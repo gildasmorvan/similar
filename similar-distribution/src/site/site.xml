@@ -1,0 +1,41 @@
+<project name="SIMILAR API suite">	
+	<bannerLeft>
+		<name>SIMILAR</name>
+		<src>./images/logo/similarLogo.png</src>
+	</bannerLeft>
+	<bannerRight>
+		<name>Binary distribution</name>
+	</bannerRight>
+	<poweredBy>
+		<logo 	name="LGI2A" 
+				href="http://www.lgi2a.univ-artois.fr/"
+				alt="LGI2A"
+				img="images/logo/lgi2a-logo.png"
+		/>
+		<logo 	name="Universite d'Artois" 
+				alt="Universite d'Artois"
+				href="http://www.univ-artois.fr/"
+				img="images/logo/artois-logo.png"
+		/>
+    	<logo 
+    			name="Maven" href="http://maven.apache.org/"
+          		img="images/logo/maven-feather.png"
+        />
+	</poweredBy>
+	
+	<body>
+		<menu ref="parent" />
+		<menu name="Distribution binaries">
+			<item name="Index" href="index.html" />
+			<item ref="license" />
+		</menu>
+		<menu name="Maven documentation">
+			<item ref="team-list" />
+			<item ref="plugin-management" />
+			<item ref="plugins" />
+			<item ref="distribution-management" />
+			<item ref="dependency-info" />
+			<item ref="dependencies" />
+		</menu>
+	</body>
+</project>

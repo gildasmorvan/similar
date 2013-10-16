@@ -1,0 +1,9 @@
+# Eclipse-related files #
+#########################
+.classpath
+.project
+.settings/
+
+# Maven generation directory #
+##############################
+target/

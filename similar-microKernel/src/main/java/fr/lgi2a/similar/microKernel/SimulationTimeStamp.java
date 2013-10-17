@@ -84,6 +84,18 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 	}
 	
 	/**
+	 * Builds a time stamp as a copy of another time stamp.
+	 * @param toCopy The time stamp to copy.
+	 * @throws IllegalArgumentException If the argument is <code>null</code>.
+	 */
+	public SimulationTimeStamp( SimulationTimeStamp toCopy ) throws IllegalArgumentException {
+		if( toCopy == null ){
+			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
+		}
+		this.identifier = toCopy.identifier;
+	}
+	
+	/**
 	 * Gets the unique identifier of this time stamp.
 	 * @return The unique identifier of this time stamp.
 	 */

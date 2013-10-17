@@ -44,65 +44,41 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 
-import java.util.NoSuchElementException;
-
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 
 /**
- * Models the environment of the simulation.
- * 
- * <h1>Correspondence with theory</h1>
- * <p>
- * 	TODO formal notation
- * </p>
+ * An abstract implementation of the {@link I_PublicLocalState} interface, providing a default behavior to the method of the interface.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Environment {
+public class AbstractPublicLocalState implements I_PublicLocalState {
 	/**
-	 * Gets the public local state of the environment for a specific level.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param level The level of the public local state of the environment.
-	 * @return The public local state of the environment for a specific level.
-	 * @throws NoSuchElementException If no public local state was defined for the specified level.
+	 * The identifier of the level where this public local state is defined.
 	 */
-	I_PublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
+	private final LevelIdentifier levelIdentifier;
 	
 	/**
-	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
-	 * <p>
-	 * 	This operation can introduce biases since it provides an estimation of the real state of a level, using the information 
-	 * 	stored into a transitory dynamic state.
-	 * </p>
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
-	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
+	 * Builds an empty abstract public local state.
+	 * @param levelIdentifier The identifier of the level where this public local state is defined.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState );
+	public AbstractPublicLocalState(
+			LevelIdentifier levelIdentifier
+	) throws IllegalArgumentException {
+		if( levelIdentifier == null ){
+			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
+		}
+		this.levelIdentifier = levelIdentifier;
+	}
 	
 	/**
-	 * Models the natural action of the environment on the simulation, from a specific level.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param level The level for which the natural action of the environment is computed.
-	 * @param levelsPublicLocalObservableDynamicState The dynamic state of the levels that are perceptible 
-	 * from the <code>level</code> level.
-	 * @param producedInfluences The map containing the influences that were produced by the natural action of the environment.
+	 * {@inheritDoc}
 	 */
-	void natural(
-		LevelIdentifier level,
-		I_DynamicState_Map levelsPublicLocalObservableDynamicState,
-		InfluencesMap producedInfluences
-	);
+	@Override
+	public LevelIdentifier getLevel() {
+		return this.levelIdentifier;
+	}
 }

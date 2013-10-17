@@ -44,46 +44,39 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 
-import java.util.Set;
+import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
 
 /**
- * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
+ * An abstract implementation of the {@link I_PerceivedDataOfAgent} interface, providing a default behavior to the method of the interface.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationEngine {
+public class AbstractPerceivedDataOfAgent implements I_PerceivedDataOfAgent {
 	/**
-	 * Adds a probe to this simulation engine.
-	 * @param identifier An unique identifier for the probe.
-	 * @param probe The probe to add to this simulation engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>, or if a probe is already defined for this identifier.
+	 * The identifier of the level by which the data were perceived.
 	 */
-	void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException;
+	private final LevelIdentifier levelIdentifier;
 	
 	/**
-	 * Removes a probe from the simulation engine.
-	 * @param identifier The identifier of the probe to remove.
-	 * @return The removed probe, <code>null</code> if no probe having the provided identifier was registered to this engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
+	 * Builds empty data perceived by an agent from a specific level.
+	 * @param levelIdentifier The identifier of the level by which the data were perceived.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	I_Probe removeProbe( String identifier );
+	public AbstractPerceivedDataOfAgent( LevelIdentifier levelIdentifier ) throws IllegalArgumentException {
+		if( levelIdentifier == null ){
+			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
+		}
+		this.levelIdentifier = levelIdentifier;
+	}
 	
 	/**
-	 * Lists the identifier of all the probes that are registered to this engine.
-	 * @return The identifier of all the probes that are registered to this engine.
+	 * {@inheritDoc}
 	 */
-	Set<String> getProbesIdentifiers( );
-	
-	/**
-	 * Initializes and then runs completely a simulation.
-	 * <p>
-	 * 	This method has the responsibility to call the appropriate methods of the probes at the different moments 
-	 * 	of the simulation.
-	 * </p>
-	 * @param simulationModel The simulation model running the simulation.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine.
-	 */
-	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException;
+	@Override
+	public LevelIdentifier getLevel() {
+		return this.levelIdentifier;
+	}
 }

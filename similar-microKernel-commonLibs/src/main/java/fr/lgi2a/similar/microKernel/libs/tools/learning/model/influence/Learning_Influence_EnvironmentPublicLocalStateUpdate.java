@@ -44,46 +44,48 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence;
 
-import java.util.Set;
+import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microKernel.influences.RegularInfluence;
 
 /**
- * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
+ * An influence sent by an agent or by the environment to update the public local state of the environment in a specific level.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationEngine {
+public class Learning_Influence_EnvironmentPublicLocalStateUpdate extends RegularInfluence {
 	/**
-	 * Adds a probe to this simulation engine.
-	 * @param identifier An unique identifier for the probe.
-	 * @param probe The probe to add to this simulation engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>, or if a probe is already defined for this identifier.
+	 * The category of this influence.
 	 */
-	void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException;
+	public static final String CATEGORY = "Environment public local state update";
 	
 	/**
-	 * Removes a probe from the simulation engine.
-	 * @param identifier The identifier of the probe to remove.
-	 * @return The removed probe, <code>null</code> if no probe having the provided identifier was registered to this engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
+	 * A counter providing unique identifiers for the influence.
 	 */
-	I_Probe removeProbe( String identifier );
+	private static long influenceCounter = 0;
 	
 	/**
-	 * Lists the identifier of all the probes that are registered to this engine.
-	 * @return The identifier of all the probes that are registered to this engine.
+	 * The unique identifier of the influence.
 	 */
-	Set<String> getProbesIdentifiers( );
+	private long influenceId;
 	
 	/**
-	 * Initializes and then runs completely a simulation.
-	 * <p>
-	 * 	This method has the responsibility to call the appropriate methods of the probes at the different moments 
-	 * 	of the simulation.
-	 * </p>
-	 * @param simulationModel The simulation model running the simulation.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine.
+	 * Builds a regular influence from the 'Update public local state of environment' category.
+	 * @param targetLevel The level containing the public local state of the environment to update.
+	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.
 	 */
-	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException;
+	public Learning_Influence_EnvironmentPublicLocalStateUpdate(
+			LevelIdentifier targetLevel
+	) throws IllegalArgumentException {
+		super( CATEGORY, targetLevel );
+		this.influenceId = ++influenceCounter;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString() {
+		return super.toString() + "#" + this.influenceId;
+	}
 }

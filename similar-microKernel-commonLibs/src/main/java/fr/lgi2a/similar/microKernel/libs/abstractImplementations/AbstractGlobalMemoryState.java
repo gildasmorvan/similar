@@ -44,10 +44,41 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
+
+import fr.lgi2a.similar.microKernel.I_Agent;
+import fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState;
 
 /**
- * Contains the simulation engines of the common libs.
+ * An abstract implementation of the {@link I_GlobalMemoryState} interface, providing a default behavior to the method it contains.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.libs.simulationEngine;
+public class AbstractGlobalMemoryState implements I_GlobalMemoryState {
+	/**
+	 * The agent owning this global memory state.
+	 */
+	private final I_Agent owner;
+	
+	/**
+	 * Builds an abstract empty global memory state of a specific agent.
+	 * @param owner The agent owning this global memory state.
+	 * @throws IllegalArgumentException If the argument is <code>null</code>.
+	 */
+	public AbstractGlobalMemoryState(
+			I_Agent owner
+	) throws IllegalArgumentException {
+		if( owner == null ){
+			throw new IllegalArgumentException( "The 'owner' argument cannot be null." );
+		}
+		this.owner = owner;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public I_Agent getOwner() {
+		return this.owner;
+	}
+}

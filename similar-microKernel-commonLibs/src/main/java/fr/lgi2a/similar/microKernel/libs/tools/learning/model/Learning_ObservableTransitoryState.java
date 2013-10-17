@@ -44,65 +44,40 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
-import java.util.NoSuchElementException;
-
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
+import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 
 /**
- * Models the environment of the simulation.
- * 
- * <h1>Correspondence with theory</h1>
- * <p>
- * 	TODO formal notation
- * </p>
+ * The disambiguation of a transitory public local dynamic state of a level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Environment {
+public class Learning_ObservableTransitoryState extends Transitory_PublicLocalDynamicState {	
 	/**
-	 * Gets the public local state of the environment for a specific level.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param level The level of the public local state of the environment.
-	 * @return The public local state of the environment for a specific level.
-	 * @throws NoSuchElementException If no public local state was defined for the specified level.
+	 * Builds a transitory public local dynamic state modeling the state of the level for a time <i>t</i> between the time stamp of 
+	 * the last consistent dynamic state, and the time stamp of the next consistent dynamic state.
+	 * @param lastConsistentDynamicState The last consistent dynamic state preceding this transitory dynamic state.
+	 * @param nextConsistentTime The next time stamp when the public local dynamic state of the level will be consistent.
+	 * @throws IllegalArgumentException If an argument of this constructor is <code>null</code>.
 	 */
-	I_PublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
+	public Learning_ObservableTransitoryState(
+			Consistent_PublicLocalDynamicState lastConsistentDynamicState,
+			SimulationTimeStamp nextConsistentTime
+	) throws IllegalArgumentException {
+		super(lastConsistentDynamicState, nextConsistentTime);
+	}
 	
 	/**
-	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
-	 * <p>
-	 * 	This operation can introduce biases since it provides an estimation of the real state of a level, using the information 
-	 * 	stored into a transitory dynamic state.
-	 * </p>
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
-	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
+	 * Creates a copy of this observable transitory public local dynamic state.
+	 * @return A copy of this observable transitory public local dynamic state.
 	 */
-	I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState );
-	
-	/**
-	 * Models the natural action of the environment on the simulation, from a specific level.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param level The level for which the natural action of the environment is computed.
-	 * @param levelsPublicLocalObservableDynamicState The dynamic state of the levels that are perceptible 
-	 * from the <code>level</code> level.
-	 * @param producedInfluences The map containing the influences that were produced by the natural action of the environment.
-	 */
-	void natural(
-		LevelIdentifier level,
-		I_DynamicState_Map levelsPublicLocalObservableDynamicState,
-		InfluencesMap producedInfluences
-	);
+	public Learning_ObservableTransitoryState createCopy( ){
+		Learning_ObservableTransitoryState copy = new Learning_ObservableTransitoryState(
+				lastConsistentDynamicState, 
+				new SimulationTimeStamp( this.getNextTime() )
+		);
+	}
 }

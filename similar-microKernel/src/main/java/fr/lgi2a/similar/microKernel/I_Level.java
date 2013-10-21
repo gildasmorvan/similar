@@ -204,7 +204,7 @@ public interface I_Level extends I_TimeModel {
 	 * <p>
 	 * 	TODO formal notation
 	 * </p>
-	 * <h2>Usage</h2>
+	 * <h2>Important notice</h2>
 	 * <p>
 	 * 	The <code>newConsistentState</code> argument of this method contains a copy of the last consistent state, 
 	 * 	where the state dynamics are empty. The reaction has to add to this set all the influences that persist after 
@@ -214,11 +214,14 @@ public interface I_Level extends I_TimeModel {
 	 * 	the <code>newInfluencesToProcess</code> set.
 	 * </p>
 	 * <p>
-	 * 	Note that for time and memory efficiency reasons, the public local state of the agents and of the environment of the new
-	 * 	consistent state (<code>newConsistentState</code> argument) are references to the public local state of the agents and of 
-	 * 	the environment of the last consistent state (<code>lastConsistentState</code>).
+	 * 	Note that for time and memory efficiency reasons, the new consistent state (<code>newConsistentState</code> argument) 
+	 * 	is in fact equal to the last consistent state (<code>lastConsistentState</code>). Indeed, it would otherwise create a full replication
+	 * 	of the dynamic state of the simulation, which is far too much memory consuming.
 	 * </p>
-	 * @param lastConsistentState The consistent state preceding the transitory phase ended by the reaction.
+	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, <i>i.e.</i> the starting time
+	 * of the transitory phase being ended by this reaction.
+	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, <i>i.e.</i> the ending time
+	 * of the transitory phase being ended by this reaction.
 	 * @param newConsistentState The consistent state following the transitory phase ended by the reaction. This state is updated
 	 * by the operations performed in this reaction.
 	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
@@ -229,7 +232,8 @@ public interface I_Level extends I_TimeModel {
 	 * of this level.
 	 */
 	void makeRegularReaction(
-			I_PublicLocalDynamicState lastConsistentState,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
 			Consistent_PublicLocalDynamicState newConsistentState,
 			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
 			Set<I_Influence> newInfluencesToProcess
@@ -240,16 +244,34 @@ public interface I_Level extends I_TimeModel {
 	 * <p>
 	 * 	TODO formal notation
 	 * </p>
+	 * <h2>Important notice</h2>
+	 * <p>
+	 * 	The <code>newConsistentState</code> argument of this method contains a copy of the last consistent state, 
+	 * 	where the state dynamics are empty. The reaction has to add to this set all the influences that persist after 
+	 * 	reaction. The other influences are consumed by the reaction.
+	 * 	Note that this reaction can also produce other influences that might have to be handled either by the current reaction (for 
+	 * 	instance the addition of new agents) or by the current/next reaction of other levels. Such influences have to be added to 
+	 * 	the <code>newInfluencesToProcess</code> set.
+	 * </p>
+	 * <p>
+	 * 	Note that for time and memory efficiency reasons, the new consistent state (<code>newConsistentState</code> argument) 
+	 * 	is in fact equal to the last consistent state (<code>lastConsistentState</code>). Indeed, it would otherwise create a full replication
+	 * 	of the dynamic state of the simulation, which is far too much memory consuming.
+	 * </p>
 	 * <h2>Usage</h2>
 	 * <p>
 	 * 	This method is called whenever a system influence has to be managed either because it was present in the transitory 
 	 * 	dynamic state, or because the reaction phase added new system influences that have to be managed.
 	 * </p>
 	 * <p>
-	 * 	The system influences contained in the <code>systemInfluencesToManage</code> set were previously managed by the 
+	 * 	The system influences contained in the <code>systemInfluencesToManage</code> set were already managed by the 
 	 * 	simulation engine. Thus, this method only contains a level specific behavior (for instance updating the public local state of the
 	 * 	environment in response to the apparition/disappearance of the public local state of an agent).
 	 * </p>
+	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, <i>i.e.</i> the starting time
+	 * of the transitory phase being ended by this reaction.
+	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, <i>i.e.</i> the ending time
+	 * of the transitory phase being ended by this reaction.
 	 * @param lastConsistentState The consistent state preceding the transitory phase ended by the reaction.
 	 * @param newConsistentState The consistent state following the transitory phase ended by the reaction. This state is updated
 	 * by the operations performed in this reaction.
@@ -264,7 +286,8 @@ public interface I_Level extends I_TimeModel {
 	 * influence is automatically added to the state dynamics of the new consistent state.
 	 */
 	void makeSystemReaction(
-			I_PublicLocalDynamicState lastConsistentState,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
 			Consistent_PublicLocalDynamicState newConsistentState,
 			Set<I_Influence> systemInfluencesToManage,
 			boolean happensBeforeRegularReaction,

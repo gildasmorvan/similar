@@ -44,46 +44,67 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 
+import java.util.LinkedHashMap;
 import java.util.Set;
 
+import fr.lgi2a.similar.microKernel.I_Probe;
+import fr.lgi2a.similar.microKernel.I_SimulationEngine;
+
 /**
- * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
+ * An abstract implementation of the {@link I_SimulationEngine} interface, providing a default behavior to the probe list-related methods.
+ * This class ensures that the iteration order over probes is the insertion order of the probes.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationEngine {
+public abstract class AbstractSimulationEngine implements I_SimulationEngine {
 	/**
-	 * Adds a probe to this simulation engine.
-	 * @param identifier An unique identifier for the probe.
-	 * @param probe The probe to add to this simulation engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>, or if a probe is already defined for this identifier.
+	 * A map containing the probes. This map ensures that the iteration order over probes is the insertion order of the probes.
 	 */
-	void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException;
+	private LinkedHashMap<String,I_Probe> probes;
+
+	/**
+	 * Builds an instance of this abstract simulation engine, containing no probes.
+	 */
+	public AbstractSimulationEngine(  ) {
+		this.probes = new LinkedHashMap<String,I_Probe>();
+	}
 	
 	/**
-	 * Removes a probe from the simulation engine.
-	 * @param identifier The identifier of the probe to remove.
-	 * @return The removed probe, <code>null</code> if no probe having the provided identifier was registered to this engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
+	 * {@inheritDoc}
 	 */
-	I_Probe removeProbe( String identifier );
-	
+	@Override
+	public void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException {
+		if( identifier == null ){
+			throw new IllegalArgumentException( "The 'identifier' argument cannot be null." );
+		} else if( probe == null ){
+			throw new IllegalArgumentException( "The 'probe' argument cannot be null." );
+		} else if( this.probes.containsKey( identifier ) ){
+			throw new IllegalArgumentException( "A probe using the '" + identifier + "' identifier already exists." );
+		}
+		this.probes.put( identifier, probe );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public I_Probe removeProbe( String identifier ) {
+		if( identifier == null ){
+			throw new IllegalArgumentException( "The 'identifier' argument cannot be null." );
+		}
+		I_Probe removedProbe = this.probes.remove( identifier );
+		return removedProbe;
+	}
+
 	/**
 	 * Lists the identifier of all the probes that are registered to this engine.
+	 * The set returned by this method is ordered, and returns the identifier of the probes in the order they were inserted.
 	 * @return The identifier of all the probes that are registered to this engine.
 	 */
-	Set<String> getProbesIdentifiers( );
-	
-	/**
-	 * Initializes and then runs completely a simulation.
-	 * <p>
-	 * 	This method has the responsibility to call the appropriate methods of the probes at the different moments 
-	 * 	of the simulation.
-	 * </p>
-	 * @param simulationModel The simulation model running the simulation.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine.
-	 */
-	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException;
+	@Override
+	public Set<String> getProbesIdentifiers() {
+		return this.probes.keySet();
+	}
 }

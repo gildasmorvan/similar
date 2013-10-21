@@ -44,46 +44,31 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.genericImplementations;
 
-import java.util.Set;
+import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPerceivedDataOfAgent;
 
 /**
- * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
+ * Models perceived data containing no information.
+ * 
+ * <h1>Usage</h1>
+ * <p>
+ * 	This type of perceived data is used whenever the agent makes decision in a level using only its 
+ * 	private local state and its global memory state.
+ * </p>
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationEngine {
+public final class EmptyPerceivedDataOfAgent extends AbstractPerceivedDataOfAgent {
 	/**
-	 * Adds a probe to this simulation engine.
-	 * @param identifier An unique identifier for the probe.
-	 * @param probe The probe to add to this simulation engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>, or if a probe is already defined for this identifier.
+	 * Builds empty data perceived by an agent from a specific level.
+	 * @param levelIdentifier The identifier of the level by which the data were perceived.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException;
-	
-	/**
-	 * Removes a probe from the simulation engine.
-	 * @param identifier The identifier of the probe to remove.
-	 * @return The removed probe, <code>null</code> if no probe having the provided identifier was registered to this engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-	 */
-	I_Probe removeProbe( String identifier );
-	
-	/**
-	 * Lists the identifier of all the probes that are registered to this engine.
-	 * @return The identifier of all the probes that are registered to this engine.
-	 */
-	Set<String> getProbesIdentifiers( );
-	
-	/**
-	 * Initializes and then runs completely a simulation.
-	 * <p>
-	 * 	This method has the responsibility to call the appropriate methods of the probes at the different moments 
-	 * 	of the simulation.
-	 * </p>
-	 * @param simulationModel The simulation model running the simulation.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine.
-	 */
-	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException;
+	public EmptyPerceivedDataOfAgent(
+			LevelIdentifier levelIdentifier
+	) throws IllegalArgumentException {
+		super(levelIdentifier);
+	}
 }

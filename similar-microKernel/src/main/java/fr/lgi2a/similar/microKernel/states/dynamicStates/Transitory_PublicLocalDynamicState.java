@@ -272,4 +272,13 @@ public class Transitory_PublicLocalDynamicState implements I_Modifiable_PublicLo
 		throw new UnsupportedOperationException( "Transitory states do not allow this operation." );
 	}
 
+	/**
+	 * The last consistent public local dynamic state of the level.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 */
+	public Consistent_PublicLocalDynamicState getLastConsistentDynamicState( ) {
+		return this.lastConsistentDynamicState;
+	}
 }

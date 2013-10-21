@@ -44,46 +44,68 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
-import java.util.Set;
+import fr.lgi2a.similar.microKernel.I_Agent;
+import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPublicLocalStateOfAgent;
 
 /**
- * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
+ * Models the public local state of an agent in a specific level, in the "learning" simulation.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationEngine {
+public class Learning_PublicLocalStateOfAgent extends AbstractPublicLocalStateOfAgent {
 	/**
-	 * Adds a probe to this simulation engine.
-	 * @param identifier An unique identifier for the probe.
-	 * @param probe The probe to add to this simulation engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>, or if a probe is already defined for this identifier.
+	 * Stores the number of modifications that were applied to this state since the beginning of the simulation.
 	 */
-	void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException;
+	private long revisionNumber;
 	
 	/**
-	 * Removes a probe from the simulation engine.
-	 * @param identifier The identifier of the probe to remove.
-	 * @return The removed probe, <code>null</code> if no probe having the provided identifier was registered to this engine.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
+	 * Builds an empty agent public local state for a specific level and a specific agent.
+	 * @param levelIdentifier The identifier of the level where this public local state is defined.
+	 * @param owner The agent owning this public local state.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	I_Probe removeProbe( String identifier );
+	public Learning_PublicLocalStateOfAgent(
+			LevelIdentifier levelIdentifier,
+			I_Agent owner
+	) throws IllegalArgumentException {
+		super(levelIdentifier, owner);
+		this.revisionNumber = 0;
+	}
+
+	/**
+	 * Gets the number of modifications that were applied to this state since the beginning of the simulation.
+	 * @return The number of modifications that were applied to this state since the beginning of the simulation.
+	 */
+	public long getRevisionNumber(){
+		return this.revisionNumber;
+	}
 	
 	/**
-	 * Lists the identifier of all the probes that are registered to this engine.
-	 * @return The identifier of all the probes that are registered to this engine.
+	 * Revise the content of this state once.
+	 * @return This instance, including a revision of its content.
 	 */
-	Set<String> getProbesIdentifiers( );
+	public Learning_PublicLocalStateOfAgent revise(){
+		this.revisionNumber++;
+		return this;
+	}
 	
 	/**
-	 * Initializes and then runs completely a simulation.
-	 * <p>
-	 * 	This method has the responsibility to call the appropriate methods of the probes at the different moments 
-	 * 	of the simulation.
-	 * </p>
-	 * @param simulationModel The simulation model running the simulation.
-	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine.
+	 * Creates a copy of this public local state of the agent.
+	 * @return A copy of this public local state.
 	 */
-	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException;
+	public Learning_PublicLocalStateOfAgent createCopy(){
+		Learning_PublicLocalStateOfAgent copy = new Learning_PublicLocalStateOfAgent( this.getLevel(), this.getOwner() );
+		copy.revisionNumber = this.revisionNumber;
+		return copy;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString( ) {
+		return "Agent (" + this.getOwner().toString() + ") - PublicLocalState ( " + this.getLevel() + " ) - #" + this.getRevisionNumber();
+	}
 }

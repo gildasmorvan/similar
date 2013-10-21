@@ -50,6 +50,7 @@ import fr.lgi2a.similar.microKernel.I_Agent;
 import fr.lgi2a.similar.microKernel.I_Influence;
 import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.influences.SystemInfluence;
+import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
 
 /**
  * The system influence sent to a level when the reaction of that level has to remove the agent from the simulation, 
@@ -71,15 +72,15 @@ public final class SystemInfluence_RemoveAgent extends SystemInfluence {
 	/**
 	 * Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
 	 * @param targetLevel The target level as described in {@link I_Influence#getTargetLevel()}
-	 * @param agent The agent to remove from the simulation.
+	 * @param publicLocalStateOfAgent The agent to remove from the simulation.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
-	public SystemInfluence_RemoveAgent( LevelIdentifier targetLevel, I_Agent agent ) throws IllegalArgumentException {
+	public SystemInfluence_RemoveAgent( LevelIdentifier targetLevel, I_PublicLocalStateOfAgent publicLocalStateOfAgent ) throws IllegalArgumentException {
 		super( CATEGORY, targetLevel );
 		if( this.agent == null ){
-			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
+			throw new IllegalArgumentException( "The 'publicLocalStateOfAgent' argument cannot be null." );
 		}
-		this.agent = agent;
+		this.agent = publicLocalStateOfAgent.getOwner();
 	}
 
 	/**

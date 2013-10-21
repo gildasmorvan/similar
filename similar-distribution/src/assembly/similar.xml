@@ -71,12 +71,31 @@
 
         <!-- include licensing and Readme files -->
 		<fileSet>
-			<directory>${parent.project.basedir}</directory>
+			<directory>../</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>USINGSIMILAR_README*</include>
 				<include>LICENSE*</include>
 				<include>NOTICE*</include>
+			</includes>
+		</fileSet>
+		
+		<!-- include the sources of the usage examples of the micro-kernel -->
+		<fileSet>
+			<directory>../similar-microKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/microKernel</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-microKernel-examples</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>MICROKERNEL-EXAMPLES*</include>
 			</includes>
 		</fileSet>
     </fileSets>

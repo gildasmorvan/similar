@@ -120,15 +120,6 @@ public interface I_Agent {
 	I_GlobalMemoryState getGlobalMemoryState();
 	
 	/**
-	 * Revises the value of the global memory state of the agent to a new value.
-	 * <p>
-	 * 	TODO : formal notation
-	 * </p>
-	 * @param newState The new value of the global memory state.
-	 */
-	void setGlobalMemoryState( I_GlobalMemoryState newState );
-	
-	/**
 	 * Gets the data that were lastly perceived by the agent, for all the levels where it lies.
 	 * <p>
 	 * 	TODO : formal notation
@@ -195,7 +186,7 @@ public interface I_Agent {
 	 * 	TODO formal notation
 	 * </p>
 	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
-	 * @param memoryState The previous value of the global memory state of the agent.
+	 * @param memoryState A copy of the previous value of the global memory state of the agent being updated by this method call.
 	 * @return The new value of the global memory state of the agent.
 	 */
 	I_GlobalMemoryState reviseMemory( Map<LevelIdentifier, I_PerceivedDataOfAgent> perceivedData, I_GlobalMemoryState memoryState );

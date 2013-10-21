@@ -117,12 +117,18 @@ public class Consistent_PublicLocalDynamicState implements I_Modifiable_PublicLo
 	 * This state still has to define the public local state of the environment, of the agents and the initial influences 
 	 * lying into the state dynamics, using the appropriate setting methods.
 	 * @param time The time stamp for which the public local dynamic state is defined.
-	 * @throws IllegalArgumentException If the <code>time</code> argument is null.
+	 * @param level The level of the public local dynamic state.
+	 * @throws IllegalArgumentException If an argument is null.
 	 */
 	public Consistent_PublicLocalDynamicState( 
-			SimulationTimeStamp time 
+			SimulationTimeStamp time,
+			LevelIdentifier level
 	) throws IllegalArgumentException {
 		this.setTime( time );
+		if( level == null ){
+			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
+		}
+		this.level = level;
 		this.stateDynamics = new HashSet<I_Influence>();
 		this.publicLocalStateOfAgents = new HashSet<I_PublicLocalStateOfAgent>();
 	}

@@ -44,65 +44,99 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microKernel.libs.tools.learning;
 
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microKernel.I_Level;
+import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractSimulationModel;
 
 /**
- * Models the environment of the simulation.
+ * This simulation model is designed to help users to understand the algorithm used to run a simulation.
+ * It builds a full trace of the operations performed during the execution of a simulation.
  * 
- * <h1>Correspondence with theory</h1>
+ * <h1>Usage</h1>
  * <p>
- * 	TODO formal notation
+ * 	TODO
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Environment {
+public class LearningSimilar_SimulationModel extends AbstractSimulationModel {
 	/**
-	 * Gets the public local state of the environment for a specific level.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param level The level of the public local state of the environment.
-	 * @return The public local state of the environment for a specific level.
-	 * @throws NoSuchElementException If no public local state was defined for the specified level.
+	 * The final time stamp of the simulation.
 	 */
-	I_PublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
+	private final SimulationTimeStamp finalTime;
+
+	/**
+	 * Builds an instance of an abstract simulation model, having a specific time stamp as initial time.
+	 * @param initialTime The initial time stamp of this simulation model.
+	 * @param finalTime The final time stamp of this simulation model, <i>i.e.</i> the time preceding the computation 
+	 * of the last reaction of the simulation.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
+	 */
+	public LearningSimilar_SimulationModel(
+			SimulationTimeStamp initialTime,
+			SimulationTimeStamp finalTime
+	){
+		super( initialTime );
+		if( finalTime == null ){
+			throw new IllegalArgumentException( "The 'finalTime' argumen cannot be null." );
+		}
+		this.finalTime = finalTime;
+	}
 	
 	/**
-	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
-	 * <p>
-	 * 	This operation can introduce biases since it provides an estimation of the real state of a level, using the information 
-	 * 	stored into a transitory dynamic state.
-	 * </p>
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
-	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
+	 * {@inheritDoc}
 	 */
-	I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState );
-	
+	@Override
+	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
-	 * Models the natural action of the environment on the simulation, from a specific level.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param level The level for which the natural action of the environment is computed.
-	 * @param levelsPublicLocalObservableDynamicState The dynamic state of the levels that are perceptible 
-	 * from the <code>level</code> level.
-	 * @param producedInfluences The map containing the influences that were produced by the natural action of the environment.
+	 * {@inheritDoc}
 	 */
-	void natural(
-		LevelIdentifier level,
-		I_DynamicState_Map levelsPublicLocalObservableDynamicState,
-		InfluencesMap producedInfluences
-	);
+	@Override
+	public boolean isFinalTimeOrAfter(
+			SimulationTimeStamp currentTime
+	) throws NoSuchElementException {
+		return currentTime.compareTo( finalTime ) >= 0;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<I_Level> generateLevels( SimulationTimeStamp initialTime ) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EnvironmentInitializationData generateEnvironment(
+			SimulationTimeStamp initialTime,
+			Map<LevelIdentifier, I_Level> levels) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AgentInitializationData generateAgents(
+			SimulationTimeStamp initialTime,
+			Map<LevelIdentifier, I_Level> levels
+	) {
+		return null;
+	}
 }

@@ -67,7 +67,6 @@ public class Learning_ObservableTransitoryState extends Transitory_PublicLocalDy
 		}
 		return transitoryDynamicState;
 	}
-	
 	/**
 	 * Builds a transitory public local dynamic state modeling the state of the level for a time <i>t</i> between the time stamp of 
 	 * the last consistent dynamic state, and the time stamp of the next consistent dynamic state.

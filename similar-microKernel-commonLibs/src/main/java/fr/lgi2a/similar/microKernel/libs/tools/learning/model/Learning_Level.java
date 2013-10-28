@@ -78,6 +78,7 @@ public abstract class Learning_Level extends AbstractLevel {
 	 * @param initialTime The initial time stamp of the level. It has to be equal 
 	 * to the initial time stamp of the simulation.
 	 * @param identifier The identifier of the level.
+	 * @param trace The trace where the execution of the simulation is tracked.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public Learning_Level(
@@ -124,15 +125,62 @@ public abstract class Learning_Level extends AbstractLevel {
 			} else if( influence instanceof I_LearningInfluence ) {
 				newConsistentState.addInfluence( influence );
 			} else {
-				throw new IllegalArgumentException( "The '" + influence.getClass().getSimpleName() + "' class of influence is not managed by this " );
+				throw new IllegalArgumentException( "The '" + influence.getClass().getSimpleName() + "' class of influence is not managed by this level." );
 			}
 		}
+		// Include user defined influences
+		this.produceNewInfluencesDuringRegularReaction(
+				previousConsistentStateTime, 
+				newConsistentStateTime, 
+				newConsistentState, 
+				regularInfluencesOftransitoryStateDynamics, 
+				newInfluencesToProcess
+		);
+		// Memorize the value of the consistent state after the execution of this reaction.
 		operation.setNewConsistentStateAtEnd( newConsistentState );
 		this.trace.addEngineOperation(
 				new Learning_EngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( newConsistentStateTime ) ), 
 				operation
 		);
 	}
+	
+	/**
+	 * This method can be overridden by users to define a custom reaction to the regular influences.
+	 * <h1>Usage</h1>
+	 * <p>
+	 * 	This method has to include into the <code>newInfluencesToProcess</code> set the influences produced by this method.
+	 * 	This method shall not modify the value of the other arguments of this method.
+	 * 	Moreover, the influences that can be produced are limited to instances of the following regular influences:
+	 * </p>
+	 * <ul>
+	 * 	<li> {@link Learning_Influence_AgentPublicLocalStateUpdate} to notify the reaction that the public local state of an agent is modified once. </li>
+	 * 	<li> {@link Learning_Influence_EnvironmentPublicLocalStateUpdate} to notify the reaction that the public local state of the environment is modified once. </li>
+	 * </ul>
+	 * <p>
+	 * 	Note that the system influences will be immediately processed if a reaction is being performed for the level they are sent to.
+	 * 	Otherwise, the influences will be processed during the next reaction of the level they are sent to.
+	 * </p>
+	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, 
+	 * <i>i.e.</i> the starting time of the transitory phase being ended by this reaction (<code>t<sub>l</sub></code> in the description
+	 * of the method).
+	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, 
+	 * <i>i.e.</i> the ending time of the transitory phase being ended by this reaction (<code>t<sub>l</sub>+dt<sub>l</sub></code> in the description
+	 * of the method).
+	 * @param consistentState The consistent state being modified by this user reaction.
+	 * The operations performed in this reaction participate in the transition of the consistent dynamic state 
+	 * <code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into its new value <code>&delta;<sub>l</sub>(t<sub>l</sub>+dt<sub>l</sub>)</code>.
+	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
+	 * previous consistent state to the next consistent state of the level.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	protected void produceNewInfluencesDuringRegularReaction(
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			Consistent_PublicLocalDynamicState newConsistentState,
+			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
+			Set<I_Influence> newInfluencesToProcess
+	){ }
 
 	/**
 	 * {@inheritDoc}
@@ -168,4 +216,12 @@ public abstract class Learning_Level extends AbstractLevel {
 	 */
 	@Override
 	public abstract SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime );
+
+	/**
+	 * Gets the trace where the execution of the simulation is tracked.
+	 * @return The trace where the execution of the simulation is tracked.
+	 */
+	public SimulationExecutionTrace getTrace( ) {
+		return this.trace;
+	}
 }

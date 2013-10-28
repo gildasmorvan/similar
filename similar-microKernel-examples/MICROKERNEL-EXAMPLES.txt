@@ -1,1 +1,1 @@
-This file lists the usage examples of the micro kernel and the common libs of SIMILAR. It also provides a short description of each example.
+The description of these examples is provided in the documentation of the SIMILAR API suite, in the "docs/similar-microKernel-examples/index.html" file.

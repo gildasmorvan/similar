@@ -82,6 +82,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 	 * Builds an initialized instance of this agent class.
 	 * @param category The category of the agent. To make the trace of the simulation explicit,
 	 * it is advised to use a different category for each agent instance.
+	 * @param trace The trace where the execution of the simulation is tracked.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public Learning_AbstractAgent( 
@@ -227,9 +228,11 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 				memoryState, 
 				perceivedData
 		);
-		for( I_Influence influence : influences ){
-			operation.addInfluence( influence );
-			producedInfluences.add( influence );
+		if( influences != null ){
+			for( I_Influence influence : influences ){
+				operation.addInfluence( influence );
+				producedInfluences.add( influence );
+			}
 		}
 		SimulationTimeStamp levelTimestamp = ( ( Learning_PerceivedDataOfAgent ) perceivedData ).getLevelsPublicLocalObservableDynamicState().get( level ).getTime();
 		this.trace.addEngineOperation(

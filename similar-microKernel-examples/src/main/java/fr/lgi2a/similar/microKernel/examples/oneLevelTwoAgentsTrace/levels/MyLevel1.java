@@ -44,62 +44,58 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.influences.systemInfluences;
+package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.levels;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.influences.SystemInfluence;
+import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.MyLevelIdentifiers;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractEnvironment;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_Level;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 
 /**
- * The system influence sent to a level when the reaction of that level has to insert a new agent into the simulation 
- * and make appear it public local state into the public dynamic state of the levels.
- * 
- * <h1>Usage</h1>
+ * Models the level 'level 1' as described in the specification of the "one level - two agents - trace" simulation.
+ * <h1>Constraints</h1>
  * <p>
- * 	The agent has to be fully initialized before being added using this influence.
+ * 	The level is an instance of the {@link Learning_AbstractEnvironment} class to ensure that the evolution of the environment 
+ * 	can be tracked by the trace of the simulation.
  * </p>
- * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class SystemInfluence_AddAgent extends SystemInfluence {
+public class MyLevel1 extends Learning_Level {
 	/**
-	 * The category of this influence.
+	 * Builds a partially initialized instance of this class.
+	 * The definition of the public local state of the environment is later defined automatically by the simulation model.
+	 * @param initialTime The initial time of the simulation. This value is provided by the simulation model.
+	 * @param trace The trace where the execution of the simulation is tracked.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public static final String CATEGORY = "System influence - Add agent";
-
-	/**
-	 * The agent to add to the simulation.
-	 */
-	private I_Agent agent;
-	
-	/**
-	 * Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link I_Influence#getTargetLevel()}
-	 * @param agent The agent to add to the simulation.
-	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
-	 */
-	public SystemInfluence_AddAgent( LevelIdentifier targetLevel, I_Agent agent ) throws IllegalArgumentException {
-		super( CATEGORY, targetLevel );
-		if( agent == null ){
-			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
-		}
-		this.agent = agent;
+	public MyLevel1(
+			SimulationTimeStamp initialTime, 
+			SimulationExecutionTrace trace
+	) throws IllegalArgumentException {
+		super( initialTime, MyLevelIdentifiers.SIMULATION_LEVEL, trace );
+		//
+		// Define the perception relation graph of the level.
+		//
+		// In a mono-level simulation, no instruction is necessary.
+		// Otherwise, calls to the addPerceptibleLevel(...) method have to be made.
+		//
+		// Define the influence relation graph of the level.
+		//
+		// In a mono-level simulation, no instruction is necessary.
+		// Otherwise, calls to the addInfluenceableLevel(...) method have to be made.
+		//
 	}
 
 	/**
-	 * Gets the agent to add to the simulation.
-	 * @return The agent to add to the simulation.
+	 * Defines how time evolves in this level.
+	 * <p>
+	 * 	In this case, we use a simple model where the identifier of the next time is equal to the identifier of the previous
+	 * 	time plus one.
+	 * </p>
 	 */
-	public I_Agent getAgent(){
-		return this.agent;
-	}
-
-	/**
-	 * Uses the category, the target level and the added agent of the influence to build a printable version of this object.
-	 * @return The concatenation of the category, the target level and the added agent of the influence.
-	 */
-	public String toString(){
-		return super.toString() + ", adding " + this.agent.toString();
+	@Override
+	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
+		return new SimulationTimeStamp( currentTime.getIdentifier() + 1 );
 	}
 }

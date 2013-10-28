@@ -71,7 +71,7 @@ public interface I_SimulationModel {
 	/**
 	 * Tells if a time stamp is greater or equal to the final time stamp.
 	 * @param currentTime The last time the dynamic state of the simulation was in a partly consistent state.
-	 * @param engine The simualtion engine containing information about the currently running simulation.
+	 * @param engine The simulation engine containing information about the currently running simulation.
 	 * @return <code>true</code> if the final time of the level was reached.
 	 */
 	boolean isFinalTimeOrAfter( SimulationTimeStamp currentTime, I_SimulationEngine engine );

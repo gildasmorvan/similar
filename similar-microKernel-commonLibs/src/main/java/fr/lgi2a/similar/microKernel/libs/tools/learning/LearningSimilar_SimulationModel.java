@@ -124,10 +124,15 @@ public abstract class LearningSimilar_SimulationModel extends AbstractSimulation
 	/**
 	 * Generates the bare levels of the simulation. These levels contain no agents and define no environment.
 	 * <p>
-	 * 	The instances only have to define the identifier of the level and how the model moves through time.
+	 * 	The instances have to define:
 	 * </p>
-	 * @param initialTime The initial time of the simulation.
-	 * @param trace The object where the trace of the simulation will be registered.
+	 * <ul>
+	 * 	<li>the identifier of the level, as an argument of the constructor</li>
+	 * 	<li>how the model moves through time, by overriding the <code>getNextTime( ... )</code> method </li>
+	 * 	<li>optionally a custom reaction to system influences, by overriding the <code>produceNewInfluencesDuringRegularReaction(...)</code> method</li>
+	 * </ul>
+	 * @param initialTime The initial time of the simulation. This argument has to be forwarded to the constructor of the levels.
+	 * @param trace The object where the trace of the simulation will be registered. This argument has to be forwarded to the constructor of the levels.
 	 * @return The bare levels of the simulation.
 	 */
 	protected abstract List<Learning_Level> generateCastedLevels( SimulationTimeStamp initialTime, SimulationExecutionTrace trace );

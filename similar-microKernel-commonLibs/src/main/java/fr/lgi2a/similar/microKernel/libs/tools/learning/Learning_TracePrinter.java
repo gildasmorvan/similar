@@ -55,6 +55,7 @@ import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.printer.Learning_EngineOperationPrinter;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationMoment;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_ReasonOfSimulationEnd;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_SimulationDynamicState;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
@@ -113,8 +114,18 @@ public class Learning_TracePrinter {
 			}
 		}
 		System.out.println( );
-		System.out.println( "Final dynamic state of the simulation : " );
-		printDynamicState( 1, trace.getFinalDynamicState( ) );
+		if( trace.getReasonOfEnd().equals( Learning_ReasonOfSimulationEnd.END_CRITERION_REACHED ) ){
+			System.out.println( "Final dynamic state of the simulation : " );
+			printDynamicState( 1, trace.getFinalDynamicState( ) );
+		} else if( trace.getReasonOfEnd().equals( Learning_ReasonOfSimulationEnd.ABORTED ) ) {
+			System.out.println( "The simulation has ended because it was aborted." );
+		} else {
+			Learning_ReasonOfSimulationEnd.ExceptionCaught castedReason = (Learning_ReasonOfSimulationEnd.ExceptionCaught) trace.getReasonOfEnd();
+			System.out.println( "The simulation has ended because of the following error:" );
+			printIndentation( 1 );
+			System.out.println( castedReason.getErrorMessage() );
+			castedReason.getError().printStackTrace( System.out );
+		}
 	}
 	
 	/**

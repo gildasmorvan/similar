@@ -178,4 +178,11 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 	public Object clone() {
 		return new SimulationTimeStamp( this.identifier );
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String toString( ) {
+		return "t(" + this.identifier + ")";
+	}
 }

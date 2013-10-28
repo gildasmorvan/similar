@@ -50,18 +50,27 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_ConsistentDynamicStateCopier;
+import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_InfluenceCopier;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationType;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
 
 /**
- * Models the operation performed by the simulation engine when it asks a level to perform its reaction.
+ * Models the operation performed by the simulation engine when it asks a level to perform its reaction to regular influences.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public class Learning_EngineOperation_RegularReaction implements Learning_EngineOperation {
+	/**
+	 * The time stamp of the last consistent state of the level.
+	 */
+	private SimulationTimeStamp previousConsistentStateTime;
+	/**
+	 * The time stamp of the next consistent state of the level.
+	 */
+	private SimulationTimeStamp newConsistentStateTime;
 	/**
 	 * The 'new consistent state' argument provided as a parameter to the 'reaction' method call.
 	 */
@@ -96,21 +105,30 @@ public class Learning_EngineOperation_RegularReaction implements Learning_Engine
 	 *		value of the new consistent state of the level after the reaction.
 	 *	</li>
 	 * </ul>
+	 * @param previousConsistentStateTime The time stamp of the last consistent state of the level.
+	 * @param newConsistentStateTime The time stamp of the next consistent state of the level.
 	 * @param newConsistentStateAtBeginning The 'new consistent state' argument provided as a parameter to the 'reaction' method call.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public Learning_EngineOperation_RegularReaction(
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
 			Consistent_PublicLocalDynamicState newConsistentStateAtBeginning
 	) throws IllegalArgumentException {
 		if( newConsistentStateAtBeginning == null ){
 			throw new IllegalArgumentException( "The 'newConsistentStateAtBeginning' argument cannot be null." );
 		}
-		if( newConsistentStateAtEnd == null ){
-			throw new IllegalArgumentException( "The 'newConsistentStateAtEnd' argument cannot be null." );
+		if( previousConsistentStateTime == null ) {
+			throw new IllegalArgumentException( "The 'previousConsistentStateTime' argument cannot be null." );
 		}
-		this.newConsistentStateAtBeginning = Learning_ConsistentDynamicStateCopier.createCopy( newConsistentStateAtBeginning );
+		if( newConsistentStateTime == null ) {
+			throw new IllegalArgumentException( "The 'newConsistentStateTime' argument cannot be null." );
+		}
+		this.newConsistentStateAtBeginning = Learning_PublicLocalDynamicStateCopier.createCopy( newConsistentStateAtBeginning );
 		this.regularInfluencesOftransitoryStateDynamicsArgument = new LinkedHashSet<I_Influence>();
 		this.producedInfluences = new LinkedHashSet<I_Influence>();
+		this.previousConsistentStateTime = new SimulationTimeStamp( previousConsistentStateTime );
+		this.newConsistentStateTime = new SimulationTimeStamp( newConsistentStateTime );
 	}
 	
 	/**
@@ -120,6 +138,22 @@ public class Learning_EngineOperation_RegularReaction implements Learning_Engine
 	@Override
 	public Learning_EngineOperationType getOperationType() {
 		return Learning_EngineOperationType.REGULARREACTION;
+	}
+	
+	/**
+	 * Gets the time stamp of the last consistent state of the level.
+	 * @return The time stamp of the last consistent state of the level.
+	 */
+	public SimulationTimeStamp getPreviousConsistentStateTime( ) {
+		return this.previousConsistentStateTime;
+	}
+	
+	/**
+	 * Gets the time stamp of the next consistent state of the level.
+	 * @return The time stamp of the next consistent state of the level.
+	 */
+	public SimulationTimeStamp getNewConsistentStateTime( ) {
+		return this.newConsistentStateTime;
 	}
 
 	/**
@@ -143,7 +177,7 @@ public class Learning_EngineOperation_RegularReaction implements Learning_Engine
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public void setNewConsistentStateAtEnd(Consistent_PublicLocalDynamicState newConsistentStateAtEnd ) throws IllegalArgumentException {
-		this.newConsistentStateAtEnd = Learning_ConsistentDynamicStateCopier.createCopy( newConsistentStateAtEnd );
+		this.newConsistentStateAtEnd = Learning_PublicLocalDynamicStateCopier.createCopy( newConsistentStateAtEnd );
 	}
 	
 	/**

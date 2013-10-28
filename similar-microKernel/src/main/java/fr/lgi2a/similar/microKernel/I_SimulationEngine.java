@@ -46,7 +46,12 @@
  */
 package fr.lgi2a.similar.microKernel;
 
+import java.util.NoSuchElementException;
 import java.util.Set;
+
+import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
+import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 
 /**
  * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
@@ -76,6 +81,12 @@ public interface I_SimulationEngine {
 	Set<String> getProbesIdentifiers( );
 	
 	/**
+	 * Requests the abortion of the simulation currently running with this simulation engine.
+	 * In response, the simulation engine will stop the simulation once the simulation reaches a partly-consistent state.
+	 */
+	void requestSimulationAbortion( );
+	
+	/**
 	 * Initializes and then runs completely a simulation.
 	 * <p>
 	 * 	This method has the responsibility to call the appropriate methods of the probes at the different moments 
@@ -83,7 +94,62 @@ public interface I_SimulationEngine {
 	 * </p>
 	 * @param simulationModel The simulation model running the simulation.
 	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine.
+     * @throws Exception_SimulationAborted if the simulation has ended because it was aborted by the user.
+     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine. 
+     * This exception wraps an {@link IllegalStateException} depicting the nature of the issue.
 	 */
-	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException;
+	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException, Exception_SimulationAborted;
+	
+	/**
+	 * Gets the current dynamic states of the simulation.
+	 * <h2>Usage</h2>
+	 * <p>
+	 * 	This method is used in probes to read the data about the simulation, when the simulation reaches a time stamp.
+	 * </p>
+	 * @return The dynamic state of the simulation, containing either consistent states (the current time stamp of the simulation is equal
+	 * to the time stamp of the level) or transitory states (in the other case).
+	 */
+	I_DynamicState_Map getSimulationDynamicStates( );
+	
+	/**
+	 * Gets the set of all the agents lying in the simulation.
+	 * <h2>Usage</h2>
+	 * <p>
+	 * 	This method is used in probes to read the data about the simulation, when the simulation reaches a time stamp.
+	 * </p>
+	 * @return The set of all the agents lying in the simulation.
+	 */
+	Set<I_Agent> getAgents( );
+	
+	/**
+	 * Gets the list of levels contained in the simulation.
+	 * @return The list of levels contained in the simulation.
+	 */
+	Set<LevelIdentifier> getLevels( );
+	
+	/**
+	 * Gets the set of all the agents lying in a specific level of the simulation.
+	 * <h2>Usage</h2>
+	 * <p>
+	 * 	This method is used in probes to read the data about the simulation, when the simulation reaches a time stamp.
+	 * </p>
+	 * @param level The levels where to get the agents.
+	 * @return The set of all the agents lying in a specific level of in the simulation.
+	 * @throws NoSuchElementException If no such level was defined for the simulation.
+	 */
+	Set<I_Agent> getAgents( LevelIdentifier level ) throws NoSuchElementException;
+	
+	/**
+	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
+	 * <p>
+	 * 	This operation can introduce biases since it provides an estimation of the real state of a level, using the information 
+	 * 	stored into a transitory dynamic state.
+	 * </p>
+	 * <p>
+	 * 	TODO formal notation
+	 * </p>
+	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
+	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
+	 */
+	I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState );
 }

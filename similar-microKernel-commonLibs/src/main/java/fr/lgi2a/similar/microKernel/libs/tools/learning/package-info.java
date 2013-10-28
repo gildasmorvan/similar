@@ -47,6 +47,7 @@
 
 /**
  * Defines a tool printing the trace of a simulation in an output stream.
+ * The use of this tool is described in the examples of the micro-kernel.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning;

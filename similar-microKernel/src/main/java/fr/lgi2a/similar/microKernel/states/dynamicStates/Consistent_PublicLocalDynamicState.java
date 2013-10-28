@@ -46,6 +46,7 @@
  */
 package fr.lgi2a.similar.microKernel.states.dynamicStates;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -111,6 +112,18 @@ public class Consistent_PublicLocalDynamicState implements I_Modifiable_PublicLo
 	 * arrived into the consistent state.
 	 */
 	private Set<I_Influence> stateDynamics;
+	/**
+	 * Models the dynamics of this local dynamic state, <i>i.e.</i> the influences that are still active (being performed) when the level
+	 * arrived into the consistent state.
+	 * This field contains only system influences.
+	 */
+	private Set<I_Influence> stateDynamics_systemInfluences;
+	/**
+	 * Models the dynamics of this local dynamic state, <i>i.e.</i> the influences that are still active (being performed) when the level
+	 * arrived into the consistent state.
+	 * This field contains only regular influences.
+	 */
+	private Set<I_Influence> stateDynamics_regularInfluences;
 	
 	/**
 	 * Builds a consistent public local state for a specific time stamp.
@@ -129,7 +142,9 @@ public class Consistent_PublicLocalDynamicState implements I_Modifiable_PublicLo
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		}
 		this.level = level;
-		this.stateDynamics = new HashSet<I_Influence>();
+		this.stateDynamics_systemInfluences = new HashSet<I_Influence>();
+		this.stateDynamics_regularInfluences = new HashSet<I_Influence>();
+		this.stateDynamics = new ViewOnSetUnion<I_Influence>( this.stateDynamics_systemInfluences, this.stateDynamics_regularInfluences );
 		this.publicLocalStateOfAgents = new HashSet<I_PublicLocalStateOfAgent>();
 	}
 	
@@ -186,6 +201,22 @@ public class Consistent_PublicLocalDynamicState implements I_Modifiable_PublicLo
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Set<I_Influence> getSystemInfluencesOfStateDynamics() {
+		return this.stateDynamics_regularInfluences;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Set<I_Influence> getRegularInfluencesOfStateDynamics() {
+		return this.stateDynamics_systemInfluences;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void setPublicLocalStateOfEnvironment(
 			I_PublicLocalState publicLocalState
 	) throws IllegalArgumentException {
@@ -229,18 +260,42 @@ public class Consistent_PublicLocalDynamicState implements I_Modifiable_PublicLo
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
-		this.stateDynamics.add( influence );
+		if( influence.isSystem() ){
+			this.stateDynamics_systemInfluences.add( influence );
+		} else {
+			this.stateDynamics_regularInfluences.add( influence );
+			
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setStateDynamicsAsCopyOf( Set<I_Influence> toCopy ) throws IllegalArgumentException {
+	public void setStateDynamicsAsCopyOf( Collection<I_Influence> toCopy ) throws IllegalArgumentException {
 		if( toCopy == null ){
 			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
 		}
-		this.stateDynamics.clear();
-		this.stateDynamics.addAll( toCopy );
+		this.stateDynamics_regularInfluences.clear();
+		this.stateDynamics_systemInfluences.clear();
+		for( I_Influence influence : toCopy ){
+			this.addInfluence( influence );
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void clearSystemInfluences() {
+		this.stateDynamics_systemInfluences.clear();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void clearRegularInfluences() {
+		this.stateDynamics_regularInfluences.clear();
 	}
 }

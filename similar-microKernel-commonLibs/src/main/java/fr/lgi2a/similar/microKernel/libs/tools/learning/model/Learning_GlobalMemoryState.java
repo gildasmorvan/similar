@@ -103,6 +103,6 @@ public class Learning_GlobalMemoryState extends AbstractGlobalMemoryState {
 	 * {@inheritDoc}
 	 */
 	public String toString( ) {
-		return "Agent (" + this.getOwner().toString() + ") - GlobalMemoryState - #" + this.getRevisionNumber();
+		return "Agent (" + this.getOwner().getCategory() + ") - GlobalMemoryState - #" + this.getRevisionNumber();
 	}
 }

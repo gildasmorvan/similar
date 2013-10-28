@@ -147,15 +147,14 @@ public class InfluencesMap {
 	 * Gets the influences contained in this map that are targeted at a specific level.
 	 * @param targetLevel The target level for which influences are fetched in this map.
 	 * @return The influences contained in this map that are targeted at a specific level.
-	 * @param NoSuchElementException If no influences targeting the <code>targetLevel</code> were added in this map.
 	 */
 	public List<I_Influence> getInfluencesForLevel( LevelIdentifier targetLevel ) throws NoSuchElementException {
 		List<I_Influence> result = this.influencesMap.get( targetLevel );
 		if( result == null ){
-			throw new NoSuchElementException( "No entry is defined in the map for the key '" + targetLevel + "'." );
-		} else {
-			return result;
+			result = new LinkedList<I_Influence>( );
+			this.influencesMap.put( targetLevel, result );
 		}
+		return result;
 	}
 	
 	/**
@@ -213,5 +212,12 @@ public class InfluencesMap {
 		for( I_Influence influence : toAdd ){
 			this.add( influence );
 		}
+	}
+	
+	/**
+	 * Removes all of the mappings from this map. The map will be empty after this call returns
+	 */
+	public void clear( ) {
+		this.influencesMap.clear( );
 	}
 }

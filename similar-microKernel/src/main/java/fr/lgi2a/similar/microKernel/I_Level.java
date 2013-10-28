@@ -46,9 +46,9 @@
  */
 package fr.lgi2a.similar.microKernel;
 
+import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
 
 /**
@@ -62,91 +62,100 @@ import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalD
  * <h1>Usage</h1>
  * <p>
  * 	The reaction of a level is a process changing the value of the last consistent public local dynamic state of the level from 
- * 	a time stamp to the next time stamp of the level. This process is performed using the following steps:
+ * 	a time stamp <code>t<sub>l</sub></code> to the next time stamp of the level <code>t<sub>l</sub>+dt<sub>l</sub></code>. 
+ * 	This process relies on the following steps:
  * </p>
  * <ol>
- * 	<li>Create a new consistent dynamic state of the level as a copy of the last consistent dynamic state.</li>
- * 	<li>Reset the state dynamics (remove all the influences it contains).</li>
  * 	<li>
- * 		The level asks the engine to perform the reaction to the system influences of contained in the 
- * 		state dynamics of the current transitory state
+ * 		The engine first loops over the system influences located in both the last consistent dynamic state 
+ * 		<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> and the ones located in the transitory dynamic state 
+ * 		of the level right before the computation of the reaction.
+ * 		During this loop, the engine removes the processed system influences from the both dynamic states.
+ * 		This process might add new influences to the simulation (for instance the 'add agent to simulation' influence
+ * 		produces 'add public local state of agent to level' influences).
+ * 		In such a case, if at least one added influence is a system influence, the engine performs another loop to manage them.
  *	</li>
  *	<li>
- *		The level then performs a user defined reaction to these system influences, for instance to update the public local state 
- *		of the environment when an influence added / removed the public local state of an agent into that level.
+ *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
+ *		by the {@link I_Level#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Collection, boolean, Collection)}
+ *		method.
+ *		This user-defined reaction:
+ * 		<ul>
+ * 			<li>
+ * 				Updates the public local state of the environment and of the agents contained in the last consistent dynamic state, 
+ * 				according to the modifications depicted by the regular influences.
+ * 				This operation is part of the transformation of the last consistent dynamic state 
+ * 				<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into the new last consistent dynamic state 
+ * 				<code>&delta;<sub>l</sub>(t<sub>l</sub> + dt<sub>l</sub>)</code>.
+ * 
+ *  			For instance, if the public local state of the environment defines an agent grid, this method can add the 
+ *  			public local state of an agent to the grid, in reaction to the 'add public local state of agent to level' 
+ *  			system influence.
+ *  		</li>
+ *  		<li>
+ *  			Can produce new influences (for instance the addition of an agent to the simulation).
+ *  			The system influences added in such a way will be processed either during the next reaction of the level 
+ *  			they are aimed at (if the targeted level is not currently computing its reaction), or during the current 
+ *  			reaction (in the next steps of this process).
+ *  		</li>
+ * 		</ul>
  *	</li>
  *	<li>
- *		If the engine or user reaction did generate new influences: 
+ *		The engine then performs a user-defined reaction to the regular influences, as described by the 
+ *		{@link I_Level#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Set, Set)}
+ *		method.
+ *		This user-defined reaction:
  *		<ul>
- *			<li>The regular influences are added to the state dynamics of the current transitory state of the level</i>
- *			<li>The system influences are managed using the step 3 again</i>
- *			<li>
- *				If the influence is targeted at another level:
- *				<ul>
- *					<li>
- *						It is added to the state dynamics of the transitory state of the other level, if the transitory state of the 
- *						other level does not end at the same time than the transitory state of this level, <i>i.e.</i> if no reaction is
- *						currently being performed for that level.
- *					</li>
- *					<li>
- *						It is managed by the current reaction process of the other level otherwise.
- *					</li>
- *				</ul>
- *			</li>
- *		</ul>
- *	</li>
- *	<li>
- *		Then, the level performs a user defined reaction to the regular influences of the state dynamics of the current transitory 
- *		state of the level.
- *		The influences persisting after this reaction have to be added to the state dynamics of the new consistent public local dynamic 
- *		state of the level.
- *	</li>
- *	<li>
- *		If this user reaction did generate new influences:
- *		<ul>
- *			<li>The regular influences are added to the new consistent public local dynamic state of the level</i>
- *			<li>The system influences are managed using the following step</i>
- *			<li>
- *				If the influence is targeted at another level:
- *				<ul>
- *					<li>
- *						It is added to the state dynamics of the transitory state of the other level, if the transitory state of the 
- *						other level does not end at the same time than the transitory state of this level, <i>i.e.</i> if no reaction is
- *						currently being performed for that level.
- *					</li>
- *					<li>
- *						It is managed by the current reaction process of the other level otherwise.
- *					</li>
- *				</ul>
- *			</li>
+ * 			<li>
+ * 				Updates the public local state of the environment and of the agents contained in the last consistent dynamic state, 
+ * 				according to the modifications depicted by the regular influences.
+ * 				This operation is part of the transformation of the last consistent dynamic state 
+ * 				<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into the new last consistent dynamic state 
+ * 				<code>&delta;<sub>l</sub>(t<sub>l</sub> + dt<sub>l</sub>)</code>.
+ *  		</li>
+ *  		<li>
+ *  			Determines which regular influences do persist after the reaction and which ones are consumed by the 
+ *  			reaction (and are thus not retained in the new last consistent dynamic state).
+ *  		</li>
+ *  		<li>
+ *  			Can produce new influences (for instance the addition of an agent to the simulation).
+ *  			The influences added in such a way will be processed either during the next reaction of the level 
+ *  			they are aimed at (if the targeted level is not currently computing its reaction or if the influence is a 
+ *  			regular influence), or during the current reaction (in the next steps of this process).
+ *  		</li>
  *		</ul>
  *	</li>
  * 	<li>
- * 		The level asks the engine to perform the reaction to the system influences that were added by the previous step.
+ * 		The engine then loops again over the system influences that were added by the user-defined reactions into the levels that
+ * 		are computing a reaction.
+ * 		During this loop, the engine removes the processed system influences from the both dynamic states.
+ * 		This process might add new influences to the simulation (for instance the 'add agent to simulation' influence
+ * 		produces 'add public local state of agent to level' influences).
+ * 		In such a case, if at least one added influence is a system influence, the engine performs another loop to manage them.
  *	</li>
  *	<li>
- *		The level then performs a user defined reaction to these system influences, for instance to update the public local state 
- *		of the environment when an influence added / removed the public local state of an agent into that level.
- *	</li>
- *	<li>
- *		If the engine or user reaction did generate new influences: 
- *		<ul>
- *			<li>The regular influences are added to the new consistent public local dynamic state of the level</i>
- *			<li>The system influences are managed using the step 8 again</i>
- *			<li>
- *				If the influence is targeted at another level:
- *				<ul>
- *					<li>
- *						It is added to the state dynamics of the transitory state of the other level, if the transitory state of the 
- *						other level does not end at the same time than the transitory state of this level, <i>i.e.</i> if no reaction is
- *						currently being performed for that level.
- *					</li>
- *					<li>
- *						It is managed by the current reaction process of the other level otherwise.
- *					</li>
- *				</ul>
- *			</li>
- *		</ul>
+ *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
+ *		by the {@link I_Level#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Collection, boolean, Collection)}
+ *		method.
+ *		This user-defined reaction:
+ * 		<ul>
+ * 			<li>
+ * 				Updates the public local state of the environment and of the agents contained in the last consistent dynamic state, 
+ * 				according to the modifications depicted by the regular influences.
+ * 				This operation is part of the transformation of the last consistent dynamic state 
+ * 				<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into the new last consistent dynamic state 
+ * 				<code>&delta;<sub>l</sub>(t<sub>l</sub> + dt<sub>l</sub>)</code>.
+ * 
+ *  			For instance, if the public local state of the environment defines an agent grid, this method can add the 
+ *  			public local state of an agent to the grid, in reaction to the 'add public local state of agent to level' 
+ *  			system influence.
+ *  		</li>
+ *  		<li>
+ *  			Can produce new influences (for instance the addition of an agent to the simulation).
+ *  			The influences added in such a way will be processed during the next reaction of the level 
+ *  			they are aimed at.
+ *  		</li>
+ * 		</ul>
  *	</li>
  * </ol>
  * 
@@ -199,98 +208,138 @@ public interface I_Level extends I_TimeModel {
 	Set<LevelIdentifier> getInfluenceableLevels( );
 	
 	/**
-	 * Performs the reaction phase of the level using the current transitory state to build next consistent state
-	 * of the simulation.
+	 * Performs a user-defined reaction to the regular influences that were lying in the last consistent dynamic state of 
+	 * the level (at the time <code>t<sub>l</sub></code>) plus the influences that were added into the transitory dynamic state
+	 * of the level during the time range <code>]t<sub>l</sub>, t<sub>l</sub>+dt<sub>l</sub>[</code>.
+	 * This reaction updates the content of the last consistent dynamic state of the 
+	 * level (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub> )</code>), to participate in its 
+	 * transformation into the new last consistent dynamic state (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub>+dt<sub>l</sub> )</code>).
+	 * 
+	 * <h2>Usage</h2>
 	 * <p>
-	 * 	TODO formal notation
+	 * 	<b>This method has to:</b>
 	 * </p>
-	 * <h2>Important notice</h2>
+	 * <ul>
+	 * 	<li>
+	 * 		Update the public local state of the environment and of the agents contained in the consistent dynamic state
+	 *  	<code>consistentState</code> argument of this method according to the modifications depicted by the regular influences.
+	 *  </li>
+	 *  <li>
+	 *  	Add to the <code>newInfluencesToProcess</code> set the influences persisting after the reaction.
+	 *  	The influences that were consumed by the reaction are not added to this set.
+	 *  </li>
+	 *  <li>
+	 *  	Add to the <code>newInfluencesToProcess</code> set the new influences that were produced by 
+	 *  	this reaction (for instance the addition of an agent to the simulation).
+	 *  	The system reactions will be processed after this user reaction to regular influences if the level they are aimed at
+	 *  	is a level currently computing its reaction. Otherwise, the system influence is managed during the next reaction of the 
+	 *  	targeted level.
+	 *  	Moreover, the regular influences added in such a way will be processed during the next reaction of the level 
+	 *  	they are aimed at.
+	 *  </li>
+	 * </ul>
 	 * <p>
-	 * 	The <code>newConsistentState</code> argument of this method contains a copy of the last consistent state, 
-	 * 	where the state dynamics are empty. The reaction has to add to this set all the influences that persist after 
-	 * 	reaction. The other influences are consumed by the reaction.
-	 * 	Note that this reaction can also produce other influences that might have to be handled either by the current reaction (for 
-	 * 	instance the addition of new agents) or by the current/next reaction of other levels. Such influences have to be added to 
-	 * 	the <code>newInfluencesToProcess</code> set.
+	 * 	<b>This method cannot:</b>
 	 * </p>
-	 * <p>
-	 * 	Note that for time and memory efficiency reasons, the new consistent state (<code>newConsistentState</code> argument) 
-	 * 	is in fact equal to the last consistent state (<code>lastConsistentState</code>). Indeed, it would otherwise create a full replication
-	 * 	of the dynamic state of the simulation, which is far too much memory consuming.
-	 * </p>
-	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, <i>i.e.</i> the starting time
-	 * of the transitory phase being ended by this reaction.
-	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, <i>i.e.</i> the ending time
-	 * of the transitory phase being ended by this reaction.
-	 * @param newConsistentState The consistent state following the transitory phase ended by the reaction. This state is updated
-	 * by the operations performed in this reaction.
+	 * <ul>
+	 * 	<li>
+	 * 		Add influences directly into the consistent state of the simulation. If it does so, it puts the simulation into an 
+	 * 		inconsistent state.
+	 * 	</li>
+	 * </ul>
+	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, 
+	 * <i>i.e.</i> the starting time of the transitory phase being ended by this reaction (<code>t<sub>l</sub></code> in the description
+	 * of the method).
+	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, 
+	 * <i>i.e.</i> the ending time of the transitory phase being ended by this reaction (<code>t<sub>l</sub>+dt<sub>l</sub></code> in the description
+	 * of the method).
+	 * @param consistentState The consistent state being modified by this user reaction.
+	 * The operations performed in this reaction participate in the transition of the consistent dynamic state 
+	 * <code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into its new value <code>&delta;<sub>l</sub>(t<sub>l</sub>+dt<sub>l</sub>)</code>.
 	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
-	 * @param newInfluencesToProcess The influences that were produced by this method and 
-	 * that have to be handled either by the current reaction of the level (system influences) or handled in other levels 
-	 * of the simulation. The regular influences added in the <code>newInfluencesToProcess</code> will be managed during the next reaction
-	 * of this level.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
 	 */
 	void makeRegularReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState newConsistentState,
+			Consistent_PublicLocalDynamicState consistentState,
 			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
-			Set<I_Influence> newInfluencesToProcess
+			Set<I_Influence> remainingInfluences
 	);
 	
 	/**
-	 * Performs a reaction of the level to specific system influences.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * <h2>Important notice</h2>
-	 * <p>
-	 * 	The <code>newConsistentState</code> argument of this method contains a copy of the last consistent state, 
-	 * 	where the state dynamics are empty. The reaction has to add to this set all the influences that persist after 
-	 * 	reaction. The other influences are consumed by the reaction.
-	 * 	Note that this reaction can also produce other influences that might have to be handled either by the current reaction (for 
-	 * 	instance the addition of new agents) or by the current/next reaction of other levels. Such influences have to be added to 
-	 * 	the <code>newInfluencesToProcess</code> set.
-	 * </p>
-	 * <p>
-	 * 	Note that for time and memory efficiency reasons, the new consistent state (<code>newConsistentState</code> argument) 
-	 * 	is in fact equal to the last consistent state (<code>lastConsistentState</code>). Indeed, it would otherwise create a full replication
-	 * 	of the dynamic state of the simulation, which is far too much memory consuming.
-	 * </p>
+	 * Performs a user-defined reaction to the system influences that are currently lying in the last consistent dynamic state of 
+	 * the level (at the time <code>t<sub>l</sub></code>) plus the influences that were added into the transitory dynamic state
+	 * of the level during the time range <code>]t<sub>l</sub>, t<sub>l</sub>+dt<sub>l</sub>[</code>.
+	 * This method is called twice during the reaction phase of the level:
+	 * <ul>
+	 * 	<li>
+	 * 		A first time right after the system reaction to the system influences happening at the beginning of the reaction phase.
+	 * 		It gives the opportunity to perform a user-defined reaction to the system influences that were added to the transitory
+	 * 		dynamic state of the level during the time range <code>]t<sub>l</sub>, t<sub>l</sub>+dt<sub>l</sub>[</code>.
+	 * 	</li>
+	 * 	<li>
+	 * 		A second time right after the system reaction to the system influences happening after the user-defined reaction to the
+	 * 		regular influences.
+	 * 		It gives the opportunity to perform a user-defined reaction to the system influences that were added to the transitory
+	 * 		dynamic state of the level during the user-defined reactions of the levels currently performing a reaction.
+	 * 	</li>
+	 * </ul>
+	 * This reaction updates the content of the last consistent dynamic state of the 
+	 * level (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub> )</code>), to participate in its 
+	 * transformation into the new last consistent dynamic state (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub>+dt<sub>l</sub> )</code>).
 	 * <h2>Usage</h2>
 	 * <p>
-	 * 	This method is called whenever a system influence has to be managed either because it was present in the transitory 
-	 * 	dynamic state, or because the reaction phase added new system influences that have to be managed.
+	 * 	<b>This method can:</b>
 	 * </p>
+	 * <ul>
+	 * 	<li>
+	 * 		Update the public local state of the environment and of the agents contained in the consistent dynamic state
+	 *  	<code>consistentState</code> argument of this method according.
+	 *  	For instance, if the public local state of the environment defines an agent grid, this method can add the public local state 
+	 *  	of an agent to the grid, in reaction to the 'add public local state of agent to level' system influence.
+	 *  </li>
+	 *  <li>
+	 *  	Add to the <code>newInfluencesToProcess</code> set the new influences that were produced by 
+	 *  	this reaction (for instance the addition of an agent to the simulation).
+	 *  	The influences added in such a way will be processed either during the next reaction of the level 
+	 *  	they are aimed at (<code>happensBeforeRegularReaction</code> <code>false</code> or the level being targeted
+	 *  	by the influence is not currently computing a reaction).
+	 *  </li>
+	 * </ul>
 	 * <p>
-	 * 	The system influences contained in the <code>systemInfluencesToManage</code> set were already managed by the 
-	 * 	simulation engine. Thus, this method only contains a level specific behavior (for instance updating the public local state of the
-	 * 	environment in response to the apparition/disappearance of the public local state of an agent).
+	 * 	<b>This method cannot:</b>
 	 * </p>
-	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, <i>i.e.</i> the starting time
-	 * of the transitory phase being ended by this reaction.
-	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, <i>i.e.</i> the ending time
-	 * of the transitory phase being ended by this reaction.
-	 * @param lastConsistentState The consistent state preceding the transitory phase ended by the reaction.
-	 * @param newConsistentState The consistent state following the transitory phase ended by the reaction. This state is updated
-	 * by the operations performed in this reaction.
-	 * @param systemInfluencesToManage The system influences for which a special reaction might be necessary by the level.
-	 * @param happensBeforeRegularReaction <code>true</code> if the reaction to the system influence happened before the call to
-	 * the {@link I_Level#makeRegularReaction(I_PublicLocalDynamicState, Consistent_PublicLocalDynamicState, Set, Set)} method.
-	 * @param newInfluencesToProcess The influences that were produced by this method and 
-	 * that have to be handled either by the current reaction of the level (system influences) or handled in other levels 
-	 * of the simulation. The regular influences that have to be managed by this level during the next reaction have to be added to the 
-	 * state dynamics of the new consistent state. The regular influences that have to be managed by this level during the current reaction
-	 * have to be added to this argument only if <code>happensBeforeRegularReaction</code> is <code>true</code>. Otherwise, the 
-	 * influence is automatically added to the state dynamics of the new consistent state.
+	 * <ul>
+	 * 	<li>
+	 * 		Add influences directly into the consistent state of the simulation. If it does so, it puts the simulation into an 
+	 * 		inconsistent state.
+	 * 	</li>
+	 * </ul>
+	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, 
+	 * <i>i.e.</i> the starting time of the transitory phase being ended by this reaction (<code>t<sub>l</sub></code> in the description
+	 * of the method).
+	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, 
+	 * <i>i.e.</i> the ending time of the transitory phase being ended by this reaction (<code>t<sub>l</sub>+dt<sub>l</sub></code> in the description
+	 * of the method).
+	 * @param consistentState The consistent state being modified by this user reaction.
+	 * The operations performed in this reaction participate in the transition of the consistent dynamic state 
+	 * <code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into its new value <code>&delta;<sub>l</sub>(t<sub>l</sub>+dt<sub>l</sub>)</code>.
+	 * @param systemInfluencesToManage The <b>system</b> influences that have to be managed by this reaction to go from the 
+	 * previous consistent state to the next consistent state of the level.
+	 * @param happensBeforeRegularReaction <code>true</code> if this user-defined system reaction is performed before the call to the
+	 * {@link I_Level#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Set, Set)} method.
+	 * @param newInfluencesToProcess The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method.
 	 */
 	void makeSystemReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState newConsistentState,
-			Set<I_Influence> systemInfluencesToManage,
+			Consistent_PublicLocalDynamicState consistentState,
+			Collection<I_Influence> systemInfluencesToManage,
 			boolean happensBeforeRegularReaction,
-			Set<I_Influence> newInfluencesToProcess
+			Collection<I_Influence> newInfluencesToProcess
 	);
 }

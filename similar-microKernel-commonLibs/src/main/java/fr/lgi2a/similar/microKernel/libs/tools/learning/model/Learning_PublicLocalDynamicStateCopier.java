@@ -47,6 +47,7 @@
 package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
 import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
 
@@ -54,7 +55,23 @@ import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalD
  * This class defines a method copying the content of a dynamic state into another dynamic state.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class Learning_ConsistentDynamicStateCopier {
+public class Learning_PublicLocalDynamicStateCopier {
+	/**
+	 * Creates a copy of a public local dynamic state of the "learning" simulation.
+	 * @param localDynamicState The public local dynamic state to copy.
+	 * @return The copy of the public local dynamic state.
+	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it contains elements that are not within 
+	 * the specification of the "learning" simulation.
+	 */
+	public static I_PublicLocalDynamicState createCopy( I_PublicLocalDynamicState localDynamicState ) throws IllegalArgumentException {
+		if( localDynamicState instanceof Consistent_PublicLocalDynamicState ){
+			return createCopy( (Consistent_PublicLocalDynamicState) localDynamicState );
+		} else {
+			throw new UnsupportedOperationException( "Cannot manage the copy of a dynamic state from the " +
+					"class '" + localDynamicState.getClass().getSimpleName() + "'" );
+		}
+	}
+	
 	/**
 	 * Creates a copy of a consistent dynamic state of the "learning" simulation.
 	 * @param toCopy The consistent dynamic state to copy.
@@ -82,7 +99,7 @@ public class Learning_ConsistentDynamicStateCopier {
 					toCopy.getLevel() + "' in the consistent dynamic state at the time '" +
 					toCopy.getTime() + "' is not an instance of the class '" + Learning_PublicLocalStateOfEnvironment.class.getSimpleName() + "'."  );
 		} else {
-			result.setPublicLocalStateOfEnvironment( (Learning_PublicLocalStateOfEnvironment) toCopy.getPublicLocalStateOfEnvironment() );
+			result.setPublicLocalStateOfEnvironment( ( (Learning_PublicLocalStateOfEnvironment) toCopy.getPublicLocalStateOfEnvironment() ).createCopy() );
 		}
 		// Copy the public local state of the agents
 		for( I_PublicLocalStateOfAgent agentPublicLocalState : toCopy.getPublicLocalStateOfAgents() ){

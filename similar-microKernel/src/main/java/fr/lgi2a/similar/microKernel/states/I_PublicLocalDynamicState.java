@@ -108,4 +108,17 @@ public interface I_PublicLocalDynamicState {
      * @return The state dynamics of this public local dynamic state.
      */
     Set<I_Influence> getStateDynamics();
+    
+    /**
+	 * Gets the system influences contained in the state transitory dynamics.
+	 * @return The system influences of the value returned by the {@link I_PublicLocalDynamicState#getStateDynamics()} method.
+	 */
+	Set<I_Influence> getSystemInfluencesOfStateDynamics();
+	
+	/**
+	 * Gets the non-system influences contained in the state transitory dynamics.
+	 * @return The non-system influences of the value returned by the 
+	 * {@link I_PublicLocalDynamicState#getStateDynamics()} method.
+	 */
+	Set<I_Influence> getRegularInfluencesOfStateDynamics();
 }

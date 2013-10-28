@@ -59,8 +59,6 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationMoment;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_Natural;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 
 /**
@@ -85,19 +83,6 @@ public abstract class Learning_AbstractEnvironment extends AbstractEnvironment {
 			throw new IllegalArgumentException( "The 'trace' argument cannot be null" );
 		}
 		this.trace = trace;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Environment#disambiguation(fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState)
-	 */
-	@Override
-	public I_PublicLocalDynamicState disambiguation(
-			Transitory_PublicLocalDynamicState transitoryDynamicState
-	) {
-		return new Learning_ObservableTransitoryState(
-				transitoryDynamicState
-		);
 	}
 
 	/**

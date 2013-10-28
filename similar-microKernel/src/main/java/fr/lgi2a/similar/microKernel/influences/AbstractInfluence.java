@@ -103,6 +103,6 @@ public abstract class AbstractInfluence implements I_Influence {
 	 */
 	@Override
 	public String toString(){
-		return this.getCategory() + "(reaction in '" + this.getTargetLevel() + "')";
+		return this.getCategory() + " (reaction in '" + this.getTargetLevel() + "')";
 	}
 }

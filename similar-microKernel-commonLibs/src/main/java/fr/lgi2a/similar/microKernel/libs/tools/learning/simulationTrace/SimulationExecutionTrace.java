@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.TreeMap;
 
 import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 
@@ -74,18 +75,30 @@ public class SimulationExecutionTrace {
 	 * The operations performed by the simulation engine, sorted by type.
 	 */
 	private Map<Learning_EngineOperationMoment, Map<Learning_EngineOperationType, List<Learning_EngineOperation>>> engineOperationsByType;
+	/**
+	 * Models the reason why the simulation ended.
+	 */
+	private Learning_ReasonOfSimulationEnd reasonOfEnd;
+	/**
+	 * The final time stamp of the simulation (if the simulation ended without errors).
+	 */
+	private SimulationTimeStamp finalTime;
+	/**
+	 * The dynamic state of the simulation when the final time was reached.
+	 */
+	private Learning_SimulationDynamicState finalDynamicState;
 	
 	/**
 	 * Builds an empty simulation execution trace.
 	 */
 	public SimulationExecutionTrace( ) {
 		this.dynamicStatesTrace = new LinkedHashMap<SimulationTimeStamp, Learning_SimulationDynamicState>( );
-		this.engineOperationsOrder = new LinkedHashMap<Learning_EngineOperationMoment, List<Learning_EngineOperation>>();
+		this.engineOperationsOrder = new TreeMap<Learning_EngineOperationMoment, List<Learning_EngineOperation>>();
 		this.engineOperationsByType = new HashMap<Learning_EngineOperationMoment, Map<Learning_EngineOperationType, List<Learning_EngineOperation>>>();
 	}
 	
 	/**
-	 * Gets all the time stamps of the simulation in increasing order.
+	 * Gets all the time stamps of the simulation, in increasing order.
 	 * @return An ordered set containing all the time stamps of the simulation in increasing order.
 	 */
 	public Set<SimulationTimeStamp> getOrderedSimulationTimeStamps(){
@@ -128,7 +141,49 @@ public class SimulationExecutionTrace {
 		} else if( this.dynamicStatesTrace.containsKey( timestamp ) ){
 			throw new IllegalArgumentException( "A dynamic state is already defined for the timestamp '" + timestamp + "'." );
 		}
-		this.dynamicStatesTrace.put( timestamp, dynamicState );
+		this.dynamicStatesTrace.put( new SimulationTimeStamp( timestamp ), dynamicState );
+	}
+
+	/**
+	 * Gets the dynamic state of the simulation when the final time was reached.
+	 * @return The dynamic state of the simulation when the final time was reached.
+	 */
+	public Learning_SimulationDynamicState getFinalDynamicState( ) {
+		return this.finalDynamicState;
+	}
+
+	/**
+	 * Sets the dynamic state of the simulation when the final time was reached.
+	 * @param finalDynamicState The dynamic state of the simulation when the final time was reached.
+	 * @throws IllegalArgumentException If an argument was <code>null</code>.
+	 */
+	public void setFinalDynamicState( SimulationTimeStamp finalTime, Learning_SimulationDynamicState finalDynamicState ) throws IllegalArgumentException {
+		if( finalDynamicState == null ){
+			throw new IllegalArgumentException( "The 'finalDynamicState' argument cannot be null." );
+		} else if( finalTime == null ) {
+			throw new IllegalArgumentException( "The 'finalTime' argument cannot be null." );
+		}
+		this.finalDynamicState = finalDynamicState;
+		this.finalTime = finalTime;
+	}
+	
+	/**
+	 * Gets the final time stamp of the simulation (if the simulation ended without errors).
+	 * @return The final time stamp of the simulation (if the simulation ended without errors).
+	 */
+	public SimulationTimeStamp getInitialTime( ) {
+		if( this.getOrderedSimulationTimeStamps().isEmpty() ){
+			return null;
+		}
+		return this.getOrderedSimulationTimeStamps().iterator().next();
+	}
+	
+	/**
+	 * Gets the final time stamp of the simulation (if the simulation ended without errors).
+	 * @return The final time stamp of the simulation (if the simulation ended without errors).
+	 */
+	public SimulationTimeStamp getFinalTime( ) {
+		return this.finalTime;
 	}
 	
 	/**
@@ -152,7 +207,7 @@ public class SimulationExecutionTrace {
 	) throws IllegalArgumentException, NoSuchElementException {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
-		} else if( ! this.dynamicStatesTrace.containsKey( moment ) ) {
+		} else if( ! this.engineOperationsOrder.containsKey( moment ) ) {
 			throw new NoSuchElementException( "No operation was performed by the simulation engine at the moment '" + moment + "'." );
 		}
 		return this.engineOperationsOrder.get( moment );
@@ -218,5 +273,36 @@ public class SimulationExecutionTrace {
 			operationsByType.put( operation.getOperationType(), operations );
 		}
 		operations.add( operation );
+	}
+	
+	/**
+	 * Gets the reason why the simulation ended.
+	 * @return The reason why the simulation ended.
+	 */
+	public Learning_ReasonOfSimulationEnd getReasonOfEnd( ) {
+		return this.reasonOfEnd;
+	}
+	
+	/**
+	 * Sets the reason why the simulation ended.
+	 * @param reasonOfEnd The reason why the simulation ended.
+	 * @throws IllegalArgumentException If the argument is <code>null</code>.
+	 */
+	public void setReasonOfEnd( Learning_ReasonOfSimulationEnd reasonOfEnd ) throws IllegalArgumentException {
+		if( reasonOfEnd == null ){
+			throw new IllegalArgumentException( "The argument 'reasonOfEnd' cannot be null." );
+		}
+		this.reasonOfEnd = reasonOfEnd;
+	}
+	
+	/**
+	 * Clears the content of the trace.
+	 */
+	public void clearTrace( ) {
+		this.dynamicStatesTrace.clear();
+		this.engineOperationsByType.clear();
+		this.engineOperationsOrder.clear();
+		this.reasonOfEnd = null;
+		this.finalDynamicState = null;
 	}
 }

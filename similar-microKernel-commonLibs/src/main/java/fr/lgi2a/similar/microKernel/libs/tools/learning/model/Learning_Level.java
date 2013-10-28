@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
-import java.util.NoSuchElementException;
+import java.util.Collection;
 import java.util.Set;
 
 import fr.lgi2a.similar.microKernel.I_Influence;
@@ -59,6 +59,7 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationMoment;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_RegularReaction;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_SystemReaction;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
 
 /**
@@ -103,12 +104,17 @@ public abstract class Learning_Level extends AbstractLevel {
 			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
 			Set<I_Influence> newInfluencesToProcess
 	) {
-		Consistent_PublicLocalDynamicState newConsistentStateAtBeginning = Learning_ConsistentDynamicStateCopier.createCopy( newConsistentState );
 		Learning_EngineOperation_RegularReaction operation = new Learning_EngineOperation_RegularReaction(
-				newConsistentStateAtBeginning
+				previousConsistentStateTime,
+				newConsistentStateTime,
+				newConsistentState
 		);
+		// Memorize the argument influences
 		for( I_Influence influence : regularInfluencesOftransitoryStateDynamics ){
 			operation.addArgumentInfluence( influence );
+		}
+		// Process the influences
+		for( I_Influence influence : regularInfluencesOftransitoryStateDynamics ){
 			if( influence instanceof Learning_Influence_AgentPublicLocalStateUpdate ){
 				Learning_Influence_AgentPublicLocalStateUpdate casted = (Learning_Influence_AgentPublicLocalStateUpdate) influence;
 				casted.getPublicLocalStateOfAgent().revise();
@@ -118,7 +124,7 @@ public abstract class Learning_Level extends AbstractLevel {
 			} else if( influence instanceof I_LearningInfluence ) {
 				newConsistentState.addInfluence( influence );
 			} else {
-				throw new IllegalArgumentException( "The '' class of influence is not managed by this " );
+				throw new IllegalArgumentException( "The '" + influence.getClass().getSimpleName() + "' class of influence is not managed by this " );
 			}
 		}
 		operation.setNewConsistentStateAtEnd( newConsistentState );
@@ -130,19 +136,30 @@ public abstract class Learning_Level extends AbstractLevel {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Level#makeSystemReaction(fr.lgi2a.similar.microKernel.SimulationTimeStamp, fr.lgi2a.similar.microKernel.SimulationTimeStamp, fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState, java.util.Set, boolean, java.util.Set)
 	 */
 	@Override
 	public void makeSystemReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
 			Consistent_PublicLocalDynamicState newConsistentState,
-			Set<I_Influence> systemInfluencesToManage,
+			Collection<I_Influence> systemInfluencesToManage,
 			boolean happensBeforeRegularReaction,
-			Set<I_Influence> newInfluencesToProcess
+			Collection<I_Influence> newInfluencesToProcess
 	) {
-		// TODO Auto-generated method stub
-		a
+		Learning_EngineOperation_SystemReaction operation = new Learning_EngineOperation_SystemReaction(
+				previousConsistentStateTime, 
+				newConsistentStateTime, 
+				happensBeforeRegularReaction, 
+				newConsistentState
+		);
+		for( I_Influence influence : systemInfluencesToManage ){
+			operation.addArgumentInfluence( influence );
+		}
+		operation.setNewConsistentStateAtEnd( newConsistentState );
+		this.trace.addEngineOperation(
+				new Learning_EngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( newConsistentStateTime ) ), 
+				operation
+		);
 	}
 
 	/**
@@ -151,13 +168,4 @@ public abstract class Learning_Level extends AbstractLevel {
 	 */
 	@Override
 	public abstract SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime );
-
-	/**
-	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_TimeModel#isFinalTimeOrAfter(fr.lgi2a.similar.microKernel.SimulationTimeStamp)
-	 */
-	@Override
-	public abstract boolean isFinalTimeOrAfter(
-			SimulationTimeStamp currentTime
-	) throws NoSuchElementException;
 }

@@ -106,6 +106,6 @@ public class Learning_PublicLocalStateOfAgent extends AbstractPublicLocalStateOf
 	 * {@inheritDoc}
 	 */
 	public String toString( ) {
-		return "Agent (" + this.getOwner().toString() + ") - PublicLocalState ( " + this.getLevel() + " ) - #" + this.getRevisionNumber();
+		return "PublicLocalState ( " + this.getLevel() + " ) - #" + this.getRevisionNumber() + " of Agent (" + this.getOwner().getCategory() + ")";
 	}
 }

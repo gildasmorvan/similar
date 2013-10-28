@@ -46,14 +46,21 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import fr.lgi2a.similar.microKernel.I_Level;
+import fr.lgi2a.similar.microKernel.I_SimulationEngine;
 import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractSimulationModel;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractAgent;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractEnvironment;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_Level;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfEnvironment;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 
 /**
  * This simulation model is designed to help users to understand the algorithm used to run a simulation.
@@ -66,11 +73,15 @@ import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractSimulat
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class LearningSimilar_SimulationModel extends AbstractSimulationModel {
+public abstract class LearningSimilar_SimulationModel extends AbstractSimulationModel {
 	/**
 	 * The final time stamp of the simulation.
 	 */
 	private final SimulationTimeStamp finalTime;
+	/**
+	 * The trace of the execution of the current simulation.
+	 */
+	private SimulationExecutionTrace trace;
 
 	/**
 	 * Builds an instance of an abstract simulation model, having a specific time stamp as initial time.
@@ -88,46 +99,62 @@ public class LearningSimilar_SimulationModel extends AbstractSimulationModel {
 			throw new IllegalArgumentException( "The 'finalTime' argumen cannot be null." );
 		}
 		this.finalTime = finalTime;
+		this.trace = new SimulationExecutionTrace( );
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * The trace of the execution of the current simulation.
 	 */
-	@Override
-	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
-		// TODO Auto-generated method stub
-		return null;
+	public SimulationExecutionTrace getTrace(){
+		return this.trace;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isFinalTimeOrAfter(
-			SimulationTimeStamp currentTime
-	) throws NoSuchElementException {
-		return currentTime.compareTo( finalTime ) >= 0;
+	public final List<I_Level> generateLevels( SimulationTimeStamp initialTime ) {
+		this.trace.clearTrace();
+		List<Learning_Level> castedLevels = this.generateCastedLevels( initialTime, this.trace );
+		List<I_Level> result = new LinkedList<I_Level>();
+		result.addAll( castedLevels );
+		return result;
 	}
+	
+	/**
+	 * Generates the bare levels of the simulation. These levels contain no agents and define no environment.
+	 * <p>
+	 * 	The instances only have to define the identifier of the level and how the model moves through time.
+	 * </p>
+	 * @param initialTime The initial time of the simulation.
+	 * @param trace The object where the trace of the simulation will be registered.
+	 * @return The bare levels of the simulation.
+	 */
+	protected abstract List<Learning_Level> generateCastedLevels( SimulationTimeStamp initialTime, SimulationExecutionTrace trace );
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<I_Level> generateLevels( SimulationTimeStamp initialTime ) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public EnvironmentInitializationData generateEnvironment(
+	public final EnvironmentInitializationData generateEnvironment(
 			SimulationTimeStamp initialTime,
-			Map<LevelIdentifier, I_Level> levels) {
-		// TODO Auto-generated method stub
-		return null;
+			Map<LevelIdentifier, I_Level> levels
+	) {
+		Learning_AbstractEnvironment environment = this.createEnvironment( this.trace );
+		for( LevelIdentifier levelId : levels.keySet() ){
+			environment.includeNewLevel( levelId, new Learning_PublicLocalStateOfEnvironment( levelId ) );
+		}
+		return new EnvironmentInitializationData( environment );
 	}
+	
+	/**
+	 * Creates a new instance of the environment where the simulation takes place.
+	 * The main role of this method is to create an environment defining its natural action over time.
+	 * The creation and addition of public local states is handled automatically by this abstract class.
+	 * @param trace The object where the trace of the simulation will be registered.
+	 * @return A new instance of the environment where the simulation takes place.
+	 */
+	protected abstract Learning_AbstractEnvironment createEnvironment( SimulationExecutionTrace trace );
 
 	/**
 	 * {@inheritDoc}
@@ -137,6 +164,39 @@ public class LearningSimilar_SimulationModel extends AbstractSimulationModel {
 			SimulationTimeStamp initialTime,
 			Map<LevelIdentifier, I_Level> levels
 	) {
-		return null;
+		AgentInitializationData result = new AgentInitializationData( );
+		for( Learning_AbstractAgent agent : this.createAgents( this.trace ) ){
+			result.agents.add( agent );
+		}
+		return result;
+	}
+	
+	/**
+	 * Creates the list of agents that will lie in the simulation.
+	 * During the creation of the agents, this method is responsible for:
+	 * <ul>
+	 * 	<li>
+	 * 		Determine the levels where the agent lies, using the 
+	 * 		{@link Learning_AbstractAgent#includeNewLevel(LevelIdentifier, fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent)} method
+	 * 		with an instance of the {@link Learning_PublicLocalStateOfAgent} class as public local state.
+	 * 	</li>
+	 * 	<li>
+	 * 		Determine the behavior of the decision operation of the agent.
+	 * 	</li>
+	 * </ul>
+	 * @param trace The object where the trace of the simulation will be registered.
+	 * @return The list of agents that will lie in the simulation.
+	 */
+	protected abstract List<Learning_AbstractAgent> createAgents( SimulationExecutionTrace trace ); 
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isFinalTimeOrAfter(
+			SimulationTimeStamp currentTime,
+			I_SimulationEngine engine
+	) {
+		return this.finalTime.compareTo( currentTime ) <= 0;
 	}
 }

@@ -51,9 +51,8 @@ import java.lang.reflect.Method;
 import fr.lgi2a.similar.microKernel.I_Influence;
 import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_ConsistentDynamicStateCopier;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_InfluenceCopier;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_ObservableTransitoryState;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationType;
 import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
@@ -122,16 +121,12 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}
-		if( dynamicState instanceof Learning_ObservableTransitoryState ){
-			Learning_ObservableTransitoryState original = (Learning_ObservableTransitoryState) dynamicState;
-			this.levelsPublicLocalObservableDynamicState.put( original.createCopy() );
-		} else if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
+		if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
 			Consistent_PublicLocalDynamicState original = (Consistent_PublicLocalDynamicState) dynamicState;
-			this.levelsPublicLocalObservableDynamicState.put( Learning_ConsistentDynamicStateCopier.createCopy( original ) );
+			this.levelsPublicLocalObservableDynamicState.put( Learning_PublicLocalDynamicStateCopier.createCopy( original ) );
 		} else {
-			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has to be an instance of either" +
-					" the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent state) or an instance of the '" +
-							Learning_ObservableTransitoryState.class.getSimpleName() + "' class (observable transitory state)." );
+			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has to be an instance " +
+					"of the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent state)." );
 		}
 	}
 	
@@ -164,5 +159,13 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 	 */
 	public I_DynamicState_Map getLevelsPublicLocalObservableDynamicState( ) {
 		return this.levelsPublicLocalObservableDynamicState;
+	}
+
+	/**
+	 * Gets the influences that were produced by the natural action of the environment.
+	 * @return The influences that were produced by the natural action of the environment.
+	 */
+	public InfluencesMap getProducedInfluences( ) {
+		return this.producedInfluences;
 	}
 }

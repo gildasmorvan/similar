@@ -49,9 +49,7 @@ package fr.lgi2a.similar.microKernel;
 import java.util.NoSuchElementException;
 
 import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 
 /**
@@ -75,20 +73,6 @@ public interface I_Environment {
 	 * @throws NoSuchElementException If no public local state was defined for the specified level.
 	 */
 	I_PublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
-	
-	/**
-	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
-	 * <p>
-	 * 	This operation can introduce biases since it provides an estimation of the real state of a level, using the information 
-	 * 	stored into a transitory dynamic state.
-	 * </p>
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
-	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
-	 */
-	I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState );
 	
 	/**
 	 * Models the natural action of the environment on the simulation, from a specific level.

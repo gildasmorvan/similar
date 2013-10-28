@@ -122,7 +122,7 @@ public class Learning_Influence_EnvironmentPublicLocalStateUpdate extends Regula
 	 * {@inheritDoc}
 	 */
 	public String toString() {
-		return super.toString() + "#" + this.influenceId;
+		return super.toString() + " #" + this.influenceId;
 	}
 
 	/**

@@ -121,13 +121,7 @@ public class Learning_PerceivedDataOfAgent extends AbstractPerceivedDataOfAgent 
 		copy.identifier = this.identifier;
 		for( LevelIdentifier level : this.levelsPublicLocalObservableDynamicState.keySet() ){
 			I_PublicLocalDynamicState dynamicState = this.levelsPublicLocalObservableDynamicState.get( level );
-			if( dynamicState instanceof Learning_ObservableTransitoryState ){
-				Learning_ObservableTransitoryState original = (Learning_ObservableTransitoryState) dynamicState;
-				copy.addObservableDynamicState( original.createCopy() );
-			} else if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
-				Consistent_PublicLocalDynamicState original = (Consistent_PublicLocalDynamicState) dynamicState;
-				copy.addObservableDynamicState( Learning_ConsistentDynamicStateCopier.createCopy( original ) );
-			}
+			copy.addObservableDynamicState( Learning_PublicLocalDynamicStateCopier.createCopy( dynamicState ) );
 		}
 		return copy;
 	}
@@ -142,16 +136,13 @@ public class Learning_PerceivedDataOfAgent extends AbstractPerceivedDataOfAgent 
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}
-		if( dynamicState instanceof Learning_ObservableTransitoryState ){
-			Learning_ObservableTransitoryState original = (Learning_ObservableTransitoryState) dynamicState;
-			this.levelsPublicLocalObservableDynamicState.put( original );
-		} else if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
+		if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
 			Consistent_PublicLocalDynamicState original = (Consistent_PublicLocalDynamicState) dynamicState;
 			this.levelsPublicLocalObservableDynamicState.put( original );
 		} else {
-			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has to be an instance of either" +
-					" the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent state) or an instance of the '" +
-							Learning_ObservableTransitoryState.class.getSimpleName() + "' class (observable transitory state)." );
+			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has " +
+					"to be an instance of the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent " +
+					"state)." );
 		}
 	}
 

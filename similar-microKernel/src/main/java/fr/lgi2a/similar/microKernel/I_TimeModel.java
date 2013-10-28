@@ -46,8 +46,6 @@
  */
 package fr.lgi2a.similar.microKernel;
 
-import java.util.NoSuchElementException;
-
 /**
  * Models how the time stamps of the simulation or of a level evolve through time.
  * 
@@ -58,31 +56,11 @@ import java.util.NoSuchElementException;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_TimeModel {
-	/**
-	 * Gets the initial time of this time model.
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @return The initial time of this model.
-	 */
-	SimulationTimeStamp getInitialTime( );
-	
+public interface I_TimeModel {	
 	/**
 	 * Gets the time stamp following a specific time stamp in this model.
 	 * @param currentTime The time stamp for which this method computes a successor.
 	 * @return The time stamp following the <code>currentTime</code> time stamp.
 	 */
 	SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime );
-	
-	/**
-	 * Tells if a time stamp is greater or equal to the final time stamp.
-	 * @param currentTime
-	 * @return <code>true</code> if the final time of the level was reached.
-	 * @throws NoSuchElementException if this time model defines no explicit final time.
-	 * This exception is thrown in the time model of a level, if the level defines no specific final time.
-	 * This exception is thrown in the time model of a simulation only if all the levels do never throw a {@link NoSuchElementException}
-	 * exception. Otherwise, the simulation will never end.
-	 */
-	boolean isFinalTimeOrAfter( SimulationTimeStamp currentTime ) throws NoSuchElementException;
 }

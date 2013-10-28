@@ -62,7 +62,7 @@ public abstract class AbstractSimulationEngine implements I_SimulationEngine {
 	/**
 	 * A map containing the probes. This map ensures that the iteration order over probes is the insertion order of the probes.
 	 */
-	private LinkedHashMap<String,I_Probe> probes;
+	protected LinkedHashMap<String,I_Probe> probes;
 
 	/**
 	 * Builds an instance of this abstract simulation engine, containing no probes.

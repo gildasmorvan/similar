@@ -47,8 +47,7 @@
 package fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations;
 
 import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_ConsistentDynamicStateCopier;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_ObservableTransitoryState;
+import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
@@ -101,8 +100,6 @@ public class Learning_EngineOperation_Perception implements Learning_EngineOpera
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		} else if( agentPublicLocalState == null ){
 			throw new IllegalArgumentException( "The 'agentPublicLocalState' argument cannot be null." );
-		} else if( levelsPublicLocalObservableDynamicState == null ){
-			throw new IllegalArgumentException( "The 'levelsPublicLocalObservableDynamicState' argument cannot be null." );
 		} else if( methodResult == null ){
 			throw new IllegalArgumentException( "The 'methodResult' argument cannot be null." );
 		}
@@ -156,16 +153,12 @@ public class Learning_EngineOperation_Perception implements Learning_EngineOpera
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}
-		if( dynamicState instanceof Learning_ObservableTransitoryState ){
-			Learning_ObservableTransitoryState original = (Learning_ObservableTransitoryState) dynamicState;
-			this.levelsPublicLocalObservableDynamicState.put( original.createCopy() );
-		} else if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
+		if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
 			Consistent_PublicLocalDynamicState original = (Consistent_PublicLocalDynamicState) dynamicState;
-			this.levelsPublicLocalObservableDynamicState.put( Learning_ConsistentDynamicStateCopier.createCopy( original ) );
+			this.levelsPublicLocalObservableDynamicState.put( Learning_PublicLocalDynamicStateCopier.createCopy( original ) );
 		} else {
-			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has to be an instance of either" +
-					" the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent state) or an instance of the '" +
-							Learning_ObservableTransitoryState.class.getSimpleName() + "' class (observable transitory state)." );
+			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has to be " +
+					"an instance of the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent state)." );
 		}
 	}
 	

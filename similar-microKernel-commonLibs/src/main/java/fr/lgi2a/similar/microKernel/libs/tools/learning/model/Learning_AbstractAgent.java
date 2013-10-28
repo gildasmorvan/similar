@@ -65,9 +65,7 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operatio
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_Perception;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_ReviseMemory;
 import fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 
 /**
@@ -81,6 +79,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 	private SimulationExecutionTrace trace;
 	
 	/**
+	 * Builds an initialized instance of this agent class.
 	 * @param category The category of the agent. To make the trace of the simulation explicit,
 	 * it is advised to use a different category for each agent instance.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
@@ -121,19 +120,6 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Agent#disambiguation(fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState)
-	 */
-	@Override
-	public I_PublicLocalDynamicState disambiguation(
-			Transitory_PublicLocalDynamicState transitoryDynamicState
-	) {
-		return new Learning_ObservableTransitoryState(
-				transitoryDynamicState
-		);
-	}
-
-	/**
-	 * {@inheritDoc}
 	 * @see fr.lgi2a.similar.microKernel.I_Agent#perceive(fr.lgi2a.similar.microKernel.LevelIdentifier, fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent, fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map)
 	 */
 	@Override
@@ -158,6 +144,9 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 				castedState, 
 				result
 		);
+		for( LevelIdentifier perceptibleLevel : levelsPublicLocalObservableDynamicState.keySet() ){
+			operation.addObservableDynamicState( levelsPublicLocalObservableDynamicState.get( perceptibleLevel ) );
+		}
 		this.trace.addEngineOperation(
 				new Learning_EngineOperationMoment.Learning_EngineOperationMoment_After( levelsPublicLocalObservableDynamicState.get( level ).getTime() ), 
 				operation
@@ -170,7 +159,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 	 * @see fr.lgi2a.similar.microKernel.I_Agent#reviseMemory(java.util.Map, fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState)
 	 */
 	@Override
-	public I_GlobalMemoryState reviseMemory(
+	public void reviseMemory(
 			Map<LevelIdentifier, I_PerceivedDataOfAgent> perceivedData,
 			I_GlobalMemoryState memoryState
 	) {
@@ -178,12 +167,21 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 			throw new IllegalArgumentException( "The global memory state of an agent has to be an instance of the '" + Learning_GlobalMemoryState.class.getSimpleName() + "' class." );
 		}
 		Learning_GlobalMemoryState castedMemory = (Learning_GlobalMemoryState) memoryState;
-		Learning_GlobalMemoryState result = castedMemory.createCopy().revise();
+		Learning_GlobalMemoryState initialMemoryCopy = castedMemory.createCopy();
+		//
+		// The next instruction simulates a revision of the memory state
+		//
+		castedMemory.revise();
+		//
+		// The rest of these instructions are dedicated to the registration of this memory revision operation to the trace of the simulation.
+		//
 		Learning_EngineOperation_ReviseMemory operation = new Learning_EngineOperation_ReviseMemory( 
-				castedMemory, 
-				result 
+				initialMemoryCopy, 
+				castedMemory 
 		);
-		SimulationTimeStamp memorizationTime = new SimulationTimeStamp( Long.MIN_VALUE );
+		// Compute the moment when the memory revision was made.
+		// This loop also copies the perceived data into the operation.
+		SimulationTimeStamp memorizationTime = null;
 		for( LevelIdentifier level : perceivedData.keySet() ){
 			I_PerceivedDataOfAgent rawData = perceivedData.get( level );
 			if( ! ( rawData instanceof Learning_PerceivedDataOfAgent ) ){
@@ -191,15 +189,15 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 			}
 			Learning_PerceivedDataOfAgent castedData = (Learning_PerceivedDataOfAgent) rawData;
 			SimulationTimeStamp levelTime = castedData.getLevelsPublicLocalObservableDynamicState().get( level ).getTime();
-			if( levelTime.compareTo( memorizationTime ) > 0 ){
+			if( memorizationTime == null || levelTime.compareTo( memorizationTime ) > 0 ){
 				memorizationTime = levelTime;
 			}
+			operation.addPerceivedData( perceivedData.get( level ) );
 		}
 		this.trace.addEngineOperation(
 				new Learning_EngineOperationMoment.Learning_EngineOperationMoment_After( memorizationTime ), 
 				operation
 		);
-		return result;
 	}
 
 	/**

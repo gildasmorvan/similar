@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microKernel.states.dynamicStates;
 
-import java.util.Set;
+import java.util.Collection;
 
 import fr.lgi2a.similar.microKernel.I_Influence;
 import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
@@ -121,5 +121,15 @@ public interface I_Modifiable_PublicLocalDynamicState extends I_PublicLocalDynam
 	 * If <code>null</code>, this method sets the state dynamics of this dynamic state to an empty set.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void setStateDynamicsAsCopyOf( Set<I_Influence> toCopy ) throws IllegalArgumentException;
+	void setStateDynamicsAsCopyOf( Collection<I_Influence> toCopy ) throws IllegalArgumentException;
+
+	/**
+	 * Remove all the system influences of this dynamic state.
+	 */
+	void clearSystemInfluences( );
+	
+	/**
+	 * Remove all the regular influences of this dynamic state.
+	 */
+	void clearRegularInfluences( );
 }

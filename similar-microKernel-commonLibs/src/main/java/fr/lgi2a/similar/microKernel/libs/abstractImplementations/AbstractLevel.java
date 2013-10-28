@@ -67,10 +67,6 @@ public abstract class AbstractLevel implements I_Level {
 	 */
 	private final LevelIdentifier identifier;
 	/**
-	 * The initial time of the level.
-	 */
-	private final SimulationTimeStamp initialTime;
-	/**
 	 * The last consistent public local dynamic state of this level.
 	 */
 	private Consistent_PublicLocalDynamicState lastConsistentPublicLocalDynamicState;
@@ -103,25 +99,15 @@ public abstract class AbstractLevel implements I_Level {
 		} else if( identifier == null ){
 			throw new IllegalArgumentException( "The 'identifier' argument cannot be null." );
 		}
-		this.initialTime = initialTime;
 		this.identifier = identifier;
 		// Create the last consistent dynamic state of this level.
-		this.lastConsistentPublicLocalDynamicState = new Consistent_PublicLocalDynamicState( this.initialTime, this.getIdentifier() );
+		this.lastConsistentPublicLocalDynamicState = new Consistent_PublicLocalDynamicState( initialTime, this.getIdentifier() );
 		// Create the out neighborhood of the perception relation graph for this level.
 		this.perceptibleLevels = new HashSet<LevelIdentifier>( );
 		this.perceptibleLevels.add( identifier );
 		// Create the out neighborhood of the influence relation graph for this level.
 		this.influenceableLevels = new HashSet<LevelIdentifier>( );
 		this.influenceableLevels.add( identifier );
-	}
-
-	/**
-	 * Gets the initial time of this time model, as defined in the constructor of the level.
-	 * @return The initial time of this model.
-	 */
-	@Override
-	public SimulationTimeStamp getInitialTime() {
-		return this.initialTime;
 	}
 
 	/**

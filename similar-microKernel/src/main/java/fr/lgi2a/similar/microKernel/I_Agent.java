@@ -53,9 +53,7 @@ import java.util.Set;
 import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
 import fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
 import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 
 /**
@@ -149,20 +147,6 @@ public interface I_Agent {
 	void setPerceivedData( LevelIdentifier levelIdentifier, I_PerceivedDataOfAgent perceivedData );
 	
 	/**
-	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
-	 * <p>
-	 * 	This operation can introduce biases since it provides an estimation of the real state of a level, using the information 
-	 * 	stored into a transitory dynamic state.
-	 * </p>
-	 * <p>
-	 * 	TODO formal notation
-	 * </p>
-	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
-	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
-	 */
-	I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState );
-	
-	/**
 	 * Creates the data perceived by an agent located in a specific level.
 	 * <p>
 	 * 	TODO formal notation
@@ -186,10 +170,9 @@ public interface I_Agent {
 	 * 	TODO formal notation
 	 * </p>
 	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
-	 * @param memoryState A copy of the previous value of the global memory state of the agent being updated by this method call.
-	 * @return The new value of the global memory state of the agent.
+	 * @param memoryState The previous value of the global memory state of the agent being updated by this method call.
 	 */
-	I_GlobalMemoryState reviseMemory( Map<LevelIdentifier, I_PerceivedDataOfAgent> perceivedData, I_GlobalMemoryState memoryState );
+	void reviseMemory( Map<LevelIdentifier, I_PerceivedDataOfAgent> perceivedData, I_GlobalMemoryState memoryState );
 	
 	/**
 	 * Produces the influences resulting from the decisions of an agent from a specific level.

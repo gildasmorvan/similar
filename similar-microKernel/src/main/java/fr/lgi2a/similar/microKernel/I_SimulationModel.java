@@ -58,7 +58,24 @@ import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationModel extends I_TimeModel {
+public interface I_SimulationModel {
+	/**
+	 * Gets the initial time of this time model.
+	 * <p>
+	 * 	TODO formal notation
+	 * </p>
+	 * @return The initial time of this model.
+	 */
+	SimulationTimeStamp getInitialTime( );
+	
+	/**
+	 * Tells if a time stamp is greater or equal to the final time stamp.
+	 * @param currentTime The last time the dynamic state of the simulation was in a partly consistent state.
+	 * @param engine The simualtion engine containing information about the currently running simulation.
+	 * @return <code>true</code> if the final time of the level was reached.
+	 */
+	boolean isFinalTimeOrAfter( SimulationTimeStamp currentTime, I_SimulationEngine engine );
+	
 	/**
 	 * Generates the bare levels of the simulation. These levels contain no agents and define no environment.
 	 * @param initialTime The initial time of the simulation.

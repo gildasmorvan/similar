@@ -117,10 +117,13 @@ public abstract class Learning_EngineOperationMoment implements Comparable<Learn
 			if( comparison != 0 ){
 				return comparison;
 			} else {
-				if( this.getClass().equals( o.getClass() ) ){
+				if( o instanceof Learning_EngineOperationMoment_Before ) {
 					return 0;
+				} else if( o instanceof Learning_EngineOperationMoment_After ) {
+					return -1;
 				} else {
-					return 1;
+					throw new UnsupportedOperationException( "An instance of the '" + this.getClass().getSimpleName() + "' class cannot be " +
+							"compared with an instance of the '" + o.getClass().getSimpleName() + "' class." );
 				}
 			}
 		}
@@ -171,10 +174,13 @@ public abstract class Learning_EngineOperationMoment implements Comparable<Learn
 			if( comparison != 0 ){
 				return comparison;
 			} else {
-				if( this.getClass().equals( o.getClass() ) ){
+				if( o instanceof Learning_EngineOperationMoment_After ) {
 					return 0;
+				} else if( o instanceof Learning_EngineOperationMoment_Before ) {
+					return 1;
 				} else {
-					return -1;
+					throw new UnsupportedOperationException( "An instance of the '" + this.getClass().getSimpleName() + "' class cannot be " +
+							"compared with an instance of the '" + o.getClass().getSimpleName() + "' class." );
 				}
 			}
 		}

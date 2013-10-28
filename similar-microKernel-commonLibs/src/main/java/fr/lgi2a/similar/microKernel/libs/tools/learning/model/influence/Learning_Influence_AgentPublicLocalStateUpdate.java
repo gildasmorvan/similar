@@ -122,7 +122,7 @@ public class Learning_Influence_AgentPublicLocalStateUpdate extends RegularInflu
 	 * {@inheritDoc}
 	 */
 	public String toString() {
-		return super.toString() + "#" + this.influenceId + ", updating " + publicLocalStateOfAgent.getOwner();
+		return super.toString() + " #" + this.influenceId + ", updating '" + this.publicLocalStateOfAgent + "'";
 	}
 
 	/**

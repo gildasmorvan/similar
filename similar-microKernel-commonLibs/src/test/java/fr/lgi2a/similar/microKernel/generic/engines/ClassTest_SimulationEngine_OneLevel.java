@@ -73,17 +73,17 @@ import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.generic.engines.tools.Test_Agent;
 import fr.lgi2a.similar.microkernel.generic.engines.tools.Test_LevelIdentifiers;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_Level;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationMoment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationType;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_Probe;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.AbstractLearningSimulationModel;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningLevel;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.AbstractLearningEngineOperationMoment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningEngineOperationType;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningTraceUpdatingProbe;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
@@ -154,24 +154,24 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 	 */
 	public void endObservation( ){ }
 	
-	private LearningSimilar_SimulationModel generateSimulationModel( 
+	private AbstractLearningSimulationModel generateSimulationModel( 
 			SimulationTimeStamp initialTime,
 			SimulationTimeStamp finalTime,
 			final LevelIdentifier[][] agentLevels,
 			final Map<LevelIdentifier,Set<LevelIdentifier>> perceptionRelationGraph,
 			final Map<LevelIdentifier,Set<LevelIdentifier>> influenceRelationGraph
 	) {
-		LearningSimilar_SimulationModel model = new LearningSimilar_SimulationModel(
+		AbstractLearningSimulationModel model = new AbstractLearningSimulationModel(
 				initialTime, 
 				finalTime
 		){
-			protected List<Learning_Level> generateCastedLevels(
+			protected List<AbstractLearningLevel> generateCastedLevels(
 					SimulationTimeStamp initialTime,
 					SimulationExecutionTrace trace
 			) {
-				List<Learning_Level> levels = new LinkedList<Learning_Level>();
+				List<AbstractLearningLevel> levels = new LinkedList<AbstractLearningLevel>();
 				for( LevelIdentifier levelId : perceptionRelationGraph.keySet() ){
-					Learning_Level newLevel = new Learning_Level( initialTime, levelId, trace ) {
+					AbstractLearningLevel newLevel = new AbstractLearningLevel( initialTime, levelId, trace ) {
 						public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
 							return new SimulationTimeStamp( currentTime.getIdentifier() + 1 );
 						}
@@ -186,10 +186,10 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 				}
 				return levels;
 			}
-			protected Learning_AbstractEnvironment createEnvironment(
+			protected AbstractLearningEnvironment createEnvironment(
 					SimulationExecutionTrace trace
 			) {
-				Learning_AbstractEnvironment result = new Learning_AbstractEnvironment( trace ) {
+				AbstractLearningEnvironment result = new AbstractLearningEnvironment( trace ) {
 					protected Set<IInfluence> produceInfluencesOfNatural(
 							LevelIdentifier level,
 							IDynamicStateMap levelsPublicLocalObservableDynamicState
@@ -197,12 +197,12 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 						Set<IInfluence> influences = new LinkedHashSet<IInfluence>();
 						for( LevelIdentifier levelId : levelsPublicLocalObservableDynamicState.keySet() ){
 							IPublicLocalDynamicState dynamicState = levelsPublicLocalObservableDynamicState.get( levelId );
-							influences.add( new Learning_Influence_EnvironmentPublicLocalStateUpdate( 
+							influences.add( new LearningInfluenceEnvironmentPublicLocalStateUpdate( 
 									levelId, 
 									dynamicState.getPublicLocalStateOfEnvironment( )
 							) );
 							for( IPublicLocalStateOfAgent agentState : dynamicState.getPublicLocalStateOfAgents() ){
-								influences.add( new Learning_Influence_AgentPublicLocalStateUpdate(
+								influences.add( new LearningInfluenceAgentPublicLocalStateUpdate(
 										levelId, 
 										agentState
 								) );
@@ -213,16 +213,16 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 				};
 				return result;
 			}
-			protected List<Learning_AbstractAgent> createAgents(
+			protected List<AbstractLearningAgent> createAgents(
 					SimulationExecutionTrace trace
 			) {
-				List<Learning_AbstractAgent> result = new LinkedList<Learning_AbstractAgent>( );
+				List<AbstractLearningAgent> result = new LinkedList<AbstractLearningAgent>( );
 				int agentId = 1;
 				for( LevelIdentifier[] levelsId : agentLevels ){
 					Test_Agent agent = new Test_Agent( "Agent#" + (agentId++), trace );
-					agent.initializeGlobalMemoryState( new Learning_GlobalMemoryState( agent ) );
+					agent.initializeGlobalMemoryState( new LearningGlobalMemoryState( agent ) );
 					for( LevelIdentifier levelId : levelsId ){
-						agent.includeNewLevel( levelId, new Learning_PublicLocalStateOfAgent( levelId, agent ) );
+						agent.includeNewLevel( levelId, new LearningPublicLocalStateOfAgent( levelId, agent ) );
 					}
 					result.add( agent );
 				}
@@ -274,14 +274,14 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 			perceptibleLevels.addAll( Arrays.asList( levelsOfSimulation ) );
 			influenceableLevels.addAll( Arrays.asList( levelsOfSimulation ) );
 		}
-		LearningSimilar_SimulationModel model = this.generateSimulationModel(
+		AbstractLearningSimulationModel model = this.generateSimulationModel(
 				initialTime, 
 				finalTime, 
 				agentLevels, 
 				perceptionRelationGraph, 
 				influenceRelationGraph
 		);
-		engine.addProbe( "Trace update", new Learning_Probe( model.getTrace() ) );
+		engine.addProbe( "Trace update", new LearningTraceUpdatingProbe( model.getTrace() ) );
 		//
 		// Run the tested method.
 		//
@@ -341,14 +341,14 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 			perceptibleLevels.addAll( Arrays.asList( levelsOfSimulation ) );
 			influenceableLevels.addAll( Arrays.asList( levelsOfSimulation ) );
 		}
-		LearningSimilar_SimulationModel model = this.generateSimulationModel(
+		AbstractLearningSimulationModel model = this.generateSimulationModel(
 				initialTime, 
 				finalTime, 
 				agentLevels, 
 				perceptionRelationGraph, 
 				influenceRelationGraph
 		);
-		engine.addProbe( "Trace update", new Learning_Probe( model.getTrace() ) );
+		engine.addProbe( "Trace update", new LearningTraceUpdatingProbe( model.getTrace() ) );
 		//
 		// Run the tested method.
 		//
@@ -369,15 +369,15 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 		);
 		assertThat( "The moments when operations were performed during simulation", model.getTrace().getOperationsMoments(), 
 				contains( 
-						(Learning_EngineOperationMoment) new Learning_EngineOperationMoment.Learning_EngineOperationMoment_After( initialTime ),
-						(Learning_EngineOperationMoment) new Learning_EngineOperationMoment.Learning_EngineOperationMoment_Before( finalTime ) 
+						(AbstractLearningEngineOperationMoment) new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( initialTime ),
+						(AbstractLearningEngineOperationMoment) new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( finalTime ) 
 				) 
 		);
-		Learning_EngineOperationMoment beforeFirstReaction = new Learning_EngineOperationMoment.Learning_EngineOperationMoment_After( initialTime );
+		AbstractLearningEngineOperationMoment beforeFirstReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( initialTime );
 		assertThat( "The operations that were performed slightly after the time " + initialTime, model.getTrace().getOperationsFor( beforeFirstReaction ), 
 				hasSize( 4 ) // natural & perception => memory revision => decision
 		);
-		Learning_EngineOperationMoment afterFirstReaction = new Learning_EngineOperationMoment.Learning_EngineOperationMoment_Before( finalTime );
+		AbstractLearningEngineOperationMoment afterFirstReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( finalTime );
 		assertThat( "The operations that were performed slightly after the time " + finalTime, model.getTrace().getOperationsFor( afterFirstReaction ), 
 				hasSize( 3 ) // system reaction => regular reaction => system reaction
 		);
@@ -417,14 +417,14 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 			perceptibleLevels.addAll( Arrays.asList( levelsOfSimulation ) );
 			influenceableLevels.addAll( Arrays.asList( levelsOfSimulation ) );
 		}
-		LearningSimilar_SimulationModel model = this.generateSimulationModel(
+		AbstractLearningSimulationModel model = this.generateSimulationModel(
 				initialTime, 
 				finalTime, 
 				agentLevels, 
 				perceptionRelationGraph, 
 				influenceRelationGraph
 		);
-		engine.addProbe( "Trace update", new Learning_Probe( model.getTrace() ) );
+		engine.addProbe( "Trace update", new LearningTraceUpdatingProbe( model.getTrace() ) );
 		//
 		// Run the tested method.
 		//
@@ -448,16 +448,16 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 		assertThat( "The final time stamp of the simulation", model.getTrace().getFinalTime(),
 				is( equalTo( finalTime ) )
 		);
-		Learning_EngineOperationMoment[] moments = new Learning_EngineOperationMoment[ (int)( finalTime.getIdentifier() - initialTime.getIdentifier() ) * 2 ];
+		AbstractLearningEngineOperationMoment[] moments = new AbstractLearningEngineOperationMoment[ (int)( finalTime.getIdentifier() - initialTime.getIdentifier() ) * 2 ];
 		for( int index = 0; index < moments.length; index++ ){
 			// Convert the index into a time stamp id.
 			boolean beforeTimestamp = (index % 2) == 1;
 			long timeStampId = initialTime.getIdentifier() + ( index + 1 ) / 2;
-			Learning_EngineOperationMoment moment = null;
+			AbstractLearningEngineOperationMoment moment = null;
 			if( beforeTimestamp ){
-				moment = new Learning_EngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( timeStampId ) );
+				moment = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( timeStampId ) );
 			} else {
-				moment = new Learning_EngineOperationMoment.Learning_EngineOperationMoment_After( new SimulationTimeStamp( timeStampId ) );
+				moment = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( new SimulationTimeStamp( timeStampId ) );
 			}
 			moments[ index ] = moment;
 		}
@@ -470,7 +470,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 			// Check all operations performed slightly after arriving to a time step (perception/memory revision/decision/natural)
 			//
 			if( timestampId != finalTime.getIdentifier() ){
-				Learning_EngineOperationMoment beforeReaction = new Learning_EngineOperationMoment.Learning_EngineOperationMoment_After( new SimulationTimeStamp( timestampId ) );
+				AbstractLearningEngineOperationMoment beforeReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( new SimulationTimeStamp( timestampId ) );
 				assertThat( "The operations that were performed slightly after the time " + new SimulationTimeStamp( timestampId ), model.getTrace().getOperationsFor( beforeReaction ), 
 						hasSize( 4 )
 				);
@@ -478,14 +478,14 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 				boolean memorizyRevisionDone = false;
 				boolean decisionDone = false;
 				boolean naturalDone = false;
-				Learning_EngineOperationType[] expectedValues = new Learning_EngineOperationType[]{
-						Learning_EngineOperationType.PERCEPTION,
-						Learning_EngineOperationType.MEMORIZATION,
-						Learning_EngineOperationType.DECISION,
-						Learning_EngineOperationType.NATURAL
+				LearningEngineOperationType[] expectedValues = new LearningEngineOperationType[]{
+						LearningEngineOperationType.PERCEPTION,
+						LearningEngineOperationType.MEMORIZATION,
+						LearningEngineOperationType.DECISION,
+						LearningEngineOperationType.NATURAL
 				};
 				for( int index = 0; index < 4; index++ ){
-					Learning_EngineOperationType opType = model.getTrace().getOperationsFor( beforeReaction ).get( index ).getOperationType();
+					LearningEngineOperationType opType = model.getTrace().getOperationsFor( beforeReaction ).get( index ).getOperationType();
 					assertThat( "The type of the " + index + "th operation performed slightly after the time " + beforeReaction, opType, allOf(
 							is( notNullValue() ),
 							isIn( expectedValues  )
@@ -533,19 +533,19 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 				// Check all operations performed slightly before arriving to a new time step (reaction)
 				//
 				if( timestampId != initialTime.getIdentifier() ){
-					Learning_EngineOperationMoment afterReaction = new Learning_EngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( timestampId ) );
+					AbstractLearningEngineOperationMoment afterReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( timestampId ) );
 					assertThat( "The operations that were performed slightly after the time " + new SimulationTimeStamp( timestampId ), model.getTrace().getOperationsFor( afterReaction ), 
 							hasSize( 3 )
 					);
-					expectedValues = new Learning_EngineOperationType[]{
-							Learning_EngineOperationType.SYSTEMREACTION,
-							Learning_EngineOperationType.REGULARREACTION
+					expectedValues = new LearningEngineOperationType[]{
+							LearningEngineOperationType.SYSTEMREACTION,
+							LearningEngineOperationType.REGULARREACTION
 					};
 					boolean firstSystemReactionDone = false;
 					boolean regularReactionDone = false;
 					boolean secondSystemReactionDone = false;
 					for( int index = 0; index < 3; index++ ){
-						Learning_EngineOperationType opType = model.getTrace().getOperationsFor( afterReaction ).get( index ).getOperationType();
+						LearningEngineOperationType opType = model.getTrace().getOperationsFor( afterReaction ).get( index ).getOperationType();
 						assertThat( "The type of the " + index + "th operation performed slightly before the time " + beforeReaction, opType, allOf(
 								is( notNullValue() ),
 								isIn( expectedValues  )

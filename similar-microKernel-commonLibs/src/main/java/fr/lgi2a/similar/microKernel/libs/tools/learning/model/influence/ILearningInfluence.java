@@ -44,22 +44,18 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+import fr.lgi2a.similar.microkernel.IInfluence;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * The parent interface of the regular influences defined in the "learning" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public interface ILearningInfluence extends IInfluence {
 	/**
-	 * {@inheritDoc}
+	 * Creates a copy of this influence.
+	 * @return A copy of this influence.
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
-	}
+	ILearningInfluence createCopy();
 }

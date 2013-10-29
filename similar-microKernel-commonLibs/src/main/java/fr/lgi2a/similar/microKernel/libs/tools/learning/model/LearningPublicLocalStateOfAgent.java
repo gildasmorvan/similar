@@ -44,22 +44,68 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalStateOfAgent;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * Models the public local state of an agent in a specific level, in the "learning" simulation.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public class LearningPublicLocalStateOfAgent extends AbstractPublicLocalStateOfAgent {
+	/**
+	 * Stores the number of modifications that were applied to this state since the beginning of the simulation.
+	 */
+	private long revisionNumber;
+	
+	/**
+	 * Builds an empty agent public local state for a specific level and a specific agent.
+	 * @param levelIdentifier The identifier of the level where this public local state is defined.
+	 * @param owner The agent owning this public local state.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
+	 */
+	public LearningPublicLocalStateOfAgent(
+			LevelIdentifier levelIdentifier,
+			IAgent owner
+	) throws IllegalArgumentException {
+		super(levelIdentifier, owner);
+		this.revisionNumber = 0;
+	}
+
+	/**
+	 * Gets the number of modifications that were applied to this state since the beginning of the simulation.
+	 * @return The number of modifications that were applied to this state since the beginning of the simulation.
+	 */
+	public long getRevisionNumber(){
+		return this.revisionNumber;
+	}
+	
+	/**
+	 * Revise the content of this state once.
+	 * @return This instance, including a revision of its content.
+	 */
+	public LearningPublicLocalStateOfAgent revise(){
+		this.revisionNumber++;
+		return this;
+	}
+	
+	/**
+	 * Creates a copy of this public local state of the agent.
+	 * @return A copy of this public local state.
+	 */
+	public LearningPublicLocalStateOfAgent createCopy(){
+		LearningPublicLocalStateOfAgent copy = new LearningPublicLocalStateOfAgent( this.getLevel(), this.getOwner() );
+		copy.revisionNumber = this.revisionNumber;
+		return copy;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
+	public String toString( ) {
+		return "PublicLocalState ( " + this.getLevel() + " ) - #" + this.getRevisionNumber() + " of Agent (" + this.getOwner().getCategory() + ")";
 	}
 }

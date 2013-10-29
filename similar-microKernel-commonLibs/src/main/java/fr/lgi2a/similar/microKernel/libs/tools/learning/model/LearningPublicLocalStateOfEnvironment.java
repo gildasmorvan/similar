@@ -44,22 +44,65 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalState;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * Models the public local state of the environment in a specific level of the "learning" simulation.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public class LearningPublicLocalStateOfEnvironment extends AbstractPublicLocalState {
+	/**
+	 * Stores the number of modifications that were applied to this state since the beginning of the simulation.
+	 */
+	private long revisionNumber;
+
+	/**
+	 * Builds an initialized public local state for a specific level the environment in the "learning" simulation.
+	 * @param levelIdentifier The identifier of the level where this public local state is defined.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
+	 */
+	public LearningPublicLocalStateOfEnvironment(
+			LevelIdentifier levelIdentifier
+	) throws IllegalArgumentException {
+		super(levelIdentifier);
+		this.revisionNumber = 0;
+	}
+
+	/**
+	 * Gets the number of modifications that were applied to this state since the beginning of the simulation.
+	 * @return The number of modifications that were applied to this state since the beginning of the simulation.
+	 */
+	public long getRevisionNumber(){
+		return this.revisionNumber;
+	}
+	
+	/**
+	 * Revise the content of this state once.
+	 * @return This instance, including a revision of its content.
+	 */
+	public LearningPublicLocalStateOfEnvironment revise(){
+		this.revisionNumber++;
+		return this;
+	}
+	
+	/**
+	 * Creates a copy of this public local state of the environment.
+	 * @return A copy of this public local state.
+	 */
+	public LearningPublicLocalStateOfEnvironment createCopy(){
+		LearningPublicLocalStateOfEnvironment copy = new LearningPublicLocalStateOfEnvironment( this.getLevel() );
+		copy.revisionNumber = this.revisionNumber;
+		return copy;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
+	public String toString( ) {
+		return "Env - PublicLocalState ( " + this.getLevel() + " ) - #" + this.getRevisionNumber();
 	}
 }

@@ -54,22 +54,22 @@ import fr.lgi2a.similar.microkernel.examples.traceusage1.agents.ActorAgent;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.agents.ProcrastinatorAgent;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.environment.MyEnvironment;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.levels.MyLevel1;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_Level;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.AbstractLearningSimulationModel;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningLevel;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 
 /**
  * Models the simulation model of the "one level - two agents - trace" simulation.
  * <h1>Constraints</h1>
  * <p>
- * 	The simulation model is an instance of the {@link LearningSimilar_SimulationModel} class to ensure that the evolution of the environment 
+ * 	The simulation model is an instance of the {@link AbstractLearningSimulationModel} class to ensure that the evolution of the environment 
  * 	can be tracked by the trace of the simulation.
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class MySimulationModel extends LearningSimilar_SimulationModel {
+public class MySimulationModel extends AbstractLearningSimulationModel {
 	/**
 	 * Builds an initialized "one level - two agents - trace" simulation.
 	 * @param initialTime Defines the initial time stamp of the simulation.
@@ -86,14 +86,14 @@ public class MySimulationModel extends LearningSimilar_SimulationModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected List<Learning_Level> generateCastedLevels(
+	protected List<AbstractLearningLevel> generateCastedLevels(
 			SimulationTimeStamp initialTime, 
 			SimulationExecutionTrace trace
 	) {
 		// Create the levels where the simulation takes place.
 		//
 		// Create the list containing all the levels of the simulation.
-		List<Learning_Level> levelsList = new LinkedList<Learning_Level>();
+		List<AbstractLearningLevel> levelsList = new LinkedList<AbstractLearningLevel>();
 		// Create the levels of the simulation
 		MyLevel1 level = new MyLevel1( initialTime, trace );
 		levelsList.add( level );
@@ -107,7 +107,7 @@ public class MySimulationModel extends LearningSimilar_SimulationModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected Learning_AbstractEnvironment createEnvironment(
+	protected AbstractLearningEnvironment createEnvironment(
 			SimulationExecutionTrace trace
 	) {
 		return new MyEnvironment( trace );
@@ -117,13 +117,13 @@ public class MySimulationModel extends LearningSimilar_SimulationModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected List<Learning_AbstractAgent> createAgents(
+	protected List<AbstractLearningAgent> createAgents(
 			SimulationExecutionTrace trace
 	) {
 		// Create the agents initially lying in the simulation.
 		//
 		// Create the list containing all the agents of the simulation.
-		List<Learning_AbstractAgent> agentsList = new LinkedList<Learning_AbstractAgent>( );
+		List<AbstractLearningAgent> agentsList = new LinkedList<AbstractLearningAgent>( );
 		// Create the agent of the 'actor' category.
 		ActorAgent actor = new ActorAgent( trace );
 		agentsList.add( actor );

@@ -46,7 +46,7 @@
  */
 
 /**
- * Defines the unit tests dedicated to the {@link fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine}
+ * Defines the unit tests dedicated to the {@link fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine}
  * class.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */

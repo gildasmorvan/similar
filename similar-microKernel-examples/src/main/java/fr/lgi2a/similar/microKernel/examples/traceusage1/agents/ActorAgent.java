@@ -52,11 +52,11 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
@@ -64,12 +64,12 @@ import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
  * Models the agents of the 'actor' category, as described in the specification of the "one level - two agents - trace" simulation.
  * <h1>Constraints</h1>
  * <p>
- * 	The agent is an instance of the {@link Learning_AbstractAgent} class to ensure that the evolution of the agent 
+ * 	The agent is an instance of the {@link AbstractLearningAgent} class to ensure that the evolution of the agent 
  * 	can be tracked by the trace of the simulation.
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ActorAgent extends Learning_AbstractAgent {
+public class ActorAgent extends AbstractLearningAgent {
 	/**
 	 * The category of this agent class, <i>i.e.</i> a unique identifier.
 	 */
@@ -87,12 +87,12 @@ public class ActorAgent extends Learning_AbstractAgent {
 		// Initialize the global memory state of the agent.
 		// This state has to be an instance of the Learning_GlobalMemoryState class from the common libs to ensure that the evolution of that
 		// state can be tracked by the trace of the simulation.
-		this.initializeGlobalMemoryState( new Learning_GlobalMemoryState( this ) );
+		this.initializeGlobalMemoryState( new LearningGlobalMemoryState( this ) );
 		// Create the public local state of the agent in the various levels where it lies.
 		// This state has to be an instance of the Learning_PublicLocalStateOfAgent class from the common libs to ensure that the evolution of that
 		// state can be tracked by the trace of the simulation.
 		LevelIdentifier levelId = MyLevelIdentifiers.SIMULATION_LEVEL;
-		this.includeNewLevel( levelId, new Learning_PublicLocalStateOfAgent( levelId, this ) );
+		this.includeNewLevel( levelId, new LearningPublicLocalStateOfAgent( levelId, this ) );
 	}
 
 	/**
@@ -100,18 +100,18 @@ public class ActorAgent extends Learning_AbstractAgent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Learning_AbstractAgent createCopy() {
+	public AbstractLearningAgent createCopy() {
 		// Create the agent embedding the copy of this instance.
 		ActorAgent copy = new ActorAgent( this.getTrace() );
 		// Create a copy of the global memory state of the agent.
-		Learning_GlobalMemoryState castedGlobalMemoryState = (Learning_GlobalMemoryState) this.getGlobalMemoryState();
+		LearningGlobalMemoryState castedGlobalMemoryState = (LearningGlobalMemoryState) this.getGlobalMemoryState();
 		copy.initializeGlobalMemoryState( castedGlobalMemoryState.createCopy() );
 		// Create the copy of the public local states of the agent.
 		// Iterate over the set of levels where the agent lies.
 		for( LevelIdentifier levelId : this.getLevels() ){
 			// Get the public local state of the agent in the level of the iteration.
 			IPublicLocalStateOfAgent agentState = this.getPublicLocalState( levelId );
-			Learning_PublicLocalStateOfAgent castedAgentState = (Learning_PublicLocalStateOfAgent) agentState;
+			LearningPublicLocalStateOfAgent castedAgentState = (LearningPublicLocalStateOfAgent) agentState;
 			// Add a copy of this state to the copy of the agent.
 			copy.includeNewLevel( levelId, castedAgentState.createCopy() );
 		}
@@ -123,8 +123,8 @@ public class ActorAgent extends Learning_AbstractAgent {
 	 */
 	@Override
 	protected Set<IInfluence> produceInfluencesOfDecision(
-			LevelIdentifier level, Learning_GlobalMemoryState memoryState,
-			Learning_PerceivedDataOfAgent perceivedData
+			LevelIdentifier level, LearningGlobalMemoryState memoryState,
+			LearningPerceivedDataOfAgent perceivedData
 	) {
 		// Create the set of influences that will be returned by the decision of the agent.
 		//
@@ -142,7 +142,7 @@ public class ActorAgent extends Learning_AbstractAgent {
 		LevelIdentifier targetLevel = MyLevelIdentifiers.SIMULATION_LEVEL;
 		// Get the updated public local state of the agent.
 		IPublicLocalStateOfAgent stateToUpdate = this.getPublicLocalState( targetLevel );
-		Learning_Influence_AgentPublicLocalStateUpdate influence = new Learning_Influence_AgentPublicLocalStateUpdate( 
+		LearningInfluenceAgentPublicLocalStateUpdate influence = new LearningInfluenceAgentPublicLocalStateUpdate( 
 				targetLevel, 
 				stateToUpdate 
 		);

@@ -66,19 +66,19 @@ public class SimulationExecutionTrace {
 	/**
 	 * The trace of the dynamic states for each time stamp of the simulation.
 	 */
-	private Map<SimulationTimeStamp,Learning_SimulationDynamicState> dynamicStatesTrace;
+	private Map<SimulationTimeStamp,LearningSimulationDynamicState> dynamicStatesTrace;
 	/**
 	 * The order in which the simulation engine did perform operations.
 	 */
-	private Map<Learning_EngineOperationMoment, List<Learning_EngineOperation>> engineOperationsOrder;
+	private Map<AbstractLearningEngineOperationMoment, List<ILearningEngineOperation>> engineOperationsOrder;
 	/**
 	 * The operations performed by the simulation engine, sorted by type.
 	 */
-	private Map<Learning_EngineOperationMoment, Map<Learning_EngineOperationType, List<Learning_EngineOperation>>> engineOperationsByType;
+	private Map<AbstractLearningEngineOperationMoment, Map<LearningEngineOperationType, List<ILearningEngineOperation>>> engineOperationsByType;
 	/**
 	 * Models the reason why the simulation ended.
 	 */
-	private Learning_ReasonOfSimulationEnd reasonOfEnd;
+	private LearningReasonOfSimulationEnd reasonOfEnd;
 	/**
 	 * The final time stamp of the simulation (if the simulation ended without errors).
 	 */
@@ -86,15 +86,15 @@ public class SimulationExecutionTrace {
 	/**
 	 * The dynamic state of the simulation when the final time was reached.
 	 */
-	private Learning_SimulationDynamicState finalDynamicState;
+	private LearningSimulationDynamicState finalDynamicState;
 	
 	/**
 	 * Builds an empty simulation execution trace.
 	 */
 	public SimulationExecutionTrace( ) {
-		this.dynamicStatesTrace = new LinkedHashMap<SimulationTimeStamp, Learning_SimulationDynamicState>( );
-		this.engineOperationsOrder = new TreeMap<Learning_EngineOperationMoment, List<Learning_EngineOperation>>();
-		this.engineOperationsByType = new HashMap<Learning_EngineOperationMoment, Map<Learning_EngineOperationType, List<Learning_EngineOperation>>>();
+		this.dynamicStatesTrace = new LinkedHashMap<SimulationTimeStamp, LearningSimulationDynamicState>( );
+		this.engineOperationsOrder = new TreeMap<AbstractLearningEngineOperationMoment, List<ILearningEngineOperation>>();
+		this.engineOperationsByType = new HashMap<AbstractLearningEngineOperationMoment, Map<LearningEngineOperationType, List<ILearningEngineOperation>>>();
 	}
 	
 	/**
@@ -112,7 +112,7 @@ public class SimulationExecutionTrace {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 * @throws NoSuchElementException If no dynamic state is defined for the provided time stamp.
 	 */
-	public Learning_SimulationDynamicState getDynamicStateAt( 
+	public LearningSimulationDynamicState getDynamicStateAt( 
 			SimulationTimeStamp timestamp 
 	) throws IllegalArgumentException, NoSuchElementException {
 		if( timestamp == null ){
@@ -132,7 +132,7 @@ public class SimulationExecutionTrace {
 	 */
 	public void addDynamicState(
 			SimulationTimeStamp timestamp,
-			Learning_SimulationDynamicState dynamicState
+			LearningSimulationDynamicState dynamicState
 	) throws IllegalArgumentException {
 		if( timestamp == null ){
 			throw new IllegalArgumentException( "The 'timestamp' argument cannot be null." );
@@ -148,7 +148,7 @@ public class SimulationExecutionTrace {
 	 * Gets the dynamic state of the simulation when the final time was reached.
 	 * @return The dynamic state of the simulation when the final time was reached.
 	 */
-	public Learning_SimulationDynamicState getFinalDynamicState( ) {
+	public LearningSimulationDynamicState getFinalDynamicState( ) {
 		return this.finalDynamicState;
 	}
 
@@ -157,7 +157,7 @@ public class SimulationExecutionTrace {
 	 * @param finalDynamicState The dynamic state of the simulation when the final time was reached.
 	 * @throws IllegalArgumentException If an argument was <code>null</code>.
 	 */
-	public void setFinalDynamicState( SimulationTimeStamp finalTime, Learning_SimulationDynamicState finalDynamicState ) throws IllegalArgumentException {
+	public void setFinalDynamicState( SimulationTimeStamp finalTime, LearningSimulationDynamicState finalDynamicState ) throws IllegalArgumentException {
 		if( finalDynamicState == null ){
 			throw new IllegalArgumentException( "The 'finalDynamicState' argument cannot be null." );
 		} else if( finalTime == null ) {
@@ -190,7 +190,7 @@ public class SimulationExecutionTrace {
 	 * Gets the ordered set of moments when the simulation engine performed operations.
 	 * @return The ordered set of moments when the simulation engine performed operations.
 	 */
-	public Set<Learning_EngineOperationMoment> getOperationsMoments(){
+	public Set<AbstractLearningEngineOperationMoment> getOperationsMoments(){
 		return this.engineOperationsOrder.keySet();
 	}
 	
@@ -202,8 +202,8 @@ public class SimulationExecutionTrace {
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 * @throws NoSuchElementException If no operation was performed by the simulation engine at that moment.
 	 */
-	public List<Learning_EngineOperation> getOperationsFor( 
-			Learning_EngineOperationMoment moment 
+	public List<ILearningEngineOperation> getOperationsFor( 
+			AbstractLearningEngineOperationMoment moment 
 	) throws IllegalArgumentException, NoSuchElementException {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
@@ -221,9 +221,9 @@ public class SimulationExecutionTrace {
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 * @throws NoSuchElementException If no operation of that type was performed by the simulation engine at that moment.
 	 */
-	public List<Learning_EngineOperation> getOperationsFor( 
-			Learning_EngineOperationMoment moment,
-			Learning_EngineOperationType type
+	public List<ILearningEngineOperation> getOperationsFor( 
+			AbstractLearningEngineOperationMoment moment,
+			LearningEngineOperationType type
 	) throws IllegalArgumentException, NoSuchElementException {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
@@ -232,7 +232,7 @@ public class SimulationExecutionTrace {
 		} else if( ! this.dynamicStatesTrace.containsKey( moment ) ) {
 			throw new NoSuchElementException( "No operation was performed by the simulation engine at the moment '" + moment + "'." );
 		}
-		List<Learning_EngineOperation> result = this.engineOperationsByType.get( moment ).get( type );
+		List<ILearningEngineOperation> result = this.engineOperationsByType.get( moment ).get( type );
 		if( result == null ){
 			throw new NoSuchElementException( 
 					"No operation of the type '" + type + "' was performed by the simulation engine at the moment '" + moment + "'." 
@@ -248,28 +248,28 @@ public class SimulationExecutionTrace {
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public void addEngineOperation(
-			Learning_EngineOperationMoment moment,
-			Learning_EngineOperation operation
+			AbstractLearningEngineOperationMoment moment,
+			ILearningEngineOperation operation
 	) throws IllegalArgumentException {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
 		} else if( operation == null ){
 			throw new IllegalArgumentException( "The 'operation' argument cannot be null." );
 		}
-		List<Learning_EngineOperation> operations = this.engineOperationsOrder.get( moment );
+		List<ILearningEngineOperation> operations = this.engineOperationsOrder.get( moment );
 		if( operations == null ){
-			operations = new LinkedList<Learning_EngineOperation>();
+			operations = new LinkedList<ILearningEngineOperation>();
 			this.engineOperationsOrder.put( moment, operations );
 		}
 		operations.add( operation );
-		Map<Learning_EngineOperationType, List<Learning_EngineOperation>> operationsByType = this.engineOperationsByType.get( moment );
+		Map<LearningEngineOperationType, List<ILearningEngineOperation>> operationsByType = this.engineOperationsByType.get( moment );
 		if( operationsByType == null ){
-			operationsByType = new HashMap<Learning_EngineOperationType, List<Learning_EngineOperation>>();
+			operationsByType = new HashMap<LearningEngineOperationType, List<ILearningEngineOperation>>();
 			this.engineOperationsByType.put( moment, operationsByType );
 		}
 		operations = operationsByType.get( operation.getOperationType() );
 		if( operations == null ){
-			operations = new LinkedList<Learning_EngineOperation>();
+			operations = new LinkedList<ILearningEngineOperation>();
 			operationsByType.put( operation.getOperationType(), operations );
 		}
 		operations.add( operation );
@@ -279,7 +279,7 @@ public class SimulationExecutionTrace {
 	 * Gets the reason why the simulation ended.
 	 * @return The reason why the simulation ended.
 	 */
-	public Learning_ReasonOfSimulationEnd getReasonOfEnd( ) {
+	public LearningReasonOfSimulationEnd getReasonOfEnd( ) {
 		return this.reasonOfEnd;
 	}
 	
@@ -288,7 +288,7 @@ public class SimulationExecutionTrace {
 	 * @param reasonOfEnd The reason why the simulation ended.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	public void setReasonOfEnd( Learning_ReasonOfSimulationEnd reasonOfEnd ) throws IllegalArgumentException {
+	public void setReasonOfEnd( LearningReasonOfSimulationEnd reasonOfEnd ) throws IllegalArgumentException {
 		if( reasonOfEnd == null ){
 			throw new IllegalArgumentException( "The argument 'reasonOfEnd' cannot be null." );
 		}

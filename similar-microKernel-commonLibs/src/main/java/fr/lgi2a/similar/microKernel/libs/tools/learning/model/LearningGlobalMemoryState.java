@@ -44,22 +44,65 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMemoryState;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * Models the public global memory state of an agent in the simulation.
+ *  
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public class LearningGlobalMemoryState extends AbstractGlobalMemoryState {
+	/**
+	 * Stores the number of modifications that were applied to this state since the beginning of the simulation.
+	 */
+	private long revisionNumber;
+	
+	/**
+	 * Builds an empty global memory state of a specific agent.
+	 * @param owner The agent owning this global memory state.
+	 * @throws IllegalArgumentException If the argument is <code>null</code>.
+	 */
+	public LearningGlobalMemoryState(
+			IAgent owner
+	) throws IllegalArgumentException {
+		super( owner );
+		this.revisionNumber = 0;
+	}
+
+	/**
+	 * Gets the number of modifications that were applied to this state since the beginning of the simulation.
+	 * @return The number of modifications that were applied to this state since the beginning of the simulation.
+	 */
+	public long getRevisionNumber(){
+		return this.revisionNumber;
+	}
+	
+	/**
+	 * Revise the content of this memory state once.
+	 * @return This instance, including a revision of its content.
+	 */
+	public LearningGlobalMemoryState revise(){
+		this.revisionNumber++;
+		return this;
+	}
+	
+	/**
+	 * Creates a copy of this global memory state of the agent.
+	 * @return A copy of this global memory state.
+	 */
+	public LearningGlobalMemoryState createCopy(){
+		LearningGlobalMemoryState copy = new LearningGlobalMemoryState( this.getOwner() );
+		copy.revisionNumber = this.revisionNumber;
+		return copy;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
+	public String toString( ) {
+		return "Agent (" + this.getOwner().getCategory() + ") - GlobalMemoryState - #" + this.getRevisionNumber();
 	}
 }

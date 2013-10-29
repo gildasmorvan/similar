@@ -44,22 +44,74 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
-
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.trace;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * Models the reason why a simulation has ended.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public class LearningReasonOfSimulationEnd {
 	/**
-	 * {@inheritDoc}
+	 * Models the case where the simulation has ended because it reached its final time.
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
+	public static final LearningReasonOfSimulationEnd END_CRITERION_REACHED = new LearningReasonOfSimulationEnd();
+	/**
+	 * Models the case where the simulation has ended because it was aborted.
+	 */
+	public static final LearningReasonOfSimulationEnd ABORTED = new LearningReasonOfSimulationEnd();
+	
+	/**
+	 * The private constructor of this object.
+	 */
+	private LearningReasonOfSimulationEnd( ) { }
+	
+	/**
+	 * Models the case where the simulation ended because of an error.
+	 * 
+	 * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+	 */
+	public static final class ExceptionCaught extends LearningReasonOfSimulationEnd {
+		/**
+		 * The error message describing why the simulation failed.
+		 */
+		private String errorMessage;
+		/**
+		 * The error that caused the simulation to fail.
+		 */
+		private Throwable error;
+		
+		/**
+		 * Builds the model of the reason why a simulation has ended when it ended because of an error.
+		 * @param errorMessage The error message describing why the simulation failed.
+		 * @param error The error that caused the simulation to fail.
+		 * @throws IllegalArgumentException If an argument is <code>null</code>.
+		 */
+		public ExceptionCaught( String errorMessage, Throwable error ) throws IllegalArgumentException {
+			if( errorMessage == null ){
+				throw new IllegalArgumentException( "The argument 'errorMessage' cannot be null." );
+			}
+			if( error == null ){
+				throw new IllegalArgumentException( "The argument 'error' cannot be null." );
+			}
+			this.error = error;
+			this.errorMessage = errorMessage;
+		}
+		
+		/**
+		 * Gets the error message describing why the simulation failed.
+		 * @return The error message describing why the simulation failed.
+		 */
+		public String getErrorMessage( ) {
+			return this.errorMessage;
+		}
+		
+		/**
+		 * Gets the error that caused the simulation to fail.
+		 * @return The error that caused the simulation to fail.
+		 */
+		public Throwable getError( ) {
+			return this.error;
+		}
 	}
 }

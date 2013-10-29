@@ -48,11 +48,11 @@ package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_De
 
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_OneLevel;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
+import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
 
 /**
  * This unit test checks the behavior of the {@link ISimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method for 
- * a simulation occurring in a single level, for the {@link MonoThreaded_DefaultDisambiguation_SimulationEngine} simulation engine.
+ * a simulation occurring in a single level, for the {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public class ClassTest_OneLevel extends ClassTest_SimulationEngine_OneLevel {
@@ -60,6 +60,6 @@ public class ClassTest_OneLevel extends ClassTest_SimulationEngine_OneLevel {
 	 * {@inheritDoc}
 	 */
 	protected ISimulationEngine createEngine() {
-		return new MonoThreaded_DefaultDisambiguation_SimulationEngine();
+		return new MonoThreadedDefaultDisambiguationSimulationEngine();
 	}
 }

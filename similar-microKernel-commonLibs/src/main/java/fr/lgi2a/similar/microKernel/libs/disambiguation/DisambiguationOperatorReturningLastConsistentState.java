@@ -44,22 +44,29 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.disambiguation;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * Defines the implementation of a disambiguation operator always returning the last consistent state of the level.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public class DisambiguationOperatorReturningLastConsistentState {
 	/**
-	 * {@inheritDoc}
+	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
+	 * <p>
+	 * 	This operation can introduce biases since it provides an estimation of the real state of a level, using the information 
+	 * 	stored into a transitory dynamic state.
+	 * </p>
+	 * <p>
+	 * 	TODO formal notation
+	 * </p>
+	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
+	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
+	public static final IPublicLocalDynamicState disambiguation( TransitoryPublicLocalDynamicState transitoryDynamicState ) {
+		return transitoryDynamicState.getLastConsistentDynamicState();
 	}
 }

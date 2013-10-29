@@ -44,22 +44,55 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.printer;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+import static fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter.*;
+
+import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationNatural;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * An element of the engine operation printing chain of responsibility.
+ * This object displays the content of the 'natural' operation performed by the environment.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public class LearningNaturalOperationPrinter extends LearningEngineOperationPrinter {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
+	@Override
+	public boolean canPrint( ILearningEngineOperation operation ) {
+		return operation instanceof LearningEngineOperationNatural;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void print( int indentation, ILearningEngineOperation operation ) {
+		LearningEngineOperationNatural castedop = (LearningEngineOperationNatural) operation;
+		printIndentation( indentation );
+		System.out.println( "Natural operation from the level '" + castedop.getLevel() + "' of the " +
+				"environment:" );
+		printIndentation( indentation + 1 );
+		System.out.println( "Observable public local dynamic states:" );
+		for( LevelIdentifier levelId : castedop.getLevelsPublicLocalObservableDynamicState().keySet() ){
+			LearningTracePrinter.printLocalDynamicState( indentation + 2, castedop.getLevelsPublicLocalObservableDynamicState().get( levelId ) );
+		}
+		printIndentation( indentation + 1 );
+		System.out.println( "Influences that were produced by the natural:" );
+		InfluencesMap influences = castedop.getProducedInfluences();
+		for( LevelIdentifier levelId : influences.getDefinedKeys() ){
+			printIndentation( indentation + 2 );
+			System.out.println( "Destined to the level '" + levelId + "':" );
+			for( IInfluence influence : influences.getInfluencesForLevel( levelId ) ){
+				printIndentation( indentation + 3 );
+				System.out.println( influence );
+			}
+		}
 	}
 }

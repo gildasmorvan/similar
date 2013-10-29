@@ -51,12 +51,12 @@ import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
@@ -68,7 +68,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class Test_Agent extends Learning_AbstractAgent {
+public class Test_Agent extends AbstractLearningAgent {
 	/**
 	 * Builds an initialized instance of this agent class.
 	 * @param category The category of the agent. To make the trace of the simulation explicit,
@@ -86,13 +86,13 @@ public class Test_Agent extends Learning_AbstractAgent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Learning_AbstractAgent createCopy() {
+	public AbstractLearningAgent createCopy() {
 		Test_Agent copy = new Test_Agent( this.getCategory(), this.getTrace() );
-		copy.initializeGlobalMemoryState( ((Learning_GlobalMemoryState)this.getGlobalMemoryState()).createCopy() );
+		copy.initializeGlobalMemoryState( ((LearningGlobalMemoryState)this.getGlobalMemoryState()).createCopy() );
 		for( LevelIdentifier levelId : this.getLevels() ){
 			copy.includeNewLevel(
 					levelId, 
-					((Learning_PublicLocalStateOfAgent)this.getPublicLocalState( levelId ) ).createCopy()
+					((LearningPublicLocalStateOfAgent)this.getPublicLocalState( levelId ) ).createCopy()
 			);
 		}
 		return copy;
@@ -103,19 +103,19 @@ public class Test_Agent extends Learning_AbstractAgent {
 	 */
 	@Override
 	protected Set<IInfluence> produceInfluencesOfDecision(
-			LevelIdentifier level, Learning_GlobalMemoryState memoryState,
-			Learning_PerceivedDataOfAgent perceivedData
+			LevelIdentifier level, LearningGlobalMemoryState memoryState,
+			LearningPerceivedDataOfAgent perceivedData
 	) {
 		Set<IInfluence> influences = new LinkedHashSet<IInfluence>();
 		IDynamicStateMap localDynamicStates = perceivedData.getLevelsPublicLocalObservableDynamicState();
 		for( LevelIdentifier levelId : localDynamicStates.keySet() ){
 			IPublicLocalDynamicState localDynamicState = localDynamicStates.get( levelId );
 			influences.add(
-					new Learning_Influence_EnvironmentPublicLocalStateUpdate( levelId, localDynamicState.getPublicLocalStateOfEnvironment() )
+					new LearningInfluenceEnvironmentPublicLocalStateUpdate( levelId, localDynamicState.getPublicLocalStateOfEnvironment() )
 			);
 			for( IPublicLocalStateOfAgent agentState : localDynamicState.getPublicLocalStateOfAgents() ){
 				influences.add(
-						new Learning_Influence_AgentPublicLocalStateUpdate( levelId, agentState )
+						new LearningInfluenceAgentPublicLocalStateUpdate( levelId, agentState )
 				);
 			}
 		}

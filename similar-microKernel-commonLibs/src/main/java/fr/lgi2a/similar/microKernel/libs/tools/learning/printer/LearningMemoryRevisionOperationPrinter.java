@@ -44,22 +44,52 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.printer;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreadedDefaultDisambiguationSimulationEngine;
+import static fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter.printIndentation;
+
+import java.util.Map.Entry;
+
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationReviseMemory;
 
 /**
- * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 
- * {@link MonoThreadedDefaultDisambiguationSimulationEngine} simulation engine.
+ * An element of the engine operation printing chain of responsibility.
+ * This object displays the content of the 'memory revision' operation performed by an agent.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases {
+public class LearningMemoryRevisionOperationPrinter extends LearningEngineOperationPrinter {
 	/**
 	 * {@inheritDoc}
 	 */
-	protected ISimulationEngine createEngine() {
-		return new MonoThreadedDefaultDisambiguationSimulationEngine();
+	@Override
+	public boolean canPrint( ILearningEngineOperation operation ) {
+		return operation instanceof LearningEngineOperationReviseMemory;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void print( int indentation, ILearningEngineOperation operation ) {
+		LearningEngineOperationReviseMemory castedop = (LearningEngineOperationReviseMemory) operation;
+		printIndentation( indentation );
+		System.out.println( "Memory revision of the agent '" + castedop.getPreviousMemoryState().getOwner().getCategory() + "':" );
+		printIndentation( indentation + 1 );
+		System.out.println( "Global memory state before memory revision:" );
+		printIndentation( indentation + 2 );
+		System.out.println( castedop.getPreviousMemoryState() );
+		printIndentation( indentation + 1 );
+		System.out.println( "Perceived data before memory revision:" );
+		for( Entry<LevelIdentifier,LearningPerceivedDataOfAgent> entry : castedop.getPerceivedData().entrySet() ){
+			printIndentation( indentation + 2 );
+			System.out.println( "Level '" + entry.getKey() + "': The perceived data with the identifier '" + entry.getValue().getIdentifier() + "'." );
+		}
+		printIndentation( indentation + 1 );
+		System.out.println( "Global memory state after revision:" );
+		printIndentation( indentation + 2 );
+		System.out.println( castedop.getMethodResult() );
 	}
 }

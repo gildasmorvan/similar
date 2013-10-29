@@ -52,11 +52,11 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
@@ -67,12 +67,12 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
  * Models the environment as described in the specification of the "one level - two agents - trace" simulation.
  * <h1>Constraints</h1>
  * <p>
- * 	The environment is an instance of the {@link Learning_AbstractEnvironment} class to ensure that the evolution of the environment 
+ * 	The environment is an instance of the {@link AbstractLearningEnvironment} class to ensure that the evolution of the environment 
  * 	can be tracked by the trace of the simulation.
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class MyEnvironment extends Learning_AbstractEnvironment {
+public class MyEnvironment extends AbstractLearningEnvironment {
 	/**
 	 * Builds an initialized instance of the environment.
 	 * @param trace The trace where the execution of the simulation is tracked.
@@ -105,9 +105,9 @@ public class MyEnvironment extends Learning_AbstractEnvironment {
 		IPublicLocalDynamicState levelPublicLocalDynamicState = levelsPublicLocalObservableDynamicState.get( MyLevelIdentifiers.SIMULATION_LEVEL );
 		for( IPublicLocalStateOfAgent agentPublicLocalState : levelPublicLocalDynamicState.getPublicLocalStateOfAgents() ){
 			// Cast the public local state of the agent in the appropriate class.
-			Learning_PublicLocalStateOfAgent castedAgentState = (Learning_PublicLocalStateOfAgent) agentPublicLocalState;
+			LearningPublicLocalStateOfAgent castedAgentState = (LearningPublicLocalStateOfAgent) agentPublicLocalState;
 			// Then create the influence telling that the environment requests the modification of this state.
-			Learning_Influence_AgentPublicLocalStateUpdate influence = new Learning_Influence_AgentPublicLocalStateUpdate(
+			LearningInfluenceAgentPublicLocalStateUpdate influence = new LearningInfluenceAgentPublicLocalStateUpdate(
 					castedAgentState.getLevel(),
 					castedAgentState
 			);
@@ -119,9 +119,9 @@ public class MyEnvironment extends Learning_AbstractEnvironment {
 		//
 		IPublicLocalState environmentPublicLocalState = levelPublicLocalDynamicState.getPublicLocalStateOfEnvironment();
 		// Cast the public local state of the environment in the appropriate class.
-		Learning_PublicLocalStateOfEnvironment castedEnvironmentState = (Learning_PublicLocalStateOfEnvironment) environmentPublicLocalState;
+		LearningPublicLocalStateOfEnvironment castedEnvironmentState = (LearningPublicLocalStateOfEnvironment) environmentPublicLocalState;
 		// Then create the influence telling that the environment requests the modification of this state.
-		Learning_Influence_EnvironmentPublicLocalStateUpdate envInfluence = new Learning_Influence_EnvironmentPublicLocalStateUpdate(
+		LearningInfluenceEnvironmentPublicLocalStateUpdate envInfluence = new LearningInfluenceEnvironmentPublicLocalStateUpdate(
 				level,
 				castedEnvironmentState
 		);

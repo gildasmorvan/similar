@@ -57,7 +57,12 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningTraceUpdat
  * Models the main class of the "one level - two agents - trace" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class MySimulationMainClass {
+public final class MySimulationMainClass {
+	/**
+	 * The constructor of this class is never used.
+	 */
+	private MySimulationMainClass( ){ }
+	
 	/**
 	 * The main method of the "one level - two agents - trace" simulation.
 	 * @param args The command line arguments of the program.

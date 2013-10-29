@@ -51,9 +51,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import fr.lgi2a.similar.microkernel.IEnvironment;
+import fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.IModifiablePublicLocalDynamicState;
 
 /**
  * An abstract implementation of the {@link IEnvironment} interface, providing a default behavior to the generic methods.

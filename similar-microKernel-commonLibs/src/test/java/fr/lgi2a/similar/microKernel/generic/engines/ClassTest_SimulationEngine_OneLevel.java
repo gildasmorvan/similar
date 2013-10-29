@@ -66,8 +66,11 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
@@ -85,9 +88,6 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.AbstractLearningEn
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningEngineOperationType;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningTraceUpdatingProbe;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Tests the behavior of the {@link ISimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method for 
@@ -369,15 +369,15 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 		);
 		assertThat( "The moments when operations were performed during simulation", model.getTrace().getOperationsMoments(), 
 				contains( 
-						(AbstractLearningEngineOperationMoment) new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( initialTime ),
-						(AbstractLearningEngineOperationMoment) new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( finalTime ) 
+						(AbstractLearningEngineOperationMoment) new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( initialTime ),
+						(AbstractLearningEngineOperationMoment) new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( finalTime ) 
 				) 
 		);
-		AbstractLearningEngineOperationMoment beforeFirstReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( initialTime );
+		AbstractLearningEngineOperationMoment beforeFirstReaction = new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( initialTime );
 		assertThat( "The operations that were performed slightly after the time " + initialTime, model.getTrace().getOperationsFor( beforeFirstReaction ), 
 				hasSize( 4 ) // natural & perception => memory revision => decision
 		);
-		AbstractLearningEngineOperationMoment afterFirstReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( finalTime );
+		AbstractLearningEngineOperationMoment afterFirstReaction = new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( finalTime );
 		assertThat( "The operations that were performed slightly after the time " + finalTime, model.getTrace().getOperationsFor( afterFirstReaction ), 
 				hasSize( 3 ) // system reaction => regular reaction => system reaction
 		);
@@ -455,9 +455,9 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 			long timeStampId = initialTime.getIdentifier() + ( index + 1 ) / 2;
 			AbstractLearningEngineOperationMoment moment = null;
 			if( beforeTimestamp ){
-				moment = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( timeStampId ) );
+				moment = new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( new SimulationTimeStamp( timeStampId ) );
 			} else {
-				moment = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( new SimulationTimeStamp( timeStampId ) );
+				moment = new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( new SimulationTimeStamp( timeStampId ) );
 			}
 			moments[ index ] = moment;
 		}
@@ -470,7 +470,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 			// Check all operations performed slightly after arriving to a time step (perception/memory revision/decision/natural)
 			//
 			if( timestampId != finalTime.getIdentifier() ){
-				AbstractLearningEngineOperationMoment beforeReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( new SimulationTimeStamp( timestampId ) );
+				AbstractLearningEngineOperationMoment beforeReaction = new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( new SimulationTimeStamp( timestampId ) );
 				assertThat( "The operations that were performed slightly after the time " + new SimulationTimeStamp( timestampId ), model.getTrace().getOperationsFor( beforeReaction ), 
 						hasSize( 4 )
 				);
@@ -533,7 +533,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 				// Check all operations performed slightly before arriving to a new time step (reaction)
 				//
 				if( timestampId != initialTime.getIdentifier() ){
-					AbstractLearningEngineOperationMoment afterReaction = new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( timestampId ) );
+					AbstractLearningEngineOperationMoment afterReaction = new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( new SimulationTimeStamp( timestampId ) );
 					assertThat( "The operations that were performed slightly after the time " + new SimulationTimeStamp( timestampId ), model.getTrace().getOperationsFor( afterReaction ), 
 							hasSize( 3 )
 					);

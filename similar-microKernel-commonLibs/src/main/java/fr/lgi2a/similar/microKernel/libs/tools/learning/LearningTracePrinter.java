@@ -50,30 +50,35 @@ import java.io.PrintStream;
 import java.util.List;
 
 import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.printer.LearningEngineOperationPrinter;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.AbstractLearningEngineOperationMoment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningReasonOfSimulationEnd;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningSimulationDynamicState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Provides methods printing the content of the trace on screen.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class LearningTracePrinter {
+public final class LearningTracePrinter {
 	/**
 	 * The object printing the trace of the simulation.
 	 */
 	public static final PrintStream PRINTER = System.out;
+	
+	/**
+	 * This constructor is never used.
+	 */
+	private LearningTracePrinter( ) { }
 	
 	/**
 	 * Prints on the standard output the trace of a simulation.
@@ -105,7 +110,7 @@ public class LearningTracePrinter {
 			if( ! timeStamp.equals( initialTime ) ){
 				printIndentation( 2 );
 				LearningTracePrinter.PRINTER.println( "Slightly before:" );
-				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( timeStamp ) );
+				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( timeStamp ) );
 				for( ILearningEngineOperation operation : operations ){
 					LearningEngineOperationPrinter.printOperation( 3, operation );
 				}
@@ -113,7 +118,7 @@ public class LearningTracePrinter {
 			if( ! timeStamp.equals( finialTime ) ){
 				printIndentation( 2 );
 				LearningTracePrinter.PRINTER.println( "Slightly after:" );
-				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( timeStamp ) );
+				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( timeStamp ) );
 				for( ILearningEngineOperation operation : operations ){
 					LearningEngineOperationPrinter.printOperation( 3, operation );
 				}

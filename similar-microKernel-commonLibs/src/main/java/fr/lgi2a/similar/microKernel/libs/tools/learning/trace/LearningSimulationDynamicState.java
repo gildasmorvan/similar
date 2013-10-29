@@ -52,17 +52,17 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
+import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.map.DynamicStateMap;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningInfluenceCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningPublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the dynamic state of a simulation during consistent or half-consistent moments.

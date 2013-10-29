@@ -44,43 +44,37 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
+package fr.lgi2a.similar.microkernel;
 
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
 
 /**
- * Models a map containing dynamic states.
- * 
- * <h1>Usage</h1>
+ * Models the public local state of an agent or of the environment.
  * <p>
- * 	This interface and its subsequent classes are defined to facilitate the use of dynamic states in the 
- * 	perception and natural methods, without having to create map duplicates.
+ * 	An instance of this class corresponds to the data that can be perceived about an agent or the environment for a specific level.
  * </p>
+ * 
+ * <h1>Correspondence with theory</h1>
+ * <p>
+ * 	TODO formal notation
+ * </p>
+ * 
+ * <h2>Usage</h2>
+ * <p>
+ * 	The public local state of the environment can directly implement this interface.
+ * </p>
+ * <p>
+ * 	The public local state of an agent has to implement the {@link IPublicLocalStateOfAgent} interface.
+ * </p>
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface IDynamicStateMap {
+public interface IPublicLocalState {
 	/**
-	 * Gets the levels which dynamic state is contained in this map.
-	 * @return The identifier of the levels contained in this map.
+	 * Gets the level for which this public local state was defined.
+	 * <p>
+	 * 	TODO formal notation
+	 * </p>
+	 * @return The identifier of the level for which this public local state was defined.
 	 */
-	Set<LevelIdentifier> keySet( );
-	
-	/**
-	 * Gets the dynamic state of a level contained in this map.
-	 * @param level The level of the dynamic state.
-	 * @return The dynamic state of the level.
-	 * @throws IllegalArgumentException If the argument is <code>null</code>.
-	 * @throws NoSuchElementException If the <code>level</code> level is not in this map.
-	 */
-	IPublicLocalDynamicState get( LevelIdentifier level ) throws IllegalArgumentException, NoSuchElementException;
-	
-	/**
-	 * Puts a dynamic state into this map.
-	 * @param state The public local dynamic state of to add to this map.
-	 */
-	void put( IPublicLocalDynamicState state ) throws IllegalArgumentException;
+	LevelIdentifier getLevel( );
 }

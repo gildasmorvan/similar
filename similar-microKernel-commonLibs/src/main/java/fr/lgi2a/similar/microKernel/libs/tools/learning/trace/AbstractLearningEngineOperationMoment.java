@@ -101,13 +101,13 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 	 * Models a moment happening slightly before a time stamp.
 	 * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
 	 */
-	public static class Learning_EngineOperationMoment_Before extends AbstractLearningEngineOperationMoment {
+	public static class LearningEngineOperationMomentBefore extends AbstractLearningEngineOperationMoment {
 		/**
 		 * Builds a moment happening slightly before a time stamp.
 		 * @param timestamp The time stamp relatively to which this moment of the simulation is expressed.
 		 * @throws IllegalArgumentException If the argument is <code>null</code>.
 		 */
-		public Learning_EngineOperationMoment_Before(
+		public LearningEngineOperationMomentBefore(
 				SimulationTimeStamp timestamp
 		) throws IllegalArgumentException {
 			super(timestamp);
@@ -122,9 +122,9 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 			if( comparison != 0 ){
 				return comparison;
 			} else {
-				if( o instanceof Learning_EngineOperationMoment_Before ) {
+				if( o instanceof LearningEngineOperationMomentBefore ) {
 					return 0;
-				} else if( o instanceof Learning_EngineOperationMoment_After ) {
+				} else if( o instanceof LearningEngineOperationMomentAfter ) {
 					return -1;
 				} else {
 					throw new UnsupportedOperationException( "An instance of the '" + this.getClass().getSimpleName() + "' class cannot be " +
@@ -138,10 +138,10 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 		 */
 		@Override
 		public boolean equals( Object other ) {
-			if( other == null || ! ( other instanceof Learning_EngineOperationMoment_Before ) ){
+			if( ! ( other instanceof LearningEngineOperationMomentBefore ) ){
 				return false;
 			} else {
-				return this.compareTo( (Learning_EngineOperationMoment_Before) other ) == 0;
+				return this.compareTo( (LearningEngineOperationMomentBefore) other ) == 0;
 			}
 		}
 		
@@ -172,13 +172,13 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 	 * Models a moment happening slightly after a time stamp.
 	 * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
 	 */
-	public static class Learning_EngineOperationMoment_After extends AbstractLearningEngineOperationMoment {
+	public static class LearningEngineOperationMomentAfter extends AbstractLearningEngineOperationMoment {
 		/**
 		 * Builds a moment happening slightly after a time stamp.
 		 * @param timestamp The time stamp relatively to which this moment of the simulation is expressed.
 		 * @throws IllegalArgumentException If the argument is <code>null</code>.
 		 */
-		public Learning_EngineOperationMoment_After(
+		public LearningEngineOperationMomentAfter(
 				SimulationTimeStamp timestamp
 		) throws IllegalArgumentException {
 			super(timestamp);
@@ -193,9 +193,9 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 			if( comparison != 0 ){
 				return comparison;
 			} else {
-				if( o instanceof Learning_EngineOperationMoment_After ) {
+				if( o instanceof LearningEngineOperationMomentAfter ) {
 					return 0;
-				} else if( o instanceof Learning_EngineOperationMoment_Before ) {
+				} else if( o instanceof LearningEngineOperationMomentBefore ) {
 					return 1;
 				} else {
 					throw new UnsupportedOperationException( "An instance of the '" + this.getClass().getSimpleName() + "' class cannot be " +
@@ -209,10 +209,10 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 		 */
 		@Override
 		public boolean equals( Object other ) {
-			if( other == null || ! ( other instanceof Learning_EngineOperationMoment_After ) ){
+			if( ! ( other instanceof LearningEngineOperationMomentAfter ) ){
 				return false;
 			} else {
-				return this.compareTo( (Learning_EngineOperationMoment_After) other ) == 0;
+				return this.compareTo( (LearningEngineOperationMomentAfter) other ) == 0;
 			}
 		}
 		

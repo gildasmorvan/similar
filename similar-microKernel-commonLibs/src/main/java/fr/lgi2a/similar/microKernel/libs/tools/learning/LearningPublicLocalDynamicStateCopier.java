@@ -46,18 +46,23 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning;
 
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * This class defines a method copying the content of a dynamic state into another dynamic state.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class LearningPublicLocalDynamicStateCopier {
+public final class LearningPublicLocalDynamicStateCopier {
+	/**
+	 * This constructor is never used.
+	 */
+	private LearningPublicLocalDynamicStateCopier( ) { }
+	
 	/**
 	 * Creates a copy of a public local dynamic state of the "learning" simulation.
 	 * @param localDynamicState The public local dynamic state to copy.

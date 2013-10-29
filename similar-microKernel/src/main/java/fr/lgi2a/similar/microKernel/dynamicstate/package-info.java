@@ -44,71 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
 
 /**
- * The map-based implementation of a dynamic state map.
+ * Defines the different implementations of a dynamic state of the simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class DynamicStateMap implements IDynamicStateMap {
-	/**
-	 * The map containing the dynamic states.
-	 */
-	private Map<LevelIdentifier,IPublicLocalDynamicState> dynamicStates;
-	
-	/**
-	 * Builds an initially empty map.
-	 */
-	public DynamicStateMap( ) {
-		this.dynamicStates = new HashMap<LevelIdentifier, IPublicLocalDynamicState>();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Set<LevelIdentifier> keySet() {
-		return this.dynamicStates.keySet();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public IPublicLocalDynamicState get(
-			LevelIdentifier level
-	) throws IllegalArgumentException, NoSuchElementException {
-		if( level == null ) {
-			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
-		}
-		IPublicLocalDynamicState result = this.dynamicStates.get( level );
-		if( result == null ){
-			throw new NoSuchElementException( "No dynamic state is defined for the level '" + level + "'." );
-		} else {
-			return result;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void put(
-			IPublicLocalDynamicState state
-	) throws IllegalArgumentException {
-		if( state == null ){
-			throw new IllegalArgumentException( "The 'state' argument cannot be null." );
-		} else {
-			this.dynamicStates.put( state.getLevel(), state );
-		}
-	}
-}
+package fr.lgi2a.similar.microkernel.dynamicstate;

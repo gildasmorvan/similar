@@ -47,8 +47,8 @@
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
 import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * An abstract implementation of the {@link IPublicLocalStateOfAgent} interface, providing a default behavior to the methods of the interface.

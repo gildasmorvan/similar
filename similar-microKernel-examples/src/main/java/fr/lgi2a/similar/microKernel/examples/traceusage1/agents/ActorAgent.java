@@ -50,6 +50,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
@@ -58,7 +59,6 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedD
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * Models the agents of the 'actor' category, as described in the specification of the "one level - two agents - trace" simulation.

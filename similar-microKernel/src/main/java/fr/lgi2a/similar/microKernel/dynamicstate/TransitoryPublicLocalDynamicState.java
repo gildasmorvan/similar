@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate;
+package fr.lgi2a.similar.microkernel.dynamicstate;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -52,10 +52,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalState;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * Models the public dynamic state of a level when the level is in a transitory phase, <i>i.e.</i> 
@@ -78,6 +79,11 @@ import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
  */
 public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocalDynamicState {
 	/**
+	 * The text of the exception thrown when an operation is not supported by instances of this class.
+	 */
+	private static final String FORBIDDEN_OPERATION_TEXT = "Transitory states do not allow this operation.";
+	
+	/**
 	 * The last consistent public local dynamic state of the level.
 	 * <p>
 	 * 	TODO : formal notation
@@ -97,27 +103,27 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 * The state dynamics of the transitory public local dynamic state, <i>i.e.</i> both the influences that were added during the 
 	 * transitory phase of the level and the influences that were lying in the state dynamics of the last consistent dynamic state.
 	 */
-	private ViewOnSetUnion<IInfluence> allInfluences_stateTransitoryDynamics;
+	private ViewOnSetUnion<IInfluence> allInfluencesOfStateTransitoryDynamics;
 	
 	/**
 	 * A subset of the transitory dynamics of the transitory public local dynamic state containing only the system influences.
 	 */
-	private Set<IInfluence> stateTransitoryDynamics_systemInfluences;
+	private Set<IInfluence> stateTransitoryDynamicsSystemInfluences;
 	
 	/**
 	 * A subset of the state dynamics of the transitory public local dynamic state containing only the system influences.
 	 */
-	private ViewOnSetUnion<IInfluence> allInfluences_stateTransitoryDynamics_systemInfluences;
+	private ViewOnSetUnion<IInfluence> allInfluencesOfStateTransitoryDynamicsSystemInfluences;
 	
 	/**
 	 * A subset of the transitory dynamics of the transitory public local dynamic state containing only the non-system influences.
 	 */
-	private Set<IInfluence> stateTransitoryDynamics_regularInfluences;
+	private Set<IInfluence> stateTransitoryDynamicsRegularInfluences;
 	
 	/**
 	 * A subset of the state dynamics of the transitory public local dynamic state containing only the non-system influences.
 	 */
-	private ViewOnSetUnion<IInfluence> allInfluences_stateTransitoryDynamics_regularInfluences;
+	private ViewOnSetUnion<IInfluence> allInfluencesOfStateTransitoryDynamicsRegularInfluences;
 	
 	/**
 	 * Builds a transitory public local dynamic state modeling the state of the level for a time <i>t</i> between the time stamp of 
@@ -137,19 +143,19 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 		}
 		this.lastConsistentDynamicState = lastConsistentDynamicState;
 		this.nextConsistentTime = nextConsistentTime;
-		this.stateTransitoryDynamics_systemInfluences = new HashSet<IInfluence>();
-		this.allInfluences_stateTransitoryDynamics_systemInfluences = new ViewOnSetUnion<>( 
+		this.stateTransitoryDynamicsSystemInfluences = new HashSet<IInfluence>();
+		this.allInfluencesOfStateTransitoryDynamicsSystemInfluences = new ViewOnSetUnion<>( 
 				this.lastConsistentDynamicState.getSystemInfluencesOfStateDynamics(), 
-				this.stateTransitoryDynamics_systemInfluences
+				this.stateTransitoryDynamicsSystemInfluences
 		);
-		this.stateTransitoryDynamics_regularInfluences = new HashSet<IInfluence>();
-		this.allInfluences_stateTransitoryDynamics_regularInfluences = new ViewOnSetUnion<>( 
+		this.stateTransitoryDynamicsRegularInfluences = new HashSet<IInfluence>();
+		this.allInfluencesOfStateTransitoryDynamicsRegularInfluences = new ViewOnSetUnion<>( 
 				this.lastConsistentDynamicState.getRegularInfluencesOfStateDynamics(), 
-				this.stateTransitoryDynamics_regularInfluences 
+				this.stateTransitoryDynamicsRegularInfluences 
 		);
-		this.allInfluences_stateTransitoryDynamics = new ViewOnSetUnion<>( 
-				this.allInfluences_stateTransitoryDynamics_systemInfluences, 
-				this.allInfluences_stateTransitoryDynamics_regularInfluences 
+		this.allInfluencesOfStateTransitoryDynamics = new ViewOnSetUnion<>( 
+				this.allInfluencesOfStateTransitoryDynamicsSystemInfluences, 
+				this.allInfluencesOfStateTransitoryDynamicsRegularInfluences 
 		);
 	}
 	
@@ -207,28 +213,28 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 * {@inheritDoc}
 	 */
 	public Set<IInfluence> getStateDynamics() {
-		return this.allInfluences_stateTransitoryDynamics;
+		return this.allInfluencesOfStateTransitoryDynamics;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Set<IInfluence> getSystemInfluencesOfStateDynamics() {
-		return this.allInfluences_stateTransitoryDynamics_systemInfluences;
+		return this.allInfluencesOfStateTransitoryDynamicsSystemInfluences;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Set<IInfluence> getRegularInfluencesOfStateDynamics() {
-		return this.allInfluences_stateTransitoryDynamics_regularInfluences;
+		return this.allInfluencesOfStateTransitoryDynamicsRegularInfluences;
 	}
 
 	/**
 	 * This operation is not supported in transitory states.
 	 */
 	public void setTime(SimulationTimeStamp time) throws IllegalArgumentException {
-		throw new UnsupportedOperationException( "Transitory states do not allow this operation." );
+		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
 	/**
@@ -258,7 +264,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	public void setPublicLocalStateOfEnvironment(
 			IPublicLocalState publicLocalState
 	) throws IllegalArgumentException {
-		throw new UnsupportedOperationException( "Transitory states do not allow this operation." );
+		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
 	/**
@@ -268,7 +274,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	public void addPublicLocalStateOfAgent(
 			IPublicLocalStateOfAgent publicLocalState
 	) throws IllegalArgumentException {
-		throw new UnsupportedOperationException( "Transitory states do not allow this operation." );
+		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
 	/**
@@ -278,7 +284,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	public void removePublicLocalStateOfAgent(
 			IPublicLocalStateOfAgent publicLocalState
 	) throws IllegalArgumentException {
-		throw new UnsupportedOperationException( "Transitory states do not allow this operation." );
+		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
 	/**
@@ -290,9 +296,9 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
 		if( influence.isSystem() ){
-			this.stateTransitoryDynamics_systemInfluences.add( influence );
+			this.stateTransitoryDynamicsSystemInfluences.add( influence );
 		} else {
-			this.stateTransitoryDynamics_regularInfluences.add( influence );
+			this.stateTransitoryDynamicsRegularInfluences.add( influence );
 		}
 	}
 
@@ -301,7 +307,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	@Override
 	public void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) throws IllegalArgumentException {
-		throw new UnsupportedOperationException( "Transitory states do not allow this operation." );
+		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
 	/**
@@ -323,7 +329,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	@Override
 	public void clearSystemInfluences() {
-		this.allInfluences_stateTransitoryDynamics_systemInfluences.clear( );
+		this.allInfluencesOfStateTransitoryDynamicsSystemInfluences.clear( );
 	}
 
 	/**
@@ -335,7 +341,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	@Override
 	public void clearRegularInfluences() {
-		this.allInfluences_stateTransitoryDynamics_regularInfluences.clear( );
+		this.allInfluencesOfStateTransitoryDynamicsRegularInfluences.clear( );
 	}
 	
 	/**
@@ -343,7 +349,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	public void moveInfluencesToConsistentState( ) {
 		// Copy the system influences.
-		Iterator<IInfluence> systemInfluenceIterator = this.stateTransitoryDynamics_systemInfluences.iterator();
+		Iterator<IInfluence> systemInfluenceIterator = this.stateTransitoryDynamicsSystemInfluences.iterator();
 		while( systemInfluenceIterator.hasNext() ){
 			IInfluence systemInfluence = systemInfluenceIterator.next();
 			// Copy the influence into the consistent state.
@@ -352,7 +358,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 			systemInfluenceIterator.remove();
 		}
 		// Copy the regular influences.
-		Iterator<IInfluence> regularInfluenceIterator = this.stateTransitoryDynamics_regularInfluences.iterator();
+		Iterator<IInfluence> regularInfluenceIterator = this.stateTransitoryDynamicsRegularInfluences.iterator();
 		while( regularInfluenceIterator.hasNext() ){
 			IInfluence regularInfluence = regularInfluenceIterator.next();
 			// Copy the influence into the consistent state.

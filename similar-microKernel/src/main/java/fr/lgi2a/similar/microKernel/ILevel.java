@@ -49,7 +49,7 @@ package fr.lgi2a.similar.microkernel;
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * Models a level of the simulation.

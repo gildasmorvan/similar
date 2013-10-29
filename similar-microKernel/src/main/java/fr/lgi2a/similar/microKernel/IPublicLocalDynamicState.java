@@ -44,10 +44,78 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microkernel;
+
+import java.util.Set;
+
 
 /**
- * Defines the classes related to the behavior of the agents.
- *
+ * The parent interface of any public dynamic state of a level of the simulation.
+ * 
+ * <h1>Correspondence with theory</h1>
+ * <p>
+ * 	TODO : formal notation
+ * </p>
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microkernel.agentbehavior;
+public interface IPublicLocalDynamicState {
+	/**
+	 * Gets the level for which the public local dynamic state is defined.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 * @return The level for which the public local dynamic state is defined.
+	 */
+	LevelIdentifier getLevel( );
+	
+	/**
+	 * Gets the time for which this public dynamic state is defined.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 * @return The time for which this public dynamic state is defined. 	
+	 */
+	SimulationTimeStamp getTime();
+	
+	/**
+	 * Gets the public local state of the environment contained in this public local dynamic state.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 * @return The public local state of the environment contained in this public local dynamic state.
+	 */
+	IPublicLocalState getPublicLocalStateOfEnvironment( );
+	
+	/**
+	 * Gets the public local state of the agents lying in the level of this dynamic state.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 * @return The public local state of the agents lying in the level of this dynamic state.
+	 */
+	Set<IPublicLocalStateOfAgent> getPublicLocalStateOfAgents();
+    
+    /**
+     * Gets the state dynamics of this public local dynamic state, <i>i.e.</i> the influences that are 
+     * still active (being performed) when the level was in this state.
+     * <p>
+     * 	TODO : formal notation
+     * </p>
+     * @return The state dynamics of this public local dynamic state.
+     */
+    Set<IInfluence> getStateDynamics();
+    
+    /**
+	 * Gets the system influences contained in the state transitory dynamics.
+	 * @return The system influences of the value returned by the {@link IPublicLocalDynamicState#getStateDynamics()} method.
+	 */
+	Set<IInfluence> getSystemInfluencesOfStateDynamics();
+	
+	/**
+	 * Gets the non-system influences contained in the state transitory dynamics.
+	 * @return The non-system influences of the value returned by the 
+	 * {@link IPublicLocalDynamicState#getStateDynamics()} method.
+	 */
+	Set<IInfluence> getRegularInfluencesOfStateDynamics();
+}

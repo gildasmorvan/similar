@@ -46,7 +46,10 @@
  */
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IProbe;
@@ -60,9 +63,10 @@ import fr.lgi2a.similar.microkernel.ISimulationEngine;
  */
 public abstract class AbstractSimulationEngine implements ISimulationEngine {
 	/**
-	 * A map containing the probes. This map ensures that the iteration order over probes is the insertion order of the probes.
+	 * A map containing the probes. This map ensures that the iteration order over probes is the insertion order of the probes (it 
+	 * has to be an instance of the {@link LinkedHashMap} class).
 	 */
-	protected LinkedHashMap<String,IProbe> probes;
+	private Map<String,IProbe> probes;
 
 	/**
 	 * Builds an instance of this abstract simulation engine, containing no probes.
@@ -94,8 +98,7 @@ public abstract class AbstractSimulationEngine implements ISimulationEngine {
 		if( identifier == null ){
 			throw new IllegalArgumentException( "The 'identifier' argument cannot be null." );
 		}
-		IProbe removedProbe = this.probes.remove( identifier );
-		return removedProbe;
+		return this.probes.remove( identifier );
 	}
 
 	/**
@@ -106,5 +109,28 @@ public abstract class AbstractSimulationEngine implements ISimulationEngine {
 	@Override
 	public Set<String> getProbesIdentifiers() {
 		return this.probes.keySet();
+	}
+	
+	/**
+	 * Gets the probe having a specific id. The probe has to be registered to this engine using the 
+	 * {@link ISimulationEngine#addProbe(String, IProbe)} method.
+	 * @param probeId The identifier of the probe that was provided when it was added.
+	 * @return The probe having the specific id.
+	 * @throws NoSuchElementException If no probe is defined for the specified id.
+	 */
+	public IProbe getProbe( String probeId ) throws NoSuchElementException {
+		IProbe result = this.probes.get( probeId );
+		if( result == null ){
+			throw new NoSuchElementException( "No probe having the '" + probeId + "' id is registered to the simulation engine." );
+		}
+		return result;
+	}
+	
+	/**
+	 * Gets the probes that are registered to this simulation engine.
+	 * @return The probes that are registered to this simulation engine.
+	 */
+	public Collection<IProbe> getProbes() {
+		return this.probes.values( );
 	}
 }

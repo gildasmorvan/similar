@@ -47,7 +47,7 @@
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
 import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 
 /**
  * An abstract implementation of the {@link IGlobalMemoryState} interface, providing a default behavior to the method it contains.

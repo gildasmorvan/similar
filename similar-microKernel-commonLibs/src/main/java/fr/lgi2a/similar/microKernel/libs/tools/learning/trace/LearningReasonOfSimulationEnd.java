@@ -64,7 +64,7 @@ public class LearningReasonOfSimulationEnd {
 	/**
 	 * The private constructor of this object.
 	 */
-	private LearningReasonOfSimulationEnd( ) { }
+	protected LearningReasonOfSimulationEnd( ) { }
 	
 	/**
 	 * Models the case where the simulation ended because of an error.

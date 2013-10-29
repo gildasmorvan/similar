@@ -44,29 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.agentbehavior;
-
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * Models the data that were perceived by an agent from a specific level <code>l</code>.
- * These data include all the information that could be perceived from <code>l</code> itself and all the levels that are
- * perceptible from <code>l</code>.
- * 
- * <h1>Correspondence with theory</h1>
- * <p>
- * 	TODO : formal notation
- * </p>
- * 
+ * This package defines a map-like data structure containing the transitory state of all the 
+ * levels of a simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface IPerceivedDataOfAgent {
-	/**
-	 * Gets the level from which these data were perceived.
-	 * <p>
-	 * 	TODO : formal notation
-	 * </p>
-	 * @return The identifier of the level for which these data were perceived.
-	 */
-	LevelIdentifier getLevel( );
-}
+package fr.lgi2a.similar.microkernel.dynamicstate.map;

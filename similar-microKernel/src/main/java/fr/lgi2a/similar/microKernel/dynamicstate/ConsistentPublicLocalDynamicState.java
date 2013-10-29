@@ -44,17 +44,18 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate;
+package fr.lgi2a.similar.microkernel.dynamicstate;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalState;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * Models a consistent public dynamic local state for a level <code>l</code> at a time <code>t</code>.
@@ -73,7 +74,7 @@ import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocalDynamicState {
+public final class ConsistentPublicLocalDynamicState implements IModifiablePublicLocalDynamicState {
 	/**
 	 * The identifier of the level for which this dynamic state is defined.
 	 */
@@ -117,13 +118,13 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 	 * arrived into the consistent state.
 	 * This field contains only system influences.
 	 */
-	private Set<IInfluence> stateDynamics_systemInfluences;
+	private Set<IInfluence> stateDynamicsSystemInfluences;
 	/**
 	 * Models the dynamics of this local dynamic state, <i>i.e.</i> the influences that are still active (being performed) when the level
 	 * arrived into the consistent state.
 	 * This field contains only regular influences.
 	 */
-	private Set<IInfluence> stateDynamics_regularInfluences;
+	private Set<IInfluence> stateDynamicsRegularInfluences;
 	
 	/**
 	 * Builds a consistent public local state for a specific time stamp.
@@ -142,9 +143,9 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		}
 		this.level = level;
-		this.stateDynamics_systemInfluences = new HashSet<IInfluence>();
-		this.stateDynamics_regularInfluences = new HashSet<IInfluence>();
-		this.stateDynamics = new ViewOnSetUnion<IInfluence>( this.stateDynamics_systemInfluences, this.stateDynamics_regularInfluences );
+		this.stateDynamicsSystemInfluences = new HashSet<IInfluence>();
+		this.stateDynamicsRegularInfluences = new HashSet<IInfluence>();
+		this.stateDynamics = new ViewOnSetUnion<IInfluence>( this.stateDynamicsSystemInfluences, this.stateDynamicsRegularInfluences );
 		this.publicLocalStateOfAgents = new HashSet<IPublicLocalStateOfAgent>();
 	}
 	
@@ -167,7 +168,7 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setTime( SimulationTimeStamp time ) throws IllegalArgumentException {
+	public final void setTime( SimulationTimeStamp time ) throws IllegalArgumentException {
 		if( time == null ){
 			throw new IllegalArgumentException( "The 'time' argument cannot be null." );
 		}
@@ -202,7 +203,7 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	@Override
 	public Set<IInfluence> getSystemInfluencesOfStateDynamics() {
-		return this.stateDynamics_regularInfluences;
+		return this.stateDynamicsRegularInfluences;
 	}
 
 	/**
@@ -210,7 +211,7 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	@Override
 	public Set<IInfluence> getRegularInfluencesOfStateDynamics() {
-		return this.stateDynamics_systemInfluences;
+		return this.stateDynamicsSystemInfluences;
 	}
 
 	/**
@@ -261,9 +262,9 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
 		if( influence.isSystem() ){
-			this.stateDynamics_systemInfluences.add( influence );
+			this.stateDynamicsSystemInfluences.add( influence );
 		} else {
-			this.stateDynamics_regularInfluences.add( influence );
+			this.stateDynamicsRegularInfluences.add( influence );
 			
 		}
 	}
@@ -276,8 +277,8 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 		if( toCopy == null ){
 			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
 		}
-		this.stateDynamics_regularInfluences.clear();
-		this.stateDynamics_systemInfluences.clear();
+		this.stateDynamicsRegularInfluences.clear();
+		this.stateDynamicsSystemInfluences.clear();
 		for( IInfluence influence : toCopy ){
 			this.addInfluence( influence );
 		}
@@ -288,7 +289,7 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	@Override
 	public void clearSystemInfluences() {
-		this.stateDynamics_systemInfluences.clear();
+		this.stateDynamicsSystemInfluences.clear();
 	}
 
 	/**
@@ -296,6 +297,6 @@ public class ConsistentPublicLocalDynamicState implements IModifiablePublicLocal
 	 */
 	@Override
 	public void clearRegularInfluences() {
-		this.stateDynamics_regularInfluences.clear();
+		this.stateDynamicsRegularInfluences.clear();
 	}
 }

@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate;
+package fr.lgi2a.similar.microkernel.dynamicstate;
 
 import java.util.AbstractSet;
 import java.util.Iterator;
@@ -93,68 +93,7 @@ public class ViewOnSetUnion<E> extends AbstractSet<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		return new Iterator<E>() {
-			/*
-			 * -1 : iteration has not started yet.
-			 * 0 : iteration currently on set 1
-			 * 1 : iteration currently on set 2
-			 */
-			private int currentIndex = -1;
-			private Iterator<? extends E> currentIterator = null;
-			
-			/**
-			 * {@inheritDoc}
-			 */
-			public boolean hasNext() {
-				if( this.currentIndex == -1 ){
-					return ! ViewOnSetUnion.this.isEmpty();
-				} else if( this.currentIndex == 0 ) {
-					return this.currentIterator.hasNext() || ! ViewOnSetUnion.this.set2.isEmpty();
-				} else {
-					return this.currentIterator.hasNext();
-				}
-			}
-			
-			/**
-			 * {@inheritDoc}
-			 */
-			public E next() {
-				if( ! this.hasNext() ){
-					throw new NoSuchElementException( );
-				} else {
-					if( this.currentIterator == null || ! this.currentIterator.hasNext() ){
-						// Case where the iteration has just started, or where the iteration over
-						// the current set has finished.
-						if( this.currentIndex == -1 ) {
-							if( ViewOnSetUnion.this.set1.isEmpty() ){
-								this.currentIndex = 1;
-								this.currentIterator = ViewOnSetUnion.this.set2.iterator();
-							} else {
-								this.currentIndex = 0;
-								this.currentIterator = ViewOnSetUnion.this.set1.iterator();
-							}
-						} else if( this.currentIndex == 0 ){
-							this.currentIndex = 1;
-							this.currentIterator = ViewOnSetUnion.this.set2.iterator();
-						} else {
-							throw new NoSuchElementException( "The set has no other elements." );
-						}
-					}
-					return this.currentIterator.next();
-				}
-			}
-			
-			/**
-			 * This operation is not supported.
-			 */
-			public void remove() {
-				if( this.currentIterator == null ){
-					throw new IllegalStateException( "The iterator is not pointing to a valid item." );
-				} else {
-					this.currentIterator.remove();
-				}
-			}
-		};
+		return new SetUnionIterator();
 	}
 
 	/**
@@ -165,4 +104,82 @@ public class ViewOnSetUnion<E> extends AbstractSet<E> {
 		return this.set1.size() + this.set2.size();
 	}
 
+	/**
+	 * The object iterating over the two sets contained in an instance of the {@link ViewOnSetUnion} class.
+	 * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+	 */
+	private class SetUnionIterator implements Iterator<E> {
+		/**
+		 * Identifies the set over which the iteration is currently being performed.
+		 * -1 : iteration has not started yet.
+		 * 0 : iteration currently on set 1
+		 * 1 : iteration currently on set 2
+		 */
+		private int currentIndex;
+		/**
+		 * The iterator over a set of the union.
+		 */
+		private Iterator<? extends E> currentIterator;
+		
+		/**
+		 * Builds an initialized iterator which first call to the next method will return the first item of the union.
+		 */
+		public SetUnionIterator( ) {
+			this.currentIterator = null;
+			this.currentIndex = -1;
+		}
+		
+		/**
+		 * {@inheritDoc}
+		 */
+		public boolean hasNext() {
+			if( this.currentIndex == -1 ){
+				return ! ViewOnSetUnion.this.isEmpty();
+			} else if( this.currentIndex == 0 ) {
+				return this.currentIterator.hasNext() || ! ViewOnSetUnion.this.set2.isEmpty();
+			} else {
+				return this.currentIterator.hasNext();
+			}
+		}
+		
+		/**
+		 * {@inheritDoc}
+		 */
+		public E next() {
+			if( ! this.hasNext() ){
+				throw new NoSuchElementException( );
+			} else {
+				if( this.currentIterator == null || ! this.currentIterator.hasNext() ){
+					// Case where the iteration has just started, or where the iteration over
+					// the current set has finished.
+					if( this.currentIndex == -1 ) {
+						if( ViewOnSetUnion.this.set1.isEmpty() ){
+							this.currentIndex = 1;
+							this.currentIterator = ViewOnSetUnion.this.set2.iterator();
+						} else {
+							this.currentIndex = 0;
+							this.currentIterator = ViewOnSetUnion.this.set1.iterator();
+						}
+					} else if( this.currentIndex == 0 ){
+						this.currentIndex = 1;
+						this.currentIterator = ViewOnSetUnion.this.set2.iterator();
+					} else {
+						throw new NoSuchElementException( "The set has no other elements." );
+					}
+				}
+				return this.currentIterator.next();
+			}
+		}
+		
+		/**
+		 * This operation is not supported.
+		 */
+		public void remove() {
+			if( this.currentIterator == null ){
+				throw new IllegalStateException( "The iterator is not pointing to a valid item." );
+			} else {
+				this.currentIterator.remove();
+			}
+		}
+	}
 }

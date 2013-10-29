@@ -49,9 +49,7 @@ package fr.lgi2a.similar.microkernel;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
+import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
 
 /**
  * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
@@ -95,10 +93,8 @@ public interface ISimulationEngine {
 	 * @param simulationModel The simulation model running the simulation.
 	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
      * @throws ExceptionSimulationAborted if the simulation has ended because it was aborted by the user.
-     * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine. 
-     * This exception wraps an {@link IllegalStateException} depicting the nature of the issue.
 	 */
-	void runNewSimulation( ISimulationModel simulationModel ) throws RuntimeException, ExceptionSimulationAborted;
+	void runNewSimulation( ISimulationModel simulationModel ) throws ExceptionSimulationAborted;
 	
 	/**
 	 * Gets the current dynamic states of the simulation.

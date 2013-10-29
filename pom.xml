@@ -20,6 +20,11 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
+<!-- Redefine the property, otherwise jacoco does not work appropriately -->
+		 <sonar.jacoco.itReportPath>
+		     ${project.basedir}/target/jacoco-t.exec
+		 </sonar.jacoco.itReportPath>
+		
 <!-- Version information. -->
 		
 		<maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>

@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 
 /**
  * Models a simulation that can be performed using a simulation engine.
@@ -119,13 +118,13 @@ public interface ISimulationModel {
 		 * 	TODO formal notation
 		 * </p>
 		 */
-		public final IEnvironment environment;
+		private final IEnvironment environment;
 		/**
 		 * The influences resulting from the generation of the environment.
 		 * These influences are put inside the state dynamics of the initial consistent 
 		 * public dynamic state of each level.
 		 */
-		public final InfluencesMap influences;
+		private final InfluencesMap influences;
 		
 		/**
 		 * Builds the initialization data coming from the generation of the environment of the simulation.
@@ -137,6 +136,27 @@ public interface ISimulationModel {
 		){
 			this.environment = environment;
 			this.influences = new InfluencesMap( );
+		}
+		
+		/**
+		 * Gets the environment of the simulation.
+		 * <p>
+		 * 	TODO formal notation
+		 * </p>
+		 * @return The environment of the simulation.
+		 */
+		public final IEnvironment getEnvironment( ) {
+			return this.environment;
+		}
+		
+		/**
+		 * Gets the influences resulting from the generation of the environment.
+		 * These influences are put inside the state dynamics of the initial consistent 
+		 * public dynamic state of each level.
+		 * @return The influences resulting from the generation of the environment.
+		 */
+		public final InfluencesMap getInfluences( ) {
+			return this.influences;
 		}
 	}
 	
@@ -152,13 +172,13 @@ public interface ISimulationModel {
 		 * 	TODO formal notation
 		 * </p>
 		 */
-		public final Set<IAgent> agents;
+		private final Set<IAgent> agents;
 		/**
-		 * The influences resulting from the generation of the environment.
+		 * The influences resulting from the generation of the agents.
 		 * These influences are put inside the state dynamics of the initial consistent 
 		 * public dynamic state of each level.
 		 */
-		public final InfluencesMap influences;
+		private final InfluencesMap influences;
 		
 		/**
 		 * Builds the initialization data coming from the generation of the initial agents of the simulation.
@@ -167,6 +187,27 @@ public interface ISimulationModel {
 		public AgentInitializationData( ){
 			this.agents = new HashSet<IAgent>( );
 			this.influences = new InfluencesMap( );
+		}
+		
+		/**
+		 * Gets the agents of the simulation.
+		 * <p>
+		 * 	TODO formal notation
+		 * </p>
+		 * @return The agents of the simulation.
+		 */
+		public final Set<IAgent> getAgents( ) {
+			return this.agents;
+		}
+		
+		/**
+		 * Gets the influences resulting from the generation of the agents.
+		 * These influences are put inside the state dynamics of the initial consistent 
+		 * public dynamic state of each level.
+		 * @return The influences resulting from the generation of the agents.
+		 */
+		public final InfluencesMap getInfluences( ) {
+			return this.influences;
 		}
 	}
 }

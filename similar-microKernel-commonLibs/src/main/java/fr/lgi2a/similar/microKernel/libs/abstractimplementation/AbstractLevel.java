@@ -50,10 +50,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.ILevel;
+import fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.IModifiablePublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * An abstract implementation of the {@link ILevel} interface, providing a default behavior to most methods.
@@ -115,7 +115,7 @@ public abstract class AbstractLevel implements ILevel {
 	 * @return The identifier of this level.
 	 */
 	@Override
-	public LevelIdentifier getIdentifier() {
+	public final LevelIdentifier getIdentifier() {
 		return this.identifier;
 	}
 

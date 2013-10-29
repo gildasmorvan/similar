@@ -49,7 +49,10 @@ package fr.lgi2a.similar.microkernel.generic.engines.tools;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
@@ -58,9 +61,6 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLoca
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * The concrete agent class used in the functional test of the simulation engine.

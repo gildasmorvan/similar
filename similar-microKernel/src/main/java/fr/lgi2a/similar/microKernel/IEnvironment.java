@@ -48,9 +48,6 @@ package fr.lgi2a.similar.microkernel;
 
 import java.util.NoSuchElementException;
 
-import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the environment of the simulation.

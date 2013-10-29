@@ -46,60 +46,70 @@
  */
 package fr.lgi2a.similar.microkernel.influences.system;
 
-import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
 
 /**
- * The system influence sent to a level when the reaction of that level has to insert a new agent into the simulation 
- * and make appear it public local state into the public dynamic state of the levels.
+ * The system influence sent to a level when the reaction of that level has to add the public local state of an agent into the 
+ * public dynamic state of the level.
  * 
  * <h1>Usage</h1>
  * <p>
- * 	The agent has to be fully initialized before being added using this influence.
+ * 	When an agent is added to the simulation, this influence is sent to the levels where the agent resides, to include 
+ * 	the public local state of the agent into the dynamic state of these levels.
+ * </p>
+ * <p>
+ * 	This influence has to be generated only by the simulation engine, in reaction to an {@link SystemInfluenceAddAgent} influence.
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class SystemInfluence_AddAgent extends SystemInfluence {
+public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfluence {
 	/**
 	 * The category of this influence.
 	 */
-	public static final String CATEGORY = "System influence - Add agent";
-
-	/**
-	 * The agent to add to the simulation.
-	 */
-	private IAgent agent;
+	public static final String CATEGORY = "System influence - Add public local state agent";
 	
 	/**
-	 * Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link IInfluence#getTargetLevel()}
-	 * @param agent The agent to add to the simulation.
-	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
+	 * The public local state to add to the public dynamic local state of the level.
 	 */
-	public SystemInfluence_AddAgent( LevelIdentifier targetLevel, IAgent agent ) throws IllegalArgumentException {
+	private IPublicLocalStateOfAgent publicLocalState;
+	
+	/**
+	 * Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the 
+	 * dynamic state of a specific level during the next reaction of that level.
+	 * @param targetLevel The target level of the influence, as defined in {@link IInfluence#getTargetLevel()}.
+	 * @param publicLocalState The public local state to add to the public dynamic local state of the level.
+	 * @throws IllegalArgumentException If the target level or the public local state are <code>null</code>.
+	 */
+	public SystemInfluenceAddPublicLocalStateToDynamicState( 
+			LevelIdentifier targetLevel, 
+			IPublicLocalStateOfAgent publicLocalState 
+	) throws IllegalArgumentException {
 		super( CATEGORY, targetLevel );
-		if( agent == null ){
-			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
+		if( publicLocalState == null ){
+			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
 		}
-		this.agent = agent;
+		this.publicLocalState = publicLocalState;
 	}
 
+	
 	/**
-	 * Gets the agent to add to the simulation.
-	 * @return The agent to add to the simulation.
+	 * Gets the public local state to add to the public dynamic local state of the level.
+	 * @return The public local state to add to the public dynamic local state of the level.
 	 */
-	public IAgent getAgent(){
-		return this.agent;
+	public IPublicLocalStateOfAgent getPublicLocalState( ) {
+		return this.publicLocalState;
 	}
 
 	/**
-	 * Uses the category, the target level and the added agent of the influence to build a printable version of this object.
-	 * @return The concatenation of the category, the target level and the added agent of the influence.
+	 * Uses the category, the target level and the owner of the public local state of the influence 
+	 * to build a printable version of this object.
+	 * @return The concatenation of the category, the target level and the added owner of the public local state of the influence.
 	 */
 	public String toString(){
-		return super.toString() + ", adding " + this.agent.toString();
+		return super.toString() + ", with owner " + this.publicLocalState;
 	}
 }

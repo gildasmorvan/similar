@@ -49,8 +49,8 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;

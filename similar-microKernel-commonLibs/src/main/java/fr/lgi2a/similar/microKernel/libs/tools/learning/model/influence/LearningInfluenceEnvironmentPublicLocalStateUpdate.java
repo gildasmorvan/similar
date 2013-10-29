@@ -46,10 +46,10 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence;
 
+import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
 
 /**
  * An influence sent by an agent or by the environment to update the public local state of the environment in a specific level.

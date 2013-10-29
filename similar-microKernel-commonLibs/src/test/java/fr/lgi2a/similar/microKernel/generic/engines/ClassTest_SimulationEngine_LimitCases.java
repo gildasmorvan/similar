@@ -55,21 +55,21 @@ import java.util.List;
 
 import org.junit.Test;
 
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.ISimulationModel;
+import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
 import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.generic.engines.tools.Test_LevelIdentifiers;
 import fr.lgi2a.similar.microkernel.generic.engines.tools.UnitTest_Level;
 import fr.lgi2a.similar.microkernel.generic.engines.tools.UnitTest_SimulationModel;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * This unit test checks that erroneous simulation models do raise exceptions when appropriate for a specific 

@@ -44,32 +44,72 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states;
+package fr.lgi2a.similar.microkernel.dynamicstate.map;
 
-import fr.lgi2a.similar.microkernel.IAgent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * Models the level-independent information memorized by an agent (for instance a plan used in more than one level).
- * 
- * <h1>Correspondence with theory</h1>
- * <p>
- * 	TODO : formal notation
- * </p>
+ * The map-based implementation of a dynamic state map.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface IGlobalMemoryState {
+public class DynamicStateMap implements IDynamicStateMap {
 	/**
-	 * Gets the owner of the global memory state, <i>i.e.</i> the agent which global memory state is 
-	 * this state.
-	 * <p>
-	 * 	This method is defined for optimization purposes, since keeping an association between global memory 
-	 * 	states and agents within the simulation engine would be too memory consuming.
-	 * </p>
-	 * <p>
-	 * 	TODO : formal notation.
-	 * </p>
-	 * @return The owner of the global memory state.
+	 * The map containing the dynamic states.
 	 */
-	IAgent getOwner( );
+	private Map<LevelIdentifier,IPublicLocalDynamicState> dynamicStates;
+	
+	/**
+	 * Builds an initially empty map.
+	 */
+	public DynamicStateMap( ) {
+		this.dynamicStates = new HashMap<LevelIdentifier, IPublicLocalDynamicState>();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Set<LevelIdentifier> keySet() {
+		return this.dynamicStates.keySet();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IPublicLocalDynamicState get(
+			LevelIdentifier level
+	) throws IllegalArgumentException, NoSuchElementException {
+		if( level == null ) {
+			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
+		}
+		IPublicLocalDynamicState result = this.dynamicStates.get( level );
+		if( result == null ){
+			throw new NoSuchElementException( "No dynamic state is defined for the level '" + level + "'." );
+		} else {
+			return result;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void put(
+			IPublicLocalDynamicState state
+	) throws IllegalArgumentException {
+		if( state == null ){
+			throw new IllegalArgumentException( "The 'state' argument cannot be null." );
+		} else {
+			this.dynamicStates.put( state.getLevel(), state );
+		}
+	}
 }

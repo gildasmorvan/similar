@@ -46,56 +46,70 @@
  */
 package fr.lgi2a.similar.microkernel.influences.system;
 
-import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
- * The system influence sent to a level when the reaction of that level has to remove the agent from the simulation, 
- * and make disappear its public local state from the public dynamic state of the levels.
+ * The system influence sent to a level when the reaction of that level has to remove the public local state of an agent from the 
+ * public dynamic state of the level.
+ * 
+ * <h1>Usage</h1>
+ * <p>
+ * 	When an agent is removed from the simulation, this influence is sent to the levels where the agent resides, to exclude 
+ * 	the public local state of the agent from the dynamic state of these levels.
+ * </p>
+ * <p>
+ * 	This influence has to be generated only by the simulation engine, in reaction to an {@link SystemInfluenceRemoveAgent} influence.
+ * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class SystemInfluence_RemoveAgent extends SystemInfluence {
+public class SystemInfluenceRemovePublicLocalStateFromDynamicState extends SystemInfluence {
 	/**
 	 * The category of this influence.
 	 */
-	public static final String CATEGORY = "System influence - Remove agent";
-
-	/**
-	 * The agent to remove from the simulation.
-	 */
-	private IAgent agent;
+	public static final String CATEGORY = "System influence - Remove public local state agent";
 	
 	/**
-	 * Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link IInfluence#getTargetLevel()}
-	 * @param publicLocalStateOfAgent The agent to remove from the simulation.
-	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
+	 * The public local state to remove from the public dynamic local state of the level.
 	 */
-	public SystemInfluence_RemoveAgent( LevelIdentifier targetLevel, IPublicLocalStateOfAgent publicLocalStateOfAgent ) throws IllegalArgumentException {
+	private IPublicLocalStateOfAgent publicLocalState;
+	
+	/**
+	 * Builds an 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the 
+	 * dynamic state of a specific level during the next reaction of that level.
+	 * @param targetLevel The target level of the influence, as defined in {@link IInfluence#getTargetLevel()}.
+	 * @param publicLocalState The public local state to remove from to the public dynamic local state of the level.
+	 * @throws IllegalArgumentException If the target level or the public local state are <code>null</code>.
+	 */
+	public SystemInfluenceRemovePublicLocalStateFromDynamicState( 
+			LevelIdentifier targetLevel, 
+			IPublicLocalStateOfAgent publicLocalState 
+	) throws IllegalArgumentException {
 		super( CATEGORY, targetLevel );
-		if( this.agent == null ){
-			throw new IllegalArgumentException( "The 'publicLocalStateOfAgent' argument cannot be null." );
+		if( publicLocalState == null ){
+			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
 		}
-		this.agent = publicLocalStateOfAgent.getOwner();
+		this.publicLocalState = publicLocalState;
 	}
 
+	
 	/**
-	 * Gets the agent to remove from the simulation.
-	 * @return The agent to remove from the simulation.
+	 * Gets the public local state to remove from the public dynamic local state of the level.
+	 * @return The public local state to remove from the public dynamic local state of the level.
 	 */
-	public IAgent getAgent(){
-		return this.agent;
+	public IPublicLocalStateOfAgent getPublicLocalState( ) {
+		return this.publicLocalState;
 	}
 
 	/**
-	 * Uses the category, the target level and the removed agent of the influence to build a printable version of this object.
-	 * @return The concatenation of the category, the target level and the removed agent of the influence.
+	 * Uses the category, the target level and the owner of the public local state of the influence 
+	 * to build a printable version of this object.
+	 * @return The concatenation of the category, the target level and the added owner of the public local state of the influence.
 	 */
 	public String toString(){
-		return super.toString() + ", removing " + this.agent.toString();
+		return super.toString() + ", with owner " + this.publicLocalState;
 	}
 }

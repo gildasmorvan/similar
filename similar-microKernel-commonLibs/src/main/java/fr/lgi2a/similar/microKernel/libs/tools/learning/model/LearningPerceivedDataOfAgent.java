@@ -46,13 +46,13 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.map.DynamicStateMap;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningPublicLocalDynamicStateCopier;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the data being perceived by an agent in the "learning" simulation.

@@ -46,14 +46,19 @@
  */
 package fr.lgi2a.similar.microkernel.libs.disambiguation;
 
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
 
 /**
  * Defines the implementation of a disambiguation operator always returning the last consistent state of the level.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class DisambiguationOperatorReturningLastConsistentState {
+public final class DisambiguationOperatorReturningLastConsistentState {
+	/**
+	 * This constructor is never used.
+	 */
+	private DisambiguationOperatorReturningLastConsistentState(){ }
+	
 	/**
 	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
 	 * <p>

@@ -52,6 +52,7 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.ILearningInfluence;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
@@ -60,7 +61,6 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.AbstractLearningEn
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationRegularReaction;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationSystemReaction;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * Models a level in the 'learning' simulation.
@@ -95,7 +95,7 @@ public abstract class AbstractLearningLevel extends AbstractLevel {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.ILevel#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, java.util.Set)
+	 * @see fr.lgi2a.similar.microkernel.ILevel#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, java.util.Set)
 	 */
 	@Override
 	public void makeRegularReaction(
@@ -139,7 +139,7 @@ public abstract class AbstractLearningLevel extends AbstractLevel {
 		// Memorize the value of the consistent state after the execution of this reaction.
 		operation.setNewConsistentStateAtEnd( newConsistentState );
 		this.trace.addEngineOperation(
-				new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( newConsistentStateTime ) ), 
+				new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( new SimulationTimeStamp( newConsistentStateTime ) ), 
 				operation
 		);
 	}
@@ -205,7 +205,7 @@ public abstract class AbstractLearningLevel extends AbstractLevel {
 		}
 		operation.setNewConsistentStateAtEnd( newConsistentState );
 		this.trace.addEngineOperation(
-				new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_Before( new SimulationTimeStamp( newConsistentStateTime ) ), 
+				new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( new SimulationTimeStamp( newConsistentStateTime ) ), 
 				operation
 		);
 	}

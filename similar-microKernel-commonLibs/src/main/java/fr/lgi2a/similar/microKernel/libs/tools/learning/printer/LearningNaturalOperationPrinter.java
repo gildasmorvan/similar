@@ -49,8 +49,8 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.printer;
 import static fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter.*;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationNatural;

@@ -46,16 +46,16 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations;
 
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.map.DynamicStateMap;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningPublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningEngineOperationType;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the operation performed by the simulation engine when it asks an agent to perceive from a level.

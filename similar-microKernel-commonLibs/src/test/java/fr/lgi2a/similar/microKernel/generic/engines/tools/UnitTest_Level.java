@@ -53,8 +53,8 @@ import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * A level where the value returned by each method is defined in the constructor.

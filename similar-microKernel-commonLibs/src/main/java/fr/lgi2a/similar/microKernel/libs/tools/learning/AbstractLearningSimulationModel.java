@@ -171,7 +171,7 @@ public abstract class AbstractLearningSimulationModel extends AbstractSimulation
 	) {
 		AgentInitializationData result = new AgentInitializationData( );
 		for( AbstractLearningAgent agent : this.createAgents( this.trace ) ){
-			result.agents.add( agent );
+			result.getAgents( ).add( agent );
 		}
 		return result;
 	}

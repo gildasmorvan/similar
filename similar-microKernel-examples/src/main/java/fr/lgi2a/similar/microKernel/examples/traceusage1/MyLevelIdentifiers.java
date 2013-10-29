@@ -58,4 +58,9 @@ public class MyLevelIdentifiers {
 	 * Models the identifier of the level where the "one level - two agents - trace" simulation takes place.
 	 */
 	public static final LevelIdentifier SIMULATION_LEVEL = new LevelIdentifier( "Level 1" );
+	
+	/**
+	 * This constructor is never used.
+	 */
+	protected MyLevelIdentifiers( ){ }
 }

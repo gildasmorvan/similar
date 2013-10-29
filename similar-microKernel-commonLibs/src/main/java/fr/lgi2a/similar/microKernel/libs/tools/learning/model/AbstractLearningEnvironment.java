@@ -48,18 +48,18 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
 import java.util.Set;
 
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.AbstractLearningEngineOperationMoment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationNatural;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the environment in the 'learning' simulation.
@@ -87,7 +87,7 @@ public abstract class AbstractLearningEnvironment extends AbstractEnvironment {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.IEnvironment#natural(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap, fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap)
+	 * @see fr.lgi2a.similar.microkernel.IEnvironment#natural(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.IDynamicStateMap, fr.lgi2a.similar.microkernel.InfluencesMap)
 	 */
 	@Override
 	public void natural(
@@ -105,7 +105,7 @@ public abstract class AbstractLearningEnvironment extends AbstractEnvironment {
 			producedInfluences.add( influence );
 		}
 		this.trace.addEngineOperation(
-				new AbstractLearningEngineOperationMoment.Learning_EngineOperationMoment_After( levelsPublicLocalObservableDynamicState.get( level ).getTime() ), 
+				new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( levelsPublicLocalObservableDynamicState.get( level ).getTime() ), 
 				operation
 		);
 	}
@@ -114,8 +114,8 @@ public abstract class AbstractLearningEnvironment extends AbstractEnvironment {
 	 * An abstract method where users can define which influences are produced by the environment during its natural phase.
 	 * The following influences can be produced:
 	 * <ul>
-	 * 	<li>{@link SystemInfluence_AddAgent}, with an instance of the {@link AbstractLearningAgent} class.</li>
-	 * 	<li>{@link SystemInfluence_RemoveAgent}, with a public local state of an agent located in the perceived data.</li>
+	 * 	<li>{@link SystemInfluenceAddAgent}, with an instance of the {@link AbstractLearningAgent} class.</li>
+	 * 	<li>{@link SystemInfluenceRemoveAgent}, with a public local state of an agent located in the perceived data.</li>
 	 * 	<li> 
 	 * 		{@link LearningInfluenceAgentPublicLocalStateUpdate}, with a public local state of an agent located in the perceived data.
 	 * 		During the reaction, this influence triggers a modification of the public local

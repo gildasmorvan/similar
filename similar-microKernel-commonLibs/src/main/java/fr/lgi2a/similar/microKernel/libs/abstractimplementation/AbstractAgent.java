@@ -52,17 +52,26 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * An abstract implementation of the {@link IAgent} interface, providing a default behavior to the generic methods.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractAgent implements IAgent {
+public abstract class AbstractAgent implements IAgent {	
+	/**
+	 * Builds the text of an exception stating that an argument cannot be <code>null</code>.
+	 * @param argName The name of the argument.
+	 * @return The text of an exception stating that an argument cannot be <code>null</code>.
+	 */
+	private static String buildNullArgumentExceptionText( String argName ) {
+		return "The '" + argName + "' argument cannot be null.";
+	}
+	
 	/**
 	 * The category of the agent.
 	 */
@@ -101,7 +110,7 @@ public abstract class AbstractAgent implements IAgent {
 	 */
 	public AbstractAgent( String category ) throws IllegalArgumentException {
 		if( category == null ){
-			throw new IllegalArgumentException( "The 'category' argument cannot be null." );
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "category" ) );
 		}
 		this.category = category;
 		this.publicLocalStates = new HashMap<LevelIdentifier, IPublicLocalStateOfAgent>();
@@ -130,7 +139,7 @@ public abstract class AbstractAgent implements IAgent {
 	 */
 	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) throws IllegalArgumentException {
 		if( initialMemoryState == null ){
-			throw new IllegalArgumentException( "The 'initialMemoryState' argument cannot be null." );
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "initialMemoryState" ) );
 		}
 		this.globalMemoryState = initialMemoryState;
 	}
@@ -147,14 +156,14 @@ public abstract class AbstractAgent implements IAgent {
 	 */
 	@Override
 	public IPublicLocalStateOfAgent getPublicLocalState(
-			LevelIdentifier levelIdentifier
+			LevelIdentifier levelId
 	) throws NoSuchElementException {
-		if( levelIdentifier == null ){
-			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
+		if( levelId == null ){
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelId" ) );
 		}
-		IPublicLocalStateOfAgent result = this.publicLocalStates.get( levelIdentifier );
+		IPublicLocalStateOfAgent result = this.publicLocalStates.get( levelId );
 		if( result == null ){
-			throw new NoSuchElementException( "The agent does not define a public local state for the level '" + levelIdentifier + "'." );
+			throw new NoSuchElementException( "The agent does not define a public local state for the level '" + levelId + "'." );
 		}
 		return result;
 	}
@@ -167,9 +176,9 @@ public abstract class AbstractAgent implements IAgent {
 	 */
 	public void includeNewLevel( LevelIdentifier levelIdentifier, IPublicLocalStateOfAgent publicLocalState ){
 		if( levelIdentifier == null ){
-			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelIdentifier" ) );
 		} else if( publicLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "publicLocalState" ) );
 		}
 		if( this.getLevels().contains( levelIdentifier ) ){
 			throw new IllegalArgumentException( "The agent has already created its public local state for the level '" + levelIdentifier + "'." );
@@ -190,14 +199,14 @@ public abstract class AbstractAgent implements IAgent {
 	 */
 	@Override
 	public IPerceivedDataOfAgent getPerceivedData(
-			LevelIdentifier levelIdentifier
+			LevelIdentifier levelIdent
 	) throws NoSuchElementException {
-		if( levelIdentifier == null ){
-			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
+		if( levelIdent == null ){
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelIdent" ) );
 		}
-		IPerceivedDataOfAgent result = this.lastPerceivedData.get( levelIdentifier );
+		IPerceivedDataOfAgent result = this.lastPerceivedData.get( levelIdent );
 		if( result == null ){
-			throw new NoSuchElementException( "No perceived data were defined for the level '" + levelIdentifier + "'." );
+			throw new NoSuchElementException( "No perceived data were defined for the level '" + levelIdent + "'." );
 		}
 		return result;
 	}
@@ -207,14 +216,14 @@ public abstract class AbstractAgent implements IAgent {
 	 */
 	@Override
 	public void setPerceivedData(
-			LevelIdentifier levelIdentifier,
+			LevelIdentifier levelIden,
 			IPerceivedDataOfAgent perceivedData
 	) {
-		if( levelIdentifier == null ){
-			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
+		if( levelIden == null ){
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelIden" ) );
 		} else if( perceivedData == null ){
-			throw new IllegalArgumentException( "The 'perceivedData' argument cannot be null." );
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "perceivedData" ) );
 		}
-		this.lastPerceivedData.put( levelIdentifier, perceivedData );
+		this.lastPerceivedData.put( levelIden, perceivedData );
 	}
 }

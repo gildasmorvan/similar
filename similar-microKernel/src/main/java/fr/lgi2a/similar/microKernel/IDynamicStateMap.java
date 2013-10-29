@@ -44,10 +44,41 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microkernel;
+
+import java.util.NoSuchElementException;
+import java.util.Set;
+
 
 /**
- * This package defines a map-like data structure containing the transitory state of all the 
- * levels of a simulation.
+ * Models a map containing dynamic states.
+ * 
+ * <h1>Usage</h1>
+ * <p>
+ * 	This interface and its subsequent classes are defined to facilitate the use of dynamic states in the 
+ * 	perception and natural methods, without having to create map duplicates.
+ * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
+public interface IDynamicStateMap {
+	/**
+	 * Gets the levels which dynamic state is contained in this map.
+	 * @return The identifier of the levels contained in this map.
+	 */
+	Set<LevelIdentifier> keySet( );
+	
+	/**
+	 * Gets the dynamic state of a level contained in this map.
+	 * @param level The level of the dynamic state.
+	 * @return The dynamic state of the level.
+	 * @throws IllegalArgumentException If the argument is <code>null</code>.
+	 * @throws NoSuchElementException If the <code>level</code> level is not in this map.
+	 */
+	IPublicLocalDynamicState get( LevelIdentifier level ) throws IllegalArgumentException, NoSuchElementException;
+	
+	/**
+	 * Puts a dynamic state into this map.
+	 * @param state The public local dynamic state of to add to this map.
+	 */
+	void put( IPublicLocalDynamicState state ) throws IllegalArgumentException;
+}

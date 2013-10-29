@@ -44,10 +44,35 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microkernel;
+
 
 /**
- * Defines the different implementations of a dynamic state of the simulation.
+ * Models the public local state of an agent.
+ * <p>
+ * 	An instance of this class corresponds to the perceptible data that the other agents can perceive 
+ * 	about an agent, for a specific level.
+ * </p>
+ * 
+ * <h1>Correspondence with theory</h1>
+ * <p>
+ * 	TODO
+ * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate;
+public interface IPublicLocalStateOfAgent {
+	/**
+	 * Gets the owner of the public local state, <i>i.e.</i> the agent which public local state at a 
+	 * specific level is this public local state.
+	 * <p>
+	 * 	This method is defined for optimization purposes, since keeping an association between public local 
+	 * 	states and agents within the simulation engine would be too memory consuming.
+	 * </p>
+	 * <p>
+	 * 	TODO formal notation
+	 * </p>
+	 * @return The owner of the public local state.
+	 */
+	IAgent getOwner( );
+}

@@ -44,13 +44,14 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
+package fr.lgi2a.similar.microkernel.dynamicstate.map;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
 
 /**
  * This class defines a sub set of a dynamic state map.
@@ -63,7 +64,7 @@ import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class DynamicStateFilteredMap implements IDynamicStateMap {
+public final class DynamicStateFilteredMap implements IDynamicStateMap {
 	/**
 	 * The over map of this map.
 	 */

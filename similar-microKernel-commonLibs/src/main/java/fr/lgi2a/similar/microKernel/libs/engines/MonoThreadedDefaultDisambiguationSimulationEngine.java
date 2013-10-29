@@ -57,32 +57,32 @@ import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.ExceptionSimulationAborted;
 import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IEnvironment;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.ILevel;
+import fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.IPublicLocalState;
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.ISimulationModel;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
 import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
-import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddPublicLocalStateToDynamicState;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemovePublicLocalStateFromDynamicState;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.dynamicstate.map.DynamicStateFilteredMap;
+import fr.lgi2a.similar.microkernel.dynamicstate.map.DynamicStateMap;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddPublicLocalStateToDynamicState;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemovePublicLocalStateFromDynamicState;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractSimulationEngine;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.IModifiablePublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateFilteredMap;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models a simulation engine running simulations using a mono-threaded approach.
@@ -160,11 +160,11 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	 */
 	@Override
 	public Set<IAgent> getAgents() {
-		Set<IAgent> agents = new HashSet<IAgent>();
+		Set<IAgent> agentsSet = new HashSet<IAgent>();
 		for( LevelIdentifier level : this.getLevels() ){
-			agents.addAll( this.getAgents( level ) );
+			agentsSet.addAll( this.getAgents( level ) );
 		}
-		return agents;
+		return agentsSet;
 	}
 
 	/**
@@ -182,11 +182,11 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	public Set<IAgent> getAgents(
 			LevelIdentifier level
 	) throws NoSuchElementException {
-		Set<IAgent> agents = this.agents.get( level );
-		if( agents == null ){
+		Set<IAgent> agentsSet = this.agents.get( level );
+		if( agentsSet == null ){
 			throw new NoSuchElementException( "The simulation does not contain the level '" + level + "'." );
 		}
-		return agents;
+		return agentsSet;
 	}
 
 	/**
@@ -220,13 +220,13 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	@Override
 	public void runNewSimulation(
 			ISimulationModel simulationModel
-	) throws RuntimeException, ExceptionSimulationAborted {
+	) throws ExceptionSimulationAborted {
 		// First check that the simulation model is not null.
 		if( simulationModel == null ) {
 			throw new IllegalArgumentException( "The 'simulationModel' argument cannot be null." );
 		}
 		// Prepare the observation made by the probes
-		for( IProbe probe : this.probes.values() ){
+		for( IProbe probe : this.getProbes() ){
 			probe.prepareObservation();
 		}
 		SimulationTimeStamp currentTime = simulationModel.getInitialTime();
@@ -237,18 +237,18 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			// Initialize the simulation
 			this.initializeSimulation( simulationModel );
 			// Tell the probes to observe the state of the simulation
-			for( IProbe probe : this.probes.values() ){
+			for( IProbe probe : this.getProbes() ){
 				probe.observeAtInitialTimes( simulationModel.getInitialTime(), this );
 			}
 			// Run the simulation
 			SimulationTimeStamp finalTime = this.performSimulation( simulationModel );
 			// The probes observe the partly consistent dynamic state of the simulation
-			for( IProbe probe : this.probes.values() ){
+			for( IProbe probe : this.getProbes() ){
 				probe.observeAtFinalTime( finalTime, this );
 			}
 		} catch( ExceptionSimulationAborted a ) {
 			// Case where the simulation was aborted by the user.
-			for( IProbe probe : this.probes.values() ){
+			for( IProbe probe : this.getProbes() ){
 				probe.reactToAbortion(
 						currentTime, 
 						this
@@ -258,7 +258,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			// In this case, both the simulation engine and the simulation model are in an
 			// invalid state because of the error.
 			// The simulation is stopped, and the probes are told to process the error.
-			for( IProbe probe : this.probes.values() ){
+			for( IProbe probe : this.getProbes() ){
 				probe.reactToError(
 						"The simulation stopped because of an error.", 
 						t
@@ -266,7 +266,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			}
 		} finally {
 			// Close the resources that were used by the probes
-			for( IProbe probe : this.probes.values() ){
+			for( IProbe probe : this.getProbes() ){
 				probe.endObservation();
 			}
 		}
@@ -369,11 +369,11 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			throw new IllegalStateException( "The value returned by the generateEnvironment(...) method of the " +
 					"simulation model cannot be null." );
 		}
-		if( generationData.environment == null ){
+		if( generationData.getEnvironment() == null ){
 			throw new IllegalStateException( "The environment of the simulation cannot be null. " +
 					"Check the value returned by the generateEnvironment(...) method of the simulation model." );
 		}
-		this.environment = generationData.environment;
+		this.environment = generationData.getEnvironment();
 		//
 		// Store the physical state of the environment in every level of the simulation.
 		//
@@ -388,7 +388,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			);
 		}
 		// Return the initial influences defined during the generation of the environment.
-		return generationData.influences;
+		return generationData.getInfluences();
 	}
 	
 	/**
@@ -410,15 +410,15 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			throw new IllegalStateException( "The value returned by the generateAgents(...) method of the " +
 					"simulation model cannot be null." );
 		}
-		if( generationData.agents == null ){
+		if( generationData.getAgents() == null ){
 			throw new IllegalStateException( "The environment of the simulation cannot be null. " +
 					"Check the value returned by the generateAgents(...) method of the simulation model." );
 		}
 		//
 		// Add the agents to the agents list. Also add the public local state of the agents to the appropriate levels.
 		//
-		Set<IAgent> agents = generationData.agents;
-		for( IAgent agent : agents ){
+		Set<IAgent> agentsToAdd = generationData.getAgents();
+		for( IAgent agent : agentsToAdd ){
 			for( LevelIdentifier levelId : agent.getLevels() ){
 				if( levelId == null || ! this.levels.containsKey( levelId ) ){
 					throw new IllegalStateException( "The agent '" + agent.getCategory() + "' from the class '" + agent.getClass( ) + "' " +
@@ -439,7 +439,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			}
 		}
 		// Return the initial influences defined during the generation of the agents.
-		return generationData.influences;
+		return generationData.getInfluences( );
 	}
 	
 	/**
@@ -510,7 +510,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			//
 			lastPartlyConsistentStateTimestamp = this.reactionPhase( lastPartlyConsistentStateTimestamp );
 			// Then trigger the observation of the simulation.
-			for( IProbe probe : this.probes.values() ){
+			for( IProbe probe : this.getProbes() ){
 				probe.observeAtPartialConsistentTime( lastPartlyConsistentStateTimestamp, this );
 			}
 			// Then check if it models the ending time of the simulation.
@@ -895,25 +895,25 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	 */
 	private Set<IInfluence> reactToSystemInfluence( IInfluence systemInfluence ){
 		Set<IInfluence> producedInfluences = null;
-		if( systemInfluence.getCategory().equals( SystemInfluence_AddAgent.CATEGORY ) ){
+		if( systemInfluence.getCategory().equals( SystemInfluenceAddAgent.CATEGORY ) ){
 			//
 			// Manage the system influence telling to add an agent into the simulation.
 			//
 			producedInfluences = new LinkedHashSet<IInfluence>( );
-			SystemInfluence_AddAgent castedInfluence = (SystemInfluence_AddAgent) systemInfluence;
+			SystemInfluenceAddAgent castedInfluence = (SystemInfluenceAddAgent) systemInfluence;
 			IAgent agentToAdd = castedInfluence.getAgent( );
 			for( LevelIdentifier levelId : agentToAdd.getLevels() ){
-				producedInfluences.add( new SystemInfluence_AddPublicLocalStateToDynamicState( 
+				producedInfluences.add( new SystemInfluenceAddPublicLocalStateToDynamicState( 
 						levelId,
 						agentToAdd.getPublicLocalState( levelId ) 
 				) );
 			}
-		} else if( systemInfluence.getCategory().equals( SystemInfluence_AddPublicLocalStateToDynamicState.CATEGORY ) ) {
+		} else if( systemInfluence.getCategory().equals( SystemInfluenceAddPublicLocalStateToDynamicState.CATEGORY ) ) {
 			//
 			// Manage the influence telling that the public local state of an agent is added in a level.
 			//
-			SystemInfluence_AddPublicLocalStateToDynamicState castedInfluence = 
-					(SystemInfluence_AddPublicLocalStateToDynamicState) systemInfluence;
+			SystemInfluenceAddPublicLocalStateToDynamicState castedInfluence = 
+					(SystemInfluenceAddPublicLocalStateToDynamicState) systemInfluence;
 			ILevel level = this.levels.get( castedInfluence.getTargetLevel() );
 			IPublicLocalStateOfAgent addedLocalState = castedInfluence.getPublicLocalState();
 			// Check the existence of the level where the public local state is added.
@@ -928,25 +928,25 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			levelConsistentState.addPublicLocalStateOfAgent( addedLocalState );
 			// Add the agent to the list of agents contained in the level
 			this.agents.get( level.getIdentifier() ).add( addedLocalState.getOwner() );
-		} else if( systemInfluence.getCategory().equals( SystemInfluence_RemoveAgent.CATEGORY ) ){
+		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemoveAgent.CATEGORY ) ){
 			//
 			// Manage the system influence telling to delete an agent from the simulation.
 			//
 			producedInfluences = new LinkedHashSet<IInfluence>( );
-			SystemInfluence_RemoveAgent castedInfluence = (SystemInfluence_RemoveAgent) systemInfluence;
+			SystemInfluenceRemoveAgent castedInfluence = (SystemInfluenceRemoveAgent) systemInfluence;
 			IAgent agentToRemove = castedInfluence.getAgent( );
 			for( LevelIdentifier levelId : agentToRemove.getLevels() ){
-				producedInfluences.add( new SystemInfluence_RemovePublicLocalStateFromDynamicState( 
+				producedInfluences.add( new SystemInfluenceRemovePublicLocalStateFromDynamicState( 
 						levelId,
 						agentToRemove.getPublicLocalState( levelId ) 
 				) );
 			}
-		} else if( systemInfluence.getCategory().equals( SystemInfluence_RemovePublicLocalStateFromDynamicState.CATEGORY ) ) {
+		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemovePublicLocalStateFromDynamicState.CATEGORY ) ) {
 			//
 			// Manage the influence telling that the physical state of an agent disappears from a level.
 			//
-			SystemInfluence_RemovePublicLocalStateFromDynamicState castedInfluence = 
-					(SystemInfluence_RemovePublicLocalStateFromDynamicState) systemInfluence;
+			SystemInfluenceRemovePublicLocalStateFromDynamicState castedInfluence = 
+					(SystemInfluenceRemovePublicLocalStateFromDynamicState) systemInfluence;
 			ILevel level = this.levels.get( castedInfluence.getTargetLevel() );
 			IPublicLocalStateOfAgent removedLocalState = castedInfluence.getPublicLocalState();
 			// Check the existence of the level from which the public local state is removed.

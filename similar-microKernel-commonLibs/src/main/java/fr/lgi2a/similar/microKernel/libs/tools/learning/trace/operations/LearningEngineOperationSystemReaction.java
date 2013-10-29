@@ -51,11 +51,11 @@ import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningInfluenceCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningPublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.LearningEngineOperationType;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * Models the operation performed by the simulation engine when it asks a level to perform its reaction to system influences.

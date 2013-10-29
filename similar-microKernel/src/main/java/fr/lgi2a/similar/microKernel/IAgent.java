@@ -50,11 +50,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
-import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models an agent contained in the simulation.

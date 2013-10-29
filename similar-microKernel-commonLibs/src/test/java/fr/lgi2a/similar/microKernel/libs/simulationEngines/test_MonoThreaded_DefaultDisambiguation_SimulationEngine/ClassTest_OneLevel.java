@@ -44,10 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
+package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
 
-import fr.lgi2a.similar.microKernel.test_simulationEngines.ClassTest_SimulationEngine_OneLevel;
 import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_OneLevel;
 import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
 
 /**

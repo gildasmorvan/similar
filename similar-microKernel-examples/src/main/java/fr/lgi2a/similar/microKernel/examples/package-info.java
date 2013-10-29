@@ -50,4 +50,4 @@
  * and the common libs of that kernel.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.examples;
+package fr.lgi2a.similar.microkernel.examples;

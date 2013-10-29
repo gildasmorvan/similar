@@ -44,14 +44,14 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents;
+package fr.lgi2a.similar.microkernel.examples.traceusage1.agents;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.I_Influence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;

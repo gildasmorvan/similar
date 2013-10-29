@@ -44,81 +44,25 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.test_simulationEngines.tools;
+package fr.lgi2a.similar.microkernel.generic.engines.tools;
 
-import java.util.Collection;
-import java.util.Set;
-
-import fr.lgi2a.similar.microkernel.I_Influence;
-import fr.lgi2a.similar.microkernel.I_Level;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
 
 /**
- * A level where the value returned by each method is defined in the constructor.
- * 
+ * Defines preset level identifiers to use in unit tests.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class UnitTest_Level extends AbstractLevel {
+public class Test_LevelIdentifiers {
 	/**
-	 * The value returned by the {@link I_Level#getNextTime(SimulationTimeStamp)} method.
+	 * The 'Level 1' level identifier.
 	 */
-	private SimulationTimeStamp nextTime;
-
+	public static final LevelIdentifier ID1 = new LevelIdentifier( "Level 1" );
 	/**
-	 * Builds a level where the value returned by each method is defined in the constructor.
-	 * @param initialTime The value returned by the {@link I_Level#getInitialTime()} method.
-	 * @param identifier The value returned by the {@link I_Level#getIdentifier()} method.
-	 * @param nextTime The value returned by the {@link I_Level#getNextTime(SimulationTimeStamp)} method.
-	 * @throws IllegalArgumentException if the <code>initialTime</code> or <code>identifier</code> arguments are <code>null</code>.
+	 * The 'Level 2' level identifier.
 	 */
-	public UnitTest_Level(
-			SimulationTimeStamp initialTime,
-			LevelIdentifier identifier,
-			boolean finalTimeOrAfter,
-			SimulationTimeStamp nextTime
-	) throws IllegalArgumentException {
-		super(initialTime, identifier);
-		this.nextTime = nextTime;
-	}
-	
+	public static final LevelIdentifier ID2 = new LevelIdentifier( "Level 2" );
 	/**
-	 * {@inheritDoc}
+	 * The 'Level 3' level identifier.
 	 */
-	@Override
-	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
-		return this.nextTime;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void makeRegularReaction(
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState consistentState,
-			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
-			Set<I_Influence> remainingInfluences
-	) { 
-		// Does nothing
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void makeSystemReaction(
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState consistentState,
-			Collection<I_Influence> systemInfluencesToManage,
-			boolean happensBeforeRegularReaction,
-			Collection<I_Influence> newInfluencesToProcess
-	) { 
-		// Does nothing
-	}
-
+	public static final LevelIdentifier ID3 = new LevelIdentifier( "Level 3" );
 }

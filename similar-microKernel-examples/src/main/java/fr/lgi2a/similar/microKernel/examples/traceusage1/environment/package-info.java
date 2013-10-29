@@ -49,4 +49,4 @@
  * Defines the environment of the "one level - two agents - trace" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.environment;
+package fr.lgi2a.similar.microkernel.examples.traceusage1.environment;

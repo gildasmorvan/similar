@@ -44,9 +44,43 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microkernel.examples.traceusage1;
+
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.Learning_TracePrinter;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_Probe;
 
 /**
- * Defines the agents of the "one level - two agents - trace" simulation.
+ * Models the main class of the "one level - two agents - trace" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents;
+public class MySimulationMainClass {
+	/**
+	 * The main method of the "one level - two agents - trace" simulation.
+	 * @param args The command line arguments of the program.
+	 */
+	public static void main( String[] args ) {
+		// Create the simulation engine running the simulation.
+		I_SimulationEngine engine = new MonoThreaded_DefaultDisambiguation_SimulationEngine( );
+		// Define the initial and final time of the simulation.
+		SimulationTimeStamp initialTime = new SimulationTimeStamp( 11 );
+		SimulationTimeStamp finalTime = new SimulationTimeStamp( 15 );
+		// Create the simulation model of the simulation we are running.
+		LearningSimilar_SimulationModel model = new MySimulationModel(
+				initialTime,
+				finalTime
+		);
+		// Tell the simulation engine that it has to memorize the trace of the dynamic state of the simulation
+		// defined by this model. This is necessary to obtain a viable trace of the simulation. Otherwise, only
+		// the operations like perception/memory revision/decision/natural and reaction are memorized in the trace.
+		engine.addProbe( "Dynamic state tracer", new Learning_Probe( model.getTrace() ) );
+		// Run the simulation
+		engine.runNewSimulation( model );
+		// Then display the trace of the simulation on the standard output.
+		// The interpretation of the trace is described in the documentation of the "learning" simulation in the common libs.
+		Learning_TracePrinter.printTrace( model.getTrace() );
+	}
+}

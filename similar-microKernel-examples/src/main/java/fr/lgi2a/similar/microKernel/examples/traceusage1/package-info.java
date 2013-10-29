@@ -46,7 +46,25 @@
  */
 
 /**
- * Defines the levels of the "one level - two agents - trace" simulation.
+ * This example illustrates the definition of a mono-level simulation containing two agents.
+ * This example also illustrates the usage of the "learning" simulations of the commonLibs to get the trace of the execution of the simulation on screen.
+ * <p>
+ * 	In this example:
+ * </p>
+ * <ul>
+ * 	<li>
+ * 		The simulation runs over five time stamps (including the initial and final one)
+ * 	</li>
+ * 	<li>
+ * 		Agents from the 'actor' category produce an influence during decision, to update the value of their own public local state.
+ *	</li>
+ *	<li>
+ *		The other agent (called 'procrastinator') does nothing.
+ *	</li>
+ *	<li>
+ *		The environment produces an influence to change the public local state of all the agents.
+ *	</li>
+ * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.levels;
+package fr.lgi2a.similar.microkernel.examples.traceusage1;

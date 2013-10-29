@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,58 +44,81 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.levels;
+package fr.lgi2a.similar.microkernel.generic.engines.tools;
 
-import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.MyLevelIdentifiers;
+import java.util.Collection;
+import java.util.Set;
+
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.I_Level;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_Level;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
 
 /**
- * Models the level 'level 1' as described in the specification of the "one level - two agents - trace" simulation.
- * <h1>Constraints</h1>
- * <p>
- * 	The level is an instance of the {@link Learning_AbstractEnvironment} class to ensure that the evolution of the environment 
- * 	can be tracked by the trace of the simulation.
- * </p>
+ * A level where the value returned by each method is defined in the constructor.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class MyLevel1 extends Learning_Level {
+public class UnitTest_Level extends AbstractLevel {
 	/**
-	 * Builds a partially initialized instance of this class.
-	 * The definition of the public local state of the environment is later defined automatically by the simulation model.
-	 * @param initialTime The initial time of the simulation. This value is provided by the simulation model.
-	 * @param trace The trace where the execution of the simulation is tracked.
-	 * @throws IllegalArgumentException If an argument is <code>null</code>.
+	 * The value returned by the {@link I_Level#getNextTime(SimulationTimeStamp)} method.
 	 */
-	public MyLevel1(
-			SimulationTimeStamp initialTime, 
-			SimulationExecutionTrace trace
-	) throws IllegalArgumentException {
-		super( initialTime, MyLevelIdentifiers.SIMULATION_LEVEL, trace );
-		//
-		// Define the perception relation graph of the level.
-		//
-		// In a mono-level simulation, no instruction is necessary.
-		// Otherwise, calls to the addPerceptibleLevel(...) method have to be made.
-		//
-		// Define the influence relation graph of the level.
-		//
-		// In a mono-level simulation, no instruction is necessary.
-		// Otherwise, calls to the addInfluenceableLevel(...) method have to be made.
-		//
-	}
+	private SimulationTimeStamp nextTime;
 
 	/**
-	 * Defines how time evolves in this level.
-	 * <p>
-	 * 	In this case, we use a simple model where the identifier of the next time is equal to the identifier of the previous
-	 * 	time plus one.
-	 * </p>
+	 * Builds a level where the value returned by each method is defined in the constructor.
+	 * @param initialTime The value returned by the {@link I_Level#getInitialTime()} method.
+	 * @param identifier The value returned by the {@link I_Level#getIdentifier()} method.
+	 * @param nextTime The value returned by the {@link I_Level#getNextTime(SimulationTimeStamp)} method.
+	 * @throws IllegalArgumentException if the <code>initialTime</code> or <code>identifier</code> arguments are <code>null</code>.
+	 */
+	public UnitTest_Level(
+			SimulationTimeStamp initialTime,
+			LevelIdentifier identifier,
+			boolean finalTimeOrAfter,
+			SimulationTimeStamp nextTime
+	) throws IllegalArgumentException {
+		super(initialTime, identifier);
+		this.nextTime = nextTime;
+	}
+	
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
-		return new SimulationTimeStamp( currentTime.getIdentifier() + 1 );
+		return this.nextTime;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void makeRegularReaction(
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			Consistent_PublicLocalDynamicState consistentState,
+			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
+			Set<I_Influence> remainingInfluences
+	) { 
+		// Does nothing
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void makeSystemReaction(
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			Consistent_PublicLocalDynamicState consistentState,
+			Collection<I_Influence> systemInfluencesToManage,
+			boolean happensBeforeRegularReaction,
+			Collection<I_Influence> newInfluencesToProcess
+	) { 
+		// Does nothing
+	}
+
 }

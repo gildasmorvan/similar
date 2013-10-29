@@ -44,16 +44,16 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace;
+package fr.lgi2a.similar.microkernel.examples.traceusage1;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents.ActorAgent;
-import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents.ProcrastinatorAgent;
-import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.environment.MyEnvironment;
-import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.levels.MyLevel1;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.agents.ActorAgent;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.agents.ProcrastinatorAgent;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.environment.MyEnvironment;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.levels.MyLevel1;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;

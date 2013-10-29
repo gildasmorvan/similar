@@ -46,7 +46,7 @@
  */
 
 /**
- * Defines the unit tests dedicated to simulation engines.
+ * Defines the agents of the "one level - two agents - trace" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.test_simulationEngines;
+package fr.lgi2a.similar.microkernel.examples.traceusage1.agents;

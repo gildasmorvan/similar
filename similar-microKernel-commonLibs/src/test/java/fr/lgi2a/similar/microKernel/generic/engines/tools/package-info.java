@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -46,9 +46,8 @@
  */
 
 /**
- * Defines a simulation template containing three levels and three agent classes.
- * This package illustrates the best practices while designing a simulation.
- * 
+ * Defines classes used in the tests of simulation engines to check if the engine works 
+ * appropriately.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.examples.simulationTemplate;
+package fr.lgi2a.similar.microkernel.generic.engines.tools;

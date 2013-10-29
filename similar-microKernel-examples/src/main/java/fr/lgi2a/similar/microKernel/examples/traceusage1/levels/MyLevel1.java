@@ -44,43 +44,58 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace;
+package fr.lgi2a.similar.microkernel.examples.traceusage1.levels;
 
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.Learning_TracePrinter;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_Probe;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_Level;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 
 /**
- * Models the main class of the "one level - two agents - trace" simulation.
+ * Models the level 'level 1' as described in the specification of the "one level - two agents - trace" simulation.
+ * <h1>Constraints</h1>
+ * <p>
+ * 	The level is an instance of the {@link Learning_AbstractEnvironment} class to ensure that the evolution of the environment 
+ * 	can be tracked by the trace of the simulation.
+ * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class MySimulationMainClass {
+public class MyLevel1 extends Learning_Level {
 	/**
-	 * The main method of the "one level - two agents - trace" simulation.
-	 * @param args The command line arguments of the program.
+	 * Builds a partially initialized instance of this class.
+	 * The definition of the public local state of the environment is later defined automatically by the simulation model.
+	 * @param initialTime The initial time of the simulation. This value is provided by the simulation model.
+	 * @param trace The trace where the execution of the simulation is tracked.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public static void main( String[] args ) {
-		// Create the simulation engine running the simulation.
-		I_SimulationEngine engine = new MonoThreaded_DefaultDisambiguation_SimulationEngine( );
-		// Define the initial and final time of the simulation.
-		SimulationTimeStamp initialTime = new SimulationTimeStamp( 11 );
-		SimulationTimeStamp finalTime = new SimulationTimeStamp( 15 );
-		// Create the simulation model of the simulation we are running.
-		LearningSimilar_SimulationModel model = new MySimulationModel(
-				initialTime,
-				finalTime
-		);
-		// Tell the simulation engine that it has to memorize the trace of the dynamic state of the simulation
-		// defined by this model. This is necessary to obtain a viable trace of the simulation. Otherwise, only
-		// the operations like perception/memory revision/decision/natural and reaction are memorized in the trace.
-		engine.addProbe( "Dynamic state tracer", new Learning_Probe( model.getTrace() ) );
-		// Run the simulation
-		engine.runNewSimulation( model );
-		// Then display the trace of the simulation on the standard output.
-		// The interpretation of the trace is described in the documentation of the "learning" simulation in the common libs.
-		Learning_TracePrinter.printTrace( model.getTrace() );
+	public MyLevel1(
+			SimulationTimeStamp initialTime, 
+			SimulationExecutionTrace trace
+	) throws IllegalArgumentException {
+		super( initialTime, MyLevelIdentifiers.SIMULATION_LEVEL, trace );
+		//
+		// Define the perception relation graph of the level.
+		//
+		// In a mono-level simulation, no instruction is necessary.
+		// Otherwise, calls to the addPerceptibleLevel(...) method have to be made.
+		//
+		// Define the influence relation graph of the level.
+		//
+		// In a mono-level simulation, no instruction is necessary.
+		// Otherwise, calls to the addInfluenceableLevel(...) method have to be made.
+		//
+	}
+
+	/**
+	 * Defines how time evolves in this level.
+	 * <p>
+	 * 	In this case, we use a simple model where the identifier of the next time is equal to the identifier of the previous
+	 * 	time plus one.
+	 * </p>
+	 */
+	@Override
+	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
+		return new SimulationTimeStamp( currentTime.getIdentifier() + 1 );
 	}
 }

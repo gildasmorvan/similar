@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,25 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.test_simulationEngines.tools;
-
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * Defines preset level identifiers to use in unit tests.
+ * Defines a simulation template containing three levels and three agent classes.
+ * This package illustrates the best practices while designing a simulation.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class Test_LevelIdentifiers {
-	/**
-	 * The 'Level 1' level identifier.
-	 */
-	public static final LevelIdentifier ID1 = new LevelIdentifier( "Level 1" );
-	/**
-	 * The 'Level 2' level identifier.
-	 */
-	public static final LevelIdentifier ID2 = new LevelIdentifier( "Level 2" );
-	/**
-	 * The 'Level 3' level identifier.
-	 */
-	public static final LevelIdentifier ID3 = new LevelIdentifier( "Level 3" );
-}
+package fr.lgi2a.similar.microkernel.examples.template;

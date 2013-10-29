@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.test_simulationEngines;
+package fr.lgi2a.similar.microkernel.generic.engines;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
@@ -66,13 +66,13 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.Test_Agent;
-import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.Test_LevelIdentifiers;
 import fr.lgi2a.similar.microkernel.I_Influence;
 import fr.lgi2a.similar.microkernel.I_Probe;
 import fr.lgi2a.similar.microkernel.I_SimulationEngine;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.generic.engines.tools.Test_Agent;
+import fr.lgi2a.similar.microkernel.generic.engines.tools.Test_LevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;

@@ -46,27 +46,27 @@
  */
 package fr.lgi2a.similar.microkernel.influences;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * Provides a default behavior of the generic methods of the {@link I_Influence} class.
+ * Provides a default behavior of the generic methods of the {@link IInfluence} class.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractInfluence implements I_Influence {
+public abstract class AbstractInfluence implements IInfluence {
 	/**
-	 * The category of the influence, as described in the {@link I_Influence#getCategory()} method.
+	 * The category of the influence, as described in the {@link IInfluence#getCategory()} method.
 	 */
 	private final String category;
 	/**
-	 * The level where the reaction to the influence is managed, as described in the {@link I_Influence#getTargetLevel()} method.
+	 * The level where the reaction to the influence is managed, as described in the {@link IInfluence#getTargetLevel()} method.
 	 */
 	private final LevelIdentifier targetLevel;
 	
 	/**
 	 * Builds an influence having a specific category and a specific target level.
-	 * @param category The category of the influence, as described in the {@link I_Influence#getCategory()} method.
+	 * @param category The category of the influence, as described in the {@link IInfluence#getCategory()} method.
 	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.
 	 */
 	public AbstractInfluence( String category, LevelIdentifier targetLevel ) throws IllegalArgumentException {
@@ -81,7 +81,7 @@ public abstract class AbstractInfluence implements I_Influence {
 	
 	/**
 	 * Returns the category defined in the constructor of this class.
-	 * @see I_Influence#getCategory()
+	 * @see IInfluence#getCategory()
 	 */
 	@Override
 	public String getCategory() {
@@ -90,7 +90,7 @@ public abstract class AbstractInfluence implements I_Influence {
 
 	/**
 	 * Returns the target level defined in the constructor of this class.
-	 * @see I_Influence#getTargetLevel()
+	 * @see IInfluence#getTargetLevel()
 	 */
 	@Override
 	public LevelIdentifier getTargetLevel() {

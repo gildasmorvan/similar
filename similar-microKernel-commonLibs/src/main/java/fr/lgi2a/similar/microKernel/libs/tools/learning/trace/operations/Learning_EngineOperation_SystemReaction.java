@@ -49,13 +49,13 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_InfluenceCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationType;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * Models the operation performed by the simulation engine when it asks a level to perform its reaction to system influences.
@@ -78,34 +78,34 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	/**
 	 * The 'new consistent state' argument provided as a parameter to the 'reaction' method call.
 	 */
-	private Consistent_PublicLocalDynamicState newConsistentStateAtBeginning;
+	private ConsistentPublicLocalDynamicState newConsistentStateAtBeginning;
 	/**
 	 * The value of the 'new consistent state' argument at the end of the 'reaction' method call.
 	 */
-	private Consistent_PublicLocalDynamicState newConsistentStateAtEnd;
+	private ConsistentPublicLocalDynamicState newConsistentStateAtEnd;
 	/**
 	 * The 'systemInfluencesToManage' argument of the 'reaction' method call.
 	 */
-	private Set<I_Influence> systemInfluencesToManage;
+	private Set<IInfluence> systemInfluencesToManage;
 	/**
 	 * The influences that were produced during the 'reaction' method call.
 	 */
-	private Set<I_Influence> producedInfluences;
+	private Set<IInfluence> producedInfluences;
 	
 	/**
 	 * Builds a partially initialized model of a call to the 'reaction' method call of a level.
 	 * The initialization is completed by calls to the:
 	 * <ul>
 	 * 	<li>
-	 * 		{@link Learning_EngineOperation_SystemReaction#addArgumentInfluence(I_Influence)} for each influence located in the 
+	 * 		{@link Learning_EngineOperation_SystemReaction#addArgumentInfluence(IInfluence)} for each influence located in the 
 	 * 		'regularInfluencesOftransitoryStateDynamics' argument of the 'reaction' method call.
 	 *	</li>
 	 * 	<li>
-	 * 		{@link Learning_EngineOperation_SystemReaction#addProducedInfluence(I_Influence)} for each influence located in the 
+	 * 		{@link Learning_EngineOperation_SystemReaction#addProducedInfluence(IInfluence)} for each influence located in the 
 	 * 		influences produced by the reaction.
 	 *	</li>
 	 *	<li>
-	 *		{@link Learning_EngineOperation_SystemReaction#setNewConsistentStateAtEnd(Consistent_PublicLocalDynamicState)} to store the
+	 *		{@link Learning_EngineOperation_SystemReaction#setNewConsistentStateAtEnd(ConsistentPublicLocalDynamicState)} to store the
 	 *		value of the new consistent state of the level after the reaction.
 	 *	</li>
 	 * </ul>
@@ -119,7 +119,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
 			boolean happensBeforeRegularReaction,
-			Consistent_PublicLocalDynamicState newConsistentStateAtBeginning
+			ConsistentPublicLocalDynamicState newConsistentStateAtBeginning
 	) throws IllegalArgumentException {
 		if( newConsistentStateAtBeginning == null ){
 			throw new IllegalArgumentException( "The 'newConsistentStateAtBeginning' argument cannot be null." );
@@ -131,8 +131,8 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 			throw new IllegalArgumentException( "The 'newConsistentStateTime' argument cannot be null." );
 		}
 		this.newConsistentStateAtBeginning = Learning_PublicLocalDynamicStateCopier.createCopy( newConsistentStateAtBeginning );
-		this.systemInfluencesToManage = new LinkedHashSet<I_Influence>();
-		this.producedInfluences = new LinkedHashSet<I_Influence>();
+		this.systemInfluencesToManage = new LinkedHashSet<IInfluence>();
+		this.producedInfluences = new LinkedHashSet<IInfluence>();
 		this.previousConsistentStateTime = new SimulationTimeStamp( previousConsistentStateTime );
 		this.newConsistentStateTime = new SimulationTimeStamp( newConsistentStateTime );
 		this.happensBeforeRegularReaction = happensBeforeRegularReaction;
@@ -175,7 +175,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	 * Gets the 'new consistent state' argument provided as a parameter to the 'reaction' method call.
 	 * @return The 'new consistent state' argument provided as a parameter to the 'reaction' method call.
 	 */
-	public Consistent_PublicLocalDynamicState getNewConsistentStateAtBeginning( ) {
+	public ConsistentPublicLocalDynamicState getNewConsistentStateAtBeginning( ) {
 		return this.newConsistentStateAtBeginning;
 	}
 	
@@ -183,7 +183,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	 * Gets the value of the 'new consistent state' argument at the end of the 'reaction' method call.
 	 * @return The value of the 'new consistent state' argument at the end of the 'reaction' method call.
 	 */
-	public Consistent_PublicLocalDynamicState getNewConsistentStateAtEnd( ) {
+	public ConsistentPublicLocalDynamicState getNewConsistentStateAtEnd( ) {
 		return this.newConsistentStateAtEnd;
 	}
 	/**
@@ -191,7 +191,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	 * @param newConsistentStateAtEnd The value of the 'new consistent state' argument at the end of the 'reaction' method call.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public void setNewConsistentStateAtEnd(Consistent_PublicLocalDynamicState newConsistentStateAtEnd ) throws IllegalArgumentException {
+	public void setNewConsistentStateAtEnd(ConsistentPublicLocalDynamicState newConsistentStateAtEnd ) throws IllegalArgumentException {
 		this.newConsistentStateAtEnd = Learning_PublicLocalDynamicStateCopier.createCopy( newConsistentStateAtEnd );
 	}
 	
@@ -199,7 +199,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	 * Gets the 'systemInfluencesToManage' argument of the 'reaction' method call.
 	 * @return The 'systemInfluencesToManage' argument of the 'reaction' method call.
 	 */
-	public Set<I_Influence> getSystemInfluencesToManageArgument( ) {
+	public Set<IInfluence> getSystemInfluencesToManageArgument( ) {
 		return this.systemInfluencesToManage;
 	}
 	
@@ -207,7 +207,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	 * Gets the influences that were produced during the 'reaction' method call.
 	 * @return The influences that were produced during the 'reaction' method call.
 	 */
-	public Set<I_Influence> getProducedInfluences( ) {
+	public Set<IInfluence> getProducedInfluences( ) {
 		return this.producedInfluences;
 	}
 	
@@ -218,7 +218,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the influence is not supported.
 	 */
 	public void addArgumentInfluence(
-			I_Influence influence
+			IInfluence influence
 	) throws IllegalArgumentException {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
@@ -232,7 +232,7 @@ public class Learning_EngineOperation_SystemReaction implements Learning_EngineO
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the influence is not supported.
 	 */
 	public void addProducedInfluence(
-			I_Influence influence
+			IInfluence influence
 	) throws IllegalArgumentException {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );

@@ -48,23 +48,23 @@ package fr.lgi2a.similar.microkernel.states.dynamicstate;
 
 import java.util.Collection;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * Models a modifiable public local dynamic state.
  * 
  * <p>
- * 	This interface is separated from the {@link I_PublicLocalDynamicState} to prevent users from modifying the content
+ * 	This interface is separated from the {@link IPublicLocalDynamicState} to prevent users from modifying the content
  * 	of a dynamic state during the behavior phase of the agent (or the natural phase of the environment).
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Modifiable_PublicLocalDynamicState extends I_PublicLocalDynamicState {
+public interface IModifiablePublicLocalDynamicState extends IPublicLocalDynamicState {
 	/**
 	 * Sets the time for which this modifiable public local dynamic state is defined.
 	 * @param time The new time for which this modifiable public local dynamic state is defined.
@@ -80,7 +80,7 @@ public interface I_Modifiable_PublicLocalDynamicState extends I_PublicLocalDynam
 	 * @param publicLocalState The public local state of the environment.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void setPublicLocalStateOfEnvironment( I_PublicLocalState publicLocalState ) throws IllegalArgumentException;
+	void setPublicLocalStateOfEnvironment( IPublicLocalState publicLocalState ) throws IllegalArgumentException;
 	
 	/**
 	 * Adds the public local state of an agent to this public local dynamic state.
@@ -93,7 +93,7 @@ public interface I_Modifiable_PublicLocalDynamicState extends I_PublicLocalDynam
 	 * @param publicLocalState The added public local state of the agent.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void addPublicLocalStateOfAgent( I_PublicLocalStateOfAgent publicLocalState ) throws IllegalArgumentException;
+	void addPublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState ) throws IllegalArgumentException;
 	
 	/**
 	 * Removes the public local state of an agent from this public local dynamic state.
@@ -103,7 +103,7 @@ public interface I_Modifiable_PublicLocalDynamicState extends I_PublicLocalDynam
 	 * @param publicLocalState The removed public local state of the agent.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void removePublicLocalStateOfAgent( I_PublicLocalStateOfAgent publicLocalState ) throws IllegalArgumentException;
+	void removePublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState ) throws IllegalArgumentException;
 	
 	/**
 	 * Adds an influence to this public local dynamic state.
@@ -113,7 +113,7 @@ public interface I_Modifiable_PublicLocalDynamicState extends I_PublicLocalDynam
 	 * @param influence The influence to add to this public local dynamic state.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void addInfluence( I_Influence influence ) throws IllegalArgumentException;
+	void addInfluence( IInfluence influence ) throws IllegalArgumentException;
 	
 	/**
 	 * Sets the state dynamics of this public local dynamic state as a copy of the specified value.
@@ -121,7 +121,7 @@ public interface I_Modifiable_PublicLocalDynamicState extends I_PublicLocalDynam
 	 * If <code>null</code>, this method sets the state dynamics of this dynamic state to an empty set.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void setStateDynamicsAsCopyOf( Collection<I_Influence> toCopy ) throws IllegalArgumentException;
+	void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) throws IllegalArgumentException;
 
 	/**
 	 * Remove all the system influences of this dynamic state.

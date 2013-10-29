@@ -46,19 +46,19 @@
  */
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
-import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
 
 /**
- * An abstract implementation of the {@link I_GlobalMemoryState} interface, providing a default behavior to the method it contains.
+ * An abstract implementation of the {@link IGlobalMemoryState} interface, providing a default behavior to the method it contains.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractGlobalMemoryState implements I_GlobalMemoryState {
+public class AbstractGlobalMemoryState implements IGlobalMemoryState {
 	/**
 	 * The agent owning this global memory state.
 	 */
-	private final I_Agent owner;
+	private final IAgent owner;
 	
 	/**
 	 * Builds an abstract empty global memory state of a specific agent.
@@ -66,7 +66,7 @@ public class AbstractGlobalMemoryState implements I_GlobalMemoryState {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
 	public AbstractGlobalMemoryState(
-			I_Agent owner
+			IAgent owner
 	) throws IllegalArgumentException {
 		if( owner == null ){
 			throw new IllegalArgumentException( "The 'owner' argument cannot be null." );
@@ -78,7 +78,7 @@ public class AbstractGlobalMemoryState implements I_GlobalMemoryState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public I_Agent getOwner() {
+	public IAgent getOwner() {
 		return this.owner;
 	}
 }

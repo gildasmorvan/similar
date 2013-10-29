@@ -51,18 +51,18 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_InfluenceCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
-import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicState_Map;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the dynamic state of a simulation during consistent or half-consistent moments.
@@ -73,30 +73,30 @@ public class Learning_SimulationDynamicState {
 	/**
 	 * The global memory state of agents, in this dynamic state.
 	 */
-	private Map<I_Agent,Learning_GlobalMemoryState> agentGlobalMemoryStates;
+	private Map<IAgent,Learning_GlobalMemoryState> agentGlobalMemoryStates;
 	/**
 	 * The data structure containing the dynamic state of the levels.
 	 */
-	private I_DynamicState_Map localDynamicStates;
+	private IDynamicStateMap localDynamicStates;
 	
 	/**
 	 * Builds an initially empty dynamic state of the simulation.
 	 * <p>
-	 * 	The initialization is completed by calling the {@link Learning_SimulationDynamicState#addGlobalMemoryState(I_Agent)} method
-	 * 	for each agent in the simulation, and the {@link Learning_SimulationDynamicState#addLevelDynamicState(I_PublicLocalDynamicState)} 
+	 * 	The initialization is completed by calling the {@link Learning_SimulationDynamicState#addGlobalMemoryState(IAgent)} method
+	 * 	for each agent in the simulation, and the {@link Learning_SimulationDynamicState#addLevelDynamicState(IPublicLocalDynamicState)} 
 	 * 	method for each level in the simulation.
 	 * </p>
 	 */
 	public Learning_SimulationDynamicState(){
-		this.agentGlobalMemoryStates = new LinkedHashMap<I_Agent, Learning_GlobalMemoryState>();
-		this.localDynamicStates = new DynamicState_Map();
+		this.agentGlobalMemoryStates = new LinkedHashMap<IAgent, Learning_GlobalMemoryState>();
+		this.localDynamicStates = new DynamicStateMap();
 	}
 	
 	/**
 	 * Gets the list of agents located in the simulation.
 	 * @return The list of agents located in the simulation.
 	 */
-	public Set<I_Agent> getAgents( ) {
+	public Set<IAgent> getAgents( ) {
 		return this.agentGlobalMemoryStates.keySet();
 	}
 	
@@ -106,11 +106,11 @@ public class Learning_SimulationDynamicState {
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the global 
 	 * memory state of the agent is not an instance of the {@link Learning_GlobalMemoryState} class.
 	 */
-	public void addGlobalMemoryState( I_Agent agent ) throws IllegalArgumentException {
+	public void addGlobalMemoryState( IAgent agent ) throws IllegalArgumentException {
 		if( agent == null ){
 			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
 		}
-		I_GlobalMemoryState memory = agent.getGlobalMemoryState();
+		IGlobalMemoryState memory = agent.getGlobalMemoryState();
 		if( memory instanceof Learning_GlobalMemoryState ){
 			Learning_GlobalMemoryState casted = (Learning_GlobalMemoryState) memory;
 			this.agentGlobalMemoryStates.put( agent, casted.createCopy() );
@@ -126,7 +126,7 @@ public class Learning_SimulationDynamicState {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 * @throws NoSuchElementException If the agent is not present in the simulation.
 	 */
-	public Learning_GlobalMemoryState getGlobalMemoryState( I_Agent agent ) throws IllegalArgumentException, NoSuchElementException {
+	public Learning_GlobalMemoryState getGlobalMemoryState( IAgent agent ) throws IllegalArgumentException, NoSuchElementException {
 		if( agent == null ){
 			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
 		}
@@ -142,7 +142,7 @@ public class Learning_SimulationDynamicState {
 	 * Gets the data structure containing the dynamic state of the levels.
 	 * @return The data structure containing the dynamic state of the levels.
 	 */
-	public I_DynamicState_Map getLocalDynamicStates(){
+	public IDynamicStateMap getLocalDynamicStates(){
 		return this.localDynamicStates;
 	}
 	
@@ -151,20 +151,20 @@ public class Learning_SimulationDynamicState {
 	 * @param levelDynamicState The public local dynamic state of a level of the simulation.
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the copy of the dynamic state failed.
 	 */
-	public void addLevelDynamicState( I_PublicLocalDynamicState levelDynamicState ) throws IllegalArgumentException {
+	public void addLevelDynamicState( IPublicLocalDynamicState levelDynamicState ) throws IllegalArgumentException {
 		if( levelDynamicState == null ){
 			throw new IllegalArgumentException( "The 'levelDynamicState' argument cannot be null." );
 		}
-		if( levelDynamicState instanceof Consistent_PublicLocalDynamicState ){
-			Consistent_PublicLocalDynamicState castedState = (Consistent_PublicLocalDynamicState) levelDynamicState;
+		if( levelDynamicState instanceof ConsistentPublicLocalDynamicState ){
+			ConsistentPublicLocalDynamicState castedState = (ConsistentPublicLocalDynamicState) levelDynamicState;
 			this.localDynamicStates.put( Learning_PublicLocalDynamicStateCopier.createCopy( castedState ) );
-		} else if( levelDynamicState instanceof Transitory_PublicLocalDynamicState ){
-			Transitory_PublicLocalDynamicState castedState = (Transitory_PublicLocalDynamicState) levelDynamicState;
-			Transitory_PublicLocalDynamicState stateCopy = new Transitory_PublicLocalDynamicState(
+		} else if( levelDynamicState instanceof TransitoryPublicLocalDynamicState ){
+			TransitoryPublicLocalDynamicState castedState = (TransitoryPublicLocalDynamicState) levelDynamicState;
+			TransitoryPublicLocalDynamicState stateCopy = new TransitoryPublicLocalDynamicState(
 					Learning_PublicLocalDynamicStateCopier.createCopy( castedState.getLastConsistentDynamicState() ), 
 					new SimulationTimeStamp( castedState.getNextTime() )
 			);
-			for( I_Influence influence : castedState.getStateDynamics() ){
+			for( IInfluence influence : castedState.getStateDynamics() ){
 				if( ! castedState.getLastConsistentDynamicState().getStateDynamics().contains( influence ) ){
 					stateCopy.addInfluence( Learning_InfluenceCopier.copyInfluence( influence ) );
 				}

@@ -44,43 +44,53 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
-
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+package fr.lgi2a.similar.microkernel;
 
 /**
- * Models a map containing dynamic states.
+ * Models an influence produced by the agents, the environment or the reaction to modify the dynamic state of the simulation.
+ * <p>
+ * 	An influence is characterized by a category, telling which kind of influence it models. This category is especially used during
+ * 	the reaction phase to identify which type of influence it is, without having to perform a class test (<code>instanceof</code>).
+ * </p>
+ * 
+ * <h1>Correspondence with theory</h1>
+ * <p>
+ * 	TODO formal notation
+ * </p>
  * 
  * <h1>Usage</h1>
  * <p>
- * 	This interface and its subsequent classes are defined to facilitate the use of dynamic states in the 
- * 	perception and natural methods, without having to create map duplicates.
+ * 	To facilitate the use of influences, it is advised to define a public and static field defining the category of the influence.
+ * 	This way, there won't be any misspelling  during the reaction phase of the simulation, when these categories are 
+ * 	used to identify the influences.
  * </p>
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_DynamicState_Map {
+public interface IInfluence {
 	/**
-	 * Gets the levels which dynamic state is contained in this map.
-	 * @return The identifier of the levels contained in this map.
+	 * Gets the category of the influence, <i>i.e.</i> a name identifying the type of the influence.
+	 * <p>
+	 * 	<b>Examples:</p>
+	 * </p>
+	 * <ul>
+	 * 	<li>Accelerate</li>
+	 * 	<li>Eat prey</li>
+	 * 	<li>Crouch</li>
+	 * </ul>
+	 * @return The category of the influence, as defined in the public static field declared in the concrete influence class.
 	 */
-	Set<LevelIdentifier> keySet( );
+	String getCategory( );
 	
 	/**
-	 * Gets the dynamic state of a level contained in this map.
-	 * @param level The level of the dynamic state.
-	 * @return The dynamic state of the level.
-	 * @throws IllegalArgumentException If the argument is <code>null</code>.
-	 * @throws NoSuchElementException If the <code>level</code> level is not in this map.
+	 * Gets the identifier of the level whose reaction will process this influence.
+	 * @return The identifier of the level whose reaction will process this influence.
 	 */
-	I_PublicLocalDynamicState get( LevelIdentifier level ) throws IllegalArgumentException, NoSuchElementException;
+	LevelIdentifier getTargetLevel();
 	
 	/**
-	 * Puts a dynamic state into this map.
-	 * @param state The public local dynamic state of to add to this map.
+	 * Checks if this influence is a system influence, and has to be managed by the simulation engine.
+	 * @return <code>true</code> if the influence is a system influence.
 	 */
-	void put( I_PublicLocalDynamicState state ) throws IllegalArgumentException;
+	boolean isSystem();
 }

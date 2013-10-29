@@ -50,11 +50,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
-import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models an agent contained in the simulation.
@@ -68,7 +68,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Agent {
+public interface IAgent {
 	/**
 	 * Gets the 'category' of the agent. This method identifies the category of agents to which this instance belongs to.
 	 * <p>
@@ -106,7 +106,7 @@ public interface I_Agent {
 	 * @return The public local state of the agent in the specified level.
 	 * @throws NoSuchElementException If the agent does not define a public local state for the provided level identifier.
 	 */
-	I_PublicLocalStateOfAgent getPublicLocalState( LevelIdentifier levelIdentifier ) throws NoSuchElementException;
+	IPublicLocalStateOfAgent getPublicLocalState( LevelIdentifier levelIdentifier ) throws NoSuchElementException;
 	
 	/**
 	 * Gets the global memory state of the agent.
@@ -115,7 +115,7 @@ public interface I_Agent {
 	 * </p>
 	 * @return The global memory state of the agent.
 	 */
-	I_GlobalMemoryState getGlobalMemoryState();
+	IGlobalMemoryState getGlobalMemoryState();
 	
 	/**
 	 * Gets the data that were lastly perceived by the agent, for all the levels where it lies.
@@ -124,7 +124,7 @@ public interface I_Agent {
 	 * </p>
 	 * @return The data that were lastly perceived by the agent, for all the levels where it lies.
 	 */
-	Map<LevelIdentifier, I_PerceivedDataOfAgent> getPerceivedData( );
+	Map<LevelIdentifier, IPerceivedDataOfAgent> getPerceivedData( );
 	
 	/**
 	 * Gets the data that were lastly perceived by the agent from a specific level where it lies.
@@ -134,7 +134,7 @@ public interface I_Agent {
 	 * @param levelIdentifier The identifier of the level from which the data were perceived.
 	 * @return The data that were lastly perceived by the agent from the <code>levelIdentifier</code> level.
 	 */
-	I_PerceivedDataOfAgent getPerceivedData( LevelIdentifier levelIdentifier ) throws NoSuchElementException;
+	IPerceivedDataOfAgent getPerceivedData( LevelIdentifier levelIdentifier ) throws NoSuchElementException;
 	
 	/**
 	 * Sets the data that were lastly perceived by the agent from a specific level where it lies.
@@ -144,7 +144,7 @@ public interface I_Agent {
 	 * @param levelIdentifier The identifier of the level from which the data were perceived.
 	 * @param perceivedData The data that were lastly perceived by the agent from the <code>levelIdentifier</code> level.
 	 */
-	void setPerceivedData( LevelIdentifier levelIdentifier, I_PerceivedDataOfAgent perceivedData );
+	void setPerceivedData( LevelIdentifier levelIdentifier, IPerceivedDataOfAgent perceivedData );
 	
 	/**
 	 * Creates the data perceived by an agent located in a specific level.
@@ -157,10 +157,10 @@ public interface I_Agent {
 	 * level <code>level</code>.
 	 * @return The data being perceived by an agent located in the <code>level</code> level.
 	 */
-	I_PerceivedDataOfAgent perceive( 
+	IPerceivedDataOfAgent perceive( 
 			LevelIdentifier level,
-			I_PublicLocalStateOfAgent publicLocalStateInLevel,
-			I_DynamicState_Map levelsPublicLocalObservableDynamicState
+			IPublicLocalStateOfAgent publicLocalStateInLevel,
+			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	);
 	
 	/**
@@ -172,7 +172,7 @@ public interface I_Agent {
 	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
 	 * @param memoryState The previous value of the global memory state of the agent being updated by this method call.
 	 */
-	void reviseMemory( Map<LevelIdentifier, I_PerceivedDataOfAgent> perceivedData, I_GlobalMemoryState memoryState );
+	void reviseMemory( Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData, IGlobalMemoryState memoryState );
 	
 	/**
 	 * Produces the influences resulting from the decisions of an agent from a specific level.
@@ -186,8 +186,8 @@ public interface I_Agent {
 	 */
 	void decide(
 			LevelIdentifier level,
-			I_GlobalMemoryState memoryState,
-			I_PerceivedDataOfAgent perceivedData,
+			IGlobalMemoryState memoryState,
+			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences
 	);
 }

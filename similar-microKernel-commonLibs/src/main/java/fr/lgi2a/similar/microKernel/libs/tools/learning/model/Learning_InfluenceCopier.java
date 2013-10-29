@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddPublicLocalStateToDynamicState;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
@@ -65,8 +65,8 @@ public class Learning_InfluenceCopier {
 	 * @throws IllegalArgumentException If the influence is a system influence that is not managed by 
 	 * the "learning" simulation or if it is not an influence defined for the "learning" simulation.
 	 */
-	public static I_Influence copyInfluence(
-			I_Influence influence
+	public static IInfluence copyInfluence(
+			IInfluence influence
 	) throws IllegalArgumentException {
 		if( influence.isSystem() ){
 			if( influence instanceof SystemInfluence_AddAgent ){

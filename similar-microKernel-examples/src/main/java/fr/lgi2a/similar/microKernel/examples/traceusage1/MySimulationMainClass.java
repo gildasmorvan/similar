@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.examples.traceusage1;
 
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
@@ -64,7 +64,7 @@ public class MySimulationMainClass {
 	 */
 	public static void main( String[] args ) {
 		// Create the simulation engine running the simulation.
-		I_SimulationEngine engine = new MonoThreaded_DefaultDisambiguation_SimulationEngine( );
+		ISimulationEngine engine = new MonoThreaded_DefaultDisambiguation_SimulationEngine( );
 		// Define the initial and final time of the simulation.
 		SimulationTimeStamp initialTime = new SimulationTimeStamp( 11 );
 		SimulationTimeStamp finalTime = new SimulationTimeStamp( 15 );

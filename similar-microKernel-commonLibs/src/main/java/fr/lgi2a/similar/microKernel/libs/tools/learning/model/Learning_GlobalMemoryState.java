@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMemoryState;
 
 /**
@@ -66,7 +66,7 @@ public class Learning_GlobalMemoryState extends AbstractGlobalMemoryState {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
 	public Learning_GlobalMemoryState(
-			I_Agent owner
+			IAgent owner
 	) throws IllegalArgumentException {
 		super( owner );
 		this.revisionNumber = 0;

@@ -58,7 +58,7 @@ import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationModel {
+public interface ISimulationModel {
 	/**
 	 * Gets the initial time of this time model.
 	 * <p>
@@ -74,14 +74,14 @@ public interface I_SimulationModel {
 	 * @param engine The simulation engine containing information about the currently running simulation.
 	 * @return <code>true</code> if the final time of the level was reached.
 	 */
-	boolean isFinalTimeOrAfter( SimulationTimeStamp currentTime, I_SimulationEngine engine );
+	boolean isFinalTimeOrAfter( SimulationTimeStamp currentTime, ISimulationEngine engine );
 	
 	/**
 	 * Generates the bare levels of the simulation. These levels contain no agents and define no environment.
 	 * @param initialTime The initial time of the simulation.
 	 * @return The bare levels of the simulation.
 	 */
-	List<I_Level> generateLevels( SimulationTimeStamp initialTime );
+	List<ILevel> generateLevels( SimulationTimeStamp initialTime );
 	
 	/**
 	 * Generates the environment of the simulation. At this stage, no agent are generated in the simulation.
@@ -93,7 +93,7 @@ public interface I_SimulationModel {
 	 * @return The generated environment and the influences to put in the state dynamics of the initial 
 	 * dynamic state of the levels.
 	 */
-	EnvironmentInitializationData generateEnvironment( SimulationTimeStamp initialTime, Map<LevelIdentifier, I_Level> levels );
+	EnvironmentInitializationData generateEnvironment( SimulationTimeStamp initialTime, Map<LevelIdentifier, ILevel> levels );
 	
 	/**
 	 * Generates the agents of the simulation.
@@ -105,7 +105,7 @@ public interface I_SimulationModel {
 	 * @return The generated agents and the influences to put in the state dynamics of the initial 
 	 * dynamic state of the levels.
 	 */
-	AgentInitializationData generateAgents( SimulationTimeStamp initialTime, Map<LevelIdentifier, I_Level> levels );
+	AgentInitializationData generateAgents( SimulationTimeStamp initialTime, Map<LevelIdentifier, ILevel> levels );
 	
 	/**
 	 * Models the initialization data coming from the generation of the environment of the simulation.
@@ -119,7 +119,7 @@ public interface I_SimulationModel {
 		 * 	TODO formal notation
 		 * </p>
 		 */
-		public final I_Environment environment;
+		public final IEnvironment environment;
 		/**
 		 * The influences resulting from the generation of the environment.
 		 * These influences are put inside the state dynamics of the initial consistent 
@@ -133,7 +133,7 @@ public interface I_SimulationModel {
 		 * @param environment The environment of the simulation.
 		 */
 		public EnvironmentInitializationData(
-				I_Environment environment
+				IEnvironment environment
 		){
 			this.environment = environment;
 			this.influences = new InfluencesMap( );
@@ -152,7 +152,7 @@ public interface I_SimulationModel {
 		 * 	TODO formal notation
 		 * </p>
 		 */
-		public final Set<I_Agent> agents;
+		public final Set<IAgent> agents;
 		/**
 		 * The influences resulting from the generation of the environment.
 		 * These influences are put inside the state dynamics of the initial consistent 
@@ -165,7 +165,7 @@ public interface I_SimulationModel {
 		 * In this object, the influences map and the agents list are initially empty.
 		 */
 		public AgentInitializationData( ){
-			this.agents = new HashSet<I_Agent>( );
+			this.agents = new HashSet<IAgent>( );
 			this.influences = new InfluencesMap( );
 		}
 	}

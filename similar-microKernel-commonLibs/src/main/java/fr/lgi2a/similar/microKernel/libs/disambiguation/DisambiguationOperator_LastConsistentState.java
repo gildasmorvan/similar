@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microkernel.libs.disambiguation;
 
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
 
 /**
  * Defines the implementation of a disambiguation operator always returning the last consistent state of the level.
@@ -66,7 +66,7 @@ public class DisambiguationOperator_LastConsistentState {
 	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
 	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
 	 */
-	public static final I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState ) {
+	public static final IPublicLocalDynamicState disambiguation( TransitoryPublicLocalDynamicState transitoryDynamicState ) {
 		return transitoryDynamicState.getLastConsistentDynamicState();
 	}
 }

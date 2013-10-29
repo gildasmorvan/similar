@@ -44,38 +44,29 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states;
+package fr.lgi2a.similar.microkernel.agentbehavior;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * Models the public local state of an agent or of the environment.
- * <p>
- * 	An instance of this class corresponds to the data that can be perceived about an agent or the environment for a specific level.
- * </p>
+ * Models the data that were perceived by an agent from a specific level <code>l</code>.
+ * These data include all the information that could be perceived from <code>l</code> itself and all the levels that are
+ * perceptible from <code>l</code>.
  * 
  * <h1>Correspondence with theory</h1>
  * <p>
- * 	TODO formal notation
- * </p>
- * 
- * <h2>Usage</h2>
- * <p>
- * 	The public local state of the environment can directly implement this interface.
- * </p>
- * <p>
- * 	The public local state of an agent has to implement the {@link I_PublicLocalStateOfAgent} interface.
+ * 	TODO : formal notation
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_PublicLocalState {
+public interface IPerceivedDataOfAgent {
 	/**
-	 * Gets the level for which this public local state was defined.
+	 * Gets the level from which these data were perceived.
 	 * <p>
-	 * 	TODO formal notation
+	 * 	TODO : formal notation
 	 * </p>
-	 * @return The identifier of the level for which this public local state was defined.
+	 * @return The identifier of the level for which these data were perceived.
 	 */
 	LevelIdentifier getLevel( );
 }

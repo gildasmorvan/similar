@@ -53,7 +53,7 @@ package fr.lgi2a.similar.microkernel;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Probe {
+public interface IProbe {
 	/**
 	 * Prepares the observation of a simulation.
 	 * <p>
@@ -70,7 +70,7 @@ public interface I_Probe {
 	 */
 	void observeAtInitialTimes(
 			SimulationTimeStamp initialTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	);
 	
 	/**
@@ -81,7 +81,7 @@ public interface I_Probe {
 	 */
 	void observeAtPartialConsistentTime(
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	);
 	
 	/**
@@ -92,7 +92,7 @@ public interface I_Probe {
 	 */
 	void observeAtFinalTime(
 			SimulationTimeStamp finalTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	);
 	
 	/**
@@ -112,7 +112,7 @@ public interface I_Probe {
 	 */
 	void reactToAbortion( 
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	);
 	/**
 	 * Ends the observation of a simulation.

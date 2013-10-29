@@ -48,7 +48,7 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
@@ -59,7 +59,7 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationMoment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_Natural;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the environment in the 'learning' simulation.
@@ -87,20 +87,20 @@ public abstract class Learning_AbstractEnvironment extends AbstractEnvironment {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.I_Environment#natural(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map, fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap)
+	 * @see fr.lgi2a.similar.microkernel.IEnvironment#natural(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap, fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap)
 	 */
 	@Override
 	public void natural(
 			LevelIdentifier level,
-			I_DynamicState_Map levelsPublicLocalObservableDynamicState,
+			IDynamicStateMap levelsPublicLocalObservableDynamicState,
 			InfluencesMap producedInfluences
 	) {
 		Learning_EngineOperation_Natural operation = new Learning_EngineOperation_Natural( level );
 		for( LevelIdentifier perceptibleLevel : levelsPublicLocalObservableDynamicState.keySet() ){
 			operation.addObservableDynamicState( levelsPublicLocalObservableDynamicState.get( perceptibleLevel ) );
 		}
-		Set<I_Influence> influences = this.produceInfluencesOfNatural( level, levelsPublicLocalObservableDynamicState );
-		for( I_Influence influence : influences ){
+		Set<IInfluence> influences = this.produceInfluencesOfNatural( level, levelsPublicLocalObservableDynamicState );
+		for( IInfluence influence : influences ){
 			operation.addInfluence( influence );
 			producedInfluences.add( influence );
 		}
@@ -139,8 +139,8 @@ public abstract class Learning_AbstractEnvironment extends AbstractEnvironment {
 	 * from the <code>level</code> level.
 	 * @return The set of influences that are produced by the natural action of the environment.
 	 */
-	protected abstract Set<I_Influence> produceInfluencesOfNatural(
+	protected abstract Set<IInfluence> produceInfluencesOfNatural(
 			LevelIdentifier level, 
-			I_DynamicState_Map levelsPublicLocalObservableDynamicState
+			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	);
 }

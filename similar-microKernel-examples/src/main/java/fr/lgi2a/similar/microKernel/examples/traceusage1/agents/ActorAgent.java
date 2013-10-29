@@ -49,7 +49,7 @@ package fr.lgi2a.similar.microkernel.examples.traceusage1.agents;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
@@ -58,7 +58,7 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_Perceived
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * Models the agents of the 'actor' category, as described in the specification of the "one level - two agents - trace" simulation.
@@ -110,7 +110,7 @@ public class ActorAgent extends Learning_AbstractAgent {
 		// Iterate over the set of levels where the agent lies.
 		for( LevelIdentifier levelId : this.getLevels() ){
 			// Get the public local state of the agent in the level of the iteration.
-			I_PublicLocalStateOfAgent agentState = this.getPublicLocalState( levelId );
+			IPublicLocalStateOfAgent agentState = this.getPublicLocalState( levelId );
 			Learning_PublicLocalStateOfAgent castedAgentState = (Learning_PublicLocalStateOfAgent) agentState;
 			// Add a copy of this state to the copy of the agent.
 			copy.includeNewLevel( levelId, castedAgentState.createCopy() );
@@ -122,7 +122,7 @@ public class ActorAgent extends Learning_AbstractAgent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected Set<I_Influence> produceInfluencesOfDecision(
+	protected Set<IInfluence> produceInfluencesOfDecision(
 			LevelIdentifier level, Learning_GlobalMemoryState memoryState,
 			Learning_PerceivedDataOfAgent perceivedData
 	) {
@@ -132,7 +132,7 @@ public class ActorAgent extends Learning_AbstractAgent {
 		//		- Learning_Influence_AgentPublicLocalStateUpdate
 		//		- Learning_Influence_EnvironmentPublicLocalStateUpdate
 		//
-		Set<I_Influence> producedInfluences = new LinkedHashSet<I_Influence>( );
+		Set<IInfluence> producedInfluences = new LinkedHashSet<IInfluence>( );
 		//
 		// During decision, the agent chooses to perform a modification of its own state.
 		// Thus, the agent produces an influence. In the context of this simulation, the produced influence
@@ -141,7 +141,7 @@ public class ActorAgent extends Learning_AbstractAgent {
 		// Get the level where the influence will be processed.
 		LevelIdentifier targetLevel = MyLevelIdentifiers.SIMULATION_LEVEL;
 		// Get the updated public local state of the agent.
-		I_PublicLocalStateOfAgent stateToUpdate = this.getPublicLocalState( targetLevel );
+		IPublicLocalStateOfAgent stateToUpdate = this.getPublicLocalState( targetLevel );
 		Learning_Influence_AgentPublicLocalStateUpdate influence = new Learning_Influence_AgentPublicLocalStateUpdate( 
 				targetLevel, 
 				stateToUpdate 

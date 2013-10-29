@@ -55,18 +55,18 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.Exception_SimulationAborted;
-import fr.lgi2a.similar.microkernel.I_Agent;
-import fr.lgi2a.similar.microkernel.I_Environment;
-import fr.lgi2a.similar.microkernel.I_Influence;
-import fr.lgi2a.similar.microkernel.I_Level;
-import fr.lgi2a.similar.microkernel.I_Probe;
-import fr.lgi2a.similar.microkernel.I_SimulationModel;
+import fr.lgi2a.similar.microkernel.ExceptionSimulationAborted;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IEnvironment;
+import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.ILevel;
+import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.I_SimulationModel.AgentInitializationData;
-import fr.lgi2a.similar.microkernel.I_SimulationModel.EnvironmentInitializationData;
-import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
+import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
+import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddPublicLocalStateToDynamicState;
@@ -74,15 +74,15 @@ import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgen
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemovePublicLocalStateFromDynamicState;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractSimulationEngine;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.I_Modifiable_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicState_FilteredMap;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicState_Map;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.IModifiablePublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateFilteredMap;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models a simulation engine running simulations using a mono-threaded approach.
@@ -112,27 +112,27 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * the current time stamp of the level) or transitory dynamic state (if the level is currently between two of its
 	 * time stamps).
 	 */
-	private I_DynamicState_Map currentSimulationDynamicState;
+	private IDynamicStateMap currentSimulationDynamicState;
 	/**
 	 * A map associating a level to its identifier.
 	 */
-	private Map<LevelIdentifier, I_Level> levels;
+	private Map<LevelIdentifier, ILevel> levels;
 	/**
 	 * A map associating the agents lying in each level of the simulation to the identifier of the level.
 	 */
-	private Map<LevelIdentifier, Set<I_Agent>> agents;
+	private Map<LevelIdentifier, Set<IAgent>> agents;
 	/**
 	 * The environment where the simulation takes place.
 	 */
-	private I_Environment environment;
+	private IEnvironment environment;
 	/**
 	 * Stores the last consistent dynamic state of each level of the simulation.
 	 */
-	private I_DynamicState_Map lastConsistentDynamicStates;
+	private IDynamicStateMap lastConsistentDynamicStates;
 	/**
 	 * Stores the current transitory dynamic state of each level of the simulation.
 	 */
-	private I_DynamicState_Map transitoryDynamicStates;
+	private IDynamicStateMap transitoryDynamicStates;
 	/**
 	 * A boolean flag telling if the simulation has to be aborted or not.
 	 */
@@ -142,8 +142,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * Builds a mono-threaded simulation engine.
 	 */
 	public MonoThreaded_DefaultDisambiguation_SimulationEngine( ) {
-		this.levels = new HashMap<LevelIdentifier, I_Level>( );
-		this.agents = new HashMap<LevelIdentifier, Set<I_Agent>>();
+		this.levels = new HashMap<LevelIdentifier, ILevel>( );
+		this.agents = new HashMap<LevelIdentifier, Set<IAgent>>();
 		this.abortFlag = false;
 	}
 	
@@ -151,7 +151,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public I_DynamicState_Map getSimulationDynamicStates() {
+	public IDynamicStateMap getSimulationDynamicStates() {
 		return this.currentSimulationDynamicState;
 	}
 
@@ -159,8 +159,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Set<I_Agent> getAgents() {
-		Set<I_Agent> agents = new HashSet<I_Agent>();
+	public Set<IAgent> getAgents() {
+		Set<IAgent> agents = new HashSet<IAgent>();
 		for( LevelIdentifier level : this.getLevels() ){
 			agents.addAll( this.getAgents( level ) );
 		}
@@ -179,10 +179,10 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Set<I_Agent> getAgents(
+	public Set<IAgent> getAgents(
 			LevelIdentifier level
 	) throws NoSuchElementException {
-		Set<I_Agent> agents = this.agents.get( level );
+		Set<IAgent> agents = this.agents.get( level );
 		if( agents == null ){
 			throw new NoSuchElementException( "The simulation does not contain the level '" + level + "'." );
 		}
@@ -201,8 +201,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
 	 */
 	@Override
-	public I_PublicLocalDynamicState disambiguation(
-			Transitory_PublicLocalDynamicState transitoryDynamicState
+	public IPublicLocalDynamicState disambiguation(
+			TransitoryPublicLocalDynamicState transitoryDynamicState
 	) {
 		return transitoryDynamicState.getLastConsistentDynamicState();
 	}
@@ -219,14 +219,14 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 */
 	@Override
 	public void runNewSimulation(
-			I_SimulationModel simulationModel
-	) throws RuntimeException, Exception_SimulationAborted {
+			ISimulationModel simulationModel
+	) throws RuntimeException, ExceptionSimulationAborted {
 		// First check that the simulation model is not null.
 		if( simulationModel == null ) {
 			throw new IllegalArgumentException( "The 'simulationModel' argument cannot be null." );
 		}
 		// Prepare the observation made by the probes
-		for( I_Probe probe : this.probes.values() ){
+		for( IProbe probe : this.probes.values() ){
 			probe.prepareObservation();
 		}
 		SimulationTimeStamp currentTime = simulationModel.getInitialTime();
@@ -237,18 +237,18 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			// Initialize the simulation
 			this.initializeSimulation( simulationModel );
 			// Tell the probes to observe the state of the simulation
-			for( I_Probe probe : this.probes.values() ){
+			for( IProbe probe : this.probes.values() ){
 				probe.observeAtInitialTimes( simulationModel.getInitialTime(), this );
 			}
 			// Run the simulation
 			SimulationTimeStamp finalTime = this.performSimulation( simulationModel );
 			// The probes observe the partly consistent dynamic state of the simulation
-			for( I_Probe probe : this.probes.values() ){
+			for( IProbe probe : this.probes.values() ){
 				probe.observeAtFinalTime( finalTime, this );
 			}
-		} catch( Exception_SimulationAborted a ) {
+		} catch( ExceptionSimulationAborted a ) {
 			// Case where the simulation was aborted by the user.
-			for( I_Probe probe : this.probes.values() ){
+			for( IProbe probe : this.probes.values() ){
 				probe.reactToAbortion(
 						currentTime, 
 						this
@@ -258,7 +258,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			// In this case, both the simulation engine and the simulation model are in an
 			// invalid state because of the error.
 			// The simulation is stopped, and the probes are told to process the error.
-			for( I_Probe probe : this.probes.values() ){
+			for( IProbe probe : this.probes.values() ){
 				probe.reactToError(
 						"The simulation stopped because of an error.", 
 						t
@@ -266,7 +266,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			}
 		} finally {
 			// Close the resources that were used by the probes
-			for( I_Probe probe : this.probes.values() ){
+			for( IProbe probe : this.probes.values() ){
 				probe.endObservation();
 			}
 		}
@@ -284,26 +284,26 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * </ul>
 	 * @throws IllegalStateException If the simulation model contains errors.
 	 */
-	protected void initializeSimulation( I_SimulationModel simulationModel ) throws IllegalStateException {
+	protected void initializeSimulation( ISimulationModel simulationModel ) throws IllegalStateException {
 		// First reset the data that were used in the previous simulations.
 		this.agents.clear();
-		this.lastConsistentDynamicStates = new DynamicState_Map( );
-		this.transitoryDynamicStates = new DynamicState_Map( );
-		this.currentSimulationDynamicState = new DynamicState_Map( );
+		this.lastConsistentDynamicStates = new DynamicStateMap( );
+		this.transitoryDynamicStates = new DynamicStateMap( );
+		this.currentSimulationDynamicState = new DynamicStateMap( );
 		this.levels.clear();
 		this.abortFlag = false;
 		//
 		// Then generate the list of the levels of the simulation.
 		//
 		SimulationTimeStamp initialTime = simulationModel.getInitialTime();
-		List<I_Level> createdLevels = simulationModel.generateLevels( initialTime );
+		List<ILevel> createdLevels = simulationModel.generateLevels( initialTime );
 		// Check that the list is valid.
 		if( createdLevels == null ){
 			throw new IllegalStateException( "The simulation model has to provide a valid list of levels. The list was null." );
 		} else if( createdLevels.isEmpty( ) ){
 			throw new IllegalStateException( "The simulation model has to contain at least one level." );
 		} else {
-			for( I_Level generatedLevel : createdLevels ){
+			for( ILevel generatedLevel : createdLevels ){
 				if( generatedLevel == null ){
 					throw new IllegalStateException( "The list of levels cannot contain the null element." );
 				}
@@ -319,12 +319,12 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		//
 		// Initialize the content of each level.
 		//
-		for( I_Level level : this.levels.values() ){
+		for( ILevel level : this.levels.values() ){
 			LevelIdentifier levelId = level.getIdentifier( );
-			this.agents.put( levelId, new LinkedHashSet<I_Agent>( ) );
+			this.agents.put( levelId, new LinkedHashSet<IAgent>( ) );
 			this.lastConsistentDynamicStates.put( level.getLastConsistentPublicLocalDynamicState() );
 			this.transitoryDynamicStates.put(
-					new Transitory_PublicLocalDynamicState( 
+					new TransitoryPublicLocalDynamicState( 
 							level.getLastConsistentPublicLocalDynamicState(), 
 							level.getNextTime( initialTime ) 
 					)
@@ -344,7 +344,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		// Finally memorize the current state of the simulation as the sum of all the initial consistent states of the levels.
 		// This value will be revised after each reaction.
 		//
-		for( I_Level level : this.levels.values() ){
+		for( ILevel level : this.levels.values() ){
 			this.currentSimulationDynamicState.put( this.lastConsistentDynamicStates.get( level.getIdentifier() ) );
 		}
 	}
@@ -357,7 +357,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @throws IllegalStateException If the simulation model contains errors.
 	 */
 	private InfluencesMap createEnvironment( 
-			I_SimulationModel simulationModel, 
+			ISimulationModel simulationModel, 
 			SimulationTimeStamp initialTime 
 	) throws IllegalStateException {
 		//
@@ -377,8 +377,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		//
 		// Store the physical state of the environment in every level of the simulation.
 		//
-		for( I_Level level : this.levels.values() ){
-			I_PublicLocalState environmentLocalState = this.environment.getPublicLocalState( level.getIdentifier() );
+		for( ILevel level : this.levels.values() ){
+			IPublicLocalState environmentLocalState = this.environment.getPublicLocalState( level.getIdentifier() );
 			if( environmentLocalState == null ){
 				throw new IllegalStateException( "The public local state of the environment in the level '" + level.getIdentifier() + "'" +
 						" cannot be null." );
@@ -398,7 +398,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @return The influences that are initially in the simulation because of the agents.
 	 */
 	private InfluencesMap createAgents( 
-			I_SimulationModel simulationModel, 
+			ISimulationModel simulationModel, 
 			SimulationTimeStamp initialTime 
 	) {
 		//
@@ -417,8 +417,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		//
 		// Add the agents to the agents list. Also add the public local state of the agents to the appropriate levels.
 		//
-		Set<I_Agent> agents = generationData.agents;
-		for( I_Agent agent : agents ){
+		Set<IAgent> agents = generationData.agents;
+		for( IAgent agent : agents ){
 			for( LevelIdentifier levelId : agent.getLevels() ){
 				if( levelId == null || ! this.levels.containsKey( levelId ) ){
 					throw new IllegalStateException( "The agent '" + agent.getCategory() + "' from the class '" + agent.getClass( ) + "' " +
@@ -427,9 +427,9 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 				// Add the agent to the list of agents in that level.
 				this.agents.get( levelId ).add( agent );
 				// Add the public local state of the agent to the public local dynamic state of the level.
-				I_Modifiable_PublicLocalDynamicState levelState = (I_Modifiable_PublicLocalDynamicState) 
+				IModifiablePublicLocalDynamicState levelState = (IModifiablePublicLocalDynamicState) 
 						this.lastConsistentDynamicStates.get( levelId );
-				I_PublicLocalStateOfAgent agentState = agent.getPublicLocalState( levelId );
+				IPublicLocalStateOfAgent agentState = agent.getPublicLocalState( levelId );
 				if( agentState == null ){
 					throw new IllegalStateException( "The agent '" + agent.getCategory() + "' from the class '" + agent.getClass( ) + "' " +
 							" defines a null public local state for the level '" + levelId + "'." );
@@ -454,16 +454,16 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	) {
 		for( LevelIdentifier levelId : this.levels.keySet( ) ){
 			if( ! influencesProducedByEnvironment.isEmpty( levelId ) ){
-				for( I_Influence influence : influencesProducedByEnvironment.getInfluencesForLevel( levelId ) ){
-					Consistent_PublicLocalDynamicState state = 
-							(Consistent_PublicLocalDynamicState) this.lastConsistentDynamicStates.get( levelId );
+				for( IInfluence influence : influencesProducedByEnvironment.getInfluencesForLevel( levelId ) ){
+					ConsistentPublicLocalDynamicState state = 
+							(ConsistentPublicLocalDynamicState) this.lastConsistentDynamicStates.get( levelId );
 					state.addInfluence( influence );
 				}
 			}
 			if( ! influencesProducedByAgents.isEmpty( levelId ) ){
-				for( I_Influence influence : influencesProducedByAgents.getInfluencesForLevel( levelId ) ){
-					Consistent_PublicLocalDynamicState state = 
-							(Consistent_PublicLocalDynamicState) this.lastConsistentDynamicStates.get( levelId );
+				for( IInfluence influence : influencesProducedByAgents.getInfluencesForLevel( levelId ) ){
+					ConsistentPublicLocalDynamicState state = 
+							(ConsistentPublicLocalDynamicState) this.lastConsistentDynamicStates.get( levelId );
 					state.addInfluence( influence );
 				}
 			}
@@ -474,12 +474,12 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * Runs the simulation, so that it will go from its initial state to its final state.
 	 * @param simulationModel The model of the simulation.
 	 * @return The final time stamp of the simulation.
-	 * @throws Exception_SimulationAborted If the simulation was aborted by the user.
+	 * @throws ExceptionSimulationAborted If the simulation was aborted by the user.
 	 * @throws Throwable If an exception was caught while running the simulation.
 	 */
 	protected SimulationTimeStamp performSimulation( 
-			I_SimulationModel simulationModel 
-	) throws Throwable, Exception_SimulationAborted {
+			ISimulationModel simulationModel 
+	) throws Throwable, ExceptionSimulationAborted {
 		// Iterate over all the time stamps of the simulation
 		SimulationTimeStamp lastPartlyConsistentStateTimestamp = simulationModel.getInitialTime();
 		//
@@ -487,7 +487,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		//
 		if( this.isSimulationContinuing( lastPartlyConsistentStateTimestamp, simulationModel ) ) {
 			// Ask all the agents to perceive
-			Set<I_Agent> agentHavingToReviseMemory = this.perceptionPhase( 
+			Set<IAgent> agentHavingToReviseMemory = this.perceptionPhase( 
 					lastPartlyConsistentStateTimestamp, 
 					this.levels.values() 
 			);
@@ -510,15 +510,15 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			//
 			lastPartlyConsistentStateTimestamp = this.reactionPhase( lastPartlyConsistentStateTimestamp );
 			// Then trigger the observation of the simulation.
-			for( I_Probe probe : this.probes.values() ){
+			for( IProbe probe : this.probes.values() ){
 				probe.observeAtPartialConsistentTime( lastPartlyConsistentStateTimestamp, this );
 			}
 			// Then check if it models the ending time of the simulation.
 			if( this.isSimulationContinuing( lastPartlyConsistentStateTimestamp, simulationModel ) ){
 				// The simulation does not stop: perception, memory revision, natural and decision have to be performed.
 				// Ask the appropriate agents to perceive.
-				Set<I_Level> levelsWherePerceptionNaturalAndDesicionAreMade = this.buildLp( lastPartlyConsistentStateTimestamp );
-				Set<I_Agent> agentHavingToReviseMemory = this.perceptionPhase( 
+				Set<ILevel> levelsWherePerceptionNaturalAndDesicionAreMade = this.buildLp( lastPartlyConsistentStateTimestamp );
+				Set<IAgent> agentHavingToReviseMemory = this.perceptionPhase( 
 						lastPartlyConsistentStateTimestamp, 
 						levelsWherePerceptionNaturalAndDesicionAreMade
 				);
@@ -537,24 +537,24 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		// 	 + The state dynamics of the transitory states becomes the state dynamics of the consistent states.
 		//
 		InfluencesMap influencesAtEnd = new InfluencesMap( );
-		for( I_Level level : this.levels.values() ){
+		for( ILevel level : this.levels.values() ){
 			// Store in a temporary variable all the influences that were lying in the level.
-			Transitory_PublicLocalDynamicState transitoryState = (Transitory_PublicLocalDynamicState)
+			TransitoryPublicLocalDynamicState transitoryState = (TransitoryPublicLocalDynamicState)
 					this.transitoryDynamicStates.get( level.getIdentifier() );
-			Set<I_Influence> dynamics = transitoryState.getStateDynamics();
-			for( I_Influence influence : dynamics ){
+			Set<IInfluence> dynamics = transitoryState.getStateDynamics();
+			for( IInfluence influence : dynamics ){
 				influencesAtEnd.add( influence );
 			}
 			// Change the current time of the last consistent dynamic state of the level to the final time of the simulation.
-			Consistent_PublicLocalDynamicState consistentState = 
-					(Consistent_PublicLocalDynamicState) this.lastConsistentDynamicStates.get( level.getIdentifier() );
+			ConsistentPublicLocalDynamicState consistentState = 
+					(ConsistentPublicLocalDynamicState) this.lastConsistentDynamicStates.get( level.getIdentifier() );
 			consistentState.setTime( lastPartlyConsistentStateTimestamp );
 		}
 		// Store the state dynamics of the levels at the end of the simulation and update the set describing the current dynamic state
 		// of the simulation.
-		for( I_Level level : this.levels.values() ){
-			Consistent_PublicLocalDynamicState consistentState = 
-					(Consistent_PublicLocalDynamicState) this.lastConsistentDynamicStates.get( level.getIdentifier() );
+		for( ILevel level : this.levels.values() ){
+			ConsistentPublicLocalDynamicState consistentState = 
+					(ConsistentPublicLocalDynamicState) this.lastConsistentDynamicStates.get( level.getIdentifier() );
 			consistentState.setStateDynamicsAsCopyOf( influencesAtEnd.getInfluencesForLevel( level.getIdentifier() ) );
 			this.currentSimulationDynamicState.put( consistentState );
 		}
@@ -569,7 +569,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 */
 	private boolean isSimulationContinuing( 
 			SimulationTimeStamp lastPartlyConsistentStateTimestamp,
-			I_SimulationModel simulationModel 
+			ISimulationModel simulationModel 
 	) {
 		return ! this.abortFlag && ! simulationModel.isFinalTimeOrAfter( lastPartlyConsistentStateTimestamp, this );
 	}
@@ -580,9 +580,9 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @param currentTime The current simulation time.
 	 * @return The list of levels that are currently in a consistent state.
 	 */
-	protected Set<I_Level> buildLp( SimulationTimeStamp currentTime ){
-		Set<I_Level> lP = new LinkedHashSet<I_Level>( );
-		for( I_Level level : this.levels.values( ) ){
+	protected Set<ILevel> buildLp( SimulationTimeStamp currentTime ){
+		Set<ILevel> lP = new LinkedHashSet<ILevel>( );
+		for( ILevel level : this.levels.values( ) ){
 			if( level.getLastConsistentPublicLocalDynamicState().getTime().equals( currentTime ) ){
 				lP.add( level );
 			}
@@ -596,26 +596,26 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @param lP The levels where the perception has to be made.
 	 * @return The set of agents that perceived during this phase. It contains the agent that will have to revise their memory.
 	 */
-	protected Set<I_Agent> perceptionPhase( 
+	protected Set<IAgent> perceptionPhase( 
 			SimulationTimeStamp currentTime, 
-			Collection<I_Level> lP 
+			Collection<ILevel> lP 
 	) {
 		//
 		// Initialize the set returned by this method.
 		//
-		Set<I_Agent> result = new LinkedHashSet<I_Agent>( );
+		Set<IAgent> result = new LinkedHashSet<IAgent>( );
 		//
 		// Iterate over the levels to trigger the perception of the agents.
 		//
-		for( I_Level level : lP ){
+		for( ILevel level : lP ){
 			LevelIdentifier levelId = level.getIdentifier();
-			I_DynamicState_Map perceptibleLocalDynamicStates = new DynamicState_FilteredMap(
+			IDynamicStateMap perceptibleLocalDynamicStates = new DynamicStateFilteredMap(
 					this.lastConsistentDynamicStates, 
 					level.getPerceptibleLevels()
 			);
-			for( I_Agent agent : this.agents.get( levelId ) ){
+			for( IAgent agent : this.agents.get( levelId ) ){
 				// Perform the perception
-				I_PerceivedDataOfAgent perceivedData = agent.perceive(
+				IPerceivedDataOfAgent perceivedData = agent.perceive(
 						levelId, 
 						agent.getPublicLocalState( levelId ), 
 						perceptibleLocalDynamicStates
@@ -637,8 +637,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * Performs the memory revision phase of the simulation for a specific set of agents.
 	 * @param agentsHavingToMemorize The set of agents that have to memorize.
 	 */
-	protected void memorizationPhase( Set<I_Agent> agentsHavingToMemorize ){
-		for( I_Agent agent : agentsHavingToMemorize ){
+	protected void memorizationPhase( Set<IAgent> agentsHavingToMemorize ){
+		for( IAgent agent : agentsHavingToMemorize ){
 			agent.reviseMemory( agent.getPerceivedData( ), agent.getGlobalMemoryState() );
 		}
 	}
@@ -650,12 +650,12 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 */
 	protected void naturalAndDecisionPhase( 
 			SimulationTimeStamp currentTime,
-			Collection<I_Level> lI
+			Collection<ILevel> lI
 	){
 		InfluencesMap producedInfluences = new InfluencesMap();
-		for( I_Level level : lI ){
+		for( ILevel level : lI ){
 			LevelIdentifier levelId = level.getIdentifier( );
-			I_DynamicState_Map perceptibleLocalDynamicStates = new DynamicState_FilteredMap(
+			IDynamicStateMap perceptibleLocalDynamicStates = new DynamicStateFilteredMap(
 					this.lastConsistentDynamicStates, 
 					level.getPerceptibleLevels()
 			);
@@ -672,7 +672,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			// Perform the decisions of the agents and include the produced influences into 
 			// the transitory state of the appropriate levels.
 			//
-			for( I_Agent agent : this.agents.get( levelId ) ) {
+			for( IAgent agent : this.agents.get( levelId ) ) {
 				agent.decide(
 						levelId, 
 						agent.getGlobalMemoryState(), 
@@ -692,9 +692,9 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	private void includeInfluencesInTransitoryStates( InfluencesMap influences ) {
 		if( influences != null ){
 			for( LevelIdentifier levelId : influences.getDefinedKeys() ){
-				I_PublicLocalDynamicState rawDynamicState = this.transitoryDynamicStates.get( levelId );
-				I_Modifiable_PublicLocalDynamicState castedDynamicState = (I_Modifiable_PublicLocalDynamicState) rawDynamicState;
-				for( I_Influence influence : influences.getInfluencesForLevel( levelId ) ){
+				IPublicLocalDynamicState rawDynamicState = this.transitoryDynamicStates.get( levelId );
+				IModifiablePublicLocalDynamicState castedDynamicState = (IModifiablePublicLocalDynamicState) rawDynamicState;
+				for( IInfluence influence : influences.getInfluencesForLevel( levelId ) ){
 					castedDynamicState.addInfluence( influence );
 				}
 			}
@@ -706,13 +706,13 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @param lastConsistentTime The last time stamp when the simulation was in a partly-consistent state.
 	 * @return The list of levels where a reaction has to be computed.
 	 */
-	protected Set<I_Level> buildLr( SimulationTimeStamp lastConsistentTime ){
-		Set<I_Level> lR = new LinkedHashSet<I_Level>( );
+	protected Set<ILevel> buildLr( SimulationTimeStamp lastConsistentTime ){
+		Set<ILevel> lR = new LinkedHashSet<ILevel>( );
 		SimulationTimeStamp nextTime = null;
-		for( I_Level level : this.levels.values( ) ){
+		for( ILevel level : this.levels.values( ) ){
 			LevelIdentifier levelId =  level.getIdentifier();
-			Transitory_PublicLocalDynamicState transitoryState = 
-					(Transitory_PublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+			TransitoryPublicLocalDynamicState transitoryState = 
+					(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
 			if( nextTime == null ){
 				nextTime = transitoryState.getNextTime();
 			}
@@ -738,7 +738,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @return The higher bound of the time range of the transitory periods for which a reaction was computed.
 	 */
 	private SimulationTimeStamp reactionPhase( SimulationTimeStamp lastConsistentTime ) {
-		Set<I_Level> levelsWhereReactionIsComputed = this.buildLr( lastConsistentTime );
+		Set<ILevel> levelsWhereReactionIsComputed = this.buildLr( lastConsistentTime );
 		SimulationTimeStamp newLastConsistentTime = null;
 		//
 		// First get the value of the new last consistent time of the simulation (the
@@ -746,8 +746,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		//
 		if( ! levelsWhereReactionIsComputed.isEmpty() ){
 			LevelIdentifier levelId = levelsWhereReactionIsComputed.iterator().next().getIdentifier();
-			Transitory_PublicLocalDynamicState transitoryState = 
-					(Transitory_PublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+			TransitoryPublicLocalDynamicState transitoryState = 
+					(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
 			newLastConsistentTime = transitoryState.getNextTime();
 		} else {
 			throw new IllegalStateException( "Failed to determine the next time stamp of the simulation." );
@@ -782,12 +782,12 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		// Update the time and next time of the consistent and transitory states that computed a reaction.
 		// Also sets the state dynamics of the consistent states as equal to the content of the transitory
 		//
-		for( I_Level level : levelsWhereReactionIsComputed ){
+		for( ILevel level : levelsWhereReactionIsComputed ){
 			LevelIdentifier levelId = level.getIdentifier();
-			Consistent_PublicLocalDynamicState consistentState = 
-					(Consistent_PublicLocalDynamicState) this.lastConsistentDynamicStates.get( levelId );
-			Transitory_PublicLocalDynamicState transitoryState = 
-					(Transitory_PublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+			ConsistentPublicLocalDynamicState consistentState = 
+					(ConsistentPublicLocalDynamicState) this.lastConsistentDynamicStates.get( levelId );
+			TransitoryPublicLocalDynamicState transitoryState = 
+					(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
 			// Update the time and next time of the last consistent and current transitory states.
 			SimulationTimeStamp transitoryStateNewLowerBound = transitoryState.getNextTime();
 			consistentState.setTime( transitoryStateNewLowerBound );
@@ -800,7 +800,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		// Change the value of the current dynamic state of the simulation.
 		// It becomes equal to a combination of transitory states and consistent states
 		//
-		for( I_Level level : this.levels.values() ){
+		for( ILevel level : this.levels.values() ){
 			if( levelsWhereReactionIsComputed.contains( level ) ){
 				// A reaction was computed for this state.
 				// Thus, the public dynamic state of the level seen by the probes is the consistent state.
@@ -823,7 +823,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @param lR The set containing all the levels having to perform a reaction.
 	 * @return The system influences that were managed during the call of this method.
 	 */
-	private InfluencesMap systemReactionToSystemInfluences( Set<I_Level> lR ) {
+	private InfluencesMap systemReactionToSystemInfluences( Set<ILevel> lR ) {
 		//
 		// Create a map that will contain the influences that were managed during the call of this method.
 		//
@@ -848,16 +848,16 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			//
 			// Then process the system influences contained in the transitory state of the levels.
 			//
-			for( I_Level level : lR ){
+			for( ILevel level : lR ){
 				LevelIdentifier levelId = level.getIdentifier();
-				Transitory_PublicLocalDynamicState transitoryState = 
-						(Transitory_PublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
-				for( I_Influence systemInfluence : transitoryState.getSystemInfluencesOfStateDynamics() ){
+				TransitoryPublicLocalDynamicState transitoryState = 
+						(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+				for( IInfluence systemInfluence : transitoryState.getSystemInfluencesOfStateDynamics() ){
 					// Handle the reaction to the influence.
-					Set<I_Influence> producedInfluences = this.reactToSystemInfluence( systemInfluence );
+					Set<IInfluence> producedInfluences = this.reactToSystemInfluence( systemInfluence );
 					// If the reaction produced other influences, add them to the influence to process.
 					if( producedInfluences != null ){
-						for( I_Influence producedInfluence : producedInfluences ){
+						for( IInfluence producedInfluence : producedInfluences ){
 							influencesToProcessInNextLoop.add( producedInfluence );
 						}
 					}
@@ -869,15 +869,15 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			// state of their corresponding levels.
 			//
 			for( LevelIdentifier levelId : influencesToProcessInNextLoop.getDefinedKeys() ){
-				Transitory_PublicLocalDynamicState transitoryDynamicState = 
-						(Transitory_PublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+				TransitoryPublicLocalDynamicState transitoryDynamicState = 
+						(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
 				// First remove all the system influence if they were managed by the current loop in this
 				// system reaction (i.e. if the level belongs to lR).
 				if( lR.contains( this.levels.get( levelId ) ) ){
 					transitoryDynamicState.clearSystemInfluences();
 				}
 				// Then include all the influences aimed at this level that were produced during the current loop.
-				for( I_Influence influence : influencesToProcessInNextLoop.getInfluencesForLevel( levelId ) ){
+				for( IInfluence influence : influencesToProcessInNextLoop.getInfluencesForLevel( levelId ) ){
 					transitoryDynamicState.addInfluence( influence );
 				}
 			}
@@ -893,15 +893,15 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @return The influences that were produced in reaction to this influence. 
 	 * <code>null</code> if no influences were produced.
 	 */
-	private Set<I_Influence> reactToSystemInfluence( I_Influence systemInfluence ){
-		Set<I_Influence> producedInfluences = null;
+	private Set<IInfluence> reactToSystemInfluence( IInfluence systemInfluence ){
+		Set<IInfluence> producedInfluences = null;
 		if( systemInfluence.getCategory().equals( SystemInfluence_AddAgent.CATEGORY ) ){
 			//
 			// Manage the system influence telling to add an agent into the simulation.
 			//
-			producedInfluences = new LinkedHashSet<I_Influence>( );
+			producedInfluences = new LinkedHashSet<IInfluence>( );
 			SystemInfluence_AddAgent castedInfluence = (SystemInfluence_AddAgent) systemInfluence;
-			I_Agent agentToAdd = castedInfluence.getAgent( );
+			IAgent agentToAdd = castedInfluence.getAgent( );
 			for( LevelIdentifier levelId : agentToAdd.getLevels() ){
 				producedInfluences.add( new SystemInfluence_AddPublicLocalStateToDynamicState( 
 						levelId,
@@ -914,8 +914,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			//
 			SystemInfluence_AddPublicLocalStateToDynamicState castedInfluence = 
 					(SystemInfluence_AddPublicLocalStateToDynamicState) systemInfluence;
-			I_Level level = this.levels.get( castedInfluence.getTargetLevel() );
-			I_PublicLocalStateOfAgent addedLocalState = castedInfluence.getPublicLocalState();
+			ILevel level = this.levels.get( castedInfluence.getTargetLevel() );
+			IPublicLocalStateOfAgent addedLocalState = castedInfluence.getPublicLocalState();
 			// Check the existence of the level where the public local state is added.
 			if( level == null ){
 				throw new IllegalStateException( "The influence '" + systemInfluence.getCategory() + "' tried to add the public " +
@@ -924,7 +924,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			}
 			// Add the public local state to the level.
 			// The following instruction is equivalent to using the lastConsistentDynamicStates map.
-			Consistent_PublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
+			ConsistentPublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
 			levelConsistentState.addPublicLocalStateOfAgent( addedLocalState );
 			// Add the agent to the list of agents contained in the level
 			this.agents.get( level.getIdentifier() ).add( addedLocalState.getOwner() );
@@ -932,9 +932,9 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			//
 			// Manage the system influence telling to delete an agent from the simulation.
 			//
-			producedInfluences = new LinkedHashSet<I_Influence>( );
+			producedInfluences = new LinkedHashSet<IInfluence>( );
 			SystemInfluence_RemoveAgent castedInfluence = (SystemInfluence_RemoveAgent) systemInfluence;
-			I_Agent agentToRemove = castedInfluence.getAgent( );
+			IAgent agentToRemove = castedInfluence.getAgent( );
 			for( LevelIdentifier levelId : agentToRemove.getLevels() ){
 				producedInfluences.add( new SystemInfluence_RemovePublicLocalStateFromDynamicState( 
 						levelId,
@@ -947,8 +947,8 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			//
 			SystemInfluence_RemovePublicLocalStateFromDynamicState castedInfluence = 
 					(SystemInfluence_RemovePublicLocalStateFromDynamicState) systemInfluence;
-			I_Level level = this.levels.get( castedInfluence.getTargetLevel() );
-			I_PublicLocalStateOfAgent removedLocalState = castedInfluence.getPublicLocalState();
+			ILevel level = this.levels.get( castedInfluence.getTargetLevel() );
+			IPublicLocalStateOfAgent removedLocalState = castedInfluence.getPublicLocalState();
 			// Check the existence of the level from which the public local state is removed.
 			if( level == null ){
 				throw new IllegalStateException( "The influence '" + systemInfluence.getCategory() + "' tried to remove the public " +
@@ -957,7 +957,7 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 			}
 			// Remove the public local state from the level.
 			// The following instruction is equivalent to using the lastConsistentDynamicStates map.
-			Consistent_PublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
+			ConsistentPublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
 			levelConsistentState.removePublicLocalStateOfAgent( removedLocalState );
 			// Remove the agent from the list of agents contained in the level
 			this.agents.get( level.getIdentifier() ).remove( removedLocalState.getOwner() );
@@ -979,18 +979,18 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @param beforeRegularReaction <code>true</code> if this method call happens before the user-defined reaction to regular influences.
 	 */
 	private void userReactionToSystemInfluences( 
-			Set<I_Level> lR,
+			Set<ILevel> lR,
 			InfluencesMap influencesManagedDuringSystemReaction,
 			boolean beforeRegularReaction
 	) {
-		Set<I_Influence> newInfluencesToProcess = new LinkedHashSet<I_Influence>();
+		Set<IInfluence> newInfluencesToProcess = new LinkedHashSet<IInfluence>();
 		//
 		// Perform the user defined reaction in each level.
 		//
-		for( I_Level level : lR ){
+		for( ILevel level : lR ){
 			LevelIdentifier levelId = level.getIdentifier();
-			Transitory_PublicLocalDynamicState transitoryState = 
-					(Transitory_PublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+			TransitoryPublicLocalDynamicState transitoryState = 
+					(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
 			level.makeSystemReaction(
 					transitoryState.getTime(), 
 					transitoryState.getNextTime(), 
@@ -1003,9 +1003,9 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		//
 		// Then add the produced influences to the transitory states
 		//
-		for( I_Influence influence : newInfluencesToProcess ){
-			I_PublicLocalDynamicState rawDynamicState = this.transitoryDynamicStates.get( influence.getTargetLevel() );
-			Transitory_PublicLocalDynamicState castedDynamicState = (Transitory_PublicLocalDynamicState) rawDynamicState;
+		for( IInfluence influence : newInfluencesToProcess ){
+			IPublicLocalDynamicState rawDynamicState = this.transitoryDynamicStates.get( influence.getTargetLevel() );
+			TransitoryPublicLocalDynamicState castedDynamicState = (TransitoryPublicLocalDynamicState) rawDynamicState;
 			castedDynamicState.addInfluence( influence );
 		}
 	}
@@ -1019,13 +1019,13 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 	 * @param lR The levels where a reaction has to be computed.
 	 */
 	private void userReactionToRegularInfluences( 
-			Set<I_Level> lR
+			Set<ILevel> lR
 	) {
-		Set<I_Influence> influencesPersistingAfterUserReaction = new LinkedHashSet<I_Influence>( );
-		for( I_Level level : lR ){
+		Set<IInfluence> influencesPersistingAfterUserReaction = new LinkedHashSet<IInfluence>( );
+		for( ILevel level : lR ){
 			LevelIdentifier levelId = level.getIdentifier( );
-			Transitory_PublicLocalDynamicState transitoryState =
-					(Transitory_PublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+			TransitoryPublicLocalDynamicState transitoryState =
+					(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
 			// Perform the user-defined reaction to the influences.
 			level.makeRegularReaction(
 					transitoryState.getTime(), 
@@ -1041,9 +1041,9 @@ public class MonoThreaded_DefaultDisambiguation_SimulationEngine extends Abstrac
 		//
 		// Add the persisting influences to the transitory dynamic state of the various levels.
 		//
-		for( I_Influence influence : influencesPersistingAfterUserReaction ){
-			I_PublicLocalDynamicState rawDynamicState = this.transitoryDynamicStates.get( influence.getTargetLevel() );
-			Transitory_PublicLocalDynamicState castedDynamicState = (Transitory_PublicLocalDynamicState) rawDynamicState;
+		for( IInfluence influence : influencesPersistingAfterUserReaction ){
+			IPublicLocalDynamicState rawDynamicState = this.transitoryDynamicStates.get( influence.getTargetLevel() );
+			TransitoryPublicLocalDynamicState castedDynamicState = (TransitoryPublicLocalDynamicState) rawDynamicState;
 			castedDynamicState.addInfluence( influence );
 		}
 	}

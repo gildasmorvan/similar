@@ -46,79 +46,34 @@
  */
 package fr.lgi2a.similar.microkernel.states;
 
-import java.util.Set;
-
-import fr.lgi2a.similar.microkernel.I_Influence;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.IAgent;
 
 /**
- * The parent interface of any public dynamic state of a level of the simulation.
+ * Models the public local state of an agent.
+ * <p>
+ * 	An instance of this class corresponds to the perceptible data that the other agents can perceive 
+ * 	about an agent, for a specific level.
+ * </p>
  * 
  * <h1>Correspondence with theory</h1>
  * <p>
- * 	TODO : formal notation
+ * 	TODO
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_PublicLocalDynamicState {
+public interface IPublicLocalStateOfAgent {
 	/**
-	 * Gets the level for which the public local dynamic state is defined.
+	 * Gets the owner of the public local state, <i>i.e.</i> the agent which public local state at a 
+	 * specific level is this public local state.
 	 * <p>
-	 * 	TODO : formal notation
+	 * 	This method is defined for optimization purposes, since keeping an association between public local 
+	 * 	states and agents within the simulation engine would be too memory consuming.
 	 * </p>
-	 * @return The level for which the public local dynamic state is defined.
-	 */
-	LevelIdentifier getLevel( );
-	
-	/**
-	 * Gets the time for which this public dynamic state is defined.
 	 * <p>
-	 * 	TODO : formal notation
+	 * 	TODO formal notation
 	 * </p>
-	 * @return The time for which this public dynamic state is defined. 	
+	 * @return The owner of the public local state.
 	 */
-	SimulationTimeStamp getTime();
-	
-	/**
-	 * Gets the public local state of the environment contained in this public local dynamic state.
-	 * <p>
-	 * 	TODO : formal notation
-	 * </p>
-	 * @return The public local state of the environment contained in this public local dynamic state.
-	 */
-	I_PublicLocalState getPublicLocalStateOfEnvironment( );
-	
-	/**
-	 * Gets the public local state of the agents lying in the level of this dynamic state.
-	 * <p>
-	 * 	TODO : formal notation
-	 * </p>
-	 * @return The public local state of the agents lying in the level of this dynamic state.
-	 */
-	Set<I_PublicLocalStateOfAgent> getPublicLocalStateOfAgents();
-    
-    /**
-     * Gets the state dynamics of this public local dynamic state, <i>i.e.</i> the influences that are 
-     * still active (being performed) when the level was in this state.
-     * <p>
-     * 	TODO : formal notation
-     * </p>
-     * @return The state dynamics of this public local dynamic state.
-     */
-    Set<I_Influence> getStateDynamics();
-    
-    /**
-	 * Gets the system influences contained in the state transitory dynamics.
-	 * @return The system influences of the value returned by the {@link I_PublicLocalDynamicState#getStateDynamics()} method.
-	 */
-	Set<I_Influence> getSystemInfluencesOfStateDynamics();
-	
-	/**
-	 * Gets the non-system influences contained in the state transitory dynamics.
-	 * @return The non-system influences of the value returned by the 
-	 * {@link I_PublicLocalDynamicState#getStateDynamics()} method.
-	 */
-	Set<I_Influence> getRegularInfluencesOfStateDynamics();
+	IAgent getOwner( );
 }

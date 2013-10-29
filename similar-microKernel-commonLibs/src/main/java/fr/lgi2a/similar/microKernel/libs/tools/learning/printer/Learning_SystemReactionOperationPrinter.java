@@ -47,7 +47,7 @@
 package fr.lgi2a.similar.microkernel.libs.tools.learning.printer;
 
 import static fr.lgi2a.similar.microkernel.libs.tools.learning.Learning_TracePrinter.printIndentation;
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.Learning_TracePrinter;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_SystemReaction;
@@ -96,7 +96,7 @@ public class Learning_SystemReactionOperationPrinter extends Learning_EngineOper
 			printIndentation( indentation + 2 );
 			System.out.println( "NO INFLUENCES" );
 		} else {
-			for( I_Influence influence : castedop.getSystemInfluencesToManageArgument() ){
+			for( IInfluence influence : castedop.getSystemInfluencesToManageArgument() ){
 				printIndentation( indentation + 2 );
 				System.out.println( influence );
 			}
@@ -110,7 +110,7 @@ public class Learning_SystemReactionOperationPrinter extends Learning_EngineOper
 			printIndentation( indentation + 2 );
 			System.out.println( "NO INFLUENCES" );
 		} else {
-			for( I_Influence influence : castedop.getProducedInfluences() ){
+			for( IInfluence influence : castedop.getProducedInfluences() ){
 				printIndentation( indentation + 2 );
 				System.out.println( influence );
 			}

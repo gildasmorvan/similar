@@ -49,10 +49,10 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
@@ -64,9 +64,9 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutio
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_Decision;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_Perception;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_ReviseMemory;
-import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models an agent in the 'learning' simulation.
@@ -121,13 +121,13 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.I_Agent#perceive(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent, fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map)
+	 * @see fr.lgi2a.similar.microkernel.IAgent#perceive(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent, fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap)
 	 */
 	@Override
-	public I_PerceivedDataOfAgent perceive(
+	public IPerceivedDataOfAgent perceive(
 			LevelIdentifier level,
-			I_PublicLocalStateOfAgent publicLocalStateInLevel,
-			I_DynamicState_Map levelsPublicLocalObservableDynamicState
+			IPublicLocalStateOfAgent publicLocalStateInLevel,
+			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
 		if( ! ( publicLocalStateInLevel instanceof Learning_PublicLocalStateOfAgent ) ){
 			 throw new IllegalArgumentException( "The public local state of agents have to be instances of the '" + Learning_PublicLocalStateOfAgent.class.getSimpleName() + "' class." );
@@ -157,12 +157,12 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.I_Agent#reviseMemory(java.util.Map, fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState)
+	 * @see fr.lgi2a.similar.microkernel.IAgent#reviseMemory(java.util.Map, fr.lgi2a.similar.microkernel.states.IGlobalMemoryState)
 	 */
 	@Override
 	public void reviseMemory(
-			Map<LevelIdentifier, I_PerceivedDataOfAgent> perceivedData,
-			I_GlobalMemoryState memoryState
+			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
+			IGlobalMemoryState memoryState
 	) {
 		if( ! (memoryState instanceof Learning_GlobalMemoryState) ){
 			throw new IllegalArgumentException( "The global memory state of an agent has to be an instance of the '" + Learning_GlobalMemoryState.class.getSimpleName() + "' class." );
@@ -184,7 +184,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 		// This loop also copies the perceived data into the operation.
 		SimulationTimeStamp memorizationTime = null;
 		for( LevelIdentifier level : perceivedData.keySet() ){
-			I_PerceivedDataOfAgent rawData = perceivedData.get( level );
+			IPerceivedDataOfAgent rawData = perceivedData.get( level );
 			if( ! ( rawData instanceof Learning_PerceivedDataOfAgent ) ){
 				throw new IllegalArgumentException( "The perceived data of agents have to be instances of the '" + Learning_PerceivedDataOfAgent.class.getSimpleName() + "' class" );
 			}
@@ -203,13 +203,13 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.I_Agent#decide(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState, fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent, fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap)
+	 * @see fr.lgi2a.similar.microkernel.IAgent#decide(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.IGlobalMemoryState, fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent, fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap)
 	 */
 	@Override
 	public void decide(
 			LevelIdentifier level, 
-			I_GlobalMemoryState memoryState,
-			I_PerceivedDataOfAgent perceivedData,
+			IGlobalMemoryState memoryState,
+			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences
 	) {
 		if( ! ( memoryState instanceof Learning_GlobalMemoryState ) ){
@@ -218,7 +218,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 		if( ! ( perceivedData instanceof Learning_PerceivedDataOfAgent ) ){
 			throw new IllegalArgumentException( "The 'perceivedData' argument has to be an instance of the '" + Learning_PerceivedDataOfAgent.class.getSimpleName() + "' class." );
 		}
-		Set<I_Influence> influences = this.produceInfluencesOfDecision( 
+		Set<IInfluence> influences = this.produceInfluencesOfDecision( 
 				level, 
 				(Learning_GlobalMemoryState) memoryState, 
 				(Learning_PerceivedDataOfAgent) perceivedData 
@@ -229,7 +229,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 				perceivedData
 		);
 		if( influences != null ){
-			for( I_Influence influence : influences ){
+			for( IInfluence influence : influences ){
 				operation.addInfluence( influence );
 				producedInfluences.add( influence );
 			}
@@ -270,7 +270,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 	 * @param perceivedData The data that were perceived by the agent.
 	 * @return The set of influences that are produced by the decision of the agent.
 	 */
-	protected abstract Set<I_Influence> produceInfluencesOfDecision(
+	protected abstract Set<IInfluence> produceInfluencesOfDecision(
 			LevelIdentifier level, 
 			Learning_GlobalMemoryState memoryState,
 			Learning_PerceivedDataOfAgent perceivedData

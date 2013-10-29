@@ -49,7 +49,7 @@ package fr.lgi2a.similar.microkernel.generic.engines.tools;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
@@ -58,9 +58,9 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLoc
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * The concrete agent class used in the functional test of the simulation engine.
@@ -102,18 +102,18 @@ public class Test_Agent extends Learning_AbstractAgent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected Set<I_Influence> produceInfluencesOfDecision(
+	protected Set<IInfluence> produceInfluencesOfDecision(
 			LevelIdentifier level, Learning_GlobalMemoryState memoryState,
 			Learning_PerceivedDataOfAgent perceivedData
 	) {
-		Set<I_Influence> influences = new LinkedHashSet<I_Influence>();
-		I_DynamicState_Map localDynamicStates = perceivedData.getLevelsPublicLocalObservableDynamicState();
+		Set<IInfluence> influences = new LinkedHashSet<IInfluence>();
+		IDynamicStateMap localDynamicStates = perceivedData.getLevelsPublicLocalObservableDynamicState();
 		for( LevelIdentifier levelId : localDynamicStates.keySet() ){
-			I_PublicLocalDynamicState localDynamicState = localDynamicStates.get( levelId );
+			IPublicLocalDynamicState localDynamicState = localDynamicStates.get( levelId );
 			influences.add(
 					new Learning_Influence_EnvironmentPublicLocalStateUpdate( levelId, localDynamicState.getPublicLocalStateOfEnvironment() )
 			);
-			for( I_PublicLocalStateOfAgent agentState : localDynamicState.getPublicLocalStateOfAgents() ){
+			for( IPublicLocalStateOfAgent agentState : localDynamicState.getPublicLocalStateOfAgents() ){
 				influences.add(
 						new Learning_Influence_AgentPublicLocalStateUpdate( levelId, agentState )
 				);

@@ -49,7 +49,7 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * An influence sent by an agent or by the environment to update the public local state of an agent in a specific level.
@@ -86,7 +86,7 @@ public class Learning_Influence_AgentPublicLocalStateUpdate extends RegularInflu
 	 */
 	public Learning_Influence_AgentPublicLocalStateUpdate(
 			LevelIdentifier targetLevel,
-			I_PublicLocalStateOfAgent publicLocalStateOfAgent
+			IPublicLocalStateOfAgent publicLocalStateOfAgent
 	) throws IllegalArgumentException {
 		super( CATEGORY, targetLevel );
 		this.influenceId = ++influenceCounter;

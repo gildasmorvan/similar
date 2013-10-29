@@ -54,7 +54,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
@@ -71,13 +71,13 @@ public class InfluencesMap {
 	/**
 	 * The data structure storing the influences.
 	 */
-	private Map<LevelIdentifier, List<I_Influence>> influencesMap;
+	private Map<LevelIdentifier, List<IInfluence>> influencesMap;
 	
 	/**
 	 * Builds an empty influences map.
 	 */
 	public InfluencesMap( ){
-		this.influencesMap = new HashMap<LevelIdentifier, List<I_Influence>>();
+		this.influencesMap = new HashMap<LevelIdentifier, List<IInfluence>>();
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class InfluencesMap {
 	 * @param toAdd The influences to include into this influence map..
 	 * @throws IllegalArgumentException if the argument is <code>null</code>.
 	 */
-	public InfluencesMap( Collection<I_Influence> toAdd ) throws IllegalArgumentException {
+	public InfluencesMap( Collection<IInfluence> toAdd ) throws IllegalArgumentException {
 		this( );
 		this.addAll( toAdd );
 	}
@@ -105,9 +105,9 @@ public class InfluencesMap {
 	 * @param toAdd The influences to include into this influence map.
 	 * @throws IllegalArgumentException if the argument is <code>null</code> or contains <code>null</code>.
 	 */
-	public InfluencesMap( I_Influence... toAdd ) throws IllegalArgumentException {
+	public InfluencesMap( IInfluence... toAdd ) throws IllegalArgumentException {
 		this( );
-		for( I_Influence addedinfluence : toAdd ) {
+		for( IInfluence addedinfluence : toAdd ) {
 			this.add( addedinfluence );
 		}
 	}
@@ -139,7 +139,7 @@ public class InfluencesMap {
 	 * @return <code>true</code> if this map contains no influences targeted at the <code>targetLevel</code> level.
 	 */
 	public boolean isEmpty( LevelIdentifier targetLevel ) {
-		List<I_Influence> result = this.influencesMap.get( targetLevel );
+		List<IInfluence> result = this.influencesMap.get( targetLevel );
 		return result == null || result.isEmpty();
 	}
 	
@@ -148,10 +148,10 @@ public class InfluencesMap {
 	 * @param targetLevel The target level for which influences are fetched in this map.
 	 * @return The influences contained in this map that are targeted at a specific level.
 	 */
-	public List<I_Influence> getInfluencesForLevel( LevelIdentifier targetLevel ) throws NoSuchElementException {
-		List<I_Influence> result = this.influencesMap.get( targetLevel );
+	public List<IInfluence> getInfluencesForLevel( LevelIdentifier targetLevel ) throws NoSuchElementException {
+		List<IInfluence> result = this.influencesMap.get( targetLevel );
 		if( result == null ){
-			result = new LinkedList<I_Influence>( );
+			result = new LinkedList<IInfluence>( );
 			this.influencesMap.put( targetLevel, result );
 		}
 		return result;
@@ -162,13 +162,13 @@ public class InfluencesMap {
 	 * @param influence The influence to add to this influence map.
 	 * @throws IllegalArgumentException If the <code>influence</code> parameter was <code>null</code>.
 	 */
-	public void add( I_Influence influence ) throws IllegalArgumentException {
+	public void add( IInfluence influence ) throws IllegalArgumentException {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
-		List<I_Influence> influenceList = this.influencesMap.get( influence.getTargetLevel() );
+		List<IInfluence> influenceList = this.influencesMap.get( influence.getTargetLevel() );
 		if( influenceList == null ){
-			influenceList = new LinkedList<I_Influence>();
+			influenceList = new LinkedList<IInfluence>();
 			this.influencesMap.put( influence.getTargetLevel(), influenceList );
 		}
 		influenceList.add( influence );
@@ -189,7 +189,7 @@ public class InfluencesMap {
 		}
 		for( LevelIdentifier key : toAdd.getDefinedKeys() ){
 			if( ! toAdd.isEmpty( key ) ){
-				List<I_Influence> influences = new LinkedList<I_Influence>();
+				List<IInfluence> influences = new LinkedList<IInfluence>();
 				this.influencesMap.put( key, influences );
 				influences.addAll( toAdd.getInfluencesForLevel( key ) );
 			}
@@ -205,11 +205,11 @@ public class InfluencesMap {
 	 * @param toAdd The influence map which content has to be added to this influence map.
 	 * @throws IllegalArgumentException If the <code>toAdd</code> argument is <code>null</code>.
 	 */
-	public void addAll( Collection<I_Influence> toAdd ) throws IllegalArgumentException {
+	public void addAll( Collection<IInfluence> toAdd ) throws IllegalArgumentException {
 		if( toAdd == null ){
 			throw new IllegalArgumentException( "The 'toAdd' argument cannot be null." );
 		}
-		for( I_Influence influence : toAdd ){
+		for( IInfluence influence : toAdd ){
 			this.add( influence );
 		}
 	}

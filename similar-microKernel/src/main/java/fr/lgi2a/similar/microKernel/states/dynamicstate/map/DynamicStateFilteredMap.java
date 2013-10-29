@@ -50,7 +50,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
 
 /**
  * This class defines a sub set of a dynamic state map.
@@ -63,11 +63,11 @@ import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class DynamicState_FilteredMap implements I_DynamicState_Map {
+public class DynamicStateFilteredMap implements IDynamicStateMap {
 	/**
 	 * The over map of this map.
 	 */
-	private I_DynamicState_Map parent;
+	private IDynamicStateMap parent;
 	
 	/**
 	 * The set of keys of the over map that have to be included to the keys of this masked map.
@@ -80,8 +80,8 @@ public class DynamicState_FilteredMap implements I_DynamicState_Map {
 	 * @param filter The set of keys to include in this map.
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the filter is not a subset of the keys of the parent.
 	 */
-	public DynamicState_FilteredMap( 
-			I_DynamicState_Map parent, 
+	public DynamicStateFilteredMap( 
+			IDynamicStateMap parent, 
 			Set<LevelIdentifier> filter 
 	) throws IllegalArgumentException {
 		if( filter == null ){
@@ -96,7 +96,7 @@ public class DynamicState_FilteredMap implements I_DynamicState_Map {
 	 * @param parent The over map of this map.
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the filter is not a subset of the keys of the parent.
 	 */
-	public void changeParent( I_DynamicState_Map parent ) throws IllegalArgumentException {
+	public void changeParent( IDynamicStateMap parent ) throws IllegalArgumentException {
 		if( parent == null ){
 			throw new IllegalArgumentException( "The 'parent' argument cannot be null." );
 		} else if( ! parent.keySet().containsAll( filter ) ){
@@ -123,7 +123,7 @@ public class DynamicState_FilteredMap implements I_DynamicState_Map {
 	 * @throws NoSuchElementException If the <code>level</code> level is not in this filtered map.
 	 */
 	@Override
-	public I_PublicLocalDynamicState get(
+	public IPublicLocalDynamicState get(
 		LevelIdentifier level
 	) throws IllegalArgumentException, NoSuchElementException {
 		if( this.filter.contains( level ) ){
@@ -138,7 +138,7 @@ public class DynamicState_FilteredMap implements I_DynamicState_Map {
 	 */
 	@Override
 	public void put(
-			I_PublicLocalDynamicState state
+			IPublicLocalDynamicState state
 	) throws IllegalArgumentException {
 		throw new UnsupportedOperationException( "This operation is not supported in this class." );
 	}

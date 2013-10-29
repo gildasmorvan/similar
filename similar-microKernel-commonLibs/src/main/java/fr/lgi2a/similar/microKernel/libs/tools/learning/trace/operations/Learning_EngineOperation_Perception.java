@@ -52,10 +52,10 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLoc
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationType;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicState_Map;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the operation performed by the simulation engine when it asks an agent to perceive from a level.
@@ -76,7 +76,7 @@ public class Learning_EngineOperation_Perception implements Learning_EngineOpera
 	 * The observable public local dynamic state of the levels that are perceptible from the level where perception is made.
 	 * This field models one element of the arguments of the 'perceive' method call.
 	 */
-	private I_DynamicState_Map levelsPublicLocalObservableDynamicState;
+	private IDynamicStateMap levelsPublicLocalObservableDynamicState;
 	/**
 	 * Models the data that were perceived, <i>i.e.</i> the result of the 'perceive' method call.
 	 */
@@ -84,7 +84,7 @@ public class Learning_EngineOperation_Perception implements Learning_EngineOpera
 	
 	/**
 	 * Builds a partially initialized object modeling a call to the 'perceive' method of an agent, for a specific level.
-	 * To achieve completion, calls to the {@link Learning_EngineOperation_Perception#addObservableDynamicState(I_PublicLocalDynamicState)} method
+	 * To achieve completion, calls to the {@link Learning_EngineOperation_Perception#addObservableDynamicState(IPublicLocalDynamicState)} method
 	 * has to be called for each perceptible level from the specified level.
 	 * @param level The level from which the perception is made.
 	 * @param agentPublicLocalState The public local state of the agent in the level from which perception is made.
@@ -105,7 +105,7 @@ public class Learning_EngineOperation_Perception implements Learning_EngineOpera
 		}
 		this.level = level;
 		this.agentPublicLocalState = agentPublicLocalState.createCopy();
-		this.levelsPublicLocalObservableDynamicState = new DynamicState_Map();
+		this.levelsPublicLocalObservableDynamicState = new DynamicStateMap();
 		this.methodResult = methodResult.createCopy();
 	}
 	
@@ -139,7 +139,7 @@ public class Learning_EngineOperation_Perception implements Learning_EngineOpera
 	 * This field models one element of the arguments of the 'perceive' method call.
 	 * @return The observable public local dynamic state of the levels that are perceptible from the level where perception is made.
 	 */
-	public I_DynamicState_Map getLevelsPublicLocalObservableDynamicState( ) {
+	public IDynamicStateMap getLevelsPublicLocalObservableDynamicState( ) {
 		return this.levelsPublicLocalObservableDynamicState;
 	}
 	
@@ -149,16 +149,16 @@ public class Learning_EngineOperation_Perception implements Learning_EngineOpera
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it is not an observable 
 	 * transitory state of the "learning" simulation or a consistent state.
 	 */
-	public void addObservableDynamicState( I_PublicLocalDynamicState dynamicState ) throws IllegalArgumentException {
+	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) throws IllegalArgumentException {
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}
-		if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
-			Consistent_PublicLocalDynamicState original = (Consistent_PublicLocalDynamicState) dynamicState;
+		if( dynamicState instanceof ConsistentPublicLocalDynamicState ){
+			ConsistentPublicLocalDynamicState original = (ConsistentPublicLocalDynamicState) dynamicState;
 			this.levelsPublicLocalObservableDynamicState.put( Learning_PublicLocalDynamicStateCopier.createCopy( original ) );
 		} else {
 			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has to be " +
-					"an instance of the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent state)." );
+					"an instance of the '" + ConsistentPublicLocalDynamicState.class.getSimpleName() + "' class (consistent state)." );
 		}
 	}
 	

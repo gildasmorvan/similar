@@ -50,7 +50,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperation;
@@ -77,7 +77,7 @@ public class Learning_EngineOperation_ReviseMemory implements Learning_EngineOpe
 	
 	/**
 	 * Builds a partly-initialized model of a call to the 'memory revision' method of an agent.
-	 * The complete initialization is achieved by making calls to the {@link Learning_EngineOperation_ReviseMemory#addPerceivedData(I_PerceivedDataOfAgent)} method 
+	 * The complete initialization is achieved by making calls to the {@link Learning_EngineOperation_ReviseMemory#addPerceivedData(IPerceivedDataOfAgent)} method 
 	 * for each perceptible level by the agent.
 	 * @param previousMemoryState The global memory state of the agent after the last reaction preceding the 'memory revision' method call. 
 	 * @param methodResult The global memory state returned by the 'memory revision' method call.
@@ -135,7 +135,7 @@ public class Learning_EngineOperation_ReviseMemory implements Learning_EngineOpe
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or is not part of the "learning" simulation.
 	 */
 	public void addPerceivedData(
-			I_PerceivedDataOfAgent perceivedData
+			IPerceivedDataOfAgent perceivedData
 	) throws IllegalArgumentException {
 		if( perceivedData == null ){
 			throw new IllegalArgumentException( "The 'perceivedData' argument cannot be null." );

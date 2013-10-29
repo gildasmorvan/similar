@@ -49,8 +49,8 @@ package fr.lgi2a.similar.microkernel;
 import java.util.NoSuchElementException;
 
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the environment of the simulation.
@@ -62,7 +62,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Environment {
+public interface IEnvironment {
 	/**
 	 * Gets the public local state of the environment for a specific level.
 	 * <p>
@@ -72,7 +72,7 @@ public interface I_Environment {
 	 * @return The public local state of the environment for a specific level.
 	 * @throws NoSuchElementException If no public local state was defined for the specified level.
 	 */
-	I_PublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
+	IPublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
 	
 	/**
 	 * Models the natural action of the environment on the simulation, from a specific level.
@@ -86,7 +86,7 @@ public interface I_Environment {
 	 */
 	void natural(
 		LevelIdentifier level,
-		I_DynamicState_Map levelsPublicLocalObservableDynamicState,
+		IDynamicStateMap levelsPublicLocalObservableDynamicState,
 		InfluencesMap producedInfluences
 	);
 }

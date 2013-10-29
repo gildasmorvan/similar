@@ -51,18 +51,18 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
- * An abstract implementation of the {@link I_Agent} interface, providing a default behavior to the generic methods.
+ * An abstract implementation of the {@link IAgent} interface, providing a default behavior to the generic methods.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractAgent implements I_Agent {
+public abstract class AbstractAgent implements IAgent {
 	/**
 	 * The category of the agent.
 	 */
@@ -70,20 +70,20 @@ public abstract class AbstractAgent implements I_Agent {
 	/**
 	 * The global memory state of the agent.
 	 */
-	private I_GlobalMemoryState globalMemoryState;
+	private IGlobalMemoryState globalMemoryState;
 	/**
 	 * The public local state of the agent in the levels where it lies.
 	 */
-	private Map<LevelIdentifier,I_PublicLocalStateOfAgent> publicLocalStates;
+	private Map<LevelIdentifier,IPublicLocalStateOfAgent> publicLocalStates;
 	/**
 	 * The last perceived data of the agent.
 	 */
-	private Map<LevelIdentifier, I_PerceivedDataOfAgent> lastPerceivedData;
+	private Map<LevelIdentifier, IPerceivedDataOfAgent> lastPerceivedData;
 	
 	/**
 	 * Creates a bare instance of an agent, using a specific category.
-	 * The agent has then to be initialized by calls to the {@link AbstractAgent#initializeGlobalMemoryState(I_GlobalMemoryState)} and
-	 * {@link AbstractAgent#includeNewLevel(LevelIdentifier, I_PublicLocalStateOfAgent)} methods.
+	 * The agent has then to be initialized by calls to the {@link AbstractAgent#initializeGlobalMemoryState(IGlobalMemoryState)} and
+	 * {@link AbstractAgent#includeNewLevel(LevelIdentifier, IPublicLocalStateOfAgent)} methods.
 	 * @param category The category of the agent.
 	 * <p>
 	 * 	This value can be the name of this class, or any other string representation modeling the equivalence 
@@ -104,8 +104,8 @@ public abstract class AbstractAgent implements I_Agent {
 			throw new IllegalArgumentException( "The 'category' argument cannot be null." );
 		}
 		this.category = category;
-		this.publicLocalStates = new HashMap<LevelIdentifier, I_PublicLocalStateOfAgent>();
-		this.lastPerceivedData = new HashMap<LevelIdentifier, I_PerceivedDataOfAgent>();
+		this.publicLocalStates = new HashMap<LevelIdentifier, IPublicLocalStateOfAgent>();
+		this.lastPerceivedData = new HashMap<LevelIdentifier, IPerceivedDataOfAgent>();
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public abstract class AbstractAgent implements I_Agent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public I_GlobalMemoryState getGlobalMemoryState() {
+	public IGlobalMemoryState getGlobalMemoryState() {
 		return this.globalMemoryState;
 	}
 
@@ -128,7 +128,7 @@ public abstract class AbstractAgent implements I_Agent {
 	 * @param newState The value of the initial memory state of the agent.
 	 * This memory state cannot be <code>null</code>.
 	 */
-	public void initializeGlobalMemoryState( I_GlobalMemoryState initialMemoryState ) throws IllegalArgumentException {
+	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) throws IllegalArgumentException {
 		if( initialMemoryState == null ){
 			throw new IllegalArgumentException( "The 'initialMemoryState' argument cannot be null." );
 		}
@@ -146,13 +146,13 @@ public abstract class AbstractAgent implements I_Agent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public I_PublicLocalStateOfAgent getPublicLocalState(
+	public IPublicLocalStateOfAgent getPublicLocalState(
 			LevelIdentifier levelIdentifier
 	) throws NoSuchElementException {
 		if( levelIdentifier == null ){
 			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
 		}
-		I_PublicLocalStateOfAgent result = this.publicLocalStates.get( levelIdentifier );
+		IPublicLocalStateOfAgent result = this.publicLocalStates.get( levelIdentifier );
 		if( result == null ){
 			throw new NoSuchElementException( "The agent does not define a public local state for the level '" + levelIdentifier + "'." );
 		}
@@ -165,7 +165,7 @@ public abstract class AbstractAgent implements I_Agent {
 	 * @param publicLocalState The public local state of the agent in that level. Note that this state has 
 	 * to be manually added into the dynamic state of the level.
 	 */
-	public void includeNewLevel( LevelIdentifier levelIdentifier, I_PublicLocalStateOfAgent publicLocalState ){
+	public void includeNewLevel( LevelIdentifier levelIdentifier, IPublicLocalStateOfAgent publicLocalState ){
 		if( levelIdentifier == null ){
 			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
 		} else if( publicLocalState == null ){
@@ -181,7 +181,7 @@ public abstract class AbstractAgent implements I_Agent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Map<LevelIdentifier, I_PerceivedDataOfAgent> getPerceivedData() {
+	public Map<LevelIdentifier, IPerceivedDataOfAgent> getPerceivedData() {
 		return this.lastPerceivedData;
 	}
 
@@ -189,13 +189,13 @@ public abstract class AbstractAgent implements I_Agent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public I_PerceivedDataOfAgent getPerceivedData(
+	public IPerceivedDataOfAgent getPerceivedData(
 			LevelIdentifier levelIdentifier
 	) throws NoSuchElementException {
 		if( levelIdentifier == null ){
 			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
 		}
-		I_PerceivedDataOfAgent result = this.lastPerceivedData.get( levelIdentifier );
+		IPerceivedDataOfAgent result = this.lastPerceivedData.get( levelIdentifier );
 		if( result == null ){
 			throw new NoSuchElementException( "No perceived data were defined for the level '" + levelIdentifier + "'." );
 		}
@@ -208,7 +208,7 @@ public abstract class AbstractAgent implements I_Agent {
 	@Override
 	public void setPerceivedData(
 			LevelIdentifier levelIdentifier,
-			I_PerceivedDataOfAgent perceivedData
+			IPerceivedDataOfAgent perceivedData
 	) {
 		if( levelIdentifier == null ){
 			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );

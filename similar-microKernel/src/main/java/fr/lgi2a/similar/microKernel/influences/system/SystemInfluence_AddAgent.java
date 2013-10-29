@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microkernel.influences.system;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
 
@@ -71,15 +71,15 @@ public final class SystemInfluence_AddAgent extends SystemInfluence {
 	/**
 	 * The agent to add to the simulation.
 	 */
-	private I_Agent agent;
+	private IAgent agent;
 	
 	/**
 	 * Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link I_Influence#getTargetLevel()}
+	 * @param targetLevel The target level as described in {@link IInfluence#getTargetLevel()}
 	 * @param agent The agent to add to the simulation.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
-	public SystemInfluence_AddAgent( LevelIdentifier targetLevel, I_Agent agent ) throws IllegalArgumentException {
+	public SystemInfluence_AddAgent( LevelIdentifier targetLevel, IAgent agent ) throws IllegalArgumentException {
 		super( CATEGORY, targetLevel );
 		if( agent == null ){
 			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
@@ -91,7 +91,7 @@ public final class SystemInfluence_AddAgent extends SystemInfluence {
 	 * Gets the agent to add to the simulation.
 	 * @return The agent to add to the simulation.
 	 */
-	public I_Agent getAgent(){
+	public IAgent getAgent(){
 		return this.agent;
 	}
 

@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
 
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.generic.engines.ClassTest_SimulationEngine_LimitCases;
 import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
 
@@ -59,7 +59,7 @@ public class ClassTest_LimitCases extends ClassTest_SimulationEngine_LimitCases 
 	/**
 	 * {@inheritDoc}
 	 */
-	protected I_SimulationEngine createEngine() {
+	protected ISimulationEngine createEngine() {
 		return new MonoThreaded_DefaultDisambiguation_SimulationEngine();
 	}
 }

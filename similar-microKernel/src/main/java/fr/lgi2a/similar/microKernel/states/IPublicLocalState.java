@@ -46,30 +46,36 @@
  */
 package fr.lgi2a.similar.microkernel.states;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * Models the level-independent information memorized by an agent (for instance a plan used in more than one level).
+ * Models the public local state of an agent or of the environment.
+ * <p>
+ * 	An instance of this class corresponds to the data that can be perceived about an agent or the environment for a specific level.
+ * </p>
  * 
  * <h1>Correspondence with theory</h1>
  * <p>
- * 	TODO : formal notation
+ * 	TODO formal notation
+ * </p>
+ * 
+ * <h2>Usage</h2>
+ * <p>
+ * 	The public local state of the environment can directly implement this interface.
+ * </p>
+ * <p>
+ * 	The public local state of an agent has to implement the {@link IPublicLocalStateOfAgent} interface.
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_GlobalMemoryState {
+public interface IPublicLocalState {
 	/**
-	 * Gets the owner of the global memory state, <i>i.e.</i> the agent which global memory state is 
-	 * this state.
+	 * Gets the level for which this public local state was defined.
 	 * <p>
-	 * 	This method is defined for optimization purposes, since keeping an association between global memory 
-	 * 	states and agents within the simulation engine would be too memory consuming.
+	 * 	TODO formal notation
 	 * </p>
-	 * <p>
-	 * 	TODO : formal notation.
-	 * </p>
-	 * @return The owner of the global memory state.
+	 * @return The identifier of the level for which this public local state was defined.
 	 */
-	I_Agent getOwner( );
+	LevelIdentifier getLevel( );
 }

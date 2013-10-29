@@ -46,13 +46,13 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 
 /**
  * The parent interface of the regular influences defined in the "learning" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_LearningInfluence extends I_Influence {
+public interface I_LearningInfluence extends IInfluence {
 	/**
 	 * Creates a copy of this influence.
 	 * @return A copy of this influence.

@@ -49,19 +49,19 @@ package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Level;
+import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.I_Modifiable_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.IModifiablePublicLocalDynamicState;
 
 /**
- * An abstract implementation of the {@link I_Level} interface, providing a default behavior to most methods.
+ * An abstract implementation of the {@link ILevel} interface, providing a default behavior to most methods.
  * It also provides setters for the perception and the influence relation graph.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractLevel implements I_Level {
+public abstract class AbstractLevel implements ILevel {
 	/**
 	 * The identifier of the level.
 	 */
@@ -69,7 +69,7 @@ public abstract class AbstractLevel implements I_Level {
 	/**
 	 * The last consistent public local dynamic state of this level.
 	 */
-	private Consistent_PublicLocalDynamicState lastConsistentPublicLocalDynamicState;
+	private ConsistentPublicLocalDynamicState lastConsistentPublicLocalDynamicState;
 	/**
 	 * The perceptible levels of this level.
 	 */
@@ -83,8 +83,8 @@ public abstract class AbstractLevel implements I_Level {
 	 * Builds an initialized instance of level having a specific initial time, a specific identifier, a perception and influence 
 	 * relation graph containing only an edge between this level and itself and an empty initial consistent dynamic state.
 	 * This dynamic state has to be initialized using the 
-	 * {@link I_Modifiable_PublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.states.I_PublicLocalState)},
-	 * {@link I_Modifiable_PublicLocalDynamicState#setStateDynamicsAsCopyOf(Set)} and {@link I_Modifiable_PublicLocalDynamicState#addPublicLocalStateOfAgent(fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent)}
+	 * {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.states.I_PublicLocalState)},
+	 * {@link IModifiablePublicLocalDynamicState#setStateDynamicsAsCopyOf(Set)} and {@link IModifiablePublicLocalDynamicState#addPublicLocalStateOfAgent(fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent)}
 	 * methods.
 	 * @param initialTime The initial time stamp of the level.
 	 * @param identifier The identifier of the level.
@@ -101,7 +101,7 @@ public abstract class AbstractLevel implements I_Level {
 		}
 		this.identifier = identifier;
 		// Create the last consistent dynamic state of this level.
-		this.lastConsistentPublicLocalDynamicState = new Consistent_PublicLocalDynamicState( initialTime, this.getIdentifier() );
+		this.lastConsistentPublicLocalDynamicState = new ConsistentPublicLocalDynamicState( initialTime, this.getIdentifier() );
 		// Create the out neighborhood of the perception relation graph for this level.
 		this.perceptibleLevels = new HashSet<LevelIdentifier>( );
 		this.perceptibleLevels.add( identifier );
@@ -123,7 +123,7 @@ public abstract class AbstractLevel implements I_Level {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Consistent_PublicLocalDynamicState getLastConsistentPublicLocalDynamicState() {
+	public ConsistentPublicLocalDynamicState getLastConsistentPublicLocalDynamicState() {
 		return this.lastConsistentPublicLocalDynamicState;
 	}
 
@@ -132,7 +132,7 @@ public abstract class AbstractLevel implements I_Level {
 	 */
 	@Override
 	public void setLastConsistentPublicLocalDynamicState(
-			Consistent_PublicLocalDynamicState lastConsistentState
+			ConsistentPublicLocalDynamicState lastConsistentState
 	) {
 		if( lastConsistentState == null ){
 			throw new IllegalArgumentException( "The 'lastConsistentState' argument cannot be null." );

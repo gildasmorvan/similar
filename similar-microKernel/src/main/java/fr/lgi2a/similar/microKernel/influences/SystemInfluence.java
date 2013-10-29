@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.influences;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
@@ -58,8 +58,8 @@ public class SystemInfluence extends AbstractInfluence {
 	/**
 	 * Builds a system influence from a specific category.
 	 * The reaction to this influence will be managed into a specific target level.
-	 * @param category The category of the influence, as described in {@link I_Influence#getCategory()}
-	 * @param targetLevel The target level of the influence, as described in {@link I_Influence#getTargetLevel()}
+	 * @param category The category of the influence, as described in {@link IInfluence#getCategory()}
+	 * @param targetLevel The target level of the influence, as described in {@link IInfluence#getTargetLevel()}
 	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.
 	 */
 	public SystemInfluence( String category, LevelIdentifier targetLevel ) throws IllegalArgumentException {

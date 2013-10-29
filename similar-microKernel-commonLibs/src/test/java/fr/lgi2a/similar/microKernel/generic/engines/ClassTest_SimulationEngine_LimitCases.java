@@ -55,12 +55,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import fr.lgi2a.similar.microkernel.I_Level;
-import fr.lgi2a.similar.microkernel.I_Probe;
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
-import fr.lgi2a.similar.microkernel.I_SimulationModel;
-import fr.lgi2a.similar.microkernel.I_SimulationModel.AgentInitializationData;
-import fr.lgi2a.similar.microkernel.I_SimulationModel.EnvironmentInitializationData;
+import fr.lgi2a.similar.microkernel.ILevel;
+import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.lgi2a.similar.microkernel.ISimulationModel;
+import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
+import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
@@ -69,7 +69,7 @@ import fr.lgi2a.similar.microkernel.generic.engines.tools.UnitTest_Level;
 import fr.lgi2a.similar.microkernel.generic.engines.tools.UnitTest_SimulationModel;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * This unit test checks that erroneous simulation models do raise exceptions when appropriate for a specific 
@@ -80,7 +80,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
+public abstract class ClassTest_SimulationEngine_LimitCases implements IProbe {
 	/**
 	 * This boolean tells if an exception was caught during the execution of the runSimulation method.
 	 */
@@ -94,7 +94,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 	 * Creates the simulation engine being used in a test of this test set.
 	 * @return A new instance of the simulation engine being used in a test of this test set.
 	 */
-	protected abstract I_SimulationEngine createEngine( );
+	protected abstract ISimulationEngine createEngine( );
 	
 	/**
 	 * {@inheritDoc}
@@ -105,21 +105,21 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 	 */
 	public void observeAtInitialTimes(
 			SimulationTimeStamp initialTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
 	 */
 	public void observeAtPartialConsistentTime(
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
 	 */
 	public void observeAtFinalTime(
 			SimulationTimeStamp finalTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
@@ -136,7 +136,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 	 */
 	public void reactToAbortion( 
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
@@ -152,13 +152,13 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 
 	/**
 	 * Tests that an {@link IllegalStateException} exception is caught if the 
-	 * {@link I_SimulationModel#getInitialTime()} method of the model used with 
+	 * {@link ISimulationModel#getInitialTime()} method of the model used with 
 	 * the simulation engine returns <code>null</code>.
 	 */
 	@Test
 	public void test_initialTimeNull_ExceptionCaught( ) {
 		// Create the engine.
-		I_SimulationEngine engine = this.createEngine( );
+		ISimulationEngine engine = this.createEngine( );
 		//
 		// Create the tested simulation model.
 		//
@@ -166,7 +166,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 		SimulationTimeStamp initialTime = null;
 		SimulationTimeStamp nextTime = new SimulationTimeStamp( 1 );
 		boolean finalTimeOrAfter = true;
-		List<I_Level> generateLevels = new LinkedList<I_Level>();
+		List<ILevel> generateLevels = new LinkedList<ILevel>();
 		generateLevels.add( new UnitTest_Level(
 				new SimulationTimeStamp( 0 ),
 				Test_LevelIdentifiers.ID1, 
@@ -176,7 +176,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 		AbstractEnvironment environment = new AbstractEnvironment() {
 			public void natural(
 					LevelIdentifier level,
-					I_DynamicState_Map levelsPublicLocalObservableDynamicState,
+					IDynamicStateMap levelsPublicLocalObservableDynamicState,
 					InfluencesMap producedInfluences
 			) {
 				// Does nothing.
@@ -186,7 +186,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 		EnvironmentInitializationData generateEnvironment = new EnvironmentInitializationData( environment );
 		AgentInitializationData generateAgents = new AgentInitializationData( );
 		// Create the simulation model.
-		I_SimulationModel model = new UnitTest_SimulationModel(
+		ISimulationModel model = new UnitTest_SimulationModel(
 				initialTime, 
 				nextTime, 
 				finalTimeOrAfter, 
@@ -215,13 +215,13 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 	
 	/**
 	 * Tests that an {@link IllegalStateException} exception is caught if the 
-	 * {@link I_SimulationModel#generateLevels(fr.lgi2a.similar.microkernel.SimulationTimeStamp)} method
+	 * {@link ISimulationModel#generateLevels(fr.lgi2a.similar.microkernel.SimulationTimeStamp)} method
 	 * of the model used with the simulation engine returns <code>null</code>.
 	 */
 	@Test
 	public void test_generateLevelsReturningNull_ExceptionCaught( ) {
 		// Create the engine.
-		I_SimulationEngine engine = this.createEngine( );
+		ISimulationEngine engine = this.createEngine( );
 		//
 		// Create the tested simulation model.
 		//
@@ -229,11 +229,11 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 		SimulationTimeStamp initialTime = new SimulationTimeStamp( 0 );
 		SimulationTimeStamp nextTime = new SimulationTimeStamp( 1 );
 		boolean finalTimeOrAfter = true;
-		List<I_Level> generateLevels = null;
+		List<ILevel> generateLevels = null;
 		AbstractEnvironment environment = new AbstractEnvironment() {
 			public void natural(
 					LevelIdentifier level,
-					I_DynamicState_Map levelsPublicLocalObservableDynamicState,
+					IDynamicStateMap levelsPublicLocalObservableDynamicState,
 					InfluencesMap producedInfluences
 			) {
 				// Does nothing.
@@ -243,7 +243,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 		EnvironmentInitializationData generateEnvironment = new EnvironmentInitializationData( environment );
 		AgentInitializationData generateAgents = new AgentInitializationData( );
 		// Create the simulation model.
-		I_SimulationModel model = new UnitTest_SimulationModel(
+		ISimulationModel model = new UnitTest_SimulationModel(
 				initialTime, 
 				nextTime, 
 				finalTimeOrAfter, 

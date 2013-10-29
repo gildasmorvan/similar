@@ -46,14 +46,14 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.trace;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
-import fr.lgi2a.similar.microkernel.I_Probe;
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * A probe registering to the simulation execution trace all the partly-consistent dynamic state of the simulation, 
@@ -61,7 +61,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class Learning_Probe implements I_Probe {
+public class Learning_Probe implements IProbe {
 	/**
 	 * The object where the execution trace of the simulation is stored.
 	 */
@@ -92,7 +92,7 @@ public class Learning_Probe implements I_Probe {
 	@Override
 	public void observeAtInitialTimes(
 			SimulationTimeStamp initialTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	) {
 		this.includeDynamicStateInTrace( initialTimestamp, simulationEngine );
 	}
@@ -103,7 +103,7 @@ public class Learning_Probe implements I_Probe {
 	@Override
 	public void observeAtPartialConsistentTime(
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	) {
 		this.includeDynamicStateInTrace( timestamp, simulationEngine );
 	}
@@ -114,15 +114,15 @@ public class Learning_Probe implements I_Probe {
 	@Override
 	public void observeAtFinalTime(
 			SimulationTimeStamp finalTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	) {
 		Learning_SimulationDynamicState dynamicState = new Learning_SimulationDynamicState( );
-		for( I_Agent agent : simulationEngine.getAgents() ){
+		for( IAgent agent : simulationEngine.getAgents() ){
 			dynamicState.addGlobalMemoryState( agent );
 		}
-		I_DynamicState_Map publicLocalDynamicStates = simulationEngine.getSimulationDynamicStates();
+		IDynamicStateMap publicLocalDynamicStates = simulationEngine.getSimulationDynamicStates();
 		for( LevelIdentifier level : publicLocalDynamicStates.keySet() ) {
-			I_PublicLocalDynamicState localDynamicState = publicLocalDynamicStates.get( level );
+			IPublicLocalDynamicState localDynamicState = publicLocalDynamicStates.get( level );
 			dynamicState.addLevelDynamicState( Learning_PublicLocalDynamicStateCopier.createCopy( localDynamicState ) );
 		}
 		this.trace.setFinalDynamicState( new SimulationTimeStamp( finalTimestamp ), dynamicState );
@@ -136,15 +136,15 @@ public class Learning_Probe implements I_Probe {
 	 */
 	private void includeDynamicStateInTrace( 
 			SimulationTimeStamp timeStamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	) {
 		Learning_SimulationDynamicState dynamicState = new Learning_SimulationDynamicState( );
-		for( I_Agent agent : simulationEngine.getAgents() ){
+		for( IAgent agent : simulationEngine.getAgents() ){
 			dynamicState.addGlobalMemoryState( agent );
 		}
-		I_DynamicState_Map publicLocalDynamicStates = simulationEngine.getSimulationDynamicStates();
+		IDynamicStateMap publicLocalDynamicStates = simulationEngine.getSimulationDynamicStates();
 		for( LevelIdentifier level : publicLocalDynamicStates.keySet() ) {
-			I_PublicLocalDynamicState localDynamicState = publicLocalDynamicStates.get( level );
+			IPublicLocalDynamicState localDynamicState = publicLocalDynamicStates.get( level );
 			dynamicState.addLevelDynamicState( Learning_PublicLocalDynamicStateCopier.createCopy( localDynamicState ) );
 		}
 		this.trace.addDynamicState(
@@ -170,7 +170,7 @@ public class Learning_Probe implements I_Probe {
 	@Override
 	public void reactToAbortion(
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	) { 
 		this.trace.setReasonOfEnd( Learning_ReasonOfSimulationEnd.ABORTED );
 	}

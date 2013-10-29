@@ -48,17 +48,17 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations;
 
 import java.lang.reflect.Method;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_InfluenceCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationType;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicState_Map;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicStateMap;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the operation performed by the simulation engine when it asks the environment to perform its natural reaction from a level.
@@ -74,7 +74,7 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 	 * The observable public local dynamic state of the levels that are perceptible from the level where perception is made.
 	 * This field models one element of the arguments of the 'natural' method call.
 	 */
-	private I_DynamicState_Map levelsPublicLocalObservableDynamicState;
+	private IDynamicStateMap levelsPublicLocalObservableDynamicState;
 	/**
 	 * The influences that were produced by the natural action of the environment.
 	 */
@@ -94,8 +94,8 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 	 * Builds a partially initialized object modeling a call to the 'natural' method of the environment from a specific level.
 	 * The initialization is completed by:
 	 * <ul>
-	 * 	<li>Calling the {@link Learning_EngineOperation_Natural#addObservableDynamicState(I_PublicLocalDynamicState)}{@link Method} method for each perceptible level.</li>
-	 * 	<li>Calling the {@link Learning_EngineOperation_Natural#addInfluence(I_Influence)} method for each influence that was produced by the natural action of the environment.</li>
+	 * 	<li>Calling the {@link Learning_EngineOperation_Natural#addObservableDynamicState(IPublicLocalDynamicState)}{@link Method} method for each perceptible level.</li>
+	 * 	<li>Calling the {@link Learning_EngineOperation_Natural#addInfluence(IInfluence)} method for each influence that was produced by the natural action of the environment.</li>
 	 * </ul>
 	 * @param level The level from which the 'natural' method is called.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
@@ -107,7 +107,7 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		}
 		this.level = level;
-		this.levelsPublicLocalObservableDynamicState = new DynamicState_Map( );
+		this.levelsPublicLocalObservableDynamicState = new DynamicStateMap( );
 		this.producedInfluences = new InfluencesMap();
 	}
 	
@@ -117,16 +117,16 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it is not an observable 
 	 * transitory state of the "learning" simulation or a consistent state.
 	 */
-	public void addObservableDynamicState( I_PublicLocalDynamicState dynamicState ) throws IllegalArgumentException {
+	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) throws IllegalArgumentException {
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}
-		if( dynamicState instanceof Consistent_PublicLocalDynamicState ){
-			Consistent_PublicLocalDynamicState original = (Consistent_PublicLocalDynamicState) dynamicState;
+		if( dynamicState instanceof ConsistentPublicLocalDynamicState ){
+			ConsistentPublicLocalDynamicState original = (ConsistentPublicLocalDynamicState) dynamicState;
 			this.levelsPublicLocalObservableDynamicState.put( Learning_PublicLocalDynamicStateCopier.createCopy( original ) );
 		} else {
 			throw new IllegalArgumentException( "The observable dynamic state of the level '" + dynamicState.getLevel() + "' has to be an instance " +
-					"of the '" + Consistent_PublicLocalDynamicState.class.getSimpleName() + "' class (consistent state)." );
+					"of the '" + ConsistentPublicLocalDynamicState.class.getSimpleName() + "' class (consistent state)." );
 		}
 	}
 	
@@ -136,7 +136,7 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public void addInfluence( 
-			I_Influence influence
+			IInfluence influence
 	) throws IllegalArgumentException {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
@@ -157,7 +157,7 @@ public class Learning_EngineOperation_Natural implements Learning_EngineOperatio
 	 * This field models one element of the arguments of the 'natural' method call.
 	 * @return The observable public local dynamic state of the levels that are perceptible from the level where perception is made.
 	 */
-	public I_DynamicState_Map getLevelsPublicLocalObservableDynamicState( ) {
+	public IDynamicStateMap getLevelsPublicLocalObservableDynamicState( ) {
 		return this.levelsPublicLocalObservableDynamicState;
 	}
 

@@ -48,8 +48,8 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning;
 
 import java.util.List;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IAgent;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.printer.Learning_EngineOperationPrinter;
@@ -58,11 +58,11 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOpe
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_ReasonOfSimulationEnd;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_SimulationDynamicState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Provides methods printing the content of the trace on screen.
@@ -146,7 +146,7 @@ public class Learning_TracePrinter {
 	public static void printDynamicState( int indentation, Learning_SimulationDynamicState dynamicState ) {
 		printIndentation( indentation );
 		System.out.println( "Memory state of the agents:" );
-		for( I_Agent agent : dynamicState.getAgents() ){
+		for( IAgent agent : dynamicState.getAgents() ){
 			printIndentation( indentation + 1 );
 			System.out.println( "Agent '" + agent.getCategory() + "'" );
 			printIndentation( indentation + 2 );
@@ -154,7 +154,7 @@ public class Learning_TracePrinter {
 		}
 		printIndentation( indentation );
 		System.out.println( "Local dynamic state of the levels:" );
-		I_DynamicState_Map localDynamicStates = dynamicState.getLocalDynamicStates();
+		IDynamicStateMap localDynamicStates = dynamicState.getLocalDynamicStates();
 		for( LevelIdentifier levelId : localDynamicStates.keySet() ){
 			printLocalDynamicState( indentation + 1, localDynamicStates.get( levelId ) );
 		}
@@ -165,13 +165,13 @@ public class Learning_TracePrinter {
 	 * @param indentation The number of indentations used to print the local dynamic state.
 	 * @param localDynamicState The local dynamic state to print.
 	 */
-	public static void printLocalDynamicState( int indentation, I_PublicLocalDynamicState localDynamicState ) {
+	public static void printLocalDynamicState( int indentation, IPublicLocalDynamicState localDynamicState ) {
 		printIndentation( indentation );
 		System.out.println( "Local dynamic state of the level '" + localDynamicState.getLevel() + "':" );
 		printIndentation( indentation + 1 );
 		System.out.println( "Nature of the public local state of the level:" );
 		printIndentation( indentation + 2 );
-		if( localDynamicState instanceof Consistent_PublicLocalDynamicState ){
+		if( localDynamicState instanceof ConsistentPublicLocalDynamicState ){
 			System.out.println( "Consistent" );
 		} else {
 			System.out.println( "Transitory" );
@@ -180,8 +180,8 @@ public class Learning_TracePrinter {
 		System.out.println( "Last consistent time of the level:" );
 		printIndentation( indentation + 2 );
 		System.out.println( localDynamicState.getTime() );
-		if( localDynamicState instanceof Transitory_PublicLocalDynamicState ) {
-			Transitory_PublicLocalDynamicState casted = (Transitory_PublicLocalDynamicState) localDynamicState;
+		if( localDynamicState instanceof TransitoryPublicLocalDynamicState ) {
+			TransitoryPublicLocalDynamicState casted = (TransitoryPublicLocalDynamicState) localDynamicState;
 			printIndentation( indentation + 1 );
 			System.out.println( "End of the transitory period:" );
 			printIndentation( indentation + 2 );
@@ -193,13 +193,13 @@ public class Learning_TracePrinter {
 		System.out.println( localDynamicState.getPublicLocalStateOfEnvironment() );
 		printIndentation( indentation + 2 );
 		System.out.println( "Public local state of the agents:" );
-		for( I_PublicLocalStateOfAgent agentState : localDynamicState.getPublicLocalStateOfAgents() ){
+		for( IPublicLocalStateOfAgent agentState : localDynamicState.getPublicLocalStateOfAgents() ){
 			printIndentation( indentation + 3 );
 			System.out.println( agentState );
 		}
 		printIndentation( indentation + 1 );
 		System.out.println( "State dynamics:" );
-		for( I_Influence influence : localDynamicState.getStateDynamics() ){
+		for( IInfluence influence : localDynamicState.getStateDynamics() ){
 			printIndentation( indentation + 2 );
 			System.out.println( influence );
 		}

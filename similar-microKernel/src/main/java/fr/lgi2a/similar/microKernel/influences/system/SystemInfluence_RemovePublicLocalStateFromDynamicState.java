@@ -46,10 +46,10 @@
  */
 package fr.lgi2a.similar.microkernel.influences.system;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * The system influence sent to a level when the reaction of that level has to remove the public local state of an agent from the 
@@ -75,18 +75,18 @@ public class SystemInfluence_RemovePublicLocalStateFromDynamicState extends Syst
 	/**
 	 * The public local state to remove from the public dynamic local state of the level.
 	 */
-	private I_PublicLocalStateOfAgent publicLocalState;
+	private IPublicLocalStateOfAgent publicLocalState;
 	
 	/**
 	 * Builds an 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the 
 	 * dynamic state of a specific level during the next reaction of that level.
-	 * @param targetLevel The target level of the influence, as defined in {@link I_Influence#getTargetLevel()}.
+	 * @param targetLevel The target level of the influence, as defined in {@link IInfluence#getTargetLevel()}.
 	 * @param publicLocalState The public local state to remove from to the public dynamic local state of the level.
 	 * @throws IllegalArgumentException If the target level or the public local state are <code>null</code>.
 	 */
 	public SystemInfluence_RemovePublicLocalStateFromDynamicState( 
 			LevelIdentifier targetLevel, 
-			I_PublicLocalStateOfAgent publicLocalState 
+			IPublicLocalStateOfAgent publicLocalState 
 	) throws IllegalArgumentException {
 		super( CATEGORY, targetLevel );
 		if( publicLocalState == null ){
@@ -100,7 +100,7 @@ public class SystemInfluence_RemovePublicLocalStateFromDynamicState extends Syst
 	 * Gets the public local state to remove from the public dynamic local state of the level.
 	 * @return The public local state to remove from the public dynamic local state of the level.
 	 */
-	public I_PublicLocalStateOfAgent getPublicLocalState( ) {
+	public IPublicLocalStateOfAgent getPublicLocalState( ) {
 		return this.publicLocalState;
 	}
 

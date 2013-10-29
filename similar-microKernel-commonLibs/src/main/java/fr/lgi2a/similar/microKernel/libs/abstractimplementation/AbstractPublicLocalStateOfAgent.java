@@ -46,20 +46,20 @@
  */
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
- * An abstract implementation of the {@link I_PublicLocalStateOfAgent} interface, providing a default behavior to the methods of the interface.
+ * An abstract implementation of the {@link IPublicLocalStateOfAgent} interface, providing a default behavior to the methods of the interface.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractPublicLocalStateOfAgent extends AbstractPublicLocalState implements I_PublicLocalStateOfAgent {
+public class AbstractPublicLocalStateOfAgent extends AbstractPublicLocalState implements IPublicLocalStateOfAgent {
 	/**
 	 * The agent owning this public local state.
 	 */
-	private final I_Agent owner;
+	private final IAgent owner;
 	
 	/**
 	 * Builds an empty agent public local state for a specific level and a specific agent.
@@ -69,7 +69,7 @@ public class AbstractPublicLocalStateOfAgent extends AbstractPublicLocalState im
 	 */
 	public AbstractPublicLocalStateOfAgent(
 			LevelIdentifier levelIdentifier,
-			I_Agent owner
+			IAgent owner
 	) throws IllegalArgumentException {
 		super( levelIdentifier );
 		if( owner == null ){
@@ -82,7 +82,7 @@ public class AbstractPublicLocalStateOfAgent extends AbstractPublicLocalState im
 	 * {@inheritDoc}
 	 */
 	@Override
-	public I_Agent getOwner() {
+	public IAgent getOwner() {
 		return this.owner;
 	}
 }

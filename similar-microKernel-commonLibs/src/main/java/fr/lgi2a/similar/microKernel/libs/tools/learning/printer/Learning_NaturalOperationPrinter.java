@@ -48,7 +48,7 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.printer;
 
 import static fr.lgi2a.similar.microkernel.libs.tools.learning.Learning_TracePrinter.*;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.Learning_TracePrinter;
@@ -89,7 +89,7 @@ public class Learning_NaturalOperationPrinter extends Learning_EngineOperationPr
 		for( LevelIdentifier levelId : influences.getDefinedKeys() ){
 			printIndentation( indentation + 2 );
 			System.out.println( "Destined to the level '" + levelId + "':" );
-			for( I_Influence influence : influences.getInfluencesForLevel( levelId ) ){
+			for( IInfluence influence : influences.getInfluencesForLevel( levelId ) ){
 				printIndentation( indentation + 3 );
 				System.out.println( influence );
 			}

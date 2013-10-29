@@ -49,7 +49,7 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
@@ -60,7 +60,7 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOpe
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_RegularReaction;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_SystemReaction;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * Models a level in the 'learning' simulation.
@@ -95,15 +95,15 @@ public abstract class Learning_Level extends AbstractLevel {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.I_Level#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState, java.util.Set, java.util.Set)
+	 * @see fr.lgi2a.similar.microkernel.ILevel#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, java.util.Set)
 	 */
 	@Override
 	public void makeRegularReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState newConsistentState,
-			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
-			Set<I_Influence> newInfluencesToProcess
+			ConsistentPublicLocalDynamicState newConsistentState,
+			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
+			Set<IInfluence> newInfluencesToProcess
 	) {
 		Learning_EngineOperation_RegularReaction operation = new Learning_EngineOperation_RegularReaction(
 				previousConsistentStateTime,
@@ -111,11 +111,11 @@ public abstract class Learning_Level extends AbstractLevel {
 				newConsistentState
 		);
 		// Memorize the argument influences
-		for( I_Influence influence : regularInfluencesOftransitoryStateDynamics ){
+		for( IInfluence influence : regularInfluencesOftransitoryStateDynamics ){
 			operation.addArgumentInfluence( influence );
 		}
 		// Process the influences
-		for( I_Influence influence : regularInfluencesOftransitoryStateDynamics ){
+		for( IInfluence influence : regularInfluencesOftransitoryStateDynamics ){
 			if( influence instanceof Learning_Influence_AgentPublicLocalStateUpdate ){
 				Learning_Influence_AgentPublicLocalStateUpdate casted = (Learning_Influence_AgentPublicLocalStateUpdate) influence;
 				casted.getPublicLocalStateOfAgent().revise();
@@ -177,9 +177,9 @@ public abstract class Learning_Level extends AbstractLevel {
 	protected void produceNewInfluencesDuringRegularReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState newConsistentState,
-			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
-			Set<I_Influence> newInfluencesToProcess
+			ConsistentPublicLocalDynamicState newConsistentState,
+			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
+			Set<IInfluence> newInfluencesToProcess
 	){ }
 
 	/**
@@ -189,10 +189,10 @@ public abstract class Learning_Level extends AbstractLevel {
 	public void makeSystemReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState newConsistentState,
-			Collection<I_Influence> systemInfluencesToManage,
+			ConsistentPublicLocalDynamicState newConsistentState,
+			Collection<IInfluence> systemInfluencesToManage,
 			boolean happensBeforeRegularReaction,
-			Collection<I_Influence> newInfluencesToProcess
+			Collection<IInfluence> newInfluencesToProcess
 	) {
 		Learning_EngineOperation_SystemReaction operation = new Learning_EngineOperation_SystemReaction(
 				previousConsistentStateTime, 
@@ -200,7 +200,7 @@ public abstract class Learning_Level extends AbstractLevel {
 				happensBeforeRegularReaction, 
 				newConsistentState
 		);
-		for( I_Influence influence : systemInfluencesToManage ){
+		for( IInfluence influence : systemInfluencesToManage ){
 			operation.addArgumentInfluence( influence );
 		}
 		operation.setNewConsistentStateAtEnd( newConsistentState );
@@ -212,7 +212,7 @@ public abstract class Learning_Level extends AbstractLevel {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.I_TimeModel#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)
+	 * @see fr.lgi2a.similar.microkernel.ITimeModel#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)
 	 */
 	@Override
 	public abstract SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime );

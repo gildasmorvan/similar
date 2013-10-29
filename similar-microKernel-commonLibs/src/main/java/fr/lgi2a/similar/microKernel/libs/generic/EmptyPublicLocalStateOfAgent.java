@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.generic;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalStateOfAgent;
 
@@ -70,7 +70,7 @@ public class EmptyPublicLocalStateOfAgent extends AbstractPublicLocalStateOfAgen
 	 */
 	public EmptyPublicLocalStateOfAgent(
 			LevelIdentifier levelIdentifier,
-			I_Agent owner
+			IAgent owner
 	) throws IllegalArgumentException {
 		super(levelIdentifier, owner);
 	}

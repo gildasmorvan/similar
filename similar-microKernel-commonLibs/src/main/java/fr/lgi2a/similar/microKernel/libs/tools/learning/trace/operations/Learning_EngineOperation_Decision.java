@@ -46,16 +46,16 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_InfluenceCopier;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationType;
-import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.IGlobalMemoryState;
 
 /**
  * Models the operation performed by the simulation engine when it asks an agent to decide from a level.
@@ -82,7 +82,7 @@ public class Learning_EngineOperation_Decision implements Learning_EngineOperati
 	
 	/**
 	 * Builds a partially initialized object modeling a method call to the 'decision' method of an agent.
-	 * The initialization of this instance is completed by calls to the {@link Learning_EngineOperation_Decision#addInfluence(I_Influence)} for each
+	 * The initialization of this instance is completed by calls to the {@link Learning_EngineOperation_Decision#addInfluence(IInfluence)} for each
 	 * influence located in the produced influences of the 'decision' method call.
 	 * @param level The level provided as a parameter of the 'decision' method call of the agent.
 	 * @param memoryState The global memory state provided as a parameter of the 'decision' method call of the agent.
@@ -92,8 +92,8 @@ public class Learning_EngineOperation_Decision implements Learning_EngineOperati
 	 */
 	public Learning_EngineOperation_Decision(
 			LevelIdentifier level,
-			I_GlobalMemoryState memoryState,
-			I_PerceivedDataOfAgent perceivedData
+			IGlobalMemoryState memoryState,
+			IPerceivedDataOfAgent perceivedData
 	) throws IllegalArgumentException {
 		if( level == null ){
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
@@ -165,7 +165,7 @@ public class Learning_EngineOperation_Decision implements Learning_EngineOperati
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public void addInfluence( 
-			I_Influence influence
+			IInfluence influence
 	) throws IllegalArgumentException {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );

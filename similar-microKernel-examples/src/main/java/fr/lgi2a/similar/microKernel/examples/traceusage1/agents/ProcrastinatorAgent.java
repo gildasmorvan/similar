@@ -48,7 +48,7 @@ package fr.lgi2a.similar.microkernel.examples.traceusage1.agents;
 
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
@@ -56,7 +56,7 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMem
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
 
 /**
  * Models agents from the 'procrastinator' category, as described in the specification of the "one level - two agents - trace" simulation.
@@ -108,7 +108,7 @@ public class ProcrastinatorAgent extends Learning_AbstractAgent {
 		// Iterate over the set of levels where the agent lies.
 		for( LevelIdentifier levelId : this.getLevels() ){
 			// Get the public local state of the agent in the level of the iteration.
-			I_PublicLocalStateOfAgent agentState = this.getPublicLocalState( levelId );
+			IPublicLocalStateOfAgent agentState = this.getPublicLocalState( levelId );
 			Learning_PublicLocalStateOfAgent castedAgentState = (Learning_PublicLocalStateOfAgent) agentState;
 			// Add a copy of this state to the copy of the agent.
 			copy.includeNewLevel( levelId, castedAgentState.createCopy() );
@@ -120,7 +120,7 @@ public class ProcrastinatorAgent extends Learning_AbstractAgent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected Set<I_Influence> produceInfluencesOfDecision(
+	protected Set<IInfluence> produceInfluencesOfDecision(
 			LevelIdentifier level, Learning_GlobalMemoryState memoryState,
 			Learning_PerceivedDataOfAgent perceivedData
 	) {

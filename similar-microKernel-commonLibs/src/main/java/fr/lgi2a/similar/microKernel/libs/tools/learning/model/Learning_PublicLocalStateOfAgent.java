@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalStateOfAgent;
 
@@ -69,7 +69,7 @@ public class Learning_PublicLocalStateOfAgent extends AbstractPublicLocalStateOf
 	 */
 	public Learning_PublicLocalStateOfAgent(
 			LevelIdentifier levelIdentifier,
-			I_Agent owner
+			IAgent owner
 	) throws IllegalArgumentException {
 		super(levelIdentifier, owner);
 		this.revisionNumber = 0;

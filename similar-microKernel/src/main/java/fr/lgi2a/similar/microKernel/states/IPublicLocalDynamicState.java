@@ -44,53 +44,81 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel;
+package fr.lgi2a.similar.microkernel.states;
+
+import java.util.Set;
+
+import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
- * Models an influence produced by the agents, the environment or the reaction to modify the dynamic state of the simulation.
- * <p>
- * 	An influence is characterized by a category, telling which kind of influence it models. This category is especially used during
- * 	the reaction phase to identify which type of influence it is, without having to perform a class test (<code>instanceof</code>).
- * </p>
+ * The parent interface of any public dynamic state of a level of the simulation.
  * 
  * <h1>Correspondence with theory</h1>
  * <p>
- * 	TODO formal notation
- * </p>
- * 
- * <h1>Usage</h1>
- * <p>
- * 	To facilitate the use of influences, it is advised to define a public and static field defining the category of the influence.
- * 	This way, there won't be any misspelling  during the reaction phase of the simulation, when these categories are 
- * 	used to identify the influences.
+ * 	TODO : formal notation
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Influence {
+public interface IPublicLocalDynamicState {
 	/**
-	 * Gets the category of the influence, <i>i.e.</i> a name identifying the type of the influence.
+	 * Gets the level for which the public local dynamic state is defined.
 	 * <p>
-	 * 	<b>Examples:</p>
+	 * 	TODO : formal notation
 	 * </p>
-	 * <ul>
-	 * 	<li>Accelerate</li>
-	 * 	<li>Eat prey</li>
-	 * 	<li>Crouch</li>
-	 * </ul>
-	 * @return The category of the influence, as defined in the public static field declared in the concrete influence class.
+	 * @return The level for which the public local dynamic state is defined.
 	 */
-	String getCategory( );
+	LevelIdentifier getLevel( );
 	
 	/**
-	 * Gets the identifier of the level whose reaction will process this influence.
-	 * @return The identifier of the level whose reaction will process this influence.
+	 * Gets the time for which this public dynamic state is defined.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 * @return The time for which this public dynamic state is defined. 	
 	 */
-	LevelIdentifier getTargetLevel();
+	SimulationTimeStamp getTime();
 	
 	/**
-	 * Checks if this influence is a system influence, and has to be managed by the simulation engine.
-	 * @return <code>true</code> if the influence is a system influence.
+	 * Gets the public local state of the environment contained in this public local dynamic state.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 * @return The public local state of the environment contained in this public local dynamic state.
 	 */
-	boolean isSystem();
+	IPublicLocalState getPublicLocalStateOfEnvironment( );
+	
+	/**
+	 * Gets the public local state of the agents lying in the level of this dynamic state.
+	 * <p>
+	 * 	TODO : formal notation
+	 * </p>
+	 * @return The public local state of the agents lying in the level of this dynamic state.
+	 */
+	Set<IPublicLocalStateOfAgent> getPublicLocalStateOfAgents();
+    
+    /**
+     * Gets the state dynamics of this public local dynamic state, <i>i.e.</i> the influences that are 
+     * still active (being performed) when the level was in this state.
+     * <p>
+     * 	TODO : formal notation
+     * </p>
+     * @return The state dynamics of this public local dynamic state.
+     */
+    Set<IInfluence> getStateDynamics();
+    
+    /**
+	 * Gets the system influences contained in the state transitory dynamics.
+	 * @return The system influences of the value returned by the {@link IPublicLocalDynamicState#getStateDynamics()} method.
+	 */
+	Set<IInfluence> getSystemInfluencesOfStateDynamics();
+	
+	/**
+	 * Gets the non-system influences contained in the state transitory dynamics.
+	 * @return The non-system influences of the value returned by the 
+	 * {@link IPublicLocalDynamicState#getStateDynamics()} method.
+	 */
+	Set<IInfluence> getRegularInfluencesOfStateDynamics();
 }

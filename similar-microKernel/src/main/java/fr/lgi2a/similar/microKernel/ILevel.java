@@ -49,7 +49,7 @@ package fr.lgi2a.similar.microkernel;
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * Models a level of the simulation.
@@ -77,7 +77,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDy
  *	</li>
  *	<li>
  *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
- *		by the {@link I_Level#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Collection, boolean, Collection)}
+ *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, Collection)}
  *		method.
  *		This user-defined reaction:
  * 		<ul>
@@ -102,7 +102,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDy
  *	</li>
  *	<li>
  *		The engine then performs a user-defined reaction to the regular influences, as described by the 
- *		{@link I_Level#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Set, Set)}
+ *		{@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, Set)}
  *		method.
  *		This user-defined reaction:
  *		<ul>
@@ -135,7 +135,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDy
  *	</li>
  *	<li>
  *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
- *		by the {@link I_Level#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Collection, boolean, Collection)}
+ *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, Collection)}
  *		method.
  *		This user-defined reaction:
  * 		<ul>
@@ -161,7 +161,7 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDy
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_Level extends I_TimeModel {
+public interface ILevel extends ITimeModel {
 	/**
 	 * Gets the identifier of this level.
 	 * <p>
@@ -178,7 +178,7 @@ public interface I_Level extends I_TimeModel {
 	 * </p>
 	 * @return The last consistent dynamic state of the level.
 	 */
-	Consistent_PublicLocalDynamicState getLastConsistentPublicLocalDynamicState( );
+	ConsistentPublicLocalDynamicState getLastConsistentPublicLocalDynamicState( );
 	
 	/**
 	 * Sets the last consistent dynamic state of the level.
@@ -187,7 +187,7 @@ public interface I_Level extends I_TimeModel {
 	 * </p>
 	 * @param lastConsistentState The last consistent dynamic state of the level.
 	 */
-	void setLastConsistentPublicLocalDynamicState( Consistent_PublicLocalDynamicState lastConsistentState );
+	void setLastConsistentPublicLocalDynamicState( ConsistentPublicLocalDynamicState lastConsistentState );
 
 	/**
 	 * Gets the levels that can be perceived by agents located in this level.
@@ -264,9 +264,9 @@ public interface I_Level extends I_TimeModel {
 	void makeRegularReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState consistentState,
-			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
-			Set<I_Influence> remainingInfluences
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
+			Set<IInfluence> remainingInfluences
 	);
 	
 	/**
@@ -330,16 +330,16 @@ public interface I_Level extends I_TimeModel {
 	 * @param systemInfluencesToManage The <b>system</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
 	 * @param happensBeforeRegularReaction <code>true</code> if this user-defined system reaction is performed before the call to the
-	 * {@link I_Level#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, Consistent_PublicLocalDynamicState, Set, Set)} method.
+	 * {@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, Set)} method.
 	 * @param newInfluencesToProcess The set that will contain the influences that were produced by the user during the invocation of 
 	 * this method.
 	 */
 	void makeSystemReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState consistentState,
-			Collection<I_Influence> systemInfluencesToManage,
+			ConsistentPublicLocalDynamicState consistentState,
+			Collection<IInfluence> systemInfluencesToManage,
 			boolean happensBeforeRegularReaction,
-			Collection<I_Influence> newInfluencesToProcess
+			Collection<IInfluence> newInfluencesToProcess
 	);
 }

@@ -66,9 +66,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
-import fr.lgi2a.similar.microkernel.I_Probe;
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.generic.engines.tools.Test_Agent;
@@ -85,19 +85,19 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOpe
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationType;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_Probe;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
- * Tests the behavior of the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method for 
+ * Tests the behavior of the {@link ISimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method for 
  * a simulation occurring in a single level.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
+public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 	/**
 	 * The exception that was caught by the simulation engine during the execution of 
-	 * the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method.
+	 * the {@link ISimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method.
 	 * Equals to <code>null</code> if no exception occurred.
 	 */
 	private Throwable caughtException;
@@ -106,7 +106,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 	 * Creates the simulation engine being used in a test of this test set.
 	 * @return A new instance of the simulation engine being used in a test of this test set.
 	 */
-	protected abstract I_SimulationEngine createEngine( );
+	protected abstract ISimulationEngine createEngine( );
 	
 	/**
 	 * {@inheritDoc}
@@ -117,21 +117,21 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 	 */
 	public void observeAtInitialTimes(
 			SimulationTimeStamp initialTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
 	 */
 	public void observeAtPartialConsistentTime(
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
 	 */
 	public void observeAtFinalTime(
 			SimulationTimeStamp finalTimestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
@@ -147,7 +147,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 	 */
 	public void reactToAbortion( 
 			SimulationTimeStamp timestamp,
-			I_SimulationEngine simulationEngine
+			ISimulationEngine simulationEngine
 	){ }
 	/**
 	 * {@inheritDoc}
@@ -190,18 +190,18 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 					SimulationExecutionTrace trace
 			) {
 				Learning_AbstractEnvironment result = new Learning_AbstractEnvironment( trace ) {
-					protected Set<I_Influence> produceInfluencesOfNatural(
+					protected Set<IInfluence> produceInfluencesOfNatural(
 							LevelIdentifier level,
-							I_DynamicState_Map levelsPublicLocalObservableDynamicState
+							IDynamicStateMap levelsPublicLocalObservableDynamicState
 					) {
-						Set<I_Influence> influences = new LinkedHashSet<I_Influence>();
+						Set<IInfluence> influences = new LinkedHashSet<IInfluence>();
 						for( LevelIdentifier levelId : levelsPublicLocalObservableDynamicState.keySet() ){
-							I_PublicLocalDynamicState dynamicState = levelsPublicLocalObservableDynamicState.get( levelId );
+							IPublicLocalDynamicState dynamicState = levelsPublicLocalObservableDynamicState.get( levelId );
 							influences.add( new Learning_Influence_EnvironmentPublicLocalStateUpdate( 
 									levelId, 
 									dynamicState.getPublicLocalStateOfEnvironment( )
 							) );
-							for( I_PublicLocalStateOfAgent agentState : dynamicState.getPublicLocalStateOfAgents() ){
+							for( IPublicLocalStateOfAgent agentState : dynamicState.getPublicLocalStateOfAgents() ){
 								influences.add( new Learning_Influence_AgentPublicLocalStateUpdate(
 										levelId, 
 										agentState
@@ -249,7 +249,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 		// Prepare the tested object
 		//
 		// Create the engine.
-		I_SimulationEngine engine = this.createEngine( );
+		ISimulationEngine engine = this.createEngine( );
 		// Add a probe listening to the errors to the simulation.
 		engine.addProbe( "Test", this );
 		// Create a model checking the behavior of the simulation engine.
@@ -316,7 +316,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 		// Prepare the tested object
 		//
 		// Create the engine.
-		I_SimulationEngine engine = this.createEngine( );
+		ISimulationEngine engine = this.createEngine( );
 		// Add a probe listening to the errors to the simulation.
 		engine.addProbe( "Test", this );
 		// Create a model checking the behavior of the simulation engine.
@@ -392,7 +392,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 		// Prepare the tested object
 		//
 		// Create the engine.
-		I_SimulationEngine engine = this.createEngine( );
+		ISimulationEngine engine = this.createEngine( );
 		// Add a probe listening to the errors to the simulation.
 		engine.addProbe( "Test", this );
 		// Create a model checking the behavior of the simulation engine.

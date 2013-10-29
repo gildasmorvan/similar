@@ -44,23 +44,32 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel;
+package fr.lgi2a.similar.microkernel.states;
+
+import fr.lgi2a.similar.microkernel.IAgent;
 
 /**
- * Models how the time stamps of the simulation or of a level evolve through time.
+ * Models the level-independent information memorized by an agent (for instance a plan used in more than one level).
  * 
  * <h1>Correspondence with theory</h1>
  * <p>
- * 	TODO formal notation
+ * 	TODO : formal notation
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_TimeModel {	
+public interface IGlobalMemoryState {
 	/**
-	 * Gets the time stamp following a specific time stamp in this model.
-	 * @param currentTime The time stamp for which this method computes a successor.
-	 * @return The time stamp following the <code>currentTime</code> time stamp.
+	 * Gets the owner of the global memory state, <i>i.e.</i> the agent which global memory state is 
+	 * this state.
+	 * <p>
+	 * 	This method is defined for optimization purposes, since keeping an association between global memory 
+	 * 	states and agents within the simulation engine would be too memory consuming.
+	 * </p>
+	 * <p>
+	 * 	TODO : formal notation.
+	 * </p>
+	 * @return The owner of the global memory state.
 	 */
-	SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime );
+	IAgent getOwner( );
 }

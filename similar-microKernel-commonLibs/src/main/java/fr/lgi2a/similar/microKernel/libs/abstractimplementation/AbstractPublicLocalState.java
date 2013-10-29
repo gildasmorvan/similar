@@ -47,14 +47,14 @@
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
 
 /**
- * An abstract implementation of the {@link I_PublicLocalState} interface, providing a default behavior to the method of the interface.
+ * An abstract implementation of the {@link IPublicLocalState} interface, providing a default behavior to the method of the interface.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractPublicLocalState implements I_PublicLocalState {
+public class AbstractPublicLocalState implements IPublicLocalState {
 	/**
 	 * The identifier of the level where this public local state is defined.
 	 */

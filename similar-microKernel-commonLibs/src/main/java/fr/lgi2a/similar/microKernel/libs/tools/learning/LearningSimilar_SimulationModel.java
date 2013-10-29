@@ -50,8 +50,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.microkernel.I_Level;
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.ILevel;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractSimulationModel;
@@ -113,10 +113,10 @@ public abstract class LearningSimilar_SimulationModel extends AbstractSimulation
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final List<I_Level> generateLevels( SimulationTimeStamp initialTime ) {
+	public final List<ILevel> generateLevels( SimulationTimeStamp initialTime ) {
 		this.trace.clearTrace();
 		List<Learning_Level> castedLevels = this.generateCastedLevels( initialTime, this.trace );
-		List<I_Level> result = new LinkedList<I_Level>();
+		List<ILevel> result = new LinkedList<ILevel>();
 		result.addAll( castedLevels );
 		return result;
 	}
@@ -143,7 +143,7 @@ public abstract class LearningSimilar_SimulationModel extends AbstractSimulation
 	@Override
 	public final EnvironmentInitializationData generateEnvironment(
 			SimulationTimeStamp initialTime,
-			Map<LevelIdentifier, I_Level> levels
+			Map<LevelIdentifier, ILevel> levels
 	) {
 		Learning_AbstractEnvironment environment = this.createEnvironment( this.trace );
 		for( LevelIdentifier levelId : levels.keySet() ){
@@ -167,7 +167,7 @@ public abstract class LearningSimilar_SimulationModel extends AbstractSimulation
 	@Override
 	public AgentInitializationData generateAgents(
 			SimulationTimeStamp initialTime,
-			Map<LevelIdentifier, I_Level> levels
+			Map<LevelIdentifier, ILevel> levels
 	) {
 		AgentInitializationData result = new AgentInitializationData( );
 		for( Learning_AbstractAgent agent : this.createAgents( this.trace ) ){
@@ -200,7 +200,7 @@ public abstract class LearningSimilar_SimulationModel extends AbstractSimulation
 	@Override
 	public boolean isFinalTimeOrAfter(
 			SimulationTimeStamp currentTime,
-			I_SimulationEngine engine
+			ISimulationEngine engine
 	) {
 		return this.finalTime.compareTo( currentTime ) <= 0;
 	}

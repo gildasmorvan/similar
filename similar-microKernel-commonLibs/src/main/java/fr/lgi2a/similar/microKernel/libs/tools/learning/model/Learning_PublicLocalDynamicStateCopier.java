@@ -47,9 +47,9 @@
 package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * This class defines a method copying the content of a dynamic state into another dynamic state.
@@ -63,9 +63,9 @@ public class Learning_PublicLocalDynamicStateCopier {
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it contains elements that are not within 
 	 * the specification of the "learning" simulation.
 	 */
-	public static I_PublicLocalDynamicState createCopy( I_PublicLocalDynamicState localDynamicState ) throws IllegalArgumentException {
-		if( localDynamicState instanceof Consistent_PublicLocalDynamicState ){
-			return createCopy( (Consistent_PublicLocalDynamicState) localDynamicState );
+	public static IPublicLocalDynamicState createCopy( IPublicLocalDynamicState localDynamicState ) throws IllegalArgumentException {
+		if( localDynamicState instanceof ConsistentPublicLocalDynamicState ){
+			return createCopy( (ConsistentPublicLocalDynamicState) localDynamicState );
 		} else {
 			throw new UnsupportedOperationException( "Cannot manage the copy of a dynamic state from the " +
 					"class '" + localDynamicState.getClass().getSimpleName() + "'" );
@@ -79,13 +79,13 @@ public class Learning_PublicLocalDynamicStateCopier {
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it contains elements that are not within 
 	 * the specification of the "learning" simulation.
 	 */
-	public static Consistent_PublicLocalDynamicState createCopy( 
-			Consistent_PublicLocalDynamicState toCopy 
+	public static ConsistentPublicLocalDynamicState createCopy( 
+			ConsistentPublicLocalDynamicState toCopy 
 	) throws IllegalArgumentException {
 		if( toCopy == null ){
 			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
 		}
-		Consistent_PublicLocalDynamicState result = new Consistent_PublicLocalDynamicState(
+		ConsistentPublicLocalDynamicState result = new ConsistentPublicLocalDynamicState(
 				new SimulationTimeStamp( toCopy.getTime() ),
 				toCopy.getLevel()
 		);
@@ -102,7 +102,7 @@ public class Learning_PublicLocalDynamicStateCopier {
 			result.setPublicLocalStateOfEnvironment( ( (Learning_PublicLocalStateOfEnvironment) toCopy.getPublicLocalStateOfEnvironment() ).createCopy() );
 		}
 		// Copy the public local state of the agents
-		for( I_PublicLocalStateOfAgent agentPublicLocalState : toCopy.getPublicLocalStateOfAgents() ){
+		for( IPublicLocalStateOfAgent agentPublicLocalState : toCopy.getPublicLocalStateOfAgents() ){
 			if( agentPublicLocalState instanceof Learning_PublicLocalStateOfAgent ){
 				Learning_PublicLocalStateOfAgent castedState = (Learning_PublicLocalStateOfAgent) agentPublicLocalState;
 				result.addPublicLocalStateOfAgent( castedState.createCopy() );

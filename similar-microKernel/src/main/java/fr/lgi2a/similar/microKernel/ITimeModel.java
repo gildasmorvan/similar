@@ -44,71 +44,23 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+package fr.lgi2a.similar.microkernel;
 
 /**
- * The map-based implementation of a dynamic state map.
+ * Models how the time stamps of the simulation or of a level evolve through time.
+ * 
+ * <h1>Correspondence with theory</h1>
+ * <p>
+ * 	TODO formal notation
+ * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class DynamicState_Map implements I_DynamicState_Map {
+public interface ITimeModel {	
 	/**
-	 * The map containing the dynamic states.
+	 * Gets the time stamp following a specific time stamp in this model.
+	 * @param currentTime The time stamp for which this method computes a successor.
+	 * @return The time stamp following the <code>currentTime</code> time stamp.
 	 */
-	private Map<LevelIdentifier,I_PublicLocalDynamicState> dynamicStates;
-	
-	/**
-	 * Builds an initially empty map.
-	 */
-	public DynamicState_Map( ) {
-		this.dynamicStates = new HashMap<LevelIdentifier, I_PublicLocalDynamicState>();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Set<LevelIdentifier> keySet() {
-		return this.dynamicStates.keySet();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public I_PublicLocalDynamicState get(
-			LevelIdentifier level
-	) throws IllegalArgumentException, NoSuchElementException {
-		if( level == null ) {
-			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
-		}
-		I_PublicLocalDynamicState result = this.dynamicStates.get( level );
-		if( result == null ){
-			throw new NoSuchElementException( "No dynamic state is defined for the level '" + level + "'." );
-		} else {
-			return result;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void put(
-			I_PublicLocalDynamicState state
-	) throws IllegalArgumentException {
-		if( state == null ){
-			throw new IllegalArgumentException( "The 'state' argument cannot be null." );
-		} else {
-			this.dynamicStates.put( state.getLevel(), state );
-		}
-	}
+	SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime );
 }

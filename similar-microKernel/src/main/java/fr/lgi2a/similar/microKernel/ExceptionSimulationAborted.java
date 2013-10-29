@@ -44,29 +44,16 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.agentbehavior;
-
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+package fr.lgi2a.similar.microkernel;
 
 /**
- * Models the data that were perceived by an agent from a specific level <code>l</code>.
- * These data include all the information that could be perceived from <code>l</code> itself and all the levels that are
- * perceptible from <code>l</code>.
- * 
- * <h1>Correspondence with theory</h1>
- * <p>
- * 	TODO : formal notation
- * </p>
+ * The exception thrown when the simulation has finished because it was aborted.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_PerceivedDataOfAgent {
+public class ExceptionSimulationAborted extends RuntimeException {
 	/**
-	 * Gets the level from which these data were perceived.
-	 * <p>
-	 * 	TODO : formal notation
-	 * </p>
-	 * @return The identifier of the level for which these data were perceived.
+	 * Serialization ID.
 	 */
-	LevelIdentifier getLevel( );
+	private static final long serialVersionUID = -7249417947876291761L;
 }

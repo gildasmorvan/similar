@@ -46,15 +46,15 @@
  */
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
-import fr.lgi2a.similar.microkernel.I_SimulationModel;
+import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
- * An abstract implementation of the {@link I_SimulationModel} interface, providing a default behavior to the initial time-related methods.
+ * An abstract implementation of the {@link ISimulationModel} interface, providing a default behavior to the initial time-related methods.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractSimulationModel implements I_SimulationModel {
+public abstract class AbstractSimulationModel implements ISimulationModel {
 	/**
 	 * The initial time stamp of this simulation model.
 	 */

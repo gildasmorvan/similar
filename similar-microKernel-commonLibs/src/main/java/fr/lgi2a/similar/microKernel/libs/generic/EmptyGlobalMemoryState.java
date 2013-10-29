@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.generic;
 
-import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMemoryState;
 
 /**
@@ -66,7 +66,7 @@ public final class EmptyGlobalMemoryState extends AbstractGlobalMemoryState {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
 	public EmptyGlobalMemoryState(
-			I_Agent owner
+			IAgent owner
 	) throws IllegalArgumentException {
 		super(owner);
 	}

@@ -49,22 +49,22 @@ package fr.lgi2a.similar.microkernel;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface I_SimulationEngine {
+public interface ISimulationEngine {
 	/**
 	 * Adds a probe to this simulation engine.
 	 * @param identifier An unique identifier for the probe.
 	 * @param probe The probe to add to this simulation engine.
 	 * @throws IllegalArgumentException If the arguments are <code>null</code>, or if a probe is already defined for this identifier.
 	 */
-	void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException;
+	void addProbe( String identifier, IProbe probe ) throws IllegalArgumentException;
 	
 	/**
 	 * Removes a probe from the simulation engine.
@@ -72,7 +72,7 @@ public interface I_SimulationEngine {
 	 * @return The removed probe, <code>null</code> if no probe having the provided identifier was registered to this engine.
 	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
 	 */
-	I_Probe removeProbe( String identifier );
+	IProbe removeProbe( String identifier );
 	
 	/**
 	 * Lists the identifier of all the probes that are registered to this engine.
@@ -94,11 +94,11 @@ public interface I_SimulationEngine {
 	 * </p>
 	 * @param simulationModel The simulation model running the simulation.
 	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
-     * @throws Exception_SimulationAborted if the simulation has ended because it was aborted by the user.
+     * @throws ExceptionSimulationAborted if the simulation has ended because it was aborted by the user.
      * @throws RuntimeException if an unexpected error caused the shutdown of the simulation engine. 
      * This exception wraps an {@link IllegalStateException} depicting the nature of the issue.
 	 */
-	void runNewSimulation( I_SimulationModel simulationModel ) throws RuntimeException, Exception_SimulationAborted;
+	void runNewSimulation( ISimulationModel simulationModel ) throws RuntimeException, ExceptionSimulationAborted;
 	
 	/**
 	 * Gets the current dynamic states of the simulation.
@@ -109,7 +109,7 @@ public interface I_SimulationEngine {
 	 * @return The dynamic state of the simulation, containing either consistent states (the current time stamp of the simulation is equal
 	 * to the time stamp of the level) or transitory states (in the other case).
 	 */
-	I_DynamicState_Map getSimulationDynamicStates( );
+	IDynamicStateMap getSimulationDynamicStates( );
 	
 	/**
 	 * Gets the set of all the agents lying in the simulation.
@@ -119,7 +119,7 @@ public interface I_SimulationEngine {
 	 * </p>
 	 * @return The set of all the agents lying in the simulation.
 	 */
-	Set<I_Agent> getAgents( );
+	Set<IAgent> getAgents( );
 	
 	/**
 	 * Gets the list of levels contained in the simulation.
@@ -137,7 +137,7 @@ public interface I_SimulationEngine {
 	 * @return The set of all the agents lying in a specific level of in the simulation.
 	 * @throws NoSuchElementException If no such level was defined for the simulation.
 	 */
-	Set<I_Agent> getAgents( LevelIdentifier level ) throws NoSuchElementException;
+	Set<IAgent> getAgents( LevelIdentifier level ) throws NoSuchElementException;
 	
 	/**
 	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.
@@ -151,5 +151,5 @@ public interface I_SimulationEngine {
 	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
 	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
 	 */
-	I_PublicLocalDynamicState disambiguation( Transitory_PublicLocalDynamicState transitoryDynamicState );
+	IPublicLocalDynamicState disambiguation( TransitoryPublicLocalDynamicState transitoryDynamicState );
 }

@@ -49,33 +49,33 @@ package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Probe;
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 
 /**
- * An abstract implementation of the {@link I_SimulationEngine} interface, providing a default behavior to the probe list-related methods.
+ * An abstract implementation of the {@link ISimulationEngine} interface, providing a default behavior to the probe list-related methods.
  * This class ensures that the iteration order over probes is the insertion order of the probes.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractSimulationEngine implements I_SimulationEngine {
+public abstract class AbstractSimulationEngine implements ISimulationEngine {
 	/**
 	 * A map containing the probes. This map ensures that the iteration order over probes is the insertion order of the probes.
 	 */
-	protected LinkedHashMap<String,I_Probe> probes;
+	protected LinkedHashMap<String,IProbe> probes;
 
 	/**
 	 * Builds an instance of this abstract simulation engine, containing no probes.
 	 */
 	public AbstractSimulationEngine(  ) {
-		this.probes = new LinkedHashMap<String,I_Probe>();
+		this.probes = new LinkedHashMap<String,IProbe>();
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addProbe( String identifier, I_Probe probe ) throws IllegalArgumentException {
+	public void addProbe( String identifier, IProbe probe ) throws IllegalArgumentException {
 		if( identifier == null ){
 			throw new IllegalArgumentException( "The 'identifier' argument cannot be null." );
 		} else if( probe == null ){
@@ -90,11 +90,11 @@ public abstract class AbstractSimulationEngine implements I_SimulationEngine {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public I_Probe removeProbe( String identifier ) {
+	public IProbe removeProbe( String identifier ) {
 		if( identifier == null ){
 			throw new IllegalArgumentException( "The 'identifier' argument cannot be null." );
 		}
-		I_Probe removedProbe = this.probes.remove( identifier );
+		IProbe removedProbe = this.probes.remove( identifier );
 		return removedProbe;
 	}
 

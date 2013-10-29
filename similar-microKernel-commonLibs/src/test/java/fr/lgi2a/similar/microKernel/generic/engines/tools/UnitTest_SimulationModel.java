@@ -49,9 +49,9 @@ package fr.lgi2a.similar.microkernel.generic.engines.tools;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.microkernel.I_Level;
-import fr.lgi2a.similar.microkernel.I_SimulationEngine;
-import fr.lgi2a.similar.microkernel.I_SimulationModel;
+import fr.lgi2a.similar.microkernel.ILevel;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
@@ -59,42 +59,42 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
  * A simulation model where the value returned by each method is defined in the constructor.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class UnitTest_SimulationModel implements I_SimulationModel {
+public class UnitTest_SimulationModel implements ISimulationModel {
 	/**
-	 * The value returned by the {@link I_SimulationModel#getInitialTime()} method.
+	 * The value returned by the {@link ISimulationModel#getInitialTime()} method.
 	 */
 	private SimulationTimeStamp initialTime;
 	/**
-	 * The static value returned by the {@link I_SimulationModel#isFinalTimeOrAfter(SimulationTimeStamp)} method.
+	 * The static value returned by the {@link ISimulationModel#isFinalTimeOrAfter(SimulationTimeStamp)} method.
 	 */
 	private boolean finalTimeOrAfter;
 	/**
-	 * The static value returned by the {@link I_SimulationModel#generateLevels(SimulationTimeStamp)} method.
+	 * The static value returned by the {@link ISimulationModel#generateLevels(SimulationTimeStamp)} method.
 	 */
-	private List<I_Level> generateLevels;
+	private List<ILevel> generateLevels;
 	/**
-	 * The static value returned by the {@link I_SimulationModel#generateEnvironment(SimulationTimeStamp, Map)} method.
+	 * The static value returned by the {@link ISimulationModel#generateEnvironment(SimulationTimeStamp, Map)} method.
 	 */
 	private EnvironmentInitializationData generateEnvironment;
 	/**
-	 * The static value returned by the {@link I_SimulationModel#generateAgents(SimulationTimeStamp, Map)} method.
+	 * The static value returned by the {@link ISimulationModel#generateAgents(SimulationTimeStamp, Map)} method.
 	 */
 	private AgentInitializationData generateAgents;
 	
 	/**
 	 * Creates a simulation model where the value returned by each method is defined in the constructor.
-	 * @param initialTime The value returned by the {@link I_SimulationModel#getInitialTime()} method.
-	 * @param nextTime The static value returned by the {@link I_SimulationModel#getNextTime(SimulationTimeStamp)} method.
-	 * @param finalTimeOrAfter The static value returned by the {@link I_SimulationModel#isFinalTimeOrAfter(SimulationTimeStamp)} method.
-	 * @param generateLevels The static value returned by the {@link I_SimulationModel#generateLevels(SimulationTimeStamp)} method.
-	 * @param generateEnvironment The static value returned by the {@link I_SimulationModel#generateEnvironment(SimulationTimeStamp, Map)} method.
-	 * @param generateAgents The static value returned by the {@link I_SimulationModel#generateAgents(SimulationTimeStamp, Map)} method.
+	 * @param initialTime The value returned by the {@link ISimulationModel#getInitialTime()} method.
+	 * @param nextTime The static value returned by the {@link ISimulationModel#getNextTime(SimulationTimeStamp)} method.
+	 * @param finalTimeOrAfter The static value returned by the {@link ISimulationModel#isFinalTimeOrAfter(SimulationTimeStamp)} method.
+	 * @param generateLevels The static value returned by the {@link ISimulationModel#generateLevels(SimulationTimeStamp)} method.
+	 * @param generateEnvironment The static value returned by the {@link ISimulationModel#generateEnvironment(SimulationTimeStamp, Map)} method.
+	 * @param generateAgents The static value returned by the {@link ISimulationModel#generateAgents(SimulationTimeStamp, Map)} method.
 	 */
 	public UnitTest_SimulationModel( 
 			SimulationTimeStamp initialTime,
 			SimulationTimeStamp nextTime,
 			boolean finalTimeOrAfter,
-			List<I_Level> generateLevels,
+			List<ILevel> generateLevels,
 			EnvironmentInitializationData generateEnvironment,
 			AgentInitializationData generateAgents
 	) {
@@ -117,7 +117,7 @@ public class UnitTest_SimulationModel implements I_SimulationModel {
 	 * Returns a value defined in the constructor of the object.
 	 */
 	@Override
-	public boolean isFinalTimeOrAfter( SimulationTimeStamp currentTime, I_SimulationEngine engine) {
+	public boolean isFinalTimeOrAfter( SimulationTimeStamp currentTime, ISimulationEngine engine) {
 		return this.finalTimeOrAfter;
 	}
 
@@ -125,7 +125,7 @@ public class UnitTest_SimulationModel implements I_SimulationModel {
 	 * Returns a value defined in the constructor of the object.
 	 */
 	@Override
-	public List<I_Level> generateLevels(SimulationTimeStamp initialTime) {
+	public List<ILevel> generateLevels(SimulationTimeStamp initialTime) {
 		return this.generateLevels;
 	}
 
@@ -135,7 +135,7 @@ public class UnitTest_SimulationModel implements I_SimulationModel {
 	@Override
 	public EnvironmentInitializationData generateEnvironment(
 			SimulationTimeStamp initialTime,
-			Map<LevelIdentifier, I_Level> levels
+			Map<LevelIdentifier, ILevel> levels
 	) {
 		return this.generateEnvironment;
 	}
@@ -146,7 +146,7 @@ public class UnitTest_SimulationModel implements I_SimulationModel {
 	@Override
 	public AgentInitializationData generateAgents(
 			SimulationTimeStamp initialTime,
-			Map<LevelIdentifier, I_Level> levels
+			Map<LevelIdentifier, ILevel> levels
 	) {
 		return this.generateAgents;
 	}

@@ -49,12 +49,12 @@ package fr.lgi2a.similar.microkernel.generic.engines.tools;
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
-import fr.lgi2a.similar.microkernel.I_Level;
+import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.ConsistentPublicLocalDynamicState;
 
 /**
  * A level where the value returned by each method is defined in the constructor.
@@ -63,15 +63,15 @@ import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDy
  */
 public class UnitTest_Level extends AbstractLevel {
 	/**
-	 * The value returned by the {@link I_Level#getNextTime(SimulationTimeStamp)} method.
+	 * The value returned by the {@link ILevel#getNextTime(SimulationTimeStamp)} method.
 	 */
 	private SimulationTimeStamp nextTime;
 
 	/**
 	 * Builds a level where the value returned by each method is defined in the constructor.
-	 * @param initialTime The value returned by the {@link I_Level#getInitialTime()} method.
-	 * @param identifier The value returned by the {@link I_Level#getIdentifier()} method.
-	 * @param nextTime The value returned by the {@link I_Level#getNextTime(SimulationTimeStamp)} method.
+	 * @param initialTime The value returned by the {@link ILevel#getInitialTime()} method.
+	 * @param identifier The value returned by the {@link ILevel#getIdentifier()} method.
+	 * @param nextTime The value returned by the {@link ILevel#getNextTime(SimulationTimeStamp)} method.
 	 * @throws IllegalArgumentException if the <code>initialTime</code> or <code>identifier</code> arguments are <code>null</code>.
 	 */
 	public UnitTest_Level(
@@ -99,9 +99,9 @@ public class UnitTest_Level extends AbstractLevel {
 	public void makeRegularReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState consistentState,
-			Set<I_Influence> regularInfluencesOftransitoryStateDynamics,
-			Set<I_Influence> remainingInfluences
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
+			Set<IInfluence> remainingInfluences
 	) { 
 		// Does nothing
 	}
@@ -113,10 +113,10 @@ public class UnitTest_Level extends AbstractLevel {
 	public void makeSystemReaction(
 			SimulationTimeStamp previousConsistentStateTime,
 			SimulationTimeStamp newConsistentStateTime,
-			Consistent_PublicLocalDynamicState consistentState,
-			Collection<I_Influence> systemInfluencesToManage,
+			ConsistentPublicLocalDynamicState consistentState,
+			Collection<IInfluence> systemInfluencesToManage,
 			boolean happensBeforeRegularReaction,
-			Collection<I_Influence> newInfluencesToProcess
+			Collection<IInfluence> newInfluencesToProcess
 	) { 
 		// Does nothing
 	}

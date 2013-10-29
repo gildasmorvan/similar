@@ -49,7 +49,7 @@ package fr.lgi2a.similar.microkernel.examples.traceusage1.environment;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
@@ -58,10 +58,10 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLoc
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalState;
+import fr.lgi2a.similar.microkernel.states.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.IDynamicStateMap;
 
 /**
  * Models the environment as described in the specification of the "one level - two agents - trace" simulation.
@@ -87,9 +87,9 @@ public class MyEnvironment extends Learning_AbstractEnvironment {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected Set<I_Influence> produceInfluencesOfNatural(
+	protected Set<IInfluence> produceInfluencesOfNatural(
 			LevelIdentifier level,
-			I_DynamicState_Map levelsPublicLocalObservableDynamicState
+			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
 		// Create the set of influences that will be returned by the natural action of the environment.
 		//
@@ -97,13 +97,13 @@ public class MyEnvironment extends Learning_AbstractEnvironment {
 		//		- Learning_Influence_AgentPublicLocalStateUpdate
 		//		- Learning_Influence_EnvironmentPublicLocalStateUpdate
 		//
-		Set<I_Influence> producedInfluences = new LinkedHashSet<I_Influence>( );
+		Set<IInfluence> producedInfluences = new LinkedHashSet<IInfluence>( );
 		//
 		// Iterate over the public local state of the agent, and tell that the environment requests their modification.
 		//
 		// First get the set containing the public local state of the agents in the 'level 1' level.
-		I_PublicLocalDynamicState levelPublicLocalDynamicState = levelsPublicLocalObservableDynamicState.get( MyLevelIdentifiers.SIMULATION_LEVEL );
-		for( I_PublicLocalStateOfAgent agentPublicLocalState : levelPublicLocalDynamicState.getPublicLocalStateOfAgents() ){
+		IPublicLocalDynamicState levelPublicLocalDynamicState = levelsPublicLocalObservableDynamicState.get( MyLevelIdentifiers.SIMULATION_LEVEL );
+		for( IPublicLocalStateOfAgent agentPublicLocalState : levelPublicLocalDynamicState.getPublicLocalStateOfAgents() ){
 			// Cast the public local state of the agent in the appropriate class.
 			Learning_PublicLocalStateOfAgent castedAgentState = (Learning_PublicLocalStateOfAgent) agentPublicLocalState;
 			// Then create the influence telling that the environment requests the modification of this state.
@@ -117,7 +117,7 @@ public class MyEnvironment extends Learning_AbstractEnvironment {
 		//
 		// Add an influence updating the value of the public local state of the environment.
 		//
-		I_PublicLocalState environmentPublicLocalState = levelPublicLocalDynamicState.getPublicLocalStateOfEnvironment();
+		IPublicLocalState environmentPublicLocalState = levelPublicLocalDynamicState.getPublicLocalStateOfEnvironment();
 		// Cast the public local state of the environment in the appropriate class.
 		Learning_PublicLocalStateOfEnvironment castedEnvironmentState = (Learning_PublicLocalStateOfEnvironment) environmentPublicLocalState;
 		// Then create the influence telling that the environment requests the modification of this state.

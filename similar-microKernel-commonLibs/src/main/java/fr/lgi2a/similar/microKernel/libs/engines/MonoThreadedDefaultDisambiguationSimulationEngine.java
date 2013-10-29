@@ -254,7 +254,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 						this
 				);
 			}
-		} catch( Throwable t ) {
+		} catch( Exception t ) {
 			// In this case, both the simulation engine and the simulation model are in an
 			// invalid state because of the error.
 			// The simulation is stopped, and the probes are told to process the error.
@@ -475,11 +475,11 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	 * @param simulationModel The model of the simulation.
 	 * @return The final time stamp of the simulation.
 	 * @throws ExceptionSimulationAborted If the simulation was aborted by the user.
-	 * @throws Throwable If an exception was caught while running the simulation.
+	 * @throws Exception If an exception was caught while running the simulation.
 	 */
 	protected SimulationTimeStamp performSimulation( 
 			ISimulationModel simulationModel 
-	) throws Throwable, ExceptionSimulationAborted {
+	) throws ExceptionSimulationAborted {
 		// Iterate over all the time stamps of the simulation
 		SimulationTimeStamp lastPartlyConsistentStateTimestamp = simulationModel.getInitialTime();
 		//

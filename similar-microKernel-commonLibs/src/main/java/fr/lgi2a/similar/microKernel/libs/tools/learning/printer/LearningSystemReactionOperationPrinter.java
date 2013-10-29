@@ -73,46 +73,46 @@ public class LearningSystemReactionOperationPrinter extends LearningEngineOperat
 	public void print( int indentation, ILearningEngineOperation operation ) {
 		LearningEngineOperationSystemReaction castedop = (LearningEngineOperationSystemReaction) operation;
 		printIndentation( indentation );
-		System.out.println( "User-defined reaction to the system influences of the level '" + castedop.getNewConsistentStateAtBeginning().getLevel() + "':" );
+		LearningTracePrinter.PRINTER.println( "User-defined reaction to the system influences of the level '" + castedop.getNewConsistentStateAtBeginning().getLevel() + "':" );
 		printIndentation( indentation + 1 );
-		System.out.println( "This reaction is performed for the following transitory period of the level:" );
+		LearningTracePrinter.PRINTER.println( "This reaction is performed for the following transitory period of the level:" );
 		printIndentation( indentation + 2 );
-		System.out.println( "From " +  castedop.getPreviousConsistentStateTime() + " to " + castedop.getNewConsistentStateTime() );
+		LearningTracePrinter.PRINTER.println( "From " +  castedop.getPreviousConsistentStateTime() + " to " + castedop.getNewConsistentStateTime() );
 		printIndentation( indentation + 1 );
-		System.out.println( "This reaction was performed: " );
+		LearningTracePrinter.PRINTER.println( "This reaction was performed: " );
 		printIndentation( indentation + 2 );
 		if( castedop.hasHappenedBeforeRegularReaction() ){
-			System.out.print( "Before" );
+			LearningTracePrinter.PRINTER.print( "Before" );
 		} else {
-			System.out.print( "After" );
+			LearningTracePrinter.PRINTER.print( "After" );
 		}
-		System.out.println( " the user-defined reaction to the regular influences of the level." );
+		LearningTracePrinter.PRINTER.println( " the user-defined reaction to the regular influences of the level." );
 		printIndentation( indentation + 1 );
-		System.out.println( "Public local state of the level before the user-defined reaction:" );
+		LearningTracePrinter.PRINTER.println( "Public local state of the level before the user-defined reaction:" );
 		LearningTracePrinter.printLocalDynamicState( indentation + 2, castedop.getNewConsistentStateAtBeginning() );
 		printIndentation( indentation + 1 );
-		System.out.println( "The system influences for which the user-defined reaction is measured were:" );
+		LearningTracePrinter.PRINTER.println( "The system influences for which the user-defined reaction is measured were:" );
 		if( castedop.getSystemInfluencesToManageArgument().isEmpty() ){
 			printIndentation( indentation + 2 );
-			System.out.println( "NO INFLUENCES" );
+			LearningTracePrinter.PRINTER.println( "NO INFLUENCES" );
 		} else {
 			for( IInfluence influence : castedop.getSystemInfluencesToManageArgument() ){
 				printIndentation( indentation + 2 );
-				System.out.println( influence );
+				LearningTracePrinter.PRINTER.println( influence );
 			}
 		}
 		printIndentation( indentation + 1 );
-		System.out.println( "Public local state of the level after the user-defined reaction:" );
+		LearningTracePrinter.PRINTER.println( "Public local state of the level after the user-defined reaction:" );
 		LearningTracePrinter.printLocalDynamicState( indentation + 2, castedop.getNewConsistentStateAtEnd() );
 		printIndentation( indentation + 1 );
-		System.out.println( "Influences that were produced by the user-defined reaction:" );
+		LearningTracePrinter.PRINTER.println( "Influences that were produced by the user-defined reaction:" );
 		if( castedop.getProducedInfluences().isEmpty() ){
 			printIndentation( indentation + 2 );
-			System.out.println( "NO INFLUENCES" );
+			LearningTracePrinter.PRINTER.println( "NO INFLUENCES" );
 		} else {
 			for( IInfluence influence : castedop.getProducedInfluences() ){
 				printIndentation( indentation + 2 );
-				System.out.println( influence );
+				LearningTracePrinter.PRINTER.println( influence );
 			}
 		}
 	}

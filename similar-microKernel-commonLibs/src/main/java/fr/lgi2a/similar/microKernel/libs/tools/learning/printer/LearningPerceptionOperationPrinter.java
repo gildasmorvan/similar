@@ -73,17 +73,17 @@ public class LearningPerceptionOperationPrinter extends LearningEngineOperationP
 	public void print( int indentation, ILearningEngineOperation operation ) {
 		LearningEngineOperationPerception castedop = (LearningEngineOperationPerception) operation;
 		printIndentation( indentation );
-		System.out.println( "Perception operation from the level '" + castedop.getLevel() + "' of the agent having the physical " +
+		LearningTracePrinter.PRINTER.println( "Perception operation from the level '" + castedop.getLevel() + "' of the agent having the physical " +
 				"state: " + castedop.getAgentPublicLocalState() );
 		printIndentation( indentation + 1 );
-		System.out.println( "Perceived public local dynamic states:" );
+		LearningTracePrinter.PRINTER.println( "Perceived public local dynamic states:" );
 		for( LevelIdentifier levelId : castedop.getLevelsPublicLocalObservableDynamicState().keySet() ){
 			LearningTracePrinter.printLocalDynamicState( indentation + 2, castedop.getLevelsPublicLocalObservableDynamicState().get( levelId ) );
 		}
 		printIndentation( indentation + 1 );
-		System.out.println( "The returned value has the identifier:" );
+		LearningTracePrinter.PRINTER.println( "The returned value has the identifier:" );
 		printIndentation( indentation + 2 );
-		System.out.println( castedop.getMethodResult().getIdentifier() );
+		LearningTracePrinter.PRINTER.println( castedop.getMethodResult().getIdentifier() );
 		
 	}
 }

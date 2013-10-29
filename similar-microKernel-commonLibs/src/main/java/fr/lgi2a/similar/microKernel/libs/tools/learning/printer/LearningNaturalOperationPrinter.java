@@ -76,22 +76,22 @@ public class LearningNaturalOperationPrinter extends LearningEngineOperationPrin
 	public void print( int indentation, ILearningEngineOperation operation ) {
 		LearningEngineOperationNatural castedop = (LearningEngineOperationNatural) operation;
 		printIndentation( indentation );
-		System.out.println( "Natural operation from the level '" + castedop.getLevel() + "' of the " +
+		LearningTracePrinter.PRINTER.println( "Natural operation from the level '" + castedop.getLevel() + "' of the " +
 				"environment:" );
 		printIndentation( indentation + 1 );
-		System.out.println( "Observable public local dynamic states:" );
+		LearningTracePrinter.PRINTER.println( "Observable public local dynamic states:" );
 		for( LevelIdentifier levelId : castedop.getLevelsPublicLocalObservableDynamicState().keySet() ){
 			LearningTracePrinter.printLocalDynamicState( indentation + 2, castedop.getLevelsPublicLocalObservableDynamicState().get( levelId ) );
 		}
 		printIndentation( indentation + 1 );
-		System.out.println( "Influences that were produced by the natural:" );
+		LearningTracePrinter.PRINTER.println( "Influences that were produced by the natural:" );
 		InfluencesMap influences = castedop.getProducedInfluences();
 		for( LevelIdentifier levelId : influences.getDefinedKeys() ){
 			printIndentation( indentation + 2 );
-			System.out.println( "Destined to the level '" + levelId + "':" );
+			LearningTracePrinter.PRINTER.println( "Destined to the level '" + levelId + "':" );
 			for( IInfluence influence : influences.getInfluencesForLevel( levelId ) ){
 				printIndentation( indentation + 3 );
-				System.out.println( influence );
+				LearningTracePrinter.PRINTER.println( influence );
 			}
 		}
 	}

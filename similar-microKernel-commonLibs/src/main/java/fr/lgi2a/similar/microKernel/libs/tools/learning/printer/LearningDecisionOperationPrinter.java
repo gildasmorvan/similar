@@ -50,6 +50,7 @@ import static fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrin
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationDecision;
 
@@ -74,25 +75,25 @@ public class LearningDecisionOperationPrinter extends LearningEngineOperationPri
 	public void print( int indentation, ILearningEngineOperation operation ) {
 		LearningEngineOperationDecision castedop = (LearningEngineOperationDecision) operation;
 		printIndentation( indentation );
-		System.out.println( "Decision operation from the level '" + castedop.getLevel() + "' of the " +
+		LearningTracePrinter.PRINTER.println( "Decision operation from the level '" + castedop.getLevel() + "' of the " +
 				"agent '" + castedop.getMemoryState().getOwner().getCategory() + "':" );
 		printIndentation( indentation + 1 );
-		System.out.println( "Global memory state used by decision:" );
+		LearningTracePrinter.PRINTER.println( "Global memory state used by decision:" );
 		printIndentation( indentation + 2 );
-		System.out.println( castedop.getMemoryState() );
+		LearningTracePrinter.PRINTER.println( castedop.getMemoryState() );
 		printIndentation( indentation + 1 );
-		System.out.println( "Perceived data used by decision:" );
+		LearningTracePrinter.PRINTER.println( "Perceived data used by decision:" );
 		printIndentation( indentation + 2 );
-		System.out.println( "The perceived data with the identifier '" + castedop.getPerceivedData().getIdentifier() + "'" );
+		LearningTracePrinter.PRINTER.println( "The perceived data with the identifier '" + castedop.getPerceivedData().getIdentifier() + "'" );
 		printIndentation( indentation + 1 );
-		System.out.println( "Influences that were produced by the decision:" );
+		LearningTracePrinter.PRINTER.println( "Influences that were produced by the decision:" );
 		InfluencesMap influences = castedop.getProducedInfluences();
 		for( LevelIdentifier levelId : influences.getDefinedKeys() ){
 			printIndentation( indentation + 2 );
-			System.out.println( "Destined to the level '" + levelId + "':" );
+			LearningTracePrinter.PRINTER.println( "Destined to the level '" + levelId + "':" );
 			for( IInfluence influence : influences.getInfluencesForLevel( levelId ) ){
 				printIndentation( indentation + 3 );
-				System.out.println( influence );
+				LearningTracePrinter.PRINTER.println( influence );
 			}
 		}
 	}

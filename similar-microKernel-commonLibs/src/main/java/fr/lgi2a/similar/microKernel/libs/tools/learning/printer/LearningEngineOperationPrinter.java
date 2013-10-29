@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.printer;
 
-import static fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter.*;
-
+import static fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter.printIndentation;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
 
 /**
@@ -123,7 +123,7 @@ public abstract class LearningEngineOperationPrinter {
 		@Override
 		public void print( int indentation, ILearningEngineOperation operation ) {
 			printIndentation( indentation );
-			System.out.println( "Unknown operation (type " + operation.getOperationType() + ")" );
+			LearningTracePrinter.PRINTER.println( "Unknown operation (type " + operation.getOperationType() + ")" );
 		}
 	}
 }

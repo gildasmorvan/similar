@@ -51,6 +51,7 @@ import static fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrin
 import java.util.Map.Entry;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningTracePrinter;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.ILearningEngineOperation;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationReviseMemory;
@@ -76,20 +77,20 @@ public class LearningMemoryRevisionOperationPrinter extends LearningEngineOperat
 	public void print( int indentation, ILearningEngineOperation operation ) {
 		LearningEngineOperationReviseMemory castedop = (LearningEngineOperationReviseMemory) operation;
 		printIndentation( indentation );
-		System.out.println( "Memory revision of the agent '" + castedop.getPreviousMemoryState().getOwner().getCategory() + "':" );
+		LearningTracePrinter.PRINTER.println( "Memory revision of the agent '" + castedop.getPreviousMemoryState().getOwner().getCategory() + "':" );
 		printIndentation( indentation + 1 );
-		System.out.println( "Global memory state before memory revision:" );
+		LearningTracePrinter.PRINTER.println( "Global memory state before memory revision:" );
 		printIndentation( indentation + 2 );
-		System.out.println( castedop.getPreviousMemoryState() );
+		LearningTracePrinter.PRINTER.println( castedop.getPreviousMemoryState() );
 		printIndentation( indentation + 1 );
-		System.out.println( "Perceived data before memory revision:" );
+		LearningTracePrinter.PRINTER.println( "Perceived data before memory revision:" );
 		for( Entry<LevelIdentifier,LearningPerceivedDataOfAgent> entry : castedop.getPerceivedData().entrySet() ){
 			printIndentation( indentation + 2 );
-			System.out.println( "Level '" + entry.getKey() + "': The perceived data with the identifier '" + entry.getValue().getIdentifier() + "'." );
+			LearningTracePrinter.PRINTER.println( "Level '" + entry.getKey() + "': The perceived data with the identifier '" + entry.getValue().getIdentifier() + "'." );
 		}
 		printIndentation( indentation + 1 );
-		System.out.println( "Global memory state after revision:" );
+		LearningTracePrinter.PRINTER.println( "Global memory state after revision:" );
 		printIndentation( indentation + 2 );
-		System.out.println( castedop.getMethodResult() );
+		LearningTracePrinter.PRINTER.println( castedop.getMethodResult() );
 	}
 }

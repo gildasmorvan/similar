@@ -48,21 +48,21 @@ package fr.lgi2a.similar.microKernel.libs.tools.learning;
 
 import java.util.List;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.printer.Learning_EngineOperationPrinter;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationMoment;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_ReasonOfSimulationEnd;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_SimulationDynamicState;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * Provides methods printing the content of the trace on screen.

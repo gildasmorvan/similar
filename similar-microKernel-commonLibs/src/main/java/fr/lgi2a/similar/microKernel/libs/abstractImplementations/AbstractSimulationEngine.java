@@ -49,8 +49,8 @@ package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Probe;
-import fr.lgi2a.similar.microKernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.I_Probe;
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
 
 /**
  * An abstract implementation of the {@link I_SimulationEngine} interface, providing a default behavior to the probe list-related methods.

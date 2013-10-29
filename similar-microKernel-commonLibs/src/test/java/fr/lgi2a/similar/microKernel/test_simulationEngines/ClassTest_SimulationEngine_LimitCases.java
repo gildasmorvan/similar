@@ -55,21 +55,21 @@ import java.util.List;
 
 import org.junit.Test;
 
-import fr.lgi2a.similar.microKernel.I_Level;
-import fr.lgi2a.similar.microKernel.I_Probe;
-import fr.lgi2a.similar.microKernel.I_SimulationEngine;
-import fr.lgi2a.similar.microKernel.I_SimulationModel;
-import fr.lgi2a.similar.microKernel.I_SimulationModel.AgentInitializationData;
-import fr.lgi2a.similar.microKernel.I_SimulationModel.EnvironmentInitializationData;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractEnvironment;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPublicLocalState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.Test_LevelIdentifiers;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.UnitTest_Level;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.UnitTest_SimulationModel;
+import fr.lgi2a.similar.microkernel.I_Level;
+import fr.lgi2a.similar.microkernel.I_Probe;
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.I_SimulationModel;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.I_SimulationModel.AgentInitializationData;
+import fr.lgi2a.similar.microkernel.I_SimulationModel.EnvironmentInitializationData;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * This unit test checks that erroneous simulation models do raise exceptions when appropriate for a specific 
@@ -215,7 +215,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements I_Probe {
 	
 	/**
 	 * Tests that an {@link IllegalStateException} exception is caught if the 
-	 * {@link I_SimulationModel#generateLevels(fr.lgi2a.similar.microKernel.SimulationTimeStamp)} method
+	 * {@link I_SimulationModel#generateLevels(fr.lgi2a.similar.microkernel.SimulationTimeStamp)} method
 	 * of the model used with the simulation engine returns <code>null</code>.
 	 */
 	@Test

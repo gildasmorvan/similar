@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
 
 /**
  * An abstract implementation of the {@link I_PerceivedDataOfAgent} interface, providing a default behavior to the method of the interface.

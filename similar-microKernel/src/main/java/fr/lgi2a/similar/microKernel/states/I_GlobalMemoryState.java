@@ -44,9 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.states;
+package fr.lgi2a.similar.microkernel.states;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
+import fr.lgi2a.similar.microkernel.I_Agent;
 
 /**
  * Models the level-independent information memorized by an agent (for instance a plan used in more than one level).

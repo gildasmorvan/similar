@@ -44,18 +44,18 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.states.dynamicStates;
+package fr.lgi2a.similar.microkernel.states.dynamicstate;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**
  * Models the public dynamic state of a level when the level is in a transitory phase, <i>i.e.</i> 

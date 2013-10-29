@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microKernel.test_simulationEngines.tools;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Defines preset level identifiers to use in unit tests.

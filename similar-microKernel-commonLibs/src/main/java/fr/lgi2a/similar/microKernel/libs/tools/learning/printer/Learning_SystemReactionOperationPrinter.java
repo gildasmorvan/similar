@@ -47,10 +47,10 @@
 package fr.lgi2a.similar.microKernel.libs.tools.learning.printer;
 
 import static fr.lgi2a.similar.microKernel.libs.tools.learning.Learning_TracePrinter.printIndentation;
-import fr.lgi2a.similar.microKernel.I_Influence;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.Learning_TracePrinter;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_SystemReaction;
+import fr.lgi2a.similar.microkernel.I_Influence;
 
 /**
  * An element of the engine operation printing chain of responsibility.

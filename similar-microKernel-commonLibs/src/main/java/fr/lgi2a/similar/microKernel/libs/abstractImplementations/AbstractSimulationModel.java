@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 
-import fr.lgi2a.similar.microKernel.I_SimulationModel;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.I_SimulationModel;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * An abstract implementation of the {@link I_SimulationModel} interface, providing a default behavior to the initial time-related methods.

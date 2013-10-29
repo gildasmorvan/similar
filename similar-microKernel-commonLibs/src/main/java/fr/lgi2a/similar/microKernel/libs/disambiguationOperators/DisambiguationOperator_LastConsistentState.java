@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.disambiguationOperators;
 
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
 
 /**
  * Defines the implementation of a disambiguation operator always returning the last consistent state of the level.

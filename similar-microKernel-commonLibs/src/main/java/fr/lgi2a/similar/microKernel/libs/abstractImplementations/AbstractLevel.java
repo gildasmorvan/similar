@@ -49,11 +49,11 @@ package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Level;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.I_Modifiable_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.I_Level;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.I_Modifiable_PublicLocalDynamicState;
 
 /**
  * An abstract implementation of the {@link I_Level} interface, providing a default behavior to most methods.
@@ -83,8 +83,8 @@ public abstract class AbstractLevel implements I_Level {
 	 * Builds an initialized instance of level having a specific initial time, a specific identifier, a perception and influence 
 	 * relation graph containing only an edge between this level and itself and an empty initial consistent dynamic state.
 	 * This dynamic state has to be initialized using the 
-	 * {@link I_Modifiable_PublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microKernel.states.I_PublicLocalState)},
-	 * {@link I_Modifiable_PublicLocalDynamicState#setStateDynamicsAsCopyOf(Set)} and {@link I_Modifiable_PublicLocalDynamicState#addPublicLocalStateOfAgent(fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent)}
+	 * {@link I_Modifiable_PublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.states.I_PublicLocalState)},
+	 * {@link I_Modifiable_PublicLocalDynamicState#setStateDynamicsAsCopyOf(Set)} and {@link I_Modifiable_PublicLocalDynamicState#addPublicLocalStateOfAgent(fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent)}
 	 * methods.
 	 * @param initialTime The initial time stamp of the level.
 	 * @param identifier The identifier of the level.

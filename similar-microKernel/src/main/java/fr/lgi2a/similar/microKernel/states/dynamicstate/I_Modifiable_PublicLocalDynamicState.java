@@ -44,15 +44,15 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.states.dynamicStates;
+package fr.lgi2a.similar.microkernel.states.dynamicstate;
 
 import java.util.Collection;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**
  * Models a modifiable public local dynamic state.

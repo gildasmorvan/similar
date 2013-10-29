@@ -49,7 +49,6 @@ package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace;
 import java.util.LinkedList;
 import java.util.List;
 
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents.ActorAgent;
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents.ProcrastinatorAgent;
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.environment.MyEnvironment;
@@ -59,6 +58,7 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractA
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractEnvironment;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_Level;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models the simulation model of the "one level - two agents - trace" simulation.

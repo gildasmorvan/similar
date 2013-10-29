@@ -44,9 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+
 /**
- * Defines the system influences of the micro kernel.
+ * Defines the different implementations of a dynamic state of the simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.influences.systemInfluences;
+package fr.lgi2a.similar.microkernel.states.dynamicstate;

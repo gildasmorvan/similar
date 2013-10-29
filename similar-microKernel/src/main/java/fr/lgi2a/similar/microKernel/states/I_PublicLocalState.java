@@ -44,9 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.states;
+package fr.lgi2a.similar.microkernel.states;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Models the public local state of an agent or of the environment.

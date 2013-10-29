@@ -51,11 +51,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**
  * An abstract implementation of the {@link I_Agent} interface, providing a default behavior to the generic methods.

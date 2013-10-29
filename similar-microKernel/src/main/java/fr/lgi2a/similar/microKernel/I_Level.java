@@ -44,12 +44,12 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microkernel;
 
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
 
 /**
  * Models a level of the simulation.

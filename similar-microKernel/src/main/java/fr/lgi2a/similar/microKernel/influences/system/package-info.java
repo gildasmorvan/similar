@@ -44,58 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.influences.systemInfluences;
-
-import fr.lgi2a.similar.microKernel.I_Agent;
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.influences.SystemInfluence;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
-
 /**
- * The system influence sent to a level when the reaction of that level has to remove the agent from the simulation, 
- * and make disappear its public local state from the public dynamic state of the levels.
+ * Defines the system influences of the micro kernel.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class SystemInfluence_RemoveAgent extends SystemInfluence {
-	/**
-	 * The category of this influence.
-	 */
-	public static final String CATEGORY = "System influence - Remove agent";
-
-	/**
-	 * The agent to remove from the simulation.
-	 */
-	private I_Agent agent;
-	
-	/**
-	 * Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link I_Influence#getTargetLevel()}
-	 * @param publicLocalStateOfAgent The agent to remove from the simulation.
-	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
-	 */
-	public SystemInfluence_RemoveAgent( LevelIdentifier targetLevel, I_PublicLocalStateOfAgent publicLocalStateOfAgent ) throws IllegalArgumentException {
-		super( CATEGORY, targetLevel );
-		if( this.agent == null ){
-			throw new IllegalArgumentException( "The 'publicLocalStateOfAgent' argument cannot be null." );
-		}
-		this.agent = publicLocalStateOfAgent.getOwner();
-	}
-
-	/**
-	 * Gets the agent to remove from the simulation.
-	 * @return The agent to remove from the simulation.
-	 */
-	public I_Agent getAgent(){
-		return this.agent;
-	}
-
-	/**
-	 * Uses the category, the target level and the removed agent of the influence to build a printable version of this object.
-	 * @return The concatenation of the category, the target level and the removed agent of the influence.
-	 */
-	public String toString(){
-		return super.toString() + ", removing " + this.agent.toString();
-	}
-}
+package fr.lgi2a.similar.microkernel.influences.system;

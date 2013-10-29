@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.abstractImplementations;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
 
 /**
  * An abstract implementation of the {@link I_PublicLocalState} interface, providing a default behavior to the method of the interface.

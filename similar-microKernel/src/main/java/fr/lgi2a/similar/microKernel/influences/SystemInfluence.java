@@ -44,10 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.influences;
+package fr.lgi2a.similar.microkernel.influences;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Models a system influence that has to be managed at least by the simulation engine of the simulation.

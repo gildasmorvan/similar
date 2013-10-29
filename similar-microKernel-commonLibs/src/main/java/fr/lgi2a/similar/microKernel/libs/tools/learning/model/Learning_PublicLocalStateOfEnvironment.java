@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPublicLocalState;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Models the public local state of the environment in a specific level of the "learning" simulation.

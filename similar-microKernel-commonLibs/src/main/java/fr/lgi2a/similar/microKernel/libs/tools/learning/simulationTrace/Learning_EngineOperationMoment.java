@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace;
 
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models a moment of the simulation, <i>i.e.</i> either when the simulation engine performed an operation or at a time stamp.

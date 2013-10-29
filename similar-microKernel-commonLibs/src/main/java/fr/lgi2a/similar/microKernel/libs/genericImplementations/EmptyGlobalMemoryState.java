@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.genericImplementations;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.I_Agent;
 
 /**
  * Models a global memory state containing no information.

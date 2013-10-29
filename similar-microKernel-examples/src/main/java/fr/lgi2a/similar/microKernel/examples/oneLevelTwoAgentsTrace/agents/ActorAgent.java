@@ -49,8 +49,6 @@ package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.MyLevelIdentifiers;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_GlobalMemoryState;
@@ -58,7 +56,9 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_Perceived
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**
  * Models the agents of the 'actor' category, as described in the specification of the "one level - two agents - trace" simulation.

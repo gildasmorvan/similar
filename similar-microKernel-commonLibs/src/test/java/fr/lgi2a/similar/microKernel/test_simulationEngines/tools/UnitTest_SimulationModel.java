@@ -49,11 +49,11 @@ package fr.lgi2a.similar.microKernel.test_simulationEngines.tools;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.microKernel.I_Level;
-import fr.lgi2a.similar.microKernel.I_SimulationEngine;
-import fr.lgi2a.similar.microKernel.I_SimulationModel;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.I_Level;
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.I_SimulationModel;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * A simulation model where the value returned by each method is defined in the constructor.

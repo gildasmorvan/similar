@@ -44,13 +44,13 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.states.dynamicStates.map;
+package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
 
 /**
  * Models a map containing dynamic states.

@@ -49,12 +49,12 @@ package fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operati
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_GlobalMemoryState;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationType;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
 
 /**
  * Models the operation performed by the simulation engine when it asks an agent to revise its memory.

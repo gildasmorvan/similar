@@ -46,9 +46,9 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Models the public local state of an agent in a specific level, in the "learning" simulation.

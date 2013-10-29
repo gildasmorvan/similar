@@ -44,14 +44,14 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microkernel;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Transitory_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Transitory_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.

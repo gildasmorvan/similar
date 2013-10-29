@@ -48,18 +48,18 @@ package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_AddAgent;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_RemoveAgent;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractEnvironment;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationMoment;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_Natural;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * Models the environment in the 'learning' simulation.
@@ -87,7 +87,7 @@ public abstract class Learning_AbstractEnvironment extends AbstractEnvironment {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Environment#natural(fr.lgi2a.similar.microKernel.LevelIdentifier, fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map, fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap)
+	 * @see fr.lgi2a.similar.microkernel.I_Environment#natural(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map, fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap)
 	 */
 	@Override
 	public void natural(

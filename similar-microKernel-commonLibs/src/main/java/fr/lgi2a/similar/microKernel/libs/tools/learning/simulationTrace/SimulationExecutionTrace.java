@@ -55,7 +55,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeMap;
 
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models the execution trace of a simulation in SIMILAR.

@@ -44,17 +44,17 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microkernel;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * Models an agent contained in the simulation.

@@ -46,12 +46,12 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_AddAgent;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_AddPublicLocalStateToDynamicState;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_RemoveAgent;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_RemovePublicLocalStateFromDynamicState;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.I_LearningInfluence;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddPublicLocalStateToDynamicState;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemovePublicLocalStateFromDynamicState;
 
 /**
  * This class defines a method creating a copy of an influence.

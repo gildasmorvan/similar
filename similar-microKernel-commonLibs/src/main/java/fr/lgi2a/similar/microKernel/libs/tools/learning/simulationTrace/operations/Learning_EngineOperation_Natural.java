@@ -48,17 +48,17 @@ package fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operati
 
 import java.lang.reflect.Method;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_InfluenceCopier;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationType;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.DynamicState_Map;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.DynamicState_Map;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * Models the operation performed by the simulation engine when it asks the environment to perform its natural reaction from a level.

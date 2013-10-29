@@ -49,9 +49,6 @@ package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractLevel;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.I_LearningInfluence;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
@@ -60,7 +57,10 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_RegularReaction;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_SystemReaction;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
 
 /**
  * Models a level in the 'learning' simulation.
@@ -95,7 +95,7 @@ public abstract class Learning_Level extends AbstractLevel {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Level#makeRegularReaction(fr.lgi2a.similar.microKernel.SimulationTimeStamp, fr.lgi2a.similar.microKernel.SimulationTimeStamp, fr.lgi2a.similar.microKernel.states.dynamicStates.Consistent_PublicLocalDynamicState, java.util.Set, java.util.Set)
+	 * @see fr.lgi2a.similar.microkernel.I_Level#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState, java.util.Set, java.util.Set)
 	 */
 	@Override
 	public void makeRegularReaction(
@@ -212,7 +212,7 @@ public abstract class Learning_Level extends AbstractLevel {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_TimeModel#getNextTime(fr.lgi2a.similar.microKernel.SimulationTimeStamp)
+	 * @see fr.lgi2a.similar.microkernel.I_TimeModel#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)
 	 */
 	@Override
 	public abstract SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime );

@@ -44,10 +44,71 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microkernel.states.dynamicstate.map;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
 
 /**
- * This package defines a map-like data structure containing the transitory state of all the 
- * levels of a simulation.
+ * The map-based implementation of a dynamic state map.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.states.dynamicStates.map;
+public class DynamicState_Map implements I_DynamicState_Map {
+	/**
+	 * The map containing the dynamic states.
+	 */
+	private Map<LevelIdentifier,I_PublicLocalDynamicState> dynamicStates;
+	
+	/**
+	 * Builds an initially empty map.
+	 */
+	public DynamicState_Map( ) {
+		this.dynamicStates = new HashMap<LevelIdentifier, I_PublicLocalDynamicState>();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Set<LevelIdentifier> keySet() {
+		return this.dynamicStates.keySet();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public I_PublicLocalDynamicState get(
+			LevelIdentifier level
+	) throws IllegalArgumentException, NoSuchElementException {
+		if( level == null ) {
+			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
+		}
+		I_PublicLocalDynamicState result = this.dynamicStates.get( level );
+		if( result == null ){
+			throw new NoSuchElementException( "No dynamic state is defined for the level '" + level + "'." );
+		} else {
+			return result;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void put(
+			I_PublicLocalDynamicState state
+	) throws IllegalArgumentException {
+		if( state == null ){
+			throw new IllegalArgumentException( "The 'state' argument cannot be null." );
+		} else {
+			this.dynamicStates.put( state.getLevel(), state );
+		}
+	}
+}

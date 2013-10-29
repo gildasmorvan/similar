@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.agentBehavior;
+package fr.lgi2a.similar.microkernel.agentbehavior;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -54,8 +54,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * A data structure containing a collection of influences, ordered using the target level of the influences.

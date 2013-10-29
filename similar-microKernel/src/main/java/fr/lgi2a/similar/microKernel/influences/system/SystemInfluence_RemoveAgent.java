@@ -44,71 +44,58 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.states.dynamicStates.map;
+package fr.lgi2a.similar.microkernel.influences.system;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**
- * The map-based implementation of a dynamic state map.
+ * The system influence sent to a level when the reaction of that level has to remove the agent from the simulation, 
+ * and make disappear its public local state from the public dynamic state of the levels.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class DynamicState_Map implements I_DynamicState_Map {
+public final class SystemInfluence_RemoveAgent extends SystemInfluence {
 	/**
-	 * The map containing the dynamic states.
+	 * The category of this influence.
 	 */
-	private Map<LevelIdentifier,I_PublicLocalDynamicState> dynamicStates;
+	public static final String CATEGORY = "System influence - Remove agent";
+
+	/**
+	 * The agent to remove from the simulation.
+	 */
+	private I_Agent agent;
 	
 	/**
-	 * Builds an initially empty map.
+	 * Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
+	 * @param targetLevel The target level as described in {@link I_Influence#getTargetLevel()}
+	 * @param publicLocalStateOfAgent The agent to remove from the simulation.
+	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
-	public DynamicState_Map( ) {
-		this.dynamicStates = new HashMap<LevelIdentifier, I_PublicLocalDynamicState>();
+	public SystemInfluence_RemoveAgent( LevelIdentifier targetLevel, I_PublicLocalStateOfAgent publicLocalStateOfAgent ) throws IllegalArgumentException {
+		super( CATEGORY, targetLevel );
+		if( this.agent == null ){
+			throw new IllegalArgumentException( "The 'publicLocalStateOfAgent' argument cannot be null." );
+		}
+		this.agent = publicLocalStateOfAgent.getOwner();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Gets the agent to remove from the simulation.
+	 * @return The agent to remove from the simulation.
 	 */
-	@Override
-	public Set<LevelIdentifier> keySet() {
-		return this.dynamicStates.keySet();
+	public I_Agent getAgent(){
+		return this.agent;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Uses the category, the target level and the removed agent of the influence to build a printable version of this object.
+	 * @return The concatenation of the category, the target level and the removed agent of the influence.
 	 */
-	@Override
-	public I_PublicLocalDynamicState get(
-			LevelIdentifier level
-	) throws IllegalArgumentException, NoSuchElementException {
-		if( level == null ) {
-			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
-		}
-		I_PublicLocalDynamicState result = this.dynamicStates.get( level );
-		if( result == null ){
-			throw new NoSuchElementException( "No dynamic state is defined for the level '" + level + "'." );
-		} else {
-			return result;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void put(
-			I_PublicLocalDynamicState state
-	) throws IllegalArgumentException {
-		if( state == null ){
-			throw new IllegalArgumentException( "The 'state' argument cannot be null." );
-		} else {
-			this.dynamicStates.put( state.getLevel(), state );
-		}
+	public String toString(){
+		return super.toString() + ", removing " + this.agent.toString();
 	}
 }

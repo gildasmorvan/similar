@@ -46,14 +46,14 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
-import fr.lgi2a.similar.microKernel.I_Probe;
-import fr.lgi2a.similar.microKernel.I_SimulationEngine;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalDynamicStateCopier;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.I_Probe;
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * A probe registering to the simulation execution trace all the partly-consistent dynamic state of the simulation, 

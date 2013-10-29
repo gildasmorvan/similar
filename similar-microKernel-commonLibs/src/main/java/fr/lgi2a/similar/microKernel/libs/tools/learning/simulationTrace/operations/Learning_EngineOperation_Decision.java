@@ -46,16 +46,16 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_GlobalMemoryState;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_InfluenceCopier;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperation;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationType;
-import fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
 
 /**
  * Models the operation performed by the simulation engine when it asks an agent to decide from a level.

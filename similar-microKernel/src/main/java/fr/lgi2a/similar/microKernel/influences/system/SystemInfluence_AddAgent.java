@@ -44,10 +44,62 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microkernel.influences.system;
+
+import fr.lgi2a.similar.microkernel.I_Agent;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
 
 /**
- * Defines the different implementations of a dynamic state of the simulation.
+ * The system influence sent to a level when the reaction of that level has to insert a new agent into the simulation 
+ * and make appear it public local state into the public dynamic state of the levels.
+ * 
+ * <h1>Usage</h1>
+ * <p>
+ * 	The agent has to be fully initialized before being added using this influence.
+ * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.states.dynamicStates;
+public final class SystemInfluence_AddAgent extends SystemInfluence {
+	/**
+	 * The category of this influence.
+	 */
+	public static final String CATEGORY = "System influence - Add agent";
+
+	/**
+	 * The agent to add to the simulation.
+	 */
+	private I_Agent agent;
+	
+	/**
+	 * Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
+	 * @param targetLevel The target level as described in {@link I_Influence#getTargetLevel()}
+	 * @param agent The agent to add to the simulation.
+	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
+	 */
+	public SystemInfluence_AddAgent( LevelIdentifier targetLevel, I_Agent agent ) throws IllegalArgumentException {
+		super( CATEGORY, targetLevel );
+		if( agent == null ){
+			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
+		}
+		this.agent = agent;
+	}
+
+	/**
+	 * Gets the agent to add to the simulation.
+	 * @return The agent to add to the simulation.
+	 */
+	public I_Agent getAgent(){
+		return this.agent;
+	}
+
+	/**
+	 * Uses the category, the target level and the added agent of the influence to build a printable version of this object.
+	 * @return The concatenation of the category, the target level and the added agent of the influence.
+	 */
+	public String toString(){
+		return super.toString() + ", adding " + this.agent.toString();
+	}
+}

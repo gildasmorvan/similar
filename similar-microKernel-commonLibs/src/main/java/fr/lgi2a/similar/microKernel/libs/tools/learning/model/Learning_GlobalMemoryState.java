@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microKernel.I_Agent;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.I_Agent;
 
 /**
  * Models the public global memory state of an agent in the simulation.

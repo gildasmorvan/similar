@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.genericImplementations;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Models perceived data containing no information.

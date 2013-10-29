@@ -50,10 +50,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import fr.lgi2a.similar.microKernel.I_Environment;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalState;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.I_Modifiable_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.I_Environment;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalState;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.I_Modifiable_PublicLocalDynamicState;
 
 /**
  * An abstract implementation of the {@link I_Environment} interface, providing a default behavior to the generic methods.

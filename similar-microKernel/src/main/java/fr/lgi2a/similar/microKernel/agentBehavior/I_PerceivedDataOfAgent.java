@@ -44,9 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.agentBehavior;
+package fr.lgi2a.similar.microkernel.agentbehavior;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Models the data that were perceived by an agent from a specific level <code>l</code>.

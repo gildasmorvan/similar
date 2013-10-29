@@ -46,8 +46,8 @@
  */
 package fr.lgi2a.similar.microKernel.libs.genericImplementations;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPublicLocalState;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * Models an empty public local state for the environment in a specific level.

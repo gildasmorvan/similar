@@ -50,10 +50,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.microKernel.I_Level;
-import fr.lgi2a.similar.microKernel.I_SimulationEngine;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractSimulationModel;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractEnvironment;
@@ -61,6 +57,10 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_Level;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfEnvironment;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
+import fr.lgi2a.similar.microkernel.I_Level;
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * This simulation model is designed to help users to understand the algorithm used to run a simulation.

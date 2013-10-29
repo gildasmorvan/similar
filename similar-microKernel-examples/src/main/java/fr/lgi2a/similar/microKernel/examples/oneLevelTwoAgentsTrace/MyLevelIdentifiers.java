@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace;
 
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * This class sums up the identifier of the various levels used in the "one level - two agents - trace" simulation.

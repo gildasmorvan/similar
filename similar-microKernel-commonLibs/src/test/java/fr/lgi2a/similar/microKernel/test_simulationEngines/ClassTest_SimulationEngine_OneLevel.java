@@ -66,11 +66,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.I_Probe;
-import fr.lgi2a.similar.microKernel.I_SimulationEngine;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.LearningSimilar_SimulationModel;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractEnvironment;
@@ -83,21 +78,26 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationType;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_Probe;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalDynamicState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.Test_Agent;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.Test_LevelIdentifiers;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.I_Probe;
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
- * Tests the behavior of the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microKernel.I_SimulationModel)} method for 
+ * Tests the behavior of the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method for 
  * a simulation occurring in a single level.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public abstract class ClassTest_SimulationEngine_OneLevel implements I_Probe {
 	/**
 	 * The exception that was caught by the simulation engine during the execution of 
-	 * the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microKernel.I_SimulationModel)} method.
+	 * the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method.
 	 * Equals to <code>null</code> if no exception occurred.
 	 */
 	private Throwable caughtException;

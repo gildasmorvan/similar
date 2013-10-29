@@ -44,47 +44,47 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.influences.systemInfluences;
+package fr.lgi2a.similar.microkernel.influences.system;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.influences.SystemInfluence;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**
- * The system influence sent to a level when the reaction of that level has to add the public local state of an agent into the 
+ * The system influence sent to a level when the reaction of that level has to remove the public local state of an agent from the 
  * public dynamic state of the level.
  * 
  * <h1>Usage</h1>
  * <p>
- * 	When an agent is added to the simulation, this influence is sent to the levels where the agent resides, to include 
- * 	the public local state of the agent into the dynamic state of these levels.
+ * 	When an agent is removed from the simulation, this influence is sent to the levels where the agent resides, to exclude 
+ * 	the public local state of the agent from the dynamic state of these levels.
  * </p>
  * <p>
- * 	This influence has to be generated only by the simulation engine, in reaction to an {@link SystemInfluence_AddAgent} influence.
+ * 	This influence has to be generated only by the simulation engine, in reaction to an {@link SystemInfluence_RemoveAgent} influence.
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class SystemInfluence_AddPublicLocalStateToDynamicState extends SystemInfluence {
+public class SystemInfluence_RemovePublicLocalStateFromDynamicState extends SystemInfluence {
 	/**
 	 * The category of this influence.
 	 */
-	public static final String CATEGORY = "System influence - Add public local state agent";
+	public static final String CATEGORY = "System influence - Remove public local state agent";
 	
 	/**
-	 * The public local state to add to the public dynamic local state of the level.
+	 * The public local state to remove from the public dynamic local state of the level.
 	 */
 	private I_PublicLocalStateOfAgent publicLocalState;
 	
 	/**
-	 * Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the 
+	 * Builds an 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the 
 	 * dynamic state of a specific level during the next reaction of that level.
 	 * @param targetLevel The target level of the influence, as defined in {@link I_Influence#getTargetLevel()}.
-	 * @param publicLocalState The public local state to add to the public dynamic local state of the level.
+	 * @param publicLocalState The public local state to remove from to the public dynamic local state of the level.
 	 * @throws IllegalArgumentException If the target level or the public local state are <code>null</code>.
 	 */
-	public SystemInfluence_AddPublicLocalStateToDynamicState( 
+	public SystemInfluence_RemovePublicLocalStateFromDynamicState( 
 			LevelIdentifier targetLevel, 
 			I_PublicLocalStateOfAgent publicLocalState 
 	) throws IllegalArgumentException {
@@ -97,8 +97,8 @@ public class SystemInfluence_AddPublicLocalStateToDynamicState extends SystemInf
 
 	
 	/**
-	 * Gets the public local state to add to the public dynamic local state of the level.
-	 * @return The public local state to add to the public dynamic local state of the level.
+	 * Gets the public local state to remove from the public dynamic local state of the level.
+	 * @return The public local state to remove from the public dynamic local state of the level.
 	 */
 	public I_PublicLocalStateOfAgent getPublicLocalState( ) {
 		return this.publicLocalState;

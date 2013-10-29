@@ -51,4 +51,4 @@
  *
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.states;
+package fr.lgi2a.similar.microkernel.states;

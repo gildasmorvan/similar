@@ -46,12 +46,12 @@
  */
 package fr.lgi2a.similar.microKernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
 
-import fr.lgi2a.similar.microKernel.I_SimulationEngine;
 import fr.lgi2a.similar.microKernel.libs.simulationEngines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.ClassTest_SimulationEngine_OneLevel;
+import fr.lgi2a.similar.microkernel.I_SimulationEngine;
 
 /**
- * This unit test checks the behavior of the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microKernel.I_SimulationModel)} method for 
+ * This unit test checks the behavior of the {@link I_SimulationEngine#runNewSimulation(fr.lgi2a.similar.microkernel.I_SimulationModel)} method for 
  * a simulation occurring in a single level, for the {@link MonoThreaded_DefaultDisambiguation_SimulationEngine} simulation engine.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */

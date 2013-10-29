@@ -44,14 +44,14 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel;
+package fr.lgi2a.similar.microkernel;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 
 /**
  * Models a simulation that can be performed using a simulation engine.

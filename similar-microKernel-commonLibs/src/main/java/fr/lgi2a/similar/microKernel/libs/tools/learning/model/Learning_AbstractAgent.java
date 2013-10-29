@@ -49,13 +49,6 @@ package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.I_Influence;
-import fr.lgi2a.similar.microKernel.LevelIdentifier;
-import fr.lgi2a.similar.microKernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_AddAgent;
-import fr.lgi2a.similar.microKernel.influences.systemInfluences.SystemInfluence_RemoveAgent;
 import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractAgent;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
@@ -64,9 +57,16 @@ import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Simulati
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_Decision;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_Perception;
 import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_ReviseMemory;
-import fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState;
-import fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map;
+import fr.lgi2a.similar.microkernel.I_Influence;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
+import fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState;
+import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**
  * Models an agent in the 'learning' simulation.
@@ -121,7 +121,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Agent#perceive(fr.lgi2a.similar.microKernel.LevelIdentifier, fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent, fr.lgi2a.similar.microKernel.states.dynamicStates.map.I_DynamicState_Map)
+	 * @see fr.lgi2a.similar.microkernel.I_Agent#perceive(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent, fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map)
 	 */
 	@Override
 	public I_PerceivedDataOfAgent perceive(
@@ -157,7 +157,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Agent#reviseMemory(java.util.Map, fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState)
+	 * @see fr.lgi2a.similar.microkernel.I_Agent#reviseMemory(java.util.Map, fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState)
 	 */
 	@Override
 	public void reviseMemory(
@@ -203,7 +203,7 @@ public abstract class Learning_AbstractAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.I_Agent#decide(fr.lgi2a.similar.microKernel.LevelIdentifier, fr.lgi2a.similar.microKernel.states.I_GlobalMemoryState, fr.lgi2a.similar.microKernel.agentBehavior.I_PerceivedDataOfAgent, fr.lgi2a.similar.microKernel.agentBehavior.InfluencesMap)
+	 * @see fr.lgi2a.similar.microkernel.I_Agent#decide(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.states.I_GlobalMemoryState, fr.lgi2a.similar.microkernel.agentbehavior.I_PerceivedDataOfAgent, fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap)
 	 */
 	@Override
 	public void decide(

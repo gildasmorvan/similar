@@ -53,12 +53,12 @@ import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents.Actor
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents.ProcrastinatorAgent;
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.environment.MyEnvironment;
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.levels.MyLevel1;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.LearningSimilar_SimulationModel;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractAgent;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractEnvironment;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_Level;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_Level;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 
 /**
  * Models the simulation model of the "one level - two agents - trace" simulation.

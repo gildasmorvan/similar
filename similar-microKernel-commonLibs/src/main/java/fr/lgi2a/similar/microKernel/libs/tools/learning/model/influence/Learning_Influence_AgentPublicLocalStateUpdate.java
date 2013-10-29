@@ -44,11 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence;
 
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**
@@ -127,7 +127,7 @@ public class Learning_Influence_AgentPublicLocalStateUpdate extends RegularInflu
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.I_LearningInfluence#createCopy()
+	 * @see fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.I_LearningInfluence#createCopy()
 	 */
 	public I_LearningInfluence createCopy() {
 		return new Learning_Influence_AgentPublicLocalStateUpdate( this );

@@ -49,13 +49,13 @@ package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.agents;
 import java.util.Set;
 
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.MyLevelIdentifiers;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractAgent;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_GlobalMemoryState;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.I_Influence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_GlobalMemoryState;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PerceivedDataOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_PublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent;
 
 /**

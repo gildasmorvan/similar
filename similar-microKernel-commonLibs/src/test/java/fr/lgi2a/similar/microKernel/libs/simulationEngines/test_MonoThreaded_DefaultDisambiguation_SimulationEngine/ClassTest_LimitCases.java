@@ -46,9 +46,9 @@
  */
 package fr.lgi2a.similar.microKernel.libs.simulationEngines.test_MonoThreaded_DefaultDisambiguation_SimulationEngine;
 
-import fr.lgi2a.similar.microKernel.libs.simulationEngines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.ClassTest_SimulationEngine_LimitCases;
 import fr.lgi2a.similar.microkernel.I_SimulationEngine;
+import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
 
 /**
  * This unit test checks that erroneous simulation models do raise exceptions when appropriate for the 

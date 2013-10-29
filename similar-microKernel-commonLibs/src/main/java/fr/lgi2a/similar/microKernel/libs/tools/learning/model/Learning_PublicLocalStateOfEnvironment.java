@@ -44,10 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
-import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPublicLocalState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalState;
 
 /**
  * Models the public local state of the environment in a specific level of the "learning" simulation.

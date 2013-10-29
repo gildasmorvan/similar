@@ -55,8 +55,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractEnvironment;
-import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractPublicLocalState;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.Test_LevelIdentifiers;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.UnitTest_Level;
 import fr.lgi2a.similar.microKernel.test_simulationEngines.tools.UnitTest_SimulationModel;
@@ -69,6 +67,8 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.I_SimulationModel.AgentInitializationData;
 import fr.lgi2a.similar.microkernel.I_SimulationModel.EnvironmentInitializationData;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalState;
 import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**

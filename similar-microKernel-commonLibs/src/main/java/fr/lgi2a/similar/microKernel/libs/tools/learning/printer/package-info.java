@@ -49,4 +49,4 @@
  * Defines the classes printing the trace of a "learning" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.libs.tools.learning.printer;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.printer;

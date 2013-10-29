@@ -46,12 +46,12 @@
  */
 package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace;
 
-import fr.lgi2a.similar.microKernel.libs.simulationEngines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.LearningSimilar_SimulationModel;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.Learning_TracePrinter;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_Probe;
 import fr.lgi2a.similar.microkernel.I_SimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.libs.engines.MonoThreaded_DefaultDisambiguation_SimulationEngine;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.LearningSimilar_SimulationModel;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.Learning_TracePrinter;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_Probe;
 
 /**
  * Models the main class of the "one level - two agents - trace" simulation.

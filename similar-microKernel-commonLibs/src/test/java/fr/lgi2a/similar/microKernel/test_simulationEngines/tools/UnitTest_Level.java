@@ -49,11 +49,11 @@ package fr.lgi2a.similar.microKernel.test_simulationEngines.tools;
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractLevel;
 import fr.lgi2a.similar.microkernel.I_Influence;
 import fr.lgi2a.similar.microkernel.I_Level;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
 import fr.lgi2a.similar.microkernel.states.dynamicstate.Consistent_PublicLocalDynamicState;
 
 /**

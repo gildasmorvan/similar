@@ -50,4 +50,4 @@
  * The use of this tool is described in the examples of the micro-kernel.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microKernel.libs.tools.learning;
+package fr.lgi2a.similar.microkernel.libs.tools.learning;

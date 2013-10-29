@@ -44,21 +44,21 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microKernel.libs.tools.learning.model;
+package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 
 import java.util.Set;
 
-import fr.lgi2a.similar.microKernel.libs.abstractImplementations.AbstractEnvironment;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.Learning_EngineOperationMoment;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.operations.Learning_EngineOperation_Natural;
 import fr.lgi2a.similar.microkernel.I_Influence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.agentbehavior.InfluencesMap;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_AddAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluence_RemoveAgent;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_AgentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.Learning_Influence_EnvironmentPublicLocalStateUpdate;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.Learning_EngineOperationMoment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.Learning_EngineOperation_Natural;
 import fr.lgi2a.similar.microkernel.states.dynamicstate.map.I_DynamicState_Map;
 
 /**

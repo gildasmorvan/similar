@@ -47,10 +47,10 @@
 package fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.levels;
 
 import fr.lgi2a.similar.microKernel.examples.oneLevelTwoAgentsTrace.MyLevelIdentifiers;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_AbstractEnvironment;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.model.Learning_Level;
-import fr.lgi2a.similar.microKernel.libs.tools.learning.simulationTrace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_AbstractEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.Learning_Level;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 
 /**
  * Models the level 'level 1' as described in the specification of the "one level - two agents - trace" simulation.

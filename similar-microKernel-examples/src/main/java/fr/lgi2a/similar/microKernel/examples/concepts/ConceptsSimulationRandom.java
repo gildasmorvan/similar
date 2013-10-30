@@ -44,11 +44,49 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.microkernel.examples.concepts;
+
+import java.util.Random;
 
 /**
- * Defines a simulation template containing three levels and three agent classes.
- * This package illustrates the best practices while designing a simulation.
- * 
+ * This class defines the random number generator used in the simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microkernel.examples.template;
+public class ConceptsSimulationRandom {
+	/**
+	 * The random number generator used in this class.
+	 */
+	private static Random RANDOM_INSTANCE;
+	
+	/**
+	 * Static block providing a default random number generator.
+	 */
+	static {
+		initializeRandomizer( 0 );
+	}
+	
+	/**
+	 * Initializes the random number generator using a specific seed.
+	 * @param seed The seed to use.
+	 */
+	public static void initializeRandomizer( long seed ) {
+		RANDOM_INSTANCE = new Random( seed );
+	}
+	
+	/**
+	 * Gets a random number between 0 (included) and 1 (excluded).
+	 * @return A random number between 0 (included) and 1 (excluded).
+	 */
+	public static double random( ) {
+		return RANDOM_INSTANCE.nextDouble();
+	}
+	
+	/**
+	 * Gets a random integer value between 0 (included) and the specified higher bound (excluded).
+	 * @param higherBound The higher bound used for random integer generation.
+	 * @return a random integer value between 0 (included) and <code>higherBound</code> (excluded).
+	 */
+	public static int randomInt( int higherBound ) {
+		return RANDOM_INSTANCE.nextInt( higherBound );
+	}
+}

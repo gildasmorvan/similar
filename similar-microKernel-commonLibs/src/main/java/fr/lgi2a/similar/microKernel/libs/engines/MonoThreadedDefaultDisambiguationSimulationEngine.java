@@ -68,9 +68,9 @@ import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.ISimulationModel;
-import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
 import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
+import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
@@ -928,6 +928,8 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			levelConsistentState.addPublicLocalStateOfAgent( addedLocalState );
 			// Add the agent to the list of agents contained in the level
 			this.agents.get( level.getIdentifier() ).add( addedLocalState.getOwner() );
+			// Add the public local state into the structure of the agent
+			addedLocalState.getOwner().includeNewLevel( castedInfluence.getTargetLevel(), addedLocalState );
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemoveAgent.CATEGORY ) ){
 			//
 			// Manage the system influence telling to delete an agent from the simulation.
@@ -961,6 +963,8 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			levelConsistentState.removePublicLocalStateOfAgent( removedLocalState );
 			// Remove the agent from the list of agents contained in the level
 			this.agents.get( level.getIdentifier() ).remove( removedLocalState.getOwner() );
+			// Remove the public local state of the agent in the specified level from the structure of the agent
+			removedLocalState.getOwner().excludeFromLevel( castedInfluence.getTargetLevel() );
 		} else {
 			throw new UnsupportedOperationException( "The system influence '" + systemInfluence.getCategory() + "' cannot " +
 					"be managed by the '" + this.getClass().getSimpleName() + "' simulation engine." );

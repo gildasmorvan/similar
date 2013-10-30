@@ -169,10 +169,7 @@ public abstract class AbstractAgent implements IAgent {
 	}
 	
 	/**
-	 * Include a new level in the specification of this agent.
-	 * @param levelIdentifier The identifier of the specified level.
-	 * @param publicLocalState The public local state of the agent in that level. Note that this state has 
-	 * to be manually added into the dynamic state of the level.
+	 * {@inheritDoc}
 	 */
 	public void includeNewLevel( LevelIdentifier levelIdentifier, IPublicLocalStateOfAgent publicLocalState ){
 		if( levelIdentifier == null ){
@@ -180,10 +177,21 @@ public abstract class AbstractAgent implements IAgent {
 		} else if( publicLocalState == null ){
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "publicLocalState" ) );
 		}
-		if( this.getLevels().contains( levelIdentifier ) ){
-			throw new IllegalArgumentException( "The agent has already created its public local state for the level '" + levelIdentifier + "'." );
+		if( ! this.getLevels().contains( levelIdentifier ) ){
+			this.publicLocalStates.put( levelIdentifier, publicLocalState );
 		}
-		this.publicLocalStates.put( levelIdentifier, publicLocalState );
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void excludeFromLevel( LevelIdentifier levelIdentifier ) {
+		if( levelIdentifier == null ){
+			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelIdentifier" ) );
+		}
+		if( this.getLevels().contains( levelIdentifier ) ){
+			this.publicLocalStates.remove( levelIdentifier );
+		}
 	}
 
 	/**

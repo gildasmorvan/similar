@@ -56,11 +56,15 @@ import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPDFPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
+import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalGoToWork;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialPublishExperimentReport;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 
 /**
@@ -175,8 +179,12 @@ public class AgtCitizen extends AbstractAgent {
 			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
 			IGlobalMemoryState memoryState
 	) { 
-		AgtCitizenGMS castedMemoryState = (AgtCitizenGMS) memoryState;
-		// TODO
+		// First cast the perceived data in an exploitable format.
+		AgtCitizenPDFPhysical castedDataFromPhysical = (AgtCitizenPDFPhysical) perceivedData.get( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
+		// Cast the revised memory state in an exploitable format.
+		AgtCitizenGMS castedMemory = (AgtCitizenGMS) memoryState;
+		// Set the paranoia level to numberOfMarks/broadcastedThreshold.
+		castedMemory.setParanoiaLevel( castedDataFromPhysical.getCurrentStrangePhysicalManifestations() / castedDataFromPhysical.getStrangePhysicalManifestationsThreshold() );
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -204,12 +212,85 @@ public class AgtCitizen extends AbstractAgent {
 	) {
 		if( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL.equals( levelId ) ) {
 			// Case where the decision is made from the 'Physical' level.
-			// TODO
+			// Dispatch to the appropriate method.
+			this.decideFromPhysicalLevel( memoryState, perceivedData, producedInfluences );
 		} else {
 			// This case is out of the bounds of the behavior of the agent.
 			// Consequently, we throw an exception telling that this case should not happen
 			// in an appropriate simulation.
 			throw new UnsupportedOperationException( "Cannot decide from the level '" + levelId + "'." );
+		}
+	}
+	
+	/**
+	 * Produce the influences resulting from the decisions made from the 'physical' level.
+	 * <p>
+	 * 	From that level, the proceeds its experiments unless the experiments have finished.
+	 * 	Once finished, the alien leaves the earth and sends an experiment report to its mothership.
+	 * </p>
+	 * @param memoryState The memory state of the citizen, defining its current mindset.
+	 * @param perceivedData The data that were perceived from the 'space' level, containing the candidates for the experiments.
+	 * @param producedInfluences The map where the influences produced by the decisions of this agent are put.
+	 */
+	private void decideFromPhysicalLevel(
+			IGlobalMemoryState memoryState,
+			IPerceivedDataOfAgent perceivedData,
+			InfluencesMap producedInfluences
+	){
+		// First cast the argument into the appropriate format.
+		AgtCitizenGMS castedMemory = (AgtCitizenGMS) memoryState;
+		AgtCitizenPDFPhysical castedPerceivedData = (AgtCitizenPDFPhysical) perceivedData;
+		// The behavior of the citizen agent depends of the time of the day:
+		//	- During the day, it either goes to work (normal behavior)  or stay sheltered (paranoid)
+		//	- During the evening, it reports experiments on the Internet (either because the citizen believes
+		//		it was a guinea pig of aliens or because it is paranoid)
+		//	- During the night, it does nothing.
+		switch( castedPerceivedData.getCurrentTimeOfTheDay() ){
+		case DAY:
+			// If the paranoia level of the citizen reaches at least 1, then it does not
+			// go to work and stays sheltered at home.
+			if( castedMemory.getParanoiaLevel() == 0 ) {
+				// The agent is not paranoid. Thus, it goes to work.
+				//
+				// Create and add the influence to the influences produced by the decision.
+				RIPhysicalGoToWork goToWorkInfluence = new RIPhysicalGoToWork( (AgtCitizenPLSPhysical) this.getPublicLocalState( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL ) );
+				producedInfluences.add( goToWorkInfluence );
+			}
+			break;
+		case EVENING:
+			// During the evening, a paranoid agent reports experiments depending on its paranoia level.
+			// At a level 1, it reports an experiment on himself in its city.
+			// Starting from level 2, it also reports experiments on himself in other (random) cities.
+			//
+			// First get the public local state of the agent in the 'physical' level.
+			AgtCitizenPLSPhysical citizenState = (AgtCitizenPLSPhysical) this.getPublicLocalState( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
+			// Create the posts and request their addition to the Internet.
+			if( castedMemory.getParanoiaLevel() >= 1 ){
+				// Then create and add the influence to the influences produced by the decision.
+				RISocialPublishExperimentReport postInfluence = new RISocialPublishExperimentReport( 
+						new PostOnConspiracyForum( citizenState, citizenState.getAddress() )
+				);
+				producedInfluences.add( postInfluence );
+			}
+			for( int postsToPublish = 2; postsToPublish <= castedMemory.getParanoiaLevel(); postsToPublish++ ){
+				// Get a city at random.
+				int cityIndex = ConceptsSimulationRandom.randomInt( Cities.values().length );
+				Cities randomCity = Cities.values()[ cityIndex ];
+				// Then create a fake experiment report in that city.
+				PostOnConspiracyForum post = new PostOnConspiracyForum( citizenState, randomCity );
+				// Then request its addition to the Internet.
+				//
+				// Create and add the influence to the influences produced by the decision.
+				RISocialPublishExperimentReport postInfluence = new RISocialPublishExperimentReport( post );
+				producedInfluences.add( postInfluence );
+			}
+			break;
+		case NIGHT:
+			// During the night, the citizen does nothing.
+			break;
+		default:
+			// This case is normally never reached.
+			throw new UnsupportedOperationException( "The '" + castedPerceivedData.getCurrentTimeOfTheDay() + "' time of the day is not supported." );
 		}
 	}
 }

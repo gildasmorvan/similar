@@ -62,6 +62,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtA
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizen;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalGoToWork;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalLandOnEarth;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalPerformExperiment;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalTakeOffFromEarth;
@@ -277,6 +278,10 @@ public class PhysicalLevel extends AbstractLevel {
 						consistentState, 
 						remainingInfluences 
 				);
+			} else if( 	RIPhysicalGoToWork.CATEGORY.equals( influence.getCategory() ) ) {
+				// This influence has currently no effect on the simulation.
+				// In the future, it can be used to track the effect on the economy of the
+				// alien experiments
 			} else {
 				// This case is out of the bounds of the behavior of the reaction.
 				// Consequently, we throw an exception telling that this case should not happen

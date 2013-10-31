@@ -47,6 +47,7 @@
 package fr.lgi2a.similar.microkernel.examples.concepts.environment.social;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -54,6 +55,7 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalState;
 
@@ -105,6 +107,11 @@ public class EnvPLSSocial extends AbstractPublicLocalState {
 	 * The posts are ordered by cities.
 	 */
 	private Map<Cities, Set<PostOnConspiracyForum>> postsPerCities;
+	/**
+	 * The reports written by citizen on the Internet stating that they were guinea pigs.
+	 * The posts are ordered by citizen.
+	 */
+	private Map<AgtCitizenPLSPhysical, Set<PostOnConspiracyForum>> postsPerCitizen;
 	
 	/**
 	 * Builds an instance of the public local state of the environment in the 'social' level.
@@ -122,6 +129,7 @@ public class EnvPLSSocial extends AbstractPublicLocalState {
 		for( Cities city : Cities.values() ){
 			this.postsPerCities.put( city, new LinkedHashSet<PostOnConspiracyForum>() );
 		}
+		this.postsPerCitizen = new HashMap<AgtCitizenPLSPhysical, Set<PostOnConspiracyForum>>( );
 	}
 	
 	/**
@@ -145,7 +153,6 @@ public class EnvPLSSocial extends AbstractPublicLocalState {
 	) {
 		this.tvBroadcastedThresholdForStrangePhysicalManifestations = tvBroadcastedThresholdForStrangePhysicalManifestations;
 	}
-	
 
 	/**
 	 * Gets the reports written by citizen on the Internet stating that they were guinea pigs in a specific city.
@@ -157,9 +164,47 @@ public class EnvPLSSocial extends AbstractPublicLocalState {
 	}
 	
 	/**
+	 * Adds a post to the Internet.
+	 * @param post The post to add.
+	 */
+	public void addPost( PostOnConspiracyForum post ){
+		this.postsPerCities.get( post.getCity() ).add( post );
+		Set<PostOnConspiracyForum> posts  = this.postsPerCitizen.get( post.getAuthor() );
+		if( posts == null ){
+			posts = new HashSet<PostOnConspiracyForum>( );
+			this.postsPerCitizen.put( post.getAuthor(), posts );
+		}
+	}
+	
+	/**
+	 * Gets the reports written by a citizen on the Internet stating that it was a guinea pigs.
+	 * @param citizen The citizen which posts are listed.
+	 * @return The list of posts on the Internet stating that a citizen was a guinea pig.
+	 * Can be <code>null</code>.
+	 */
+	public Set<PostOnConspiracyForum> getPostsFor( AgtCitizenPLSPhysical citizen ) {
+		return this.postsPerCitizen.get( citizen );
+	}
+	
+	/**
+	 * Removes all the posts of a citizen that were made on the Internet to report alien experiments.
+	 * @param citizen The citizen which posts are removed.
+	 */
+	public void removeAllPostsOfCitizen( AgtCitizenPLSPhysical citizen ) {
+		Set<PostOnConspiracyForum> posts = this.postsPerCitizen.get( citizen );
+		if( posts != null ){
+			for( PostOnConspiracyForum post : posts ){
+				this.postsPerCities.get( post.getCity() ).remove( post );
+			}
+			posts.clear( );
+		}
+	}
+	
+	/**
 	 * Removes all the posts that were made on the Internet to report alien experiments.
 	 */
 	public void removeAllPostsFromTheInternet( ) {
+		this.postsPerCitizen.clear();
 		for( Cities city : Cities.values() ){
 			this.postsPerCities.get( city ).clear();
 		}

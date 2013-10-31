@@ -44,55 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.environment.social;
-
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
-import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 
 /**
- * Models an article posted on a conspiracy forum on the Internet, to tell that a citizen has 
- * been the subject of alien experiments.
+ * Specifications related to the 'physical' level of the 'FBI' agents.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class PostOnConspiracyForum {
-	/**
-	 * The author of the post (the victim of the experiments).
-	 */
-	private AgtCitizenPLSPhysical author;
-	/**
-	 * The city where the experiment was discovered.
-	 */
-	private Cities city;
-	
-	/**
-	 * Builds an article posted on a conspiracy forum on the Internet, to tell that a citizen has 
-	 * been the subject of alien experiments.
-	 * This constructor identifies the author of the post (the victim of the experiments), the city where
-	 * the experiments were made and the moment when the experiments were made.
-	 * @param author The author of the post (the victim of the experiments).
-	 * @param city The city where the experiment was discovered.
-	 */
-	public PostOnConspiracyForum( 
-			AgtCitizenPLSPhysical author,
-			Cities city
-	) {
-		this.author = author;
-		this.city = city;
-	}
-
-	/**
-	 * Gets the author of the post (the victim of the experiments).
-	 * @return The author of the post (the victim of the experiments).
-	 */
-	public AgtCitizenPLSPhysical getAuthor( ) {
-		return this.author;
-	}
-	
-	/**
-	 * Gets the city where the experiment was discovered.
-	 * @return The city where the experiment was discovered.
-	 */
-	public Cities getCity( ) {
-		return this.city;
-	}
-}
+package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.physical;

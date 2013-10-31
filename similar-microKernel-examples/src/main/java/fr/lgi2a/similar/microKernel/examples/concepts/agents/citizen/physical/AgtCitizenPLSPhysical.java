@@ -46,10 +46,14 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
+import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalStateOfAgent;
 
 /**
@@ -83,6 +87,10 @@ public class AgtCitizenPLSPhysical extends AbstractPublicLocalStateOfAgent {
 	 * The number of strange physical manifestations on the body of the 'Citizen' agent.
 	 */
 	private int strangePhysicalManifestationsNumber;
+	/**
+	 * The posts that were created by the citizen.
+	 */
+	private List<PostOnConspiracyForum> posts;
 
 	/**
 	 * Builds an instance of the public local state of a 'Citizen' agent in the 'physical' level.
@@ -98,6 +106,8 @@ public class AgtCitizenPLSPhysical extends AbstractPublicLocalStateOfAgent {
 		this.address = address;
 		// The agent initially has no strange physical manifestations on the body.
 		this.strangePhysicalManifestationsNumber = 0;
+		// The agent initially has no posts on the Internet.
+		this.posts = new LinkedList<PostOnConspiracyForum>( );
 	}
 
 	/**
@@ -129,5 +139,35 @@ public class AgtCitizenPLSPhysical extends AbstractPublicLocalStateOfAgent {
 	 */
 	public void increaseNumberOfStrangePhysicalManifestations( int strangeManifestationsToAdd ) {
 		this.strangePhysicalManifestationsNumber += strangeManifestationsToAdd;
+	}
+	
+	/**
+	 * Remove all the strange physical manifestations of this agent.
+	 */
+	public void removeAllStrangePhysicalManifestations( ) {
+		
+	}
+
+	/**
+	 * Gets the posts that were created by the citizen.
+	 * @return The posts that were created by the citizen.
+	 */
+	public List<PostOnConspiracyForum> getPosts( ) {
+		return this.posts;
+	}
+	
+	/**
+	 * Adds a post to this agent.
+	 * @param post The post to add to this agent.
+	 */
+	public void addPost( PostOnConspiracyForum post ) {
+		this.posts.add( post );
+	}
+	
+	/**
+	 * Removes all the posts of this agent.
+	 */
+	public void cleanPosts( ) {
+		this.posts.clear();
 	}
 }

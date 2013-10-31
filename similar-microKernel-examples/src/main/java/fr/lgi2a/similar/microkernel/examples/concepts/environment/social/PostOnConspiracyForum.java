@@ -46,7 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.environment.social;
 
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 
@@ -64,10 +63,6 @@ public class PostOnConspiracyForum {
 	 * The city where the experiment was discovered.
 	 */
 	private Cities city;
-	/**
-	 * The moment when the experiment was discovered.
-	 */
-	private SimulationTimeStamp time;
 	
 	/**
 	 * Builds an article posted on a conspiracy forum on the Internet, to tell that a citizen has 
@@ -76,16 +71,13 @@ public class PostOnConspiracyForum {
 	 * the experiments were made and the moment when the experiments were made.
 	 * @param author The author of the post (the victim of the experiments).
 	 * @param city The city where the experiment was discovered.
-	 * @param time The moment when the experiment was discovered.
 	 */
 	public PostOnConspiracyForum( 
 			AgtCitizenPLSPhysical author,
-			Cities city,
-			SimulationTimeStamp time
+			Cities city
 	) {
 		this.author = author;
 		this.city = city;
-		this.time = time;
 	}
 
 	/**
@@ -102,13 +94,5 @@ public class PostOnConspiracyForum {
 	 */
 	public Cities getCity( ) {
 		return this.city;
-	}
-	
-	/**
-	 * Gets the moment when the experiment was discovered.
-	 * @return The moment when the experiment was discovered.
-	 */
-	public SimulationTimeStamp getTime( ) {
-		return this.time;
 	}
 }

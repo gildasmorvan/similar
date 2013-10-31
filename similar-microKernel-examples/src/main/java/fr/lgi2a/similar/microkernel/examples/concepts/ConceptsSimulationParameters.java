@@ -111,4 +111,9 @@ public class ConceptsSimulationParameters {
 	 * broadcasts values that are not advised by the FBI.
 	 */
 	public static final long EDITOR_IN_CHIEF_PARANOIA_THRESHOLD = 10;
+	
+	/**
+	 * The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
+	 */
+	public static final int CITIZEN_POSTS_THRESHOLD_BEFORE_LOBOTOMY = 40;
 }

@@ -366,10 +366,10 @@ public class AgtAlien extends AbstractAgent {
 	/**
 	 * Produce the influences resulting from the decisions made from the 'physical' level.
 	 * <p>
-	 * 	From that level, the proceeds its experiments unless the experiments have finished.
+	 * 	From that level, the alien proceeds its experiments unless the experiments have finished.
 	 * 	Once finished, the alien leaves the earth and sends an experiment report to its mothership.
 	 * </p>
-	 * @param perceivedData The data that were perceived from the 'space' level, containing the candidates for the experiments.
+	 * @param perceivedData The data that were perceived from the 'physical' level, containing the candidates for the experiments.
 	 * @param producedInfluences The map where the influences produced by the decisions of this agent are put.
 	 */
 	private void decideFromPhysicalLevel(

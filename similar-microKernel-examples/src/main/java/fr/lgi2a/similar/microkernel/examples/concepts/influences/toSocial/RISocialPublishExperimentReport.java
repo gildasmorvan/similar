@@ -44,55 +44,69 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.environment.social;
+package fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial;
 
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
-import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
+import fr.lgi2a.similar.microkernel.IInfluence;
+import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
+import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 
 /**
- * Models an article posted on a conspiracy forum on the Internet, to tell that a citizen has 
- * been the subject of alien experiments.
+ * Models the influence sent by a 'Citizen' agent when it wishes to report an alien experiment 
+ * on the Internet.
+ * 
+ * <h1>Naming convention</h1>
+ * In the name of the class:
+ * <ul>
+ * 	<li>"RI" stands for "Regular Influence"</li>
+ * </ul>
+ * These rules were defined to reduce the size of the name of the class.
+ * 
+ * <h1>Regular influences in the SIMILAR API suite.</h1>
+ * <p>
+ * 	In the micro-kernel of SIMILAR, the regular influences are implemented as an 
+ * 	instance of either the {@link IInfluence} interface or the {@link RegularInfluence} 
+ * 	abstract class.
+ * 	In this example, we use the abstract class which is easier to implement.
+ * </p>
+ * 
+ * <h1>Best practice</h1>
+ * <p>
+ * 	The category of the influence is a unique identifier for the influence. It is defined to avoid
+ * 	using <code>instanceof</code> instructions in the reaction of the level to identify the nature of the
+ * 	influence and the operations that have to be performed in reaction to the influence.
+ * </p>
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class PostOnConspiracyForum {
+public class RISocialPublishExperimentReport extends RegularInfluence {
 	/**
-	 * The author of the post (the victim of the experiments).
+	 * The category of the influence, used as a unique identifier in the reaction of the 'social' 
+	 * level to determine the nature of the influence.
 	 */
-	private AgtCitizenPLSPhysical author;
-	/**
-	 * The city where the experiment was discovered.
-	 */
-	private Cities city;
+	public static final String CATEGORY = "Report experiment";
 	
 	/**
-	 * Builds an article posted on a conspiracy forum on the Internet, to tell that a citizen has 
-	 * been the subject of alien experiments.
-	 * This constructor identifies the author of the post (the victim of the experiments), the city where
-	 * the experiments were made and the moment when the experiments were made.
-	 * @param author The author of the post (the victim of the experiments).
-	 * @param city The city where the experiment was discovered.
+	 * The post sent to the Internet.
 	 */
-	public PostOnConspiracyForum( 
-			AgtCitizenPLSPhysical author,
-			Cities city
-	) {
-		this.author = author;
-		this.city = city;
-	}
-
+	private PostOnConspiracyForum post;
+	
 	/**
-	 * Gets the author of the post (the victim of the experiments).
-	 * @return The author of the post (the victim of the experiments).
+	 * Builds a regular influence modeling the will of a 'Citizen' to post a message on the Internet.
+	 * @param post The post sent to the Internet.
 	 */
-	public AgtCitizenPLSPhysical getAuthor( ) {
-		return this.author;
+	public RISocialPublishExperimentReport(
+			PostOnConspiracyForum post
+	) throws IllegalArgumentException {
+		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
+		this.post = post;
 	}
 	
 	/**
-	 * Gets the city where the experiment was discovered.
-	 * @return The city where the experiment was discovered.
+	 * Gets the post sent to the Internet.
+	 * @return The post sent to the Internet.
 	 */
-	public Cities getCity( ) {
-		return this.city;
+	public PostOnConspiracyForum getPost( ) {
+		return this.post;
 	}
 }

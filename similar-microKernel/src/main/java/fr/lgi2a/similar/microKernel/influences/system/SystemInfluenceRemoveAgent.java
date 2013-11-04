@@ -77,7 +77,7 @@ public final class SystemInfluenceRemoveAgent extends SystemInfluence {
 	 */
 	public SystemInfluenceRemoveAgent( LevelIdentifier targetLevel, IPublicLocalStateOfAgent publicLocalStateOfAgent ) throws IllegalArgumentException {
 		super( CATEGORY, targetLevel );
-		if( this.agent == null ){
+		if( publicLocalStateOfAgent == null ){
 			throw new IllegalArgumentException( "The 'publicLocalStateOfAgent' argument cannot be null." );
 		}
 		this.agent = publicLocalStateOfAgent.getOwner();

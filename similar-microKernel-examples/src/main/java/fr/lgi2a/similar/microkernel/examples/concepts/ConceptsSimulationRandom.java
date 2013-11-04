@@ -62,7 +62,7 @@ public class ConceptsSimulationRandom {
 	 * Static block providing a default random number generator.
 	 */
 	static {
-		initializeRandomizer( 0 );
+		initializeRandomizer( 10 );
 	}
 	
 	/**

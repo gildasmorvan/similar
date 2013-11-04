@@ -47,7 +47,7 @@
 package fr.lgi2a.similar.microkernel.examples.concepts.level;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
@@ -55,9 +55,17 @@ import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationTimeInterpretationModel;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.AgtFBI;
+import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialChangeBroadcast;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialPublishExperimentReport;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialRemoveAllPublications;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialRemovePublications;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialReplaceEditorInChief;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
 
 /**
@@ -111,8 +119,8 @@ public class SocialLevel extends AbstractLevel {
 	 */
 	@Override
 	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
-		// In this level, the times moves with a period of 6 (two days).
-		return new SimulationTimeStamp( currentTime.getIdentifier() + 6 );
+		// In this level, the times moves from evening to evening.
+		return ConceptsSimulationTimeInterpretationModel.INSTANCE.getNext( currentTime, TimeOfTheDay.EVENING );
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -217,13 +225,36 @@ public class SocialLevel extends AbstractLevel {
 		// Consequently, instead of managing individually the RISocialChangeBroadcast influences
 		// their management is grouped.
 		//
-		// The set where the RISocialChangeBroadcast are grouped together.
-		Set<RISocialChangeBroadcast> broadcastInfluences = new HashSet<RISocialChangeBroadcast>();
+		// The same problem goes with the addition of posts on the Internet (RISocialPublishExperimentReport influences)
+		// and the deletion of posts with the RISocialRemoveAllPublications and RISocialRemovePublications influences.
+		//
+		// Declare the set where the RISocialChangeBroadcast influences are grouped together.
+		Set<RISocialChangeBroadcast> broadcastInfluences = new LinkedHashSet<RISocialChangeBroadcast>();
+		Set<RISocialPublishExperimentReport> publishInfluences = new LinkedHashSet<RISocialPublishExperimentReport>();
+		Set<IInfluence> censorshipInfluences = new LinkedHashSet<IInfluence>();
 		for( IInfluence influence : regularInfluencesOftransitoryStateDynamics ){
 			// Dispatch the management of the influence to the appropriate methods.
 			if( RISocialChangeBroadcast.CATEGORY.equals( influence.getCategory() ) ){
 				// The management of this influence is performed in a group to solve conflicts.
 				broadcastInfluences.add( (RISocialChangeBroadcast) influence );
+			} else if( RISocialPublishExperimentReport.CATEGORY.equals( influence.getCategory() ) ) {
+				// The management of this influence is performed in a group to solve conflicts.
+				publishInfluences.add( (RISocialPublishExperimentReport) influence );
+			} else if( RISocialReplaceEditorInChief.CATEGORY.equals( influence.getCategory() ) ) {
+				// Dispatch the management of the influence.
+				this.reactTo( 
+						(RISocialReplaceEditorInChief) influence, 
+						previousConsistentStateTime, 
+						newConsistentStateTime, 
+						consistentState, 
+						remainingInfluences 
+				);
+			} else if( RISocialRemoveAllPublications.CATEGORY.equals( influence.getCategory() ) ) {
+				// The management of this influence is performed in a group to solve conflicts.
+				censorshipInfluences.add( influence );
+			} else if( RISocialRemovePublications.CATEGORY.equals( influence.getCategory() ) ) {
+				// The management of this influence is performed in a group to solve conflicts.
+				censorshipInfluences.add( influence );
 			} else {
 				// This case is out of the bounds of the behavior of the reaction.
 				// Consequently, we throw an exception telling that this case should not happen
@@ -238,6 +269,83 @@ public class SocialLevel extends AbstractLevel {
 		if( ! broadcastInfluences.isEmpty() ){
 			EnvPLSSocial envState = (EnvPLSSocial) consistentState.getPublicLocalStateOfEnvironment();
 			this.managedGroupedChangeBroadcastInfluences( broadcastInfluences, envState );
+		}
+		//
+		// Then perform a grouped management of the post publication/censorship influences.
+		//
+		this.managedGroupedPostsOnTheInternetInfluences(
+				publishInfluences, 
+				censorshipInfluences, 
+				previousConsistentStateTime, 
+				newConsistentStateTime, 
+				consistentState, 
+				regularInfluencesOftransitoryStateDynamics, 
+				remainingInfluences
+		);
+	}
+	
+	/**
+	 * Solves the possible conflicts between a set of influences and modifies the public local dynamic state of the simulation
+	 * accordingly.
+	 * <h1>Conflicts</h1>
+	 * <p>
+	 * 	The management of the reaction to the {@link RISocialPublishExperimentReport}, {@link RISocialRemoveAllPublications} and
+	 *  {@link RISocialRemovePublications} influences is special, since this reaction has to solve a conflict between
+	 * 	the addition of posts and the removal of posts.
+	 * 	Consequently, instead of managing individually the influences their management is grouped and favors removal:
+	 * 	the posts added by the {@link RISocialPublishExperimentReport} are removed by the {@link RISocialRemovePublications} and
+	 * 	{@link RISocialRemoveAllPublications} when possible.
+	 * </p>
+	 * @param publishInfluences The set of influences where a conflict can happen.
+	 * @param censorshipInfluences The set of influences where a conflict can happen.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
+	 * previous consistent state to the next consistent state of the level.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void managedGroupedPostsOnTheInternetInfluences( 
+			Set<RISocialPublishExperimentReport> publishInfluences,
+			Set<IInfluence> censorshipInfluences,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
+			Set<IInfluence> remainingInfluences
+	) {
+		// First manage the post addition influences.
+		for( RISocialPublishExperimentReport influence : publishInfluences ){
+			this.reactTo(
+					influence, 
+					previousConsistentStateTime, 
+					newConsistentStateTime, 
+					consistentState, 
+					remainingInfluences
+			);
+		}
+		// Then manage the post censorship influences.
+		for( IInfluence influence : censorshipInfluences ) {
+			if( RISocialRemoveAllPublications.CATEGORY.equals( influence.getCategory() ) ) {
+				this.reactTo(
+						(RISocialRemoveAllPublications) influence, 
+						previousConsistentStateTime, 
+						newConsistentStateTime, 
+						consistentState, 
+						remainingInfluences
+				);
+			} else if( RISocialRemovePublications.CATEGORY.equals( influence.getCategory() ) ) {
+				this.reactTo(
+						(RISocialRemovePublications) influence, 
+						previousConsistentStateTime, 
+						newConsistentStateTime, 
+						consistentState, 
+						remainingInfluences
+				);
+			} else {
+				throw new UnsupportedOperationException( "Cannot manage the reaction to '" + influence.getCategory() + "' influences." );
+			}
 		}
 	}
 	
@@ -275,5 +383,110 @@ public class SocialLevel extends AbstractLevel {
 		}
 		// Modify the broadcasted value in the TV program.
 		envPublicLocalState.setTvBroadcastedThresholdForStrangePhysicalManifestations( valueToBroadCast );
+	}
+	
+	/**
+	 * Manages the reaction to a {@link RISocialPublishExperimentReport} influence.
+	 * @param influence The influence which reaction is managed by this method call.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void reactTo(
+			RISocialPublishExperimentReport influence,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> remainingInfluences
+	){
+		//
+		// In reaction to this influence, the post is included in the Internet (public local state of the environment).
+		//
+		// First get the casted public local state of the environment.
+		EnvPLSSocial castedEnv = (EnvPLSSocial) consistentState.getPublicLocalStateOfEnvironment();
+		castedEnv.addPost( influence.getPost() );
+	}
+	
+	/**
+	 * Manages the reaction to a {@link RISocialReplaceEditorInChief} influence.
+	 * @param influence The influence which reaction is managed by this method call.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void reactTo(
+			RISocialReplaceEditorInChief influence,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> remainingInfluences
+	){
+		//
+		// In reaction to this influence, the current editor in chief is removed from the simulation and the new one is added to the simulation.
+		//
+		// First remove the current editor in chief from the simulation. This task is performed by using a system reaction.
+		// Since we want to remove the agent before the end of this reaction, the system influence has to be managed in the system reaction
+		// directly following this reaction to regular influences. This is achieved by aiming the influence at this level.
+		SystemInfluenceRemoveAgent removeAgtInfluence = new SystemInfluenceRemoveAgent( this.getIdentifier(), influence.getEditorInChiefToReplace() );
+		// Add the influence to the influence to manage.
+		remainingInfluences.add( removeAgtInfluence );
+		// Then add the new editor in chief to the simulation. This task is also performed using a system reaction.
+		SystemInfluenceAddAgent addAgtInfluence = new SystemInfluenceAddAgent( this.getIdentifier(), influence.getNewEditorInChief() );
+		// Add the influence to the influence to manage.
+		remainingInfluences.add( addAgtInfluence );
+	}
+	
+	/**
+	 * Manages the reaction to a {@link RISocialRemoveAllPublications} influence.
+	 * @param influence The influence which reaction is managed by this method call.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void reactTo(
+			RISocialRemoveAllPublications influence,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> remainingInfluences
+	){
+		//
+		// In reaction to this influence, all the posts are removed from the Internet (public local state of the environment).
+		//
+		// First get the casted public local state of the environment.
+		EnvPLSSocial castedEnv = (EnvPLSSocial) consistentState.getPublicLocalStateOfEnvironment();
+		// Then remove all the posts on the Internet.
+		castedEnv.removeAllPostsFromTheInternet( );
+	}
+	
+	/**
+	 * Manages the reaction to a {@link RISocialRemovePublications} influence.
+	 * @param influence The influence which reaction is managed by this method call.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void reactTo(
+			RISocialRemovePublications influence,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> remainingInfluences
+	){
+		//
+		// In reaction to this influence, all the posts of the citizen are removed from the Internet (public local state of the environment).
+		//
+		// First get the casted public local state of the environment.
+		EnvPLSSocial castedEnv = (EnvPLSSocial) consistentState.getPublicLocalStateOfEnvironment();
+		// Then remove the posts of the citizen.
+		castedEnv.removeAllPostsOfCitizen( influence.getCitizen() );
 	}
 }

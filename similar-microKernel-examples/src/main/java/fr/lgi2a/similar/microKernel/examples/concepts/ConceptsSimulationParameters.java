@@ -104,7 +104,7 @@ public class ConceptsSimulationParameters {
 	 * was performed on him/her. This value is being broadcasted on television and corresponds to the value 
 	 * advised by the FBI.
 	 */
-	public static final int THRESHOLD_FOR_STRANGE_PHYSICAL_MANIFESTATION_ADVISED_BY_FBI = 5;
+	public static final int THRESHOLD_FOR_STRANGE_PHYSICAL_MANIFESTATION_ADVISED_BY_FBI = 4;
 	
 	/**
 	 * The number of abduction being reported in the city of the editor in chief before it becomes paranoid and 
@@ -115,5 +115,30 @@ public class ConceptsSimulationParameters {
 	/**
 	 * The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
 	 */
-	public static final int CITIZEN_POSTS_THRESHOLD_BEFORE_LOBOTOMY = 40;
+	public static final int CITIZEN_POSTS_THRESHOLD_BEFORE_LOBOTOMY = 15;
+	
+	/**
+	 * Models a range of citizen initially lying in a city. The bounds of the interval are included.
+	 * This interval is used during the generation of the simulation.
+	 */
+	public static final int[] DEFAULT_RANGE_OF_CITIZENS_PER_CITY = new int[]{ 0, 6 };
+	
+	/**
+	 * The default number of aliens in the simulation.
+	 */
+	public static final int DEFAULT_NUMBER_OF_ALIENS = 10;
+	
+	/**
+	 * Models the default efficiency of the alien in its experiments. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It will be used as a multiplication factor when 
+	 * the reaction will determine how much the experiment of the alien advanced.
+	 */
+	public static final double DEFAULT_ALIEN_EFFICIENCY_IN_EXPERIMENTS = 0.5;
+	
+	/**
+	 * Models the default efficiency of the FBI to capture alien. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It determines the success chances of
+	 * a capture influence sent by the FBI.
+	 */
+	public static final double DEFAULT_FBI_EFFICIENCY_IN_CAPTURE = 0.05;
 }

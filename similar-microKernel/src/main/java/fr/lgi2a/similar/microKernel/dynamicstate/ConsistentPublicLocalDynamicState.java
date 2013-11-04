@@ -47,7 +47,7 @@
 package fr.lgi2a.similar.microkernel.dynamicstate;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
@@ -143,10 +143,10 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		}
 		this.level = level;
-		this.stateDynamicsSystemInfluences = new HashSet<IInfluence>();
-		this.stateDynamicsRegularInfluences = new HashSet<IInfluence>();
+		this.stateDynamicsSystemInfluences = new LinkedHashSet<IInfluence>();
+		this.stateDynamicsRegularInfluences = new LinkedHashSet<IInfluence>();
 		this.stateDynamics = new ViewOnSetUnion<IInfluence>( this.stateDynamicsSystemInfluences, this.stateDynamicsRegularInfluences );
-		this.publicLocalStateOfAgents = new HashSet<IPublicLocalStateOfAgent>();
+		this.publicLocalStateOfAgents = new LinkedHashSet<IPublicLocalStateOfAgent>();
 	}
 	
 	/**
@@ -203,7 +203,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 */
 	@Override
 	public Set<IInfluence> getSystemInfluencesOfStateDynamics() {
-		return this.stateDynamicsRegularInfluences;
+		return this.stateDynamicsSystemInfluences;
 	}
 
 	/**
@@ -211,7 +211,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 */
 	@Override
 	public Set<IInfluence> getRegularInfluencesOfStateDynamics() {
-		return this.stateDynamicsSystemInfluences;
+		return this.stateDynamicsRegularInfluences;
 	}
 
 	/**

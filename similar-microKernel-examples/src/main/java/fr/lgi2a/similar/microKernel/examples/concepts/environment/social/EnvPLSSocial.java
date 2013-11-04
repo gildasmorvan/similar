@@ -47,7 +47,6 @@
 package fr.lgi2a.similar.microkernel.examples.concepts.environment.social;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -171,9 +170,10 @@ public class EnvPLSSocial extends AbstractPublicLocalState {
 		this.postsPerCities.get( post.getCity() ).add( post );
 		Set<PostOnConspiracyForum> posts  = this.postsPerCitizen.get( post.getAuthor() );
 		if( posts == null ){
-			posts = new HashSet<PostOnConspiracyForum>( );
+			posts = new LinkedHashSet<PostOnConspiracyForum>( );
 			this.postsPerCitizen.put( post.getAuthor(), posts );
 		}
+		posts.add( post );
 	}
 	
 	/**

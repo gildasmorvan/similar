@@ -70,9 +70,15 @@ import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Citie
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalCaptureAndDissectAlien;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalRemoveAllStrangePhysicalManifestations;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialChangeBroadcast;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialRemoveAllPublications;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialRemovePublications;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialReplaceEditorInChief;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
+import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
 
 /**
  * Models instances of 'Citizen' agents.
@@ -113,6 +119,31 @@ public class AgtFBI extends AbstractAgent {
 	public AgtFBI( ) {
 		// The super constructor requires the definition of the category of the agent.
 		super( CATEGORY );
+		//
+		// Define the initial global memory state of the agent.
+		//
+		// No specific data are required in that state for the 'alien' agent. Thus, instead of defining a new class,
+		// we use the generic class EmptyGlobalMemoryState defined in the common libs of SIMILAR.
+		// This class models an empty global memory state for an agent.
+		this.initializeGlobalMemoryState( new EmptyGlobalMemoryState( this ) );
+		//
+		// Tell that this agent is initially in the 'Physical' level.
+		//
+		// No specific data about this agent have be perceptible in the 'Physical' level. Thus, instead of defining a new class,
+		// we use the generic class EmptyPublicLocalStateOfAgent defined in the common libs of SIMILAR.
+		// This class models an empty public local state for an agent.
+		IPublicLocalStateOfAgent stateInPhysicalLevel = new EmptyPublicLocalStateOfAgent( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL, this );
+		// Specify that the agent lies is initially present in the 'Physical' level.
+		this.includeNewLevel( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL, stateInPhysicalLevel );
+		//
+		// Tell that this agent is initially in the 'Social' level.
+		//
+		// No specific data about this agent have be perceptible in the 'Social' level. Thus, instead of defining a new class,
+		// we use the generic class EmptyPublicLocalStateOfAgent defined in the common libs of SIMILAR.
+		// This class models an empty public local state for an agent.
+		IPublicLocalStateOfAgent stateInSocialLevel = new EmptyPublicLocalStateOfAgent( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, this );
+		// Specify that the agent lies is initially present in the 'Social' level.
+		this.includeNewLevel( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, stateInSocialLevel );
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -225,8 +256,11 @@ public class AgtFBI extends AbstractAgent {
 				envPhysical.getCurrentTimeOfTheDay() 
 		);
 		// Add the aliens located in that city.
-		for( AgtAlienPLSPhysical alien : envPhysical.getAliensAt( selectedCity ) ){
-			perceivedData.addAlienInSearchedCity( alien );
+		Set<AgtAlienPLSPhysical> aliens = envPhysical.getAliensAt( selectedCity );
+		if( aliens != null ){
+			for( AgtAlienPLSPhysical alien : aliens ){
+				perceivedData.addAlienInSearchedCity( alien );
+			}
 		}
 		// Find dangerous citizens.
 		for( IPublicLocalStateOfAgent agentState : levelsPublicLocalObservableDynamicState.get( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL ).getPublicLocalStateOfAgents() ){
@@ -235,8 +269,10 @@ public class AgtFBI extends AbstractAgent {
 				// If the agent is a citizen, find the number of posts that were written by him.
 				AgtCitizenPLSPhysical citizenState = (AgtCitizenPLSPhysical) agentState;
 				Set<PostOnConspiracyForum> posts = envSocial.getPostsFor( citizenState );
-				if( posts.size() > this.citizenPostsThresholdBeforeLobotomy ){
-					perceivedData.addDangerousCitizen( citizenState );
+				if( posts != null ){
+					if( posts.size() > this.citizenPostsThresholdBeforeLobotomy ){
+						perceivedData.addDangerousCitizen( citizenState, envSocial.getPostsFor( citizenState ) );
+					}
 				}
 			}
 		}
@@ -320,6 +356,8 @@ public class AgtFBI extends AbstractAgent {
 	 * Produce the influences resulting from the decisions made from the 'Social' level.
 	 * <p>
 	 * 	From that level, the FBI replaces 'Editor in chiefs' if they do not follow the directives of the FBI any more.
+	 * 	If it does so, the FBI also changes the broadcasted value to the recommended one. It also removes all the posts on the
+	 * 	Internet to cut off the panic in the media.
 	 * </p>
 	 * @param perceivedData The data that were perceived from the 'Social' level, containing the candidates for the experiments.
 	 * @param producedInfluences The map where the influences produced by the decisions of this agent are put.
@@ -340,6 +378,8 @@ public class AgtFBI extends AbstractAgent {
 					this.getCategory() 
 			);
 			producedInfluences.add( changeInfluence );
+			RISocialRemoveAllPublications removeAllInfluence = new RISocialRemoveAllPublications( );
+			producedInfluences.add( removeAllInfluence );
 		}
 	}
 	
@@ -362,15 +402,30 @@ public class AgtFBI extends AbstractAgent {
 		AgtFBIPDFPhysical castedData = (AgtFBIPDFPhysical) perceivedData;
 		switch( castedData.getCurrentTime() ){
 		case DAY:
-			// TODO
-			int a;
+			// The FBI lobotomizes all the dangerous citizen (remove all strange physical manifestations, and remove all their posts on the Internet)
+			for( AgtCitizenPLSPhysical dangerousCitizen : castedData.getDangerousCitizens() ) {
+				// First tell that the strange physical manifestations have to be removed.
+				RIPhysicalRemoveAllStrangePhysicalManifestations removeManifestationsInfluence = new RIPhysicalRemoveAllStrangePhysicalManifestations(
+						dangerousCitizen
+				);
+				producedInfluences.add( removeManifestationsInfluence );
+				// Then tell that all the posts of that citizen have to be removed from the Internet.
+				RISocialRemovePublications removePostsInfluence = new RISocialRemovePublications( dangerousCitizen );
+				producedInfluences.add( removePostsInfluence );
+			}
 			break;
 		case EVENING:
 			// The FBI does nothing in the evening.
 			break;
 		case NIGHT:
-			// TODO
-			int b;
+			// The FBI chases the aliens it perceived.
+			if( castedData.getAliensInSearchedCity() != null ){
+				for( AgtAlienPLSPhysical alien : castedData.getAliensInSearchedCity() ){
+					// Produce an influence telling that the FBI tries to capture the alien.
+					RIPhysicalCaptureAndDissectAlien captureInfluence = new RIPhysicalCaptureAndDissectAlien( alien );
+					producedInfluences.add( captureInfluence );
+				}
+			}
 			break;
 		default:
 			// This case is normally never reached.

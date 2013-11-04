@@ -57,16 +57,21 @@ import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicSta
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
+import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationTimeInterpretationModel;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.AgtAlien;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizen;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalCaptureAndDissectAlien;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalGoToWork;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalLandOnEarth;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalPerformExperiment;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalRemoveAllStrangePhysicalManifestations;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalSetTimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalTakeOffFromEarth;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddPublicLocalStateToDynamicState;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemovePublicLocalStateFromDynamicState;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
@@ -278,6 +283,30 @@ public class PhysicalLevel extends AbstractLevel {
 						consistentState, 
 						remainingInfluences 
 				);
+			} else if( RIPhysicalSetTimeOfTheDay.CATEGORY.equals( influence.getCategory() ) ){
+				this.reactTo( 
+						(RIPhysicalSetTimeOfTheDay) influence, 
+						previousConsistentStateTime, 
+						newConsistentStateTime, 
+						consistentState, 
+						remainingInfluences 
+				);
+			} else if( RIPhysicalCaptureAndDissectAlien.CATEGORY.equals( influence.getCategory() ) ){
+				this.reactTo( 
+						(RIPhysicalCaptureAndDissectAlien) influence, 
+						previousConsistentStateTime, 
+						newConsistentStateTime, 
+						consistentState, 
+						remainingInfluences 
+				);
+			} else if( RIPhysicalRemoveAllStrangePhysicalManifestations.CATEGORY.equals( influence.getCategory() ) ){
+				this.reactTo( 
+						(RIPhysicalRemoveAllStrangePhysicalManifestations) influence, 
+						previousConsistentStateTime, 
+						newConsistentStateTime, 
+						consistentState, 
+						remainingInfluences 
+				);
 			} else if( 	RIPhysicalGoToWork.CATEGORY.equals( influence.getCategory() ) ) {
 				// This influence has currently no effect on the simulation.
 				// In the future, it can be used to track the effect on the economy of the
@@ -410,5 +439,90 @@ public class PhysicalLevel extends AbstractLevel {
 		if( ! influence.getAlienPublicLocalState().hasFinishedExperiments() ){
 			remainingInfluences.add( influence );
 		}
+	}
+	
+	/**
+	 * Manages the reaction to a {@link RIPhysicalSetTimeOfTheDay} influence.
+	 * @param influence The influence which reaction is managed by this method call.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void reactTo(
+			RIPhysicalSetTimeOfTheDay influence,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> remainingInfluences
+	){
+		//
+		// In reaction to this influence, the current time of the day is updated.
+		// to the 'space' level.
+		//
+		EnvPLSPhysical castedEnvState = (EnvPLSPhysical) consistentState.getPublicLocalStateOfEnvironment();
+		castedEnvState.setCurrentTimeOfTheDay( ConceptsSimulationTimeInterpretationModel.INSTANCE.getTimeOfTheDay( newConsistentStateTime ) );
+	}
+	
+	/**
+	 * Models the efficiency of the FBI to capture alien. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It determines the success chances of
+	 * a capture influence sent by the FBI.
+	 */
+	private double fbiCaptureEfficiency = ConceptsSimulationParameters.DEFAULT_FBI_EFFICIENCY_IN_CAPTURE;
+
+	/**
+	 * Manages the reaction to a {@link RIPhysicalCaptureAndDissectAlien} influence.
+	 * @param influence The influence which reaction is managed by this method call.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void reactTo(
+			RIPhysicalCaptureAndDissectAlien influence,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> remainingInfluences
+	){
+		//
+		// In reaction to this influence, the alien is removed from the simulation if the FBI is efficient enough.
+		// This is determined by getting a random number and checking if it is higher than an efficiency threshold.
+		//
+		// First get a random number.
+		double randomNumber = ConceptsSimulationRandom.random( );
+		// Then check if the FBI is efficient enough to capture the alien.
+		if( randomNumber < this.fbiCaptureEfficiency ){
+			// The alien is removed from the simulation. This task is performed by using a system reaction.
+			// Since we want to remove the agent before the end of this reaction, the system influence has to be managed in the system reaction
+			// directly following this reaction to regular influences. This is achieved by aiming the influence at this level.
+			SystemInfluenceRemoveAgent removeAgtInfluence = new SystemInfluenceRemoveAgent( this.getIdentifier(), influence.getAlien() );
+			remainingInfluences.add( removeAgtInfluence );
+		}
+	}
+
+	/**
+	 * Manages the reaction to a {@link RIPhysicalRemoveAllStrangePhysicalManifestations} influence.
+	 * @param influence The influence which reaction is managed by this method call.
+	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
+	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
+	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
+	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * this method, or the influences that persist after this reaction.
+	 */
+	private void reactTo(
+			RIPhysicalRemoveAllStrangePhysicalManifestations influence,
+			SimulationTimeStamp previousConsistentStateTime,
+			SimulationTimeStamp newConsistentStateTime,
+			ConsistentPublicLocalDynamicState consistentState,
+			Set<IInfluence> remainingInfluences
+	){
+		//
+		// In reaction to this influence, the number of strange physical manifestations on the body of the citizen are removed.
+		//
+		influence.getCitizen().resetStrangePhysicalManifestations( );
 	}
 }

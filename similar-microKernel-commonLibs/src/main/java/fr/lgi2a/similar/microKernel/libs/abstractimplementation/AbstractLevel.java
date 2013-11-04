@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.abstractimplementation;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.ILevel;
@@ -103,10 +103,10 @@ public abstract class AbstractLevel implements ILevel {
 		// Create the last consistent dynamic state of this level.
 		this.lastConsistentPublicLocalDynamicState = new ConsistentPublicLocalDynamicState( initialTime, this.getIdentifier() );
 		// Create the out neighborhood of the perception relation graph for this level.
-		this.perceptibleLevels = new HashSet<LevelIdentifier>( );
+		this.perceptibleLevels = new LinkedHashSet<LevelIdentifier>( );
 		this.perceptibleLevels.add( identifier );
 		// Create the out neighborhood of the influence relation graph for this level.
-		this.influenceableLevels = new HashSet<LevelIdentifier>( );
+		this.influenceableLevels = new LinkedHashSet<LevelIdentifier>( );
 		this.influenceableLevels.add( identifier );
 	}
 

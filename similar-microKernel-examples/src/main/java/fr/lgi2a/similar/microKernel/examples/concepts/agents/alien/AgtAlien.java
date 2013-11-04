@@ -46,8 +46,9 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.alien;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -215,10 +216,11 @@ public class AgtAlien extends AbstractAgent {
 		// at least one citizen.
 		AgtAlienPDFSpace perceivedData = null;
 		// Create a list from which cities are randomly picked until a city containing a citizen is chosen.
-		List<Cities> cityCandidates = Arrays.asList( Cities.values() );
+		List<Cities> cityCandidates = new LinkedList<Cities>();
+		Collections.addAll( cityCandidates, Cities.values() );
 		// The tries remaining before the alien fails to find a citizen.
 		int remainingTries = this.perceptibleCitiesPerTime;
-		while( perceivedData != null && remainingTries > 0 && ! cityCandidates.isEmpty() ) {
+		while( perceivedData == null && remainingTries > 0 && ! cityCandidates.isEmpty() ) {
 			int listIndex = ConceptsSimulationRandom.randomInt( cityCandidates.size() );
 			Cities city = cityCandidates.remove( listIndex );
 			Set<AgtCitizenPLSPhysical> citizensFromCity = environmentInPhysicalLevel.getCitizensAt( city );

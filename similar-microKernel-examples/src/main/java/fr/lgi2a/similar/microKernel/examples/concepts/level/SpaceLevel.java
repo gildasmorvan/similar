@@ -58,7 +58,6 @@ import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIde
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.space.EnvPLSSpace;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalPerformExperiment;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSpace.RISpaceSendExperimentReport;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
 
@@ -229,7 +228,7 @@ public class SpaceLevel extends AbstractLevel {
 	) {
 		for( IInfluence influence : regularInfluencesOftransitoryStateDynamics ){
 			// Dispatch the management of the influence to the appropriate methods.
-			if( RIPhysicalPerformExperiment.CATEGORY.equals( influence.getCategory() ) ){
+			if( RISpaceSendExperimentReport.CATEGORY.equals( influence.getCategory() ) ){
 				this.reactTo( 
 						(RISpaceSendExperimentReport) influence, 
 						previousConsistentStateTime, 

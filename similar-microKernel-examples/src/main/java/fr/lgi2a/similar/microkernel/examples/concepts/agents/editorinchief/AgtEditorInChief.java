@@ -241,7 +241,7 @@ public class AgtEditorInChief extends AbstractAgent {
 				// It reduces the threshold by an amount equal to the total number of abduction cases divided by the number of cities plus
 				// the threshold (arbitrary computation).
 				int broadCastedValue = (int) Math.max(
-						0, 
+						1, 
 						this.thresholdForStrangePhysicalManifestationsAdvisedByFBI - castedPerceivedData.getTotalNumberOfExperiments() / ( 
 								castedPerceivedData.getNumberOfExperimentsInCityOfEditorInChief() + this.paranoiaThreshold
 						)

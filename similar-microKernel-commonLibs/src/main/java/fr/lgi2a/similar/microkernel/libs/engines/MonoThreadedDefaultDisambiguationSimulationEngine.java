@@ -48,7 +48,6 @@ package fr.lgi2a.similar.microkernel.libs.engines;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -160,7 +159,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	 */
 	@Override
 	public Set<IAgent> getAgents() {
-		Set<IAgent> agentsSet = new HashSet<IAgent>();
+		Set<IAgent> agentsSet = new LinkedHashSet<IAgent>();
 		for( LevelIdentifier level : this.getLevels() ){
 			agentsSet.addAll( this.getAgents( level ) );
 		}
@@ -855,6 +854,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 				for( IInfluence systemInfluence : transitoryState.getSystemInfluencesOfStateDynamics() ){
 					// Handle the reaction to the influence.
 					Set<IInfluence> producedInfluences = this.reactToSystemInfluence( systemInfluence );
+					influencesManagedDuringSystemReaction.add( systemInfluence );
 					// If the reaction produced other influences, add them to the influence to process.
 					if( producedInfluences != null ){
 						for( IInfluence producedInfluence : producedInfluences ){
@@ -864,26 +864,31 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 				}
 			}
 			//
-			// Then remove all system influences from the transitory dynamic states of the levels contained in lR, and
-			// then dispatch all the influences contained in the 'influencesToProcessInNextLoop' map into the transitory dynamic
+			// Then remove all system influences from the transitory dynamic states of the levels contained in lR.
+			//
+			for( ILevel level : lR ){
+				LevelIdentifier levelId = level.getIdentifier();
+				// First remove all the system influence if they were managed by the current loop in this
+				// system reaction (i.e. if the level belongs to lR).
+				if( lR.contains( this.levels.get( levelId ) ) ){
+					TransitoryPublicLocalDynamicState transitoryDynamicState = 
+							(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
+					transitoryDynamicState.clearSystemInfluences();
+				}
+			}
+			// Then dispatch all the influences contained in the 'influencesToProcessInNextLoop' map into the transitory dynamic
 			// state of their corresponding levels.
 			//
 			for( LevelIdentifier levelId : influencesToProcessInNextLoop.getDefinedKeys() ){
 				TransitoryPublicLocalDynamicState transitoryDynamicState = 
 						(TransitoryPublicLocalDynamicState) this.transitoryDynamicStates.get( levelId );
-				// First remove all the system influence if they were managed by the current loop in this
-				// system reaction (i.e. if the level belongs to lR).
-				if( lR.contains( this.levels.get( levelId ) ) ){
-					transitoryDynamicState.clearSystemInfluences();
-				}
-				// Then include all the influences aimed at this level that were produced during the current loop.
+				// Include all the influences aimed at this level that were produced during the current loop.
 				for( IInfluence influence : influencesToProcessInNextLoop.getInfluencesForLevel( levelId ) ){
 					transitoryDynamicState.addInfluence( influence );
 				}
 			}
 			// Continue the iteration if the 'influencesToProcessInNextLoop' map is not empty.
 		} while( ! influencesToProcessInNextLoop.isEmpty() );
-		
 		return influencesManagedDuringSystemReaction;
 	}
 	

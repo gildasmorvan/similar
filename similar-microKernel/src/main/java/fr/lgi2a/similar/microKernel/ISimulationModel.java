@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -185,7 +185,7 @@ public interface ISimulationModel {
 		 * In this object, the influences map and the agents list are initially empty.
 		 */
 		public AgentInitializationData( ){
-			this.agents = new HashSet<IAgent>( );
+			this.agents = new LinkedHashSet<IAgent>( );
 			this.influences = new InfluencesMap( );
 		}
 		

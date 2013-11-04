@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.environment.space;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
@@ -99,7 +99,7 @@ public class EnvPLSSpace extends AbstractPublicLocalState {
 		// The super constructor requires the identifier of the level for which this public
 		// local state is defined.
 		super( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );
-		this.samples = new HashSet<AgtCitizenPLSPhysical>( );
+		this.samples = new LinkedHashSet<AgtCitizenPLSPhysical>( );
 		this.samplesNumber = 0;
 	}
 

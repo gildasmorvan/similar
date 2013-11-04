@@ -47,8 +47,8 @@
 package fr.lgi2a.similar.microkernel.dynamicstate;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
@@ -143,12 +143,12 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 		}
 		this.lastConsistentDynamicState = lastConsistentDynamicState;
 		this.nextConsistentTime = nextConsistentTime;
-		this.stateTransitoryDynamicsSystemInfluences = new HashSet<IInfluence>();
+		this.stateTransitoryDynamicsSystemInfluences = new LinkedHashSet<IInfluence>();
 		this.allInfluencesOfStateTransitoryDynamicsSystemInfluences = new ViewOnSetUnion<>( 
 				this.lastConsistentDynamicState.getSystemInfluencesOfStateDynamics(), 
 				this.stateTransitoryDynamicsSystemInfluences
 		);
-		this.stateTransitoryDynamicsRegularInfluences = new HashSet<IInfluence>();
+		this.stateTransitoryDynamicsRegularInfluences = new LinkedHashSet<IInfluence>();
 		this.allInfluencesOfStateTransitoryDynamicsRegularInfluences = new ViewOnSetUnion<>( 
 				this.lastConsistentDynamicState.getRegularInfluencesOfStateDynamics(), 
 				this.stateTransitoryDynamicsRegularInfluences 

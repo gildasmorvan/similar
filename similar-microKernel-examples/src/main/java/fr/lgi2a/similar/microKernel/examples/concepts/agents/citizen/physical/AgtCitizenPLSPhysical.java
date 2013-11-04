@@ -140,13 +140,6 @@ public class AgtCitizenPLSPhysical extends AbstractPublicLocalStateOfAgent {
 	public void increaseNumberOfStrangePhysicalManifestations( int strangeManifestationsToAdd ) {
 		this.strangePhysicalManifestationsNumber += strangeManifestationsToAdd;
 	}
-	
-	/**
-	 * Remove all the strange physical manifestations of this agent.
-	 */
-	public void removeAllStrangePhysicalManifestations( ) {
-		
-	}
 
 	/**
 	 * Gets the posts that were created by the citizen.

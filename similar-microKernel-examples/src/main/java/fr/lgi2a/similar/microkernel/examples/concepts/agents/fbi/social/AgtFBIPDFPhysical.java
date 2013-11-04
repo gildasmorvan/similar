@@ -47,7 +47,9 @@
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
@@ -56,6 +58,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtA
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
+import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPerceivedDataOfAgent;
 
 /**
@@ -95,6 +98,10 @@ public class AgtFBIPDFPhysical extends AbstractPerceivedDataOfAgent {
 	 */
 	private Set<AgtCitizenPLSPhysical> dangerousCitizens;
 	/**
+	 * The posts on the Internet of the citizens considered as dangerous by the FBI.
+	 */
+	private Map<AgtCitizenPLSPhysical,Set<PostOnConspiracyForum>> postsOfDangerousCitizens;
+	/**
 	 * The city that was chosen by the FBI to search for aliens.
 	 */
 	private Cities cityWhereToSearchForAliens;
@@ -120,7 +127,9 @@ public class AgtFBIPDFPhysical extends AbstractPerceivedDataOfAgent {
 		// The super constructor requires the identifier of the level from which 
 		// these data were perceived.
 		super( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
-		this.dangerousCitizens = new HashSet<AgtCitizenPLSPhysical>( );
+		this.alienPhysicalState = new LinkedHashSet<AgtAlienPLSPhysical>();
+		this.dangerousCitizens = new LinkedHashSet<AgtCitizenPLSPhysical>( );
+		this.postsOfDangerousCitizens = new HashMap<AgtCitizenPLSPhysical,Set<PostOnConspiracyForum>>();
 		this.currentTime = currentTime;
 	}
 
@@ -135,9 +144,22 @@ public class AgtFBIPDFPhysical extends AbstractPerceivedDataOfAgent {
 	/**
 	 * Adds a dangerous citizen to the perceived data.
 	 * @param citizen The citizen to add.
+	 * @param posts The posts on the Internet of the dangerous citizen.
 	 */
-	public void addDangerousCitizen( AgtCitizenPLSPhysical citizen ) {
+	public void addDangerousCitizen( AgtCitizenPLSPhysical citizen, Set<PostOnConspiracyForum> posts ) {
 		this.dangerousCitizens.add( citizen );
+		Set<PostOnConspiracyForum> postsOfCitizen = new LinkedHashSet<PostOnConspiracyForum>( );
+		postsOfCitizen.addAll( posts );
+		this.postsOfDangerousCitizens.put( citizen, postsOfCitizen );
+	}
+
+	/**
+	 * Gets the posts on the Internet of the citizens considered as dangerous by the FBI.
+	 * @param citizen The citizen for which the posts are retrieved.
+	 * @return The posts on the Internet of the citizens considered as dangerous by the FBI.
+	 */
+	public Set<PostOnConspiracyForum> getPostsOfDangerousCitizen( AgtCitizenPLSPhysical citizen ) {
+		return this.postsOfDangerousCitizens.get( citizen );
 	}
 
 	/**

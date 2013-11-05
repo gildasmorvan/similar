@@ -1,0 +1,19 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+<!-- Specification of the parent module -->
+  
+  <parent>
+    <groupId>fr.lgi2a</groupId>
+    <artifactId>similar</artifactId>
+    <version>0.0.1</version>
+  </parent>
+  
+<!-- The description of the module -->
+  
+  <artifactId>similar-microKernel</artifactId>
+  <description>A micro kernel containing the minimal specification of SIMILAR, supporting the design of efficient simulations.</description>
+  <name>SIMILAR - Micro kernel</name>
+  <inceptionYear>2013</inceptionYear>
+  
+</project>

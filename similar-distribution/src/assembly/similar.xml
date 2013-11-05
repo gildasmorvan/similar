@@ -1,0 +1,102 @@
+<!-- 
+
+	The XML file describing how the binary distribution of similar is built.
+	
+ -->
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+   		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  		xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    
+    <id>bin</id>
+    
+    <!-- Generates a zip package containing the needed files -->
+    <formats>
+        <format>dir</format>
+        <format>zip</format>
+    </formats>
+    
+    <!-- Necessary for the creation of the binary release (see http://maven.apache.org/plugins/maven-assembly-plugin/examples/multimodule/module-binary-inclusion-simple.html) -->
+    <includeBaseDirectory>false</includeBaseDirectory>
+    
+    <!-- Tell that we include resources coming from the sub-modules -->
+    
+    <moduleSets>
+    
+   		<!-- Include the site of the module in the appropriate place of the archive. -->
+    
+    	<moduleSet>
+    		<!-- Enable access to all projects in the current multimodule build! -->
+    		<useAllReactorProjects>true</useAllReactorProjects>
+    		
+    		<sources>
+    			<outputDirectoryMapping>/docs/${module.artifactId}</outputDirectoryMapping>
+    			<includeModuleDirectory>true</includeModuleDirectory>
+    			<fileSets>
+    				<fileSet>
+    					<directory>target/site</directory>
+    					<outputDirectory>/</outputDirectory>
+    				</fileSet>
+    			</fileSets>
+    		</sources>
+    	</moduleSet>
+    
+ 		<!-- Include the jar dependencies of the module into the lib directory. -->
+   			
+    	<moduleSet>
+    		<useAllReactorProjects>true</useAllReactorProjects>
+    		<binaries>
+    			<outputDirectory>/similarLib</outputDirectory>
+				<unpack>false</unpack>
+				<includeDependencies>true</includeDependencies>
+				<dependencySets>
+					<dependencySet>
+						<outputDirectory>../lib</outputDirectory>
+						<scope>runtime</scope>
+						<excludes>
+							<exclude>fr.lgi2a:*</exclude>
+						</excludes>
+					</dependencySet>
+				</dependencySets>
+    		</binaries>
+    	</moduleSet>
+    </moduleSets>
+    
+    <fileSets>
+            
+        <!-- include the documentation site of the parent into the binary release -->
+	    <fileSet>
+	      <directory>../target/site</directory>
+	      <outputDirectory>/docs</outputDirectory>
+	    </fileSet>
+
+        <!-- include licensing and Readme files -->
+		<fileSet>
+			<directory>../</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>USINGSIMILAR_README*</include>
+				<include>LICENSE*</include>
+				<include>NOTICE*</include>
+			</includes>
+		</fileSet>
+		
+		<!-- include the sources of the usage examples of the micro-kernel -->
+		<fileSet>
+			<directory>../similar-microKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/microKernel</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-microKernel-examples</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>MICROKERNEL-EXAMPLES*</include>
+			</includes>
+		</fileSet>
+    </fileSets>
+</assembly>

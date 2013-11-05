@@ -57,7 +57,6 @@ import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPDFSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
@@ -99,10 +98,24 @@ public class AgtEditorInChief extends AbstractAgent {
 	/**
 	 * Builds an 'Editor in chief' agent initially lying in the 'social' level.
 	 * @param address The city where the editor in chief lives.
+	 * @param thresholdForStrangePhysicalManifestationsAdvisedByFBI The number of strange physical manifestation over which a 
+	 * citizen can consider that an alien experiment was performed on him/her. This value is being broadcasted on television 
+	 * and corresponds to the value advised by the FBI.
+	 * @param paranoiaThreshold The number of abduction being reported in the city of the editor in chief before it becomes paranoid and 
+	 * broadcasts values that are not advised by the FBI.
 	 */
-	public AgtEditorInChief( Cities address ) throws IllegalArgumentException {
+	public AgtEditorInChief( 
+			Cities address,
+			int thresholdForStrangePhysicalManifestationsAdvisedByFBI,
+			long paranoiaThreshold
+	) throws IllegalArgumentException {
 		// The super constructor requires the definition of the category of the agent.
 		super( CATEGORY );
+		//
+		// Define the initial private local states of the agent.
+		//
+		this.paranoiaThreshold = paranoiaThreshold;
+		this.thresholdForStrangePhysicalManifestationsAdvisedByFBI = thresholdForStrangePhysicalManifestationsAdvisedByFBI;
 		//
 		// Define the initial global memory state of the agent.
 		//
@@ -204,8 +217,7 @@ public class AgtEditorInChief extends AbstractAgent {
 	 * 	agent from the 'social' level, it is declared here rather than in the public local state or the global memory state of the agent.
 	 * </p>
 	 */
-	private int thresholdForStrangePhysicalManifestationsAdvisedByFBI = 
-			ConceptsSimulationParameters.THRESHOLD_FOR_STRANGE_PHYSICAL_MANIFESTATION_ADVISED_BY_FBI;
+	private int thresholdForStrangePhysicalManifestationsAdvisedByFBI;
 	/**
 	 * The number of abduction being reported in the city of the editor in chief before it becomes paranoid and 
 	 * broadcasts values that are not advised by the FBI.
@@ -214,7 +226,7 @@ public class AgtEditorInChief extends AbstractAgent {
 	 * 	agent from the 'social' level, it is declared here rather than in the public local state or the global memory state of the agent.
 	 * </p>
 	 */
-	private long paranoiaThreshold = ConceptsSimulationParameters.EDITOR_IN_CHIEF_PARANOIA_THRESHOLD;
+	private long paranoiaThreshold;
 	
 	/**
 	 * This method defines the influences that are produced by the decisions made by this agent, when it performs a decision

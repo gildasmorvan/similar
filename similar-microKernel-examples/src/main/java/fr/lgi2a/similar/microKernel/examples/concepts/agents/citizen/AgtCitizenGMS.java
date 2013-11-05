@@ -74,13 +74,9 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMe
  * 	The identification of the data that should be in the global memory state and the data that
  * 	should be in the private local state of the agent is a hard task. Indeed, the simple rule 'if the 
  * 	data is used in more than one level and cannot be perceived, then the data belongs to the global memory state' 
- * 	is not appropriate in the general case for two reasons:
+ * 	is not appropriate in the general case:
  * </p>
  * <ul>
- * 	<li>
- * 		In a complete perception relation graph, the data located in a private local state can be perceived from any level.
- * 		Consequently, choosing whether the data has to be put in the private local state or the global memory state becomes tricky.
- * 	</li>
  * 	<li>
  * 		The same data can appear in different levels using different forms. For instance a the total number of agents, 
  * 		and the number of agents per category. In this case, it becomes difficult to tell if the number of agents per category should be
@@ -89,8 +85,8 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMe
  * 	</li>
  * </ul>
  * <p>
- * 	In the end, it is up to the user to determine the information to include in the global dynamic state. The global memory state can include beliefs 
- * 	as well as plans, or only beliefs or cross level plans, etc.
+ * 	In the end, it is up to the user to determine the information to include in the global dynamic state. 
+ * 	The global memory state can include beliefs as well as plans, or only beliefs or cross level plans, etc.
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>

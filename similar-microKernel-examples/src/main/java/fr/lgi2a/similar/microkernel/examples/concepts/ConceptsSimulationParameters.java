@@ -49,96 +49,324 @@ package fr.lgi2a.similar.microkernel.examples.concepts;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * Defines the static parameters and the initial values of the different elements of this model.
+ * Models the parameters used in this simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public class ConceptsSimulationParameters {
 	/**
-	 * Defines the completion rate of the experiment performed by an alien, that is achieved when a reaction is computed i nthe 'physical' level.
+	 * Defines the speed of an alien experiment.
+	 * The unit is a percentage (within range ]0,100]) per reaction.
 	 */
-	public static final double EXPERIMENT_COMPLETION_RATE_PER_REACTION = 25;
+	private int alienExperimentSpeed;
 	/**
-	 * This default parameter tells how much cities an alien is able to scrutinize each time it perceives from the 'space' level.
+	 * Models how much cities an alien is able to scrutinize each time it perceives from the 'Space' level.
 	 * <p>
-	 * 	If no citizen could be found after looking at <code>CITIES_PERCEPTIBLE_BY_ALIEN_PER_PERCEPTION</code> cities, then the alien failed to find
+	 * 	If no citizen could be found after looking at <code>alienCitiesPerPerception</code> cities, then the alien failed to find
 	 * 	a citizen to perform experiments that time.
 	 * </p>
 	 */
-	public static final int CITIES_PERCEPTIBLE_BY_ALIEN_PER_PERCEPTION = 2;
+	private int alienCitiesPerPerception;
 	/**
-	 * Defines the default apparition rate of strange physical manifestations on the body of citizen when an alien performs 
+	 * Models the efficiency of an alien in its experiments. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It will be used as a multiplication factor when 
+	 * the reaction will determine how much the experiment of the alien advanced.
+	 */
+	private double alienExperimentsEfficiency;
+	/**
+	 * The apparition rate of strange physical manifestations on the body of citizen when an alien performs 
 	 * an experiment on them.
 	 * <p>
-	 * 	This value has to be between 0 (included) and 1 (excluded).
+	 * 	This value has to be between 0 (included) and 1 (excluded) and models a percentage.
 	 * </p>
 	 */
-	public static final double STRANGE_PHYSICAL_MANIFESTATIONS_APPARITION_RATE = 0.50;
-	
+	private double citizenStrangePhysicalManifestationsApparitionRate;
 	/**
-	 * The map defining how the times of the level 'space' moves with a non-uniform pattern. This pattern models 
-	 * that the actions of aliens cannot be foretold.
-	 * This map uses as keys the long values contained in the interval [0,N] where N is the number of keys.
-	 * The values model the increment applied between a current time and the next time.
-	 * The identifier of the current time is converted into a value contained in the range [0,N] using the modulo operator.
+	 * The data structure modeling how the time evolves in the 'Space' level. To simulate a unpredictable evolution, the evolution of time is based 
+	 * on a map associating an increment value I(x) to the values x from an interval [0,N] of integers. The identifier of the time stamp following 
+	 * a time stamp t is computed using the formula: <i>id(t+dt) = id(t) + I( t mod N )</i>.
 	 */
-	public static final Map<Long,Long> TIME_EVOLUTION_DESCRIPTOR_OF_SPACE_LEVEL = createTimeEvolutionDescriptorOfSpaceLevel( );
-	
-	/**
-	 * Creates the value of the {@link ConceptsSimulationParameters#TIME_EVOLUTION_DESCRIPTOR_OF_SPACE_LEVEL} field of this class.
-	 * @return The value of the {@link ConceptsSimulationParameters#TIME_EVOLUTION_DESCRIPTOR_OF_SPACE_LEVEL} field of this class.
-	 */
-	private static Map<Long,Long> createTimeEvolutionDescriptorOfSpaceLevel( ) {
-		Map<Long,Long> result = new HashMap<Long,Long>( );
-		result.put( 0l, 2l );
-		result.put( 1l, 3l );
-		result.put( 2l, 1l );
-		result.put( 3l, 4l );
-		result.put( 4l, 3l );
-		return result;
-	}
-	
+	private Map<Long,Long> timeEvolutionDescriptorOfSpaceLevel;
 	/**
 	 * The number of strange physical manifestation over which a citizen can consider that an alien experiment 
 	 * was performed on him/her. This value is being broadcasted on television and corresponds to the value 
 	 * advised by the FBI.
 	 */
-	public static final int THRESHOLD_FOR_STRANGE_PHYSICAL_MANIFESTATION_ADVISED_BY_FBI = 4;
-	
-	/**
-	 * The number of abduction being reported in the city of the editor in chief before it becomes paranoid and 
-	 * broadcasts values that are not advised by the FBI.
-	 */
-	public static final long EDITOR_IN_CHIEF_PARANOIA_THRESHOLD = 10;
-	
+	private int fbiAdvisedThreshold;
 	/**
 	 * The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
 	 */
-	public static final int CITIZEN_POSTS_THRESHOLD_BEFORE_LOBOTOMY = 15;
-	
+	private int fbiThresholdBeforeCitizenLobotomy;
 	/**
-	 * Models a range of citizen initially lying in a city. The bounds of the interval are included.
-	 * This interval is used during the generation of the simulation.
-	 */
-	public static final int[] DEFAULT_RANGE_OF_CITIZENS_PER_CITY = new int[]{ 0, 6 };
-	
-	/**
-	 * The default number of aliens in the simulation.
-	 */
-	public static final int DEFAULT_NUMBER_OF_ALIENS = 10;
-	
-	/**
-	 * Models the default efficiency of the alien in its experiments. This value has to be 
-	 * between 0 (completely inefficient) to 1 (fully efficient). It will be used as a multiplication factor when 
-	 * the reaction will determine how much the experiment of the alien advanced.
-	 */
-	public static final double DEFAULT_ALIEN_EFFICIENCY_IN_EXPERIMENTS = 0.5;
-	
-	/**
-	 * Models the default efficiency of the FBI to capture alien. This value has to be 
+	 * Models the efficiency of the FBI to capture alien. This value has to be 
 	 * between 0 (completely inefficient) to 1 (fully efficient). It determines the success chances of
 	 * a capture influence sent by the FBI.
 	 */
-	public static final double DEFAULT_FBI_EFFICIENCY_IN_CAPTURE = 0.05;
+	private double fbiCaptureEfficiency;
+	/**
+	 * The number of experiments being reported in the city of the editor in chief before it becomes paranoid and 
+	 * broadcasts values that are not advised by the FBI.
+	 */
+	private int editorInChiefParanoiaThreshold;
+	/**
+	 * Models the range where the number of citizen initially lying in a city is included. The bounds of the interval are included.
+	 * This interval is used during the generation of the simulation.
+	 */
+	private int[] rangeOfCitizenPerCity;
+	/**
+	 * The number of aliens initially in the simulation.
+	 */
+	private int aliensNumber;
+	
+	/**
+	 * Builds a parameters set containing default values.
+	 * The values can be changed using the setters of the parameters.
+	 */
+	public ConceptsSimulationParameters( ) {
+		this.alienExperimentSpeed = 25;
+		this.alienCitiesPerPerception = 2;
+		this.alienExperimentsEfficiency = 0.5;
+		this.citizenStrangePhysicalManifestationsApparitionRate = 0.5;
+		this.timeEvolutionDescriptorOfSpaceLevel = new HashMap<Long, Long>();
+		this.timeEvolutionDescriptorOfSpaceLevel.put( 0l, 2l );
+		this.timeEvolutionDescriptorOfSpaceLevel.put( 1l, 3l );
+		this.timeEvolutionDescriptorOfSpaceLevel.put( 2l, 1l );
+		this.timeEvolutionDescriptorOfSpaceLevel.put( 3l, 4l );
+		this.timeEvolutionDescriptorOfSpaceLevel.put( 4l, 3l );
+		this.fbiAdvisedThreshold = 4;
+		this.fbiThresholdBeforeCitizenLobotomy = 15;
+		this.fbiCaptureEfficiency = 0.05;
+		this.editorInChiefParanoiaThreshold = 10;
+		this.rangeOfCitizenPerCity = new int[]{ 0, 6 };
+		this.aliensNumber = 10;
+	}
+
+	/**
+	 * Gets the speed of an alien experiment.
+	 * The unit is a percentage (within range ]0,100]) per reaction.
+	 * @return The speed of an alien experiment.
+	 */
+	public int getAlienExperimentSpeed() {
+		return alienExperimentSpeed;
+	}
+
+	/**
+	 * Sets the speed of an alien experiment.
+	 * The unit is a percentage (within range ]0,100]) per reaction.
+	 * @param alienExperimentSpeed The speed of an alien experiment.
+	 */
+	public void setAlienExperimentSpeed(int alienExperimentSpeed) {
+		this.alienExperimentSpeed = alienExperimentSpeed;
+	}
+
+	/**
+	 * Gets how much cities an alien is able to scrutinize each time it perceives from the 'Space' level.
+	 * <p>
+	 * 	If no citizen could be found after looking at <code>alienCitiesPerPerception</code> cities, then the alien failed to find
+	 * 	a citizen to perform experiments that time.
+	 * </p>
+	 * @return How much cities an alien is able to scrutinize each time it perceives from the 'Space' level.
+	 */
+	public int getAlienCitiesPerPerception() {
+		return alienCitiesPerPerception;
+	}
+
+	/**
+	 * Sets how much cities an alien is able to scrutinize each time it perceives from the 'Space' level.
+	 * <p>
+	 * 	If no citizen could be found after looking at <code>alienCitiesPerPerception</code> cities, then the alien failed to find
+	 * 	a citizen to perform experiments that time.
+	 * </p>
+	 * @param alienCitiesPerPerception How much cities an alien is able to scrutinize each time it perceives from the 'Space' level.
+	 */
+	public void setAlienCitiesPerPerception(int alienCitiesPerPerception) {
+		this.alienCitiesPerPerception = alienCitiesPerPerception;
+	}
+
+	/**
+	 * Gets the efficiency of an alien in its experiments. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It will be used as a multiplication factor when 
+	 * the reaction will determine how much the experiment of the alien advanced.
+	 * @return The efficiency of an alien in its experiments.
+	 */
+	public double getAlienExperimentsEfficiency() {
+		return alienExperimentsEfficiency;
+	}
+
+	/**
+	 * Sets the efficiency of an alien in its experiments. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It will be used as a multiplication factor when 
+	 * the reaction will determine how much the experiment of the alien advanced.
+	 * @param alienExperimentsEfficiency The efficiency of an alien in its experiments.
+	 */
+	public void setAlienExperimentsEfficiency(double alienExperimentsEfficiency) {
+		this.alienExperimentsEfficiency = alienExperimentsEfficiency;
+	}
+
+	/**
+	 * Gets the apparition rate of strange physical manifestations on the body of citizen when an alien performs 
+	 * an experiment on them.
+	 * <p>
+	 * 	This value has to be between 0 (included) and 1 (excluded) and models a percentage.
+	 * </p>
+	 * @return The apparition rate of strange physical manifestations on the body of citizen when an alien performs 
+	 * an experiment on them.
+	 */
+	public double getCitizenStrangePhysicalManifestationsApparitionRate() {
+		return citizenStrangePhysicalManifestationsApparitionRate;
+	}
+
+	/**
+	 * Sets the apparition rate of strange physical manifestations on the body of citizen when an alien performs 
+	 * an experiment on them.
+	 * <p>
+	 * 	This value has to be between 0 (included) and 1 (excluded) and models a percentage.
+	 * </p>
+	 * @param citizenStrangePhysicalManifestationsApparitionRate The apparition rate of strange physical manifestations on the body of citizen when an alien performs 
+	 * an experiment on them.
+	 */
+	public void setCitizenStrangePhysicalManifestationsApparitionRate(
+			double citizenStrangePhysicalManifestationsApparitionRate) {
+		this.citizenStrangePhysicalManifestationsApparitionRate = citizenStrangePhysicalManifestationsApparitionRate;
+	}
+
+	/**
+	 * Gets how the times of the level 'space' moves with a non-uniform pattern. This pattern models 
+	 * that the actions of aliens cannot be foretold.
+	 * This map uses as keys the long values contained in the interval [0,N-1], where N is the number of keys in the map.
+	 * The values model the increment applied between a current time and the next time.
+	 * The identifier of the current time is converted into a value contained in the range [0,N] using the modulo operator.
+	 * @return The evolution pattern of the time in the 'Space' level.
+	 */
+	public Map<Long, Long> getTimeEvolutionDescriptorOfSpaceLevel() {
+		return timeEvolutionDescriptorOfSpaceLevel;
+	}
+
+	/**
+	 * Sets how the times of the level 'space' moves with a non-uniform pattern. This pattern models 
+	 * that the actions of aliens cannot be foretold.
+	 * This map uses as keys the long values contained in the interval [0,N-1], where N is the number of keys in the map.
+	 * The values model the increment applied between a current time and the next time.
+	 * The identifier of the current time is converted into a value contained in the range [0,N] using the modulo operator.
+	 * @param timeEvolutionDescriptorOfSpaceLevel The evolution pattern of the time in the 'Space' level.
+	 */
+	public void setTimeEvolutionDescriptorOfSpaceLevel(
+			Map<Long, Long> timeEvolutionDescriptorOfSpaceLevel) {
+		this.timeEvolutionDescriptorOfSpaceLevel = timeEvolutionDescriptorOfSpaceLevel;
+	}
+
+	/**
+	 * Gets the number of strange physical manifestation over which a citizen can consider that an alien experiment 
+	 * was performed on him/her. This value is being broadcasted on television and corresponds to the value 
+	 * advised by the FBI.
+	 * @return The number of strange physical manifestation over which a citizen can consider that an alien experiment 
+	 * was performed on him/her.
+	 */
+	public int getFbiAdvisedThreshold() {
+		return fbiAdvisedThreshold;
+	}
+
+	/**
+	 * Sets the number of strange physical manifestation over which a citizen can consider that an alien experiment 
+	 * was performed on him/her. This value is being broadcasted on television and corresponds to the value 
+	 * advised by the FBI.
+	 * @param fbiAdvisedThreshold The number of strange physical manifestation over which a citizen can consider that an alien experiment 
+	 * was performed on him/her.
+	 */
+	public void setFbiAdvisedThreshold(int fbiAdvisedThreshold) {
+		this.fbiAdvisedThreshold = fbiAdvisedThreshold;
+	}
+
+	/**
+	 * Gets the threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
+	 * @return The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
+	 */
+	public int getFbiThresholdBeforeCitizenLobotomy() {
+		return fbiThresholdBeforeCitizenLobotomy;
+	}
+
+	/**
+	 * Sets the threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
+	 * @param fbiThresholdBeforeCitizenLobotomy The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
+	 */
+	public void setFbiThresholdBeforeCitizenLobotomy(
+			int fbiThresholdBeforeCitizenLobotomy) {
+		this.fbiThresholdBeforeCitizenLobotomy = fbiThresholdBeforeCitizenLobotomy;
+	}
+
+	/**
+	 * Gets the efficiency of the FBI to capture alien. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It determines the success chances of
+	 * a capture influence sent by the FBI.
+	 * @return The efficiency of the FBI to capture alien.
+	 */
+	public double getFbiCaptureEfficiency() {
+		return fbiCaptureEfficiency;
+	}
+
+	/**
+	 * Sets the efficiency of the FBI to capture alien. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It determines the success chances of
+	 * a capture influence sent by the FBI.
+	 * @param fbiCaptureEfficiency The efficiency of the FBI to capture alien.
+	 */
+	public void setFbiCaptureEfficiency(double fbiCaptureEfficiency) {
+		this.fbiCaptureEfficiency = fbiCaptureEfficiency;
+	}
+
+	/**
+	 * Gets the number of experiments being reported in the city of the editor in chief before it becomes paranoid and 
+	 * broadcasts values that are not advised by the FBI.
+	 * @return The number of experiments being reported in the city of the editor in chief before it becomes paranoid and 
+	 * broadcasts values that are not advised by the FBI.
+	 */
+	public int getEditorInChiefParanoiaThreshold() {
+		return editorInChiefParanoiaThreshold;
+	}
+
+	/**
+	 * Sets the number of experiments being reported in the city of the editor in chief before it becomes paranoid and 
+	 * broadcasts values that are not advised by the FBI.
+	 * @param editorInChiefParanoiaThreshold The number of experiments being reported in the city of the editor in chief before it becomes paranoid and 
+	 * broadcasts values that are not advised by the FBI.
+	 */
+	public void setEditorInChiefParanoiaThreshold(int editorInChiefParanoiaThreshold) {
+		this.editorInChiefParanoiaThreshold = editorInChiefParanoiaThreshold;
+	}
+
+	/**
+	 * Gets the range where the number of citizen initially lying in a city is included. The bounds of the interval are included.
+	 * This interval is used during the generation of the simulation.
+	 * @return The range where the number of citizen initially lying in a city is included.
+	 */
+	public int[] getRangeOfCitizenPerCity() {
+		return rangeOfCitizenPerCity;
+	}
+
+	/**
+	 * Sets the range where the number of citizen initially lying in a city is included. The bounds of the interval are included.
+	 * This interval is used during the generation of the simulation.
+	 * @param citizenPerCityRange The range where the number of citizen initially lying in a city is included.
+	 */
+	public void setRangeOfCitizenPerCity(int[] citizenPerCityRange) {
+		this.rangeOfCitizenPerCity = citizenPerCityRange;
+	}
+
+	/**
+	 * Gets the number of aliens initially in the simulation.
+	 * @return The number of aliens initially in the simulation.
+	 */
+	public int getAliensNumber() {
+		return aliensNumber;
+	}
+
+	/**
+	 * Sets the number of aliens initially in the simulation.
+	 * @param aliensNumber The number of aliens initially in the simulation.
+	 */
+	public void setAliensNumber(int aliensNumber) {
+		this.aliensNumber = aliensNumber;
+	}
 }

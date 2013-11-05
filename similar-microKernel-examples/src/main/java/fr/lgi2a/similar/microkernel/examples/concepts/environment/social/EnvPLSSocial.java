@@ -53,7 +53,6 @@ import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalState;
@@ -115,14 +114,17 @@ public class EnvPLSSocial extends AbstractPublicLocalState {
 	/**
 	 * Builds an instance of the public local state of the environment in the 'social' level.
 	 * This instance initially contains no samples.
+	 * @param tvBroadcastedThresholdForStrangePhysicalManifestations The initial number of strange physical manifestation over which a citizen can consider 
+	 * that an alien experiment was performed on him/her. This value is being broadcasted on television.
 	 */
-	public EnvPLSSocial( ) throws IllegalArgumentException {
+	public EnvPLSSocial( int tvBroadcastedThresholdForStrangePhysicalManifestations ) throws IllegalArgumentException {
 		// The super constructor requires the identifier of the level for which this public
 		// local state is defined.
 		super( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
-		// Set the initial value as the one advised by the FBI.
-		this.tvBroadcastedThresholdForStrangePhysicalManifestations = 
-				ConceptsSimulationParameters.THRESHOLD_FOR_STRANGE_PHYSICAL_MANIFESTATION_ADVISED_BY_FBI;
+		//
+		// Initialize the public local state of the environment.
+		//
+		this.tvBroadcastedThresholdForStrangePhysicalManifestations = tvBroadcastedThresholdForStrangePhysicalManifestations;
 		// Set the initial value of the reports written on the Internet.
 		this.postsPerCities = new HashMap<Cities, Set<PostOnConspiracyForum>>( );
 		for( Cities city : Cities.values() ){

@@ -58,6 +58,7 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.AgtAlien;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizen;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtEditorInChief;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtFactoryEditorInChief;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.AgtFBI;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.EnvForConceptsSimulation;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
@@ -84,34 +85,24 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 	 * The final time stamp of the simulation, after which the execution of the simulation stops.
 	 */
 	private SimulationTimeStamp finalTime;
-	
 	/**
-	 * Models a range of citizen initially lying in a city. The bounds of the interval are included.
-	 * This interval is used during the generation of the simulation.
+	 * The parameters used in this simulation model.
 	 */
-	private int[] rangeOfInitialCitizensPerCity;
-	/**
-	 * The initial number of aliens in the simulation.
-	 */
-	private int initialNumberOfAliens;
+	private ConceptsSimulationParameters parameters;
 
 	/**
 	 * @param initialTime The initial time stamp of the simulation.
 	 * @param finalTime The final time stamp of the simulation, after which the execution of the simulation stops.
-	 * @param rangeOfInitialCitizensPerCity An array containing two elements: the lower and the higher bound of the 
-	 * numbers of citizens contained in a city. The bounds of the interval are included.
-	 * @param initialNumberOfAliens The initial number of aliens in the simulation.
+	 * @param parameters The parameters used in this simulation model.
 	 */
 	public ConceptsSimulationModel( 
 			SimulationTimeStamp initialTime,
 			SimulationTimeStamp finalTime,
-			int[] rangeOfInitialCitizensPerCity,
-			int initialNumberOfAliens
+			ConceptsSimulationParameters parameters
 	) throws IllegalArgumentException {
 		super(initialTime);
 		this.finalTime = finalTime;
-		this.rangeOfInitialCitizensPerCity = rangeOfInitialCitizensPerCity;
-		this.initialNumberOfAliens = initialNumberOfAliens;
+		this.parameters = parameters;
 	}
 
 	/**
@@ -143,9 +134,19 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 	public List<ILevel> generateLevels( SimulationTimeStamp initialTime ) {
 		List<ILevel> result = new LinkedList<ILevel>();
 		// In this model, the initialization of the perception and influence relation graphs is made inside the constructor of each level.
-		result.add( new PhysicalLevel( initialTime ) );
-		result.add( new SocialLevel( initialTime ) );
-		result.add( new SpaceLevel( initialTime ) );
+		result.add( new PhysicalLevel( 
+				initialTime, 
+				this.parameters.getAlienExperimentSpeed(), 
+				this.parameters.getCitizenStrangePhysicalManifestationsApparitionRate(), 
+				this.parameters.getFbiCaptureEfficiency()
+		) );
+		result.add( new SocialLevel( 
+				initialTime 
+		) );
+		result.add( new SpaceLevel( 
+				initialTime, 
+				this.parameters.getTimeEvolutionDescriptorOfSpaceLevel() 
+		) );
 		return result;
 	}
 
@@ -165,7 +166,8 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 		// To preserve the coherence of the time model, the current time of the day is computed using the
 		// value of the current time stamp. This computation is performed in a class modeling the interpretation of time.
 		EnvForConceptsSimulation environment = new EnvForConceptsSimulation( 
-				ConceptsSimulationTimeInterpretationModel.INSTANCE.getTimeOfTheDay( initialTime )
+				ConceptsSimulationTimeInterpretationModel.INSTANCE.getTimeOfTheDay( initialTime ), 
+				this.parameters.getFbiAdvisedThreshold()
 		);
 		// Create the object containing the initialization data of the environment.
 		EnvironmentInitializationData initializationData = new EnvironmentInitializationData(environment);
@@ -196,7 +198,10 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 		//
 		// Get an address at random for this agent.
 		Cities randomCity = Cities.values()[ ConceptsSimulationRandom.randomInt( Cities.values().length ) ];
-		AgtEditorInChief editor = new AgtEditorInChief( randomCity );
+		AgtEditorInChief editor = AgtFactoryEditorInChief.INSTANCE.generateAgent(
+				randomCity, 
+				this.parameters.getFbiAdvisedThreshold()
+		);
 		// First method to add agents initially lying in the simulation: 
 		// include them in the initializationData.getAgents() set. Note that if these agents have to be included in the
 		// public local state of the environment (this is the case for instance for citizens that have to be added to 
@@ -204,12 +209,15 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 		// does not apply to the agents that are initially in the simulation.
 		initializationData.getAgents().add( editor );
 		// Create the FBI agent.
-		AgtFBI fbi = new AgtFBI( );
+		AgtFBI fbi = new AgtFBI(
+				this.parameters.getFbiThresholdBeforeCitizenLobotomy(), 
+				this.parameters.getFbiAdvisedThreshold()
+		);
 		initializationData.getAgents().add( fbi );
 		// Create the citizen agents.
 		for( Cities city : Cities.values() ){
-			int numberOfCitizen = this.rangeOfInitialCitizensPerCity[ 0 ] + ConceptsSimulationRandom.randomInt( 
-					this.rangeOfInitialCitizensPerCity[ 1 ] - this.rangeOfInitialCitizensPerCity[ 0 ]
+			int numberOfCitizen = this.parameters.getRangeOfCitizenPerCity()[ 0 ] + ConceptsSimulationRandom.randomInt( 
+					this.parameters.getRangeOfCitizenPerCity()[ 1 ] - this.parameters.getRangeOfCitizenPerCity()[ 0 ]
 			);
 			while( numberOfCitizen > 0 ) {
 				// The initialization of the agent (public local states, global memory state, ...) is performed 
@@ -225,8 +233,11 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 			}
 		}
 		// Create the alien agents.
-		for( int alienIdx = 0; alienIdx < this.initialNumberOfAliens; alienIdx++ ) {
-			AgtAlien alien = new AgtAlien( ConceptsSimulationParameters.DEFAULT_ALIEN_EFFICIENCY_IN_EXPERIMENTS );
+		for( int alienIdx = 0; alienIdx < this.parameters.getAliensNumber(); alienIdx++ ) {
+			AgtAlien alien = new AgtAlien(
+					this.parameters.getAlienCitiesPerPerception(), 
+					this.parameters.getAlienExperimentsEfficiency() 
+			);
 			// Second approach to the addition of the agents: add them during the first reaction of a level (here the 'space' level).
 			SystemInfluenceAddAgent addAgentInfluence = new SystemInfluenceAddAgent(
 					ConceptsSimulationLevelIdentifiers.SPACE_LEVEL, 

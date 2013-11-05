@@ -46,12 +46,14 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning;
 
+import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfEnvironment;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.ILearningInfluence;
 
 /**
  * This class defines a method copying the content of a dynamic state into another dynamic state.
@@ -118,7 +120,14 @@ public final class LearningPublicLocalDynamicStateCopier {
 			}
 		}
 		// Copy the state dynamics
-		result.setStateDynamicsAsCopyOf( toCopy.getStateDynamics() );
+		for( IInfluence influence : toCopy.getStateDynamics() ) {
+			if( influence instanceof ILearningInfluence ){
+				ILearningInfluence castedInfluence = (ILearningInfluence) influence;
+				result.addInfluence( castedInfluence.createCopy() );
+			} else {
+				result.addInfluence( LearningInfluenceCopier.copyInfluence( influence ) );
+			}
+		}
 		return result;
 	}
 }

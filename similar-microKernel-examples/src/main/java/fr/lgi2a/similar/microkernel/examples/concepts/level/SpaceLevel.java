@@ -55,7 +55,6 @@ import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.space.EnvPLSSpace;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSpace.RISpaceSendExperimentReport;
@@ -79,9 +78,13 @@ public class SpaceLevel extends AbstractLevel {
 	 * Builds an initialized instance of the 'physical' level.
 	 * @param initialTime The initial time stamp of the simulation. This value is provided during 
 	 * the initialization process of a simulation.
+	 * @param mapCreatingNonUniformEvolution The data structure modeling how the time evolves in this level. To simulate a unpredictable evolution, the evolution of time is based 
+	 * on a map associating an increment value I(x) to the values x from an interval [0,N] of integers. The identifier of the time stamp following 
+	 * a time stamp t is computed using the formula: <i>id(t+dt) = id(t) + I( t mod N )</i>.
 	 */
 	public SpaceLevel(
-			SimulationTimeStamp initialTime
+			SimulationTimeStamp initialTime,
+			Map<Long,Long> mapCreatingNonUniformEvolution
 	) throws IllegalArgumentException {
 		super( initialTime, ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );
 		//
@@ -97,6 +100,10 @@ public class SpaceLevel extends AbstractLevel {
 		// Aliens can modify the environment of the 'physical' levels from the 'space' level (by moving from space 
 		// to the earth).
 		this.addInfluenceableLevel( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
+		//
+		// Initialize the parameters of the time evolution model of this level.
+		//
+		this.mapCreatingNonUniformEvolution = mapCreatingNonUniformEvolution;
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -108,11 +115,14 @@ public class SpaceLevel extends AbstractLevel {
 	//
 
 	/**
-	 * This map uses as keys the long values contained in the interval [0,N] where N is the number of keys.
-	 * The values model the increment applied between a current time and the next time.
-	 * The identifier of the current time is converted into a value contained in the range [0,N] using the modulo operator.
+	 * The data structure modeling how the time evolves in this level. To simulate a unpredictable evolution, the evolution of time is based 
+	 * on a map associating an increment value I(x) to the values x from an interval [0,N] of integers. The identifier of the time stamp following 
+	 * a time stamp t is computed using the formula: <i>id(t+dt) = id(t) + I( t mod N )</i>.
+	 * <p>
+	 * 	This field is a parameter of the time evolution model of this level.
+	 * </p>
 	 */
-	private Map<Long,Long> mapCreatingNonUniformEvolution = ConceptsSimulationParameters.TIME_EVOLUTION_DESCRIPTOR_OF_SPACE_LEVEL;
+	private Map<Long,Long> mapCreatingNonUniformEvolution;
 	
 	/**
 	 * This method determines the next time when the next reaction will be performed for this level.

@@ -51,6 +51,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeO
 
 /**
  * This class provides methods converting a time using timestamps into a time using the Day/Evening/Night system.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public class ConceptsSimulationTimeInterpretationModel {

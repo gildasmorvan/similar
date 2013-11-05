@@ -88,10 +88,15 @@ public class EnvForConceptsSimulation extends AbstractEnvironment {
 	/**
 	 * Builds an initialized instance of the environment, where a public local state is defined for the 'Physical', 'Social' and 'Space' levels.
 	 * @param initialTime The time of the day of the initial time of the simulation.
+	 * @param tvBroadcastedThresholdForStrangePhysicalManifestations The initial number of strange physical manifestation over which a citizen can consider 
+	 * that an alien experiment was performed on him/her. This value is being broadcasted on television.
 	 */
-	public EnvForConceptsSimulation( TimeOfTheDay initialTime ) {
+	public EnvForConceptsSimulation( 
+			TimeOfTheDay initialTime,
+			int tvBroadcastedThresholdForStrangePhysicalManifestations
+		) {
 		this.includeNewLevel( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL, new EnvPLSPhysical( initialTime ) );
-		this.includeNewLevel( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, new EnvPLSSocial( ) );
+		this.includeNewLevel( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, new EnvPLSSocial( tvBroadcastedThresholdForStrangePhysicalManifestations ) );
 		this.includeNewLevel( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL, new EnvPLSSpace( ) );
 	}
 

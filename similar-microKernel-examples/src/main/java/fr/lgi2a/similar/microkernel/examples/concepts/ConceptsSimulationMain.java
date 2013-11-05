@@ -49,6 +49,7 @@ package fr.lgi2a.similar.microkernel.examples.concepts;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtFactoryEditorInChief;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.probes.ProbeAliensNumber;
 import fr.lgi2a.similar.microkernel.examples.concepts.probes.ProbeCitizenParanoia;
@@ -89,11 +90,16 @@ public class ConceptsSimulationMain {
 		SimulationTimeStamp initialTime = ConceptsSimulationTimeInterpretationModel.INSTANCE.getNext( new SimulationTimeStamp( -1 ), TimeOfTheDay.DAY );
 		// End the simulation when it reaches the daytime of the 90th day following the start of the simulation.
 		SimulationTimeStamp finalTime = new SimulationTimeStamp( initialTime.getIdentifier() + 90 * TimeOfTheDay.values().length );
+		// Create the parameters used in the simulation model
+		// In this simulation, we will use the default parameters defined in the constructor with no arguments.
+		ConceptsSimulationParameters parameters = new ConceptsSimulationParameters( );
+		// Link these parameters to the agent factories, to identify the default value they can use
+		AgtFactoryEditorInChief.INSTANCE.setParameters( parameters );
+		// Create the simulation model.
 		ISimulationModel model = new ConceptsSimulationModel(
 				initialTime, 
 				finalTime, 
-				ConceptsSimulationParameters.DEFAULT_RANGE_OF_CITIZENS_PER_CITY, 
-				ConceptsSimulationParameters.DEFAULT_NUMBER_OF_ALIENS
+				parameters
 		);
 		//
 		// 3 - Create the probes observing the results of the simulation.

@@ -58,11 +58,11 @@ import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizen;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtEditorInChief;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtFactoryEditorInChief;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.physical.AgtFBIPDFSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social.AgtFBIPDFPhysical;
@@ -111,14 +111,23 @@ public class AgtFBI extends AbstractAgent {
 	public static final String CATEGORY = "FBI";
 	
 	/**
-	 * Builds the global memory state of the FBI agents.
-	 * <p>
-	 * 	The private local state of the agent in the 'physical' state contains an initially empty posts database.
-	 * </p>
+	 * Builds an initialized 'FBI' agent lying in both the 'Physical' and in the 'Social' levels.
+	 * @param citizenPostsThresholdBeforeLobotomy The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
+	 * @param thresholdForStrangePhysicalManifestationsAdvisedByFBI The number of strange physical manifestation over which a citizen 
+	 * can consider that an alien experiment was performed on him/her. This value is being broadcasted on television and corresponds to the value 
+	 * advised by the FBI.
 	 */
-	public AgtFBI( ) {
+	public AgtFBI( 
+			int citizenPostsThresholdBeforeLobotomy,
+			int thresholdForStrangePhysicalManifestationsAdvisedByFBI
+	) {
 		// The super constructor requires the definition of the category of the agent.
 		super( CATEGORY );
+		//
+		// Define the initial private local states of the agent.
+		//
+		this.citizenPostsThresholdBeforeLobotomy = citizenPostsThresholdBeforeLobotomy;
+		this.thresholdForStrangePhysicalManifestationsAdvisedByFBI = thresholdForStrangePhysicalManifestationsAdvisedByFBI;
 		//
 		// Define the initial global memory state of the agent.
 		//
@@ -224,8 +233,12 @@ public class AgtFBI extends AbstractAgent {
 	
 	/**
 	 * The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
+	 * <p>
+	 * 	This value is part of the private local state of the agent. Since it purely belongs to the inner working of the behavior of the 
+	 * 	agent from the 'social' level, it is declared here rather than in the public local state or the global memory state of the agent.
+	 * </p>
 	 */
-	private int citizenPostsThresholdBeforeLobotomy = ConceptsSimulationParameters.CITIZEN_POSTS_THRESHOLD_BEFORE_LOBOTOMY;
+	private int citizenPostsThresholdBeforeLobotomy;
 	
 	/**
 	 * Produce the perceived data of the agent in the case when the perception is made from the 'physical' level.
@@ -349,8 +362,7 @@ public class AgtFBI extends AbstractAgent {
 	 * 	agent from the 'social' level, it is declared here rather than in the public local state or the global memory state of the agent.
 	 * </p>
 	 */
-	private int thresholdForStrangePhysicalManifestationsAdvisedByFBI = 
-			ConceptsSimulationParameters.THRESHOLD_FOR_STRANGE_PHYSICAL_MANIFESTATION_ADVISED_BY_FBI;
+	private int thresholdForStrangePhysicalManifestationsAdvisedByFBI;
 
 	/**
 	 * Produce the influences resulting from the decisions made from the 'Social' level.
@@ -368,9 +380,17 @@ public class AgtFBI extends AbstractAgent {
 	) {
 		AgtFBIPDFSocial castedData = (AgtFBIPDFSocial) perceivedData;
 		if( castedData.getBroadcastedValue() != this.thresholdForStrangePhysicalManifestationsAdvisedByFBI ){
+			// Generate the new editor in chief replacing the current one.
+			// Use the factory instead of the constructor of the agent, to provide a default value to the 
+			// private local state of the agent.
+			AgtEditorInChief newEditor = AgtFactoryEditorInChief.INSTANCE.generateAgent(
+					castedData.getCityWithLessPosts(), 
+					this.thresholdForStrangePhysicalManifestationsAdvisedByFBI
+			);
+			// Generate the influence replacing the current editor in chief by the new one.
 			RISocialReplaceEditorInChief replaceInfluence = new RISocialReplaceEditorInChief( 
 					castedData.getEditorInChief(), 
-					new AgtEditorInChief( castedData.getCityWithLessPosts() ) 
+					newEditor
 			);
 			producedInfluences.add( replaceInfluence );
 			RISocialChangeBroadcast changeInfluence = new RISocialChangeBroadcast( 

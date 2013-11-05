@@ -62,7 +62,6 @@ import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPDFPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPLSPhysical;
@@ -110,16 +109,26 @@ public class AgtAlien extends AbstractAgent {
 	
 	/**
 	 * Builds an 'Alien' agent initially lying in the 'space' level.
+	 * @param perceptibleCitiesPerTime This parameter of the agent tells how much cities it is able to scrutinize each time it 
+	 * perceives from the 'space' level.
+	 * <p>
+	 * 	If no citizen could be found after looking at <code>perceptibleCitiesPerTime</code> cities, then the alien failed to find
+	 * 	a citizen to perform experiments that time.
+	 * </p>
 	 * @param efficiencyInExperiments Models the efficiency of the alien in its experiments. This value has to be 
 	 * between 0 (completely inefficient) to 1 (fully efficient). It will be used as a multiplication factor when 
 	 * the reaction will determine how much the experiment of the alien advanced.
 	 */
-	public AgtAlien( double efficiencyInExperiments ) throws IllegalArgumentException {
+	public AgtAlien( 
+			int perceptibleCitiesPerTime,
+			double efficiencyInExperiments
+	) throws IllegalArgumentException {
 		// The super constructor requires the definition of the category of the agent.
 		super( CATEGORY );
 		//
 		// Define the initial private local states of the agent.
 		//
+		this.perceptibleCitiesPerTime = perceptibleCitiesPerTime;
 		this.efficiencyInExperiments = efficiencyInExperiments;
 		//
 		// Define the initial global memory state of the agent.
@@ -188,7 +197,7 @@ public class AgtAlien extends AbstractAgent {
 	 * 	agent from the 'space' level, it is declared here rather than in the public local state or the global memory state of the agent.
 	 * </p>
 	 */
-	private int perceptibleCitiesPerTime = ConceptsSimulationParameters.CITIES_PERCEPTIBLE_BY_ALIEN_PER_PERCEPTION;
+	private int perceptibleCitiesPerTime;
 	
 	/**
 	 * Produce the perceived data of the agent in the case when the perception is made from the 'space' level.

@@ -55,7 +55,6 @@ import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationTimeInterpretationModel;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.AgtAlien;
@@ -94,9 +93,20 @@ public class PhysicalLevel extends AbstractLevel {
 	 * Builds an initialized instance of the 'physical' level.
 	 * @param initialTime The initial time stamp of the simulation. This value is provided during 
 	 * the initialization process of a simulation.
+	 * @param experimentCompletionRatePerReaction The completion rate of the experiment performed by an alien achieved when a reaction is computed. This value is within the range ]0,100]. 
+	 * It corresponds to the percentage of the experiment process completed after one reaction.
+	 * @param strangePhysicalManifestationRate The apparition rate of strange physical manifestations on the body of citizen when an alien performs 
+	 * an experiment on them. This value has to be between 0 (included) and 1 (excluded). The higher the value, the higher a strange physical manifestation
+	 * will appear on a citizen during each reaction where the experiment is still performed.
+	 * @param fbiCaptureEfficiency The efficiency of the FBI to capture alien. This value has to be 
+	 * between 0 (completely inefficient) to 1 (fully efficient). It determines the success chances of
+	 * a capture influence sent by the FBI.
 	 */
 	public PhysicalLevel(
-			SimulationTimeStamp initialTime
+			SimulationTimeStamp initialTime,
+			double experimentCompletionRatePerReaction,
+			double strangePhysicalManifestationRate,
+			double fbiCaptureEfficiency
 	) throws IllegalArgumentException {
 		super( initialTime, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		//
@@ -115,6 +125,12 @@ public class PhysicalLevel extends AbstractLevel {
 		// Aliens can send data reports to their mothership in the 'space' level at the end of their experiments from the
 		// 'physical' level.
 		this.addInfluenceableLevel( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );
+		//
+		// Initialize the parameters of the reaction of this level.
+		//
+		this.experimentCompletionRatePerReaction = experimentCompletionRatePerReaction;
+		this.strangePhysicalManifestationRate = strangePhysicalManifestationRate;
+		this.fbiCaptureEfficiency = fbiCaptureEfficiency;
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -393,17 +409,22 @@ public class PhysicalLevel extends AbstractLevel {
 	}
 	
 	/**
-	 * Defines the completion rate of the experiment performed by an alien achieved when a reaction is computed.
-	 */
-	private double experimentCompletionRatePerReaction = ConceptsSimulationParameters.EXPERIMENT_COMPLETION_RATE_PER_REACTION;
-	/**
-	 * Defines the apparition rate of strange physical manifestations on the body of citizen when an alien performs 
-	 * an experiment on them.
+	 * Models the completion rate of the experiment performed by an alien achieved when a reaction is computed. This value is within the range ]0,100]. 
+	 * It corresponds to the percentage of the experiment process completed after one reaction.
 	 * <p>
-	 * 	This value has to be between 0 (included) and 1 (excluded).
+	 * 	This value is a parameter of the reaction process of the level.
 	 * </p>
 	 */
-	private double strangePhysicalManifestationRate = ConceptsSimulationParameters.STRANGE_PHYSICAL_MANIFESTATIONS_APPARITION_RATE;
+	private double experimentCompletionRatePerReaction;
+	/**
+	 * Models the apparition rate of strange physical manifestations on the body of citizen when an alien performs 
+	 * an experiment on them. This value has to be between 0 (included) and 1 (excluded). The higher the value, the higher a strange physical manifestation
+	 * will appear on a citizen during each reaction where the experiment is still performed.
+	 * <p>
+	 * 	This value is a parameter of the reaction process of the level.
+	 * </p>
+	 */
+	private double strangePhysicalManifestationRate;
 	
 	/**
 	 * Manages the reaction to a {@link RIPhysicalPerformExperiment} influence.
@@ -469,8 +490,11 @@ public class PhysicalLevel extends AbstractLevel {
 	 * Models the efficiency of the FBI to capture alien. This value has to be 
 	 * between 0 (completely inefficient) to 1 (fully efficient). It determines the success chances of
 	 * a capture influence sent by the FBI.
+	 * <p>
+	 * 	This value is a parameter of the reaction process of the level.
+	 * </p>
 	 */
-	private double fbiCaptureEfficiency = ConceptsSimulationParameters.DEFAULT_FBI_EFFICIENCY_IN_CAPTURE;
+	private double fbiCaptureEfficiency;
 
 	/**
 	 * Manages the reaction to a {@link RIPhysicalCaptureAndDissectAlien} influence.

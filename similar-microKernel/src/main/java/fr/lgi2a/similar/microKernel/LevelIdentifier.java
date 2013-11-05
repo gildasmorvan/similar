@@ -81,7 +81,7 @@ public final class LevelIdentifier {
 	 * @param identifier The identifier of the level. This value should be unique.
 	 * @throws IllegalArgumentException If <code>identifier</code> is <code>null</code>.
 	 */
-	public LevelIdentifier( String identifier ) throws IllegalArgumentException {
+	public LevelIdentifier( String identifier ) {
 		if( identifier == null ){
 			throw new IllegalArgumentException( "The first argument cannot be null." );
 		}

@@ -135,7 +135,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	public TransitoryPublicLocalDynamicState( 
 			ConsistentPublicLocalDynamicState lastConsistentDynamicState,
 			SimulationTimeStamp nextConsistentTime
-	) throws IllegalArgumentException {
+	) {
 		if( lastConsistentDynamicState == null ){
 			throw new IllegalArgumentException( "The 'lastConsistentDynamicState' argument cannot be null." );
 		} else if( nextConsistentTime == null ) {
@@ -233,7 +233,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	/**
 	 * This operation is not supported in transitory states.
 	 */
-	public void setTime(SimulationTimeStamp time) throws IllegalArgumentException {
+	public void setTime(SimulationTimeStamp time) {
 		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
@@ -247,7 +247,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 * @param time The time stamp modeling the higher bound of the time range for which this transitory state is defined.
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or is lower or equal to the current next time.
 	 */
-	public void setNextTime( SimulationTimeStamp time ) throws IllegalArgumentException {// TODO
+	public void setNextTime( SimulationTimeStamp time ) {
 		if( time == null ){
 			throw new IllegalArgumentException( "The 'time' argument cannot be null." );
 		} else if( time.compareTo( this.getNextTime() ) <= 0 ){
@@ -263,7 +263,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	@Override
 	public void setPublicLocalStateOfEnvironment(
 			IPublicLocalState publicLocalState
-	) throws IllegalArgumentException {
+	) {
 		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
@@ -273,7 +273,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	@Override
 	public void addPublicLocalStateOfAgent(
 			IPublicLocalStateOfAgent publicLocalState
-	) throws IllegalArgumentException {
+	) {
 		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
@@ -283,7 +283,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	@Override
 	public void removePublicLocalStateOfAgent(
 			IPublicLocalStateOfAgent publicLocalState
-	) throws IllegalArgumentException {
+	) {
 		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 
@@ -291,7 +291,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addInfluence( IInfluence influence ) throws IllegalArgumentException {
+	public void addInfluence( IInfluence influence ) {
 		if( influence == null ) {
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
@@ -306,7 +306,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	 * This operation is not supported in transitory states.
 	 */
 	@Override
-	public void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) throws IllegalArgumentException {
+	public void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) {
 		throw new UnsupportedOperationException( FORBIDDEN_OPERATION_TEXT );
 	}
 

@@ -94,7 +94,7 @@ public class ConceptsSimulationMain {
 		// In this simulation, we will use the default parameters defined in the constructor with no arguments.
 		ConceptsSimulationParameters parameters = new ConceptsSimulationParameters( );
 		// Link these parameters to the agent factories, to identify the default value they can use
-		AgtFactoryEditorInChief.INSTANCE.setParameters( parameters );
+		AgtFactoryEditorInChief.instance().setParameters( parameters );
 		// Create the simulation model.
 		ISimulationModel model = new ConceptsSimulationModel(
 				initialTime, 

@@ -79,7 +79,7 @@ public final class SystemInfluenceAddAgent extends SystemInfluence {
 	 * @param agent The agent to add to the simulation.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
-	public SystemInfluenceAddAgent( LevelIdentifier targetLevel, IAgent agent ) throws IllegalArgumentException {
+	public SystemInfluenceAddAgent( LevelIdentifier targetLevel, IAgent agent ) {
 		super( CATEGORY, targetLevel );
 		if( agent == null ){
 			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );

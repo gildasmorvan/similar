@@ -74,7 +74,7 @@ public class LearningTraceUpdatingProbe implements IProbe {
 	 */
 	public LearningTraceUpdatingProbe(
 			SimulationExecutionTrace trace
-	) throws IllegalArgumentException {
+	) {
 		if( trace == null ) {
 			throw new IllegalArgumentException( "The 'trace' argument cannot be null." );
 		}

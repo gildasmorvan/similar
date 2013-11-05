@@ -85,34 +85,35 @@ public final class LearningTracePrinter {
 	 * @param trace The trace to print on screen.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public static void printTrace( SimulationExecutionTrace trace ) throws IllegalArgumentException {
+	public static void printTrace( SimulationExecutionTrace trace ) {
+		int indentationLevel = 1;
 		if( trace == null ) {
 			throw new IllegalArgumentException( "The 'trace' argument cannot be null." );
 		}
 		LearningTracePrinter.PRINTER.println( "=== Start of the trace " );
 		SimulationTimeStamp initialTime = trace.getInitialTime();
 		SimulationTimeStamp finialTime = trace.getFinalTime();
-		printIndentation( 1 );
+		printIndentation( indentationLevel );
 		LearningTracePrinter.PRINTER.println( "Initial time : " + initialTime );
-		printIndentation( 1 );
+		printIndentation( indentationLevel );
 		LearningTracePrinter.PRINTER.println( "Final time : " + finialTime );
 		LearningTracePrinter.PRINTER.println( );
 		LearningTracePrinter.PRINTER.println( "Initial dynamic state of the simulation : " );
-		printDynamicState( 1, trace.getDynamicStateAt( initialTime ) );
+		printDynamicState( indentationLevel, trace.getDynamicStateAt( initialTime ) );
 		LearningTracePrinter.PRINTER.println( );
 		for( SimulationTimeStamp timeStamp : trace.getOrderedSimulationTimeStamps() ){
 			LearningTracePrinter.PRINTER.println( "===Information related to the time " + timeStamp );
-			printIndentation( 1 );
+			printIndentation( indentationLevel );
 			LearningTracePrinter.PRINTER.println( "=== Dynamic state of the simulation at the time " + timeStamp );
-			printDynamicState( 2, trace.getDynamicStateAt( timeStamp ) );
-			printIndentation( 1 );
+			printDynamicState( indentationLevel + 1, trace.getDynamicStateAt( timeStamp ) );
+			printIndentation( indentationLevel );
 			LearningTracePrinter.PRINTER.println( "=== Operations happening close to the time " + timeStamp );
 			if( ! timeStamp.equals( initialTime ) ){
-				printIndentation( 2 );
+				printIndentation( indentationLevel + 1 );
 				LearningTracePrinter.PRINTER.println( "Slightly before:" );
 				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( timeStamp ) );
 				for( ILearningEngineOperation operation : operations ){
-					LearningEngineOperationPrinter.printOperation( 3, operation );
+					LearningEngineOperationPrinter.printOperation( indentationLevel + 2, operation );
 				}
 			}
 			if( ! timeStamp.equals( finialTime ) ){
@@ -120,20 +121,20 @@ public final class LearningTracePrinter {
 				LearningTracePrinter.PRINTER.println( "Slightly after:" );
 				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( timeStamp ) );
 				for( ILearningEngineOperation operation : operations ){
-					LearningEngineOperationPrinter.printOperation( 3, operation );
+					LearningEngineOperationPrinter.printOperation( indentationLevel + 2, operation );
 				}
 			}
 		}
 		LearningTracePrinter.PRINTER.println( );
 		if( trace.getReasonOfEnd().equals( LearningReasonOfSimulationEnd.END_CRITERION_REACHED ) ){
 			LearningTracePrinter.PRINTER.println( "Final dynamic state of the simulation : " );
-			printDynamicState( 1, trace.getFinalDynamicState( ) );
+			printDynamicState( indentationLevel, trace.getFinalDynamicState( ) );
 		} else if( trace.getReasonOfEnd().equals( LearningReasonOfSimulationEnd.ABORTED ) ) {
 			LearningTracePrinter.PRINTER.println( "The simulation has ended because it was aborted." );
 		} else {
 			LearningReasonOfSimulationEnd.ExceptionCaught castedReason = (LearningReasonOfSimulationEnd.ExceptionCaught) trace.getReasonOfEnd();
 			LearningTracePrinter.PRINTER.println( "The simulation has ended because of the following error:" );
-			printIndentation( 1 );
+			printIndentation( indentationLevel );
 			LearningTracePrinter.PRINTER.println( castedReason.getErrorMessage() );
 			castedReason.getError().printStackTrace( LearningTracePrinter.PRINTER );
 		}

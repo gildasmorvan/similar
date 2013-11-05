@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social;
+package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.physical;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -117,13 +117,11 @@ public class AgtFBIPDFPhysical extends AbstractPerceivedDataOfAgent {
 	/**
 	 * Builds the data that were perceived by the 'FBI' agent in preparation for
 	 * its behavior from the 'Physical' level.
-	 * @param cityWhereToSearchForAliens The city that was chosen by the FBI to search for aliens.
 	 * @param currentTime The current time of the day.
 	 */
 	public AgtFBIPDFPhysical( 
-			Cities cityWhereToSearchForAliens,
 			TimeOfTheDay currentTime
-	) throws IllegalArgumentException {
+	) {
 		// The super constructor requires the identifier of the level from which 
 		// these data were perceived.
 		super( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );

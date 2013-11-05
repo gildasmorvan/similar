@@ -68,7 +68,7 @@ public class EmptyPublicLocalStateOfEnvironment extends AbstractPublicLocalState
 	 */
 	public EmptyPublicLocalStateOfEnvironment(
 			LevelIdentifier levelIdentifier
-	) throws IllegalArgumentException {
+	) {
 		super(levelIdentifier);
 	}
 }

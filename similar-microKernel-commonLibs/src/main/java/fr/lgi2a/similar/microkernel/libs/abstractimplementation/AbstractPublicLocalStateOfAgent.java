@@ -70,7 +70,7 @@ public class AbstractPublicLocalStateOfAgent extends AbstractPublicLocalState im
 	public AbstractPublicLocalStateOfAgent(
 			LevelIdentifier levelIdentifier,
 			IAgent owner
-	) throws IllegalArgumentException {
+	) {
 		super( levelIdentifier );
 		if( owner == null ){
 			throw new IllegalArgumentException( "The 'owner' argument cannot be null." );

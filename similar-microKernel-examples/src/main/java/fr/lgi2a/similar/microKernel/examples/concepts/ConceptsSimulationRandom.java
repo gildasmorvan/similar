@@ -56,7 +56,7 @@ public class ConceptsSimulationRandom {
 	/**
 	 * The random number generator used in this class.
 	 */
-	private static Random RANDOM_INSTANCE;
+	private static Random randomInstance;
 	
 	/**
 	 * Static block providing a default random number generator.
@@ -65,12 +65,14 @@ public class ConceptsSimulationRandom {
 		initializeRandomizer( 10 );
 	}
 	
+	protected ConceptsSimulationRandom( ){ }
+	
 	/**
 	 * Initializes the random number generator using a specific seed.
 	 * @param seed The seed to use.
 	 */
 	public static void initializeRandomizer( long seed ) {
-		RANDOM_INSTANCE = new Random( seed );
+		randomInstance = new Random( seed );
 	}
 	
 	/**
@@ -78,7 +80,7 @@ public class ConceptsSimulationRandom {
 	 * @return A random number between 0 (included) and 1 (excluded).
 	 */
 	public static double random( ) {
-		return RANDOM_INSTANCE.nextDouble();
+		return randomInstance.nextDouble();
 	}
 	
 	/**
@@ -87,6 +89,6 @@ public class ConceptsSimulationRandom {
 	 * @return a random integer value between 0 (included) and <code>higherBound</code> (excluded).
 	 */
 	public static int randomInt( int higherBound ) {
-		return RANDOM_INSTANCE.nextInt( higherBound );
+		return randomInstance.nextInt( higherBound );
 	}
 }

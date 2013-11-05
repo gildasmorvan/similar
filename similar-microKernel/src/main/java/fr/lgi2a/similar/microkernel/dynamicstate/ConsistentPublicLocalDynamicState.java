@@ -137,7 +137,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	public ConsistentPublicLocalDynamicState( 
 			SimulationTimeStamp time,
 			LevelIdentifier level
-	) throws IllegalArgumentException {
+	) {
 		this.setTime( time );
 		if( level == null ){
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
@@ -168,7 +168,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final void setTime( SimulationTimeStamp time ) throws IllegalArgumentException {
+	public final void setTime( SimulationTimeStamp time ) {
 		if( time == null ){
 			throw new IllegalArgumentException( "The 'time' argument cannot be null." );
 		}
@@ -220,7 +220,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	@Override
 	public void setPublicLocalStateOfEnvironment(
 			IPublicLocalState publicLocalState
-	) throws IllegalArgumentException {
+	) {
 		if( publicLocalState == null ){
 			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
 		}
@@ -233,7 +233,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	@Override
 	public void addPublicLocalStateOfAgent(
 			IPublicLocalStateOfAgent publicLocalState
-	) throws IllegalArgumentException {
+	) {
 		if( publicLocalState == null ){
 			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
 		}
@@ -246,7 +246,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	@Override
 	public void removePublicLocalStateOfAgent(
 			IPublicLocalStateOfAgent publicLocalState
-	) throws IllegalArgumentException {
+	) {
 		if( publicLocalState == null ){
 			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
 		}
@@ -257,7 +257,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addInfluence( IInfluence influence ) throws IllegalArgumentException {
+	public void addInfluence( IInfluence influence ) {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
@@ -273,7 +273,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) throws IllegalArgumentException {
+	public void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) {
 		if( toCopy == null ){
 			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
 		}

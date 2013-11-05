@@ -72,7 +72,7 @@ public class MyLevel1 extends AbstractLearningLevel {
 	public MyLevel1(
 			SimulationTimeStamp initialTime, 
 			SimulationExecutionTrace trace
-	) throws IllegalArgumentException {
+	) {
 		super( initialTime, MyLevelIdentifiers.SIMULATION_LEVEL, trace );
 		//
 		// Define the perception relation graph of the level.

@@ -86,7 +86,7 @@ public class LearningEngineOperationReviseMemory implements ILearningEngineOpera
 	public LearningEngineOperationReviseMemory(
 			LearningGlobalMemoryState previousMemoryState,
 			LearningGlobalMemoryState methodResult
-	) throws IllegalArgumentException {
+	) {
 		if( previousMemoryState == null ){
 			throw new IllegalArgumentException( "The 'previousMemoryState' argument cannot be null." );
 		} else if( methodResult == null ){
@@ -136,7 +136,7 @@ public class LearningEngineOperationReviseMemory implements ILearningEngineOpera
 	 */
 	public void addPerceivedData(
 			IPerceivedDataOfAgent perceivedData
-	) throws IllegalArgumentException {
+	) {
 		if( perceivedData == null ){
 			throw new IllegalArgumentException( "The 'perceivedData' argument cannot be null." );
 		} else if( this.perceivedData.containsKey( perceivedData.getLevel() ) ){

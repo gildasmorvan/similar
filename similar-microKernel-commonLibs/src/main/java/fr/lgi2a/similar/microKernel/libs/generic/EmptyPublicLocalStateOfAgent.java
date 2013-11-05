@@ -71,7 +71,7 @@ public class EmptyPublicLocalStateOfAgent extends AbstractPublicLocalStateOfAgen
 	public EmptyPublicLocalStateOfAgent(
 			LevelIdentifier levelIdentifier,
 			IAgent owner
-	) throws IllegalArgumentException {
+	) {
 		super(levelIdentifier, owner);
 	}
 }

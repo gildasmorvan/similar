@@ -120,7 +120,7 @@ public class LearningEngineOperationSystemReaction implements ILearningEngineOpe
 			SimulationTimeStamp newConsistentStateTime,
 			boolean happensBeforeRegularReaction,
 			ConsistentPublicLocalDynamicState newConsistentStateAtBeginning
-	) throws IllegalArgumentException {
+	) {
 		if( newConsistentStateAtBeginning == null ){
 			throw new IllegalArgumentException( "The 'newConsistentStateAtBeginning' argument cannot be null." );
 		}
@@ -191,7 +191,7 @@ public class LearningEngineOperationSystemReaction implements ILearningEngineOpe
 	 * @param newConsistentStateAtEnd The value of the 'new consistent state' argument at the end of the 'reaction' method call.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public void setNewConsistentStateAtEnd(ConsistentPublicLocalDynamicState newConsistentStateAtEnd ) throws IllegalArgumentException {
+	public void setNewConsistentStateAtEnd(ConsistentPublicLocalDynamicState newConsistentStateAtEnd ) {
 		this.newConsistentStateAtEnd = LearningPublicLocalDynamicStateCopier.createCopy( newConsistentStateAtEnd );
 	}
 	
@@ -219,7 +219,7 @@ public class LearningEngineOperationSystemReaction implements ILearningEngineOpe
 	 */
 	public void addArgumentInfluence(
 			IInfluence influence
-	) throws IllegalArgumentException {
+	) {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
@@ -233,7 +233,7 @@ public class LearningEngineOperationSystemReaction implements ILearningEngineOpe
 	 */
 	public void addProducedInfluence(
 			IInfluence influence
-	) throws IllegalArgumentException {
+	) {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}

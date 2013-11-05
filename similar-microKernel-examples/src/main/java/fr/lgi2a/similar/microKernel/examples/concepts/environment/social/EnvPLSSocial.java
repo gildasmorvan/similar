@@ -117,7 +117,7 @@ public class EnvPLSSocial extends AbstractPublicLocalState {
 	 * @param tvBroadcastedThresholdForStrangePhysicalManifestations The initial number of strange physical manifestation over which a citizen can consider 
 	 * that an alien experiment was performed on him/her. This value is being broadcasted on television.
 	 */
-	public EnvPLSSocial( int tvBroadcastedThresholdForStrangePhysicalManifestations ) throws IllegalArgumentException {
+	public EnvPLSSocial( int tvBroadcastedThresholdForStrangePhysicalManifestations ) {
 		// The super constructor requires the identifier of the level for which this public
 		// local state is defined.
 		super( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );

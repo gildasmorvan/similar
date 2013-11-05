@@ -82,7 +82,7 @@ public class ActorAgent extends AbstractLearningAgent {
 	 */
 	public ActorAgent(
 			SimulationExecutionTrace trace
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, trace);
 		// Initialize the global memory state of the agent.
 		// This state has to be an instance of the Learning_GlobalMemoryState class from the common libs to ensure that the evolution of that

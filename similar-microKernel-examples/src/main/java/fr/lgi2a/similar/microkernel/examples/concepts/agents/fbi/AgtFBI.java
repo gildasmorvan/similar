@@ -64,8 +64,8 @@ import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.Ag
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtEditorInChief;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtFactoryEditorInChief;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.physical.AgtFBIPDFSocial;
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social.AgtFBIPDFPhysical;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.physical.AgtFBIPDFPhysical;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social.AgtFBIPDFSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
@@ -265,7 +265,6 @@ public class AgtFBI extends AbstractAgent {
 			}
 		}
 		AgtFBIPDFPhysical perceivedData = new AgtFBIPDFPhysical( 
-				selectedCity, 
 				envPhysical.getCurrentTimeOfTheDay() 
 		);
 		// Add the aliens located in that city.
@@ -282,10 +281,8 @@ public class AgtFBI extends AbstractAgent {
 				// If the agent is a citizen, find the number of posts that were written by him.
 				AgtCitizenPLSPhysical citizenState = (AgtCitizenPLSPhysical) agentState;
 				Set<PostOnConspiracyForum> posts = envSocial.getPostsFor( citizenState );
-				if( posts != null ){
-					if( posts.size() > this.citizenPostsThresholdBeforeLobotomy ){
-						perceivedData.addDangerousCitizen( citizenState, envSocial.getPostsFor( citizenState ) );
-					}
+				if( posts != null && posts.size() > this.citizenPostsThresholdBeforeLobotomy ){
+					perceivedData.addDangerousCitizen( citizenState, envSocial.getPostsFor( citizenState ) );
 				}
 			}
 		}
@@ -383,7 +380,7 @@ public class AgtFBI extends AbstractAgent {
 			// Generate the new editor in chief replacing the current one.
 			// Use the factory instead of the constructor of the agent, to provide a default value to the 
 			// private local state of the agent.
-			AgtEditorInChief newEditor = AgtFactoryEditorInChief.INSTANCE.generateAgent(
+			AgtEditorInChief newEditor = AgtFactoryEditorInChief.instance().generateAgent(
 					castedData.getCityWithLessPosts(), 
 					this.thresholdForStrangePhysicalManifestationsAdvisedByFBI
 			);

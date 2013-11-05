@@ -88,7 +88,7 @@ public abstract class AbstractLearningAgent extends AbstractAgent {
 	public AbstractLearningAgent( 
 			String category, 
 			SimulationExecutionTrace trace 
-	) throws IllegalArgumentException {
+	) {
 		super(category);
 		if( trace == null ){
 			throw new IllegalArgumentException( "The 'trace' argument cannot be null." );

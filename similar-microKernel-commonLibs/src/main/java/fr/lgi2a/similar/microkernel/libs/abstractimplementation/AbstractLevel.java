@@ -93,7 +93,7 @@ public abstract class AbstractLevel implements ILevel {
 	public AbstractLevel(
 			SimulationTimeStamp initialTime,
 			LevelIdentifier identifier
-	) throws IllegalArgumentException {
+	) {
 		if( initialTime == null ){
 			throw new IllegalArgumentException( "The 'initialTime' argument cannot be null." );
 		} else if( identifier == null ){
@@ -153,7 +153,7 @@ public abstract class AbstractLevel implements ILevel {
 	 * @param perceptibleLevel The level becoming perceptible by this level.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	public void addPerceptibleLevel( LevelIdentifier perceptibleLevel ) throws IllegalArgumentException {
+	public void addPerceptibleLevel( LevelIdentifier perceptibleLevel ) {
 		if( perceptibleLevel == null ){
 			throw new IllegalArgumentException( "The 'perceptibleLevel' argument cannot be null." );
 		}
@@ -173,7 +173,7 @@ public abstract class AbstractLevel implements ILevel {
 	 * @param influenceableLevel The level becoming influenceable by this level.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	public void addInfluenceableLevel( LevelIdentifier influenceableLevel ) throws IllegalArgumentException {
+	public void addInfluenceableLevel( LevelIdentifier influenceableLevel ) {
 		if( influenceableLevel == null ){
 			throw new IllegalArgumentException( "The 'influenceableLevel' argument cannot be null." );
 		}

@@ -67,7 +67,7 @@ public class LearningPublicLocalStateOfEnvironment extends AbstractPublicLocalSt
 	 */
 	public LearningPublicLocalStateOfEnvironment(
 			LevelIdentifier levelIdentifier
-	) throws IllegalArgumentException {
+	) {
 		super(levelIdentifier);
 		this.revisionNumber = 0;
 	}

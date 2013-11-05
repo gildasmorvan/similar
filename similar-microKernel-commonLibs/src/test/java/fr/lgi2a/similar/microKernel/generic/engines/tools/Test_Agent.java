@@ -78,7 +78,7 @@ public class Test_Agent extends AbstractLearningAgent {
 	public Test_Agent(
 			String category, 
 			SimulationExecutionTrace trace
-	) throws IllegalArgumentException {
+	) {
 		super(category, trace);
 	}
 

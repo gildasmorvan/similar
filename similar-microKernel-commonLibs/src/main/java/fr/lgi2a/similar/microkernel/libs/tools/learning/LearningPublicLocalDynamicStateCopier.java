@@ -72,7 +72,7 @@ public final class LearningPublicLocalDynamicStateCopier {
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it contains elements that are not within 
 	 * the specification of the "learning" simulation.
 	 */
-	public static IPublicLocalDynamicState createCopy( IPublicLocalDynamicState localDynamicState ) throws IllegalArgumentException {
+	public static IPublicLocalDynamicState createCopy( IPublicLocalDynamicState localDynamicState ) {
 		if( localDynamicState instanceof ConsistentPublicLocalDynamicState ){
 			return createCopy( (ConsistentPublicLocalDynamicState) localDynamicState );
 		} else {
@@ -90,7 +90,7 @@ public final class LearningPublicLocalDynamicStateCopier {
 	 */
 	public static ConsistentPublicLocalDynamicState createCopy( 
 			ConsistentPublicLocalDynamicState toCopy 
-	) throws IllegalArgumentException {
+	) {
 		if( toCopy == null ){
 			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
 		}

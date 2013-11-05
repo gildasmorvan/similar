@@ -96,7 +96,7 @@ public final class RIPhysicalGoToWork extends RegularInfluence {
 	 */
 	public RIPhysicalGoToWork( 
 			AgtCitizenPLSPhysical citizen
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		this.citizen = citizen;
 	}

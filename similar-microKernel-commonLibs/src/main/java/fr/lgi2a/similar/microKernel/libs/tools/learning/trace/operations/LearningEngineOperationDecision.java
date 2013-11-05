@@ -94,7 +94,7 @@ public class LearningEngineOperationDecision implements ILearningEngineOperation
 			LevelIdentifier level,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData
-	) throws IllegalArgumentException {
+	) {
 		if( level == null ){
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		} else if( memoryState == null ){
@@ -166,7 +166,7 @@ public class LearningEngineOperationDecision implements ILearningEngineOperation
 	 */
 	public void addInfluence( 
 			IInfluence influence
-	) throws IllegalArgumentException {
+	) {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}

@@ -46,6 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.probes;
 
+import java.io.PrintStream;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IAgent;
@@ -80,12 +81,17 @@ public class ProbeCitizenParanoia implements IProbe {
 	public static final String PROBEID = "[Probe:Paranoia] ";
 	
 	/**
+	 * The print stream used to print the data of this probe.
+	 */
+	private PrintStream printer;
+	
+	/**
 	 * This observation method is called before the initialization of a new simulation.
 	 * It is used to prepare the observation, for instance by showing a GUI Frame, opening a stream towards a file, etc.
 	 */
 	@Override
 	public void prepareObservation() {
-		System.out.println( PROBEID + "Creating a new simulation." );
+		this.printer = System.out;
 	}
 
 	/**
@@ -97,7 +103,7 @@ public class ProbeCitizenParanoia implements IProbe {
 			SimulationTimeStamp initialTimestamp,
 			ISimulationEngine simulationEngine
 	) {
-		System.out.println( PROBEID + "Initial " + initialTimestamp + ":\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
+		this.printer.println( PROBEID + "Initial " + initialTimestamp + ":\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
 	}
 	
 	/**
@@ -139,7 +145,7 @@ public class ProbeCitizenParanoia implements IProbe {
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
 	) {
-		System.out.println( PROBEID + timestamp + ":\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
+		this.printer.println( PROBEID + timestamp + ":\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
 	}
 
 	/**
@@ -150,7 +156,7 @@ public class ProbeCitizenParanoia implements IProbe {
 			SimulationTimeStamp finalTimestamp,
 			ISimulationEngine simulationEngine
 	) {
-		System.out.println( PROBEID  + "Final " + finalTimestamp + ":\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
+		this.printer.println( PROBEID  + "Final " + finalTimestamp + ":\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
 	}
 
 	/**
@@ -172,7 +178,7 @@ public class ProbeCitizenParanoia implements IProbe {
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
 	) {
-		System.out.println( PROBEID  + " Aborted at " + timestamp + " where:\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
+		this.printer.println( PROBEID  + " Aborted at " + timestamp + " where:\t" + this.getParanoiaMessage( simulationEngine.getAgents() ) );
 	}
 
 	/**
@@ -180,6 +186,6 @@ public class ProbeCitizenParanoia implements IProbe {
 	 */
 	@Override
 	public void endObservation() {
-		System.out.println( PROBEID + "Simulation ended" );
+		this.printer.println( PROBEID + "Simulation ended" );
 	}
 }

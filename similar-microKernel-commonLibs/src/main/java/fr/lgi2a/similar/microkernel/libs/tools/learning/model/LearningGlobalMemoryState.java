@@ -67,7 +67,7 @@ public class LearningGlobalMemoryState extends AbstractGlobalMemoryState {
 	 */
 	public LearningGlobalMemoryState(
 			IAgent owner
-	) throws IllegalArgumentException {
+	) {
 		super( owner );
 		this.revisionNumber = 0;
 	}

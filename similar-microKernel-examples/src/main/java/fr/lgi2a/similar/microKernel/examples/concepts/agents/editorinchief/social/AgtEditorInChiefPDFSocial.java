@@ -103,7 +103,7 @@ public class AgtEditorInChiefPDFSocial extends AbstractPerceivedDataOfAgent {
 	public AgtEditorInChiefPDFSocial(
 			long totalNumberOfExperiments,
 			long numberOfExperimentsInCityOfEditorInChief
-	) throws IllegalArgumentException {
+	) {
 		// The super constructor requires the identifier of the level from which 
 		// these data were perceived.
 		super( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );

@@ -79,7 +79,7 @@ public class UnitTest_Level extends AbstractLevel {
 			LevelIdentifier identifier,
 			boolean finalTimeOrAfter,
 			SimulationTimeStamp nextTime
-	) throws IllegalArgumentException {
+	) {
 		super(initialTime, identifier);
 		this.nextTime = nextTime;
 	}

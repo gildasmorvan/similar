@@ -46,6 +46,8 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.probes;
 
+import java.io.PrintStream;
+
 import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
@@ -77,12 +79,17 @@ public class ProbeTVBroadcastedValue implements IProbe {
 	public static final String PROBEID = "[Probe:TV value] ";
 	
 	/**
+	 * The print stream used to print the data of this probe.
+	 */
+	private PrintStream printer;
+	
+	/**
 	 * This observation method is called before the initialization of a new simulation.
 	 * It is used to prepare the observation, for instance by showing a GUI Frame, opening a stream towards a file, etc.
 	 */
 	@Override
 	public void prepareObservation() {
-		System.out.println( PROBEID + "Creating a new simulation." );
+		this.printer = System.out;
 	}
 
 	/**
@@ -96,7 +103,7 @@ public class ProbeTVBroadcastedValue implements IProbe {
 	) {
 		IPublicLocalDynamicState socialLevelState = simulationEngine.getSimulationDynamicStates().get( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		EnvPLSSocial environmentStateInSocial = (EnvPLSSocial) socialLevelState.getPublicLocalStateOfEnvironment();
-		System.out.println( PROBEID + "Initial " + initialTimestamp + ":\t" + this.getBroadcastMessage( environmentStateInSocial ) );
+		this.printer.println( PROBEID + "Initial " + initialTimestamp + ":\t" + this.getBroadcastMessage( environmentStateInSocial ) );
 	}
 	
 	/**
@@ -121,7 +128,7 @@ public class ProbeTVBroadcastedValue implements IProbe {
 	) {
 		IPublicLocalDynamicState socialLevelState = simulationEngine.getSimulationDynamicStates().get( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		EnvPLSSocial environmentStateInSocial = (EnvPLSSocial) socialLevelState.getPublicLocalStateOfEnvironment();
-		System.out.println( PROBEID + timestamp + ":\t" + this.getBroadcastMessage( environmentStateInSocial ) );
+		this.printer.println( PROBEID + timestamp + ":\t" + this.getBroadcastMessage( environmentStateInSocial ) );
 	}
 
 	/**
@@ -134,7 +141,7 @@ public class ProbeTVBroadcastedValue implements IProbe {
 	) {
 		IPublicLocalDynamicState socialLevelState = simulationEngine.getSimulationDynamicStates().get( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		EnvPLSSocial environmentStateInSocial = (EnvPLSSocial) socialLevelState.getPublicLocalStateOfEnvironment();
-		System.out.println( PROBEID  + "Final " + finalTimestamp + ":\t" + this.getBroadcastMessage( environmentStateInSocial ) );
+		this.printer.println( PROBEID  + "Final " + finalTimestamp + ":\t" + this.getBroadcastMessage( environmentStateInSocial ) );
 	}
 
 	/**
@@ -158,7 +165,7 @@ public class ProbeTVBroadcastedValue implements IProbe {
 	) {
 		IPublicLocalDynamicState socialLevelState = simulationEngine.getSimulationDynamicStates().get( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		EnvPLSSocial environmentStateInSocial = (EnvPLSSocial) socialLevelState.getPublicLocalStateOfEnvironment();
-		System.out.println( PROBEID  + "Aborted at " + timestamp + " where:\t" + this.getBroadcastMessage( environmentStateInSocial ) );
+		this.printer.println( PROBEID  + "Aborted at " + timestamp + " where:\t" + this.getBroadcastMessage( environmentStateInSocial ) );
 	}
 
 	/**
@@ -166,6 +173,6 @@ public class ProbeTVBroadcastedValue implements IProbe {
 	 */
 	@Override
 	public void endObservation() {
-		System.out.println( PROBEID + "Simulation ended" );
+		this.printer.println( PROBEID + "Simulation ended" );
 	}
 }

@@ -70,7 +70,15 @@ public class AgtFactoryEditorInChief {
 	/**
 	 * The instance of this singleton class. Use this field to call the generation methods of this factory.
 	 */
-	public static final AgtFactoryEditorInChief INSTANCE = new AgtFactoryEditorInChief( );
+	private static final AgtFactoryEditorInChief INSTANCE = new AgtFactoryEditorInChief( );
+	
+	/**
+	 * Gets the instance of this singleton class. Use this field to call the generation methods of this factory.
+	 * @return The instance of this singleton class. Use this field to call the generation methods of this factory.
+	 */
+	public static AgtFactoryEditorInChief instance( ) {
+		return INSTANCE;
+	}
 	
 	/**
 	 * The parameters currently used to generate 'editor in chief' agents with this factory.

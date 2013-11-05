@@ -71,6 +71,11 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 	private static final long serialVersionUID = 5067374981031091877L;
 	
 	/**
+	 * A value used in the computation of the hashcode.
+	 */
+	private static final int SHIFT_VALUE = 32;
+	
+	/**
 	 * The unique identifier of this time stamp.
 	 */
 	private final long identifier;
@@ -88,7 +93,7 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 	 * @param toCopy The time stamp to copy.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	public SimulationTimeStamp( SimulationTimeStamp toCopy ) throws IllegalArgumentException {
+	public SimulationTimeStamp( SimulationTimeStamp toCopy ) {
 		if( toCopy == null ){
 			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
 		}
@@ -120,7 +125,7 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	public int compareTo( SimulationTimeStamp otherTimeStamp ) throws IllegalArgumentException {
+	public int compareTo( SimulationTimeStamp otherTimeStamp ) {
 		if( otherTimeStamp == null ) {
 			throw new IllegalArgumentException( "The first parameter of this method cannot be null." );
 		} else {
@@ -145,7 +150,7 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 		// This code was automatically generated using the eclipse framework.
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) ( this.identifier ^ ( this.identifier >>> 32 ) );
+		result = prime * result + (int) ( this.identifier ^ ( this.identifier >>> SHIFT_VALUE ) );
 		return result;
 	}
 

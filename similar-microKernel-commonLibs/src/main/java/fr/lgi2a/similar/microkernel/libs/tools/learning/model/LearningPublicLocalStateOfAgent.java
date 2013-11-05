@@ -70,7 +70,7 @@ public class LearningPublicLocalStateOfAgent extends AbstractPublicLocalStateOfA
 	public LearningPublicLocalStateOfAgent(
 			LevelIdentifier levelIdentifier,
 			IAgent owner
-	) throws IllegalArgumentException {
+	) {
 		super(levelIdentifier, owner);
 		this.revisionNumber = 0;
 	}

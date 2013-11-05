@@ -79,7 +79,7 @@ public abstract class AbstractSimulationEngine implements ISimulationEngine {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addProbe( String identifier, IProbe probe ) throws IllegalArgumentException {
+	public void addProbe( String identifier, IProbe probe ) {
 		if( identifier == null ){
 			throw new IllegalArgumentException( "The 'identifier' argument cannot be null." );
 		} else if( probe == null ){

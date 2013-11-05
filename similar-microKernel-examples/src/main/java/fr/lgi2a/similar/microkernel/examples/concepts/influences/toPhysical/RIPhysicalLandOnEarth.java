@@ -105,7 +105,7 @@ public final class RIPhysicalLandOnEarth extends RegularInfluence {
 	public RIPhysicalLandOnEarth( 
 			AgtAlien alienAgent,
 			AgtCitizenPLSPhysical experimentSubject
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		this.alienAgent = alienAgent;
 		this.experimentSubject = experimentSubject;

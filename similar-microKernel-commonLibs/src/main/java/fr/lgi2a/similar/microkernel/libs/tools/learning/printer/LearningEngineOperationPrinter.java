@@ -75,7 +75,7 @@ public abstract class LearningEngineOperationPrinter {
 	 * @param operation The operation being printed.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public static void printOperation( int indentation, ILearningEngineOperation operation ) throws IllegalArgumentException {
+	public static void printOperation( int indentation, ILearningEngineOperation operation ) {
 		if( operation == null ){
 			throw new IllegalArgumentException( "The 'operation' argument cannot be null." );
 		}

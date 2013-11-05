@@ -98,7 +98,7 @@ public class AgtCitizenPLSPhysical extends AbstractPublicLocalStateOfAgent {
 	 * @param owner The 'citizen' agent to which this public local state belongs.
 	 * @param address The address of the citizen in the 'physical' level.
 	 */
-	public AgtCitizenPLSPhysical( IAgent owner, Cities address ) throws IllegalArgumentException {
+	public AgtCitizenPLSPhysical( IAgent owner, Cities address ) {
 		// The super constructor requires the identifier of the level for which this public
 		// local state is defined.
 		super( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL, owner );

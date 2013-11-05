@@ -108,7 +108,7 @@ public class AgtAlienPDFSpace extends AbstractPerceivedDataOfAgent {
 	public AgtAlienPDFSpace( 
 			Cities selectedLocation, 
 			Set<AgtCitizenPLSPhysical> citizensAtSelectedLocation 
-	) throws IllegalArgumentException {
+	) {
 		// The super constructor requires the identifier of the level from which 
 		// these data were perceived.
 		super( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );

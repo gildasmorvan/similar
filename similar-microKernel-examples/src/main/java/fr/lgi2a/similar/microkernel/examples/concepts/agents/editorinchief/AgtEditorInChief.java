@@ -108,7 +108,7 @@ public class AgtEditorInChief extends AbstractAgent {
 			Cities address,
 			int thresholdForStrangePhysicalManifestationsAdvisedByFBI,
 			long paranoiaThreshold
-	) throws IllegalArgumentException {
+	) {
 		// The super constructor requires the definition of the category of the agent.
 		super( CATEGORY );
 		//

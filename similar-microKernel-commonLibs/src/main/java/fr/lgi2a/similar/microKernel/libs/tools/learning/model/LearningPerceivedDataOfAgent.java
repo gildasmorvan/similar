@@ -92,7 +92,7 @@ public class LearningPerceivedDataOfAgent extends AbstractPerceivedDataOfAgent {
 	public LearningPerceivedDataOfAgent(
 			LevelIdentifier levelIdentifier,
 			LearningPublicLocalStateOfAgent agentPublicLocalState
-	) throws IllegalArgumentException {
+	) {
 		super(levelIdentifier);
 		this.identifier = ++identifierCounter;
 		if( agentPublicLocalState == null ){
@@ -133,7 +133,7 @@ public class LearningPerceivedDataOfAgent extends AbstractPerceivedDataOfAgent {
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it is not an observable 
 	 * transitory state of the "learning" simulation or a consistent state.
 	 */
-	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) throws IllegalArgumentException {
+	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) {
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}

@@ -56,6 +56,11 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
  */
 public abstract class AbstractLearningEngineOperationMoment implements Comparable<AbstractLearningEngineOperationMoment> {
 	/**
+	 * A value used in the computation of the hashcode.
+	 */
+	private static final int SHIFT_VALUE = 32;
+	
+	/**
 	 * The time stamp relatively to which this moment of the simulation is expressed.
 	 */
 	private SimulationTimeStamp timestamp;
@@ -67,7 +72,7 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 	 */
 	public AbstractLearningEngineOperationMoment(
 			SimulationTimeStamp timestamp
-	) throws IllegalArgumentException {
+	) {
 		if( timestamp == null ){
 			throw new IllegalArgumentException( "The 'timestamp' argument cannot be null." );
 		}
@@ -103,13 +108,18 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 	 */
 	public static class LearningEngineOperationMomentBefore extends AbstractLearningEngineOperationMoment {
 		/**
+		 * The integer modeling the moment before a timestamp.
+		 */
+		private final int HASHCODE_BEFORE_ID = 1237;
+		
+		/**
 		 * Builds a moment happening slightly before a time stamp.
 		 * @param timestamp The time stamp relatively to which this moment of the simulation is expressed.
 		 * @throws IllegalArgumentException If the argument is <code>null</code>.
 		 */
 		public LearningEngineOperationMomentBefore(
 				SimulationTimeStamp timestamp
-		) throws IllegalArgumentException {
+		) {
 			super(timestamp);
 		}
 
@@ -154,8 +164,8 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 			// having a long and a boolean field. The boolean field models "before" or "after".
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + 1237;
-			result = prime * result + (int) (this.getTimestamp().getIdentifier() ^ (this.getTimestamp().getIdentifier() >>> 32));
+			result = prime * result + HASHCODE_BEFORE_ID;
+			result = prime * result + (int) (this.getTimestamp().getIdentifier() ^ (this.getTimestamp().getIdentifier() >>> SHIFT_VALUE));
 			return result;
 		}
 
@@ -174,13 +184,18 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 	 */
 	public static class LearningEngineOperationMomentAfter extends AbstractLearningEngineOperationMoment {
 		/**
+		 * The integer modeling the moment after a timestamp.
+		 */
+		private final int HASHCODE_AFTER_ID = 1237;
+		
+		/**
 		 * Builds a moment happening slightly after a time stamp.
 		 * @param timestamp The time stamp relatively to which this moment of the simulation is expressed.
 		 * @throws IllegalArgumentException If the argument is <code>null</code>.
 		 */
 		public LearningEngineOperationMomentAfter(
 				SimulationTimeStamp timestamp
-		) throws IllegalArgumentException {
+		) {
 			super(timestamp);
 		}
 
@@ -225,8 +240,8 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 			// having a long and a boolean field. The boolean field models "before" or "after".
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + 1231;
-			result = prime * result + (int) (this.getTimestamp().getIdentifier() ^ (this.getTimestamp().getIdentifier() >>> 32));
+			result = prime * result + HASHCODE_AFTER_ID;
+			result = prime * result + (int) (this.getTimestamp().getIdentifier() ^ (this.getTimestamp().getIdentifier() >>> SHIFT_VALUE));
 			return result;
 		}
 

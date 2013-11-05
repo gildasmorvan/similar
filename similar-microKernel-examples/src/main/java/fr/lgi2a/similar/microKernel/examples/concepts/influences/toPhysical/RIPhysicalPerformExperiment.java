@@ -115,7 +115,7 @@ public final class RIPhysicalPerformExperiment extends RegularInfluence {
 			AgtAlienPLSPhysical alienAgentPLS,
 			AgtCitizenPLSPhysical experimentSubject,
 			double efficiencyInExperiments
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		this.experimentSubject = experimentSubject;
 		this.alienAgentPLS = alienAgentPLS;

@@ -123,7 +123,7 @@ public class EnvForConceptsSimulation extends AbstractEnvironment {
 		} else if( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL.equals( levelId ) ) {
 			// Case where the decision is made from the 'Physical' level.
 			// Dispatch to the appropriate method.
-			this.naturalFromPhysicalLevel( levelsPublicLocalObservableDynamicState, producedInfluences );
+			this.naturalFromPhysicalLevel( producedInfluences );
 		} else {
 			// This case is out of the bounds of the behavior of the agent.
 			// Consequently, we throw an exception telling that this case should not happen
@@ -137,12 +137,9 @@ public class EnvForConceptsSimulation extends AbstractEnvironment {
 	 * <p>
 	 * 	From that level, the environment moves the day-evening-night cycle.
 	 * </p>
-	 * @param levelsPublicLocalObservableDynamicState The public dynamic state of the levels that can be perceived from 
-	 * the level having the identifier <code>levelId</code>.
 	 * @param producedInfluences The map where the influences produced by the decisions of this agent are put.
 	 */
 	private void naturalFromPhysicalLevel(
-			IDynamicStateMap levelsPublicLocalObservableDynamicState,
 			InfluencesMap producedInfluences
 	){
 		// Create the influence that will change the current time of the day of the environment to the 

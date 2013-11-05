@@ -84,7 +84,7 @@ public final class DynamicStateFilteredMap implements IDynamicStateMap {
 	public DynamicStateFilteredMap( 
 			IDynamicStateMap parent, 
 			Set<LevelIdentifier> filter 
-	) throws IllegalArgumentException {
+	) {
 		if( filter == null ){
 			throw new IllegalArgumentException( "The 'filter' argument cannot be null." );
 		}
@@ -97,7 +97,7 @@ public final class DynamicStateFilteredMap implements IDynamicStateMap {
 	 * @param parent The over map of this map.
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the filter is not a subset of the keys of the parent.
 	 */
-	public void changeParent( IDynamicStateMap parent ) throws IllegalArgumentException {
+	public void changeParent( IDynamicStateMap parent ) {
 		if( parent == null ){
 			throw new IllegalArgumentException( "The 'parent' argument cannot be null." );
 		} else if( ! parent.keySet().containsAll( filter ) ){
@@ -140,7 +140,7 @@ public final class DynamicStateFilteredMap implements IDynamicStateMap {
 	@Override
 	public void put(
 			IPublicLocalDynamicState state
-	) throws IllegalArgumentException {
+	) {
 		throw new UnsupportedOperationException( "This operation is not supported in this class." );
 	}
 }

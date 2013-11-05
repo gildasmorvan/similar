@@ -67,7 +67,7 @@ public class AbstractPublicLocalState implements IPublicLocalState {
 	 */
 	public AbstractPublicLocalState(
 			LevelIdentifier levelIdentifier
-	) throws IllegalArgumentException {
+	) {
 		if( levelIdentifier == null ){
 			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
 		}

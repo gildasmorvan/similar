@@ -87,7 +87,7 @@ public class LearningReasonOfSimulationEnd {
 		 * @param error The error that caused the simulation to fail.
 		 * @throws IllegalArgumentException If an argument is <code>null</code>.
 		 */
-		public ExceptionCaught( String errorMessage, Throwable error ) throws IllegalArgumentException {
+		public ExceptionCaught( String errorMessage, Throwable error ) {
 			if( errorMessage == null ){
 				throw new IllegalArgumentException( "The argument 'errorMessage' cannot be null." );
 			}

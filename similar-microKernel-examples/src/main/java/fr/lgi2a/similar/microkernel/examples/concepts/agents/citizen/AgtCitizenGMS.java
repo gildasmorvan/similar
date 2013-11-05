@@ -102,7 +102,7 @@ public class AgtCitizenGMS extends AbstractGlobalMemoryState {
 	 * Builds a global memory state where the paranoia level is set to 0.
 	 * @param owner The agent owning this global memory state.
 	 */
-	public AgtCitizenGMS(IAgent owner) throws IllegalArgumentException {
+	public AgtCitizenGMS(IAgent owner) {
 		super(owner);
 		// Sets the initial paranoia level to 0.
 		this.paranoiaLevel = 0;

@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.physical;
+package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social;
 
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
@@ -105,7 +105,7 @@ public class AgtFBIPDFSocial extends AbstractPerceivedDataOfAgent {
 			AgtEditorInChiefPLSSocial editorInChief,
 			double broadcastedValue,
 			Cities cityWithLessPosts
-	) throws IllegalArgumentException {
+	) {
 		// The super constructor requires the identifier of the level from which 
 		// these data were perceived.
 		super( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );

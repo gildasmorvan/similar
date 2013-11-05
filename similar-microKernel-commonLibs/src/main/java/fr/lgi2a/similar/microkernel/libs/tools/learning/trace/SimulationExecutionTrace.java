@@ -114,7 +114,7 @@ public class SimulationExecutionTrace {
 	 */
 	public LearningSimulationDynamicState getDynamicStateAt( 
 			SimulationTimeStamp timestamp 
-	) throws IllegalArgumentException, NoSuchElementException {
+	) throws NoSuchElementException {
 		if( timestamp == null ){
 			throw new IllegalArgumentException( "The 'timestamp' argument cannot be null." );
 		} else if( ! this.dynamicStatesTrace.containsKey( timestamp ) ) {
@@ -133,7 +133,7 @@ public class SimulationExecutionTrace {
 	public void addDynamicState(
 			SimulationTimeStamp timestamp,
 			LearningSimulationDynamicState dynamicState
-	) throws IllegalArgumentException {
+	) {
 		if( timestamp == null ){
 			throw new IllegalArgumentException( "The 'timestamp' argument cannot be null." );
 		} else if( dynamicState == null ){
@@ -157,7 +157,7 @@ public class SimulationExecutionTrace {
 	 * @param finalDynamicState The dynamic state of the simulation when the final time was reached.
 	 * @throws IllegalArgumentException If an argument was <code>null</code>.
 	 */
-	public void setFinalDynamicState( SimulationTimeStamp finalTime, LearningSimulationDynamicState finalDynamicState ) throws IllegalArgumentException {
+	public void setFinalDynamicState( SimulationTimeStamp finalTime, LearningSimulationDynamicState finalDynamicState ) {
 		if( finalDynamicState == null ){
 			throw new IllegalArgumentException( "The 'finalDynamicState' argument cannot be null." );
 		} else if( finalTime == null ) {
@@ -204,7 +204,7 @@ public class SimulationExecutionTrace {
 	 */
 	public List<ILearningEngineOperation> getOperationsFor( 
 			AbstractLearningEngineOperationMoment moment 
-	) throws IllegalArgumentException, NoSuchElementException {
+	) throws NoSuchElementException {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
 		} else if( ! this.engineOperationsOrder.containsKey( moment ) ) {
@@ -224,7 +224,7 @@ public class SimulationExecutionTrace {
 	public List<ILearningEngineOperation> getOperationsFor( 
 			AbstractLearningEngineOperationMoment moment,
 			LearningEngineOperationType type
-	) throws IllegalArgumentException, NoSuchElementException {
+	) throws NoSuchElementException {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
 		} else if( type == null ){
@@ -250,7 +250,7 @@ public class SimulationExecutionTrace {
 	public void addEngineOperation(
 			AbstractLearningEngineOperationMoment moment,
 			ILearningEngineOperation operation
-	) throws IllegalArgumentException {
+	) {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
 		} else if( operation == null ){
@@ -288,7 +288,7 @@ public class SimulationExecutionTrace {
 	 * @param reasonOfEnd The reason why the simulation ended.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	public void setReasonOfEnd( LearningReasonOfSimulationEnd reasonOfEnd ) throws IllegalArgumentException {
+	public void setReasonOfEnd( LearningReasonOfSimulationEnd reasonOfEnd ) {
 		if( reasonOfEnd == null ){
 			throw new IllegalArgumentException( "The argument 'reasonOfEnd' cannot be null." );
 		}

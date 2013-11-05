@@ -65,7 +65,7 @@ public class AbstractPerceivedDataOfAgent implements IPerceivedDataOfAgent {
 	 * @param levelIdentifier The identifier of the level by which the data were perceived.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public AbstractPerceivedDataOfAgent( LevelIdentifier levelIdentifier ) throws IllegalArgumentException {
+	public AbstractPerceivedDataOfAgent( LevelIdentifier levelIdentifier ) {
 		if( levelIdentifier == null ){
 			throw new IllegalArgumentException( "The 'levelIdentifier' argument cannot be null." );
 		}

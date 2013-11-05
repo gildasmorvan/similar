@@ -87,8 +87,7 @@ public class RISocialRemoveAllPublications extends RegularInfluence {
 	/**
 	 * Builds a regular influence modeling the will of the 'FBI' to remove all the messages from the Internet.
 	 */
-	public RISocialRemoveAllPublications(
-	) throws IllegalArgumentException {
+	public RISocialRemoveAllPublications( ) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 	}
 }

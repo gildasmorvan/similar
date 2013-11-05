@@ -62,7 +62,7 @@ public class SystemInfluence extends AbstractInfluence {
 	 * @param targetLevel The target level of the influence, as described in {@link IInfluence#getTargetLevel()}
 	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.
 	 */
-	public SystemInfluence( String category, LevelIdentifier targetLevel ) throws IllegalArgumentException {
+	public SystemInfluence( String category, LevelIdentifier targetLevel ) {
 		super( category, targetLevel );
 	}
 

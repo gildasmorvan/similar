@@ -68,7 +68,7 @@ public final class EmptyPerceivedDataOfAgent extends AbstractPerceivedDataOfAgen
 	 */
 	public EmptyPerceivedDataOfAgent(
 			LevelIdentifier levelIdentifier
-	) throws IllegalArgumentException {
+	) {
 		super(levelIdentifier);
 	}
 }

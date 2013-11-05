@@ -107,7 +107,7 @@ public class PhysicalLevel extends AbstractLevel {
 			double experimentCompletionRatePerReaction,
 			double strangePhysicalManifestationRate,
 			double fbiCaptureEfficiency
-	) throws IllegalArgumentException {
+	) {
 		super( initialTime, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		//
 		// Build the perception relation graph of the level, i.e. identify the level that can be perceived
@@ -278,50 +278,31 @@ public class PhysicalLevel extends AbstractLevel {
 			if( RIPhysicalLandOnEarth.CATEGORY.equals( influence.getCategory() ) ){
 				this.reactTo( 
 						(RIPhysicalLandOnEarth) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
 						remainingInfluences 
 				);
 			} else if( RIPhysicalTakeOffFromEarth.CATEGORY.equals( influence.getCategory() ) ){
 				this.reactTo( 
 						(RIPhysicalTakeOffFromEarth) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
 						remainingInfluences 
 				);
 			} else if( RIPhysicalPerformExperiment.CATEGORY.equals( influence.getCategory() ) ){
 				this.reactTo( 
 						(RIPhysicalPerformExperiment) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
 						remainingInfluences 
 				);
 			} else if( RIPhysicalSetTimeOfTheDay.CATEGORY.equals( influence.getCategory() ) ){
-				this.reactTo( 
-						(RIPhysicalSetTimeOfTheDay) influence, 
-						previousConsistentStateTime, 
+				this.reactToSetTimeOfTheDay( 
 						newConsistentStateTime, 
-						consistentState, 
-						remainingInfluences 
+						consistentState
 				);
 			} else if( RIPhysicalCaptureAndDissectAlien.CATEGORY.equals( influence.getCategory() ) ){
 				this.reactTo( 
 						(RIPhysicalCaptureAndDissectAlien) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
 						remainingInfluences 
 				);
 			} else if( RIPhysicalRemoveAllStrangePhysicalManifestations.CATEGORY.equals( influence.getCategory() ) ){
 				this.reactTo( 
-						(RIPhysicalRemoveAllStrangePhysicalManifestations) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
-						remainingInfluences 
+						(RIPhysicalRemoveAllStrangePhysicalManifestations) influence
 				);
 			} else if( 	RIPhysicalGoToWork.CATEGORY.equals( influence.getCategory() ) ) {
 				// This influence has currently no effect on the simulation.
@@ -340,17 +321,11 @@ public class PhysicalLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RIPhysicalLandOnEarth} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
-	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
 	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
 	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RIPhysicalLandOnEarth influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
 			Set<IInfluence> remainingInfluences
 	){
 		//
@@ -376,17 +351,11 @@ public class PhysicalLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RIPhysicalTakeOffFromEarth} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
-	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
 	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
 	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RIPhysicalTakeOffFromEarth influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
 			Set<IInfluence> remainingInfluences
 	){
 		//
@@ -429,17 +398,11 @@ public class PhysicalLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RIPhysicalPerformExperiment} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
-	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
 	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
 	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RIPhysicalPerformExperiment influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
 			Set<IInfluence> remainingInfluences
 	){
 		//
@@ -464,19 +427,12 @@ public class PhysicalLevel extends AbstractLevel {
 	
 	/**
 	 * Manages the reaction to a {@link RIPhysicalSetTimeOfTheDay} influence.
-	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
 	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
 	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method, or the influences that persist after this reaction.
 	 */
-	private void reactTo(
-			RIPhysicalSetTimeOfTheDay influence,
-			SimulationTimeStamp previousConsistentStateTime,
+	private void reactToSetTimeOfTheDay(
 			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
-			Set<IInfluence> remainingInfluences
+			ConsistentPublicLocalDynamicState consistentState
 	){
 		//
 		// In reaction to this influence, the current time of the day is updated.
@@ -499,17 +455,11 @@ public class PhysicalLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RIPhysicalCaptureAndDissectAlien} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
-	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
 	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
 	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RIPhysicalCaptureAndDissectAlien influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
 			Set<IInfluence> remainingInfluences
 	){
 		//
@@ -531,18 +481,9 @@ public class PhysicalLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RIPhysicalRemoveAllStrangePhysicalManifestations} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
-	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
-			RIPhysicalRemoveAllStrangePhysicalManifestations influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
-			Set<IInfluence> remainingInfluences
+			RIPhysicalRemoveAllStrangePhysicalManifestations influence
 	){
 		//
 		// In reaction to this influence, the number of strange physical manifestations on the body of the citizen are removed.

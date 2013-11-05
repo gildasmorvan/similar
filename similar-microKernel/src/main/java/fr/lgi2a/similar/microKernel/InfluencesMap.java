@@ -83,7 +83,7 @@ public final class InfluencesMap {
 	 * @param toAdd The influences map to copy.
 	 * @throws IllegalArgumentException if the argument is <code>null</code>.
 	 */
-	public InfluencesMap( InfluencesMap toAdd ) throws IllegalArgumentException {
+	public InfluencesMap( InfluencesMap toAdd ) {
 		this( );
 		this.addAll( toAdd );
 	}
@@ -93,7 +93,7 @@ public final class InfluencesMap {
 	 * @param toAdd The influences to include into this influence map..
 	 * @throws IllegalArgumentException if the argument is <code>null</code>.
 	 */
-	public InfluencesMap( Collection<IInfluence> toAdd ) throws IllegalArgumentException {
+	public InfluencesMap( Collection<IInfluence> toAdd ) {
 		this( );
 		this.addAll( toAdd );
 	}
@@ -103,7 +103,7 @@ public final class InfluencesMap {
 	 * @param toAdd The influences to include into this influence map.
 	 * @throws IllegalArgumentException if the argument is <code>null</code> or contains <code>null</code>.
 	 */
-	public InfluencesMap( IInfluence... toAdd ) throws IllegalArgumentException {
+	public InfluencesMap( IInfluence... toAdd ) {
 		this( );
 		for( IInfluence addedinfluence : toAdd ) {
 			this.add( addedinfluence );
@@ -160,7 +160,7 @@ public final class InfluencesMap {
 	 * @param influence The influence to add to this influence map.
 	 * @throws IllegalArgumentException If the <code>influence</code> parameter was <code>null</code>.
 	 */
-	public void add( IInfluence influence ) throws IllegalArgumentException {
+	public void add( IInfluence influence ) {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
@@ -181,7 +181,7 @@ public final class InfluencesMap {
 	 * @param toAdd The influence map which content has to be added to this influence map.
 	 * @throws IllegalArgumentException If the <code>toAdd</code> argument is <code>null</code>.
 	 */
-	public void addAll( InfluencesMap toAdd ) throws IllegalArgumentException {
+	public void addAll( InfluencesMap toAdd ) {
 		if( toAdd == null ){
 			throw new IllegalArgumentException( "The 'toAdd' argument cannot be null." );
 		}
@@ -203,7 +203,7 @@ public final class InfluencesMap {
 	 * @param toAdd The influence map which content has to be added to this influence map.
 	 * @throws IllegalArgumentException If the <code>toAdd</code> argument is <code>null</code>.
 	 */
-	public void addAll( Collection<IInfluence> toAdd ) throws IllegalArgumentException {
+	public void addAll( Collection<IInfluence> toAdd ) {
 		if( toAdd == null ){
 			throw new IllegalArgumentException( "The 'toAdd' argument cannot be null." );
 		}

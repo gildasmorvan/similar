@@ -85,7 +85,7 @@ public class LearningInfluenceEnvironmentPublicLocalStateUpdate extends RegularI
 	public LearningInfluenceEnvironmentPublicLocalStateUpdate(
 			LevelIdentifier targetLevel,
 			IPublicLocalState publicLocalStateOfEnvironment
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, targetLevel );
 		this.influenceId = ++influenceCounter;
 		if( publicLocalStateOfEnvironment == null ) {
@@ -104,7 +104,7 @@ public class LearningInfluenceEnvironmentPublicLocalStateUpdate extends RegularI
 	 */
 	public LearningInfluenceEnvironmentPublicLocalStateUpdate(
 			LearningInfluenceEnvironmentPublicLocalStateUpdate toCopy
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, toCopy.getTargetLevel() );
 		this.influenceId = toCopy.influenceId;
 		this.publicLocalStateOfEnvironment = toCopy.publicLocalStateOfEnvironment.createCopy();

@@ -99,7 +99,7 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 			SimulationTimeStamp initialTime,
 			SimulationTimeStamp finalTime,
 			ConceptsSimulationParameters parameters
-	) throws IllegalArgumentException {
+	) {
 		super(initialTime);
 		this.finalTime = finalTime;
 		this.parameters = parameters;
@@ -198,7 +198,7 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 		//
 		// Get an address at random for this agent.
 		Cities randomCity = Cities.values()[ ConceptsSimulationRandom.randomInt( Cities.values().length ) ];
-		AgtEditorInChief editor = AgtFactoryEditorInChief.INSTANCE.generateAgent(
+		AgtEditorInChief editor = AgtFactoryEditorInChief.instance().generateAgent(
 				randomCity, 
 				this.parameters.getFbiAdvisedThreshold()
 		);

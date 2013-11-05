@@ -95,7 +95,7 @@ public class RISpaceSendExperimentReport extends RegularInfluence {
 	 * Builds a regular influence modeling the will of an alien to send an experimental report to its mothership in space.
 	 * @param experimentSubject The 'citizen' agent that was the subject of the experiment.
 	 */
-	public RISpaceSendExperimentReport( AgtCitizenPLSPhysical experimentSubject ) throws IllegalArgumentException {
+	public RISpaceSendExperimentReport( AgtCitizenPLSPhysical experimentSubject ) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );
 		this.experimentSubject = experimentSubject;
 	}

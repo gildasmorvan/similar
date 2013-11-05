@@ -83,7 +83,7 @@ public class AgtEditorInChiefPLSSocial extends AbstractPublicLocalStateOfAgent {
 	 * @param owner The 'Editor in chief' agent to which this public local state belongs.
 	 * @param address The city where the editor in chief lives.
 	 */
-	public AgtEditorInChiefPLSSocial( IAgent owner, Cities address ) throws IllegalArgumentException {
+	public AgtEditorInChiefPLSSocial( IAgent owner, Cities address ) {
 		// The super constructor requires the identifier of the level for which this public
 		// local state is defined.
 		super( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, owner );

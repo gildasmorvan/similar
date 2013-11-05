@@ -112,7 +112,7 @@ public class AgtAlienPDFPhysical extends AbstractPerceivedDataOfAgent {
 			boolean experimentsStarted,
 			boolean experimentsFinished,
 			AgtCitizenPLSPhysical experimentSubject
-	) throws IllegalArgumentException {
+	) {
 		// The super constructor requires the identifier of the level from which 
 		// these data were perceived.
 		super( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );

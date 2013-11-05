@@ -97,7 +97,7 @@ public final class RIPhysicalTakeOffFromEarth extends RegularInfluence {
 	 */
 	public RIPhysicalTakeOffFromEarth( 
 			AgtAlien alienAgent
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		this.alienAgent = alienAgent;
 	}

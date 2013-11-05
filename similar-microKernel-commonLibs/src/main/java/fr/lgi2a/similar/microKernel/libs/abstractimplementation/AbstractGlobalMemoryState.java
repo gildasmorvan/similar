@@ -67,7 +67,7 @@ public class AbstractGlobalMemoryState implements IGlobalMemoryState {
 	 */
 	public AbstractGlobalMemoryState(
 			IAgent owner
-	) throws IllegalArgumentException {
+	) {
 		if( owner == null ){
 			throw new IllegalArgumentException( "The 'owner' argument cannot be null." );
 		}

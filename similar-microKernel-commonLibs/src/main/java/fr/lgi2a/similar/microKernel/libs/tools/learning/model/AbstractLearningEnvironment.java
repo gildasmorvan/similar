@@ -78,7 +78,7 @@ public abstract class AbstractLearningEnvironment extends AbstractEnvironment {
 	 */
 	public AbstractLearningEnvironment(
 			SimulationExecutionTrace trace
-	) throws IllegalArgumentException {
+	) {
 		if( trace == null ){
 			throw new IllegalArgumentException( "The 'trace' argument cannot be null" );
 		}

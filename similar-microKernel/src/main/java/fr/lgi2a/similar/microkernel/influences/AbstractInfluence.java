@@ -69,7 +69,7 @@ public abstract class AbstractInfluence implements IInfluence {
 	 * @param category The category of the influence, as described in the {@link IInfluence#getCategory()} method.
 	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.
 	 */
-	public AbstractInfluence( String category, LevelIdentifier targetLevel ) throws IllegalArgumentException {
+	public AbstractInfluence( String category, LevelIdentifier targetLevel ) {
 		if( category == null ){
 			throw new IllegalArgumentException( "The 'category' argument of this method cannot be null." );
 		} else if( targetLevel == null ){

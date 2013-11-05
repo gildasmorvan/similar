@@ -89,7 +89,7 @@ public class SocialLevel extends AbstractLevel {
 	 */
 	public SocialLevel(
 			SimulationTimeStamp initialTime
-	) throws IllegalArgumentException {
+	) {
 		super( initialTime, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		//
 		// Build the perception relation graph of the level, i.e. identify the level that can be perceived
@@ -244,9 +244,6 @@ public class SocialLevel extends AbstractLevel {
 				// Dispatch the management of the influence.
 				this.reactTo( 
 						(RISocialReplaceEditorInChief) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
 						remainingInfluences 
 				);
 			} else if( RISocialRemoveAllPublications.CATEGORY.equals( influence.getCategory() ) ) {
@@ -319,29 +316,19 @@ public class SocialLevel extends AbstractLevel {
 		for( RISocialPublishExperimentReport influence : publishInfluences ){
 			this.reactTo(
 					influence, 
-					previousConsistentStateTime, 
-					newConsistentStateTime, 
-					consistentState, 
-					remainingInfluences
+					consistentState
 			);
 		}
 		// Then manage the post censorship influences.
 		for( IInfluence influence : censorshipInfluences ) {
 			if( RISocialRemoveAllPublications.CATEGORY.equals( influence.getCategory() ) ) {
-				this.reactTo(
-						(RISocialRemoveAllPublications) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
-						remainingInfluences
+				this.reactToRemoveAllPublications(
+						consistentState
 				);
 			} else if( RISocialRemovePublications.CATEGORY.equals( influence.getCategory() ) ) {
 				this.reactTo(
 						(RISocialRemovePublications) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
-						remainingInfluences
+						consistentState
 				);
 			} else {
 				throw new UnsupportedOperationException( "Cannot manage the reaction to '" + influence.getCategory() + "' influences." );
@@ -388,18 +375,11 @@ public class SocialLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RISocialPublishExperimentReport} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
 	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RISocialPublishExperimentReport influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
-			Set<IInfluence> remainingInfluences
+			ConsistentPublicLocalDynamicState consistentState
 	){
 		//
 		// In reaction to this influence, the post is included in the Internet (public local state of the environment).
@@ -412,17 +392,11 @@ public class SocialLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RISocialReplaceEditorInChief} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
-	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
 	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
 	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RISocialReplaceEditorInChief influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
 			Set<IInfluence> remainingInfluences
 	){
 		//
@@ -442,19 +416,10 @@ public class SocialLevel extends AbstractLevel {
 	
 	/**
 	 * Manages the reaction to a {@link RISocialRemoveAllPublications} influence.
-	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
 	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method, or the influences that persist after this reaction.
 	 */
-	private void reactTo(
-			RISocialRemoveAllPublications influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
-			Set<IInfluence> remainingInfluences
+	private void reactToRemoveAllPublications(
+			ConsistentPublicLocalDynamicState consistentState
 	){
 		//
 		// In reaction to this influence, all the posts are removed from the Internet (public local state of the environment).
@@ -468,18 +433,11 @@ public class SocialLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RISocialRemovePublications} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
 	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RISocialRemovePublications influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
-			Set<IInfluence> remainingInfluences
+			ConsistentPublicLocalDynamicState consistentState
 	){
 		//
 		// In reaction to this influence, all the posts of the citizen are removed from the Internet (public local state of the environment).

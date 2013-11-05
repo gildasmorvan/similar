@@ -62,7 +62,7 @@ public class RegularInfluence extends AbstractInfluence {
 	 * @param targetLevel The target level of the influence, as described in {@link IInfluence#getTargetLevel()}
 	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.
 	 */
-	public RegularInfluence( String category, LevelIdentifier targetLevel ) throws IllegalArgumentException {
+	public RegularInfluence( String category, LevelIdentifier targetLevel ) {
 		super( category, targetLevel );
 	}
 

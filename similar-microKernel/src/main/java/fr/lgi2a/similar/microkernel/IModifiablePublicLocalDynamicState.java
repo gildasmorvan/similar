@@ -65,7 +65,7 @@ public interface IModifiablePublicLocalDynamicState extends IPublicLocalDynamicS
 	 * @param time The new time for which this modifiable public local dynamic state is defined.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void setTime( SimulationTimeStamp time ) throws IllegalArgumentException;
+	void setTime( SimulationTimeStamp time );
 	
 	/**
 	 * Sets the value of the public local state of the environment in this dynamic state.
@@ -75,7 +75,7 @@ public interface IModifiablePublicLocalDynamicState extends IPublicLocalDynamicS
 	 * @param publicLocalState The public local state of the environment.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void setPublicLocalStateOfEnvironment( IPublicLocalState publicLocalState ) throws IllegalArgumentException;
+	void setPublicLocalStateOfEnvironment( IPublicLocalState publicLocalState );
 	
 	/**
 	 * Adds the public local state of an agent to this public local dynamic state.
@@ -88,7 +88,7 @@ public interface IModifiablePublicLocalDynamicState extends IPublicLocalDynamicS
 	 * @param publicLocalState The added public local state of the agent.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void addPublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState ) throws IllegalArgumentException;
+	void addPublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState );
 	
 	/**
 	 * Removes the public local state of an agent from this public local dynamic state.
@@ -98,7 +98,7 @@ public interface IModifiablePublicLocalDynamicState extends IPublicLocalDynamicS
 	 * @param publicLocalState The removed public local state of the agent.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void removePublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState ) throws IllegalArgumentException;
+	void removePublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState );
 	
 	/**
 	 * Adds an influence to this public local dynamic state.
@@ -108,7 +108,7 @@ public interface IModifiablePublicLocalDynamicState extends IPublicLocalDynamicS
 	 * @param influence The influence to add to this public local dynamic state.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void addInfluence( IInfluence influence ) throws IllegalArgumentException;
+	void addInfluence( IInfluence influence );
 	
 	/**
 	 * Sets the state dynamics of this public local dynamic state as a copy of the specified value.
@@ -116,7 +116,7 @@ public interface IModifiablePublicLocalDynamicState extends IPublicLocalDynamicS
 	 * If <code>null</code>, this method sets the state dynamics of this dynamic state to an empty set.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) throws IllegalArgumentException;
+	void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy );
 
 	/**
 	 * Remove all the system influences of this dynamic state.

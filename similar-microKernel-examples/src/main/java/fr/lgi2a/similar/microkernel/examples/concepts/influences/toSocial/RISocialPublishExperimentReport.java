@@ -97,7 +97,7 @@ public class RISocialPublishExperimentReport extends RegularInfluence {
 	 */
 	public RISocialPublishExperimentReport(
 			PostOnConspiracyForum post
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		this.post = post;
 	}

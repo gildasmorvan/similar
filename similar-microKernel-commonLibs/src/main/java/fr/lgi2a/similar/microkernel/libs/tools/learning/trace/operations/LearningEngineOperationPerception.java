@@ -95,7 +95,7 @@ public class LearningEngineOperationPerception implements ILearningEngineOperati
 			LevelIdentifier level,
 			LearningPublicLocalStateOfAgent agentPublicLocalState,
 			LearningPerceivedDataOfAgent methodResult
-	) throws IllegalArgumentException {
+	) {
 		if( level == null ){
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		} else if( agentPublicLocalState == null ){
@@ -149,7 +149,7 @@ public class LearningEngineOperationPerception implements ILearningEngineOperati
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it is not an observable 
 	 * transitory state of the "learning" simulation or a consistent state.
 	 */
-	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) throws IllegalArgumentException {
+	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) {
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}

@@ -95,7 +95,7 @@ public class EnvPLSSpace extends AbstractPublicLocalState {
 	 * Builds an instance of the public local state of the environment in the 'space' level.
 	 * This instance initially contains no samples.
 	 */
-	public EnvPLSSpace( ) throws IllegalArgumentException {
+	public EnvPLSSpace( ) {
 		// The super constructor requires the identifier of the level for which this public
 		// local state is defined.
 		super( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );

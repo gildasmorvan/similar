@@ -145,7 +145,7 @@ public interface ISimulationModel {
 		 * </p>
 		 * @return The environment of the simulation.
 		 */
-		public final IEnvironment getEnvironment( ) {
+		public IEnvironment getEnvironment( ) {
 			return this.environment;
 		}
 		
@@ -155,7 +155,7 @@ public interface ISimulationModel {
 		 * public dynamic state of each level.
 		 * @return The influences resulting from the generation of the environment.
 		 */
-		public final InfluencesMap getInfluences( ) {
+		public InfluencesMap getInfluences( ) {
 			return this.influences;
 		}
 	}
@@ -196,7 +196,7 @@ public interface ISimulationModel {
 		 * </p>
 		 * @return The agents of the simulation.
 		 */
-		public final Set<IAgent> getAgents( ) {
+		public Set<IAgent> getAgents( ) {
 			return this.agents;
 		}
 		
@@ -206,7 +206,7 @@ public interface ISimulationModel {
 		 * public dynamic state of each level.
 		 * @return The influences resulting from the generation of the agents.
 		 */
-		public final InfluencesMap getInfluences( ) {
+		public InfluencesMap getInfluences( ) {
 			return this.influences;
 		}
 	}

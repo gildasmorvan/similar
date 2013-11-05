@@ -84,7 +84,7 @@ public final class LearningInfluenceCopier {
 	 */
 	public static IInfluence copyInfluence(
 			IInfluence influence
-	) throws IllegalArgumentException {
+	) {
 		if( influence.isSystem() ){
 			if( influence instanceof SystemInfluenceAddAgent ){
 				SystemInfluenceAddAgent castedInfluence = (SystemInfluenceAddAgent) influence;

@@ -85,7 +85,7 @@ public class SpaceLevel extends AbstractLevel {
 	public SpaceLevel(
 			SimulationTimeStamp initialTime,
 			Map<Long,Long> mapCreatingNonUniformEvolution
-	) throws IllegalArgumentException {
+	) {
 		super( initialTime, ConceptsSimulationLevelIdentifiers.SPACE_LEVEL );
 		//
 		// Build the perception relation graph of the level, i.e. identify the level that can be perceived
@@ -241,10 +241,7 @@ public class SpaceLevel extends AbstractLevel {
 			if( RISpaceSendExperimentReport.CATEGORY.equals( influence.getCategory() ) ){
 				this.reactTo( 
 						(RISpaceSendExperimentReport) influence, 
-						previousConsistentStateTime, 
-						newConsistentStateTime, 
-						consistentState, 
-						remainingInfluences 
+						consistentState
 				);
 			} else {
 				// This case is out of the bounds of the behavior of the reaction.
@@ -259,18 +256,11 @@ public class SpaceLevel extends AbstractLevel {
 	/**
 	 * Manages the reaction to a {@link RISpaceSendExperimentReport} influence.
 	 * @param influence The influence which reaction is managed by this method call.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
 	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method, or the influences that persist after this reaction.
 	 */
 	private void reactTo(
 			RISpaceSendExperimentReport influence,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
-			Set<IInfluence> remainingInfluences
+			ConsistentPublicLocalDynamicState consistentState
 	){
 		//
 		// In reaction to this influence, a sample of the citizen on which the experiment was made is added to

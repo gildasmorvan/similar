@@ -106,7 +106,7 @@ public class LearningSimulationDynamicState {
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the global 
 	 * memory state of the agent is not an instance of the {@link LearningGlobalMemoryState} class.
 	 */
-	public void addGlobalMemoryState( IAgent agent ) throws IllegalArgumentException {
+	public void addGlobalMemoryState( IAgent agent ) {
 		if( agent == null ){
 			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
 		}
@@ -126,7 +126,7 @@ public class LearningSimulationDynamicState {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 * @throws NoSuchElementException If the agent is not present in the simulation.
 	 */
-	public LearningGlobalMemoryState getGlobalMemoryState( IAgent agent ) throws IllegalArgumentException, NoSuchElementException {
+	public LearningGlobalMemoryState getGlobalMemoryState( IAgent agent ) throws NoSuchElementException {
 		if( agent == null ){
 			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
 		}
@@ -151,7 +151,7 @@ public class LearningSimulationDynamicState {
 	 * @param levelDynamicState The public local dynamic state of a level of the simulation.
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the copy of the dynamic state failed.
 	 */
-	public void addLevelDynamicState( IPublicLocalDynamicState levelDynamicState ) throws IllegalArgumentException {
+	public void addLevelDynamicState( IPublicLocalDynamicState levelDynamicState ) {
 		if( levelDynamicState == null ){
 			throw new IllegalArgumentException( "The 'levelDynamicState' argument cannot be null." );
 		}

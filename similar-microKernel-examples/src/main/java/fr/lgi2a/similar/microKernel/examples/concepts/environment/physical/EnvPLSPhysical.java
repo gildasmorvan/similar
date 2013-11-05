@@ -103,7 +103,7 @@ public class EnvPLSPhysical extends AbstractPublicLocalState {
 	 * method of this class.
 	 * @param initialTime The initial time of the day of this simulation.
 	 */
-	public EnvPLSPhysical( TimeOfTheDay initialTime ) throws IllegalArgumentException {
+	public EnvPLSPhysical( TimeOfTheDay initialTime ) {
 		// The super constructor requires the identifier of the level for which this public
 		// local state is defined.
 		super( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );

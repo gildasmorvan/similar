@@ -87,7 +87,7 @@ public class SystemInfluenceRemovePublicLocalStateFromDynamicState extends Syste
 	public SystemInfluenceRemovePublicLocalStateFromDynamicState( 
 			LevelIdentifier targetLevel, 
 			IPublicLocalStateOfAgent publicLocalState 
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, targetLevel );
 		if( publicLocalState == null ){
 			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );

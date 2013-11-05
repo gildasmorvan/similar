@@ -108,7 +108,7 @@ public abstract class AbstractAgent implements IAgent {
 	 * </ul>
 	 * @throws IllegalArgumentException if the argument is <code>null</code>.
 	 */
-	public AbstractAgent( String category ) throws IllegalArgumentException {
+	public AbstractAgent( String category ) {
 		if( category == null ){
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "category" ) );
 		}
@@ -137,7 +137,7 @@ public abstract class AbstractAgent implements IAgent {
 	 * @param newState The value of the initial memory state of the agent.
 	 * This memory state cannot be <code>null</code>.
 	 */
-	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) throws IllegalArgumentException {
+	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) {
 		if( initialMemoryState == null ){
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "initialMemoryState" ) );
 		}

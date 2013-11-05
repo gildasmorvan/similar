@@ -100,7 +100,7 @@ public interface IAgent {
 	 * @param levelIdentifier The identifier of the specified level.
 	 * @param publicLocalState The public local state of the agent in that level.
 	 */
-	public void includeNewLevel( LevelIdentifier levelIdentifier, IPublicLocalStateOfAgent publicLocalState );
+	void includeNewLevel( LevelIdentifier levelIdentifier, IPublicLocalStateOfAgent publicLocalState );
 
 	/**
 	 * Excludes a level from the specification of this agent.
@@ -109,7 +109,7 @@ public interface IAgent {
 	 * </p>
 	 * @param levelIdentifier The identifier of the level from which the agent is excluded.
 	 */
-	public void excludeFromLevel( LevelIdentifier levelIdentifier );
+	void excludeFromLevel( LevelIdentifier levelIdentifier );
 	
 	/**
 	 * Gets the public local state of the agent located in a specific level of the simulation.

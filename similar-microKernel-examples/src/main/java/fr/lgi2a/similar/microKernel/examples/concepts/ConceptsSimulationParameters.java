@@ -350,8 +350,11 @@ public class ConceptsSimulationParameters {
 	 * This interval is used during the generation of the simulation.
 	 * @param citizenPerCityRange The range where the number of citizen initially lying in a city is included.
 	 */
-	public void setRangeOfCitizenPerCity(int[] citizenPerCityRange) {
-		this.rangeOfCitizenPerCity = citizenPerCityRange;
+	public void setRangeOfCitizenPerCity( int[] citizenPerCityRange ) {
+		this.rangeOfCitizenPerCity = new int[ citizenPerCityRange.length ];
+		for( int index = 0; index < this.rangeOfCitizenPerCity.length; index++ ) {
+			this.rangeOfCitizenPerCity[ index ] = citizenPerCityRange[ index ];
+		}
 	}
 
 	/**

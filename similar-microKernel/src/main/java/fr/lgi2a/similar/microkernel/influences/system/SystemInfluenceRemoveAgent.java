@@ -75,7 +75,7 @@ public final class SystemInfluenceRemoveAgent extends SystemInfluence {
 	 * @param publicLocalStateOfAgent The agent to remove from the simulation.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
-	public SystemInfluenceRemoveAgent( LevelIdentifier targetLevel, IPublicLocalStateOfAgent publicLocalStateOfAgent ) throws IllegalArgumentException {
+	public SystemInfluenceRemoveAgent( LevelIdentifier targetLevel, IPublicLocalStateOfAgent publicLocalStateOfAgent ) {
 		super( CATEGORY, targetLevel );
 		if( publicLocalStateOfAgent == null ){
 			throw new IllegalArgumentException( "The 'publicLocalStateOfAgent' argument cannot be null." );

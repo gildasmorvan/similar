@@ -105,7 +105,7 @@ public class RISocialReplaceEditorInChief extends RegularInfluence {
 	public RISocialReplaceEditorInChief( 
 			AgtEditorInChiefPLSSocial agtEditorInChiefPLSSocial,
 			AgtEditorInChief newEditorInChief
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		this.editorInChiefToReplace = agtEditorInChiefPLSSocial;
 		this.newEditorInChief = newEditorInChief;

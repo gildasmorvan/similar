@@ -85,7 +85,7 @@ public abstract class AbstractLearningLevel extends AbstractLevel {
 			SimulationTimeStamp initialTime,
 			LevelIdentifier identifier,
 			SimulationExecutionTrace trace
-	) throws IllegalArgumentException {
+	) {
 		super(initialTime, identifier);
 		if( trace == null ){
 			throw new IllegalArgumentException( "The 'trace' argument cannot be null." );

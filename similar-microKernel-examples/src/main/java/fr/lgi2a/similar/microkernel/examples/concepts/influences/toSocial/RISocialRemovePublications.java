@@ -96,7 +96,7 @@ public class RISocialRemovePublications extends RegularInfluence {
 	 */
 	public RISocialRemovePublications(
 			AgtCitizenPLSPhysical citizen
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		this.citizen = citizen;
 	}

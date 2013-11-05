@@ -97,7 +97,7 @@ public final class RIPhysicalRemoveAllStrangePhysicalManifestations extends Regu
 	 */
 	public RIPhysicalRemoveAllStrangePhysicalManifestations( 
 			AgtCitizenPLSPhysical citizen
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		this.citizen = citizen;
 	}

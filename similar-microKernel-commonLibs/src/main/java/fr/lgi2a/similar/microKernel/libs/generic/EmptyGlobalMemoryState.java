@@ -67,7 +67,7 @@ public final class EmptyGlobalMemoryState extends AbstractGlobalMemoryState {
 	 */
 	public EmptyGlobalMemoryState(
 			IAgent owner
-	) throws IllegalArgumentException {
+	) {
 		super(owner);
 	}
 }

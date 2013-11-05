@@ -46,6 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.probes;
 
+import java.io.PrintStream;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
@@ -80,12 +81,17 @@ public class ProbeExperimentsNumber implements IProbe {
 	public static final String PROBEID = "[Probe:Exps. Nb] ";
 	
 	/**
+	 * The print stream used to print the data of this probe.
+	 */
+	private PrintStream printer;
+	
+	/**
 	 * This observation method is called before the initialization of a new simulation.
 	 * It is used to prepare the observation, for instance by showing a GUI Frame, opening a stream towards a file, etc.
 	 */
 	@Override
 	public void prepareObservation() {
-		System.out.println( PROBEID + "Creating a new simulation." );
+		this.printer = System.out;
 	}
 
 	/**
@@ -100,7 +106,7 @@ public class ProbeExperimentsNumber implements IProbe {
 		IPublicLocalDynamicState physicalLevelState = simulationEngine.getSimulationDynamicStates().get( 
 				ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL 
 		);
-		System.out.println( PROBEID + "Initial " + initialTimestamp + ":\t" + this.getExperimentsNumberMessage( 
+		this.printer.println( PROBEID + "Initial " + initialTimestamp + ":\t" + this.getExperimentsNumberMessage( 
 				physicalLevelState.getRegularInfluencesOfStateDynamics() ) 
 		);
 	}
@@ -134,7 +140,7 @@ public class ProbeExperimentsNumber implements IProbe {
 		IPublicLocalDynamicState physicalLevelState = simulationEngine.getSimulationDynamicStates().get( 
 				ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL 
 		);
-		System.out.println( PROBEID + timestamp + ":\t" + this.getExperimentsNumberMessage( 
+		this.printer.println( PROBEID + timestamp + ":\t" + this.getExperimentsNumberMessage( 
 				physicalLevelState.getRegularInfluencesOfStateDynamics() ) 
 		);
 	}
@@ -150,7 +156,7 @@ public class ProbeExperimentsNumber implements IProbe {
 		IPublicLocalDynamicState physicalLevelState = simulationEngine.getSimulationDynamicStates().get( 
 				ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL 
 		);
-		System.out.println( PROBEID  + "Final " + finalTimestamp + ":\t" + this.getExperimentsNumberMessage( 
+		this.printer.println( PROBEID  + "Final " + finalTimestamp + ":\t" + this.getExperimentsNumberMessage( 
 				physicalLevelState.getRegularInfluencesOfStateDynamics() ) 
 		);
 	}
@@ -177,7 +183,7 @@ public class ProbeExperimentsNumber implements IProbe {
 		IPublicLocalDynamicState physicalLevelState = simulationEngine.getSimulationDynamicStates().get( 
 				ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL 
 		);
-		System.out.println( PROBEID  + " Aborted at " + timestamp + " where:\t" + this.getExperimentsNumberMessage( 
+		this.printer.println( PROBEID  + " Aborted at " + timestamp + " where:\t" + this.getExperimentsNumberMessage( 
 				physicalLevelState.getRegularInfluencesOfStateDynamics() ) 
 		);
 	}
@@ -187,6 +193,6 @@ public class ProbeExperimentsNumber implements IProbe {
 	 */
 	@Override
 	public void endObservation() {
-		System.out.println( PROBEID + "Simulation ended" );
+		this.printer.println( PROBEID + "Simulation ended" );
 	}
 }

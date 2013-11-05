@@ -78,8 +78,7 @@ public class MyEnvironment extends AbstractLearningEnvironment {
 	 * @param trace The trace where the execution of the simulation is tracked.
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
-	public MyEnvironment(SimulationExecutionTrace trace)
-			throws IllegalArgumentException {
+	public MyEnvironment(SimulationExecutionTrace trace) {
 		super(trace);
 	}
 

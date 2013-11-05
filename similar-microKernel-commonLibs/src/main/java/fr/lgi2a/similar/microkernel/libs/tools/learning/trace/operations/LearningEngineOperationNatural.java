@@ -102,7 +102,7 @@ public class LearningEngineOperationNatural implements ILearningEngineOperation 
 	 */
 	public LearningEngineOperationNatural(
 			LevelIdentifier level
-	) throws IllegalArgumentException {
+	) {
 		if( level == null ){
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		}
@@ -117,7 +117,7 @@ public class LearningEngineOperationNatural implements ILearningEngineOperation 
 	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it is not an observable 
 	 * transitory state of the "learning" simulation or a consistent state.
 	 */
-	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) throws IllegalArgumentException {
+	public void addObservableDynamicState( IPublicLocalDynamicState dynamicState ) {
 		if( dynamicState == null ){
 			throw new IllegalArgumentException( "The 'dynamicState' argument cannot be null." );
 		}
@@ -137,7 +137,7 @@ public class LearningEngineOperationNatural implements ILearningEngineOperation 
 	 */
 	public void addInfluence( 
 			IInfluence influence
-	) throws IllegalArgumentException {
+	) {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}

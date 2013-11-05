@@ -87,7 +87,7 @@ public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfl
 	public SystemInfluenceAddPublicLocalStateToDynamicState( 
 			LevelIdentifier targetLevel, 
 			IPublicLocalStateOfAgent publicLocalState 
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, targetLevel );
 		if( publicLocalState == null ){
 			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );

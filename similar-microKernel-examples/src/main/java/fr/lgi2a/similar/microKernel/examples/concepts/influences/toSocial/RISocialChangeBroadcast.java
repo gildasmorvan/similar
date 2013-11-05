@@ -103,7 +103,7 @@ public class RISocialChangeBroadcast extends RegularInfluence {
 	public RISocialChangeBroadcast(
 			int newThreshold,
 			String authorCategory
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		this.newThreshold = newThreshold;
 		this.authorCategory = authorCategory;

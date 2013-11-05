@@ -67,7 +67,7 @@ public abstract class AbstractSimulationModel implements ISimulationModel {
 	 */
 	public AbstractSimulationModel(
 			SimulationTimeStamp initialTime
-	) throws IllegalArgumentException {
+	) {
 		if( initialTime == null ){
 			throw new IllegalArgumentException( "The 'initialTime' argument cannot be null." );
 		}

@@ -62,7 +62,7 @@ public interface ISimulationEngine {
 	 * @param probe The probe to add to this simulation engine.
 	 * @throws IllegalArgumentException If the arguments are <code>null</code>, or if a probe is already defined for this identifier.
 	 */
-	void addProbe( String identifier, IProbe probe ) throws IllegalArgumentException;
+	void addProbe( String identifier, IProbe probe );
 	
 	/**
 	 * Removes a probe from the simulation engine.

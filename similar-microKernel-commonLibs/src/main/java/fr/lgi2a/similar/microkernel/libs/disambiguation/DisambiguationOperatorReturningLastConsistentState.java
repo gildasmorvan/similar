@@ -71,7 +71,7 @@ public final class DisambiguationOperatorReturningLastConsistentState {
 	 * @param transitoryDynamicState The transitory state for which a disambiguation is computed.
 	 * @return the observable dynamic state corresponding to the disambiguation of the transitory dynamic state.
 	 */
-	public static final IPublicLocalDynamicState disambiguation( TransitoryPublicLocalDynamicState transitoryDynamicState ) {
+	public static IPublicLocalDynamicState disambiguation( TransitoryPublicLocalDynamicState transitoryDynamicState ) {
 		return transitoryDynamicState.getLastConsistentDynamicState();
 	}
 }

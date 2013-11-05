@@ -97,7 +97,7 @@ public final class RIPhysicalCaptureAndDissectAlien extends RegularInfluence {
 	 */
 	public RIPhysicalCaptureAndDissectAlien( 
 			AgtAlienPLSPhysical alien
-	) throws IllegalArgumentException {
+	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		this.alien = alien;
 	}

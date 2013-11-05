@@ -87,8 +87,7 @@ public final class RIPhysicalSetTimeOfTheDay extends RegularInfluence {
 	/**
 	 * Builds a regular influence modeling the will of the environment to change the current time of the day.
 	 */
-	public RIPhysicalSetTimeOfTheDay( 
-	) throws IllegalArgumentException {
+	public RIPhysicalSetTimeOfTheDay( ) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 	}
 }

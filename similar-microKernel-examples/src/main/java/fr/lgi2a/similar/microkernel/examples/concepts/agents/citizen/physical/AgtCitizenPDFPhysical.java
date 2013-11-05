@@ -106,7 +106,7 @@ public class AgtCitizenPDFPhysical extends AbstractPerceivedDataOfAgent {
 			int strangePhysicalManifestationsThreshold,
 			int currentStrangePhysicalManifestations,
 			TimeOfTheDay currentTimeOfTheDay
-	) throws IllegalArgumentException {
+	) {
 		super( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL );
 		this.strangePhysicalManifestationsThreshold = strangePhysicalManifestationsThreshold;
 		this.currentStrangePhysicalManifestations = currentStrangePhysicalManifestations;

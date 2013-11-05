@@ -122,7 +122,7 @@ public class AgtAlien extends AbstractAgent {
 	public AgtAlien( 
 			int perceptibleCitiesPerTime,
 			double efficiencyInExperiments
-	) throws IllegalArgumentException {
+	) {
 		// The super constructor requires the definition of the category of the agent.
 		super( CATEGORY );
 		//

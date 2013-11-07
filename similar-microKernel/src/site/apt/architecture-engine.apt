@@ -1,12 +1,17 @@
 About the <Simulation engine> in SIMILAR
 
-	In SIMILAR, the notion of <<simulation model>> is separated from the notion of <<simulation engine>> to separate the declarative knowledge of the simulation from the procedural knowledge of the simulation.
-	
-	* A <<simulation model>> assembles the simulation-case specific knowledge. It contains the definition of the levels, the agents, the natural action of the environment and the reaction of each level. This knowledge is domain specific.
 
-	* A <<simulation engine>> assembles the execution-related information of a simulation. It defines how time moves, when to ask the agents to perceive, memorize or decide, when the environment produces its natural action or when the reaction is performed. It is also responsible for the observation and the exporting of the simulation data and responsible for the reaction to the so called {{{./architecture-system.html}<<system influences>>}}.
-		
-	[]
+	In SIMILAR, the notion of <<simulation model>> is separated from the notion of <<simulation engine>> to separate the 
+	declarative knowledge of the simulation from the procedural knowledge of the simulation.
+	
+	* A <<simulation model>> assembles the simulation-case specific knowledge. 
+	It contains the definition of the levels, the agents, the natural action of the environment and the reaction of each level. 
+	This knowledge is domain specific.
+
+	* A <<simulation engine>> assembles the execution-related information of a simulation. 
+	It defines how time moves, when to ask the agents to perceive, memorize or decide, when the environment produces 
+	its natural action or when the reaction is performed. It is also responsible for the observation and the 
+	exporting of the simulation data and responsible for the reaction to the so-called {{{./architecture-system.html}<<system influences>>}}.
 
 	The separation between <model> and <engine> facilitates the optimization of simulations, by using the most appropriate execution mode depending on the simulation: a simulation engine can be implemented using different inner mechanisms to manage the execution of a simulation. For instance:
 	
@@ -22,6 +27,8 @@ About the <Simulation engine> in SIMILAR
 
 	The simulation engine has different roles in the simulation:
 	
+	* Manage the value of the dynamic state of the simulation;
+	
 	* Move the simulation through time and call when it is appropriate:
 	
 		* The perception, memorization, decision phases of the agents;
@@ -35,3 +42,8 @@ About the <Simulation engine> in SIMILAR
 	* Ensure that the observation probes are updated appropriately (see {{{./architecture-probe.html}<<this page>>}});
 	
 	* Provide a reaction to the system influences of any simulation (see {{{./architecture-system.html}<<this page>>}}).
+	
+* Insight on the execution trace of a simulation
+
+	Since using the time-related constraints are difficult to interpret, this section illustrates a possible expected behavior of a 
+	simulation containing 2 levels.

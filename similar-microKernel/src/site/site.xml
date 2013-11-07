@@ -35,7 +35,6 @@
 				<item name="System influences" href="architecture-system.html"/>
 			</item>
 			<item name="Desgin guidelines" href="design.html">
-				<item name="General" href="design-general.html" />
 				<item name="Simulation engine" href="design-engine.html" />
 				<item name="Simulation model" href="design-model.html" />
 				<item name="Probe" href="design-probe.html" />

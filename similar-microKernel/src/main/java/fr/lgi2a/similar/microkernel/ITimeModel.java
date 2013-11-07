@@ -54,11 +54,21 @@ package fr.lgi2a.similar.microkernel;
  * 	TODO formal notation
  * </p>
  * 
+ * <h1>Usage</h1>
+ * <p>
+ *  For simulation consistency reasons, the {@link ITimeModel#getNextTime(SimulationTimeStamp)} has to be deterministic. 
+ *  Calling this method twice with the same parameter has to produce the same output.
+ * </p>
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public interface ITimeModel {	
 	/**
 	 * Gets the time stamp following a specific time stamp in this model.
+	 * <p>
+	 * 	Note: for simulation consistency reasons, this method has to be deterministic: calling twice 
+	 * 	this method with the same parameter has to produce the same output.
+	 * </p>
 	 * @param currentTime The time stamp for which this method computes a successor.
 	 * @return The time stamp following the <code>currentTime</code> time stamp.
 	 */

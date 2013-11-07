@@ -4,11 +4,11 @@ General architecture of the <Minimal kernel> of SIMILAR
 	
 	* The {{{./architecture-bijection.html}<<concepts of SIMILAR>>}} are embodied as concrete classes;
 	
-	* The {{{./architecture-model.html}<<simulation model>>}}, containing the declarative part of the simulation (the description of the simulated phenomenon);
+	* The {{{./architecture-model.html}<<simulation model>>}} defines the declarative part of the simulation (the description of the simulated phenomenon);
 	
-	* The {{{./architecture-engine.html}<<simulation engine>>}}, containing the procedural part of the simulation (the generic algorithms running simulations);
+	* The {{{./architecture-engine.html}<<simulation engine>>}} defines the procedural part of the simulation (the generic algorithms running simulations);
 	
-	* The {{{./architecture-probe.html}<<observation probes>>}}, reading information about the simulation and exporting them in various formats.
+	* The {{{./architecture-probe.html}<<observation probes>>}} define simulation data export routines in various formats.
 	
 	[]
 

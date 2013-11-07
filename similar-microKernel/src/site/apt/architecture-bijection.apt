@@ -4,20 +4,123 @@ From the theory of SIMILAR to a runnable simulation
 	
 * Bijection between theory and code
 	
-	The following array describes the correspondence between the theoretical concepts of SIMILAR and their implementation:
+	The following array describes the correspondence between the theoretical concepts of SIMILAR and their implementation. Note that this list is not exhaustive and focuses
+	on the core concepts of SIMILAR. See the documentation of the various classes of the micro-kernel to have a better insight on the correspondance between the theory and this
+	implementation.
 	
-	<<TODO>>
+** Level-related elements:
 	
-* System influences and system reaction
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| <<Full name in SIMILAR>>                     | <<Element in the SIMILAR API suite>>                                                  |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Level                                        | Instances of the <<<ILevel>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Perception relation graph of the simulation  | Spread among the instances of the <<<ILevel>>> interface of the simulation.           |
+|                                              | The out neighborhood of the perception relation graph is returned by a call to the    |
+|                                              | <"getPerceptibleLevels()"> method of the <<<ILevel>>> interface.                      |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Influence relation graph of the simulation   | Spread among the instances of the <<<ILevel>>> interface of the simulation.           |
+|                                              | The out neighborhood of the influence relation graph is returned by a call to the     |
+|                                              | <"getInfluenceableLevels()"> method of the <<<ILevel>>> interface.                    |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Public local dynamic state of the simulation | Instances of the <<<IDynamicStateMap>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Public local dynamic state of a level        | Instances of the <<<IPublicLocalDynamicState>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Consistent dynamic state of a level          | Instances of the <<<ConsistentPublicLocalDynamicState>>> class. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Transitory dynamic state of a level          | Instances of the <<<TransitoryPublicLocalDynamicState>>> class. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Reaction process of a level                  | <"makeRegularReaction(...)"> and <"makeSystemReaction(...)"> methods of the |
+|                                              | <<<ILevel>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+<<Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (levels)>>
 
-	In addition to these main elements, SIMILAR defines a specific class of influences for the sake of the definition of runnable simulations. These influences, called <<system influences>> are influences that can be found in any kind of simulation. The reaction of the various levels of the simulation to these influences is generic. Consequently, these influences are also defined in this class.
-	
-	* {{{./architecture-system.html}<<System influences>>}} include:
-	
-		* The addition and the removal of an agent from the simulation
-		
-		* The apparition or disappearance of the physical state of an agent from the simulation
-		
-		* Prevent an agent from acting or deciding until it is woken up
-		
-		* Wake up an agent
+** Environment-related elements:
+
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| <<Full name in SIMILAR>>                     | <<Element in the SIMILAR API suite>>                                                  |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Environment                                  | Instances of the <<<IEnvironment>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Public local state of the environment        | Instances of the <<<IPublicLocalState>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Private local state of the environment       | Fields of the implementation of the <<<IEnvironment>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Natural action process of the environment    | <"natural(...)"> method of the <<<IEnvironment>>> interface. |
+| from a level.                                | |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+<<Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (environment)>>
+
+** Agent-related elements:
+
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| <<Full name in SIMILAR>>                     | <<Element in the SIMILAR API suite>>                                                  |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Agent                                        | Instances of the <<<IAgent>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Global memory state                          | Instances of the <<<IGlobalMemoryState>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Public local state of an agent               | Instances of the <<<IPublicLocalStateOfAgent>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Private local state of an agent              | Fields of the implementation of the <<<IAgent>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Perceived data of an agent                   | Instances of the <<<IPerceivedDataOfAgent>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Perception process of an agent from a level  | <"perceive(...)"> method of the <<<IAgent>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Memory revision process of an agent          | <"reviseMemory(...)"> method of the <<<IAgent>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Decision process of an agent from a level    | <"decide(...)"> method of the <<<IAgent>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+<<Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (agents)>>
+
+** Influence-related elements:
+
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| <<Full name in SIMILAR>>                     | <<Element in the SIMILAR API suite>>                                                  |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Influence produced by the decisions of the   | Instances of the <<<IInfluence>>> interface. |
+| agents or the natural action of the          | |
+| environment                                  | |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| System influences (generic influences)       | Instances of the <<<RegularInfluence>>> abstract class |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Regular influences (simulation-dependent     | Instances of the <<<SystemInfluence>>> abstract class |
+| influences)                                  | |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Set of influences produced by the decisions  | Instances of the <<<IInfluenceMap>>> interface |
+| of the agents or the natural action of the   | |
+| environment                                  | |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+<<Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (influences)>>
+
+** Time-related elements:
+
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| <<Full name in SIMILAR>>                     | <<Element in the SIMILAR API suite>>                                                  |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Time stamp                                   | Instances of the <<<SimulationTimeStamp>>> class |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Time evolution model of a level              | <"getNextTime(...)"> method of the <<<ITimeModel>>> class |
+|                                              | Note: The <<<ILevel>>> interface extends the <<<ITimeModel>>> interface. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Initial time stamp                           | An instance of the <<<SimulationTimeStamp>>> class defined during the construction of |
+|                                              | the simulation model. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Final time stamp                             | The <"currentTime"> argument of the <"isFinalTimeOrAfter(...)"> method  of the        |
+|                                              | <"ISimulationModel"> class when this method returns <<<true>>>. |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+
+** Simulation-related elements:
+
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| <<Full name in SIMILAR>>                     | <<Element in the SIMILAR API suite>>                                                  |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Simulation model                             | Instances of the <<<ISimulationModel>>> interface |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Simulation engine                            | Instances of the <<<ISimulationEngine>>> interface |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+| Observation probe                            | Instances of the <<<IProbe>>> interface |
+*----------------------------------------------+---------------------------------------------------------------------------------------+
+<<Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (other)>>

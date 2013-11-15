@@ -96,7 +96,7 @@ of the java installation has to be included into the system 'PATH' environment v
 In windows, it means to add to the end of the 'PATH' environment variable the text following text, without the quote marks: ";%PATH%\bin"
 	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	(I-b) Install Maven								(sum-mave)
+	(I-b) Install Maven									(sum-mave)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	The SIMILAR API suite relies on the Maven project management tool to build the project and generate the jar API.
@@ -305,7 +305,7 @@ To avoid the unit tests during that process, the following instructions have to 
 		- Type the 'maven.test.skip' text in the field next to the 'Name:' label and the 'true' text in the field next to the 'Value:' label
 		- Select the 'Run' button located at the bottom right of the frame.
 		
-The generated binary archive is located in the 'similarApiSuite/target' directory.
+The generated binary archive is located in the 'similar-distribution/target' directory.
 
 
 --- (sum-edit) =============================================================================================================================================================

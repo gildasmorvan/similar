@@ -24,6 +24,7 @@
 		<menu name="General">
 			<item name="Parent project" href="../index.html" />
 			<item ref="license" />
+			<item name="test" href="./html/empty.html" />
 		</menu>
 		<menu name="Minimal kernel">
 			<item name="Index" href="index.html" />

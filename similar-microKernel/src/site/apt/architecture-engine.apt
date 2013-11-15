@@ -1,6 +1,5 @@
 About the <Simulation engine> in SIMILAR
 
-
 	In SIMILAR, the notion of <<simulation model>> is separated from the notion of <<simulation engine>> to separate the 
 	declarative knowledge of the simulation from the procedural knowledge of the simulation.
 	
@@ -12,8 +11,16 @@ About the <Simulation engine> in SIMILAR
 	It defines how time moves, when to ask the agents to perceive, memorize or decide, when the environment produces 
 	its natural action or when the reaction is performed. It is also responsible for the observation and the 
 	exporting of the simulation data and responsible for the reaction to the so-called {{{./architecture-system.html}<<system influences>>}}.
+	
+	[]
+	
+[./images/similarArchitectureIllustration.png] General architecture of the SIMILAR API
 
-	The separation between <model> and <engine> facilitates the optimization of simulations, by using the most appropriate execution mode depending on the simulation: a simulation engine can be implemented using different inner mechanisms to manage the execution of a simulation. For instance:
+* Roles and usages of a simulation engine
+	
+	The separation between <model> and <engine> facilitates the optimization of simulations, by using the most appropriate execution 
+	mode depending on the simulation: a simulation engine can be implemented using different inner mechanisms to manage the execution of a 
+	simulation. For instance:
 	
 	* Performing all the operations in sequence;
 	
@@ -23,13 +30,11 @@ About the <Simulation engine> in SIMILAR
 	
 	[]
 	
-* Roles of the simulation engine
-
-	The simulation engine has different roles in the simulation:
+	To manage the execution of a simulation, a simulation engine has to provide specific functions responding to specific constraints:
 	
-	* Manage the value of the dynamic state of the simulation;
+	* It has to guarantee the validity of the dynamic state of the simulation all along the simulation process;
 	
-	* Move the simulation through time and call when it is appropriate:
+	* It has to move the simulation through time and call when it is appropriate:
 	
 		* The perception, memorization, decision phases of the agents;
 		
@@ -37,13 +42,20 @@ About the <Simulation engine> in SIMILAR
 		
 		* The reaction phase of the levels;
 	
-	* Ensure that the time-related constraints of the model remain valid during the whole execution of the simulation. {{{../pdf/morvan10irm4mls.pdf}<<This paper>>}} describes the time constraints that the perception, memorization, natural, decision and reaction phases of the simulation have to verify;
+	* It has to ensure that the simulation complies with the time-related constraints of IRM4MLS {{{../pdf/morvan10irm4mls.pdf}<<This paper>>}} 
+	describes the time constraints that the perception, memorization, natural, decision and reaction phases of the simulation have to verify;
 	
-	* Ensure that the observation probes are updated appropriately (see {{{./architecture-probe.html}<<this page>>}});
+	* It has to ensure that the observation probes are updated appropriately (see {{{./architecture-probe.html}<<this page>>}});
 	
-	* Provide a reaction to the system influences of any simulation (see {{{./architecture-system.html}<<this page>>}}).
+	* It has to provide a reaction to the system influences (see {{{./architecture-system.html}<<this page>>}}).
 	
-* Insight on the execution trace of a simulation
+** The evolution of time in a simulation
 
-	Since using the time-related constraints are difficult to interpret, this section illustrates a possible expected behavior of a 
-	simulation containing 2 levels.
+
+[./images/engineArchitecture/timeModel.png] The evolution of the dynamic state of the simulation accross time.
+
+[./images/engineArchitecture/timeModel2.png] The evolution of the dynamic state of the simulation accross time.
+
+[./images/engineArchitecture/timeModel3.png] The evolution of the dynamic state of the simulation accross time.
+
+[./images/engineArchitecture/timeGraph.png] The evolution of the dynamic state of the simulation accross time.

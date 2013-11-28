@@ -13,4 +13,6 @@
   		<version>0.0.1</version>
   	</dependency>
   </dependencies>
+  <description>The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features.</description>
+  <name>SIMILAR - Common libs</name>
 </project>

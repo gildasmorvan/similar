@@ -13,7 +13,7 @@
 
   <artifactId>similar-distribution</artifactId>
   <description>Builds the binary release of the SIMILAR API suite.</description>
-  <name>Binary distribution</name>
+  <name>SIMILAR - Binary distribution</name>
   <inceptionYear>2013</inceptionYear>
   
 <!-- The dependencies of this module. Since this module builds the whole application, 
@@ -39,6 +39,19 @@
 
 	<build>
 		<plugins>
+<!-- Create a jar referencing all the SIMILAR libraries (usage shortcut for users) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+		<version>${maven-jar-plugin.version}</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
 		
 <!-- Definition of the plugin building the application binaries -->
 		
@@ -62,7 +75,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<packaging>pom</packaging>
 	<properties>
 		<fr.lgi2a.similar.version>0.0.1</fr.lgi2a.similar.version>
 	</properties>

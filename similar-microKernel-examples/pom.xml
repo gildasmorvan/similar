@@ -18,4 +18,6 @@
   		<version>0.0.1</version>
   	</dependency>
   </dependencies>
+  <description>The examples illustrating the use of the micro kernel and the common libraries to design simulations.</description>
+  <name>SIMILAR - Micro-kernel examples</name>
 </project>

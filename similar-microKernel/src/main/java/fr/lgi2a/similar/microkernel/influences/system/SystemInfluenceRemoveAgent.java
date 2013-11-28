@@ -72,7 +72,7 @@ public final class SystemInfluenceRemoveAgent extends SystemInfluence {
 	/**
 	 * Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
 	 * @param targetLevel The target level as described in {@link IInfluence#getTargetLevel()}
-	 * @param publicLocalStateOfAgent The agent to remove from the simulation.
+	 * @param publicLocalStateOfAgent A public local state of the agent to remove from the simulation.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
 	public SystemInfluenceRemoveAgent( LevelIdentifier targetLevel, IPublicLocalStateOfAgent publicLocalStateOfAgent ) {

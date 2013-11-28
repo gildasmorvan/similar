@@ -78,10 +78,10 @@ public class SystemInfluenceRemovePublicLocalStateFromDynamicState extends Syste
 	private IPublicLocalStateOfAgent publicLocalState;
 	
 	/**
-	 * Builds an 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the 
+	 * Builds a 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the 
 	 * dynamic state of a specific level during the next reaction of that level.
 	 * @param targetLevel The target level of the influence, as defined in {@link IInfluence#getTargetLevel()}.
-	 * @param publicLocalState The public local state to remove from to the public dynamic local state of the level.
+	 * @param publicLocalState The public local state to remove from the public local dynamic state of the level.
 	 * @throws IllegalArgumentException If the target level or the public local state are <code>null</code>.
 	 */
 	public SystemInfluenceRemovePublicLocalStateFromDynamicState( 

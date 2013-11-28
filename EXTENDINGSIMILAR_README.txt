@@ -344,6 +344,9 @@ To change the version number of the SIMILAR API suite, the following modificatio
 		  		<artifactId>similar-microKernel</artifactId>
 		  		<version>0.0.0</version>
 		  	</dependency>
+	- Change the version number in the documentation in the file "src/doc/README.txt":
+		- In the tiddler found in the "Project dependencies" item of the left menu
+		- In the "SiteSubtitle" tiddler (it can be found by performing a search using the top right bar)
 
 --- (sum-copy) =============================================================================================================================================================
              __                                 

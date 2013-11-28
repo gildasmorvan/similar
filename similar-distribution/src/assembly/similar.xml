@@ -63,10 +63,16 @@
     
     <fileSets>
             
-        <!-- include the documentation site of the parent into the binary release -->
+        <!-- include the documentation declared in the parent into the binary release -->
 	    <fileSet>
-	      <directory>../target/site</directory>
+	      <directory>../src/doc</directory>
 	      <outputDirectory>/docs</outputDirectory>
+	    </fileSet>
+            
+        <!-- Add the javadoc to the documentation -->
+	    <fileSet>
+	      <directory>../target/site/apidocs</directory>
+	      <outputDirectory>/docs/api</outputDirectory>
 	    </fileSet>
 
         <!-- include licensing and Readme files -->
@@ -81,21 +87,42 @@
 		</fileSet>
 		
 		<!-- include the sources of the usage examples of the micro-kernel -->
+		
+		<!-- Add the "Concepts" simulation example -->
 		<fileSet>
 			<directory>../similar-microKernel-examples/src/main/java</directory>
-			<outputDirectory>/examples/microKernel</outputDirectory>
+			<outputDirectory>/examples/microKernel/concepts/src</outputDirectory>
 			<excludes>
 				<exclude>package-info.java</exclude>
 			</excludes>
 			<includes>
-				<include>*</include>
+				<include>**/microkernel/examples/concepts/**</include>
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>../similar-microKernel-examples</directory>
-			<outputDirectory>/</outputDirectory>
+			<directory>../similar-microKernel-examples/src/main/doc/</directory>
+			<outputDirectory>/examples/microKernel/concepts</outputDirectory>
 			<includes>
-				<include>MICROKERNEL-EXAMPLES*</include>
+				<include>concept_example_README.txt</include>
+			</includes>
+		</fileSet>
+		
+		<!-- Add the "Trace usage" simulation example -->
+		<fileSet>
+			<directory>../similar-microKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/microKernel/traceUsage/src</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>**/microkernel/examples/traceusage1/**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-microKernel-examples/src/main/doc/</directory>
+			<outputDirectory>/examples/microKernel/traceUsage</outputDirectory>
+			<includes>
+				<include>traceUsage_example_README.txt</include>
 			</includes>
 		</fileSet>
     </fileSets>

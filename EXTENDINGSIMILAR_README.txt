@@ -63,12 +63,12 @@ Summary:
 	II - Components generation						(sum-comp)
 		a - Clean generated files					(sum-clea)
 		b - Generate the jar archives				(sum-jars)
-		c - Generate the HTML documentation 		(sum-site)
-		d - Run stand-alone unit tests				(sum-test)
+		c - Run stand-alone unit tests				(sum-test)
 	III - Deployment								(sum-depl)
 	IV - Editing the SIMILAR API suite				(sum-edit)
 		a - Including license information			(sum-incl)
 		b - Changing the version number				(sum-vers)
+		c - Adding simulation examples				(sum-exam)
 	V - Copyrighting								(sum-copy)
 
 
@@ -250,17 +250,7 @@ To pack the application without running the tests, use the following instruction
 The next time this operation has to be done, you have only to select the 'SIMILAR - all - package - noTest' build configuration and click on the 'Run' button.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	(II-c) Generate the HTML documentation				(sum-site)
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	The following instructions tell how to generate the documentation website of the whole SIMILAR suite. It contains many information including the structure of the 
-project and the relationships between sub-modules, the documentation of the SIMILAR kernel API, the extended architecutre API and the libraries API. It also tells how to
-write libraries for the SIMILAR API and how to use the SIMILAR API suite to build either optimized simulations, or simulations that can easily be modified and extended.
-
-See the 'Deployment' section (sum-depl).
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	(II-d) Run stand-alone unit tests					(sum-test)
+	(II-c) Run stand-alone unit tests					(sum-test)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 The following instruction tell how to run tests on the application for the whole SIMILAR suite without generating the jar archives:
@@ -283,24 +273,24 @@ examples and all the other resources required by the SIMILAR API suite to work. 
 include the unit tests of the API suite. To avoid them, see the next paragraph of this section:
 	- Using the command line:
 		- Go into the root directory of the project
-		- Run the "mvn clean site package" command
+		- Run the "mvn clean package" command
 	- Using eclipse:
 		- Right click on the project in the file or the package explorer
 		- Hover the 'Run As' menu and select the 'Maven build...' item (the fourth one)
 		- Enter an explicit name to this eclipse run configuration, in the text field at the top. For instance 'SIMILAR - binary archive'
-		- Type the 'clean site package' text into the text field right to the 'Goals' text field.
+		- Type the 'clean package' text into the text field right to the 'Goals' text field.
 		- Select the 'Run' button located at the bottom right of the frame.
 The next time this operation has to be done, you have only to select the 'SIMILAR - all - package - noTest' build configuration and click on the 'Run' button.
 
 To avoid the unit tests during that process, the following instructions have to be used:
 	- Using the command line:
 		- Go into the root directory of the project
-		- Run the "mvn -Dmaven.test.skip=true clean site package" command
+		- Run the "mvn -Dmaven.test.skip=true clean package" command
 	- Using eclipse:
 		- Right click on the project in the file or the package explorer
 		- Hover the 'Run As' menu and select the 'Maven build...' item (the fourth one)
 		- Enter an explicit name to this eclipse run configuration, in the text field at the top. For instance 'SIMILAR - binary archive - no tests'
-		- Type the 'clean site package' text into the text field right to the 'Goals' text field.
+		- Type the 'clean package' text into the text field right to the 'Goals' text field.
 		- Select the 'Add...' button at the center right of the frame.
 		- Type the 'maven.test.skip' text in the field next to the 'Name:' label and the 'true' text in the field next to the 'Value:' label
 		- Select the 'Run' button located at the bottom right of the frame.
@@ -347,6 +337,54 @@ To change the version number of the SIMILAR API suite, the following modificatio
 	- Change the version number in the documentation in the file "src/doc/README.txt":
 		- In the tiddler found in the "Project dependencies" item of the left menu
 		- In the "SiteSubtitle" tiddler (it can be found by performing a search using the top right bar)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	(IV-c) Adding simulation examples					(sum-exam)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+	The addition of simulation examples has to be made either inside the "src/main/java" of the "similar-microKernel-examples" or "similar-extendedKernel-examples" 
+sub-modules. They should be located in the same root package than the other examples. In addition, two operations have to be made to include the examples in the
+binary distribution:
+	- A documentation readme file has to be included in the "src/main/doc" directory
+	- The "src/assembly/similar.xml" file from the "similar-distribution" sub-module has to be edited. A block like the following one has to be happened to the end
+		of the file (example of the micro-kernel):
+					<!-- Add the "Trace usage" simulation example -->
+					<fileSet>
+						<directory>../similar-microKernel-examples/src/main/java</directory>
+						<outputDirectory>/examples/microKernel/traceUsage/src</outputDirectory>
+						<excludes>
+							<exclude>package-info.java</exclude>
+						</excludes>
+						<includes>
+							<include>**/microkernel/examples/traceusage1/**</include>
+						</includes>
+					</fileSet>
+					<fileSet>
+						<directory>../similar-microKernel-examples/src/main/doc/</directory>
+						<outputDirectory>/examples/microKernel/traceUsage</outputDirectory>
+						<includes>
+							<include>traceUsage_example_README.txt</include>
+						</includes>
+					</fileSet>
+In the case of the extended kernel, the block becomes:
+					<!-- Add the "Trace usage" simulation example -->
+					<fileSet>
+						<directory>../similar-extendedKernel-examples/src/main/java</directory>
+						<outputDirectory>/examples/extendedKernel/traceUsage/src</outputDirectory>
+						<excludes>
+							<exclude>package-info.java</exclude>
+						</excludes>
+						<includes>
+							<include>**/extendedKernel/examples/traceusage1/**</include>
+						</includes>
+					</fileSet>
+					<fileSet>
+						<directory>../similar-extendedKernel-examples/src/main/doc/</directory>
+						<outputDirectory>/examples/extendedKernel/traceUsage</outputDirectory>
+						<includes>
+							<include>traceUsage_example_README.txt</include>
+						</includes>
+					</fileSet>
 
 --- (sum-copy) =============================================================================================================================================================
              __                                 

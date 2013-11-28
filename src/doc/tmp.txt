@@ -1,5 +1,0 @@
-
-*Define the reaction process of the levels of the simulation, i.e. how the environment modifies its public local state according to the modification requests depicted by the influences it received up until the beginning of the reaction process +++
-*Specify a user-defined reaction to the system influences that were managed by the simulation engine. This phase is important since some levels might require specific operations after a system reaction. For instance, adding the public local state of a newly added vehicle agent into the infrastructure of the road network stored in the public local state of the environment;
-*Specify a user-defined reaction to the regular influences that were sent to this level. This phase also tells which influence persist after the reaction (it models an action that has not finished yet).
-===

@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="650"
+   height="420"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="multiLevelTimeModel.svg"
+   inkscape:export-filename="C:\Users\yoakubera\Desktop\similarDoc\microKernel\images\simulationModelDesign\multiLevelTimeModel.png"
+   inkscape:export-xdpi="143.35631"
+   inkscape:export-ydpi="143.35631">
+  <defs
+     id="defs4">
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect4123"
+       is_visible="true"
+       bendpath="m 292.88064,173.57803 c 47.69883,-39.64785 142.12703,-29.4739 152.91448,-13.41609"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect4021"
+       is_visible="true"
+       bendpath="m 103.98212,175.59833 c 12.66644,-23.49492 39.87407,-26.8833 46.8169,-14.45781"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3960"
+       is_visible="true"
+       bendpath="m 107.70775,174.33563 c 23.21289,-53.56529 58.07012,-28.03323 57.62309,0"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3919"
+       is_visible="true"
+       bendpath="M 169.13323,173.57803 229.65779,163.4765"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3917"
+       is_visible="true"
+       bendpath="m 105.29011,173.57803 c 25.70416,-47.23141 32.46343,-24.99429 57.99918,-0.50507"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3858"
+       is_visible="true"
+       bendpath="m 107.74331,172.82041 c 26.99973,-38.47314 31.03461,-19.21116 53.06489,2.52538"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3917-8"
+       is_visible="true"
+       bendpath="m 167.52588,175.15289 c 10.0468,-38.64511 20.84668,-20.4486 57.99918,-0.50507"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="356.02381"
+     inkscape:cy="135.15623"
+     inkscape:document-units="px"
+     inkscape:current-layer="g3076"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     style="display:inline"
+     transform="translate(-41.656269,208.34497)"
+     id="g3076"
+     inkscape:groupmode="layer"
+     inkscape:label="Time model">
+    <g
+       style="fill:#000000;display:inline"
+       id="g3063"
+       transform="translate(2.4965866,-263)">
+      <path
+         inkscape:export-ydpi="83.708908"
+         inkscape:export-xdpi="83.708908"
+         inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+         inkscape:connector-curvature="0"
+         id="path2987"
+         d="m 42.800306,76.146362 0,1 641.957144,0 0,-1 -641.957144,0 z"
+         style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+      <path
+         inkscape:export-ydpi="83.708908"
+         inkscape:export-xdpi="83.708908"
+         inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+         transform="translate(554.76942,-22.131813)"
+         inkscape:transform-center-x="-1.3889598"
+         d="m 129.29953,98.778175 -8.33376,4.811495 0,-9.622992 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.0471976"
+         sodipodi:arg1="0"
+         sodipodi:r2="2.7779195"
+         sodipodi:r1="5.5558391"
+         sodipodi:cy="98.778175"
+         sodipodi:cx="123.74369"
+         sodipodi:sides="3"
+         id="path2993"
+         style="fill:#000000;stroke:#000000;stroke-width:1.37699997;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+         sodipodi:type="star" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="615.0177"
+       y="-190.40463"
+       id="text2995"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"><tspan
+         sodipodi:role="line"
+         id="tspan2997"
+         x="615.0177"
+         y="-190.40463">Real time</tspan></text>
+    <text
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       sodipodi:linespacing="125%"
+       id="text3086"
+       y="201.57211"
+       x="505.70578"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff8080;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="201.57211"
+         x="505.70578"
+         id="tspan3088"
+         sodipodi:role="line">Time model of the simulation</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3090"
+       d="m 102.39065,155.74011 -0.6875,0.71875 2.90625,2.875 -58.562508,0 0,1 58.562508,0 -2.90625,2.90625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3092"
+       d="m 162.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3096"
+       d="m 582.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -2.90625,-2.90625 101.03125,0 0,-1 -101.03125,0 2.90625,-2.875 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       transform="translate(558.0158,61.06538)"
+       inkscape:transform-center-x="-1.3889598"
+       d="m 129.29953,98.778175 -8.33376,4.811495 0,-9.622992 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="1.0471976"
+       sodipodi:arg1="0"
+       sodipodi:r2="2.7779195"
+       sodipodi:r1="5.5558391"
+       sodipodi:cy="98.778175"
+       sodipodi:cx="123.74369"
+       sodipodi:sides="3"
+       id="path3098"
+       style="fill:#ff8080;fill-opacity:1;stroke:#ff8080;stroke-width:1.37699997;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       sodipodi:type="star" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 226.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3132" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3134"
+       d="m 288.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3136"
+       d="m 462.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 522.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3138" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="207.73944"
+       y="-169.98782"
+       id="text3011"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3013"
+         x="207.73944"
+         y="-169.98782"
+         style="fill:#000000">Definition domain of the simulation</tspan></text>
+    <path
+       style="fill:none;stroke:#868686;stroke-width:1.56601954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.5660195, 4.69805852;stroke-dashoffset:0;display:inline"
+       d="m 585.31633,171.35736 0,-368.6911"
+       id="path3015-1"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#868686;stroke-width:1.56601954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.5660195, 4.69805852;stroke-dashoffset:0;display:inline"
+       d="m 105.61177,171.35736 0,-368.6911"
+       id="path3015-1-7"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;display:inline"
+       d="m 568.90285,-182.59497 2.8125,4.59375 -83.96875,-0.0312 -0.0312,7.4375 84,0 -2.84375,4.5625 13.9375,-7 0,7 2.03125,0 0,-8.53125 0,-8.03125 -2.03125,0 0,7 -13.90625,-7 z"
+       id="path3983-5-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;display:inline"
+       d="m 105.84035,-182.59497 0,16.5625 2,0 0,-7.125 14.21875,7.125 -2.84375,-4.5625 82,0 -0.0312,-7.4375 -81.96875,0.0312 2.8125,-4.59375 -14.1875,7.15625 0,-7.15625 -2,0 z"
+       id="path3861"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="505.70578"
+       y="-70.427887"
+       id="text3016"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"><tspan
+         sodipodi:role="line"
+         id="tspan3018"
+         x="505.70578"
+         y="-70.427887">Time model of the level &quot;1&quot;</tspan></text>
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 102.39065,-98.25989 -0.6875,0.71875 2.90625,2.875 -58.562508,0 0,1 58.562508,0 -2.90625,2.90625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3020"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"
+       inkscape:connector-curvature="0" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 162.39065,-98.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3022"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"
+       inkscape:connector-curvature="0" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 582.39065,-98.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -2.90625,-2.90625 101.03125,0 0,-1 -101.03125,0 2.90625,-2.875 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3024"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:type="star"
+       style="fill:#008000;fill-opacity:1;stroke:#008000;stroke-width:1.37699997;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="path3026"
+       sodipodi:sides="3"
+       sodipodi:cx="123.74369"
+       sodipodi:cy="98.778175"
+       sodipodi:r1="5.5558391"
+       sodipodi:r2="2.7779195"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 129.29953,98.778175 -8.33376,4.811495 0,-9.622992 z"
+       inkscape:transform-center-x="-1.3889598"
+       transform="translate(558.0158,-192.93462)"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       id="path3028"
+       d="m 226.39065,-98.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 288.39065,-98.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3030"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 462.39065,-98.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3032"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       id="path3034"
+       d="m 522.39065,-98.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3036"
+       d="m 138.40284,-130.65625 c -2.47158,0.0265 -4.92649,0.35565 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68501 -10.53125,-7.8125 -2.47512,-0.68084 -4.96592,-0.96399 -7.4375,-0.9375 z"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline" />
+    <path
+       id="path3038"
+       d="m 202.15893,-130.65627 c -2.47158,0.0265 -4.92649,0.35565 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68501 -10.53125,-7.8125 -2.47512,-0.68084 -4.96592,-0.96399 -7.4375,-0.9375 z"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3040"
+       d="m 265.27317,-130.65627 c -2.47159,0.0265 -4.92649,0.35564 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68502 -10.53125,-7.8125 -2.47512,-0.68085 -4.96592,-0.964 -7.4375,-0.9375 z"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3042"
+       d="m 497.12347,-130.65627 c -2.47159,0.0265 -4.92649,0.35564 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68502 -10.53125,-7.8125 -2.47512,-0.68085 -4.96592,-0.964 -7.4375,-0.9375 z"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3044"
+       d="m 560.76309,-130.65627 c -2.47159,0.0265 -4.92649,0.35564 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68502 -10.53125,-7.8125 -2.47512,-0.68085 -4.96592,-0.964 -7.4375,-0.9375 z"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3046"
+       d="m 390.87159,-134.75 c -1.74544,-0.0157 -3.50867,0.007 -5.25,0.0312 -16.39554,0.20858 -32.85718,2.24633 -48.75,6.65625 -15.71629,4.33509 -31.07309,11.18727 -43.875,21.78125 l 4.75,5.71875 c 11.70016,-9.77244 26.14319,-16.17963 41.125,-20.375 15.17892,-4.22437 30.99296,-6.16091 46.84375,-6.375 13.50873,-0.16583 27.02064,0.80555 40,3.84375 4.6668,1.10157 9.17424,2.37253 13.28125,4.3125 1.51565,0.7196 2.92229,1.48481 4.125,2.375 0.80531,0.6229 1.4797,1.20382 1.90625,1.78125 l 3.6875,6.34375 -5.34375,-0.15625 14.875,9.8125 0.46875,-0.28125 -1.03125,-17.8125 -2.53125,4.71875 -3.78125,-6.53125 -0.21875,-0.375 -0.0625,0.0312 c -1.09841,-1.47894 -2.35263,-2.62923 -3.59375,-3.5 -1.74592,-1.2645 -3.55253,-2.2636 -5.34375,-3.09375 -4.81731,-2.24238 -9.81868,-3.70666 -14.75,-4.84375 -12.02691,-2.7956 -24.31318,-3.95279 -36.53125,-4.0625 z"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <text
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       sodipodi:linespacing="125%"
+       id="text3048"
+       y="9.572113"
+       x="505.70578"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="9.572113"
+         x="505.70578"
+         id="tspan3050"
+         sodipodi:role="line">Time model of the level &quot;2&quot;</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3052"
+       d="m 102.39065,-18.25989 -0.6875,0.71875 2.90625,2.875 -58.562508,0 0,1 58.562508,0 -2.90625,2.90625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3056"
+       d="m 582.39065,-18.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -2.90625,-2.90625 101.03125,0 0,-1 -101.03125,0 2.90625,-2.875 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       transform="translate(558.0158,-112.93462)"
+       inkscape:transform-center-x="-1.3889598"
+       d="m 129.29953,98.778175 -8.33376,4.811495 0,-9.622992 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="1.0471976"
+       sodipodi:arg1="0"
+       sodipodi:r2="2.7779195"
+       sodipodi:r1="5.5558391"
+       sodipodi:cy="98.778175"
+       sodipodi:cx="123.74369"
+       sodipodi:sides="3"
+       id="path3058"
+       style="fill:#008000;fill-opacity:1;stroke:#008000;stroke-width:1.37699997;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       sodipodi:type="star" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3062"
+       d="m 257.39065,-18.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3064"
+       d="m 500.39065,-18.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       d="m 311.40918,-47.79913 c -2.47159,0.0265 -18.92649,0.35564 -21.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 21.56173,-1.09813 24.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68502 -10.53125,-7.8125 -2.47512,-0.68085 -4.96592,-0.964 -7.4375,-0.9375 z"
+       id="path3074"
+       sodipodi:nodetypes="sccccccccccccccccccs" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       d="m 543.0488,-47.08484 c -2.47159,0.0265 -8.92649,0.35564 -11.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 23.56173,-1.09813 26.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68502 -10.53125,-7.8125 -2.47512,-0.68085 -16.96592,-0.964 -19.4375,-0.9375 z"
+       id="path3076"
+       sodipodi:nodetypes="sccccccccccccccccccs" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       d="m 203.72873,-54.03571 c -1.74544,-0.0157 -3.50867,0.007 -5.25,0.0312 -16.39554,0.20858 -32.85718,2.24633 -48.75,6.65625 -15.71629,4.33509 -31.07309,11.18727 -43.875,21.78125 l 4.75,5.71875 c 11.70016,-9.77244 26.14319,-16.17963 41.125,-20.375 15.17892,-4.22437 30.99296,-6.16091 46.84375,-6.375 13.50873,-0.16583 15.02064,0.80555 28,3.84375 4.6668,1.10157 9.17424,2.37253 13.28125,4.3125 1.51565,0.7196 2.92229,1.48481 4.125,2.375 0.80531,0.6229 1.4797,1.20382 1.90625,1.78125 l 3.6875,6.34375 -5.34375,-0.15625 14.875,9.8125 0.46875,-0.28125 -1.03125,-17.8125 -2.53125,4.71875 -3.78125,-6.53125 -0.21875,-0.375 -0.0625,0.0312 c -1.09841,-1.47894 -2.35263,-2.62923 -3.59375,-3.5 -1.74592,-1.2645 -3.55253,-2.2636 -5.34375,-3.09375 -4.81731,-2.24238 -9.81868,-3.70666 -14.75,-4.84375 -12.02691,-2.7956 -12.31318,-3.95279 -24.53125,-4.0625 z"
+       id="path3078"
+       sodipodi:nodetypes="ccccccccccccccccccccccccc" />
+    <path
+       inkscape:export-ydpi="83.708908"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       id="path3064-1"
+       d="m 334.39065,-18.25989 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       d="m 437.38277,-52.8602 c -1.74544,-0.0157 -3.50867,0.007 -5.25,0.0312 -16.39554,0.20858 -32.85718,2.24633 -48.75001,6.65625 -15.71629,4.33509 -31.07309,11.18727 -43.875,21.78125 l 4.75,5.71875 c 11.70016,-9.77244 26.14319,-16.17963 41.125,-20.375 15.17893,-4.22437 30.99297,-6.16091 46.84376,-6.375 13.50873,-0.16583 23.02064,0.80555 36,3.84375 4.6668,1.10157 9.17424,2.37253 13.28125,4.3125 1.51565,0.7196 2.92229,1.48481 4.125,2.375 0.80531,0.6229 1.4797,1.20382 1.90625,1.78125 l 3.6875,6.34375 -5.34375,-0.15625 14.875,9.8125 0.46875,-0.28125 -1.03125,-17.8125 -2.53125,4.71875 -3.78125,-6.53125 -0.21875,-0.375 -0.0625,0.0312 c -1.09841,-1.47894 -2.35263,-2.62923 -3.59375,-3.5 -1.74592,-1.2645 -3.55253,-2.2636 -5.34375,-3.09375 -4.81731,-2.24238 -9.81868,-3.70666 -14.75,-4.84375 -12.02691,-2.7956 -20.31318,-3.95279 -32.53125,-4.0625 z"
+       id="path3078-7"
+       sodipodi:nodetypes="ccccccccccccccccccccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="505.70578"
+       y="89.572113"
+       id="text3138"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"><tspan
+         sodipodi:role="line"
+         id="tspan3140"
+         x="505.70578"
+         y="89.572113">Time model of the level &quot;3&quot;</tspan></text>
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 102.39065,61.74011 -0.6875,0.71875 2.90625,2.875 -58.562508,0 0,1 58.562508,0 -2.90625,2.90625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3142"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"
+       inkscape:connector-curvature="0" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 582.39065,61.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -2.90625,-2.90625 101.03125,0 0,-1 -101.03125,0 2.90625,-2.875 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3144"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:type="star"
+       style="fill:#008000;fill-opacity:1;stroke:#008000;stroke-width:1.37699997;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="path3146"
+       sodipodi:sides="3"
+       sodipodi:cx="123.74369"
+       sodipodi:cy="98.778175"
+       sodipodi:r1="5.5558391"
+       sodipodi:r2="2.7779195"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 129.29953,98.778175 -8.33376,4.811495 0,-9.622992 z"
+       inkscape:transform-center-x="-1.3889598"
+       transform="translate(558.0158,-32.93462)"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 162.39065,61.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3148"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 500.39065,61.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3150"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 288.39065,61.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3158"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       d="m 138.40284,29.34375 c -2.47158,0.0265 -4.92649,0.35565 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68501 -10.53125,-7.8125 -2.47512,-0.68084 -4.96592,-0.96399 -7.4375,-0.9375 z"
+       id="path3184"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3188"
+       d="m 218.40284,29.34375 c -2.47158,0.0265 -24.92649,0.35565 -27.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 67.56173,-1.09813 70.90625,-0.0937 2.59726,0.8037 8.54393,2.24946 10.15625,4.34375 1.61232,2.09429 2.66312,4.62746 3.99995,6.9375 l -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 c 0,0 -2.21147,-4.75882 -3.96875,-6.90625 -1.75728,-2.14743 -10.57582,-7.03291 -14.56245,-7.7813 -3.98663,-0.74839 -44.96592,-0.96399 -47.4375,-0.9375 z"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       sodipodi:nodetypes="sccccccczcccccczzs" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       d="m 438.01883,26.35882 c -1.74544,-0.0157 -49.50867,0.007 -51.25,0.0312 -16.39554,0.20858 -32.85718,2.24633 -48.75001,6.65625 -15.71629,4.33509 -31.07309,11.18727 -43.875,21.78125 l 4.75,5.71875 c 11.70016,-9.77244 26.14319,-16.17963 41.125,-20.375 15.17893,-4.22437 30.99297,-6.16091 46.84376,-6.375 13.50873,-0.16583 69.02064,0.80555 82,3.84375 4.6668,1.10157 9.17424,2.37253 13.28125,4.3125 1.51565,0.7196 2.92229,1.48481 4.125,2.375 0.80531,0.6229 1.4797,1.20382 1.90625,1.78125 l 3.6875,6.34375 -5.34375,-0.15625 14.875,9.8125 0.46875,-0.28125 -1.03125,-17.8125 -2.53125,4.71875 -3.78125,-6.53125 -0.21875,-0.375 -0.0625,0.0312 c -1.09841,-1.47894 -2.35263,-2.62923 -3.59375,-3.5 -1.74592,-1.2645 -3.55253,-2.2636 -5.34375,-3.09375 -4.81731,-2.24238 -9.81868,-3.70666 -14.75,-4.84375 -12.02691,-2.7956 -20.31318,-3.95279 -32.53125,-4.0625 z"
+       id="path3078-7-4"
+       sodipodi:nodetypes="ccccccccccccccccccccccccc" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#008000;fill-opacity:1;stroke:none;display:inline"
+       d="m 545.98582,33.13997 c -2.47159,0.0265 -12.92649,0.35564 -15.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 27.56173,-1.09813 30.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68502 -10.53125,-7.8125 -2.47512,-0.68085 -16.96592,-0.964 -19.4375,-0.9375 z"
+       id="path3076-0"
+       sodipodi:nodetypes="sccccccccccccccccccs" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 257.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3246"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 334.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3248"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       inkscape:connector-curvature="0"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff8080;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 500.39065,155.74011 -0.6875,0.71875 3.40625,3.375 -3.40625,3.40625 0.6875,0.6875 3.40625,-3.40625 3.40625,3.40625 0.6875,-0.6875 -3.40625,-3.40625 3.40625,-3.375 -0.6875,-0.71875 -3.40625,3.40625 -3.40625,-3.40625 z"
+       id="path3250"
+       inkscape:export-filename="C:\Users\yoakubera\latex-workspace\lgi2a-shared-latex-documents\kubera\similar-paper-2013\images\timeModel2.png"
+       inkscape:export-xdpi="83.708908"
+       inkscape:export-ydpi="83.708908" />
+    <path
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       d="m 138.40284,125.34375 c -2.47158,0.0265 -4.92649,0.35565 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68501 -10.53125,-7.8125 -2.47512,-0.68084 -4.96592,-0.96399 -7.4375,-0.9375 z"
+       id="path3252"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3258"
+       d="m 200.40284,125.34375 c -2.47158,0.0265 -4.92649,0.35565 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68501 -10.53125,-7.8125 -2.47512,-0.68084 -4.96592,-0.96399 -7.4375,-0.9375 z"
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline" />
+    <path
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       d="m 402.40284,125.34375 c -2.47158,0.0265 -32.92649,0.35565 -35.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 69.56173,-1.09813 72.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68501 -10.53125,-7.8125 -2.47512,-0.68084 -38.96592,-0.96399 -41.4375,-0.9375 z"
+       id="path3260"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sccccccccccccccccccs" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       d="m 242.90715,129.34375 c -3.80107,0 -6.05808,2.46953 -15.89063,19.5 l 6.53125,3.5 c 0,0 6.40774,-14.93745 9.35938,-14.93745 2.95164,0 5.51255,4.92608 6.85932,7.28125 l -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 c -1.26984,-2.19942 -9.4645,-11.62505 -13.26557,-11.62505 z"
+       id="path3074-9-4"
+       sodipodi:nodetypes="zcczccccccz" />
+    <path
+       sodipodi:nodetypes="zcczccccccz"
+       id="path3309"
+       d="m 274.90715,129.34375 c -3.80107,0 -6.05808,2.46953 -15.89063,19.5 l 6.53125,3.5 c 0,0 6.40774,-14.93745 9.35938,-14.93745 2.95164,0 5.51255,4.92608 6.85932,7.28125 l -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 c -1.26984,-2.19942 -9.4645,-11.62505 -13.26557,-11.62505 z"
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       d="m 312.90715,129.34375 c -7.19393,0 -12.05808,2.46953 -21.89063,19.5 l 6.53125,3.5 c 0,0 8.3006,-14.93745 15.35938,-14.93745 7.05878,0 11.51255,4.92608 12.85932,7.28125 l -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 c -1.26984,-2.19942 -12.07164,-11.62505 -19.26557,-11.62505 z"
+       id="path3311"
+       sodipodi:nodetypes="zcczccccccz" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       d="m 480.90715,129.34375 c -3.80107,0 -8.05808,2.46953 -17.89063,19.5 l 6.53125,3.5 c 0,0 8.40774,-14.93745 11.35938,-14.93745 2.95164,0 5.51255,4.92608 6.85932,7.28125 l -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 c -1.26984,-2.19942 -9.4645,-11.62505 -13.26557,-11.62505 z"
+       id="path3315"
+       sodipodi:nodetypes="zcczccccccz" />
+    <path
+       sodipodi:nodetypes="zcczccccccz"
+       id="path3317"
+       d="m 510.90715,129.34375 c -4.8725,0 -8.90378,8.35292 -11.89063,19.5 l 6.53125,3.5 c 0,0 3.3006,-14.93745 5.35938,-14.93745 2.05878,0 3.51255,4.92608 4.85932,7.28125 l -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 c -1.26984,-2.19942 -6.39307,-11.62505 -11.26557,-11.62505 z"
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path3044-8"
+       d="m 561.17967,125.34375 c -2.47159,0.0265 -4.92649,0.35564 -7.25,0.9375 -5.60399,1.36418 -10.77845,4.00355 -15.25,7.46875 -5.27195,4.08217 -9.56836,9.29299 -12.6875,15.09375 l 6.53125,3.5 c 2.67198,-4.94115 6.29905,-9.3442 10.6875,-12.71875 3.73703,-2.87087 7.99204,-5.05888 12.46875,-6.125 3.73835,-0.85814 7.56173,-1.09813 10.90625,-0.0937 2.59726,0.8037 5.03411,2.30012 6.15625,4.34375 l 0.0937,0.1875 3.90625,6.75 -5.375,-0.1875 14.90625,9.8125 0.46875,-0.25 -1.03125,-17.8125 -2.5625,4.71875 -3.96875,-6.90625 -0.0312,0.0312 c -2.45686,-4.01562 -6.35646,-6.68502 -10.53125,-7.8125 -2.47512,-0.68085 -4.96592,-0.964 -7.4375,-0.9375 z"
+       style="fill:#ff8080;fill-opacity:1;stroke:none;display:inline"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="100.66353"
+       y="182.99191"
+       id="text3487"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3489"
+         x="100.66353"
+         y="182.99191">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="161.4639"
+       y="183.10178"
+       id="text3491"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3493"
+         x="161.4639"
+         y="183.10178">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="225.00247"
+       y="183.10178"
+       id="text3495"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3497"
+         x="225.00247"
+         y="183.10178">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="255.8223"
+       y="182.98752"
+       id="text3499"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3501"
+         x="255.8223"
+         y="182.98752">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="287.11234"
+       y="183.07541"
+       id="text3503"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3505"
+         x="287.11234"
+         y="183.07541">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="332.77835"
+       y="182.87766"
+       id="text3507"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3509"
+         x="332.77835"
+         y="182.87766">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="460.86624"
+       y="182.99191"
+       id="text3511"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3513"
+         x="460.86624"
+         y="182.99191">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="498.77396"
+       y="182.99191"
+       id="text3515"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3517"
+         x="498.77396"
+         y="182.99191">7</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="520.82227"
+       y="182.99191"
+       id="text3519"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3521"
+         x="520.82227"
+         y="182.99191">8</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="580.33295"
+       y="182.99191"
+       id="text3523"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3525"
+         x="580.33295"
+         y="182.99191">9</tspan></text>
+  </g>
+</svg>

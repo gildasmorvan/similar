@@ -40,18 +40,18 @@
 	<build>
 		<plugins>
 <!-- Create a jar referencing all the SIMILAR libraries (usage shortcut for users) -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-		<version>${maven-jar-plugin.version}</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-jar-plugin</artifactId>
+			<version>${maven-jar-plugin.version}</version>
+	        <configuration>
+	          <archive>
+	            <manifest>
+	              <addClasspath>true</addClasspath>
+	            </manifest>
+	          </archive>
+	        </configuration>
+	      </plugin>
 		
 <!-- Definition of the plugin building the application binaries -->
 		

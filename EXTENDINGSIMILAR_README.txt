@@ -69,6 +69,7 @@ Summary:
 		a - Including license information			(sum-incl)
 		b - Changing the version number				(sum-vers)
 		c - Adding simulation examples				(sum-exam)
+		d - Updating the documentation				(sum-docu)
 	V - Copyrighting								(sum-copy)
 
 
@@ -385,6 +386,14 @@ In the case of the extended kernel, the block becomes:
 							<include>traceUsage_example_README.txt</include>
 						</includes>
 					</fileSet>
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	(IV-d) Updating the documentation					(sum-docu)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+					
+The documentation uses the Tiddlywiki format, and is located in the "src/doc" directory of the root module of this project. Note that the modifications
+to the documentation are taken into accound only if they are saved using the "save" option of the backstage bar. To show the backstage bar, click on the black button
+appearing when the mouse cursor hovers the top right corner of the page.
 
 --- (sum-copy) =============================================================================================================================================================
              __                                 

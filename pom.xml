@@ -143,6 +143,19 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 			            <inherited>false</inherited>
 					</execution>
 				</executions>
+				<configuration>
+					<groups>
+						<group>
+							<title>Micro-kernel</title>
+							<packages>fr.lgi2a.similar.microkernel:fr.lgi2a.similar.microkernel.dynamicstate*:fr.lgi2a.similar.microkernel.influences*</packages>
+						</group>
+						<group>
+							<title>Common libs</title>
+							<packages>fr.lgi2a.similar.microkernel.libs:fr.lgi2a.similar.microkernel.libs.abstractimplementation:fr.lgi2a.similar.microkernel.libs.disambiguation:fr.lgi2a.similar.microkernel.libs.engines:fr.lgi2a.similar.microkernel.libs.generic:fr.lgi2a.similar.microkernel.libs.probes:fr.lgi2a.similar.microkernel.libs.tools:fr.lgi2a.similar.microkernel.libs.tools.learning</packages>
+						</group>
+					</groups>
+					<excludePackageNames>fr.lgi2a.similar.microkernel.examples:fr.lgi2a.similar.extendedkernel.examples</excludePackageNames>
+				</configuration>
 		      </plugin>
 		</plugins>
 	</build>

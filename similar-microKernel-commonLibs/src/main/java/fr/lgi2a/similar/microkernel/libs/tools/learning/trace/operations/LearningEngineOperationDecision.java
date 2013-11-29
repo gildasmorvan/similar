@@ -95,27 +95,39 @@ public class LearningEngineOperationDecision implements ILearningEngineOperation
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData
 	) {
+		this.checkConstructorArgumentsValidity( level, memoryState, perceivedData );
+		this.level = level;
+		LearningGlobalMemoryState castedState = (LearningGlobalMemoryState) memoryState;
+		this.memoryState = castedState.createCopy();
+		LearningPerceivedDataOfAgent castedData = (LearningPerceivedDataOfAgent) perceivedData;
+		this.perceivedData = castedData.createCopy();
+		this.producedInfluences = new InfluencesMap();
+	}
+	
+	/**
+	 * Checks the validity of the arguments of the constructor of this class.
+	 * @param level The level provided as a parameter of the 'decision' method call of the agent.
+	 * @param memoryState The global memory state provided as a parameter of the 'decision' method call of the agent.
+	 * @param perceivedData The perceived data provided as a parameter of the 'decision' method call of the agent.
+	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the arguments are not elements 
+	 * from the "learning" model.
+	 */
+	private final void checkConstructorArgumentsValidity(
+			LevelIdentifier level,
+			IGlobalMemoryState memoryState,
+			IPerceivedDataOfAgent perceivedData
+	) {
 		if( level == null ){
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		} else if( memoryState == null ){
 			throw new IllegalArgumentException( "The 'memoryState' argument cannot be null." );
 		} else if( perceivedData == null ){
 			throw new IllegalArgumentException( "The 'perceivedData' argument cannot be null." );
-		}
-		this.level = level;
-		if( !( memoryState instanceof LearningGlobalMemoryState ) ){
+		} else if( !( memoryState instanceof LearningGlobalMemoryState ) ){
 			throw new IllegalArgumentException( "The memory state of the agent has to be from the '" + LearningGlobalMemoryState.class + "' class." );
-		} else {
-			LearningGlobalMemoryState castedState = (LearningGlobalMemoryState) memoryState;
-			this.memoryState = castedState.createCopy();
-		}
-		if( !( perceivedData instanceof LearningPerceivedDataOfAgent ) ){
+		} else if( !( perceivedData instanceof LearningPerceivedDataOfAgent ) ){
 			throw new IllegalArgumentException( "The perceived data of the agent has to be from the '" + LearningPerceivedDataOfAgent.class + "' class." );
-		} else {
-			LearningPerceivedDataOfAgent castedData = (LearningPerceivedDataOfAgent) perceivedData;
-			this.perceivedData = castedData.createCopy();
 		}
-		this.producedInfluences = new InfluencesMap();
 	}
 	
 	/**

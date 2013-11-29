@@ -58,7 +58,15 @@ public class ConceptsSimulationTimeInterpretationModel {
 	/**
 	 * The instance used to call the conversion methods.
 	 */
-	public static ConceptsSimulationTimeInterpretationModel INSTANCE = new ConceptsSimulationTimeInterpretationModel( );
+	private static ConceptsSimulationTimeInterpretationModel instance = new ConceptsSimulationTimeInterpretationModel( );
+	
+	/**
+	 * Gets the instance used to call the conversion methods.
+	 * @return The instance used to call the conversion methods.
+	 */
+	public static ConceptsSimulationTimeInterpretationModel getInstance( ) {
+		return instance;
+	}
 	
 	/**
 	 * Converts a time stamp of the simulation into a time of the day.

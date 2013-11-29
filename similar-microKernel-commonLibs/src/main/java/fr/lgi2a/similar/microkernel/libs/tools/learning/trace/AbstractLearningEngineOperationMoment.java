@@ -110,7 +110,7 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 		/**
 		 * The integer modeling the moment before a timestamp.
 		 */
-		private final int HASHCODE_BEFORE_ID = 1237;
+		private static final int HASHCODE_BEFORE_ID = 1237;
 		
 		/**
 		 * Builds a moment happening slightly before a time stamp.
@@ -186,7 +186,7 @@ public abstract class AbstractLearningEngineOperationMoment implements Comparabl
 		/**
 		 * The integer modeling the moment after a timestamp.
 		 */
-		private final int HASHCODE_AFTER_ID = 1237;
+		private static final int HASHCODE_AFTER_ID = 1237;
 		
 		/**
 		 * Builds a moment happening slightly after a time stamp.

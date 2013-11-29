@@ -157,7 +157,7 @@ public abstract class AbstractAgent implements IAgent {
 	@Override
 	public IPublicLocalStateOfAgent getPublicLocalState(
 			LevelIdentifier levelId
-	) throws NoSuchElementException {
+	) {
 		if( levelId == null ){
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelId" ) );
 		}
@@ -208,7 +208,7 @@ public abstract class AbstractAgent implements IAgent {
 	@Override
 	public IPerceivedDataOfAgent getPerceivedData(
 			LevelIdentifier levelIdent
-	) throws NoSuchElementException {
+	) {
 		if( levelIdent == null ){
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelIdent" ) );
 		}

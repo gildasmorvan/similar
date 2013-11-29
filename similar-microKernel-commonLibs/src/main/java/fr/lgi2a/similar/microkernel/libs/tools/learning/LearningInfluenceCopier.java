@@ -86,53 +86,7 @@ public final class LearningInfluenceCopier {
 			IInfluence influence
 	) {
 		if( influence.isSystem() ){
-			if( influence instanceof SystemInfluenceAddAgent ){
-				SystemInfluenceAddAgent castedInfluence = (SystemInfluenceAddAgent) influence;
-				if( ! ( castedInfluence.getAgent() instanceof AbstractLearningAgent ) ){
-					throw new IllegalArgumentException( buildWrongClassExceptionText( 
-							"agents", 
-							AbstractLearningAgent.class, 
-							castedInfluence.getAgent().getClass() 
-					) );
-				}
-				AbstractLearningAgent agentCopy = ((AbstractLearningAgent) castedInfluence.getAgent() ).createCopy();
-				return new SystemInfluenceAddAgent( castedInfluence.getTargetLevel(), agentCopy );
-			} else if( influence instanceof SystemInfluenceAddPublicLocalStateToDynamicState ){
-				SystemInfluenceAddPublicLocalStateToDynamicState castedInfluence = (SystemInfluenceAddPublicLocalStateToDynamicState) influence;
-				if( ! ( castedInfluence.getPublicLocalState() instanceof LearningPublicLocalStateOfAgent ) ){
-					throw new IllegalArgumentException( buildWrongClassExceptionText( 
-							"public local states of agents", 
-							LearningPublicLocalStateOfAgent.class, 
-							castedInfluence.getPublicLocalState().getClass() 
-					) );
-				}
-				LearningPublicLocalStateOfAgent castedState = (LearningPublicLocalStateOfAgent) castedInfluence.getPublicLocalState();
-				return new SystemInfluenceAddPublicLocalStateToDynamicState( castedState.getLevel(), castedState.createCopy() );
-			} else if( influence instanceof SystemInfluenceRemoveAgent ){
-				SystemInfluenceRemoveAgent castedInfluence = (SystemInfluenceRemoveAgent) influence;
-				if( ! ( castedInfluence.getAgent() instanceof AbstractLearningAgent ) ){
-					throw new IllegalArgumentException( buildWrongClassExceptionText( 
-							"agents", 
-							AbstractLearningAgent.class, 
-							castedInfluence.getAgent().getClass() 
-					) );}
-				AbstractLearningAgent agentCopy = ((AbstractLearningAgent) castedInfluence.getAgent() ).createCopy();
-				return new SystemInfluenceRemoveAgent( castedInfluence.getTargetLevel(), agentCopy.getPublicLocalState( castedInfluence.getTargetLevel() ) );
-			} else if( influence instanceof SystemInfluenceRemovePublicLocalStateFromDynamicState ){
-				SystemInfluenceRemovePublicLocalStateFromDynamicState castedInfluence = (SystemInfluenceRemovePublicLocalStateFromDynamicState) influence;
-				if( ! ( castedInfluence.getPublicLocalState() instanceof LearningPublicLocalStateOfAgent ) ){
-					throw new IllegalArgumentException( buildWrongClassExceptionText( 
-							"public local states of agents", 
-							LearningPublicLocalStateOfAgent.class, 
-							castedInfluence.getPublicLocalState().getClass() 
-					) );
-				}
-				LearningPublicLocalStateOfAgent castedState = (LearningPublicLocalStateOfAgent) castedInfluence.getPublicLocalState();
-				return new SystemInfluenceRemovePublicLocalStateFromDynamicState( castedState.getLevel(), castedState.createCopy() );
-			} else {
-				throw new IllegalArgumentException( "System influences of the '" + influence.getClass().getSimpleName() + "' class are not supported by this model. " +
-						"If you wish to support them, then tell in this method how to clone them." );
-			}
+			return copySystemInfluence( influence );
 		} else if( influence instanceof ILearningInfluence ) {
 			ILearningInfluence castedInfluence = (ILearningInfluence) influence;
 			return castedInfluence.createCopy();
@@ -140,5 +94,92 @@ public final class LearningInfluenceCopier {
 			throw new IllegalArgumentException( "Agents can only produce system influences or instances of " +
 					"the '" + ILearningInfluence.class.getSimpleName() + "' interface (was '" + influence.getClass().getSimpleName() + "')." );
 		}
+	}
+	
+	/**
+	 * Creates a copy of a system influence.
+	 * @param castedInfluence The system influence to copy.
+	 * @return A copy of the influence.
+	 */
+	private static IInfluence copySystemInfluence( IInfluence systemInfluence ) {
+		if( systemInfluence instanceof SystemInfluenceAddAgent ){
+			return copyInfluence( (SystemInfluenceAddAgent) systemInfluence );
+		} else if( systemInfluence instanceof SystemInfluenceAddPublicLocalStateToDynamicState ){
+			return copyInfluence( (SystemInfluenceAddPublicLocalStateToDynamicState) systemInfluence );
+		} else if( systemInfluence instanceof SystemInfluenceRemoveAgent ){
+			return copyInfluence( (SystemInfluenceRemoveAgent) systemInfluence );
+		} else if( systemInfluence instanceof SystemInfluenceRemovePublicLocalStateFromDynamicState ){
+			return copyInfluence( (SystemInfluenceRemovePublicLocalStateFromDynamicState) systemInfluence );
+		} else {
+			throw new IllegalArgumentException( "System influences of the '" + systemInfluence.getClass().getSimpleName() + "' class are not supported by this model. " +
+					"If you wish to support them, then tell in this method how to clone them." );
+		}
+	}
+	
+	/**
+	 * Creates a copy of a system influence from the class {@link SystemInfluenceAddAgent}.
+	 * @param castedInfluence The influence to copy.
+	 * @return A copy of the influence.
+	 */
+	private static SystemInfluenceAddAgent copyInfluence( SystemInfluenceAddAgent castedInfluence ){
+		if( ! ( castedInfluence.getAgent() instanceof AbstractLearningAgent ) ){
+			throw new IllegalArgumentException( buildWrongClassExceptionText( 
+					"agents", 
+					AbstractLearningAgent.class, 
+					castedInfluence.getAgent().getClass() 
+			) );
+		}
+		AbstractLearningAgent agentCopy = ((AbstractLearningAgent) castedInfluence.getAgent() ).createCopy();
+		return new SystemInfluenceAddAgent( castedInfluence.getTargetLevel(), agentCopy );
+	}
+	
+	/**
+	 * Creates a copy of a system influence from the class {@link SystemInfluenceAddPublicLocalStateToDynamicState}.
+	 * @param castedInfluence The influence to copy.
+	 * @return A copy of the influence.
+	 */
+	private static SystemInfluenceAddPublicLocalStateToDynamicState copyInfluence( SystemInfluenceAddPublicLocalStateToDynamicState castedInfluence ){
+		if( ! ( castedInfluence.getPublicLocalState() instanceof LearningPublicLocalStateOfAgent ) ){
+			throw new IllegalArgumentException( buildWrongClassExceptionText( 
+					"public local states of agents", 
+					LearningPublicLocalStateOfAgent.class, 
+					castedInfluence.getPublicLocalState().getClass() 
+			) );
+		}
+		LearningPublicLocalStateOfAgent castedState = (LearningPublicLocalStateOfAgent) castedInfluence.getPublicLocalState();
+		return new SystemInfluenceAddPublicLocalStateToDynamicState( castedState.getLevel(), castedState.createCopy() );
+	}
+	
+	/**
+	 * Creates a copy of a system influence from the class {@link SystemInfluenceRemoveAgent}.
+	 * @param castedInfluence The influence to copy.
+	 * @return A copy of the influence.
+	 */
+	private static SystemInfluenceRemoveAgent copyInfluence( SystemInfluenceRemoveAgent castedInfluence ){
+		if( ! ( castedInfluence.getAgent() instanceof AbstractLearningAgent ) ){
+			throw new IllegalArgumentException( buildWrongClassExceptionText( 
+					"agents", 
+					AbstractLearningAgent.class, 
+					castedInfluence.getAgent().getClass() 
+			) );}
+		AbstractLearningAgent agentCopy = ((AbstractLearningAgent) castedInfluence.getAgent() ).createCopy();
+		return new SystemInfluenceRemoveAgent( castedInfluence.getTargetLevel(), agentCopy.getPublicLocalState( castedInfluence.getTargetLevel() ) );
+	}
+	
+	/**
+	 * Creates a copy of a system influence from the class {@link SystemInfluenceRemovePublicLocalStateFromDynamicState}.
+	 * @param castedInfluence The influence to copy.
+	 * @return A copy of the influence.
+	 */
+	private static SystemInfluenceRemovePublicLocalStateFromDynamicState copyInfluence( SystemInfluenceRemovePublicLocalStateFromDynamicState castedInfluence ){
+		if( ! ( castedInfluence.getPublicLocalState() instanceof LearningPublicLocalStateOfAgent ) ){
+			throw new IllegalArgumentException( buildWrongClassExceptionText( 
+					"public local states of agents", 
+					LearningPublicLocalStateOfAgent.class, 
+					castedInfluence.getPublicLocalState().getClass() 
+			) );
+		}
+		LearningPublicLocalStateOfAgent castedState = (LearningPublicLocalStateOfAgent) castedInfluence.getPublicLocalState();
+		return new SystemInfluenceRemovePublicLocalStateFromDynamicState( castedState.getLevel(), castedState.createCopy() );
 	}
 }

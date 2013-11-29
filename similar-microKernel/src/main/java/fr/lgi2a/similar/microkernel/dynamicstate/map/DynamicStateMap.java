@@ -87,7 +87,7 @@ public class DynamicStateMap implements IDynamicStateMap {
 	@Override
 	public IPublicLocalDynamicState get(
 			LevelIdentifier level
-	) throws NoSuchElementException {
+	) {
 		if( level == null ) {
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		}

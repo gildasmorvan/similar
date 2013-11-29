@@ -120,7 +120,7 @@ public class SocialLevel extends AbstractLevel {
 	@Override
 	public SimulationTimeStamp getNextTime( SimulationTimeStamp currentTime ) {
 		// In this level, the times moves from evening to evening.
-		return ConceptsSimulationTimeInterpretationModel.INSTANCE.getNext( currentTime, TimeOfTheDay.EVENING );
+		return ConceptsSimulationTimeInterpretationModel.getInstance().getNext( currentTime, TimeOfTheDay.EVENING );
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -270,14 +270,10 @@ public class SocialLevel extends AbstractLevel {
 		//
 		// Then perform a grouped management of the post publication/censorship influences.
 		//
-		this.managedGroupedPostsOnTheInternetInfluences(
+		this.manageGroupedPostsOnTheInternetInfluences(
 				publishInfluences, 
 				censorshipInfluences, 
-				previousConsistentStateTime, 
-				newConsistentStateTime, 
-				consistentState, 
-				regularInfluencesOftransitoryStateDynamics, 
-				remainingInfluences
+				consistentState
 		);
 	}
 	
@@ -295,22 +291,12 @@ public class SocialLevel extends AbstractLevel {
 	 * </p>
 	 * @param publishInfluences The set of influences where a conflict can happen.
 	 * @param censorshipInfluences The set of influences where a conflict can happen.
-	 * @param previousConsistentStateTime The time stamp of the last time a reaction was computed for this level.
-	 * @param newConsistentStateTime The time stamp of when this reaction is computed for this level.
 	 * @param consistentState The public dynamic local state of the level being updated by the reaction to reach its new state.
-	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
-	 * previous consistent state to the next consistent state of the level.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method, or the influences that persist after this reaction.
 	 */
-	private void managedGroupedPostsOnTheInternetInfluences( 
+	private void manageGroupedPostsOnTheInternetInfluences( 
 			Set<RISocialPublishExperimentReport> publishInfluences,
 			Set<IInfluence> censorshipInfluences,
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
-			ConsistentPublicLocalDynamicState consistentState,
-			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
-			Set<IInfluence> remainingInfluences
+			ConsistentPublicLocalDynamicState consistentState
 	) {
 		// First manage the post addition influences.
 		for( RISocialPublishExperimentReport influence : publishInfluences ){

@@ -112,7 +112,6 @@ public class AgtFactoryEditorInChief {
 			throw new IllegalStateException( "The generation parameters have to be set before creating agents!" );
 		} else {
 			AgtEditorInChief result = new AgtEditorInChief(
-					address, 
 					thresholdForStrangePhysicalManifestationsAdvisedByFBI, 
 					this.parameters.getEditorInChiefParanoiaThreshold()
 			);

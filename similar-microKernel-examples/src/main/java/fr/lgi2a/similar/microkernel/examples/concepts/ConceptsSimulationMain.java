@@ -87,7 +87,7 @@ public class ConceptsSimulationMain {
 		// 2 - Create the model of the simulation to perform.
 		//
 		// Start the simulation the daytime following the time stamp with the identifier -1.
-		SimulationTimeStamp initialTime = ConceptsSimulationTimeInterpretationModel.INSTANCE.getNext( new SimulationTimeStamp( -1 ), TimeOfTheDay.DAY );
+		SimulationTimeStamp initialTime = ConceptsSimulationTimeInterpretationModel.getInstance().getNext( new SimulationTimeStamp( -1 ), TimeOfTheDay.DAY );
 		// End the simulation when it reaches the daytime of the 90th day following the start of the simulation.
 		SimulationTimeStamp finalTime = new SimulationTimeStamp( initialTime.getIdentifier() + 90 * TimeOfTheDay.values().length );
 		// Create the parameters used in the simulation model

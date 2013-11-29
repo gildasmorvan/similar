@@ -79,7 +79,7 @@ public abstract class AbstractEnvironment implements IEnvironment {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IPublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException {
+	public IPublicLocalState getPublicLocalState( LevelIdentifier level ) {
 		IPublicLocalState result = this.publicLocalStates.get( level );
 		if( result == null ){
 			throw new NoSuchElementException( "No public local state is defined in the environment for the level '" + level + "'." );

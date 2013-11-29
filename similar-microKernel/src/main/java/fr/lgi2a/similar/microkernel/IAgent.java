@@ -120,7 +120,7 @@ public interface IAgent {
 	 * @return The public local state of the agent in the specified level.
 	 * @throws NoSuchElementException If the agent does not define a public local state for the provided level identifier.
 	 */
-	IPublicLocalStateOfAgent getPublicLocalState( LevelIdentifier levelIdentifier ) throws NoSuchElementException;
+	IPublicLocalStateOfAgent getPublicLocalState( LevelIdentifier levelIdentifier );
 	
 	/**
 	 * Gets the global memory state of the agent.
@@ -148,7 +148,7 @@ public interface IAgent {
 	 * @param levelIdentifier The identifier of the level from which the data were perceived.
 	 * @return The data that were lastly perceived by the agent from the <code>levelIdentifier</code> level.
 	 */
-	IPerceivedDataOfAgent getPerceivedData( LevelIdentifier levelIdentifier ) throws NoSuchElementException;
+	IPerceivedDataOfAgent getPerceivedData( LevelIdentifier levelIdentifier );
 	
 	/**
 	 * Sets the data that were lastly perceived by the agent from a specific level where it lies.

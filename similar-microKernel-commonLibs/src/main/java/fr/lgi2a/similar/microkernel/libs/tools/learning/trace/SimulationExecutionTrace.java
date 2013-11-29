@@ -114,7 +114,7 @@ public class SimulationExecutionTrace {
 	 */
 	public LearningSimulationDynamicState getDynamicStateAt( 
 			SimulationTimeStamp timestamp 
-	) throws NoSuchElementException {
+	) {
 		if( timestamp == null ){
 			throw new IllegalArgumentException( "The 'timestamp' argument cannot be null." );
 		} else if( ! this.dynamicStatesTrace.containsKey( timestamp ) ) {
@@ -204,7 +204,7 @@ public class SimulationExecutionTrace {
 	 */
 	public List<ILearningEngineOperation> getOperationsFor( 
 			AbstractLearningEngineOperationMoment moment 
-	) throws NoSuchElementException {
+	) {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
 		} else if( ! this.engineOperationsOrder.containsKey( moment ) ) {
@@ -224,7 +224,7 @@ public class SimulationExecutionTrace {
 	public List<ILearningEngineOperation> getOperationsFor( 
 			AbstractLearningEngineOperationMoment moment,
 			LearningEngineOperationType type
-	) throws NoSuchElementException {
+	) {
 		if( moment == null ){
 			throw new IllegalArgumentException( "The 'moment' argument cannot be null." );
 		} else if( type == null ){

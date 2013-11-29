@@ -66,6 +66,7 @@ import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
 import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
@@ -180,7 +181,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	@Override
 	public Set<IAgent> getAgents(
 			LevelIdentifier level
-	) throws NoSuchElementException {
+	) {
 		Set<IAgent> agentsSet = this.agents.get( level );
 		if( agentsSet == null ){
 			throw new NoSuchElementException( "The simulation does not contain the level '" + level + "'." );
@@ -219,7 +220,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	@Override
 	public void runNewSimulation(
 			ISimulationModel simulationModel
-	) throws ExceptionSimulationAborted {
+	) {
 		// First check that the simulation model is not null.
 		if( simulationModel == null ) {
 			throw new IllegalArgumentException( "The 'simulationModel' argument cannot be null." );
@@ -233,18 +234,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			if( currentTime == null ){
 				throw new IllegalStateException( "The 'initial time' defined in the simulation model cannot be null. " );
 			}
-			// Initialize the simulation
-			this.initializeSimulation( simulationModel );
-			// Tell the probes to observe the state of the simulation
-			for( IProbe probe : this.getProbes() ){
-				probe.observeAtInitialTimes( simulationModel.getInitialTime(), this );
-			}
-			// Run the simulation
-			SimulationTimeStamp finalTime = this.performSimulation( simulationModel );
-			// The probes observe the partly consistent dynamic state of the simulation
-			for( IProbe probe : this.getProbes() ){
-				probe.observeAtFinalTime( finalTime, this );
-			}
+			this.runNewSimulationWithoutCheckingErrors(simulationModel);
 		} catch( ExceptionSimulationAborted a ) {
 			// Case where the simulation was aborted by the user.
 			for( IProbe probe : this.getProbes() ){
@@ -272,6 +262,28 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	}
 	
 	/**
+	 * Performs the same task then the {@link ISimulationEngine#runNewSimulation(ISimulationModel)} method, 
+	 * but without checking errors.
+	 * @param simulationModel The simulation model used to generate a new simulation.
+	 */
+	public void runNewSimulationWithoutCheckingErrors(
+			ISimulationModel simulationModel
+	) {
+		// Initialize the simulation
+		this.initializeSimulation( simulationModel );
+		// Tell the probes to observe the state of the simulation
+		for( IProbe probe : this.getProbes() ){
+			probe.observeAtInitialTimes( simulationModel.getInitialTime(), this );
+		}
+		// Run the simulation
+		SimulationTimeStamp finalTime = this.performSimulation( simulationModel );
+		// The probes observe the partly consistent dynamic state of the simulation
+		for( IProbe probe : this.getProbes() ){
+			probe.observeAtFinalTime( finalTime, this );
+		}
+	}
+	
+	/**
 	 * Initializes the simulation that will run.
 	 * @param simulationModel The simulation model used to build the simulation being run with this engine.
 	 * @throws IllegalArgumentException if: 
@@ -283,7 +295,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	 * </ul>
 	 * @throws IllegalStateException If the simulation model contains errors.
 	 */
-	protected void initializeSimulation( ISimulationModel simulationModel ) throws IllegalStateException {
+	protected void initializeSimulation( ISimulationModel simulationModel ) {
 		// First reset the data that were used in the previous simulations.
 		this.agents.clear();
 		this.lastConsistentDynamicStates = new DynamicStateMap( );
@@ -291,30 +303,11 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 		this.currentSimulationDynamicState = new DynamicStateMap( );
 		this.levels.clear();
 		this.abortFlag = false;
+		SimulationTimeStamp initialTime = simulationModel.getInitialTime();
 		//
 		// Then generate the list of the levels of the simulation.
 		//
-		SimulationTimeStamp initialTime = simulationModel.getInitialTime();
-		List<ILevel> createdLevels = simulationModel.generateLevels( initialTime );
-		// Check that the list is valid.
-		if( createdLevels == null ){
-			throw new IllegalStateException( "The simulation model has to provide a valid list of levels. The list was null." );
-		} else if( createdLevels.isEmpty( ) ){
-			throw new IllegalStateException( "The simulation model has to contain at least one level." );
-		} else {
-			for( ILevel generatedLevel : createdLevels ){
-				if( generatedLevel == null ){
-					throw new IllegalStateException( "The list of levels cannot contain the null element." );
-				}
-				LevelIdentifier levelId = generatedLevel.getIdentifier( );
-				if( levelId == null ){
-					throw new IllegalStateException( "The identifier of a level cannot be null." );
-				} else if( this.levels.containsKey( levelId ) ){
-					throw new IllegalStateException( "Two levels share the same identifier '" + levelId + "'." );
-				}
-				this.levels.put( levelId, generatedLevel );
-			}
-		}
+		this.generateLevels( simulationModel, initialTime );
 		//
 		// Initialize the content of each level.
 		//
@@ -349,6 +342,35 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	}
 	
 	/**
+	 * Generates and memorizes into the engine the levels of the simulation.
+	 * @param simulationModel The simulation model used to build the simulation being run with this engine. 
+	 * This value is never equal to <code>null</code>.
+	 * @param initialTime The initial time stamp of the simulation.
+	 */
+	private void generateLevels( ISimulationModel simulationModel, SimulationTimeStamp initialTime ) {
+		List<ILevel> createdLevels = simulationModel.generateLevels( initialTime );
+		// Check that the list is valid.
+		if( createdLevels == null ){
+			throw new IllegalStateException( "The simulation model has to provide a valid list of levels. The list was null." );
+		} else if( createdLevels.isEmpty( ) ){
+			throw new IllegalStateException( "The simulation model has to contain at least one level." );
+		} else {
+			for( ILevel generatedLevel : createdLevels ){
+				if( generatedLevel == null ){
+					throw new IllegalStateException( "The list of levels cannot contain the null element." );
+				}
+				LevelIdentifier levelId = generatedLevel.getIdentifier( );
+				if( levelId == null ){
+					throw new IllegalStateException( "The identifier of a level cannot be null." );
+				} else if( this.levels.containsKey( levelId ) ){
+					throw new IllegalStateException( "Two levels share the same identifier '" + levelId + "'." );
+				}
+				this.levels.put( levelId, generatedLevel );
+			}
+		}
+	}
+	
+	/**
 	 * Creates the environment of the simulation.
 	 * @param simulationModel The model of the simulation.
 	 * @param initialTime The initial time of the simulation.
@@ -358,7 +380,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	private InfluencesMap createEnvironment( 
 			ISimulationModel simulationModel, 
 			SimulationTimeStamp initialTime 
-	) throws IllegalStateException {
+	) {
 		//
 		// Ask the model to create a new environment for the simulation.
 		//
@@ -912,78 +934,109 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			//
 			// Manage the system influence telling to add an agent into the simulation.
 			//
-			producedInfluences = new LinkedHashSet<IInfluence>( );
-			SystemInfluenceAddAgent castedInfluence = (SystemInfluenceAddAgent) systemInfluence;
-			IAgent agentToAdd = castedInfluence.getAgent( );
-			for( LevelIdentifier levelId : agentToAdd.getLevels() ){
-				producedInfluences.add( new SystemInfluenceAddPublicLocalStateToDynamicState( 
-						levelId,
-						agentToAdd.getPublicLocalState( levelId ) 
-				) );
-			}
+			producedInfluences = this.manageSystemInfluence( (SystemInfluenceAddAgent) systemInfluence );
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceAddPublicLocalStateToDynamicState.CATEGORY ) ) {
 			//
 			// Manage the influence telling that the public local state of an agent is added in a level.
 			//
-			SystemInfluenceAddPublicLocalStateToDynamicState castedInfluence = 
-					(SystemInfluenceAddPublicLocalStateToDynamicState) systemInfluence;
-			ILevel level = this.levels.get( castedInfluence.getTargetLevel() );
-			IPublicLocalStateOfAgent addedLocalState = castedInfluence.getPublicLocalState();
-			// Check the existence of the level where the public local state is added.
-			if( level == null ){
-				throw new IllegalStateException( "The influence '" + systemInfluence.getCategory() + "' tried to add the public " +
-						"local state of an agent '" + addedLocalState.getOwner().getCategory() + "' to the " +
-						"non-existing level '" + level + "'." );
-			}
-			// Add the public local state to the level.
-			// The following instruction is equivalent to using the lastConsistentDynamicStates map.
-			ConsistentPublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
-			levelConsistentState.addPublicLocalStateOfAgent( addedLocalState );
-			// Add the agent to the list of agents contained in the level
-			this.agents.get( level.getIdentifier() ).add( addedLocalState.getOwner() );
-			// Add the public local state into the structure of the agent
-			addedLocalState.getOwner().includeNewLevel( castedInfluence.getTargetLevel(), addedLocalState );
+			producedInfluences = this.manageSystemInfluence( (SystemInfluenceAddPublicLocalStateToDynamicState) systemInfluence );
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemoveAgent.CATEGORY ) ){
 			//
 			// Manage the system influence telling to delete an agent from the simulation.
 			//
-			producedInfluences = new LinkedHashSet<IInfluence>( );
-			SystemInfluenceRemoveAgent castedInfluence = (SystemInfluenceRemoveAgent) systemInfluence;
-			IAgent agentToRemove = castedInfluence.getAgent( );
-			for( LevelIdentifier levelId : agentToRemove.getLevels() ){
-				producedInfluences.add( new SystemInfluenceRemovePublicLocalStateFromDynamicState( 
-						levelId,
-						agentToRemove.getPublicLocalState( levelId ) 
-				) );
-			}
+			this.manageSystemInfluence( (SystemInfluenceRemoveAgent) systemInfluence );
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemovePublicLocalStateFromDynamicState.CATEGORY ) ) {
 			//
 			// Manage the influence telling that the physical state of an agent disappears from a level.
 			//
-			SystemInfluenceRemovePublicLocalStateFromDynamicState castedInfluence = 
-					(SystemInfluenceRemovePublicLocalStateFromDynamicState) systemInfluence;
-			ILevel level = this.levels.get( castedInfluence.getTargetLevel() );
-			IPublicLocalStateOfAgent removedLocalState = castedInfluence.getPublicLocalState();
-			// Check the existence of the level from which the public local state is removed.
-			if( level == null ){
-				throw new IllegalStateException( "The influence '" + systemInfluence.getCategory() + "' tried to remove the public " +
-						"local state of an agent '" + removedLocalState.getOwner().getCategory() + "' from the " +
-						"non-existing level '" + level + "'." );
-			}
-			// Remove the public local state from the level.
-			// The following instruction is equivalent to using the lastConsistentDynamicStates map.
-			ConsistentPublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
-			levelConsistentState.removePublicLocalStateOfAgent( removedLocalState );
-			// Remove the agent from the list of agents contained in the level
-			this.agents.get( level.getIdentifier() ).remove( removedLocalState.getOwner() );
-			// Remove the public local state of the agent in the specified level from the structure of the agent
-			removedLocalState.getOwner().excludeFromLevel( castedInfluence.getTargetLevel() );
+			this.manageSystemInfluence( (SystemInfluenceRemovePublicLocalStateFromDynamicState) systemInfluence );
 		} else {
 			throw new UnsupportedOperationException( "The system influence '" + systemInfluence.getCategory() + "' cannot " +
 					"be managed by the '" + this.getClass().getSimpleName() + "' simulation engine." );
 		}
 		return producedInfluences;
 	}
+	
+	/**
+	 * Manages the reaction to a {@link SystemInfluenceAddAgent} system influence.
+	 * @param systemInfluence The system influence to manage.
+	 */
+	private Set<IInfluence> manageSystemInfluence( SystemInfluenceAddAgent systemInfluence ){
+		Set<IInfluence> producedInfluences = new LinkedHashSet<IInfluence>( );
+		IAgent agentToAdd = systemInfluence.getAgent( );
+		for( LevelIdentifier levelId : agentToAdd.getLevels() ){
+			producedInfluences.add( new SystemInfluenceAddPublicLocalStateToDynamicState( 
+					levelId,
+					agentToAdd.getPublicLocalState( levelId ) 
+			) );
+		}
+		return producedInfluences;
+	}
+	
+	/**
+	 * Manages the reaction to a {@link SystemInfluenceAddPublicLocalStateToDynamicState} system influence.
+	 * @param systemInfluence The system influence to manage.
+	 */
+	private Set<IInfluence> manageSystemInfluence( SystemInfluenceAddPublicLocalStateToDynamicState systemInfluence ){
+		ILevel level = this.levels.get( systemInfluence.getTargetLevel() );
+		IPublicLocalStateOfAgent addedLocalState = systemInfluence.getPublicLocalState();
+		// Check the existence of the level where the public local state is added.
+		if( level == null ){
+			throw new IllegalStateException( "The influence '" + systemInfluence.getCategory() + "' tried to add the public " +
+					"local state of an agent '" + addedLocalState.getOwner().getCategory() + "' to the " +
+					"non-existing level '" + level + "'." );
+		}
+		// Add the public local state to the level.
+		// The following instruction is equivalent to using the lastConsistentDynamicStates map.
+		ConsistentPublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
+		levelConsistentState.addPublicLocalStateOfAgent( addedLocalState );
+		// Add the agent to the list of agents contained in the level
+		this.agents.get( level.getIdentifier() ).add( addedLocalState.getOwner() );
+		// Add the public local state into the structure of the agent
+		addedLocalState.getOwner().includeNewLevel( systemInfluence.getTargetLevel(), addedLocalState );
+		return null;
+	}
+	
+	/**
+	 * Manages the reaction to a {@link SystemInfluenceRemoveAgent} system influence.
+	 * @param systemInfluence The system influence to manage.
+	 */
+	private Set<IInfluence> manageSystemInfluence( SystemInfluenceRemoveAgent systemInfluence ){
+		Set<IInfluence> producedInfluences = new LinkedHashSet<IInfluence>( );
+		IAgent agentToRemove = systemInfluence.getAgent( );
+		for( LevelIdentifier levelId : agentToRemove.getLevels() ){
+			producedInfluences.add( new SystemInfluenceRemovePublicLocalStateFromDynamicState( 
+					levelId,
+					agentToRemove.getPublicLocalState( levelId ) 
+			) );
+		}
+		return producedInfluences;
+	}
+	
+	/**
+	 * Manages the reaction to a {@link SystemInfluenceRemovePublicLocalStateFromDynamicState} system influence.
+	 * @param systemInfluence The system influence to manage.
+	 */
+	private Set<IInfluence> manageSystemInfluence( SystemInfluenceRemovePublicLocalStateFromDynamicState systemInfluence ){
+		ILevel level = this.levels.get( systemInfluence.getTargetLevel() );
+		IPublicLocalStateOfAgent removedLocalState = systemInfluence.getPublicLocalState();
+		// Check the existence of the level from which the public local state is removed.
+		if( level == null ){
+			throw new IllegalStateException( "The influence '" + systemInfluence.getCategory() + "' tried to remove the public " +
+					"local state of an agent '" + removedLocalState.getOwner().getCategory() + "' from the " +
+					"non-existing level '" + level + "'." );
+		}
+		// Remove the public local state from the level.
+		// The following instruction is equivalent to using the lastConsistentDynamicStates map.
+		ConsistentPublicLocalDynamicState levelConsistentState = level.getLastConsistentPublicLocalDynamicState();
+		levelConsistentState.removePublicLocalStateOfAgent( removedLocalState );
+		// Remove the agent from the list of agents contained in the level
+		this.agents.get( level.getIdentifier() ).remove( removedLocalState.getOwner() );
+		// Remove the public local state of the agent in the specified level from the structure of the agent
+		removedLocalState.getOwner().excludeFromLevel( systemInfluence.getTargetLevel() );
+		return null;
+	}
+	
 	
 	/**
 	 * Performs a user-defined reaction for the system influences that were managed during the system reaction.

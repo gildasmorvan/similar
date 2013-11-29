@@ -118,7 +118,7 @@ public abstract class AbstractSimulationEngine implements ISimulationEngine {
 	 * @return The probe having the specific id.
 	 * @throws NoSuchElementException If no probe is defined for the specified id.
 	 */
-	public IProbe getProbe( String probeId ) throws NoSuchElementException {
+	public IProbe getProbe( String probeId ) {
 		IProbe result = this.probes.get( probeId );
 		if( result == null ){
 			throw new NoSuchElementException( "No probe having the '" + probeId + "' id is registered to the simulation engine." );

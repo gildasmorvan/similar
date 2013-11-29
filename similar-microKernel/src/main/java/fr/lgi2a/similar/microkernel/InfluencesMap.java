@@ -51,7 +51,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 
@@ -146,7 +145,7 @@ public final class InfluencesMap {
 	 * @param targetLevel The target level for which influences are fetched in this map.
 	 * @return The influences contained in this map that are targeted at a specific level.
 	 */
-	public List<IInfluence> getInfluencesForLevel( LevelIdentifier targetLevel ) throws NoSuchElementException {
+	public List<IInfluence> getInfluencesForLevel( LevelIdentifier targetLevel ) {
 		List<IInfluence> result = this.influencesMap.get( targetLevel );
 		if( result == null ){
 			result = new LinkedList<IInfluence>( );

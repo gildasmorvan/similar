@@ -166,7 +166,7 @@ public class ConceptsSimulationModel extends AbstractSimulationModel {
 		// To preserve the coherence of the time model, the current time of the day is computed using the
 		// value of the current time stamp. This computation is performed in a class modeling the interpretation of time.
 		EnvForConceptsSimulation environment = new EnvForConceptsSimulation( 
-				ConceptsSimulationTimeInterpretationModel.INSTANCE.getTimeOfTheDay( initialTime ), 
+				ConceptsSimulationTimeInterpretationModel.getInstance().getTimeOfTheDay( initialTime ), 
 				this.parameters.getFbiAdvisedThreshold()
 		);
 		// Create the object containing the initialization data of the environment.

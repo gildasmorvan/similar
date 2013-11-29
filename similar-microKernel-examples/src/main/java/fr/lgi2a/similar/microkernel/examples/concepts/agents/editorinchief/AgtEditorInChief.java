@@ -96,7 +96,6 @@ public class AgtEditorInChief extends AbstractAgent {
 	
 	/**
 	 * Builds an 'Editor in chief' agent having initially no public local states or global memory state.
-	 * @param address The city where the editor in chief lives.
 	 * @param thresholdForStrangePhysicalManifestationsAdvisedByFBI The number of strange physical manifestation over which a 
 	 * citizen can consider that an alien experiment was performed on him/her. This value is being broadcasted on television 
 	 * and corresponds to the value advised by the FBI.
@@ -104,7 +103,6 @@ public class AgtEditorInChief extends AbstractAgent {
 	 * broadcasts values that are not advised by the FBI.
 	 */
 	public AgtEditorInChief( 
-			Cities address,
 			int thresholdForStrangePhysicalManifestationsAdvisedByFBI,
 			long paranoiaThreshold
 	) {

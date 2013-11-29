@@ -439,7 +439,7 @@ public class PhysicalLevel extends AbstractLevel {
 		// to the 'space' level.
 		//
 		EnvPLSPhysical castedEnvState = (EnvPLSPhysical) consistentState.getPublicLocalStateOfEnvironment();
-		castedEnvState.setCurrentTimeOfTheDay( ConceptsSimulationTimeInterpretationModel.INSTANCE.getTimeOfTheDay( newConsistentStateTime ) );
+		castedEnvState.setCurrentTimeOfTheDay( ConceptsSimulationTimeInterpretationModel.getInstance().getTimeOfTheDay( newConsistentStateTime ) );
 	}
 	
 	/**

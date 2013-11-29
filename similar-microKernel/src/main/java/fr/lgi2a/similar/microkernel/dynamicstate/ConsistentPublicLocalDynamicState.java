@@ -168,7 +168,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final void setTime( SimulationTimeStamp time ) {
+	public void setTime( SimulationTimeStamp time ) {
 		if( time == null ){
 			throw new IllegalArgumentException( "The 'time' argument cannot be null." );
 		}

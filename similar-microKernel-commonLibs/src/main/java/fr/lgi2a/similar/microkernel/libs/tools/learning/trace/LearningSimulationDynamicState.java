@@ -126,7 +126,7 @@ public class LearningSimulationDynamicState {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 * @throws NoSuchElementException If the agent is not present in the simulation.
 	 */
-	public LearningGlobalMemoryState getGlobalMemoryState( IAgent agent ) throws NoSuchElementException {
+	public LearningGlobalMemoryState getGlobalMemoryState( IAgent agent ) {
 		if( agent == null ){
 			throw new IllegalArgumentException( "The 'agent' argument cannot be null." );
 		}

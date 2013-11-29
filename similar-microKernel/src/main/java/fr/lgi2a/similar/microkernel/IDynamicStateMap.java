@@ -74,11 +74,11 @@ public interface IDynamicStateMap {
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 * @throws NoSuchElementException If the <code>level</code> level is not in this map.
 	 */
-	IPublicLocalDynamicState get( LevelIdentifier level ) throws NoSuchElementException;
+	IPublicLocalDynamicState get( LevelIdentifier level );
 	
 	/**
 	 * Puts a dynamic state into this map.
 	 * @param state The public local dynamic state of to add to this map.
 	 */
-	void put( IPublicLocalDynamicState state ) throws IllegalArgumentException;
+	void put( IPublicLocalDynamicState state );
 }

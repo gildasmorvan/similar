@@ -91,25 +91,13 @@ public final class LearningPublicLocalDynamicStateCopier {
 	public static ConsistentPublicLocalDynamicState createCopy( 
 			ConsistentPublicLocalDynamicState toCopy 
 	) {
-		if( toCopy == null ){
-			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
-		}
+		checkConsistentPublicLocalDynamicStateEnvValidity( toCopy );
 		ConsistentPublicLocalDynamicState result = new ConsistentPublicLocalDynamicState(
 				new SimulationTimeStamp( toCopy.getTime() ),
 				toCopy.getLevel()
 		);
 		// Copy the public local state of the environment
-		if( toCopy.getPublicLocalStateOfEnvironment() == null ){
-			throw new IllegalArgumentException( "The public local state of the environment at the level '" +
-					toCopy.getLevel() + "' in the consistent dynamic state at the time '" +
-					toCopy.getTime() + "' was null."  );
-		} else if( ! (toCopy.getPublicLocalStateOfEnvironment() instanceof LearningPublicLocalStateOfEnvironment) ){
-			throw new IllegalArgumentException( "The public local state of the environment at the level '" +
-					toCopy.getLevel() + "' in the consistent dynamic state at the time '" +
-					toCopy.getTime() + "' is not an instance of the class '" + LearningPublicLocalStateOfEnvironment.class.getSimpleName() + "'."  );
-		} else {
-			result.setPublicLocalStateOfEnvironment( ( (LearningPublicLocalStateOfEnvironment) toCopy.getPublicLocalStateOfEnvironment() ).createCopy() );
-		}
+		result.setPublicLocalStateOfEnvironment( ( (LearningPublicLocalStateOfEnvironment) toCopy.getPublicLocalStateOfEnvironment() ).createCopy() );
 		// Copy the public local state of the agents
 		for( IPublicLocalStateOfAgent agentPublicLocalState : toCopy.getPublicLocalStateOfAgents() ){
 			if( agentPublicLocalState instanceof LearningPublicLocalStateOfAgent ){
@@ -129,5 +117,27 @@ public final class LearningPublicLocalDynamicStateCopier {
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * Checks the validity of the public local state of the environment in a copied consistent public local dynamic state.
+	 * @param toCopy The consistent dynamic state to copy.
+	 * @throws IllegalArgumentException If the argument is <code>null</code> or if it contains elements that are not within 
+	 * the specification of the "learning" simulation.
+	 */
+	private static void checkConsistentPublicLocalDynamicStateEnvValidity( 
+			ConsistentPublicLocalDynamicState toCopy
+	) {
+		if( toCopy == null ){
+			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
+		} else if( toCopy.getPublicLocalStateOfEnvironment() == null ){
+			throw new IllegalArgumentException( "The public local state of the environment at the level '" +
+					toCopy.getLevel() + "' in the consistent dynamic state at the time '" +
+					toCopy.getTime() + "' was null."  );
+		} else if( ! (toCopy.getPublicLocalStateOfEnvironment() instanceof LearningPublicLocalStateOfEnvironment) ){
+			throw new IllegalArgumentException( "The public local state of the environment at the level '" +
+					toCopy.getLevel() + "' in the consistent dynamic state at the time '" +
+					toCopy.getTime() + "' is not an instance of the class '" + LearningPublicLocalStateOfEnvironment.class.getSimpleName() + "'."  );
+		}
 	}
 }

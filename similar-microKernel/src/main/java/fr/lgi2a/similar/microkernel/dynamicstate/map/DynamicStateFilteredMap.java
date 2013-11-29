@@ -126,7 +126,7 @@ public final class DynamicStateFilteredMap implements IDynamicStateMap {
 	@Override
 	public IPublicLocalDynamicState get(
 		LevelIdentifier level
-	) throws IllegalArgumentException, NoSuchElementException {
+	) {
 		if( this.filter.contains( level ) ){
 			return this.parent.get( level );
 		} else {

@@ -94,7 +94,7 @@ public interface ISimulationEngine {
 	 * @throws IllegalArgumentException If the arguments are <code>null</code>.
      * @throws ExceptionSimulationAborted if the simulation has ended because it was aborted by the user.
 	 */
-	void runNewSimulation( ISimulationModel simulationModel ) throws ExceptionSimulationAborted;
+	void runNewSimulation( ISimulationModel simulationModel );
 	
 	/**
 	 * Gets the current dynamic states of the simulation.
@@ -133,7 +133,7 @@ public interface ISimulationEngine {
 	 * @return The set of all the agents lying in a specific level of in the simulation.
 	 * @throws NoSuchElementException If no such level was defined for the simulation.
 	 */
-	Set<IAgent> getAgents( LevelIdentifier level ) throws NoSuchElementException;
+	Set<IAgent> getAgents( LevelIdentifier level );
 	
 	/**
 	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.

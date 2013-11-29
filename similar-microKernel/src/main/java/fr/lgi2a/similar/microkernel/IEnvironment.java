@@ -69,7 +69,7 @@ public interface IEnvironment {
 	 * @return The public local state of the environment for a specific level.
 	 * @throws NoSuchElementException If no public local state was defined for the specified level.
 	 */
-	IPublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
+	IPublicLocalState getPublicLocalState( LevelIdentifier level );
 	
 	/**
 	 * Models the natural action of the environment on the simulation, from a specific level.

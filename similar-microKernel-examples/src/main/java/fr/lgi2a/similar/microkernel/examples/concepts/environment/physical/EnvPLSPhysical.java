@@ -187,7 +187,7 @@ public class EnvPLSPhysical extends AbstractPublicLocalState {
 
 	/**
 	 * Sets the current time of the day in the 'physical' level.
-	 * @param The new current time of the day in the 'physical' level.
+	 * @param currentTimeOfTheDay The new current time of the day in the 'physical' level.
 	 */
 	public void setCurrentTimeOfTheDay( TimeOfTheDay currentTimeOfTheDay ){
 		this.currentTimeOfTheDay = currentTimeOfTheDay;

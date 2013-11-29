@@ -46,8 +46,12 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief;
 
+import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationParameters;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
+import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalMemoryState;
 
 /**
  * A factory method generating 'Editor in chief' agents. Agents are generated using both explicit parameters and default parameters.
@@ -94,10 +98,11 @@ public class AgtFactoryEditorInChief {
 	}
 	
 	/**
-	 * Generates TODO 
-	 * @param address
-	 * @param thresholdForStrangePhysicalManifestationsAdvisedByFBI
-	 * @return
+	 * Generates an editor in chief agent living in a specific city and broadcasting a specific threshold for strange physical manifestations.
+	 * @param address The address of the editor in chief agent.
+	 * @param thresholdForStrangePhysicalManifestationsAdvisedByFBI The thresold for strange physical manifestations (expressed 
+	 * in a number of manifestations to reach to believe that experiments were made on a citizen).
+	 * @return The new and initialized editor in chief agent.
 	 */
 	public AgtEditorInChief generateAgent( 
 			Cities address,
@@ -106,11 +111,25 @@ public class AgtFactoryEditorInChief {
 		if( this.parameters == null ) {
 			throw new IllegalStateException( "The generation parameters have to be set before creating agents!" );
 		} else {
-			return new AgtEditorInChief(
+			AgtEditorInChief result = new AgtEditorInChief(
 					address, 
 					thresholdForStrangePhysicalManifestationsAdvisedByFBI, 
 					this.parameters.getEditorInChiefParanoiaThreshold()
 			);
+			//
+			// Define the initial global memory state of the agent.
+			//
+			// No specific data are required in that state for the 'Editor in chief' agent. Thus, instead of defining a new class,
+			// we use the generic class EmptyGlobalMemoryState defined in the common libs of SIMILAR.
+			// This class models an empty global memory state for an agent.
+			result.initializeGlobalMemoryState( new EmptyGlobalMemoryState( result ) );
+			//
+			// Tell that this agent is initially in the 'social' level.
+			//
+			IPublicLocalStateOfAgent stateInSocialLevel = new AgtEditorInChiefPLSSocial( result, address );
+			// Specify that the agent lies is initially present in the 'social' level.
+			result.includeNewLevel( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, stateInSocialLevel );
+			return result;
 		}
 	}
 }

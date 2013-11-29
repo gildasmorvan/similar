@@ -134,7 +134,7 @@ public abstract class AbstractAgent implements IAgent {
 
 	/**
 	 * Sets the value of the initial memory state of the agent.
-	 * @param newState The value of the initial memory state of the agent.
+	 * @param initialMemoryState The value of the initial memory state of the agent.
 	 * This memory state cannot be <code>null</code>.
 	 */
 	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) {

@@ -182,7 +182,7 @@ public abstract class AbstractLearningSimulationModel extends AbstractSimulation
 	 * <ul>
 	 * 	<li>
 	 * 		Determine the levels where the agent lies, using the 
-	 * 		{@link AbstractLearningAgent#includeNewLevel(LevelIdentifier, fr.lgi2a.similar.microKernel.states.I_PublicLocalStateOfAgent)} method
+	 * 		{@link AbstractLearningAgent#includeNewLevel(LevelIdentifier, fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent)} method
 	 * 		with an instance of the {@link LearningPublicLocalStateOfAgent} class as public local state.
 	 * 	</li>
 	 * 	<li>

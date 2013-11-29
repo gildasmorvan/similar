@@ -159,7 +159,7 @@ public class AgtAlien extends AbstractAgent {
 	/**
 	 * This method defines the data being perceived by the agent, depending on the level from which perception is made.
 	 * @param levelId The identifier of the level from which the perception is made.
-	 * @param The public local state of this agent in the level which identifier is <code>levelId</code>.
+	 * @param publicLocalStateInLevel The public local state of this agent in the level which identifier is <code>levelId</code>.
 	 * @param levelsPublicLocalObservableDynamicState The public dynamic state of the levels that can be perceived from 
 	 * the level having the identifier <code>levelId</code>.
 	 */

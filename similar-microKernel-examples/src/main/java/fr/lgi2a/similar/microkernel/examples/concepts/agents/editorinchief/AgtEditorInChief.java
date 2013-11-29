@@ -63,7 +63,6 @@ import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Citie
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialChangeBroadcast;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalMemoryState;
 
 /**
  * Models instances of 'Editor in chief' agents.
@@ -96,7 +95,7 @@ public class AgtEditorInChief extends AbstractAgent {
 	public static final String CATEGORY = "Editor in chief";
 	
 	/**
-	 * Builds an 'Editor in chief' agent initially lying in the 'social' level.
+	 * Builds an 'Editor in chief' agent having initially no public local states or global memory state.
 	 * @param address The city where the editor in chief lives.
 	 * @param thresholdForStrangePhysicalManifestationsAdvisedByFBI The number of strange physical manifestation over which a 
 	 * citizen can consider that an alien experiment was performed on him/her. This value is being broadcasted on television 
@@ -116,19 +115,6 @@ public class AgtEditorInChief extends AbstractAgent {
 		//
 		this.paranoiaThreshold = paranoiaThreshold;
 		this.thresholdForStrangePhysicalManifestationsAdvisedByFBI = thresholdForStrangePhysicalManifestationsAdvisedByFBI;
-		//
-		// Define the initial global memory state of the agent.
-		//
-		// No specific data are required in that state for the 'Editor in chief' agent. Thus, instead of defining a new class,
-		// we use the generic class EmptyGlobalMemoryState defined in the common libs of SIMILAR.
-		// This class models an empty global memory state for an agent.
-		this.initializeGlobalMemoryState( new EmptyGlobalMemoryState( this ) );
-		//
-		// Tell that this agent is initially in the 'social' level.
-		//
-		IPublicLocalStateOfAgent stateInSocialLevel = new AgtEditorInChiefPLSSocial( this, address );
-		// Specify that the agent lies is initially present in the 'social' level.
-		this.includeNewLevel( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, stateInSocialLevel );
 	}
 
 	// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -142,7 +128,7 @@ public class AgtEditorInChief extends AbstractAgent {
 	/**
 	 * This method defines the data being perceived by the agent, depending on the level from which perception is made.
 	 * @param levelId The identifier of the level from which the perception is made.
-	 * @param The public local state of this agent in the level which identifier is <code>levelId</code>.
+	 * @param publicLocalStateInLevel The public local state of this agent in the level which identifier is <code>levelId</code>.
 	 * @param levelsPublicLocalObservableDynamicState The public dynamic state of the levels that can be perceived from 
 	 * the level having the identifier <code>levelId</code>.
 	 */

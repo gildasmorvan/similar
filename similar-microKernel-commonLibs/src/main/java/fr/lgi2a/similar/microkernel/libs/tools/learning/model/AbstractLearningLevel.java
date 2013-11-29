@@ -163,20 +163,20 @@ public abstract class AbstractLearningLevel extends AbstractLevel {
 	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, 
 	 * <i>i.e.</i> the starting time of the transitory phase being ended by this reaction (<code>t<sub>l</sub></code> in the description
 	 * of the method).
-	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, 
+	 * @param consistentStateTime The next time stamp when the dynamic state of this level will be consistent, 
 	 * <i>i.e.</i> the ending time of the transitory phase being ended by this reaction (<code>t<sub>l</sub>+dt<sub>l</sub></code> in the description
 	 * of the method).
-	 * @param consistentState The consistent state being modified by this user reaction.
+	 * @param newConsistentState The consistent state being modified by this user reaction.
 	 * The operations performed in this reaction participate in the transition of the consistent dynamic state 
 	 * <code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into its new value <code>&delta;<sub>l</sub>(t<sub>l</sub>+dt<sub>l</sub>)</code>.
 	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * @param newInfluencesToProcess The set that will contain the influences that were produced by the user during the invocation of 
 	 * this method, or the influences that persist after this reaction.
 	 */
 	protected void produceNewInfluencesDuringRegularReaction(
 			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
+			SimulationTimeStamp consistentStateTime,
 			ConsistentPublicLocalDynamicState newConsistentState,
 			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
 			Set<IInfluence> newInfluencesToProcess

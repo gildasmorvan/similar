@@ -128,7 +128,7 @@ public class AgtAlienPLSPhysical extends AbstractPublicLocalStateOfAgent {
 
 	/**
 	 * Sets the location of the alien in the 'physical' level.
-	 * @param The location of the alien in the 'physical' level.
+	 * @param location The location of the alien in the 'physical' level.
 	 */
 	public void setLocation( Cities location ){
 		this.location = location;

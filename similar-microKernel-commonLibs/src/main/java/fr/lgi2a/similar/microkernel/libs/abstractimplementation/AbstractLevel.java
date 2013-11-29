@@ -50,7 +50,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.ILevel;
-import fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
@@ -82,10 +81,11 @@ public abstract class AbstractLevel implements ILevel {
 	/**
 	 * Builds an initialized instance of level having a specific initial time, a specific identifier, a perception and influence 
 	 * relation graph containing only an edge between this level and itself and an empty initial consistent dynamic state.
-	 * This dynamic state has to be initialized using the 
-	 * {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.states.I_PublicLocalState)},
-	 * {@link IModifiablePublicLocalDynamicState#setStateDynamicsAsCopyOf(Set)} and {@link IModifiablePublicLocalDynamicState#addPublicLocalStateOfAgent(fr.lgi2a.similar.microkernel.states.I_PublicLocalStateOfAgent)}
-	 * methods.
+	 * This dynamic state has to be initialized using the following methods:
+	 * <ul>
+	 * <li>{@link fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.IPublicLocalState)}</li>
+	 * <li>{@link fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState#setStateDynamicsAsCopyOf(java.util.Collection)}</li>
+	 * <li>{@link fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState#addPublicLocalStateOfAgent(fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent)}</li>
 	 * @param initialTime The initial time stamp of the level.
 	 * @param identifier The identifier of the level.
 	 * @throws IllegalArgumentException if an argument is <code>null</code>.

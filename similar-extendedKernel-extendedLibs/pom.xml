@@ -11,9 +11,9 @@
   
 <!-- The description of the module -->
   
-  <artifactId>similar-microKernel-examples</artifactId>
-  <description>The examples illustrating the use of the micro kernel and the common libraries to design simulations.</description>
-  <name>SIMILAR - Micro-kernel examples</name>
+  <artifactId>similar-extendedKernel-extendedLibs</artifactId>
+  <name>SIMILAR - Extended libs</name>
+  <description>The extended libraries of the extended kernel, containing generic implementations of simulation algorithms and results exporting features.</description>
   
 <!-- The dependencies of the module -->
   
@@ -25,7 +25,7 @@
   	</dependency>
   	<dependency>
   		<groupId>fr.lgi2a</groupId>
-  		<artifactId>similar-microKernel-commonLibs</artifactId>
+  		<artifactId>similar-extendedKernel</artifactId>
   		<version>0.1.1</version>
   	</dependency>
   </dependencies>

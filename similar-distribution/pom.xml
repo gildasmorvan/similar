@@ -6,7 +6,7 @@
   <parent>
     <groupId>fr.lgi2a</groupId>
     <artifactId>similar</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.1</version>
   </parent>
   
 <!-- The description of the module -->
@@ -20,21 +20,31 @@
 		its dependencies have to include all the other sub-modules.  -->
   
   <dependencies>
-  <dependency>
-  	<groupId>fr.lgi2a</groupId>
-  	<artifactId>similar-microKernel</artifactId>
-  	<version>${fr.lgi2a.similar.version}</version>
-  </dependency>
-  <dependency>
-  	<groupId>fr.lgi2a</groupId>
-  	<artifactId>similar-microKernel-commonLibs</artifactId>
-  	<version>${fr.lgi2a.similar.version}</version>
-  </dependency>
-  <dependency>
-  	<groupId>fr.lgi2a</groupId>
-  	<artifactId>similar-microKernel-examples</artifactId>
-  	<version>${fr.lgi2a.similar.version}</version>
-  </dependency>
+	  <dependency>
+	  	<groupId>fr.lgi2a</groupId>
+	  	<artifactId>similar-microKernel</artifactId>
+	  	<version>${fr.lgi2a.similar.version}</version>
+	  </dependency>
+	  <dependency>
+	  	<groupId>fr.lgi2a</groupId>
+	  	<artifactId>similar-microKernel-commonLibs</artifactId>
+	  	<version>${fr.lgi2a.similar.version}</version>
+	  </dependency>
+	  <dependency>
+	  	<groupId>fr.lgi2a</groupId>
+	  	<artifactId>similar-microKernel-examples</artifactId>
+	  	<version>${fr.lgi2a.similar.version}</version>
+	  </dependency>
+	  <dependency>
+	  	<groupId>fr.lgi2a</groupId>
+	  	<artifactId>similar-extendedKernel</artifactId>
+	  	<version>${fr.lgi2a.similar.version}</version>
+	  </dependency>
+	  <dependency>
+	  	<groupId>fr.lgi2a</groupId>
+	  	<artifactId>similar-extendedKernel-extendedLibs</artifactId>
+	  	<version>${fr.lgi2a.similar.version}</version>
+	  </dependency>
   </dependencies>
 
 	<build>
@@ -76,6 +86,6 @@
 		</plugins>
 	</build>
 	<properties>
-		<fr.lgi2a.similar.version>0.0.1</fr.lgi2a.similar.version>
+		<fr.lgi2a.similar.version>0.1.1</fr.lgi2a.similar.version>
 	</properties>
 </project>

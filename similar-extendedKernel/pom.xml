@@ -6,13 +6,25 @@
   <parent>
     <groupId>fr.lgi2a</groupId>
     <artifactId>similar</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.1</version>
   </parent>
   
 <!-- The description of the module -->
   
-  
   <artifactId>similar-extendedKernel</artifactId>
   <name>SIMILAR - Extended kernel</name>
   <description>An extended kernel containing the modular and highly customizable specifications of SIMILAR, supporting the design of maintainable et evolutive simulations.</description>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>fr.lgi2a</groupId>
+  		<artifactId>similar-microKernel</artifactId>
+  		<version>0.1.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>fr.lgi2a</groupId>
+  		<artifactId>similar-microKernel-commonLibs</artifactId>
+  		<version>0.1.1</version>
+  	</dependency>
+  </dependencies>
 </project>

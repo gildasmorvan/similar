@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.lgi2a</groupId>
 	<artifactId>similar</artifactId>
-	<version>0.0.1</version>
+	<version>0.1.1</version>
 	
 	<name>SIMILAR API suite</name>
 	<description>The SIMILAR suite is a java API whose purpose is to support the
@@ -155,7 +155,11 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 						</group>
 						<group>
 							<title>Extended-kernel</title>
-							<packages>fr.lgi2a.similar.microkernel:fr.lgi2a.similar.extendedkernel*</packages>
+							<packages>fr.lgi2a.similar.extendedkernel</packages>
+						</group>
+						<group>
+							<title>Extended libs</title>
+							<packages>fr.lgi2a.similar.extendedkernel.libs*</packages>
 						</group>
 					</groups>
 					<excludePackageNames>fr.lgi2a.similar.microkernel.examples:fr.lgi2a.similar.extendedkernel.examples</excludePackageNames>
@@ -172,6 +176,7 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 		<module>similar-microKernel-commonLibs</module>
 		<module>similar-microKernel-examples</module>
 		<module>similar-extendedKernel</module>
+		<module>similar-extendedKernel-extendedLibs</module>
 	</modules>
 	
 <!-- Manage the jar dependencies of all the children -->

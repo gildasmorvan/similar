@@ -222,29 +222,29 @@ located into the 'target' directory of each sub-module. To generate a stand alon
 Note that the following command will also run the unit tests on the project.
 	- Using the command line:
 		- Go into the root directory of the project
-		- Run the 'mvn package' command
+		- Run the 'mvn install' command
 	- Using eclipse:
 		- Right click on the project in the file or the package explorer
 	- Using the command line:
 		- Go into the root directory of the project
-		- Run the "mvn -Dmaven.test.skip=true package" command
+		- Run the "mvn -Dmaven.test.skip=true install" command
 	- Using eclipse:
 		- Right click on the project in the file or the package explorer
 		- Hover the 'Run As' menu and select the 'Maven build...' item (the fourth one)
 		- Enter an explicit name to this eclipse run configuration, in the text field at the top. For instance 'SIMILAR - all - package'
-		- Type the 'package' text into the text field right to the 'Goals' text field.
+		- Type the 'install' text into the text field right to the 'Goals' text field.
 		- Select the 'Run' button located at the bottom right of the frame.
 The next time this operation has to be done, you have only to select the 'SIMILAR - all - package - noTest' build configuration and click on the 'Run' button.
 
 To pack the application without running the tests, use the following instructions:
 	- Using the command line:
 		- Go into the root directory of the project
-		- Run the "mvn -Dmaven.test.skip=true package" command
+		- Run the "mvn -Dmaven.test.skip=true install" command
 	- Using eclipse:
 		- Right click on the project in the file or the package explorer
 		- Hover the 'Run As' menu and select the 'Maven build...' item (the fourth one)
 		- Enter an explicit name to this eclipse run configuration, in the text field at the top. For instance 'SIMILAR - all - package - noTest'
-		- Type the 'package' text into the text field right to the 'Goals' text field.
+		- Type the 'install' text into the text field right to the 'Goals' text field.
 		- Select the 'Add...' button at the center right of the frame.
 		- Type the 'maven.test.skip' text in the field next to the 'Name:' label and the 'true' text in the field next to the 'Value:' label
 		- Select the 'Run' button located at the bottom right of the frame.
@@ -274,24 +274,24 @@ examples and all the other resources required by the SIMILAR API suite to work. 
 include the unit tests of the API suite. To avoid them, see the next paragraph of this section:
 	- Using the command line:
 		- Go into the root directory of the project
-		- Run the "mvn clean package" command
+		- Run the "mvn clean install" command
 	- Using eclipse:
 		- Right click on the project in the file or the package explorer
 		- Hover the 'Run As' menu and select the 'Maven build...' item (the fourth one)
 		- Enter an explicit name to this eclipse run configuration, in the text field at the top. For instance 'SIMILAR - binary archive'
-		- Type the 'clean package' text into the text field right to the 'Goals' text field.
+		- Type the 'clean install' text into the text field right to the 'Goals' text field.
 		- Select the 'Run' button located at the bottom right of the frame.
 The next time this operation has to be done, you have only to select the 'SIMILAR - all - package - noTest' build configuration and click on the 'Run' button.
 
 To avoid the unit tests during that process, the following instructions have to be used:
 	- Using the command line:
 		- Go into the root directory of the project
-		- Run the "mvn -Dmaven.test.skip=true clean package" command
+		- Run the "mvn -Dmaven.test.skip=true clean install" command
 	- Using eclipse:
 		- Right click on the project in the file or the package explorer
 		- Hover the 'Run As' menu and select the 'Maven build...' item (the fourth one)
 		- Enter an explicit name to this eclipse run configuration, in the text field at the top. For instance 'SIMILAR - binary archive - no tests'
-		- Type the 'clean package' text into the text field right to the 'Goals' text field.
+		- Type the 'clean install' text into the text field right to the 'Goals' text field.
 		- Select the 'Add...' button at the center right of the frame.
 		- Type the 'maven.test.skip' text in the field next to the 'Name:' label and the 'true' text in the field next to the 'Value:' label
 		- Select the 'Run' button located at the bottom right of the frame.

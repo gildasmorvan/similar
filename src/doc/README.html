@@ -46,7 +46,7 @@ DAMAGE.
 <!--}}}-->
 
 <!--PRE-HEAD-END-->
-<title> Similar API suite - Documentation (v 0.0.1) </title>
+<title> Similar API suite - Documentation (v 0.1.1) </title>
 <style id="styleArea" type="text/css">
 #saveTest {display:none;}
 #messageArea {display:none;}
@@ -1339,7 +1339,7 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 }
 //}}}</pre>
 </div>
-<div title="Include this library" creator="Designer" modifier="Designer" created="201311151203" modified="201311280919" changecount="19">
+<div title="Include this library" creator="Designer" modifier="Designer" created="201311151203" modified="201311291654" changecount="20">
 <pre>To compile and execute code using the SIMILAR API suite, the following instructions have to be used. Note that the following instructions include +++^34em^*@[all the libraries]
 The mentionned jar file points to all the libraries of SIMILAR:
 *The micro-kernel
@@ -1352,12 +1352,12 @@ The mentionned jar file points to all the libraries of SIMILAR:
 
 +++?[&lt;span class=&quot;docbigbtn&quot;&gt;Javac / Java commands&lt;/span&gt;]
 {{docsection{
-The ''&quot;similar-distribution-0.0.1.jar&quot;'' file from the ''&quot;similarLib&quot;'' directory has to be included in the classpath:
+The ''&quot;similar-distribution-0.1.1.jar&quot;'' file from the ''&quot;similarLib&quot;'' directory has to be included in the classpath:
 {{{
-javac -classpath similarLib/similar-distribution-0.0.1.jar ...
+javac -classpath similarLib/similar-distribution-0.1.1.jar ...
 }}}
 {{{
-java -cp similarLib/similar-distribution-0.0.1.jar ...
+java -cp similarLib/similar-distribution-0.1.1.jar ...
 }}}
 Note that these command lines work only if the &quot;''similarLib''&quot; directory also contains the jar files of the libraries of the SIMILAR API suite.
 }}} ===
@@ -1369,7 +1369,7 @@ Note that these command lines work only if the &quot;''similarLib''&quot; direct
 &lt;dependency&gt;
   &lt;groupId&gt;fr.lgi2a&lt;/groupId&gt;
   &lt;artifactId&gt;similar-distribution&lt;/artifactId&gt;
-  &lt;version&gt;0.0.1&lt;/version&gt;
+  &lt;version&gt;0.1.1&lt;/version&gt;
 &lt;/dependency&gt;
 }}}
 }}} ===
@@ -1378,7 +1378,7 @@ Note that these command lines work only if the &quot;''similarLib''&quot; direct
 +++?[&lt;span class=&quot;docbigbtn&quot;&gt;Apache Buildr&lt;/span&gt;]
 {{docsection{
 {{{
-'fr.lgi2a:similar-distribution:jar:0.0.1'
+'fr.lgi2a:similar-distribution:jar:0.1.1'
 }}}
 }}} ===
 
@@ -1386,7 +1386,7 @@ Note that these command lines work only if the &quot;''similarLib''&quot; direct
 +++?[&lt;span class=&quot;docbigbtn&quot;&gt;Apache Ant&lt;/span&gt;]
 {{docsection{
 {{{
-&lt;dependency org=&quot;fr.lgi2a&quot; name=&quot;similar-distribution&quot; rev=&quot;0.0.1&quot;&gt;
+&lt;dependency org=&quot;fr.lgi2a&quot; name=&quot;similar-distribution&quot; rev=&quot;0.1.1&quot;&gt;
   &lt;artifact name=&quot;similar-distribution&quot; type=&quot;jar&quot; /&gt;
 &lt;/dependency&gt;
 }}}
@@ -1397,7 +1397,7 @@ Note that these command lines work only if the &quot;''similarLib''&quot; direct
 {{docsection{
 {{{
 @Grapes(
-@Grab(group='fr.lgi2a', module='similar-distribution', version='0.0.1')
+@Grab(group='fr.lgi2a', module='similar-distribution', version='0.1.1')
 )
 }}}
 }}} ===
@@ -1406,7 +1406,7 @@ Note that these command lines work only if the &quot;''similarLib''&quot; direct
 +++?[&lt;span class=&quot;docbigbtn&quot;&gt;Grails&lt;/span&gt;]
 {{docsection{
 {{{
-compile 'fr.lgi2a:similar-distribution:0.0.1'
+compile 'fr.lgi2a:similar-distribution:0.1.1'
 }}}
 }}} ===
 
@@ -1414,7 +1414,7 @@ compile 'fr.lgi2a:similar-distribution:0.0.1'
 +++?[&lt;span class=&quot;docbigbtn&quot;&gt;Leiningen&lt;/span&gt;]
 {{docsection{
 {{{
-[fr.lgi2a/similar-distribution &quot;0.0.1&quot;]
+[fr.lgi2a/similar-distribution &quot;0.1.1&quot;]
 }}}
 }}} ===
 
@@ -1422,7 +1422,7 @@ compile 'fr.lgi2a:similar-distribution:0.0.1'
 +++?[&lt;span class=&quot;docbigbtn&quot;&gt;SBT&lt;/span&gt;]
 {{docsection{
 {{{
-libraryDependencies += &quot;fr.lgi2a&quot; %% &quot;similar-distribution&quot; % &quot;0.0.1&quot;
+libraryDependencies += &quot;fr.lgi2a&quot; %% &quot;similar-distribution&quot; % &quot;0.1.1&quot;
 }}}
 }}} ===</pre>
 </div>
@@ -2058,7 +2058,7 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201311280956" changecount="41">
+<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201311291653" changecount="46">
 <pre>This part of the documentation was generated with Maven.
 !Project Dependencies
 The following is a list of dependencies for this project. These dependencies are required to compile and use the application.
@@ -2067,9 +2067,11 @@ The following is a list of dependencies for this project. These dependencies are
 {{implsection{
 The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:
 |!GroupId |!ArtifactId |!Version |!Type |!License |
-|fr.lgi2a |similar-microKernel |0.0.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-microKernel-commonLibs |0.0.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-microKernel-examples |0.0.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-microKernel |0.1.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-microKernel-commonLibs |0.1.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-microKernel-examples |0.1.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-extendedKernel |0.1.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-extendedKernel-extendedLibs |0.1.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}}
 ===
 
@@ -2094,31 +2096,45 @@ The following is a list of test dependencies for this project. These dependencie
 }}} ===
 
 !Project Dependency Tree
-*fr.lgi2a:similar-distribution:jar:0.0.1 +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+*fr.lgi2a:similar-distribution:jar:0.1.1 +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Binary distribution|
 |''Description:'' |Builds the binary release of the SIMILAR API suite. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
-**fr.lgi2a:similar-microKernel:jar:0.0.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+**fr.lgi2a:similar-microKernel:jar:0.1.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Micro kernel|
 |''Description:'' |A micro kernel containing the minimal specification of SIMILAR, supporting the design of efficient simulations. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
-**fr.lgi2a:similar-microKernel-commonLibs:jar:0.0.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+**fr.lgi2a:similar-microKernel-commonLibs:jar:0.1.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Common libs|
 |''Description:'' |The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
-**fr.lgi2a:similar-microKernel-examples:jar:0.0.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+**fr.lgi2a:similar-microKernel-examples:jar:0.1.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Micro-kernel examples|
 |''Description:'' |The examples illustrating the use of the micro kernel and the common libraries to design simulations. |
+|''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+}}} ===
+
+**fr.lgi2a:similar-extendedKernel:jar:0.1.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+{{moresection{
+|&gt;|!SIMILAR - Extended kernel|
+|''Description:'' |An extended kernel containing the modular and highly customizable specifications of SIMILAR, supporting the design of maintainable et evolutive simulations. |
+|''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+}}} ===
+
+**fr.lgi2a:similar-extendedKernel-extendedLibs:jar:0.1.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+{{moresection{
+|&gt;|!SIMILAR - Extended libs|
+|''Description:'' |The extended libraries of the extended kernel, containing generic implementations of simulation algorithms and results exporting features. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
@@ -2148,7 +2164,7 @@ The following is a list of test dependencies for this project. These dependencie
 
 ''Common Public License Version 1.0:'' JUnit
 
-''CeCILL-B Free Software License Agreement:'' SIMILAR - Binary distribution, SIMILAR - Micro kernel, SIMILAR - Common libs, SIMILAR - Micro-kernel examples</pre>
+''CeCILL-B Free Software License Agreement:'' SIMILAR - Binary distribution, SIMILAR - Micro kernel, SIMILAR - Common libs, SIMILAR - Micro-kernel examples, SIMILAR - Extended kernel, SIMILAR - Extended libs</pre>
 </div>
 <div title="Project licence" creator="Designer" modifier="Designer" created="201311151108" modified="201311151113" changecount="11">
 <pre>This software is governed by the CeCILL-B license under French law and abiding by the rules of distribution of free software.  You can  use, modify and/ or redistribute the software under the terms of the CeCILL-B license as circulated by CEA, CNRS and INRIA at the following URL http://www.cecill.info. 
@@ -2321,8 +2337,8 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 //}}}
 </pre>
 </div>
-<div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201311281001" tags="system excludeLists" changecount="5">
-<pre>Documentation (v 0.0.1)</pre>
+<div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201311291653" tags="system excludeLists" changecount="7">
+<pre>Documentation &lt;html&gt;&lt;sub&gt;(v 0.1.1)&lt;/sub&gt;&lt;/html&gt;</pre>
 </div>
 <div title="SiteTitle" creator="Designer" modifier="Designer" created="201311150941" modified="201311151625" tags="system excludeLists" changecount="15">
 <pre>[img(50%,)[SIMILAR API suite|images/similarLogo.png]] [&gt;img[images/structure_thumb.png]]</pre>

@@ -46,7 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel;
 
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
@@ -131,7 +130,7 @@ public interface ISimulationEngine {
 	 * </p>
 	 * @param level The levels where to get the agents.
 	 * @return The set of all the agents lying in a specific level of in the simulation.
-	 * @throws NoSuchElementException If no such level was defined for the simulation.
+	 * @throws java.util.NoSuchElementException If no such level was defined for the simulation.
 	 */
 	Set<IAgent> getAgents( LevelIdentifier level );
 	

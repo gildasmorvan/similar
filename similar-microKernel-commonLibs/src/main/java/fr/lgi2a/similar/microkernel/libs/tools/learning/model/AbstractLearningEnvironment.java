@@ -52,11 +52,7 @@ import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.AbstractLearningEngineOperationMoment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations.LearningEngineOperationNatural;
@@ -114,16 +110,16 @@ public abstract class AbstractLearningEnvironment extends AbstractEnvironment {
 	 * An abstract method where users can define which influences are produced by the environment during its natural phase.
 	 * The following influences can be produced:
 	 * <ul>
-	 * 	<li>{@link SystemInfluenceAddAgent}, with an instance of the {@link AbstractLearningAgent} class.</li>
-	 * 	<li>{@link SystemInfluenceRemoveAgent}, with a public local state of an agent located in the perceived data.</li>
+	 * 	<li>{@link fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent}, with an instance of the {@link AbstractLearningAgent} class.</li>
+	 * 	<li>{@link fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent}, with a public local state of an agent located in the perceived data.</li>
 	 * 	<li> 
-	 * 		{@link LearningInfluenceAgentPublicLocalStateUpdate}, with a public local state of an agent located in the perceived data.
+	 * 		{@link fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate}, with a public local state of an agent located in the perceived data.
 	 * 		During the reaction, this influence triggers a modification of the public local
 	 * 		state, increasing its revision number. This operation models any modification 
 	 * 		that can be made in the public local state of an agent.
 	 * 	</li>
 	 * <li> 
-	 * 		{@link LearningInfluenceEnvironmentPublicLocalStateUpdate}, with a public local state of the environment 
+	 * 		{@link fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate}, with a public local state of the environment 
 	 * 		located in the perceived data.
 	 * 		During the reaction, this influence triggers a modification of the public local
 	 * 		state, increasing its revision number. This operation models any modification 

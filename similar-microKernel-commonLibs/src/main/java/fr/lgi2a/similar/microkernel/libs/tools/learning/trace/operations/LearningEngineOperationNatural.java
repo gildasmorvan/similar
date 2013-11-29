@@ -46,8 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.learning.trace.operations;
 
-import java.lang.reflect.Method;
-
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
@@ -94,7 +92,7 @@ public class LearningEngineOperationNatural implements ILearningEngineOperation 
 	 * Builds a partially initialized object modeling a call to the 'natural' method of the environment from a specific level.
 	 * The initialization is completed by:
 	 * <ul>
-	 * 	<li>Calling the {@link LearningEngineOperationNatural#addObservableDynamicState(IPublicLocalDynamicState)}{@link Method} method for each perceptible level.</li>
+	 * 	<li>Calling the {@link LearningEngineOperationNatural#addObservableDynamicState(IPublicLocalDynamicState)} method for each perceptible level.</li>
 	 * 	<li>Calling the {@link LearningEngineOperationNatural#addInfluence(IInfluence)} method for each influence that was produced by the natural action of the environment.</li>
 	 * </ul>
 	 * @param level The level from which the 'natural' method is called.

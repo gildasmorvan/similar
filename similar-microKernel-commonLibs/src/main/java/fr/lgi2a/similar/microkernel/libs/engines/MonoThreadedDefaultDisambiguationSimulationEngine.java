@@ -66,7 +66,6 @@ import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
 import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
@@ -222,9 +221,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			ISimulationModel simulationModel
 	) {
 		// First check that the simulation model is not null.
-		if( simulationModel == null ) {
-			throw new IllegalArgumentException( "The 'simulationModel' argument cannot be null." );
-		}
+		this.checkArgumentValidity( simulationModel );
 		// Prepare the observation made by the probes
 		for( IProbe probe : this.getProbes() ){
 			probe.prepareObservation();
@@ -262,7 +259,17 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	}
 	
 	/**
-	 * Performs the same task then the {@link ISimulationEngine#runNewSimulation(ISimulationModel)} method, 
+	 * Checks the validity of the argument of the {@link fr.lgi2a.similar.microkernel.ISimulationEngine#runNewSimulation(ISimulationModel)} method.
+	 * @param simulationModel The argument which validity is checked.
+	 */
+	private void checkArgumentValidity( ISimulationModel simulationModel ) {
+		if( simulationModel == null ) {
+			throw new IllegalArgumentException( "The 'simulationModel' argument cannot be null." );
+		}
+	}
+	
+	/**
+	 * Performs the same task then the {@link fr.lgi2a.similar.microkernel.ISimulationEngine#runNewSimulation(ISimulationModel)} method, 
 	 * but without checking errors.
 	 * @param simulationModel The simulation model used to generate a new simulation.
 	 */
@@ -349,24 +356,31 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	 */
 	private void generateLevels( ISimulationModel simulationModel, SimulationTimeStamp initialTime ) {
 		List<ILevel> createdLevels = simulationModel.generateLevels( initialTime );
-		// Check that the list is valid.
+		// Check that the list is valid and add the levels to the simulation engine.
+		this.checkLevelsListValidity( createdLevels );
+		for( ILevel generatedLevel : createdLevels ){
+			if( generatedLevel == null ){
+				throw new IllegalStateException( "The list of levels cannot contain the null element." );
+			}
+			LevelIdentifier levelId = generatedLevel.getIdentifier( );
+			if( levelId == null ){
+				throw new IllegalStateException( "The identifier of a level cannot be null." );
+			} else if( this.levels.containsKey( levelId ) ){
+				throw new IllegalStateException( "Two levels share the same identifier '" + levelId + "'." );
+			}
+			this.levels.put( levelId, generatedLevel );
+		}
+	}
+	
+	/**
+	 * Checks the validity of the list of levels created by the {@link ISimulationModel#generateLevels(SimulationTimeStamp)} method.
+	 * @param createdLevels The levels list that was created.
+	 */
+	private void checkLevelsListValidity( List<ILevel> createdLevels ){
 		if( createdLevels == null ){
 			throw new IllegalStateException( "The simulation model has to provide a valid list of levels. The list was null." );
 		} else if( createdLevels.isEmpty( ) ){
 			throw new IllegalStateException( "The simulation model has to contain at least one level." );
-		} else {
-			for( ILevel generatedLevel : createdLevels ){
-				if( generatedLevel == null ){
-					throw new IllegalStateException( "The list of levels cannot contain the null element." );
-				}
-				LevelIdentifier levelId = generatedLevel.getIdentifier( );
-				if( levelId == null ){
-					throw new IllegalStateException( "The identifier of a level cannot be null." );
-				} else if( this.levels.containsKey( levelId ) ){
-					throw new IllegalStateException( "Two levels share the same identifier '" + levelId + "'." );
-				}
-				this.levels.put( levelId, generatedLevel );
-			}
 		}
 	}
 	

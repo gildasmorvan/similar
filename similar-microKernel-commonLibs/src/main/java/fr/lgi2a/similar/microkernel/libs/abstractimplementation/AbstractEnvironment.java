@@ -51,7 +51,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import fr.lgi2a.similar.microkernel.IEnvironment;
-import fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
@@ -91,7 +90,7 @@ public abstract class AbstractEnvironment implements IEnvironment {
 	 * Introduces the level-related data of the environment for a new level.
 	 * <p>
 	 * 	Note that the public local state also has to be added to the first consistent dynamic state of the level:
-	 * 	the {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(IPublicLocalState)} method has to
+	 * 	the {@link fr.lgi2a.similar.microkernel.IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(IPublicLocalState)} method has to
 	 * 	be called during the initialization of the simulation for the initial consistent state.
 	 * </p>
 	 * @param level The level for which data are added.

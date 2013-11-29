@@ -58,7 +58,6 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractSimulati
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningLevel;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfEnvironment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 
@@ -183,7 +182,7 @@ public abstract class AbstractLearningSimulationModel extends AbstractSimulation
 	 * 	<li>
 	 * 		Determine the levels where the agent lies, using the 
 	 * 		{@link AbstractLearningAgent#includeNewLevel(LevelIdentifier, fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent)} method
-	 * 		with an instance of the {@link LearningPublicLocalStateOfAgent} class as public local state.
+	 * 		with an instance of the {@link fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent} class as public local state.
 	 * 	</li>
 	 * 	<li>
 	 * 		Determine the behavior of the decision operation of the agent.

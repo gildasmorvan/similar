@@ -46,7 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial;
 
-import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
@@ -64,7 +63,7 @@ import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
  * <h1>Regular influences in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, the regular influences are implemented as an 
- * 	instance of either the {@link IInfluence} interface or the {@link RegularInfluence} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.IInfluence} interface or the {@link RegularInfluence} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

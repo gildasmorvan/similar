@@ -51,7 +51,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
@@ -71,7 +70,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLo
  * <h1>Public local state of the environment in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, the public local state of the environment is implemented as an 
- * 	instance of either the {@link IPublicLocalState} interface, or of the {@link AbstractPublicLocalState} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.IPublicLocalState} interface, or of the {@link AbstractPublicLocalState} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

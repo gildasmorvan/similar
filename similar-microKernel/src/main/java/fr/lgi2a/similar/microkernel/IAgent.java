@@ -47,7 +47,6 @@
 package fr.lgi2a.similar.microkernel;
 
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 
@@ -118,7 +117,7 @@ public interface IAgent {
 	 * </p>
 	 * @param levelIdentifier The identifier of the level of the public local state, TODO : formal notation.
 	 * @return The public local state of the agent in the specified level.
-	 * @throws NoSuchElementException If the agent does not define a public local state for the provided level identifier.
+	 * @throws java.util.NoSuchElementException If the agent does not define a public local state for the provided level identifier.
 	 */
 	IPublicLocalStateOfAgent getPublicLocalState( LevelIdentifier levelIdentifier );
 	

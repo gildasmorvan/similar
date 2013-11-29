@@ -47,7 +47,6 @@
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen;
 
 import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMemoryState;
 
 /**
@@ -64,7 +63,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMe
  * <h1>Global memory states in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, the global memory state of an agent is implemented as an 
- * 	instance of either the {@link IGlobalMemoryState} interface, or of the {@link AbstractGlobalMemoryState} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.IGlobalMemoryState} interface, or of the {@link AbstractGlobalMemoryState} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

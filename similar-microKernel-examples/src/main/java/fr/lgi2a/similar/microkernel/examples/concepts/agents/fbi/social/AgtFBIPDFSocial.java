@@ -46,7 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social;
 
-import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
@@ -66,7 +65,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPerceive
  * <h1>Perceived data in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, the data perceived by agent are implemented as an 
- * 	instance of either the {@link IPerceivedDataOfAgent} interface or the {@link AbstractPerceivedDataOfAgent} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent} interface or the {@link AbstractPerceivedDataOfAgent} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

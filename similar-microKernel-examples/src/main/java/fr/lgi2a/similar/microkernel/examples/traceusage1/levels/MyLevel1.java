@@ -48,7 +48,6 @@ package fr.lgi2a.similar.microkernel.examples.traceusage1.levels;
 
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningLevel;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 
@@ -56,7 +55,7 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutio
  * Models the level 'level 1' as described in the specification of the "one level - two agents - trace" simulation.
  * <h1>Constraints</h1>
  * <p>
- * 	The level is an instance of the {@link AbstractLearningEnvironment} class to ensure that the evolution of the environment 
+ * 	The level is an instance of the {@link fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment} class to ensure that the evolution of the environment 
  * 	can be tracked by the trace of the simulation.
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>

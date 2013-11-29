@@ -51,7 +51,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
-import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
@@ -74,7 +73,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
  * <h1>Levels in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, a level is implemented as an 
- * 	instance of either the {@link ILevel} interface, or of the {@link AbstractLevel} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.ILevel} interface, or of the {@link AbstractLevel} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

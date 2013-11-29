@@ -50,7 +50,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
@@ -70,7 +69,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLo
  * <h1>Public local state of an agent in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, the public local state of an agent is implemented as an 
- * 	instance of either the {@link IPublicLocalStateOfAgent} interface, or of the {@link AbstractPublicLocalStateOfAgent} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent} interface, or of the {@link AbstractPublicLocalStateOfAgent} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

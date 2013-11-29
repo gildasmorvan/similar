@@ -46,8 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel;
 
-import java.util.NoSuchElementException;
-
 
 /**
  * Models the environment of the simulation.
@@ -67,7 +65,7 @@ public interface IEnvironment {
 	 * </p>
 	 * @param level The level of the public local state of the environment.
 	 * @return The public local state of the environment for a specific level.
-	 * @throws NoSuchElementException If no public local state was defined for the specified level.
+	 * @throws java.util.NoSuchElementException If no public local state was defined for the specified level.
 	 */
 	IPublicLocalState getPublicLocalState( LevelIdentifier level );
 	

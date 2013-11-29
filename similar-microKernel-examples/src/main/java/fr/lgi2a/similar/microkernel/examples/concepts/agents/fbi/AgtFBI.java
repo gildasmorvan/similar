@@ -49,7 +49,6 @@ package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
@@ -93,7 +92,7 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
  * <h1>Agents in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, an agent is implemented as an 
- * 	instance of either the {@link IAgent} interface, or of the {@link AbstractAgent} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.IAgent} interface, or of the {@link AbstractAgent} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

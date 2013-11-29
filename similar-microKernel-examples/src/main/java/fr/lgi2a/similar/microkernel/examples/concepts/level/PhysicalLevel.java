@@ -50,7 +50,6 @@ import java.util.Collection;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IInfluence;
-import fr.lgi2a.similar.microkernel.ILevel;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
@@ -81,7 +80,7 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
  * <h1>Levels in the SIMILAR API suite.</h1>
  * <p>
  * 	In the micro-kernel of SIMILAR, a level is implemented as an 
- * 	instance of either the {@link ILevel} interface, or of the {@link AbstractLevel} 
+ * 	instance of either the {@link fr.lgi2a.similar.microkernel.ILevel} interface, or of the {@link AbstractLevel} 
  * 	abstract class.
  * 	In this example, we use the abstract class which is easier to implement.
  * </p>

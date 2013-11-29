@@ -35,6 +35,9 @@
     				<fileSet>
     					<directory>target/site</directory>
     					<outputDirectory>/</outputDirectory>
+    					<excludes>
+    						<exclude>TiddlySaver.jar</exclude>
+    					</excludes>
     				</fileSet>
     			</fileSets>
     		</sources>

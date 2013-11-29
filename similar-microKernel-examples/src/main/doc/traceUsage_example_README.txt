@@ -1,4 +1,4 @@
-This example defines a usage example of the "Learning" simulation from the common libs. A "Learning" simulation defines
+This example illustrates the usage of the "Learning" simulation from the common libs. A "Learning" simulation defines
 a simulation template where the complete trace of the simulation can be visualized. It gives access to the following values:
 	- The content of a consistent or half consistent dynamic state of the simulation:
 		- The value of the public local states and the global memory state of the agents;

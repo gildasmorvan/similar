@@ -46,7 +46,7 @@ DAMAGE.
 <!--}}}-->
 
 <!--PRE-HEAD-END-->
-<title> Similar API suite - Documentation (v 0.0.1) </title>
+<title> Similar API suite - Examples (micro-kernel) </title>
 <style id="styleArea" type="text/css">
 #saveTest {display:none;}
 #messageArea {display:none;}
@@ -521,50 +521,6 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="API suite Architecture" creator="Designer" modifier="Designer" created="201311261500" modified="201311291014" changecount="30">
-<pre>The SIMILAR API suite was built while considering the best compromise possible between:
-*The +++^34em^*@[efficiency]
-Efficiency is here meant in the context of computing: 
-*Efficiency in memory usage;
-*Efficiency in computations number;
-*Efficiency in time.
-=== of the simulations;
-*The best practices in +++^34em^*@[Knowledge engineering]
-Perform the following operations with the least effort as possible:
-*Model revision;
-*Model extension;
-*Model reuse.
-===, in the context of simulations;
-*The best practices in +++^34em^*@[Software engineering]
-Here in the context of simulation:
-*Separate the generic simulation algorithms with the domain-dependent model;
-*Use software engineering tools facilitating the build of the binaries.
-===, in the context of simulations;
-This lead to a layered architecture separating the API suite in six different API, distributed between two kernels: the ''micro-kernel'' and the ''extended-kernel''.
-
-{{bigemphasisblock{
-Note that these two APIs are compatible: you can write a part of your model using the micro-kernel and the rest using the extended kernel (or conversely)!
-}}}
-!The micro-kernel
-[&gt;img(45%,)[images/structure_microKernel.png]]
-The ''micro kernel'' of SIMILAR defines the core classes of the SIMILAR API. It provides the minimal implementation of these concepts and leaves the implementation of the simulations opened to many optimizations. Thus, this kernel is appropriate for developers wishing to ''tune the low level implementation of the simulation''.
-
-The micro kernel of SIMILAR is characterized by three components:
-*The [[API of the micro kernel|./microKernel/index.html]], containing the java classes of that kernel.
-*The [[common libraries|./microKernel/commonLibs/index.html]] of the micro kernel, containing generic implementations of simulation algorithms and results exporting features.
-*The [[examples|./microKernel/examples/index.html]] illustrating the use of the micro kernel and the common libraries to design simulations.
-!The extended-kernel
-[&gt;img(45%,)[images/structure_extendedKernel.png]]
-The ''extended kernel'' of SIMILAR defines the modular classes of the SIMILAR API. It provides a highly customizable structure to the elements of SIMILAR, where changes can be made even at runtime: agents are even capable of +++^34em^*@[introspection]
-Agent are aware of the nature of their behavior and can base their reasoning on this information.
-=== and +++^34em^*@[intercession]Agents are able to change dynamically their own behavior, //i.e.// adding, removing or modifying elements inside its perception, memory revision or decision process.
-===. Thus, this kernel is appropriate for developers wishing to ''create modular and easy to modify simulations''.
-
-The extended kernel of SIMILAR is characterized by three components:
-*The [[API of the extended kernel|./extendedKernel/index.html]], containing the java classes of that kernel.
-*The [[extended libraries|./extendedKernel/extendedLibs/index.html]] of the extended kernel, containing generic implementations of simulation algorithms and results exporting features.
-*The [[examples|./microKernel/extendedKernel/index.html]] illustrating the use of the micro-kernel, the common libraries, the extended kernel and the extended libraries to design simulations.</pre>
-</div>
 <div title="BackstageNewtiddlerPlugin" creator="Designer" modifier="Designer" created="201311150914" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
 |''Name:''|BackstageSidebarPlugin|
@@ -640,102 +596,6 @@ config.macros.BackstageSidebarPlugin.init = function() {
 !(end of Stylesheet)
 ***/</pre>
 </div>
-<div title="Beginners guide" creator="Designer" modifier="Designer" created="201311261001" modified="201311281007" changecount="126">
-<pre>If you are new to SIMILAR and IRM4MLS, the beginner's guide contains useful information about the theory behind SIMILAR and the decomposition of this API suite
-
-Your starting point in this guide depends on how knowledgeable you are about SIMILAR&lt;html&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/html&gt;. Do not hesistate to skip one step if you are already familiar with it.
-&lt;html&gt;&lt;sub&gt;[1: ... and on your tolerance to mathematical notations.]&lt;/sub&gt;&lt;/html&gt;
-!Theory
-[&lt;img[images/beginnersGuideSummary1.png]]
-The SIMILAR suite is a multi-agent based simulation API relying on the SIMILAR meta-model. This model uses ''Influence/Reaction principle'' and is strongly inspired from the ''Influence/Reaction principle for Multiagent based Simulations'' (IRM4S) and ''Influence/Reaction Model for Multi-Level Simulations'' (IRM4MLS) models.
-
-Since SIMILAR is based on many theoretical concepts from these theories, we highly recommend new users to read these papers.
-
-{{linkbigbtn center{[[Get the papers|Bibliography]]}}}
-!Architecture
-[&lt;img[images/beginnersGuideSummary2.png]]
-The SIMILAR API suite was built while considering the best compromise possible between +++^34em^*@[&lt;strong&gt;simulation efficiency&lt;/strong&gt;]Efficiency is here meant in the context of computing: 
-*Efficiency in memory usage;
-*Efficiency in computations number;
-*Efficiency in time.
-===, +++^34em^*@[&lt;strong&gt;knowledge engineering best practices&lt;/strong&gt;]
-Perform the following operations with the least effort as possible:
-*Model revision;
-*Model extension;
-*Model reuse.
-=== and +++^34em^*@[&lt;strong&gt;software engineering best practices&lt;/strong&gt;]
-Here in the context of simulation:
-*Separate the generic simulation algorithms with the domain-dependent model;
-*Use software engineering tools facilitating the build of the binaries.
-===. This lead to a layered architecture separating the API suite in six different API, distributed between two kernels.
-
-In the end, the only API necessary to build simulations using SIMILAR is the [[API of the micro-kernel|./microKernel/index.html]]. Yet, we highly recommend to take into consideration the various tools provided by the other APIs. These tools will greatly facilitate your task as a simulation designer.
-
-{{linkbigbtn center{[[More about the SIMILAR architecture|API suite Architecture]]}}}
-!Simulation structure
-[&lt;img[images/beginnersGuideSummary4.png]]
-SIMILAR is designed to have a highly customizable architecture, while making the structure of a simulation as explicit as possible. It distinguishes explicitly elements that are often left to the developers and embedded into the code of the simulations.
-
-This part of the documentation presents the general organisation of a simulation using SIMILAR. It describes the ''software decomposition of a simulation'' and the ''role of each element of the decomposition'' in the simulation.
-
-{{linkbigbtn center{[[Structure of a simulation in SIMILAR|General structure]]}}}
-!Design help
-[&lt;img[images/beginnersGuideSummary3.png]]
-The documentation of each kernel of SIMILAR embeds information helping the design of simulations:
-*A ''simulation design methodology'', telling how to incrementally build a simulation;
-*Runnable ''examples'' showing how some simulations can be implemented;
-*''Learning tools'', including:
-**Tools focusing on the comprehension of the mechanisms underlying SIMILAR;
-**Examples showing how to solve specific simulation problems.
-
-{{linkbigbtn{[[Micro-kernel|./microKernel/index.html]]}}} {{linkbigbtn{[[Extd. kernel|./extendedKernel/index.html]]}}}</pre>
-</div>
-<div title="Bibliography" creator="Designer" modifier="Designer" created="201311261029" modified="201311261149" changecount="40">
-<pre>The SIMILAR API suite is based on various theories that are not fully described in this documentation. More information can be found in the following documents:
-*The //SImulations with MultI-Level Agents and Reactions// (''SIMILAR'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-!Available documents
-The theoretical paper on SIMILAR is currently not available (work in process).
-&lt;&lt;&lt;
-Contact ''Gildas Morvan'' ( //gildas.morvan@univ-artois.fr// ) for more details about SIMILAR.
-&lt;&lt;&lt;
-}}}
-===
-
-*The //Influence/Reaction Model for Multi-Level Simulations// (''IRM4MLS'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-!Available documents
-Paper focusing on the formalized model of IRM4MLS:
-&lt;&lt;&lt;
-[&gt;img(50px,)[images/pdf.png][./files/morvan10irm4mls.pdf]] ''IRM4MLS: The Influence Reaction Model for MultiLevel Simulation''&lt;br/&gt;G. Morvan, A. Veremme, D. Dupont,&lt;br/&gt;//Workshop on Multi-Agent Systems and Agent-Based Simulation (MABS)//, Toronto, Canada, 2010
-&lt;&lt;&lt;
-Paper focusing on the formalized model of IRM4S, IRM4MLS and on a simulation example using IRM4MLS (multi-level game of life):
-&lt;&lt;&lt;
-[&gt;img(50px,)[images/pdf.png][./files/morvan12irm4mls.pdf]] ''Multi-level agent-based modeling with the Influence Reaction principle''&lt;br/&gt;G. Morvan, D. Jolly,&lt;br/&gt;//CoRR, abs/1204.0634//, 2012
-&lt;&lt;&lt;
-}}}
-===
-
-*The //Influence/Reaction principle for Multiagent based Simulations// (''IRM4S'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-!Available documents
-Short paper describing the main notations and features of the IRM4S model:
-&lt;&lt;&lt;
-[&gt;img(50px,)[images/pdf.png][./files/michel07irm4sShort.pdf]] ''The IRM4S Model: The Influence/Reaction Principle for Multi-Agent Based Simulation''&lt;br/&gt;F. Michel&lt;br/&gt;//Proceedings of AAMAS'07//, Honolulu, Hawai’i, USA, May 14–18 2007
-&lt;&lt;&lt;
-}}}
-===
-
-*The //Influence/Reaction model// theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-!Available documents
-Paper focusing on the formalized model of the Influence/Reaction principle:
-&lt;&lt;&lt;
-[&gt;img(50px,)[images/pdf.png][./files/ferber96ir.pdf]] ''Influences and Reaction : a Model of Situated Multiagent Systems''&lt;br/&gt;J. Ferber, JP. Müller&lt;br/&gt;//Proceedings of the Second International Conference on Multiagent Systems//, 1996
-&lt;&lt;&lt;
-}}}
-===</pre>
-</div>
 <div title="ConfigTweaks" creator="Administrator" modifier="Designer" created="201311150903" modified="201311151014" tags="excludeLists systemConfig" changecount="3">
 <pre>/*{{{*/
 config.options.txtUserName='Designer';
@@ -743,7 +603,7 @@ config.options.chkSaveBackups=false;
 config.options.chkDisableWikiLinks=true;
 /*}}}*/</pre>
 </div>
-<div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311261459" modified="201311271605" tags="system excludeLists" changecount="5">
+<div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311290938" modified="201311290952" tags="system excludeLists" changecount="2">
 <pre>[[Home]]
 [[Documentation content]]</pre>
 </div>
@@ -849,36 +709,8 @@ Tiddler.prototype.changed = function()
 };
 //}}}</pre>
 </div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311261511" modified="201311281615" changecount="7">
-<pre>The SIMIAR API suite is a java API whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. Its present documentation contains the following features:
-
-!!Beginner's guide
-[&lt;img(25%,)[images/newcomer.png]]
-If you are new to SIMILAR and IRM4MLS, the ''beginner's guide'' contains useful information about the theory behind SIMILAR and the decomposition of this API suite.
-
-{{linkbigbtn center{[[Go to the beginner's guide|Beginners guide]]}}}
-
-!!Javadoc API
-[&lt;img(25%,)[images/javadoc.png]]
-The javadoc API of the whole SIMILAR API suite.
-
-{{linkbigbtn center{[[Go to the javadoc API|./api/index.html]]}}}
-
-!!Micro kernel
-[&gt;img(25%,)[images/structure_microKernel.png]]
-The documentation of a [[micro kernel|./microKernel/index.html]], advised for users who wish to ''tune the efficiency'' of the simulation at the cost of ''significant manual implementations''. It comes with:
-*Common libraries facilitating the design of simulations
-*Examples illustrating the usage and the mechanisms of the micro-kernel
-
-{{linkbigbtn center {[[Micro-kernel documentation|./microKernel/index.html]]}}}
-
-!!Extended kernel
-[&gt;img(25%,)[images/structure_extendedKernel.png]]
-The documentation of an [[extended kernel|./extendedKernel/index.html]], advised for users who wish to create ''modular and easy to modify'' simulations. It comes with:
-*Extended libraries facilitating the design of simulations
-*Examples illustrating the usage and the mechanisms of the extended-kernel
-
-{{linkbigbtn center {[[Extended-kernel documentation|./extendedKernel/index.html]]}}}</pre>
+<div title="Documentation content" creator="Designer" modifier="Designer" created="201311290947" modified="201311291023" changecount="11">
+<pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
 <div title="DropDownMenuPlugin" creator="Designer" modifier="Designer" created="201311151101" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
@@ -1055,17 +887,7 @@ store.addNotification(&quot;StyleSheetDropDownMenuPlugin&quot;,refreshStyles);
 //!END-PLUGIN-CODE
 // %/</pre>
 </div>
-<div title="General structure" creator="Designer" modifier="Designer" created="201311261546" modified="201311270843" changecount="8">
-<pre>SIMILAR is designed to have a highly customizable architecture, while making the structure of a simulation as explicit as possible. It distinguishes explicitly elements that are often left to the developers and embedded into the code of the simulations:
-*The [[concepts of SIMILAR|Structure - Concepts mapping]] are embodied as concrete classes;
-*The [[simulation model|Structure - Simulation model]] defines the declarative part of the simulation (the description of the simulated phenomenon);
-*The [[simulation engine|Structure - Simulation engine]] defines the procedural part of the simulation (the generic algorithms running simulations);
-*The [[observation probes|Structure - Probe]] define simulation data exportation routines in various formats.
-
-[img(100%,)[images/similarArchitectureIllustration.png]]
-{{center caption{General architecture of a simulation in SIMILAR}}}</pre>
-</div>
-<div title="GettingStarted" creator="Designer" modifier="Designer" created="201311150928" modified="201311261459" tags="system excludeLists" changecount="124">
+<div title="GettingStarted" creator="Designer" modifier="Designer" created="201311150928" modified="201311290938" tags="system excludeLists" changecount="123">
 <pre>[[StyleSheetCustomization]]
 
 To get started with this blank TiddlyWiki, you'll need to modify the following tiddlers:
@@ -1153,13 +975,23 @@ Tabulation content 2.
 <div title="HaemoSideBar" creator="Designer" modifier="Designer" created="201311150920" modified="201311150925" tags="HaemoglobinTheme excludeLists" changecount="5">
 <pre></pre>
 </div>
-<div title="Home" creator="Designer" modifier="Designer" created="201311261001" modified="201311290938" changecount="52">
-<pre>The simulation of complex system often requires knowledge coming from different sources to obtain relevant results. These sources can either be persons from different application fields, or different viewpoints on the same phenomenon.
-		
-Yet, regular multi-agent based simulation meta models lack the structure to manage the aggregation of such systems: their representation of the agents, the environment and the temporal dynamics of the system is designed to support a single viewpoint.
-		
-The +++^34em^*@[&lt;strong&gt;SIMILAR&lt;/strong&gt;]''SIMILAR'' stands for: //''SI''mulations with ''M''ult''I''-''L''evel ''A''gents and ''R''eactions//.
-=== approach is designed to deal with this issue. This approach relies on a a multi-level, influence-reaction and agent-based knowledge representation, more fitting to multiple viewpoints. The approach includes a generic and modular formal model, a methodology and a simulation API preserving the structure of the formal model. Owing to these properties, the design of the above-mentioned simulations is supported during the whole simulation process, is more robust to model revisions and relies on a structure fit to represent the intrinsic complexity of the simulated phenomena.
+<div title="Home" creator="Designer" modifier="Designer" created="201311290939" modified="201311291048" changecount="23">
+<pre>[&gt;img(35%,)[images/structure_microExamples.png]]
+The examples illustrating the use of the micro kernel and the common libraries to design simulations. These examples include:
+*A simulation where the FBI chases aliens that experiment on citizens. +++?[&lt;span class=&quot;expandbutton&quot;&gt;Usage details&lt;/span&gt;]
+{{moresection{
+This simulation illustrates:
+*how the concepts of the formal model of SIMILAR are applied to a concrete simulation;
+*how to use the common libs to build simulations;
+*how many different simulation design problems are handled in SIMILAR.
+}}}
+===
+
+*A simulation providing the complete trace of the simulation execution. +++?[&lt;span class=&quot;expandbutton&quot;&gt;Usage details&lt;/span&gt;]
+{{moresection{
+The study on a simulation trace of the execution mechanisms of a simulation.
+}}}
+===
 
 {{linkbigbtn center{[[Documentation content]]}}}</pre>
 </div>
@@ -1339,124 +1171,51 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 }
 //}}}</pre>
 </div>
-<div title="Include this library" creator="Designer" modifier="Designer" created="201311151203" modified="201311280919" changecount="19">
-<pre>To compile and execute code using the SIMILAR API suite, the following instructions have to be used. Note that the following instructions include +++^34em^*@[all the libraries]
-The mentionned jar file points to all the libraries of SIMILAR:
-*The micro-kernel
-**The common-libs
-**The micro-kernel examples
-*The extended-kernel
-**The extended-libs
-**The extended-kernel examples
-=== of the API suite at once:
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Javac / Java commands&lt;/span&gt;]
-{{docsection{
-The ''&quot;similar-distribution-0.0.1.jar&quot;'' file from the ''&quot;similarLib&quot;'' directory has to be included in the classpath:
-{{{
-javac -classpath similarLib/similar-distribution-0.0.1.jar ...
-}}}
-{{{
-java -cp similarLib/similar-distribution-0.0.1.jar ...
-}}}
-Note that these command lines work only if the &quot;''similarLib''&quot; directory also contains the jar files of the libraries of the SIMILAR API suite.
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Apache Maven&lt;/span&gt;]
-{{docsection{
+<div title="Include this library" creator="Designer" modifier="Designer" created="201311151203" modified="201311151203" changecount="2">
+<pre>!Dependency Information
+!!Apache Maven
 {{{
 &lt;dependency&gt;
   &lt;groupId&gt;fr.lgi2a&lt;/groupId&gt;
-  &lt;artifactId&gt;similar-distribution&lt;/artifactId&gt;
+  &lt;artifactId&gt;similar-microKernel&lt;/artifactId&gt;
   &lt;version&gt;0.0.1&lt;/version&gt;
 &lt;/dependency&gt;
 }}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Apache Buildr&lt;/span&gt;]
-{{docsection{
+!!Apache Buildr
 {{{
-'fr.lgi2a:similar-distribution:jar:0.0.1'
+'fr.lgi2a:similar-microKernel:jar:0.0.1'
 }}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Apache Ant&lt;/span&gt;]
-{{docsection{
+!!Apache Ant
 {{{
-&lt;dependency org=&quot;fr.lgi2a&quot; name=&quot;similar-distribution&quot; rev=&quot;0.0.1&quot;&gt;
-  &lt;artifact name=&quot;similar-distribution&quot; type=&quot;jar&quot; /&gt;
+&lt;dependency org=&quot;fr.lgi2a&quot; name=&quot;similar-microKernel&quot; rev=&quot;0.0.1&quot;&gt;
+  &lt;artifact name=&quot;similar-microKernel&quot; type=&quot;jar&quot; /&gt;
 &lt;/dependency&gt;
 }}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Groovy Grape&lt;/span&gt;]
-{{docsection{
+!!Groovy Grape
 {{{
 @Grapes(
-@Grab(group='fr.lgi2a', module='similar-distribution', version='0.0.1')
+@Grab(group='fr.lgi2a', module='similar-microKernel', version='0.0.1')
 )
 }}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Grails&lt;/span&gt;]
-{{docsection{
+!!Grails
 {{{
-compile 'fr.lgi2a:similar-distribution:0.0.1'
+compile 'fr.lgi2a:similar-microKernel:0.0.1'
 }}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Leiningen&lt;/span&gt;]
-{{docsection{
+!!Leiningen
 {{{
-[fr.lgi2a/similar-distribution &quot;0.0.1&quot;]
+[fr.lgi2a/similar-microKernel &quot;0.0.1&quot;]
 }}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;SBT&lt;/span&gt;]
-{{docsection{
+!!SBT
 {{{
-libraryDependencies += &quot;fr.lgi2a&quot; %% &quot;similar-distribution&quot; % &quot;0.0.1&quot;
-}}}
-}}} ===</pre>
+libraryDependencies += &quot;fr.lgi2a&quot; %% &quot;similar-microKernel&quot; % &quot;0.0.1&quot;
+}}}</pre>
 </div>
-<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201311281615" tags="excludeLists system" changecount="40">
-<pre>''General''
+<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201311291041" tags="excludeLists system" changecount="29">
+<pre>{{toparent{[[back to parent|../index.html]]}}}
+''General''
 ----
 *[[Home]]
-*[[Documentation index|Documentation content]]
-*[[Team]]
-*[[Project licence]]
-''Beginners guide''
-----
-*[[Guide index|Beginners guide]]
-*[[Theory|Bibliography]]
-*[[Architecture|API suite Architecture]]
-''Structure of a simulation''
-----
-*[[General structure]]
-*[[Concepts mapping|Structure - Concepts mapping]]
-*[[Simulation model|Structure - Simulation model]]
-**[[Time model|Structure - Simulation model - Time model]]
-**[[Reaction model|Structure - Simulation model - Reaction model]]
-*[[Simulation engine|Structure - Simulation engine]]
-*[[Probe|Structure - Probe]]
-''Kernels documentation''
-----
-*[[Javadoc API|./api/index.html]]
-*[[Micro-kernel|./microKernel/index.html]]
-*[[Extended-kernel|./extendedKernel/index.html]]
-''Maven documentation''
-----
-*[[Project dependencies]]
-*[[Include this library]]
-</pre>
+*[[Documentation index|Documentation content]]</pre>
 </div>
 <div title="MathJaxPlugin" creator="Administrator" modifier="Designer" created="201311150900" modified="201311151031" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***
@@ -1534,7 +1293,7 @@ config.formatters.push({
 });
 //}}}</pre>
 </div>
-<div title="NestedSlidersPlugin2" creator="Designer" modifier="Designer" created="201311151017" modified="201311261346" tags="plugin systemConfig excludeLists" changecount="6">
+<div title="NestedSlidersPlugin2" creator="Designer" modifier="Designer" created="201311151017" modified="201311260758" tags="plugin systemConfig excludeLists" changecount="5">
 <pre>/***
 |Name|NestedSlidersPlugin2|
 |Source|http://www.TiddlyTools.com/#NestedSlidersPlugin|
@@ -2058,97 +1817,52 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201311280956" changecount="41">
-<pre>This part of the documentation was generated with Maven.
-!Project Dependencies
+<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201311151202" changecount="18">
+<pre>!Project Dependencies
 The following is a list of dependencies for this project. These dependencies are required to compile and use the application.
-
-+++?[&lt;span class=&quot;implbigbtn&quot;&gt;Compile scope&lt;/span&gt;]
-{{implsection{
-The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:
-|!GroupId |!ArtifactId |!Version |!Type |!License |
-|fr.lgi2a |similar-microKernel |0.0.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-microKernel-commonLibs |0.0.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-microKernel-examples |0.0.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-}}}
-===
-
-
-+++?[&lt;span class=&quot;implbigbtn&quot;&gt;Test scope&lt;/span&gt;]
-{{implsection{
+!!test
 The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:
 |!GroupId |!ArtifactId |!Version |!Type |!License |
 |junit |[[junit|http://junit.org/]] |4.11 |jar |[[Common Public License Version 1.0|http://opensource.org/licenses/cpl1.0.txt]] |
 |org.hamcrest |hamcrest-all |1.3 |jar |[[New BSD License|http://opensource.org/licenses/bsd-license.php]] |
-}}}
-===
-
 !Project Transitive Dependencies
 The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.
-
-+++?[&lt;span class=&quot;implbigbtn&quot;&gt;Test scope&lt;/span&gt;]
-{{implsection{
+!!test
 The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:
 |!GroupId |!ArtifactId |!Version |!Type |!License |
 |org.hamcrest |hamcrest-core |1.3 |jar |[[New BSD License|http://opensource.org/licenses/bsd-license.php]] |
-}}} ===
-
-!Project Dependency Tree
-*fr.lgi2a:similar-distribution:jar:0.0.1 +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-|&gt;|!SIMILAR - Binary distribution|
-|''Description:'' |Builds the binary release of the SIMILAR API suite. |
-|''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-}}} ===
-
-**fr.lgi2a:similar-microKernel:jar:0.0.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
+!Project Dependency Graph
+!!Dependency Tree
+*fr.lgi2a:similar-microKernel:jar:0.0.1+++
 |&gt;|!SIMILAR - Micro kernel|
 |''Description:'' |A micro kernel containing the minimal specification of SIMILAR, supporting the design of efficient simulations. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-}}} ===
+===
 
-**fr.lgi2a:similar-microKernel-commonLibs:jar:0.0.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-|&gt;|!SIMILAR - Common libs|
-|''Description:'' |The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features. |
-|''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-}}} ===
-
-**fr.lgi2a:similar-microKernel-examples:jar:0.0.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-|&gt;|!SIMILAR - Micro-kernel examples|
-|''Description:'' |The examples illustrating the use of the micro kernel and the common libraries to design simulations. |
-|''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-}}} ===
-
-**org.hamcrest:hamcrest-all:jar:1.3 (test) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
+**org.hamcrest:hamcrest-all:jar:1.3 (test)+++
 |&gt;|!Hamcrest All |
 |''Description:'' |A self-contained hamcrest jar containing all of the sub-modules in a single artifact. |
 |''Project License:'' |[[New BSD License|http://opensource.org/licenses/bsd-license.php]] |
-}}} ===
+===
 
-**junit:junit:jar:4.11 (test) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
+**junit:junit:jar:4.11 (test)+++
 |&gt;|!JUnit |
 |''Description:'' |JUnit is a regression testing framework written by Erich Gamma and Kent Beck. It is used by the developer who implements unit tests in Java. |
 |''Project License:'' |[[Common Public License Version 1.0|http://opensource.org/licenses/cpl1.0.txt]] |
-}}} ===
+===
 
-***org.hamcrest:hamcrest-core:jar:1.3 (test) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
+***org.hamcrest:hamcrest-core:jar:1.3 (test)+++
 |&gt;|!Hamcrest Core |
 |''Description:'' |This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations. |
 |''Project License:'' |[[New BSD License|http://opensource.org/licenses/bsd-license.php]] |
-}}} ===
+===
 
 !Licenses
 ''New BSD License:'' Hamcrest All, Hamcrest Core
 
 ''Common Public License Version 1.0:'' JUnit
 
-''CeCILL-B Free Software License Agreement:'' SIMILAR - Binary distribution, SIMILAR - Micro kernel, SIMILAR - Common libs, SIMILAR - Micro-kernel examples</pre>
+''CeCILL-B Free Software License Agreement:'' SIMILAR - Micro kernel</pre>
 </div>
 <div title="Project licence" creator="Designer" modifier="Designer" created="201311151108" modified="201311151113" changecount="11">
 <pre>This software is governed by the CeCILL-B license under French law and abiding by the rules of distribution of free software.  You can  use, modify and/ or redistribute the software under the terms of the CeCILL-B license as circulated by CEA, CNRS and INRIA at the following URL http://www.cecill.info. 
@@ -2321,758 +2035,14 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 //}}}
 </pre>
 </div>
-<div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201311281001" tags="system excludeLists" changecount="5">
-<pre>Documentation (v 0.0.1)</pre>
+<div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201311291048" tags="system excludeLists" changecount="7">
+<pre>Examples &lt;html&gt;&lt;sub&gt;(micro-kernel)&lt;/sub&gt;&lt;/html&gt;</pre>
 </div>
-<div title="SiteTitle" creator="Designer" modifier="Designer" created="201311150941" modified="201311151625" tags="system excludeLists" changecount="15">
+<div title="SiteTitle" creator="Designer" modifier="Designer" created="201311150941" modified="201311290943" tags="system excludeLists" changecount="16">
 <pre>[img(50%,)[SIMILAR API suite|images/similarLogo.png]] [&gt;img[images/structure_thumb.png]]</pre>
 </div>
 <div title="SiteTitleText" creator="Designer" modifier="Designer" created="201311151320" tags="system excludeLists" changecount="1">
 <pre>Similar API suite</pre>
-</div>
-<div title="Structure - Concepts mapping" creator="Designer" modifier="Designer" created="201311261612" modified="201311261617" changecount="6">
-<pre>The SIMILAR API suite was designed to provide a direct ''bijection between the theoretical concepts'' developed in SIMILAR ''and their implementation''. This bijection facilitates the comprehension of the code and embodies the proof that the benefits of the SIMILAR meta-model are not purely theoretical.
-
-The following arrays describe the correspondence between the theoretical concepts of SIMILAR and their implementation. Note that this list is not exhaustive and focuses on the core concepts of SIMILAR. See the documentation of the various classes of the micro-kernel and extended-kernel to have a better insight on the correspondance between the theory and this implementation.
-!!Level-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Level |Instances of the {{{ILevel}}} interface. |
-|Perception relation graph of the simulation |Spread among the instances of the {{{ILevel}}} interface of the simulation. The out neighborhood of the perception relation graph is returned by a call to the {{{getPerceptibleLevels()}}} method of the {{{ILevel}}} interface. |
-|Influence relation graph of the simulation |Spread among the instances of the {{{ILevel}}} interface of the simulation. The out neighborhood of the influence relation graph is returned by a call to the {{{getInfluenceableLevels()}}} method of the ILevel interface. |
-|Public local dynamic state of the simulation |Instances of the {{{IDynamicStateMap}}} interface. |
-|Public local dynamic state of a level |Instances of the {{{IPublicLocalDynamicState}}} interface. |
-|Consistent dynamic state of a level |Instances of the {{{ConsistentPublicLocalDynamicState}}} class. |
-|Transitory dynamic state of a level |Instances of the {{{TransitoryPublicLocalDynamicState}}} class. |
-|Reaction process of a level |Implementation of the {{{makeRegularReaction(...)}}} and {{{makeSystemReaction(...)}}} methods of the {{{ILevel}}} interface. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (levels) |c
-!!Environment-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Environment |Instances of the {{{IEnvironment}}} interface. |
-|Public local state of the environment |Instances of the {{{IPublicLocalState}}} interface. |
-|Private local state of the environment |Fields of the implementation of the {{{IEnvironment}}} interface. |
-|Natural action process of the environment from a level. |Implementation of the {{{natural(...)}}} method of the {{{IEnvironment}}} interface. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (environment) |c
-!!Agent-related elements
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Agent |Instances of the {{{IAgent}}} interface. |
-|Global memory state |Instances of the {{{IGlobalMemoryState}}} interface. |
-|Public local state of an agent |Instances of the {{{IPublicLocalStateOfAgent}}} interface. |
-|Private local state of an agent |Fields of the implementation of the {{{IAgent}}} interface. |
-|Perceived data of an agent |Instances of the {{{IPerceivedDataOfAgent}}} interface. |
-|Perception process of an agent from a level |Implementation of the {{{perceive(...)}}} method of the {{{IAgent}}} interface. |
-|Memory revision process of an agent |Implementation of the {{{reviseMemory(...)}}} method of the {{{IAgent}}} interface. |
-|Decision process of an agent from a level |Implementation of the {{{decide(...)}}} method of the {{{IAgent}}} interface. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (agents) |c
-!!Influence-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Influence produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluence}}} interface. |
-|System influences (generic influences) |Instances of the {{{RegularInfluence}}} abstract class |
-|Regular influences (simulation-dependent influences) |Instances of the {{{SystemInfluence}}} abstract class |
-|Set of influences produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluenceMap}}} interface |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (influences) |c
-!!Time-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Time stamp |Instances of the {{{SimulationTimeStamp}}} class |
-|Time evolution model of a level |Implementation of the {{{getNextTime(...)}}} method of the {{{ITimeModel}}} class.&lt;br/&gt; __Note:__ The {{{ILevel}}} interface extends the {{{ITimeModel}}} interface. |
-|Initial time stamp |An instance of the {{{SimulationTimeStamp}}} class defined during the construction of the simulation model. |
-|Final time stamp |The {{{currentTime}}} argument of the {{{isFinalTimeOrAfter(...)}}} method of the {{{ISimulationModel}}} class when this method returns {{{true}}}. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (time) |c
-!!Simulation-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Simulation model |Instances of the {{{ISimulationModel}}} interface |
-|Simulation engine |Instances of the {{{ISimulationEngine}}} interface |
-|Observation probe |Instances of the {{{IProbe}}} interface |
-| |c</pre>
-</div>
-<div title="Structure - Probe" creator="Designer" modifier="Designer" created="201311280726" modified="201311280838" changecount="42">
-<pre>[&gt;img(45%,)[images/similarArchitectureIllustration4.png]]
-The observation and the exploitation of a simulation is managed using ''observation probes''. Probes are autonomous software elements that listen to the evolution of the simulation. They are usually exporting simulation data/results in various formats, so that users can exploit or visualize them.
-
-Considering a observation probe as a top-class abstraction allows to easily change the nature of the data being exported without having to change the simulation model itself.
-
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Examples&lt;/span&gt;]
-{{exsection{
-The probes that can be defined for a simulation include:
-!Graph/graphical charts
-Charts displaying the evolution of a value of a public local state or any agregated values:
-{{center{[img(50%,)[images/probeExample2.png]]}}}
-!Data files exportation
-Storing the evolution of values of the public local states or any agregated values into files:
-{{center{[img(60%,)[images/probeExample3.png]]}}}
-!Simulation overall progress
-For instance displaying the current time stamp of the simulation:
-{{center{[img[images/probeExample4.png]]}}}
-!Simulation-dependent GUIs
-For instance a probe displaying an aerial view on the road traffic:
-{{center{[img(98%,)[images/probeExample.png][images/probeExample.png]]}}}
-}}}
-===
-
-!Probes and simulation execution
-Since the state of the simulation is not always consistent (especially during the computation of the reaction), the probes do not decide by themselves when to observe the simulation. Instead, they wait for the notification by the simulation engine that the state of the simulation is fit to be observed.
-
-The probes observe the simulation:
-*After the initialization, but before the execution of the simulation; +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-__''Observed data:''__ The initial and consistent state of the simulation.
-}}}
-===
-
-*When the simulation reaches an +++^34em^*@[half-consistent state]
-Right after the reaction of at least one level.
-===; +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-__''Observed data:''__ The dynmaic state of the simulation in a half-consistent state.
-}}}
-===
-
-*After the final time stamp of the simulation; +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-__''Observed data:''__ The final consistent state of the simulation.
-}}}
-===
-
-Since simulations do not always execute peacefully, probes also have to manage the case when the simulation fails because of an error. Moreover, since some probes might use external resources, they also have to be notified when a new simulation is about to start or has ended. Consequently, probes are also notified when:
-*A new simulations has been started with the simulation engine; +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-__''Observed data:''__ Nothing.
-This call is dedicated to operations like the creation and opening of a new log file, the reinitialization and display of a GUI, //etc.//
-}}}
-===
-
-*A simulation ends because of an error. +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-__''Observed data:''__ The error that caused the simulation to fail.
-}}}
-===</pre>
-</div>
-<div title="Structure - Simulation engine" creator="Designer" modifier="Designer" created="201311271606" modified="201311271626" changecount="24">
-<pre>[&gt;img(45%,)[images/similarArchitectureIllustration2.png]]
-In SIMILAR, the notion of simulation model is separated from the notion of simulation engine to separate the declarative knowledge of the simulation from the procedural knowledge of the simulation.
-
-A ''simulation engine'' assembles the execution-related information of a simulation. It defines how time is moved, when to ask the agents to perceive, memorize or decide, when the environment produces its natural action or when the reaction is performed. It is also responsible for the notification of the half-consistent states to the porbes and for the reaction to the [[system influences|Structure - Simulation model - Reaction model]]. This knowledge is ''domain independent''.
-
-The separation between model and engine facilitates the optimization of simulations: the most appropriate execution mode can be chosen depending on the simulation. Indeed, a simulation engine can be implemented using different inner mechanisms to manage the execution of a simulation. For instance:
-*Performing all the operations in sequence;
-*Performing the operations (when it is possible) in parallel using threads; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-Perform the decision of each agent in a different thread.
-}}} ===
-
-*Performing the operations (when it is possible) in parallel using threads and GPGPU. +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-Perform the decision of each agent in a different computation unit of the GPU.
-}}} ===
-
-!Procedural knowledge of the simulation
-The simulation engine has different roles in the simulation:
-*Manage the value of the dynamic state of the simulation;
-*Move the simulation through time +++
-Call when it is appropriate:
-**The perception, memorization, decision phases of the agents;
-**The natural phase of the environment;
-**The reaction phase of the levels;
-===
-
-*Ensure that the time-related constraints of the model remain valid; +++
-{{moresection{
-[[This paper|./files/morvan10irm4mls.pdf]] describes the time constraints that the perception, memorization, natural, decision and reaction phases of the simulation have to verify;
-}}}
-===
-
-*Ensure that the observation probes are updated appropriately; +++
-{{moresection{
-Refer to the page dedicated to the [[observation probes|Structure - Probe]].
-}}}
-===
-
-*Provide a reaction to the system influences of any simulation. +++
-{{moresection{
-Refer to the page dedicated to the [[reaction model|Structure - Simulation model - Reaction model]].
-}}}
-===</pre>
-</div>
-<div title="Structure - Simulation model" creator="Designer" modifier="Designer" created="201311261618" modified="201311280728" changecount="34">
-<pre>[&gt;img(45%,)[images/similarArchitectureIllustration3.png]]
-In SIMILAR, the notion of simulation model is separated from the notion of simulation engine to separate the declarative knowledge of the simulation from the procedural knowledge of the simulation.
-
-A ''simulation model'' assembles the simulation-case specific knowledge. It contains the definition of the levels, the agents, the natural action of the environment and the reaction of each level. This ''knowledge is domain specific''.
-
-The separation between model and engine //facilitates the specification of simulations//, since the execution mechanisms of the behavior of agents, of the natural action of the environment and the reaction of the levels are managed automatically. In addition, it provides a //better support for simulation evolution and revision//.
-!Declarative knowledge of the simulation model
-The simulation model has different roles in SIMILAR: the ''description of the model'' itself (the agents, the environment, the levels and the influences) but also the ''description of the initial state'' of the simulation&lt;html&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/html&gt;:
-*Define the influences that can be sent to each level of the simulation +++
-*Create a unique identifier for each type of influence;
-*Identify the level(s) to which the influence can be sent;
-*Identify the +++^34em^*@[information to embed in the influence]The information that are necessary to manage the influence in the reaction===
-
-===
-
-*Define the environment of the simulation +++
-*Define the public local states of the environment +++
-*Define one public local state per level of the simulation
-*Identify the information contained in each of these public local states
-===
-
-*Define the natural action of the environment +++
-*Define a natural action for each level of the simulation
-*The natural action from a level \(l\) models the process used by the environment to generate influences from \(l\). These influences can be aimed at any level in the +++^34em^*@[out neighborhood of l]
-The levels that can be influenced by \(l\).
-=== (influence relation graph).
-===
-
-===
-
-*Define the agents of the simulation +++
-*Define the +++^34em^*@[category]
-A class, type, nature or any other unique value used during the reaction to identify which kind of agent it models.
-=== of the agent;
-*Define the global memory state of the agent +++
-*Define the information that have to be contained in the global memory state;
-*Define the initial information contained in the global memory state;
-===
-
-*Define the public local states of the agent +++
-*Define a public local state for each level where the agent lies;
-*Model the information contained in each public local state;
-*Define the initial information contained in each public local state;
-===
-
-*Define the +++^34em^*@[perceived data]
-An +++^34em^*@[interpretation]
-For instance, if an agent bases its decision on the density of agents in a gird, the perceived data of the agent should be a grid of densities rather than the grid of agents itself.
-=== of the raw data contained in the public local state of the simulation. This interpretation (and the global memory state of the agent) are the only information used in the decision process of the agent to determine what to.
-
-=== of the agent +++
-*Embed the information required by the decisions of an agent from a level \(l\) in a perceived data model
-*Specify a perceived data model for each level where the agent lies
-*Use in a perceived data model only the information lying in the levels that +++^34em^*@[can be perceived from l]
-The levels lying in the out neighborhood of \(l\) in the perception relation graph.
-===
-
-===
-
-*Define the perception process of the agents +++
-*Specify a perception process for each level \(l\) where the agent lies
-*Determine how the agent uses the +++^34em^*@[public dynamic state of the simulation]
-To be more precise, the public local state of the levels that can be perceived from \(l\).
-=== to generate the perceived data.
-===
-
-*Define the memory revision process of the agent +++
-*Define how the agent uses the former value of its global memory state and the +++^34em^*@[lastly perceived data]
-The last data that were perceived by the agent from each level where it lies.
-=== to build the new value of its global memory state
-
-===
-
-*Define the decision process of the agent +++
-*Specify a decision process for each level \(l\) where the agent lies
-*Define how the agent uses its global memory state and the perceived data from \(l\) to generate influences into the +++^34em^*@[influenceable levels]
-The levels belonging to the out neighborhood of \(l\) in the influence relation graph.
-=== from \(l\).
-===
-
-===
-
-*Define the levels of the simulation +++
-*Create a unique +++^34em^*@[identifier]
-A unique value used during the reaction to identify the levels.
-=== for each level \(l\) of the simulation;
-*Identify the levels that +++^34em^*@[can be perceived]
-The levels lying in the out neighborhood of \(l\) in the perception relation graph.
-=== from \(l\);
-*Identify the levels that +++^34em^*@[can be influenced]
-The levels lying in the out neighborhood of \(l\) in the influence relation graph.
-=== by \(l\);
-*Define the +++^34em^*@[time model]
-Usually the ordered set of time stamps when the level is consistent in the simulation, or at least a deterministic criterion telling how to obtain the next consistent time following a consistent time.
-=== of the level;
-*Define the reaction process of the level +++
-*Define how the level interprets the influences that were aimed at it to +++^34em^*@[update its public dynamic state]
-Update the public local state of the environment in the level \(l\), or the public local state in \(l\) of the agents lying in \(l\).
-===
-
-*Define which influence +++^34em^*@[persist after reaction]
-Influences persist if the action they represent has not finished after the reaction.
-=== and which influences are consumed by the reaction;
-===
-
-===
-
-*Define the initial setting of the simulation +++
-*Create the levels of the simulation;
-*Create the environment of the simulation +++
-*Create an instance of the model of the environment;
-*Initialize the public local state of the environment for each level of the simulation;
-===
-
-*Create the initial agents of the simulation;
-*Create the initial influences of the simulation;
-===
-
-!SIMILAR Vs. IRM4MLS/IRM4S
-SIMILAR differs from [[IRM4MLS|Bibliography]] and [[IRM4S|Bibliography]] mainly because of two concepts:
-*The model of the reaction used in the levels;
-*The time evolution model of the simulation.
-We do not intend to describe formally these differences in this documentation. Yet, we consider that these points are important enough to bring some clarifications.
-
-{{center{ {{linkbigbtn {[[About the time model|Structure - Simulation model - Time model]]}}} {{linkbigbtn {[[About the reaction model|Structure - Simulation model - Reaction model]]}}} }}}
-
-&lt;html&gt;&lt;sub&gt;1: The order of this presentation is not necessarily the order of the specification.&lt;/sub&gt;&lt;/html&gt;</pre>
-</div>
-<div title="Structure - Simulation model - Reaction model" creator="Designer" modifier="Designer" created="201311261644" modified="201311270719" changecount="53">
-<pre>In the [[IRM4MLS|Bibliography]] and [[IRM4S|Bibliography]] approaches, the reaction is considered as domain-dependent. As a consequence, the users are doomed to manually re-write the reaction every time, even though the reaction to some specific influences remains the same no matter the simulation.
-
-In SIMILAR, we consider that a simulation has to manage two kinds of influences:
-*''Regular influences'', modeling the influences that are domain-dependent;
-*''System influences'', modeling the influences that are independent from the application field.
-Since the reaction to the system influence is domain independent, users shouldn't have to write it. Therefore, ''the reaction process'' is different in SIMILAR compared to [[IRM4MLS|Bibliography]] and [[IRM4S|Bibliography]].
-!System influences in SIMILAR
-&lt;&lt;tiddler [[Structure - Simulation model - Reaction model - System influences]]&gt;&gt;
-!Reaction process in SIMILAR
-&lt;&lt;tiddler [[Structure - Simulation model - Reaction model - Process]]&gt;&gt;</pre>
-</div>
-<div title="Structure - Simulation model - Reaction model - Process" creator="Designer" modifier="Designer" created="201311261816" modified="201311270734" changecount="16">
-<pre>Before presenting the general algorithm itself, we would like to draw attention on three important problems in the reaction:
-#The //reaction to a system influence// can //produce other influences// +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-When an agent is added to the simulation, its public local state has to appear in each level of the simulation. Threfore, the reaction to the ''&quot;add new agent&quot;'' influence produces one or more ''&quot;add agent to the level l&quot;'' influences.
-}}} ===
-
-#The //addition/removal of an agent to a level// might //require// the //modification of the environment// +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-In a level where agents have //(x,y)// coordinates, the public local state of the environment can define a grid of agents to provide a fast access to the agents using their coordinates. In such a case, each time an agent is added to the level, it has to be added to the appropriate cell of the grid. The same goes for the removal of the agent.
-}}}===
-
-#The //reaction to a regular influence// might //create// new agents///delete// existing agents +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-For instance, in a shooting simulation, a //&quot;person&quot;// agent being hit by a bullet might die in some specific circumstances. In such a case, the person agent is removed from the simulation (and might be replaced by a //&quot;corpse&quot;// agent).
-}}}===
-
-!!A process more complex than expected
-Because of the combination of these three problems, the ''reaction process is more complex'' than expected:
-*The first problem induces that the reaction to system influences has to be a loop;
-*The second problem induces that each time a system influence is processed, the user must have the opportunity to perform actions;
-*The last problem induces that during the reaction to regular influences, the user might create system influences that have to be processed right away.
-Consequently, the reaction of the levels has to rely on the following algorithm. Note that this algorithm assumes that a reaction can be computed in more than one level at the same time&lt;html&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/html&gt;:
-
-+++?[&lt;span class=&quot;implbigbtn&quot;&gt;See the algorithm&lt;/span&gt;]
-{{implsection {
-We consider that \(L_r\) is the set of levels that are reacting at the same time
-#As long as there are unprocessed system influences aimed at a level from \(L_r\)
-##\(\forall{} l \in L_r :\)
-###React to the unprocessed system influences of \(l\)
-###If the reaction generated new system influences, tag the ones aimed at levels from \(L_r\) as unprocessed
-###Ask the level \(l\) to perform a user-defined reaction to the system influences aimed at \(l\) that were processed.
-#\(\forall{} l \in L_r :\)
-##Perform the user-defined reaction to the regular reactions aimed at \(l\)
-###If the reaction generated new system influences, tag the ones aimed at levels from \(L_r\) as unprocessed
-#As long as there are unprocessed system influences aimed at a level from \(L_r\)
-##\(\forall{} l \in L_r :\)
-###React to the unprocessed system influences of \(l\)
-###If the reaction generated new system influences, tag the ones aimed at levels from \(L_r\) as unprocessed
-###Ask the level \(l\) to perform a user-defined reaction to the system influences aimed at \(l\) that were processed.
-}}}===
-
-&lt;html&gt;&lt;sub&gt;1: This can happen especially when two levels are consistent at the same time stamp.&lt;/sub&gt;&lt;/html&gt;</pre>
-</div>
-<div title="Structure - Simulation model - Reaction model - System influences" creator="Designer" modifier="Designer" created="201311261734" modified="201311261821" changecount="20">
-<pre>In the current implementation of SIMILAR, the system influences are:
-*The //addition of an agent to the simulation//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-As its name implies, this influence requests the addition of an agent to the simulation. This influence can be used in various contexts:
-*In //the behavior of the agents//, if their decisions lead to the creation of new agents;
-*In the //initial state of the simulation//, if the agent has to be added during the first reaction of a level;
-*In //a reaction//, if an agent has to be added in reaction to another influence.
-Since this influence is tagged as system, a generic system reaction has to be defined for that influence.
-!!System reaction
-The reaction to this influence consists in:
-#Adding the agent to the list of agents currently lying in the simulation;
-#Requesting the addition of the public local state of the agent to their corresponding levels;
-!!Important notices
-*The level to which the influence is aimed determines when the agent is added to the simulation.
-*The public local state of the agent appears immediatly in the levels that were computing a reaction;
-*The apparition of the public local state of the agent in the other levels is delayed to their next reaction.
-}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceAddAgent}}} class, located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package. 
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceAddAgent( LevelIdentifier targetLevel, IAgent agent );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
-
-''Parameters:''
-*''targetLevel:'' The target level as described in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface;
-*''agent:'' The agent to add to the simulation.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the agent are {{{null}}}.
-}}} 
-}}} ===
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
-{{exsection{
-In this example, we consider that:
-*There is a level which identifier is //&quot;Earth&quot;//;
-*An agent was created and stored in the variable named //&quot;agentToAdd&quot;//;
-*The agent addition influence is aimed at the //&quot;Earth&quot;// level.
-
-This example illustrates the addition of the //&quot;agentToAdd&quot;// agent to the simulation during the next reaction of the //&quot;Earth&quot;// level.
-!!Code
-{{{
-IAgent agentToAdd = ...;
-LevelIdentifier identifier = new LevelIdentifier( &quot;Earth&quot; );
-SystemInfluenceAddAgent influence = new SystemInfluenceAddAgent(
-	identifier,
-	agentToAdd
-);
-}}}
-}}} ===
-}}} ===
-
-*The //removal of an agent from the simulation//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-As its name implies, this influence requests the removal of an agent from the simulation. This influence can be used in various contexts:
-*In //the behavior of the agents//, if their decisions lead to the destruction of an existing agent;
-*In //the initial state of the simulation//, if the agent has to be removed during the first reaction of a level;
-*In //a reaction//, if the agent has to be removed in reaction to another influence.
-
-Since this influence is tagged as system, a generic system reaction has to be defined for that influence.
-!!System reaction
-The reaction to this influence consists in:
-*Removing the agent from the list of agents currently lying in the simulation;
-*Requesting the removal of the public local state of the agent from their corresponding levels;
-!!Important notices
-*This influence takes as an argument a public local state since this is the only part of an agent that can be perceived by the other agents;
-*The level to which the influence is aimed determines when the agent is removed from the simulation.
-*The public local state of the agent disappears immediatly in the levels that were computing a reaction;
-*The disparition of the public local state of the agent in the other levels is delayed to their next reaction.
-}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceRemoveAgent}}} class, located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceRemoveAgent( 
-	LevelIdentifier targetLevel, 
-	IPublicLocalStateOfAgent publicLocalStateOfAgent 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
-
-''Parameters:''
-*''targetLevel:'' The target level as described in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface;
-*''publicLocalStateOfAgent:'' A public local state of the agent to remove from the simulation.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the agent are {{{null}}}.
-}}} 
-}}} ===
-
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
-{{exsection{
-In this example, we consider that:
-*There is a level which identifier is //&quot;Earth&quot;//;
-*An agent has a public local state stored in a local variable named //&quot;stateOfRemovedAgent&quot;//;
-*The agent removal influence is aimed at the //&quot;Earth&quot;// level.
-
-This example illustrates the removal from the simulation of the agent owning the //&quot;stateOfRemovedAgent&quot;// public local state, during the next reaction of the //&quot;Earth&quot;// level.
-!!Code
-{{{
-IPublicLocalStateOfAgent stateOfRemovedAgent = ...;
-LevelIdentifier levelIdentifier = new LevelIdentifier( &quot;Earth&quot; );
-SystemInfluenceRemoveAgent influence = new SystemInfluenceRemoveAgent(
-	levelIdentifier,
-	stateOfRemovedAgent
-);
-}}}
-}}} ===
-}}} ===
-
-*The //addition of an agent to a level//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-As its name implies, this influence requests the addition of an agent to a specific level. This influence can be used in various contexts:
-*In //the behavior of the agents//, if their decisions lead to the apparition of an agent in a level;
-*In //the initial state of the simulation//, if the agent has to appear in a level during the first reaction of that level;
-*In //a reaction//, if an agent has to be added to a level in reaction to another influence.
-!!System reaction
-The reaction to this influence consists in:
-#Adding the public local state of the agent to the public local dynamic state of that level.
-!!Important notices
-*The level at which the influence is aimed has to be the level where the public local state appears.
-}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceAddPublicLocalStateToDynamicState}}} class, located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceAddPublicLocalStateToDynamicState( 
-	LevelIdentifier targetLevel, 
-	IPublicLocalStateOfAgent publicLocalState 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the dynamic state of a specific level during the next reaction of that level.
-
-''Parameters:''
-*''targetLevel:'' The target level of the influence, as defined in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface.
-*''publicLocalState:'' The public local state to add to the public dynamic local state of the level.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the public local state are &lt;code&gt;null&lt;/code&gt;.
-}}} 
-}}} ===
-
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
-{{exsection{
-In this example, we consider that:
-*There is a level which identifier is //&quot;Earth&quot;//;
-*An agent owns a public local state for the level //&quot;Earth&quot;//, stored in the variable named //&quot;stateToAdd&quot;//;
-*The //&quot;stateToAdd&quot;// public local state is not already in the public local dynamic state of the //&quot;Earth&quot;// level.
-
-This example illustrates the apparition in the //&quot;Earth&quot;// level of the //&quot;stateToAdd&quot;// public local state of an agent, during the next reaction of the //&quot;Earth&quot;// level.
-!!Code
-{{{
-IPublicLocalStateOfAgent stateToAdd = ...;
-LevelIdentifier levelIdentifier = new LevelIdentifier ( &quot;Earth&quot; );
-SystemInfluenceAddPublicLocalStateToDynamicState influence = new SystemInfluenceAddPublicLocalStateToDynamicState(
-	levelIdentifier,
-	stateToAdd
-);
-}}}
-}}} ===
-}}} ===
-
-*The //removal of an agent from a level//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-As its name implies, this influence requests the removal of an agent from a specific level. This influence can be used in various contexts:
-*In //the behavior of the agents//, if their decisions lead to the disparition of an agent from a level;
-*In //the initial state of the simulation//, if the agent has to disappear from a level during the first reaction of that level;
-*In //a reaction//, if an agent has to be removed from a level in reaction to another influence.
-!!System reaction
-The reaction to this influence consists in:
-#Removing the public local state of the agent from the public local dynamic state of that level.
-!!Important notices
-*The level at which the influence is aimed has to be the level where the public local state lies;
-*If the agent still lies in other levels, the agent still has a behavior in those levels.
-}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceRemovePublicLocalStateFromDynamicState}}} class is located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceRemovePublicLocalStateFromDynamicState( 
-	LevelIdentifier targetLevel, 
-	IPublicLocalStateOfAgent publicLocalState 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds a 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the dynamic state of a specific level during the next reaction of that level.
-
-''Parameters:''
-*''targetLevel:'' The target level of the influence, as defined in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface;
-*''publicLocalState:'' The public local state to remove from the public dynamic local state of the level.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the public local state are {{{null}}}.
-}}} 
-}}} ===
-
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
-{{exsection{
-In this example, we consider that:
-*There is a level which identifier is //&quot;Earth&quot;//;
-*An agent owns a public local state for the level //&quot;Earth&quot;//, stored in the variable named //&quot;stateToRemove&quot;//;
-*The //&quot;stateToRemove&quot;// public local state is in the public local dynamic state of the //&quot;Earth&quot;// level.
-
-This example illustrates the disappearance from the //&quot;Earth&quot;// level of the //&quot;stateToRemove&quot;// public local state of an agent, during the next reaction of the //&quot;Earth&quot;// level.
-!!Code
-{{{
-IPublicLocalStateOfAgent stateToRemove = ...;
-LevelIdentifier levelIdentifier = new LevelIdentifier( &quot;Earth&quot; );
-SystemInfluenceRemovePublicLocalStateFromDynamicState influence = new SystemInfluenceRemovePublicLocalStateFromDynamicState(
-	levelIdentifier,
-	stateToRemove 
-);
-}}}
-}}} ===
-}}} ===</pre>
-</div>
-<div title="Structure - Simulation model - Time model" creator="Designer" modifier="Designer" created="201311270745" modified="201311271459" changecount="96">
-<pre>Managing explicitly the time in a simulation is not necessarily an easy task. Indeed, a simulation often relies on the notion of //&quot;time step&quot;// whereas simulated phenomena rely on notions like hours/minutes/seconds, seasons or years. In SIMILAR, we define the ''time model'' as the mean to clarify and handle this problem.
-!Regular model of time
-In reality, time is often seen as a +++^34em^*@[&lt;strong&gt;continuous&lt;/strong&gt;]
-If we take two different time values, it is always possible to find a thrid time value between them.
-=== flow. As a consequence, the properties of the phenomenon (//e.g.// a temperature, a number of subjects, a blood pressure) can be observed at almost any time. On the opposite, multi-agent based simulations (and more generally computer simulations) operate using a +++^34^*@[&lt;strong&gt;discretization&lt;/strong&gt;]
-The simulation &quot;jumps&quot; from a state to the other and have no intermediary states in between.
-===  of time&lt;html&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/html&gt;.
-
-[img(98%,)[images/generalTimeModel.png]]
-{{center caption{Illustration of the difference between real time and a simulation time model}}}
-+++?[&lt;span class=&quot;morebigbtn&quot;&gt;Read more...&lt;/span&gt;] {{moresection{
-First of all, a simulation is defined only for a specific subset of real time, called ''definition domain'' of the simulation. The evolution of the simulated phenomenon out of this domain is considered as not relevant: the simulation stays still during this period&lt;html&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/html&gt;. 
-
-Then, the state of the simulation is defined only for a discrete subset of the definition domain of the simulation. This discrete subset contains elements called ''time stamps''. 
-!!Transitory state
-Since the state of the simulation is defined only at each time stamp, the behavior of the agents, of the environment and the evolution of the dynamic state of the simulation occurs between two time stamps. To make our speach clearer, we use the following terminology:
-*The dynamic state of the simulation is in a ''consistent state'' at each time stamp;
-*The dynamic state of the simulation is in a ''transitory state'' between two consecutive time stamps.
-[img(98%,)[images/generalTimeModel2.png]]
-{{center caption{Illustration of the concepts of consistent and transitory states}}}
-
-&lt;html&gt;&lt;sub&gt;1: Even in continuous time models like discrete time event models.&lt;/sub&gt;&lt;/html&gt;
-&lt;html&gt;&lt;sub&gt;2: Since the simulation stays still, the state of the phenomenon can be observed anytime. This is the reason why the time is seen as continuous out of the definition domain of the simulation.&lt;/sub&gt;&lt;/html&gt;
-}}} ===
-!Multi-level model of time
-In multi-level simulations, the management of time is even more complex, since ''each level'' evolves using its ''own time model''. Indeed, levels are not necessarily moving through time synchronously: for instance, there might be a phase shift between their evolution or they can move at different paces, //etc.//
-
-[img(98%,)[images/multiLevelTimeModel.png]]
-{{center caption{Illustration of a multi-level simulation time model}}}
-+++?[&lt;span class=&quot;morebigbtn&quot;&gt;Read more...&lt;/span&gt;] {{moresection{
-!!Transitory states in multi-level simulations
-In the context of multi-level simulations, the terminology has to be extented. Indeed, each level has its own time model. Therefore, strictly speaking, the consistent/transitory terminology applies to levels:
-*The dynamic state of a ''level is in a consistent state at'' each time stamp of its model;
-*The dynamic state of a ''level is in a transitory state between'' two consecutive time stamp of its model.
-On the scale of the simulation, the terminology has to be extended since a simulation can contain a level in a transitory state and another in a consistent state:
-*The dynamic state of the ''simulation is in a consistent state'' if ''all the levels'' are in a ''consistent state'';
-*The dynamic state of the ''simulation is in a transitory state'' if ''all the levels'' are in a ''transitory state'';
-*The dynamic state of the ''simulation is in a half-consistent state'' if at least ''one level'' is in a ''consitent state''.
-}}} ===
-!Time model issues
-Managing a time model raises the following problems:
-#Agents perception occurs during the transitory states, where the dynamic state of the simulation is undefined;
-#An agent lying in a level might have to perceive data from a level in the middle of a transitory state; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-For example, in the image, even if an agent located in the level //&quot;3&quot;// perceives right during the time stamp //&quot;1&quot;//, the level //&quot;2&quot;// is in the middle of a transitory state. Therefore, we do not know exactly what information are being perceived by the agent.
-}}} ===
-
-#The mapping between time stamps and real time moments is not necessary in some simulations. +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-For instance, Mitchell Resnick&lt;html&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/html&gt; reproduced the construction of piles of wood by termites agents without referring to real time.
-&lt;html&gt;&lt;sub&gt;3: In his book &lt;em&gt;&quot;Turtles, Termites, and Traffic Jams: Explorations in Massively Parallel Microworlds&quot;&lt;/em&gt;, Resnick M., MIT press, 1997&lt;/sub&gt;&lt;/html&gt;
-}}} ===
-
-In SIMILAR, these issues are dealt by two means:
-*An extension of the formal model of [[IRM4MLS|Bibliography]], introducing the concept of ''state disambiguation'';
-*A simplification of the ''model of the time stamps''.
-{{center{ {{linkbigbtn{[[State disambiguation|Structure - Simulation model - Time model - State disambiguation]]}}} {{linkbigbtn{[[Time stamps model|Structure - Simulation model - Time model - Time stamps model]]}}} }}}</pre>
-</div>
-<div title="Structure - Simulation model - Time model - State disambiguation" creator="Designer" modifier="Designer" created="201311271604" changecount="1">
-<pre>The principles underlying the disambiguation of transitory states of a simulation are currently a working topic of SIMILAR. To avoid creating a documentation that will likely become obsolete quite quickly, this part has yet to be documented.
-
-{{center{[img(95%,)[images/workInProgress.png]]}}}</pre>
-</div>
-<div title="Structure - Simulation model - Time model - Time stamps model" creator="Designer" modifier="Designer" created="201311271459" modified="201311271603" changecount="37">
-<pre>In multi-level simulations, levels are not necessarily moving through time synchronously: there might be a phase shift between their evolution, they can move at different paces, etc.
-
-[img(98%,)[images/multiLevelTimeModel.png]]
-{{center caption{Illustration of a multi-level simulation time model}}}
-To manage the execution flow of the simulation, a simulation engine does not need qualitative information about time (for instance the duration between two consecutive time stamps). Indeed, all the half-consistent times and transitory phases of a simulation can be identified by considering the ''relative location of the time stamps''.
-
-The real time ellapsing between two time stamps is necessary in simulations where the evolution of the state of the agents is tighly bound with time. For instance in a road traffic simulation where the position of the agents depends on their speed. Many simulations do not need such information. For instance, Mitchell Resnick&lt;html&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/html&gt; reproduced the construction of piles of wood by termites agents without this notion.
-
-&lt;html&gt;&lt;sub&gt;1: See the book //&quot;Turtles, Termites, and Traffic Jams: Explorations in Massively Parallel Microworlds&quot;//, Resnick M., MIT press, 1997&lt;/sub&gt;&lt;/html&gt;
-!Possible time stamp models
-Based on the previous observations, two different models can be envisioned for time stamps:
-*An ''absolute positioning model'', where the real time ellapsing between two time stamps is ''known'';
-*A ''relative positioning model'', where the real time ellapsing between two time stamps is ''unknown''.
-Using an absolute positioning model preserves qualitative data about time and is far more accurate. Yet:
-*It makes the design of simulations using a simple time representation +++^34em^*@[&lt;strong&gt;more complex than necessary&lt;/strong&gt;;]
-For instance the usage in java of {{{BigDecimal}}} values is incompatible with simple artihmetic operations like //&quot;+&quot;//. Only methods like {{{bigDecimal1.add( bigDecimal2 )}}} can be used to perform computations.
-===
-
-*It is either +++^34em^*@[&lt;strong&gt;prone to errors&lt;/strong&gt;]
-For instance the usage of imprecise {{{double}}} values to model the absolute position of the time stamp can cause simulation biases.
-=== or +++^34em^*@[&lt;strong&gt;memory consuming&lt;/strong&gt;]
-The memory usage of an arbitrary precision value is far greater than the positive integer values used for relative positioning.
-===.
-On the opposite, using a relative positioning model loses precision to focus on the mechanics of the simulation engine. Since the number of time stamps of a simulation is +++^34em^*@[numerable]
-Otherwise, the simulation would never stop.
-===, time stamps can be modeled as integers in that model. This has many benefits:
-*It saves memory space;
-*It prevents many errors due to the precision loss;
-*Arithmetic operation are easy to declare.
-{{bigemphasisblock{
-SIMILAR relies on the relative positioning model of time stamps.
-}}}
-This representation is sufficient to model the evolution of time in the simulation engine. If the time ellapsed between two time stamps is necessary, then the user will have to define a ''time conversion model''.
-!Time stamp model in SIMILAR
-In SIMILAR, the time stamps are characterized by:
-*Time stamps have a unique identifier modeled as a long number;
-*Time stamps are ordered using their identifiers.
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-A time stamp is an instance of the {{{SimulationTimeStamp}}} class located in the {{{fr.lgi2a.similar.microkernel}}} package.
-!!Construction
-A time stamp can be built using three different approaches:
-#Constructing the instance using a {{{long}}} value;
-#Constructing the instance as a copy of another time stamp;
-#Copying an exising instance;
-!!!Using a long value
-A time stamp can be created using a constructor specifying the {{{long}}} value of the time stamp:
-{{{
-public SimulationTimeStamp( long identifier );
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Builds a time stamp having a specific identifier.
-
-''Parameters:''
-*''identifier:'' The identifier of the time stamp.
-}}}
-!!!Constructing a copy
-A time stamp can be created using a constructor copying the identifier of another time stamp:
-{{{
-public SimulationTimeStamp( SimulationTimeStamp toCopy );
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Builds a time stamp having a specific identifier.
-
-''Parameters:''
-*''toCopy:'' The time stamp to copy.
-''Throws:''
-*''IllegalArgumentException:'' If the argument is {{{null}}}.
-}}}
-!!!Copying a time stamp
-A time stamp can be created by cloning another time stamp:
-{{{
-public Object clone();
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Creates a copy of this object, having the same identifier.
-
-''Returns:''
-*A copy of this object.
-}}}
-!!Usage
-A time stamp is used in three different contexts:
-*When the identifier of the time stamp has be known;
-*When two time stamps have to be compared;
-*When the evenness of two time stamps has to be checked.
-!!!Accessing to the identifier
-The identifier of a time stamp can be accessed using the following method:
-{{{
-public long getIdentifier( );
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Gets the unique identifier of this time stamp.
-
-''Returns:''
-*The unique identifier of this time stamp.
-}}}
-!!!Comparison
-The {{{SimulationTimeStamp}}} class implements the {{{Comparable}}} interface. Its comparison method returns the difference between the identifier of the time stamps.
-!!!Evenness
-The {{{SimulationTimeStamp}}} class redefines the {{{equals(...)}}} and {{{hashCode()}}} methods to check the evenness of two objects.
-}}}
-===</pre>
 </div>
 <div title="StyleSheet" creator="Designer" modifier="Designer" created="201311150915" modified="201311151317" tags="HaemoglobinTheme excludeLists" changecount="74">
 <pre>/*{{{*/
@@ -3370,7 +2340,7 @@ h3 {font-size: 14px;}
 /*}}}*/
 [[StyleSheetCustomization]]</pre>
 </div>
-<div title="StyleSheetCustomization" creator="Designer" modifier="Designer" created="201311151021" modified="201311260931" tags="system CSS excludeLists" changecount="64">
+<div title="StyleSheetCustomization" creator="Designer" modifier="Designer" created="201311151021" modified="201311291036" tags="system CSS excludeLists" changecount="68">
 <pre>[[StyleSheetCustomization - DefaultStyles]]
 [[StyleSheetCustomization - Buttons]]
 [[StyleSheetCustomization - Collapse buttons]]
@@ -3379,7 +2349,7 @@ h3 {font-size: 14px;}
 
 [[StyleSheetCustomization - NestedSlidersPlugin]]</pre>
 </div>
-<div title="StyleSheetCustomization - Buttons" creator="Designer" modifier="Designer" created="201311260728" modified="201311261457" tags="CSS excludeLists" changecount="90">
+<div title="StyleSheetCustomization - Buttons" creator="Designer" modifier="Designer" created="201311260728" modified="201311260948" tags="CSS excludeLists" changecount="87">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the button
@@ -3438,7 +2408,7 @@ h3 {font-size: 14px;}
 /* This button was generated using CSSButtonGenerator.com */
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201311271211" tags="CSS excludeLists" changecount="13">
+<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201311290937" tags="CSS excludeLists" changecount="2">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the buttons
@@ -3703,7 +2673,7 @@ h3 {font-size: 14px;}
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201311291042" changecount="24">
+<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201311291042" changecount="28">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the custom 
@@ -3763,7 +2733,7 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201311261443" tags="CSS excludeLists" changecount="17">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201311291033" tags="CSS excludeLists" changecount="10">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
@@ -3791,7 +2761,7 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - NestedSlidersPlugin" creator="Designer" modifier="Designer" created="201311260739" modified="201311280829" tags="CSS excludeLists" changecount="14">
+<div title="StyleSheetCustomization - NestedSlidersPlugin" creator="Designer" modifier="Designer" created="201311260739" modified="201311271142" tags="CSS excludeLists" changecount="4">
 <pre>/*{{{*/
 /* *********************************************
 The small button used by the nested slider plugin 

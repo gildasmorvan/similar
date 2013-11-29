@@ -47,7 +47,6 @@
 package fr.lgi2a.similar.microkernel.influences.system;
 
 import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
@@ -71,7 +70,7 @@ public final class SystemInfluenceRemoveAgent extends SystemInfluence {
 	
 	/**
 	 * Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link IInfluence#getTargetLevel()}
+	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}
 	 * @param publicLocalStateOfAgent A public local state of the agent to remove from the simulation.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */

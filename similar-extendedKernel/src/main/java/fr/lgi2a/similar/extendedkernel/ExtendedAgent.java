@@ -251,7 +251,7 @@ public class ExtendedAgent extends AbstractAgent {
 		IAgtPerceptionModel result = this.perceptionModels.get( levelId );
 		if( result == null ){
 			throw new NoSuchElementException( "No perception model is defined for the " +
-					"level '" + levelId + "' (agent '" + this.getCategory() + "')." );
+					"level '" + levelId + "' for the agent " + this.getCategory() );
 		}
 		return result;
 	}
@@ -281,7 +281,7 @@ public class ExtendedAgent extends AbstractAgent {
 		IAgtDecisionModel result = this.decisionModels.get( levelId );
 		if( result == null ){
 			throw new NoSuchElementException( "No decision model is defined for the " +
-					"level '" + levelId + "' (agent '" + this.getCategory() + "')." );
+					"level '" + levelId + "' for the agent " + this.getCategory() );
 		}
 		return result;
 	}
@@ -312,7 +312,7 @@ public class ExtendedAgent extends AbstractAgent {
 	) {
 		IAgtPerceptionModel perceptionModel = this.perceptionModels.get( level );
 		if( perceptionModel == null ){
-			throw new IllegalStateException( "No perception model is defined for the level '" + level + "' (agent '" + this.getCategory() + "')." );
+			throw new IllegalStateException( "No perception model is defined for the level '" + level + "' for the agent   " + this.getCategory() );
 		} else {
 			return perceptionModel.perceive(
 					publicLocalStateInLevel, 
@@ -348,7 +348,7 @@ public class ExtendedAgent extends AbstractAgent {
 	) {
 		IAgtDecisionModel perceptionModel = this.decisionModels.get( level );
 		if( perceptionModel == null ){
-			throw new IllegalStateException( "No decision model is defined for the level '" + level + "' (agent '" + this.getCategory() + "')." );
+			throw new IllegalStateException( "No decision model is defined for the level '" + level + "'' for the agent  " + this.getCategory() );
 		} else {
 			perceptionModel.decide( memoryState, perceivedData, producedInfluences );
 		}

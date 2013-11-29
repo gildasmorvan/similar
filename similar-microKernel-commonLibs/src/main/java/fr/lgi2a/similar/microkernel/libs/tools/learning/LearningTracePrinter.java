@@ -105,25 +105,33 @@ public final class LearningTracePrinter {
 			LearningTracePrinter.PRINTER.println( "===Information related to the time " + timeStamp );
 			printIndentation( indentationLevel );
 			LearningTracePrinter.PRINTER.println( "=== Dynamic state of the simulation at the time " + timeStamp );
-			printDynamicState( indentationLevel + 1, trace.getDynamicStateAt( timeStamp ) );
+			indentationLevel++;
+			printDynamicState( indentationLevel, trace.getDynamicStateAt( timeStamp ) );
+			indentationLevel--;
 			printIndentation( indentationLevel );
 			LearningTracePrinter.PRINTER.println( "=== Operations happening close to the time " + timeStamp );
+			indentationLevel++;
 			if( ! timeStamp.equals( initialTime ) ){
-				printIndentation( indentationLevel + 1 );
+				printIndentation( indentationLevel );
 				LearningTracePrinter.PRINTER.println( "Slightly before:" );
 				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentBefore( timeStamp ) );
+				indentationLevel++;
 				for( ILearningEngineOperation operation : operations ){
-					LearningEngineOperationPrinter.printOperation( indentationLevel + 2, operation );
+					LearningEngineOperationPrinter.printOperation( indentationLevel, operation );
 				}
+				indentationLevel--;
 			}
 			if( ! timeStamp.equals( finialTime ) ){
-				printIndentation( 2 );
+				printIndentation( indentationLevel );
 				LearningTracePrinter.PRINTER.println( "Slightly after:" );
 				List<ILearningEngineOperation> operations = trace.getOperationsFor( new AbstractLearningEngineOperationMoment.LearningEngineOperationMomentAfter( timeStamp ) );
+				indentationLevel++;
 				for( ILearningEngineOperation operation : operations ){
-					LearningEngineOperationPrinter.printOperation( indentationLevel + 2, operation );
+					LearningEngineOperationPrinter.printOperation( indentationLevel, operation );
 				}
+				indentationLevel--;
 			}
+			indentationLevel--;
 		}
 		LearningTracePrinter.PRINTER.println( );
 		if( trace.getReasonOfEnd().equals( LearningReasonOfSimulationEnd.END_CRITERION_REACHED ) ){
@@ -158,12 +166,16 @@ public final class LearningTracePrinter {
 	public static void printDynamicState( int indentation, LearningSimulationDynamicState dynamicState ) {
 		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "Memory state of the agents:" );
+		indentation++;
 		for( IAgent agent : dynamicState.getAgents() ){
-			printIndentation( indentation + 1 );
+			printIndentation( indentation );
 			LearningTracePrinter.PRINTER.println( "Agent '" + agent.getCategory() + "'" );
-			printIndentation( indentation + 2 );
+			indentation++;
+			printIndentation( indentation );
 			LearningTracePrinter.PRINTER.println( dynamicState.getGlobalMemoryState( agent ) );
+			indentation--;
 		}
+		indentation--;
 		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "Local dynamic state of the levels:" );
 		IDynamicStateMap localDynamicStates = dynamicState.getLocalDynamicStates();
@@ -180,40 +192,53 @@ public final class LearningTracePrinter {
 	public static void printLocalDynamicState( int indentation, IPublicLocalDynamicState localDynamicState ) {
 		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "Local dynamic state of the level '" + localDynamicState.getLevel() + "':" );
-		printIndentation( indentation + 1 );
+		indentation++;
+		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "Nature of the public local state of the level:" );
-		printIndentation( indentation + 2 );
+		indentation++;
+		printIndentation( indentation );
 		if( localDynamicState instanceof ConsistentPublicLocalDynamicState ){
 			LearningTracePrinter.PRINTER.println( "Consistent" );
 		} else {
 			LearningTracePrinter.PRINTER.println( "Transitory" );
 		}
-		printIndentation( indentation + 1 );
+		indentation--;
+		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "Last consistent time of the level:" );
-		printIndentation( indentation + 2 );
+		indentation++;
+		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( localDynamicState.getTime() );
+		indentation--;
 		if( localDynamicState instanceof TransitoryPublicLocalDynamicState ) {
 			TransitoryPublicLocalDynamicState casted = (TransitoryPublicLocalDynamicState) localDynamicState;
-			printIndentation( indentation + 1 );
+			printIndentation( indentation  );
 			LearningTracePrinter.PRINTER.println( "End of the transitory period:" );
-			printIndentation( indentation + 2 );
+			indentation++;
+			printIndentation( indentation );
 			LearningTracePrinter.PRINTER.println( casted.getNextTime() );
+			indentation--;
 		}
-		printIndentation( indentation + 1 );
+		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "Public local state of the environment:" );
-		printIndentation( indentation + 2 );
+		indentation++;
+		printIndentation( indentation);
 		LearningTracePrinter.PRINTER.println( localDynamicState.getPublicLocalStateOfEnvironment() );
-		printIndentation( indentation + 2 );
+		indentation--;
+		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "Public local state of the agents:" );
+		indentation++;
 		for( IPublicLocalStateOfAgent agentState : localDynamicState.getPublicLocalStateOfAgents() ){
-			printIndentation( indentation + 3 );
+			printIndentation( indentation );
 			LearningTracePrinter.PRINTER.println( agentState );
 		}
-		printIndentation( indentation + 1 );
+		indentation--;
+		printIndentation( indentation );
 		LearningTracePrinter.PRINTER.println( "State dynamics:" );
+		indentation++;
 		for( IInfluence influence : localDynamicState.getStateDynamics() ){
-			printIndentation( indentation + 2 );
+			printIndentation( indentation );
 			LearningTracePrinter.PRINTER.println( influence );
 		}
+		indentation--;
 	}
 }

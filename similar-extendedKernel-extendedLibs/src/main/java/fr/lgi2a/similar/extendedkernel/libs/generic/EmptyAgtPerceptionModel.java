@@ -61,7 +61,7 @@ public final class EmptyAgtPerceptionModel extends AbstractAgtPerceptionModel {
 	/**
 	 * The value returned by the perception method.
 	 */
-	private final EmptyPerceivedDataOfAgent PERCEIVED_DATA;
+	private final EmptyPerceivedDataOfAgent perceivedData;
 	
 	/**
 	 * Creates an empty perception  model, using a specific level identifier.
@@ -71,7 +71,7 @@ public final class EmptyAgtPerceptionModel extends AbstractAgtPerceptionModel {
 			LevelIdentifier levelIdentifier
 	) {
 		super(levelIdentifier);
-		this.PERCEIVED_DATA = new EmptyPerceivedDataOfAgent( this.getLevel() );
+		this.perceivedData = new EmptyPerceivedDataOfAgent( this.getLevel() );
 	}
 
 	/**
@@ -82,6 +82,6 @@ public final class EmptyAgtPerceptionModel extends AbstractAgtPerceptionModel {
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
-		return this.PERCEIVED_DATA;
+		return this.perceivedData;
 	}
 }

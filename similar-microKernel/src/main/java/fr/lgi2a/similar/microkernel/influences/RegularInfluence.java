@@ -46,7 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel.influences;
 
-import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
@@ -58,8 +57,8 @@ public class RegularInfluence extends AbstractInfluence {
 	/**
 	 * Builds a regular influence from a specific category.
 	 * The reaction to this influence will be managed into a specific target level.
-	 * @param category The category of the influence, as described in {@link IInfluence#getCategory()}
-	 * @param targetLevel The target level of the influence, as described in {@link IInfluence#getTargetLevel()}
+	 * @param category The category of the influence, as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getCategory()}
+	 * @param targetLevel The target level of the influence, as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}
 	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.
 	 */
 	public RegularInfluence( String category, LevelIdentifier targetLevel ) {

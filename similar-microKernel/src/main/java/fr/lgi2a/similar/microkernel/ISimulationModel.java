@@ -111,7 +111,7 @@ public interface ISimulationModel {
 	 * 
 	 * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
 	 */
-	static final class EnvironmentInitializationData {
+	static class EnvironmentInitializationData {
 		/**
 		 * The environment of the simulation.
 		 * <p>
@@ -165,7 +165,7 @@ public interface ISimulationModel {
 	 * 
 	 * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
 	 */
-	static final class AgentInitializationData {
+	static class AgentInitializationData {
 		/**
 		 * The agents of the simulation.
 		 * <p>

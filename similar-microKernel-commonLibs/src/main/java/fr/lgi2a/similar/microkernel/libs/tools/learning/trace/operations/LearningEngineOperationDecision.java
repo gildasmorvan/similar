@@ -112,17 +112,13 @@ public class LearningEngineOperationDecision implements ILearningEngineOperation
 	 * @throws IllegalArgumentException If an argument is <code>null</code> or if the arguments are not elements 
 	 * from the "learning" model.
 	 */
-	private final void checkConstructorArgumentsValidity(
+	private void checkConstructorArgumentsValidity(
 			LevelIdentifier level,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData
 	) {
-		if( level == null ){
-			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
-		} else if( memoryState == null ){
-			throw new IllegalArgumentException( "The 'memoryState' argument cannot be null." );
-		} else if( perceivedData == null ){
-			throw new IllegalArgumentException( "The 'perceivedData' argument cannot be null." );
+		if( level == null || memoryState == null || perceivedData == null ){
+			throw new IllegalArgumentException( "The arguments cannot be null." );
 		} else if( !( memoryState instanceof LearningGlobalMemoryState ) ){
 			throw new IllegalArgumentException( "The memory state of the agent has to be from the '" + LearningGlobalMemoryState.class + "' class." );
 		} else if( !( perceivedData instanceof LearningPerceivedDataOfAgent ) ){

@@ -46,7 +46,6 @@
  */
 package fr.lgi2a.similar.microkernel.influences.system;
 
-import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
@@ -80,7 +79,7 @@ public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfl
 	/**
 	 * Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the 
 	 * dynamic state of a specific level during the next reaction of that level.
-	 * @param targetLevel The target level of the influence, as defined in {@link IInfluence#getTargetLevel()}.
+	 * @param targetLevel The target level of the influence, as defined in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}.
 	 * @param publicLocalState The public local state to add to the public dynamic local state of the level.
 	 * @throws IllegalArgumentException If the target level or the public local state are <code>null</code>.
 	 */

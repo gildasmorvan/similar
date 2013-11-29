@@ -47,7 +47,6 @@
 package fr.lgi2a.similar.microkernel.influences.system;
 
 import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
 
@@ -75,7 +74,7 @@ public final class SystemInfluenceAddAgent extends SystemInfluence {
 	
 	/**
 	 * Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link IInfluence#getTargetLevel()}
+	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}
 	 * @param agent The agent to add to the simulation.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */

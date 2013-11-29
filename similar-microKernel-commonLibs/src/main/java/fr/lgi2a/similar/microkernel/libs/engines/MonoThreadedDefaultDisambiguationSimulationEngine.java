@@ -522,7 +522,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	 */
 	protected SimulationTimeStamp performSimulation( 
 			ISimulationModel simulationModel 
-	) throws ExceptionSimulationAborted {
+	) {
 		// Iterate over all the time stamps of the simulation
 		SimulationTimeStamp lastPartlyConsistentStateTimestamp = simulationModel.getInitialTime();
 		//

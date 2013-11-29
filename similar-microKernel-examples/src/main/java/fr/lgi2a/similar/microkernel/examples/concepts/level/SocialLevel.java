@@ -59,11 +59,11 @@ import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationTimeInte
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.AgtFBI;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialChangeBroadcast;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialPublishExperimentReport;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialRemoveAllPublications;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialRemovePublications;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialReplaceEditorInChief;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialChangeBroadcast;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialPublishExperimentReport;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialRemoveAllPublications;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialRemovePublications;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialReplaceEditorInChief;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;

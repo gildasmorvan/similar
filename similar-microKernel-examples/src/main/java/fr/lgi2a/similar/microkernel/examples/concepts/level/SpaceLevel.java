@@ -57,7 +57,7 @@ import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicSta
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.space.EnvPLSSpace;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSpace.RISpaceSendExperimentReport;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tospace.RISpaceSendExperimentReport;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractLevel;
 
 /**

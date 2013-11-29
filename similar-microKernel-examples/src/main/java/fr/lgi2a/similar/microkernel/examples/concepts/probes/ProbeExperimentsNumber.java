@@ -55,7 +55,7 @@ import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalPerformExperiment;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalPerformExperiment;
 
 /**
  * This observation probe displays the number of experiments currently being performed by aliens.

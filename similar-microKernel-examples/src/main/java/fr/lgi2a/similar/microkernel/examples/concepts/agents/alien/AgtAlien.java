@@ -69,10 +69,10 @@ import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.space.AgtAlie
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalLandOnEarth;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalPerformExperiment;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalTakeOffFromEarth;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSpace.RISpaceSendExperimentReport;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalLandOnEarth;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalPerformExperiment;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalTakeOffFromEarth;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tospace.RISpaceSendExperimentReport;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;

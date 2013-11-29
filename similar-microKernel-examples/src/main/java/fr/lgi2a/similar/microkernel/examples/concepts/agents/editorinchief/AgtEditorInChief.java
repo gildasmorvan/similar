@@ -61,7 +61,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.socia
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialChangeBroadcast;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialChangeBroadcast;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 
 /**

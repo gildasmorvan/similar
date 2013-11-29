@@ -63,8 +63,8 @@ import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Citie
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalGoToWork;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toSocial.RISocialPublishExperimentReport;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalGoToWork;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialPublishExperimentReport;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 
 /**

@@ -50,4 +50,4 @@
  * to the 'space' level.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.influences.toSpace;
+package fr.lgi2a.similar.microkernel.examples.concepts.influences.tospace;

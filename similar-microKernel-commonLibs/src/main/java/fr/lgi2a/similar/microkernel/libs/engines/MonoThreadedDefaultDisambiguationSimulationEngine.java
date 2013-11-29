@@ -418,27 +418,35 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 		//
 		Set<IAgent> agentsToAdd = generationData.getAgents();
 		for( IAgent agent : agentsToAdd ){
-			for( LevelIdentifier levelId : agent.getLevels() ){
-				if( levelId == null || ! this.levels.containsKey( levelId ) ){
-					throw new IllegalStateException( "The agent '" + agent.getCategory() + "' from the class '" + agent.getClass( ) + "' " +
-							"specified a public local state for a not existing level named '" + levelId + "'." );
-				}
-				// Add the agent to the list of agents in that level.
-				this.agents.get( levelId ).add( agent );
-				// Add the public local state of the agent to the public local dynamic state of the level.
-				IModifiablePublicLocalDynamicState levelState = (IModifiablePublicLocalDynamicState) 
-						this.lastConsistentDynamicStates.get( levelId );
-				IPublicLocalStateOfAgent agentState = agent.getPublicLocalState( levelId );
-				if( agentState == null ){
-					throw new IllegalStateException( "The agent '" + agent.getCategory() + "' from the class '" + agent.getClass( ) + "' " +
-							" defines a null public local state for the level '" + levelId + "'." );
-				} else {
-					levelState.addPublicLocalStateOfAgent( agentState );
-				}
-			}
+			this.addAgentToSimulation( agent );
 		}
 		// Return the initial influences defined during the generation of the agents.
 		return generationData.getInfluences( );
+	}
+	
+	/**
+	 * Adds an agent to this simulation.
+	 * @param agent The agent to add to this simulation.
+	 */
+	private void addAgentToSimulation( IAgent agent ){
+		for( LevelIdentifier levelId : agent.getLevels() ){
+			if( levelId == null || ! this.levels.containsKey( levelId ) ){
+				throw new IllegalStateException( "The agent '" + agent.getCategory() + "' from the class '" + agent.getClass( ) + "' " +
+						"specified a public local state for a not existing level named '" + levelId + "'." );
+			}
+			// Add the agent to the list of agents in that level.
+			this.agents.get( levelId ).add( agent );
+			// Add the public local state of the agent to the public local dynamic state of the level.
+			IModifiablePublicLocalDynamicState levelState = (IModifiablePublicLocalDynamicState) 
+					this.lastConsistentDynamicStates.get( levelId );
+			IPublicLocalStateOfAgent agentState = agent.getPublicLocalState( levelId );
+			if( agentState == null ){
+				throw new IllegalStateException( "The agent '" + agent.getCategory() + "' from the class '" + agent.getClass( ) + "' " +
+						" defines a null public local state for the level '" + levelId + "'." );
+			} else {
+				levelState.addPublicLocalStateOfAgent( agentState );
+			}
+		}
 	}
 	
 	/**

@@ -55,7 +55,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPL
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.space.EnvPLSSpace;
-import fr.lgi2a.similar.microkernel.examples.concepts.influences.toPhysical.RIPhysicalSetTimeOfTheDay;
+import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalSetTimeOfTheDay;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 
 /**

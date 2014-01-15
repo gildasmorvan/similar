@@ -607,6 +607,32 @@ config.options.chkDisableWikiLinks=true;
 <pre>[[Home]]
 [[Documentation content]]</pre>
 </div>
+<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201401150857" modified="201401150919" changecount="5">
+<pre>*[[Start|Simulation models]]
+*[[Preparation|SMD - Preparation]]
+**[[Packages tree|SMD - Package tree]]
+**[[Tools|SMD - Tools preparation]]
+**[[Random values|SMD - Tools preparation - Random]]
+**[[Parameters|SMD - Tools preparation - Parameters]]
+*[[High level|SMD - High level specifications]]
+**[[Level identification|SMD - Levels identification]]
+**[[Level skeleton|SMD - Level skeleton]]
+**[[Environment skeleton|SMD - Environment skeleton]]
+**[[Agents skeleton|SMD - Agents skeleton]]
+**[[Time model|SMD - Time model]]
+**[[Influences|SMD - Influences]]
+**[[Public states|SMD - Public local states]]
+*[[Low level|SMD - Low level specifications]]
+**[[Perception|SMD - Perception]]
+**[[Memory|SMD - Memory]]
+**[[Decision|SMD - Decision]]
+**[[Natural|SMD - Natural]]
+**[[Reaction|SMD - Reaction]]
+*[[Final steps|SMD - Final steps]]
+**[[Initial state|SMD - Initial state]]
+**[[Execution|SMD - Running the simulation]]
+&lt;&lt;dropMenu&gt;&gt;</pre>
+</div>
 <div title="DisableWikiLinksPlugin" creator="Designer" modifier="Designer" created="201311151013" modified="201311151013" tags="systemConfig excludeLists plugin" changecount="2">
 <pre>/***
 |Name|DisableWikiLinksPlugin|
@@ -709,7 +735,240 @@ Tiddler.prototype.changed = function()
 };
 //}}}</pre>
 </div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201311291048" changecount="43">
+<div title="Documentation - Consistent Local Dynamic State" creator="Designer" modifier="Designer" created="201401151247" modified="201401151424" changecount="41">
+<pre>The consistent public local dynamic state of a level is an instance of the {{{ConsistentPublicLocalDynamicState}}} class from the {{{fr.lgi2a.similar.microkernel.dynamicstate}}} package. 
+!Content
+This class embeds the information contained in the public local dynamic state of a level during consistent time stamps:
+*The ''time stamp'' when the dynamic state of the level was in this state; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get its value&lt;/span&gt;]
+{{docsection {
+The read access to the time stamp is defined by the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
+{{{
+public SimulationTimeStamp getTime();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the time for which this public dynamic state is defined.
+
+''Returns:''
+*The time for which this public dynamic state is defined.
+}}}
+}}} === +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set its value&lt;/span&gt;]
+{{docsection {
+The value of the time stamp is set in the {{{ConsistentPublicLocalDynamicState}}} class either during ''the construction of the dynamic state'', or using the ''following setting method'':
+{{{
+public final void setTime( SimulationTimeStamp time );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Sets the time for which this modifiable public local dynamic state is defined.
+
+''Parameters:''
+*''Parameter (//time//):'' The time for which this public dynamic state is defined.
+}}}
+}}} ===
+
+*The ''public local state of the environment'' in the level at that time; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get its value&lt;/span&gt;]
+{{docsection {
+The access to the public local state of the environment is defined by the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
+{{{
+public IPublicLocalState getPublicLocalStateOfEnvironment( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the public local state of the environment contained in this public local dynamic state.
+
+''Returns:''
+*The public local state of the environment contained in this public local dynamic state.
+}}}
+}}} ===  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set its value&lt;/span&gt;]
+{{docsection {
+The public local state of the environment is set by the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
+{{{
+public void setPublicLocalStateOfEnvironment(
+		IPublicLocalState publicLocalState
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Sets the value of the public local state of the environment in this dynamic state.
+
+''Parameters:''
+*''Parameter (//publicLocalState//):'' The public local state of the environment.
+}}}
+}}} ===
+
+*The ''public local state of the agents'' in the level at that time; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get the value&lt;/span&gt;]
+{{docsection {
+The set of public local state of agents contained in the dynamic state can be read using the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
+{{{
+public Set&lt;IPublicLocalStateOfAgent&gt; getPublicLocalStateOfAgents();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the public local state of the agents lying in the level of this dynamic state.
+
+''Returns:''
+*The public local state of the agents lying in the level of this dynamic state.
+}}}
+}}} === +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set the value&lt;/span&gt;]
+{{docsection {
+The set of public local state of agents contained in the dynamic state can be modified using an ''addition'' or a ''removal'' method of the {{{ConsistentPublicLocalDynamicState}}} class.
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Adding a public local state&lt;/span&gt;]
+{{docsubsection{
+{{{
+public void addPublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Adds the public local state of an agent to this public local dynamic state.
+This method does nothing if public local state of that agent is already in this dynamic state.
+
+''Parameters:''
+*''Parameter (//publicLocalState//):'' The public local state of the agent to add to the dynamic state.
+}}}
+}}} ===
+
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Removing a public local state&lt;/span&gt;]
+{{docsubsection{
+{{{
+public void removePublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Removes the public local state of an agent from this public local dynamic state.
+
+''Parameters:''
+*''Parameter (//publicLocalState//):'' The removed public local state being removed.
+}}}
+}}} ===
+}}} ===
+
+*The ''influences'' persisting in the dynamic state of the level at that time. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get the value&lt;/span&gt;]
+{{docsection {
+The read access to the persistent influences of the level is obtained by the following methods of the {{{ConsistentPublicLocalDynamicState}}} class:
+*A method getting all the persistent influences;
+*A method getting all only the system influences;
+*A method getting all only the regular influences.
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Get all the influences&lt;/span&gt;]
+{{docsubsection {
+{{{
+public Set&lt;IInfluence&gt; getStateDynamics();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the state dynamics of this public local dynamic state, //i.e.// the influences that are still active (being performed) when the level was in this state.
+
+''Returns:''
+*The state dynamics of this public local dynamic state.
+}}}
+}}} ===
+
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Get the system influences&lt;/span&gt;]
+{{docsubsection {
+{{{
+public Set&lt;IInfluence&gt; getSystemInfluencesOfStateDynamics();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the system influences contained in the state transitory dynamics.
+
+''Returns:''
+*The system influences of the value returned by the IPublicLocalDynamicState#getStateDynamics() method.
+}}}
+}}} ===
+
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Get the regular influences&lt;/span&gt;]
+{{docsubsection {
+{{{
+public Set&lt;IInfluence&gt; getRegularInfluencesOfStateDynamics();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the non-system influences contained in the state transitory dynamics.
+
+''Returns:''
+*The non-system influences of the value returned by the IPublicLocalDynamicState#getStateDynamics() method.
+}}}
+}}} ===
+
+}}} ===  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set the value&lt;/span&gt;]
+{{docsection {
+The modification of the persistent influences of the level is obtained by the following methods of the {{{ConsistentPublicLocalDynamicState}}} class:
+*A method adding an influence to the dynamic state;
+*A method removing all the system influences from the dynamic state;
+*A method removing all the regular influences from the dynamic state.
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Add an influence&lt;/span&gt;]
+{{docsubsection {
+{{{
+public void addInfluence( IInfluence influence );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Adds an influence to this public local dynamic state.
+
+''Parameters:''
+*''Parameter (//influence//):'' The influence to add to this public local dynamic state.
+}}}
+}}} ===
+
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Remove all the system influences&lt;/span&gt;]
+{{docsubsection {
+{{{
+public void clearSystemInfluences( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Remove all the system influences of this dynamic state.
+}}}
+}}} ===
+
+
++++?[&lt;span class=&quot;docbigbtn&quot;&gt;Remove all the regular influences&lt;/span&gt;]
+{{docsubsection {
+{{{
+public void clearRegularInfluences( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Remove all the regular influences of this dynamic state.
+}}}
+}}} ===
+
+}}} ===
+
+!Construction
+The construction of a consistent public local dynamic state of a level relies on a constructor having two parameters:
+*The ''time stamp'' for which the dynamic state is defined;
+*The ''identifier'' of the level of the dynamic state;
+The following elements of the dynamic state are either null (public local state of the environment) or empty (public local state of the agents contained in the level, influences) and have to be initialized with the appropriate methods mentionned above.
+
+This constructor has the following signature:
+{{{
+public ConsistentPublicLocalDynamicState( 
+		SimulationTimeStamp time,
+		LevelIdentifier level
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Builds a consistent public local state for a specific time stamp.
+This state still has to define the public local state of the environment, of the agents and the initial influences lying into the state dynamics, using the appropriate setting methods.
+
+''Parameters:''
+*''Parameter (//time//):'' The time stamp for which the public local dynamic state is defined.
+*''Parameter (//level//):'' The level of the public local dynamic state.
+''Throws:''
+*''IllegalArgumentException:'' If an argument is null.
+}}}</pre>
+</div>
+<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201401151146" changecount="46">
 <pre>The micro kernel of SIMILAR is characterized by three components.
 !Micro kernel API
 [&lt;img(25%,)[images/guidelines.png]]
@@ -740,13 +999,13 @@ This simulation illustrates:
 
 *A simulation providing the complete trace of the simulation execution. +++?[&lt;span class=&quot;expandbutton&quot;&gt;Usage details&lt;/span&gt;]
 {{moresection{
-The study on a simulation trace of the execution mechanisms of a simulation.
+This simulation can be used to study the execution mechanisms of a simulation, on a detailed execution trace.
 }}}
 ===
 
 {{linkbigbtn center {[[Usage examples index|./examples/index.html]]}}}</pre>
 </div>
-<div title="DropDownMenuPlugin" creator="Designer" modifier="Designer" created="201311151101" tags="systemConfig plugin excludeLists" changecount="1">
+<div title="DropDownMenuPlugin" creator="Designer" modifier="Designer" created="201311151101" modified="201401150903" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***
 |''Name:''|DropDownMenuPlugin|
 |''Description:''|Create dropdown menus from unordered lists|
@@ -773,10 +1032,9 @@ The study on a simulation trace of the execution mechanisms of a simulation.
 
 !!Examples:
 * [[DropDownMenuDemo]]
-
+!! Code
 ***/
-// /%
-//!BEGIN-PLUGIN-CODE
+//{{{
 config.macros.dropMenu={
 
 	dropdownchar: &quot;\u25bc&quot;,
@@ -918,8 +1176,7 @@ config.shadowTiddlers[&quot;StyleSheetDropDownMenuPlugin&quot;] =
 	 &quot;/***** END LAYOUT AND APPEARANCE: VERTICAL *****/\n&quot;+
 	 &quot;/*}}}*/&quot;;
 store.addNotification(&quot;StyleSheetDropDownMenuPlugin&quot;,refreshStyles);
-//!END-PLUGIN-CODE
-// %/</pre>
+//}}}</pre>
 </div>
 <div title="GettingStarted" creator="Designer" modifier="Designer" created="201311150928" modified="201311290937" tags="system excludeLists" changecount="122">
 <pre>[[StyleSheetCustomization]]
@@ -1006,12 +1263,12 @@ Tabulation content 2.
 [&lt;img(10%,)[file:///C:/Users/yoakubera/Desktop/similarDoc/images/completeStructure.png]]
 {{linkbigbtn center{[[Big link button | MainMenu]]}}}</pre>
 </div>
-<div title="Guidelines index" creator="Designer" modifier="Designer" created="201311290904" modified="201311290925" changecount="15">
+<div title="Guidelines index" creator="Designer" modifier="Designer" created="201311290904" modified="201401061353" changecount="16">
 <pre>This part of the documentation is dedicated to the design and the implementation of SIMILAR simulations ''using the micro-kernel only''. At the same time, it describes ''best practices'' facilitating the organization of the implementation of the simulation.
 
 __Note:__ Libraries facilitating the design of simulations are available in the [[common libs|./commonlibs/index.html]] of the micro kernel. This library especially contains the definition of a generic simulation engine. Do not hesitate to refer to this library to facilitate the implementation of your simulations!
 !Available guidelines
-The guidelines focus on the following components of a simulation:
+The guidelines describe how to implement the following components of a simulation:
 
 {{center{[img(22%,)[images/engineIcon.png][Simulation engines]] [img(22%,)[images/modelIcon.png][Simulation models]] [img(22%,)[images/probeIcon.png][Observation probes]] [img(22%,)[images/runIcon.png][Simulation execution]]}}}</pre>
 </div>
@@ -1823,6 +2080,544 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
+<div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201401151130" changecount="7">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]
+----}}}
+The following step in the design of a simulation model is the ''description of the simulation at a coarse grain''. During this step, no attention is paid to the inner mechanisms of the levels, the agents and the environment. Instead, the design is focused on the general description of the simulation: the identification of the levels, the agents, the environment, their public local states and the influences that can be produced.
+
+This following step create the content of the simulation model at a coarse grain:
+*[[Identification of the levels|SMD - Levels identification]] of the simulation
+*Creation of the [[skeleton of the levels|SMD - Level skeleton]]
+*Creation of the [[skeleton of the environment|SMD - Environment skeleton]]
+*Creation of the [[skeleton of the agents|SMD - Agents skeleton]]
+*Definition of the [[time model|SMD - Time model]] of the levels
+*Creation of the [[influences|SMD - Influences]]
+*Creation of the [[public local states|SMD - Public local states]] of the environment and of the agents
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
+</div>
+<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201401151453" changecount="57">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Level skeleton}}}  [[next step &gt;&gt;|SMD - Environment skeleton]]
+----}}}
+After the identification of the levels, the objects modeling them can be created. Note that ''at this stage, these objects are'' mere +++^60em^*@[&lt;strong&gt;skeletons&lt;/strong&gt;]&lt;html&gt;&lt;h1&gt;Why skeletons?&lt;/h1&gt;&lt;/html&gt;
+The simulation design process is rarely straightforward. Indeed, having an overview on all the implementation details of the model is next to impossible. Instead, models are built incrementally, by adding bits of information each time.
+
+The design guidelines of SIMILAR take into consideration this point by creating first the skeleton of all the entities involved in the simulation. After these high-level specifications, the operational code of these classes is included incrementally during the low-level specifications.
+===, since the level-related specifications (time model and reaction) are not specified yet.
+!Structure of a level in SIMILAR
+[&gt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline1.png]]
+In SIMILAR, a level is the sum of the following elements\(\,^1\):
+*An ''identifier'', defined during the previous step;
+*A part of the ''perception relation graph''\(^2\);
+*A part of the ''influence relation graph''\(^2\);
+*The ''dynamic state'' of the level\(^3\);
+*A ''time model'' defining when the level is consistent;
+*A ''reaction to the influences'' aimed at the level:
+**A reaction for the ''system influences'';
+**A reaction for the ''regular influences''.
+
+\(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)
+\(_{\underline{2:}\text{ More precisely, the out neighborhood of the level in that graph.}}\)
+\(_{\underline{3:}\text{ In SIMILAR, the model of a level stores the lastly computed consistent state. The management of the transitory states is left to the simulation engines.}}\)
+!Implementation
+[&lt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline2.png]]
+In SIMILAR, levels are modeled as instances of the +++^34em^*@[&lt;strong&gt;ILevel&lt;/strong&gt;]
+The {{{ILevel}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
+=== interface. This interface defines methods providing access to the core elements of a level (identifier, influence and perception relation graphs) and to the core behavior of the levels (time model and reaction).
+
+To facilitate simulation revisions, each core element and behavior is reified as a separate method.
+
+In the first step of the specification of the levels, only subset of the content of each level is specified and implemented. Therefore, the unspecified methods have to throw an {{{UnsupportedOperationException}}} at this stage.
+
+
+In this skeleton, the following elements are defined:
+*The ''identifier'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The access to the identifier of the level is defined by the following method of the {{{ILevel}}} interface:
+{{{
+public LevelIdentifier getIdentifier( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{Gets the identifier of this level.
+
+''Returns:''
+*The identifier of this level;
+}}} 
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of these methods usually consists in:
+*Adding a field to the class having the type {{{LevelIdentifier }}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (//i.e.// {{{getIdentifier( )}}}).
+}}} ===
+
+*The ''perception relation graph'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+In SIMILAR, the perception relation graph is distributed among the levels. Each level embeds its out neighborhood of the perception relation graph. The access to the neighborhood is defined by the following method of the {{{ILevel}}} interface:
+{{{
+public Set&lt;LevelIdentifier&gt; getPerceptibleLevels( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{Gets the levels that can be perceived by agents located in this level.
+
+''Returns:''
+*The levels that can be perceived by agents located in this level.
+}}} 
+}}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of these methods usually consists in:
+*Adding a field to the class having the type {{{Set&lt;LevelIdentifier&gt;}}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (//i.e.// {{{getPerceptibleLevels( )}}}).
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
+*A &quot;city&quot; level
+*A &quot;slumbs&quot; level
+*A &quot;country&quot; level
+*A &quot;seashore&quot; level
+It illustrates the implementation of the {{{getPerceptibleLevels(...)}}} method of a &quot;city&quot; level such that:
+*The out neighborhood of the level in the perception relation graph contains the &quot;city&quot; and &quot;slumbs&quot; levels.
+!Code
+{{{
+public class CityLevel implements ILevel {
+	[...]
+	
+	private Set&lt;LevelIdentifier&gt; perceptibleLevels;
+	
+	[...]
+
+	public CityLevel( 
+		[...] 
+	){
+		[...]
+		this.perceptibleLevels = new HashSet&lt;LevelIdentifier&gt;();
+		// First add the identifier of this level to the graph.
+		this.perceptibleLevels.add( MyAwesomeLevelList.CITY );
+		// Then add to the set the identifier of the perceptible levels.
+		this.perceptibleLevels.add( MyAwesomeLevelList.SLUMBS );
+		[...]
+	}
+
+	[...]
+	
+	public Set&lt;LevelIdentifier&gt; getPerceptibleLevels() {
+		return this.perceptibleLevels;
+	}
+}
+}}}
+}}} ===
+
+*The ''influence relation graph'' of the level;  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+In SIMILAR, the influence relation graph is distributed among the levels. Each level embeds its out neighborhood of the influence relation graph. The access to the neighborhood is defined by the following method of the {{{ILevel}}} interface:
+{{{
+public Set&lt;LevelIdentifier&gt; getInfluenceableLevels( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{Gets the levels that can be influenced by agents located in this level.
+
+''Returns:''
+*The levels that can be influenced by agents located in this level.
+}}} 
+}}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of these methods usually consists in:
+*Adding a field to the class having the type {{{Set&lt;LevelIdentifier&gt;}}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (//i.e.// {{{getInfluenceableLevels( )}}}).
+}}} ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
+*A &quot;city&quot; level
+*A &quot;slumbs&quot; level
+*A &quot;country&quot; level
+*A &quot;seashore&quot; level
+It illustrates the implementation of the {{{getInfluenceableLevels(...)}}} method of a &quot;city&quot; level such that:
+*The out neighborhood of the level in the influence relation graph contains the &quot;city&quot;, &quot;seashore&quot; and &quot;country&quot; levels.
+!Code
+{{{
+public class CityLevel implements ILevel {
+	[...]
+	
+	private Set&lt;LevelIdentifier&gt; influenceableLevels;
+	
+	[...]
+
+	public CityLevel( 
+		[...] 
+	){
+		[...]
+		this.influenceableLevels = new HashSet&lt;LevelIdentifier&gt;();
+		// First add the identifier of this level to the graph.
+		this.influenceableLevels.add( MyAwesomeLevelList.SEASHORE );
+		// Then add to the set the identifier of the perceptible levels.
+		this.influenceableLevels.add( MyAwesomeLevelList.COUNTRY );
+		[...]
+	}
+
+	[...]
+	
+	public Set&lt;LevelIdentifier&gt; getInfluenceableLevels() {
+		return this.influenceableLevels;
+	}
+}
+}}}
+}}} ===
+
+*The ''most recent consistent dynamic state'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The access to the most recent consistent dynamic state of the level is done using two methods:
+*An accessor reading the value of such a dynamic state; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection{
+The read access to the most recent consistent dynamic state of the level is defined by the following method of the {{{ILevel}}} interface:
+{{{
+ConsistentPublicLocalDynamicState getLastConsistentPublicLocalDynamicState( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{Gets the last consistent dynamic state of the level.
+
+''Returns:''
+*The last consistent dynamic state of the level.
+}}}
+}}} ===
+
+*An accessor setting the value of such a dynamic state; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection{
+The write access to the most recent consistent dynamic state of the level is defined by the following method of the {{{ILevel}}} interface:
+{{{
+void setLastConsistentPublicLocalDynamicState( 
+	ConsistentPublicLocalDynamicState lastConsistentState 
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{Sets the last consistent dynamic state of the level.
+
+''Parameters:''
+*''Parameter (//lastConsistentState//):'' The last consistent dynamic state of the level.
+}}}
+}}} ===
+
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of these methods usually consists in:
+*Adding a field to the class having the type {{{ConsistentPublicLocalDynamicState }}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (//i.e.// {{{getInfluenceableLevels( )}}}).
+!!Setting the initial value
+Contrary to the other elements of the level, the dynamic state requires specific information to be fully initialized:
+*A time stamp modeling the time for which this dynamic state is defined;
+*The public local state of the environment for the level;
+In the context of the constructor of a level, these values are the initial ones. At this current step of the methodology, only the initial time stamp will be defined. The definition of the initial public local state of the environment is made later.
+}}}  ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
+*A &quot;city&quot; level
+*A &quot;slumbs&quot; level
+*A &quot;country&quot; level
+*A &quot;seashore&quot; level
+It illustrates the implementation of the {{{getLastConsistentPublicLocalDynamicState(...)}}} and {{{setLastConsistentPublicLocalDynamicState(...)}}} methods of a &quot;city&quot; level.
+!Code
+{{{
+public class CityLevel implements ILevel {
+	[...]
+	
+	private ConsistentPublicLocalDynamicState  mostRecentConsistentDynamicState;
+	
+	[...]
+
+	public CityLevel( 
+		[...] 
+		SimulationTimeStamp initialTime,
+		[...] 
+	){
+		[...]
+		this.mostRecentConsistentDynamicState = new ConsistentPublicLocalDynamicState( 
+			initialTime, 
+			MyAwesomeLevelList.CITY 
+		);
+		[...]
+	}
+
+	[...]
+	
+	public ConsistentPublicLocalDynamicState  getLastConsistentPublicLocalDynamicState() {
+		return this.mostRecentConsistentDynamicState;
+	}
+	
+	public void setLastConsistentPublicLocalDynamicState( ConsistentPublicLocalDynamicState state ) {
+		this.mostRecentConsistentDynamicState = state;
+	}
+}
+}}}
+}}} ===
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Level skeleton}}}  [[next step &gt;&gt;|SMD - Environment skeleton]]}}}</pre>
+</div>
+<div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201401151130" modified="201401151203" changecount="8">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - High level specifications]]  {{stepTitle{Levels identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]
+----}}}
+The first concrete step in the design of the simulation model is the identification of the levels where the simulation takes place. In this step, no precise knowledge about the levels is necessary. The only important point here is to ''identify the existence of the levels, and give them a unique name''.
+
+Once the levels and their names is known, the user can create a class summing up these information.
+!Creating the identifier of a level
+In SIMILAR, the identifier of a level is modeled as an instance of the +++^34em^*@[&lt;strong&gt;LevelIdentifier&lt;/strong&gt;]
+The {{{LevelIdentifier}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
+=== class. A level identifier is built using the following constructor:
+{{{
+public LevelIdentifier( String levelName );
+}}}
+Note that the ''levelName'' argument cannot be null. Moreover, its value has to be different for each level being modeled.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Level identifier creation example&lt;/span&gt;]
+{{exsection {
+This example illustrates the creation of the identifier of a level named &quot;city&quot;:
+{{{
+LevelIdentifier cityLevelIdentifier = new LevelIdentifier( &quot;city&quot; );
+}}}
+}}} ===
+!The level identifiers list
+The identifier of a level is unique and does not change over the simulation. To avoid misspelling errors during the implementation, we highly recommend to create an enum-like structure containing the identifier of each level of the simulation. This structure is called the ''&quot;level identifiers list&quot;''.
+!!Creating the list of level identifier
+[&gt;img[images/simulationModel/highLevel/levelsList_package.png]]
+The ''&quot;level identifiers list&quot;'' class is designed to avoid misspelling errors in the simulation. It relies on a specific structure supporting inheritance. Owing to this property, simulation models +++^34em^*@[extending this simulation model]
+Simulations which model includes additional features to the model of another simulation like new levels, new agents, new influences, //etc.//
+=== can be created.
+
+This class has to:
+*Be //public//;
+*Define a single //protected// constructor with no arguments;
+*Contain as many //public statc final// fields from the {{{LevelIdentifier}}} class as the number of levels in the simulation.
+*Be located into the ''&quot;levels''&quot; package.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Level identifier creation example&lt;/span&gt;]
+{{exsection {
+This example illustrates the creation of a level identifiers list called {{{MyAwesomeLevelList }}}. This list contains the &quot;city&quot;, &quot;slumbs&quot;, &quot;country&quot;, &quot;seashore&quot; levels.
+
+This example is also available in a [[stand alone file|./files/simulationModel/highLevel/MyAwesomeLevelList.java]].
+!Code
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='./files/simulationModel/highLevel/MyAwesomeLevelList.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+!!Using the list of level identifier
+Once the class  of the level identifier list is declared, it becomes no longer necessary to create instances of the {{{LevelIdentifier}}} class to have access to the feratures of the simulation. Instead, users have to refer to a static field of the ''&quot;level identifiers list&quot;'' class.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection {
+This example illustrates the use of the &quot;level identifiers list&quot; in replacement to the manual creation of level identifiers, in the context of the retrieval of the public local state in the &quot;city&quot; level of an agent.
+
+Without using the &quot;level identifiers list&quot;, the public local state of the agent in the &quot;city&quot; level is retrived with the following instructions:
+{{{
+IAgent agent = ...;
+LevelIdentifier levelId = new LevelIdentifier( &quot;city&quot; );
+IPublicLocalStateOfAgent state = agent.getPublicLocalState( levelId  );
+}}}
+When using the list, the code becomes:
+{{{
+IAgent agent = ...;
+IPublicLocalStateOfAgent state = agent.getPublicLocalState( MyAwesomeLevelList.CITY );
+}}}
+}}} ===
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - High level specifications]]  {{stepTitle{Levels identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]}}}</pre>
+</div>
+<div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201401151023" changecount="27">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Preparation]]  {{stepTitle{Package tree}}}  [[next step &gt;&gt;|SMD - Tools preparation]]
+----}}}
+The first step of the design of a simulation model consists in creating the tree hierarchy where the sources are put. We recommend users to use a hierarchy where the source files are split by themes.
+!Naming the simulation model
+The name of the simulation model has first to be determined. It has to illustrate precisely the nature of the simulation model. Moreover, the name also has to respect the packages naming constraints of java:
+#The full name has to start with a locale identification (//e.g.// &quot;fr&quot;, &quot;en&quot;, &quot;de&quot;, //etc.//)
+#The full name has then to identify the organization that wrote the model
+#Finally the name of the model itself has to be defined.
+According to the naming conventions of java, all these name have to be written in lowercase letters, and have to contain only letters or figures (a figure cannot have the leading position).
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Naming example&lt;/span&gt;]
+{{exsection {
+A __bubble chamber simulation__ wrote by the __french__ team of the __LGI2A laboratory__ should have a name like:
+&lt;&lt;&lt;
+//fr.lgi2a.bubblechamber//
+&lt;&lt;&lt;
+}}}===
+!Folders hierarchy
+The project where the simulation is written has to use a specific folder hierarchy where sources are separated from binaries. To make to compilation of the simulations easier, we advise users to rely on the following [[Maven|http://maven.apache.org/]]-like hierarchy:
+
+[&lt;img[images/simulationModel/preparation/basicTree.png]]In this hierarchy, the {{{src/main/java}}} folder will contain the ''source files'' of the simulation model. 
+
+The {{{target/bin}}} directory will contain the compiled binary files of the simulation model. 
+
+The {{{README.txt}}} file contains the description of the simulation model: its purpose, its parameters, its output and how to interpret the output.
+
+
+This structure is compatible with the [[Maven|http://maven.apache.org/]] project management and comprehension tool. Therefore, a maven build can be used to compile the simulation model.
+!!Simulation model directory layout
+Once the main directory hierarchy is installed, a package tree can be installed to facilitate the location and the future modification of the sources of the simulation model. We advise the use of the following distribution of packages:
+
+[&gt;img[images/simulationModel/preparation/basicPackagesTree.png]]This hierarchy uses a root package named after the name of the simulation model (see above). This root package contains:
+*The ''engines''  package, containing the simulation engines of the simulation;
+*The ''initializations'' package, containing different initial settings of the simulation model;
+*The ''model'' package, defining the simulation model. It contains:
+**The ''agents'' package containing the model of the agents;
+**The ''environment'' package containing the model of the environment;
+**The ''influences'' package containing the model of the influences;
+**The ''levels'' package containing the model of the levels of the simulation;
+*The ''probes'' package containing the observation probes used in the simulation;
+*The ''tools'' package containing the miscellaneous tools that were used to implement the simulation.
+
+This structure is obviously not rigid. For instance, if the simulation uses predefined simulation engines and probes, and defines only one initial setting for the simulation, then a simplified package tree can be used.
+!!Simulation model declaration
+The declaration of the elements of the simulation model usually also creates a model-dependent sub-division of the presented hierarchy:
+*The ''agents'' package is sub-divided into packages named after the various types of agents of the simulation;
+*The ''environment'' and ''influences'' package are sub-divided into packages named after the various levels of the simulation.
+*The ''levels'' package can be sub-divided into packages named after the various levels of the simulation. This happens if there are various implementations of the time model or of the reaction of the levels.
+
+In addition, the package of an agent type is often sub-divided into packages named after the levels where it can lie.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Package hierarchy example&lt;/span&gt;]
+{{exsection {
+[&gt;img[images/simulationModel/preparation/completePackagesTree.png]]
+This example illustrates the full directory structure of a plane traffic simulation model where:
+*There are two levels named ''Sky'' and ''Ground''
+*The simulation contains ''Plane'' agents navigating in the ''Sky'' level and taking off or landing in the ''Ground'' level.
+*The simulation contains ''Control tower'' agents telling ''Plane'' agents when they are authorized to land. These agents are only in the ''Ground'' level.
+&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+}}}===
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Preparation]]  {{stepTitle{Package tree}}}  [[next step &gt;&gt;|SMD - Tools preparation]]}}}</pre>
+</div>
+<div title="SMD - Preparation" creator="Designer" modifier="Designer" created="201401150920" modified="201401151004" changecount="9">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|Simulation models]]  {{stepTitle{Preparation}}}  [[next step &gt;&gt;|SMD - Package tree]]
+----}}}
+Before heading into the code of the simulation model, we have first to organize and prepare the sources. Indeed, the revision of a model is made easier if the code to update can be identified and located quickly. The first step of the simulation design consists in creating such a source tree structure.
+
+This first main step creates the general structure of the simulation model:
+*The [[source tree hierarchy|SMD - Package tree]]
+*The [[tools|SMD - Tools preparation]] that are used in many classes of the simulation model:
+**The [[random values generation|SMD - Tools preparation - Random]] tool
+**The [[parameters management|SMD - Tools preparation - Parameters]] tool
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|Simulation models]]  {{stepTitle{Preparation}}}  [[next step &gt;&gt;|SMD - Package tree]]}}}</pre>
+</div>
+<div title="SMD - Tools preparation" creator="Designer" modifier="Designer" created="201401151002" modified="201401151005" changecount="5">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Package tree]]  {{stepTitle{Tools preparation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Random]]
+----}}}
+A second preliminary step is necessary before writing the simulation model: the reification of the ''random values generator'' and of the ''parameters of the simulation''.
+
+This step is fundamental in many regards. Yet it is often underestimated and disseminated in the code of the simulation. Their reification as concrete classes is necessary to replace easily the random values generation heuristic or the parameters used within the simulation.
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Package tree]]  {{stepTitle{Tools preparation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Random]]}}}</pre>
+</div>
+<div title="SMD - Tools preparation - Parameters" creator="Designer" modifier="Designer" created="201401151041" modified="201401151202" changecount="10">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Random]]  {{stepTitle{Parameters of the simulation}}}  [[next step &gt;&gt;|SMD - High level specifications]]
+----}}}
+To facilitate the definition of various experiments, the parameters used in the simulation shouldn't be disseminated into the various classes of the project. Otherwise, the modification of the value of a parameter becomes really difficult, since we first have to find where the parameter was declared.
+
+A possible solution to this problem is to define one parameter class (or many classes divided by themes) shared among all the classes of the simulation.
+!Structure of the parameters class
+The parameters class is a regular java class containing the declaration of a field per simulation parameter. This field:
+*Must have a getter and a setter in the class, or has to be public;
+*Must have a default value set in the constructor;
+These classes are usually put in the ''&quot;model&quot;'' directory of the package hierarchy.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Parameters class example&lt;/span&gt;]
+{{exsection {
+We consider in this example a simulation relying on the following parameters:
+*''Initial number of agents'' (default value: 350)
+*''Agent initial speed'' (default value: 25)
+
+This example is also available in a [[stand alone file|./files/simulationModel/preparation/MyParametersClass.java]]. The parameter class corresponding to this specification is:
+!Code
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/preparation/MyParametersClass.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+!Usage of the parameters class
+The parameter classes are used only in the initialization process of the simulation. Since talking about simulation initialization is premature at this step of the methodology, we defer the description of the usage of this class to a [[later step of the methodology|SMD - Initial state]].
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Tools preparation - Random]]  {{stepTitle{Parameters of the simulation}}}  [[next step &gt;&gt;|SMD - High level specifications]]}}}</pre>
+</div>
+<div title="SMD - Tools preparation - Random" creator="Designer" modifier="Designer" created="201401151005" modified="201401151202" changecount="22">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation]]  {{stepTitle{Random values generation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Parameters]]
+----}}}
+The generation of random values is important in simulation since it provides the means to include noise and heterogeneity in a model. Yet, the production of random values cannot be wild: a simulation has to be +++^34em^*@[reproducible]
+Using a set of parameters (including the parameters of the random values generator) twice should produce the same outcomes, even if random values generation is involved in the simulation process.
+===. Thus users should have control over the way random values are generated.
+
+The first tool used in a simulation is a random number generator. Since we do not want to depend on a specific implementation of the generator, the following classes have to be included in the project:
+*The {{{IRandomValuesGenerator}}} interface, containing the signature of the random value generation methods (usually one per type of value);
+*Implementations of the {{{IRandomValuesGenerator}}} interface, modeling various values generation strategies;
+*The {{{RandomValueFactory}}} class, embedding one value generation strategy. The generation of random value within the simulation has to be made using the static methods defined in that class.
+These classes are usually put in the ''&quot;tools&quot;'' directory of the package hierarchy.
+!!Signature of the random values generation methods
+There is no specific constraint on the declaration of this interface. It can define as much methods as necessary.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Signature example&lt;/span&gt;]
+{{exsection {
+This example illustrates the implementation of the {{{IRandomValuesGenerator}}} interface where two generation methods are defined (one for {{{double}}} values, the other for {{{int}}} values).
+
+This example is also available in a [[stand alone file|./files/simulationModel/preparation/IRandomValuesGenerator.java]].
+!Code
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/preparation/IRandomValuesGenerator.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}}===
+!!Random value generation heuristic
+The heuristic used to generate random values has to be written by the user. Its implementation has mainly two constraints:
+*If the heuristic requires initialization parameters, these parameters have to be explicitly mentionned to the users;
+*Two instances of the same heuristic with the same initialization parameters should produce the same +++^34em^*@[results]
+Using the same sequence of method calls in the heuristic should produce the same sequence of values.
+===;
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Heuristic example&lt;/span&gt;]
+{{exsection {
+This example illustrates the instanciation of the {{{IRandomValuesGenerator}}} interface described in the previous example. This instanciation is based on the {{{java.util.Random}}} class\(^1\).
+
+This example is also available in a [[stand alone file|./files/simulationModel/preparation/JavaRandomBasedValuesGenerator.java]].
+!Code
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/preparation/JavaRandomBasedValuesGenerator.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;\(_{\underline{1:} \text{This implementation is made for illustration purposes: we are fully aware that using this class is a bad idea since it relies on inappropriate random numbers generation metrics.}}\)
+}}}===
+
+!!Random values factory
+The two previous classes can be used to specify a random value generation heuristic. To facilitate their use in the simulation, a factory class embeds the strategy currently used in the simulation. 
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Factory example&lt;/span&gt;]
+{{exsection {
+This example illustrates the implementation of the {{{RandomValueFactory}}} random number values factory used in the whole simulation. This implementation uses the java-based generation strategy defined in the examples above.
+
+This example is also available in a [[stand alone file|./files/simulationModel/preparation/RandomValueFactory.java]].
+!Code
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/preparation/RandomValueFactory.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}}===
+
+__//Note://__ If the strategy used in the simulation has to be different from the default one, then the first instruction of the simulation should be the setting of that strategy in the factory.
+!!Using random values in the simulation
+Once the three classes are defined, using random values in the simulation consists in calling the appropriate method of the object embedded in the random value generation factory.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Factory usage example&lt;/span&gt;]
+{{exsection {
+A random double value in the range [0;1[ is obtained by performing the following method call:
+!Code
+{{{
+RandomValueFactory.getStrategy( ).randomDouble( );
+}}}
+}}}===
+
+__//Note://__ These operations assume that the random value factory exists and is already initialized.
+
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Tools preparation]]  {{stepTitle{Random values generation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Parameters]]}}}</pre>
+</div>
 <div title="SimpleSearchPlugin" creator="Designer" modifier="Designer" created="201311151015" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
 |''Name''|SimpleSearchPlugin|
@@ -1985,8 +2780,11 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 <div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="2">
 <pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="3">
-<pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
+<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201401150933" changecount="24">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt;
+This part of the documentation is dedicated to the design and the implementation of SIMILAR simulation models using the micro-kernel only. At the same time, it describes best practices facilitating the organization of the implementation of the simulation. Note that the guidelines provided here are not absolute rules. They only make the design of simulations either easier, or more robust to model revisions.
+
+{{linkbigbtn center{[[Start creating a new model!|SMD - Preparation]]}}}</pre>
 </div>
 <div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201311281641" tags="system excludeLists" changecount="4">
 <pre>Micro-kernel documentation</pre>
@@ -2361,7 +3159,7 @@ h3 {font-size: 14px;}
 /* This button was generated using CSSButtonGenerator.com */
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201311290937" tags="CSS excludeLists" changecount="3">
+<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201401151342" tags="CSS excludeLists" changecount="5">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the buttons
@@ -2443,7 +3241,7 @@ h3 {font-size: 14px;}
 /* ********************************************************
  * Common features of blocks following a big or small button
  ******************************************************** */
-.implsection, .exsection, .docsection, .moresection {
+.implsection, .exsection, .docsection, .docsubsection, .moresection {
 	display:block;
 	padding: 0.5em;
 	margin-top:0.25em;
@@ -2521,6 +3319,10 @@ h3 {font-size: 14px;}
 .docsection {
 	border:1px solid #528fcc;
 	background-color: #d6eafc;
+}
+.docsubsection {
+	border:1px solid #528fcc;
+	background-color: #96d9f5;
 }
 /* Change the color of the titles inside a document section. */
 .docsection h1, .docsection h2, .docsection h3, .docsection h4, .docsection h5 {
@@ -2770,12 +3572,189 @@ when the &quot;+ + +&quot; maccro is used without a text between &quot;[ ]&quot;
 /* This button was generated using CSSButtonGenerator.com */
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Wikispecific" creator="Designer" modifier="Designer" created="201311260750" modified="201311260750" tags="CSS excludeLists" changecount="2">
+<div title="StyleSheetCustomization - Wikispecific" creator="Designer" modifier="Designer" created="201311260750" modified="201401150858" tags="CSS excludeLists" changecount="5">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
  * that are specific to this wiki.
  ******************************************************** */
+/*}}}*/
+[[StyleSheetCustomization - Wikispecific - GuidelinesNavMenu]]</pre>
+</div>
+<div title="StyleSheetCustomization - Wikispecific - GuidelinesNavMenu" creator="Designer" modifier="Designer" created="201401150858" modified="201401150931" changecount="18">
+<pre>/*{{{*/
+/* ********************************************************
+ * This tiddler contains the CSS rules for the classes
+ * used in the navigation menu of the guidelines.
+ ******************************************************** */
+/*}}}*/
+/*{{{*/
+/* Style of the bar under the navigation buttons */
+.guidelinesNavMenu {
+	display:block;
+	text-align:center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.guidelinesNavMenu hr {
+	width: 100%;
+	height: 2px;
+	border: 0;
+	background: -webkit-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -o-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -ms-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+	background: linear-gradient(to right,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+}
+
+/* Style of the navigation title displayed in the design guidelines */
+.stepTitle {
+	margin: 0em 3em;
+	font-weight: bold;
+	text-decoration: underline;
+}
+/*}}}*/
+[[StyleSheetDropDownMenuPlugin]]</pre>
+</div>
+<div title="StyleSheetDropDownMenuPlugin" creator="Designer" modifier="Designer" created="201401150912" modified="201401150931" changecount="2">
+<pre>/*{{{*/
+/***** LAYOUT STYLES -  DO NOT EDIT! *****/
+ul.suckerfish, ul.suckerfish ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	line-height:1.4em;
+}
+
+ul.suckerfish  li {
+	display: inline-block; 
+	display: block;
+	float: left; 
+}
+
+ul.suckerfish li ul {
+	position: absolute;
+	left: -999em;
+}
+
+ul.suckerfish li:hover ul, ul.suckerfish li.sfhover ul {
+	left: auto;
+}
+
+ul.suckerfish ul li {
+	float: none;
+	border-right: 0;
+	border-left:0;
+}
+
+ul.suckerfish a, ul.suckerfish a:hover {
+	display: block;
+}
+
+ul.suckerfish li a.tiddlyLink, ul.suckerfish li a, #mainMenu ul.suckerfish li a {font-weight:bold;}
+/**** END LAYOUT STYLES *****/
+
+
+/**** COLORS AND APPEARANCE - DEFAULT *****/
+ul.suckerfish li a {
+	padding: 0.5em 1.5em;
+	font-weight:bold;
+	border-bottom: 0;
+	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	box-shadow:inset 0px 1px 0px 0px #f29c93;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+	background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
+	background-color:#fe1a00;
+	color:#ffffff;
+}
+
+ul.suckerfish li:hover a, ul.suckerfish li.sfhover a{
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
+	background-color:#ce0100;
+}
+
+ul.suckerfish li:hover ul a, ul.suckerfish li.sfhover ul a{
+	color: #d83526;
+	background: #ffeeee;
+}
+
+ul.suckerfish ul li a:hover {
+	background: #ffdddd;
+}
+
+ul.suckerfish li a{
+	width:9.5em;
+}
+
+ul.suckerfish ul li a, ul.suckerfish ul li a:hover{
+	display:inline-block;
+	width:9.5em;
+}
+
+ul.suckerfish li {
+	border:1px solid #d83526;
+}
+
+ul.suckerfish li ul li a {
+	border-style: solid;
+	border-color: #d83526;
+	border-top-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+}
+/***** END COLORS AND APPEARANCE - DEFAULT *****/
+
+
+/***** LAYOUT AND APPEARANCE: VERTICAL *****/
+ul.suckerfish.vertical li{
+	width:10em;
+	border-left: 0px solid #00558f;
+}
+
+ul.suckerfish.vertical ul li, ul.suckerfish.vertical li a, ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a {
+	border-left: 0.8em solid #00558f;
+}
+
+ul.suckerfish.vertical li a, ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a,  ul.suckerfish.vertical li.sfhover a:hover{
+	width:8em;
+}
+
+ul.suckerfish.vertical {
+	width:10em; text-align:left;
+	float:left;
+}
+
+ul.suckerfish.vertical li a {
+	padding: 0.5em 1em 0.5em 1em;
+	border-top:1px solid  #fff;
+}
+
+ul.suckerfish.vertical, ul.suckerfish.vertical ul {
+	line-height:1.4em;
+}
+
+ul.suckerfish.vertical li:hover ul, ul.suckerfish.vertical li.sfhover ul { 
+	margin: -2.4em 0 0 10.9em;
+}
+
+ul.suckerfish.vertical li:hover ul li a, ul.suckerfish.vertical li.sfhover ul li a {
+	border: 0px solid #FFF;
+}
+
+ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a{
+	padding-right:1.1em;
+}
+
+ul.suckerfish.vertical li:hover ul li, ul.suckerfish.vertical li.sfhover ul li {
+	border-bottom:1px solid  #fff;
+}
+
+/***** END LAYOUT AND APPEARANCE: VERTICAL *****/
 /*}}}*/</pre>
 </div>
 <div title="TagsTreeStyleSheet" creator="Designer" modifier="Designer" created="201311150935" tags="excludeLists" changecount="1">
@@ -2785,6 +3764,9 @@ when the &quot;+ + +&quot; maccro is used without a text between &quot;[ ]&quot;
 #mainMenu {text-align:left}
 .branch .button {border:1px solid #DDD; color:#AAA;font-size:9px;padding:0 2px;margin-right:0.3em;vertical-align:middle;text-align:center;}
 /*}}}*/</pre>
+</div>
+<div title="Test" creator="Designer" modifier="Designer" created="201401151245" modified="201401151248" changecount="4">
+<pre></pre>
 </div>
 <div title="TiddlersBarPlugin" creator="Administrator" modifier="Administrator" created="201311150853" modified="201311150900" tags="systemConfig excludeLists plugin" changecount="3">
 <pre>/***

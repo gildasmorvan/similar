@@ -521,7 +521,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="API suite Architecture" creator="Designer" modifier="Designer" created="201311261500" modified="201311291014" changecount="30">
+<div title="API suite Architecture" creator="Designer" modifier="Designer" created="201311261500" modified="201401061347" changecount="32">
 <pre>The SIMILAR API suite was built while considering the best compromise possible between:
 *The +++^34em^*@[efficiency]
 Efficiency is here meant in the context of computing: 
@@ -538,9 +538,9 @@ Perform the following operations with the least effort as possible:
 *The best practices in +++^34em^*@[Software engineering]
 Here in the context of simulation:
 *Separate the generic simulation algorithms with the domain-dependent model;
-*Use software engineering tools facilitating the build of the binaries.
+*Use software engineering tools facilitating the construction of the binaries.
 ===, in the context of simulations;
-This lead to a layered architecture separating the API suite in six different API, distributed between two kernels: the ''micro-kernel'' and the ''extended-kernel''.
+This led to a layered architecture separating the API suite in six different API, distributed between two kernels: the ''micro-kernel'' and the ''extended-kernel''.
 
 {{bigemphasisblock{
 Note that these two APIs are compatible: you can write a part of your model using the micro-kernel and the rest using the extended kernel (or conversely)!
@@ -690,19 +690,19 @@ The documentation of each kernel of SIMILAR embeds information helping the desig
 
 {{linkbigbtn{[[Micro-kernel|./microKernel/index.html]]}}} {{linkbigbtn{[[Extd. kernel|./extendedKernel/index.html]]}}}</pre>
 </div>
-<div title="Bibliography" creator="Designer" modifier="Designer" created="201311261029" modified="201311261149" changecount="40">
+<div title="Bibliography" creator="Designer" modifier="Designer" created="201311261029" modified="201401151145" changecount="42">
 <pre>The SIMILAR API suite is based on various theories that are not fully described in this documentation. More information can be found in the following documents:
-*The //SImulations with MultI-Level Agents and Reactions// (''SIMILAR'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The //SImulations with MultI-Level Agents and Reactions// (''SIMILAR'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documents&lt;/span&gt;]
 {{docsection{
 !Available documents
-The theoretical paper on SIMILAR is currently not available (work in process).
+The theoretical paper on SIMILAR is currently not available (work in progress).
 &lt;&lt;&lt;
 Contact ''Gildas Morvan'' ( //gildas.morvan@univ-artois.fr// ) for more details about SIMILAR.
 &lt;&lt;&lt;
 }}}
 ===
 
-*The //Influence/Reaction Model for Multi-Level Simulations// (''IRM4MLS'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The //Influence/Reaction Model for Multi-Level Simulations// (''IRM4MLS'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documents&lt;/span&gt;]
 {{docsection{
 !Available documents
 Paper focusing on the formalized model of IRM4MLS:
@@ -716,7 +716,7 @@ Paper focusing on the formalized model of IRM4S, IRM4MLS and on a simulation exa
 }}}
 ===
 
-*The //Influence/Reaction principle for Multiagent based Simulations// (''IRM4S'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The //Influence/Reaction principle for Multiagent based Simulations// (''IRM4S'') theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documents&lt;/span&gt;]
 {{docsection{
 !Available documents
 Short paper describing the main notations and features of the IRM4S model:
@@ -726,7 +726,7 @@ Short paper describing the main notations and features of the IRM4S model:
 }}}
 ===
 
-*The //Influence/Reaction model// theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The //Influence/Reaction model// theory +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documents&lt;/span&gt;]
 {{docsection{
 !Available documents
 Paper focusing on the formalized model of the Influence/Reaction principle:
@@ -849,7 +849,7 @@ Tiddler.prototype.changed = function()
 };
 //}}}</pre>
 </div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311261511" modified="201311281615" changecount="7">
+<div title="Documentation content" creator="Designer" modifier="Designer" created="201311261511" modified="201401061329" changecount="8">
 <pre>The SIMIAR API suite is a java API whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. Its present documentation contains the following features:
 
 !!Beginner's guide
@@ -865,7 +865,7 @@ The javadoc API of the whole SIMILAR API suite.
 {{linkbigbtn center{[[Go to the javadoc API|./api/index.html]]}}}
 
 !!Micro kernel
-[&gt;img(25%,)[images/structure_microKernel.png]]
+[&lt;img(25%,)[images/structure_microKernel.png]]
 The documentation of a [[micro kernel|./microKernel/index.html]], advised for users who wish to ''tune the efficiency'' of the simulation at the cost of ''significant manual implementations''. It comes with:
 *Common libraries facilitating the design of simulations
 *Examples illustrating the usage and the mechanisms of the micro-kernel
@@ -873,7 +873,7 @@ The documentation of a [[micro kernel|./microKernel/index.html]], advised for us
 {{linkbigbtn center {[[Micro-kernel documentation|./microKernel/index.html]]}}}
 
 !!Extended kernel
-[&gt;img(25%,)[images/structure_extendedKernel.png]]
+[&lt;img(25%,)[images/structure_extendedKernel.png]]
 The documentation of an [[extended kernel|./extendedKernel/index.html]], advised for users who wish to create ''modular and easy to modify'' simulations. It comes with:
 *Extended libraries facilitating the design of simulations
 *Examples illustrating the usage and the mechanisms of the extended-kernel
@@ -2346,7 +2346,7 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 <div title="SiteTitleText" creator="Designer" modifier="Designer" created="201311151320" tags="system excludeLists" changecount="1">
 <pre>Similar API suite</pre>
 </div>
-<div title="Structure - Concepts mapping" creator="Designer" modifier="Designer" created="201311261612" modified="201311261617" changecount="6">
+<div title="Structure - Concepts mapping" creator="Designer" modifier="Designer" created="201311261612" modified="201401071038" changecount="9">
 <pre>The SIMILAR API suite was designed to provide a direct ''bijection between the theoretical concepts'' developed in SIMILAR ''and their implementation''. This bijection facilitates the comprehension of the code and embodies the proof that the benefits of the SIMILAR meta-model are not purely theoretical.
 
 The following arrays describe the correspondence between the theoretical concepts of SIMILAR and their implementation. Note that this list is not exhaustive and focuses on the core concepts of SIMILAR. See the documentation of the various classes of the micro-kernel and extended-kernel to have a better insight on the correspondance between the theory and this implementation.
@@ -2381,10 +2381,10 @@ The following arrays describe the correspondence between the theoretical concept
 |Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (agents) |c
 !!Influence-related elements:
 |!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Influence produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluence}}} interface. |
-|System influences (generic influences) |Instances of the {{{RegularInfluence}}} abstract class |
-|Regular influences (simulation-dependent influences) |Instances of the {{{SystemInfluence}}} abstract class |
-|Set of influences produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluenceMap}}} interface |
+|An influence produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluence}}} interface. |
+|A set of influences produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluenceMap}}} interface |
+|System influences (generic influences) |Instances of the {{{SystemInfluence}}} abstract class |
+|Regular influences (simulation-dependent influences) |Instances of the {{{RegularInfluence}}} abstract class |
 |Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (influences) |c
 !!Time-related elements:
 |!Full name in SIMILAR |!Element in the SIMILAR API suite |
@@ -2637,7 +2637,7 @@ We do not intend to describe formally these differences in this documentation. Y
 
 &lt;html&gt;&lt;sub&gt;1: The order of this presentation is not necessarily the order of the specification.&lt;/sub&gt;&lt;/html&gt;</pre>
 </div>
-<div title="Structure - Simulation model - Reaction model" creator="Designer" modifier="Designer" created="201311261644" modified="201311270719" changecount="53">
+<div title="Structure - Simulation model - Reaction model" creator="Designer" modifier="Designer" created="201311261644" modified="201401150938" changecount="54">
 <pre>In the [[IRM4MLS|Bibliography]] and [[IRM4S|Bibliography]] approaches, the reaction is considered as domain-dependent. As a consequence, the users are doomed to manually re-write the reaction every time, even though the reaction to some specific influences remains the same no matter the simulation.
 
 In SIMILAR, we consider that a simulation has to manage two kinds of influences:
@@ -2649,7 +2649,7 @@ Since the reaction to the system influence is domain independent, users shouldn'
 !Reaction process in SIMILAR
 &lt;&lt;tiddler [[Structure - Simulation model - Reaction model - Process]]&gt;&gt;</pre>
 </div>
-<div title="Structure - Simulation model - Reaction model - Process" creator="Designer" modifier="Designer" created="201311261816" modified="201311270734" changecount="16">
+<div title="Structure - Simulation model - Reaction model - Process" creator="Designer" modifier="Designer" created="201311261816" modified="201401151021" changecount="17">
 <pre>Before presenting the general algorithm itself, we would like to draw attention on three important problems in the reaction:
 #The //reaction to a system influence// can //produce other influences// +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
@@ -2922,7 +2922,7 @@ SystemInfluenceRemovePublicLocalStateFromDynamicState influence = new SystemInfl
 }}} ===
 }}} ===</pre>
 </div>
-<div title="Structure - Simulation model - Time model" creator="Designer" modifier="Designer" created="201311270745" modified="201311271459" changecount="96">
+<div title="Structure - Simulation model - Time model" creator="Designer" modifier="Designer" created="201311270745" modified="201401061356" changecount="97">
 <pre>Managing explicitly the time in a simulation is not necessarily an easy task. Indeed, a simulation often relies on the notion of //&quot;time step&quot;// whereas simulated phenomena rely on notions like hours/minutes/seconds, seasons or years. In SIMILAR, we define the ''time model'' as the mean to clarify and handle this problem.
 !Regular model of time
 In reality, time is often seen as a +++^34em^*@[&lt;strong&gt;continuous&lt;/strong&gt;]
@@ -2986,7 +2986,7 @@ In SIMILAR, these issues are dealt by two means:
 
 {{center{[img(95%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Structure - Simulation model - Time model - Time stamps model" creator="Designer" modifier="Designer" created="201311271459" modified="201311271603" changecount="37">
+<div title="Structure - Simulation model - Time model - Time stamps model" creator="Designer" modifier="Designer" created="201311271459" modified="201401061422" changecount="53">
 <pre>In multi-level simulations, levels are not necessarily moving through time synchronously: there might be a phase shift between their evolution, they can move at different paces, etc.
 
 [img(98%,)[images/multiLevelTimeModel.png]]
@@ -2995,7 +2995,7 @@ To manage the execution flow of the simulation, a simulation engine does not nee
 
 The real time ellapsing between two time stamps is necessary in simulations where the evolution of the state of the agents is tighly bound with time. For instance in a road traffic simulation where the position of the agents depends on their speed. Many simulations do not need such information. For instance, Mitchell Resnick&lt;html&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/html&gt; reproduced the construction of piles of wood by termites agents without this notion.
 
-&lt;html&gt;&lt;sub&gt;1: See the book //&quot;Turtles, Termites, and Traffic Jams: Explorations in Massively Parallel Microworlds&quot;//, Resnick M., MIT press, 1997&lt;/sub&gt;&lt;/html&gt;
+&lt;html&gt;&lt;sub&gt;1: See the book &lt;i&gt;&quot;Turtles, Termites, and Traffic Jams: Explorations in Massively Parallel Microworlds&quot;&lt;/i&gt;, Resnick M., MIT press, 1997&lt;/sub&gt;&lt;/html&gt;
 !Possible time stamp models
 Based on the previous observations, two different models can be envisioned for time stamps:
 *An ''absolute positioning model'', where the real time ellapsing between two time stamps is ''known'';
@@ -3029,10 +3029,8 @@ In SIMILAR, the time stamps are characterized by:
 A time stamp is an instance of the {{{SimulationTimeStamp}}} class located in the {{{fr.lgi2a.similar.microkernel}}} package.
 !!Construction
 A time stamp can be built using three different approaches:
-#Constructing the instance using a {{{long}}} value;
-#Constructing the instance as a copy of another time stamp;
-#Copying an exising instance;
-!!!Using a long value
+#Constructing the instance using a {{{long}}} value; +++
+{{docsubsection{
 A time stamp can be created using a constructor specifying the {{{long}}} value of the time stamp:
 {{{
 public SimulationTimeStamp( long identifier );
@@ -3043,7 +3041,11 @@ public SimulationTimeStamp( long identifier );
 ''Parameters:''
 *''identifier:'' The identifier of the time stamp.
 }}}
-!!!Constructing a copy
+}}}
+===
+
+#Constructing the instance as a copy of another time stamp; +++
+{{docsubsection{
 A time stamp can be created using a constructor copying the identifier of another time stamp:
 {{{
 public SimulationTimeStamp( SimulationTimeStamp toCopy );
@@ -3056,7 +3058,11 @@ public SimulationTimeStamp( SimulationTimeStamp toCopy );
 ''Throws:''
 *''IllegalArgumentException:'' If the argument is {{{null}}}.
 }}}
-!!!Copying a time stamp
+}}}
+===
+
+#Copying an exising instance; +++
+{{docsubsection{
 A time stamp can be created by cloning another time stamp:
 {{{
 public Object clone();
@@ -3067,12 +3073,13 @@ public Object clone();
 ''Returns:''
 *A copy of this object.
 }}}
+}}}
+===
+
 !!Usage
 A time stamp is used in three different contexts:
-*When the identifier of the time stamp has be known;
-*When two time stamps have to be compared;
-*When the evenness of two time stamps has to be checked.
-!!!Accessing to the identifier
+*When the identifier of the time stamp has be known; +++
+{{docsubsection{
 The identifier of a time stamp can be accessed using the following method:
 {{{
 public long getIdentifier( );
@@ -3083,10 +3090,21 @@ public long getIdentifier( );
 ''Returns:''
 *The unique identifier of this time stamp.
 }}}
-!!!Comparison
+}}}
+===
+
+*When two time stamps have to be compared; +++
+{{docsubsection{
 The {{{SimulationTimeStamp}}} class implements the {{{Comparable}}} interface. Its comparison method returns the difference between the identifier of the time stamps.
-!!!Evenness
+}}}
+===
+
+*When the evenness of two time stamps has to be checked. +++
+{{docsubsection{
 The {{{SimulationTimeStamp}}} class redefines the {{{equals(...)}}} and {{{hashCode()}}} methods to check the evenness of two objects.
+}}}
+===
+
 }}}
 ===</pre>
 </div>
@@ -3454,7 +3472,7 @@ h3 {font-size: 14px;}
 /* This button was generated using CSSButtonGenerator.com */
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201311271211" tags="CSS excludeLists" changecount="13">
+<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201401061423" tags="CSS excludeLists" changecount="17">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the buttons
@@ -3536,7 +3554,7 @@ h3 {font-size: 14px;}
 /* ********************************************************
  * Common features of blocks following a big or small button
  ******************************************************** */
-.implsection, .exsection, .docsection, .moresection {
+.implsection, .exsection, .docsection, .docsubsection, .moresection {
 	display:block;
 	padding: 0.5em;
 	margin-top:0.25em;
@@ -3614,6 +3632,10 @@ h3 {font-size: 14px;}
 .docsection {
 	border:1px solid #528fcc;
 	background-color: #d6eafc;
+}
+.docsubsection {
+	border:1px solid #528fcc;
+	background-color: #76b9f5;
 }
 /* Change the color of the titles inside a document section. */
 .docsection h1, .docsection h2, .docsection h3, .docsection h4, .docsection h5 {

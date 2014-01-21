@@ -1205,11 +1205,10 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 }
 //}}}</pre>
 </div>
-<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201311291550" tags="excludeLists system" changecount="31">
+<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201401211614" tags="excludeLists system" changecount="32">
 <pre>{{toparent{[[back to parent|../README.html]]}}}
 ''General''
 ----
-*[[Main documentation|../README.html]]
 *[[Home]]
 *[[Documentation index|Documentation content]]
 ''Design guidelines''
@@ -2115,7 +2114,7 @@ Story.prototype.displayTiddler = function(srcElement,tiddler,template,animate,sl
 	if (single &amp;&amp; opt.chkSinglePagePermalink &amp;&amp; !config.browser.isSafari) {
 		window.location.hash = encodeURIComponent(String.encodeTiddlyLink(title));
 		config.lastURL = window.location.hash;
-		document.title = wikifyPlain(&quot;SiteTitle&quot;) + &quot; - &quot; + title;
+		document.title = wikifyPlain(&quot;SiteTitleText&quot;) + &quot; - &quot; + title;
 		if (!config.SPMTimer) config.SPMTimer=window.setInterval(function() {checkLastURL();},1000);
 	}
 	if (tiddlerElem &amp;&amp; tiddlerElem.getAttribute(&quot;dirty&quot;)==&quot;true&quot;) { // editing... move tiddler without re-rendering

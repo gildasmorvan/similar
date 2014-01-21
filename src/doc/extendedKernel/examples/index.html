@@ -596,16 +596,17 @@ config.macros.BackstageSidebarPlugin.init = function() {
 !(end of Stylesheet)
 ***/</pre>
 </div>
-<div title="ConfigTweaks" creator="Administrator" modifier="Designer" created="201311150903" modified="201311151014" tags="excludeLists systemConfig" changecount="3">
+<div title="ConfigTweaks" creator="Administrator" modifier="Designer" created="201311150903" modified="201401211600" tags="excludeLists systemConfig" changecount="4">
 <pre>/*{{{*/
 config.options.txtUserName='Designer';
 config.options.chkSaveBackups=false;
 config.options.chkDisableWikiLinks=true;
+config.options.chkSinglePageMode=true;
+config.options.chkHideTabsBarWhenSingleTab=true;
 /*}}}*/</pre>
 </div>
-<div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311290938" modified="201311290952" tags="system excludeLists" changecount="2">
-<pre>[[Home]]
-[[Documentation content]]</pre>
+<div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311290938" modified="201401211547" tags="system excludeLists" changecount="3">
+<pre>[[Home]]</pre>
 </div>
 <div title="DisableWikiLinksPlugin" creator="Designer" modifier="Designer" created="201311151013" modified="201311151013" tags="systemConfig excludeLists plugin" changecount="2">
 <pre>/***
@@ -2028,6 +2029,237 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 } //# end of &quot;install only once&quot;
 //}}}
 </pre>
+</div>
+<div title="SinglePageModePlugin" creator="Designer" modifier="Designer" created="201401211542" tags="systemConfig plugin excludeLists" changecount="1">
+<pre>/***
+|Name|SinglePageModePlugin|
+|Source|http://www.TiddlyTools.com/#SinglePageModePlugin|
+|Documentation|http://www.TiddlyTools.com/#SinglePageModePluginInfo|
+|Version|2.9.7|
+|Author|Eric Shulman|
+|License|http://www.TiddlyTools.com/#LegalStatements|
+|~CoreVersion|2.1|
+|Type|plugin|
+|Description|Show tiddlers one at a time with automatic permalink, or always open tiddlers at top/bottom of page.|
+This plugin allows you to configure TiddlyWiki to navigate more like a traditional multipage web site with only one tiddler displayed at a time.
+!!!!!Documentation
+&gt;see [[SinglePageModePluginInfo]]
+!!!!!Configuration
+&lt;&lt;&lt;
+&lt;&lt;option chkSinglePageMode&gt;&gt; Display one tiddler at a time
+&gt;&lt;&lt;option chkSinglePagePermalink&gt;&gt; Automatically permalink current tiddler
+&gt;&lt;&lt;option chkSinglePageKeepFoldedTiddlers&gt;&gt; Don't close tiddlers that are folded
+&gt;&lt;&lt;option chkSinglePageKeepEditedTiddlers&gt;&gt; Don't close tiddlers that are being edited
+&lt;&lt;option chkTopOfPageMode&gt;&gt; Open tiddlers at the top of the page
+&lt;&lt;option chkBottomOfPageMode&gt;&gt; Open tiddlers at the bottom of the page
+&lt;&lt;option chkSinglePageAutoScroll&gt;&gt; Automatically scroll tiddler into view (if needed)
+
+Notes:
+* The &quot;display one tiddler at a time&quot; option can also be //temporarily// set/reset by including a 'paramifier' in the document URL: {{{#SPM:true}}} or {{{#SPM:false}}}.
+* If more than one display mode is selected, 'one at a time' display takes precedence over both 'top' and 'bottom' settings, and if 'one at a time' setting is not used, 'top of page' takes precedence over 'bottom of page'.
+* When using Apple's Safari browser, automatically setting the permalink causes an error and is disabled.
+&lt;&lt;&lt;
+!!!!!Revisions
+&lt;&lt;&lt;
+2010.11.30 2.9.7 use story.getTiddler()
+2008.10.17 2.9.6 changed chkSinglePageAutoScroll default to false
+| Please see [[SinglePageModePluginInfo]] for previous revision details |
+2005.08.15 1.0.0 Initial Release.  Support for BACK/FORWARD buttons adapted from code developed by Clint Checketts.
+&lt;&lt;&lt;
+!!!!!Code
+***/
+//{{{
+version.extensions.SinglePageModePlugin= {major: 2, minor: 9, revision: 7, date: new Date(2010,11,30)};
+//}}}
+//{{{
+config.paramifiers.SPM = { onstart: function(v) {
+	config.options.chkSinglePageMode=eval(v);
+	if (config.options.chkSinglePageMode &amp;&amp; config.options.chkSinglePagePermalink &amp;&amp; !config.browser.isSafari) {
+		config.lastURL = window.location.hash;
+		if (!config.SPMTimer) config.SPMTimer=window.setInterval(function() {checkLastURL();},1000);
+	}
+} };
+//}}}
+//{{{
+if (config.options.chkSinglePageMode==undefined)
+	config.options.chkSinglePageMode=false;
+if (config.options.chkSinglePagePermalink==undefined)
+	config.options.chkSinglePagePermalink=true;
+if (config.options.chkSinglePageKeepFoldedTiddlers==undefined)
+	config.options.chkSinglePageKeepFoldedTiddlers=false;
+if (config.options.chkSinglePageKeepEditedTiddlers==undefined)
+	config.options.chkSinglePageKeepEditedTiddlers=false;
+if (config.options.chkTopOfPageMode==undefined)
+	config.options.chkTopOfPageMode=false;
+if (config.options.chkBottomOfPageMode==undefined)
+	config.options.chkBottomOfPageMode=false;
+if (config.options.chkSinglePageAutoScroll==undefined)
+	config.options.chkSinglePageAutoScroll=false;
+//}}}
+//{{{
+config.SPMTimer = 0;
+config.lastURL = window.location.hash;
+function checkLastURL()
+{
+	if (!config.options.chkSinglePageMode)
+		{ window.clearInterval(config.SPMTimer); config.SPMTimer=0; return; }
+	if (config.lastURL == window.location.hash) return; // no change in hash
+	var tids=decodeURIComponent(window.location.hash.substr(1)).readBracketedList();
+	if (tids.length==1) // permalink (single tiddler in URL)
+		story.displayTiddler(null,tids[0]);
+	else { // restore permaview or default view
+		config.lastURL = window.location.hash;
+		if (!tids.length) tids=store.getTiddlerText(&quot;DefaultTiddlers&quot;).readBracketedList();
+		story.closeAllTiddlers();
+		story.displayTiddlers(null,tids);
+	}
+}
+
+
+if (Story.prototype.SPM_coreDisplayTiddler==undefined)
+	Story.prototype.SPM_coreDisplayTiddler=Story.prototype.displayTiddler;
+Story.prototype.displayTiddler = function(srcElement,tiddler,template,animate,slowly)
+{
+	var title=(tiddler instanceof Tiddler)?tiddler.title:tiddler;
+	var tiddlerElem=story.getTiddler(title); // ==null unless tiddler is already displayed
+	var opt=config.options;
+	var single=opt.chkSinglePageMode &amp;&amp; !startingUp;
+	var top=opt.chkTopOfPageMode &amp;&amp; !startingUp;
+	var bottom=opt.chkBottomOfPageMode &amp;&amp; !startingUp;
+	if (single) {
+		story.forEachTiddler(function(tid,elem) {
+			// skip current tiddler and, optionally, tiddlers that are folded.
+			if (	tid==title
+				|| (opt.chkSinglePageKeepFoldedTiddlers &amp;&amp; elem.getAttribute(&quot;folded&quot;)==&quot;true&quot;))
+				return;
+			// if a tiddler is being edited, ask before closing
+			if (elem.getAttribute(&quot;dirty&quot;)==&quot;true&quot;) {
+				if (opt.chkSinglePageKeepEditedTiddlers) return;
+				// if tiddler to be displayed is already shown, then leave active tiddler editor as is
+				// (occurs when switching between view and edit modes)
+				if (tiddlerElem) return;
+				// otherwise, ask for permission
+				var msg=&quot;'&quot;+tid+&quot;' is currently being edited.\n\n&quot;;
+				msg+=&quot;Press OK to save and close this tiddler\nor press Cancel to leave it opened&quot;;
+				if (!confirm(msg)) return; else story.saveTiddler(tid);
+			}
+			story.closeTiddler(tid);
+		});
+	}
+	else if (top)
+		arguments[0]=null;
+	else if (bottom)
+		arguments[0]=&quot;bottom&quot;;
+	if (single &amp;&amp; opt.chkSinglePagePermalink &amp;&amp; !config.browser.isSafari) {
+		window.location.hash = encodeURIComponent(String.encodeTiddlyLink(title));
+		config.lastURL = window.location.hash;
+		document.title = wikifyPlain(&quot;SiteTitle&quot;) + &quot; - &quot; + title;
+		if (!config.SPMTimer) config.SPMTimer=window.setInterval(function() {checkLastURL();},1000);
+	}
+	if (tiddlerElem &amp;&amp; tiddlerElem.getAttribute(&quot;dirty&quot;)==&quot;true&quot;) { // editing... move tiddler without re-rendering
+		var isTopTiddler=(tiddlerElem.previousSibling==null);
+		if (!isTopTiddler &amp;&amp; (single || top))
+			tiddlerElem.parentNode.insertBefore(tiddlerElem,tiddlerElem.parentNode.firstChild);
+		else if (bottom)
+			tiddlerElem.parentNode.insertBefore(tiddlerElem,null);
+		else this.SPM_coreDisplayTiddler.apply(this,arguments); // let CORE render tiddler
+	} else
+		this.SPM_coreDisplayTiddler.apply(this,arguments); // let CORE render tiddler
+	var tiddlerElem=story.getTiddler(title);
+	if (tiddlerElem&amp;&amp;opt.chkSinglePageAutoScroll) {
+		// scroll to top of page or top of tiddler
+		var isTopTiddler=(tiddlerElem.previousSibling==null);
+		var yPos=isTopTiddler?0:ensureVisible(tiddlerElem);
+		// if animating, defer scroll until after animation completes
+		var delay=opt.chkAnimate?config.animDuration+10:0;
+		setTimeout(&quot;window.scrollTo(0,&quot;+yPos+&quot;)&quot;,delay); 
+	}
+}
+
+if (Story.prototype.SPM_coreDisplayTiddlers==undefined)
+	Story.prototype.SPM_coreDisplayTiddlers=Story.prototype.displayTiddlers;
+Story.prototype.displayTiddlers = function() {
+	// suspend single/top/bottom modes when showing multiple tiddlers
+	var opt=config.options;
+	var saveSPM=opt.chkSinglePageMode; opt.chkSinglePageMode=false;
+	var saveTPM=opt.chkTopOfPageMode; opt.chkTopOfPageMode=false;
+	var saveBPM=opt.chkBottomOfPageMode; opt.chkBottomOfPageMode=false;
+	this.SPM_coreDisplayTiddlers.apply(this,arguments);
+	opt.chkBottomOfPageMode=saveBPM;
+	opt.chkTopOfPageMode=saveTPM;
+	opt.chkSinglePageMode=saveSPM;
+}
+//}}}</pre>
+</div>
+<div title="SinglePageModePluginInfo" creator="Designer" modifier="Designer" created="201401211543" tags="pluginInfo excludeLists" changecount="1">
+<pre>/***
+|Name|SinglePageModePluginInfo|
+|Source|http://www.TiddlyTools.com/#SinglePageModePlugin|
+|Documentation|http://www.TiddlyTools.com/#SinglePageModePluginInfo|
+|Version|2.9.6|
+|Author|Eric Shulman|
+|License|http://www.TiddlyTools.com/#LegalStatements|
+|~CoreVersion|2.1|
+|Type|documentation|
+|Description|Documentation for SinglePageModePlugin|
+Normally, as you click on the links in TiddlyWiki, more and more tiddlers are displayed on the page. The order of this tiddler display depends upon when and where you have clicked. Some people like this non-linear method of reading the document, while others have reported that when many tiddlers have been opened, it can get somewhat confusing.  SinglePageModePlugin allows you to configure TiddlyWiki to navigate more like a traditional multipage web site with only one item displayed at a time.
+!!!!!Usage
+&lt;&lt;&lt;
+When the plugin is enabled, only one tiddler will be displayed at a time and the browser window's titlebar is updated to include the current tiddler title.  The browser's location URL is also updated with a 'permalink' for the current tiddler so that it is easier to create a browser 'bookmark' for the current tiddler.  Alternatively, even when displaying multiple tiddlers //is// permitted, you can still reduce the potential for confusion by forcing  tiddlers to always open at the top (or bottom) of the page instead of being displayed following the tiddler containing the link that was clicked.
+&lt;&lt;&lt;
+!!!!!Configuration
+&lt;&lt;&lt;
+&lt;&lt;option chkSinglePageMode&gt;&gt; Display one tiddler at a time
+&gt;&lt;&lt;option chkSinglePagePermalink&gt;&gt; Automatically permalink current tiddler
+&gt;&lt;&lt;option chkSinglePageKeepFoldedTiddlers&gt;&gt; Don't close tiddlers that are folded
+&gt;&lt;&lt;option chkSinglePageKeepEditedTiddlers&gt;&gt; Don't close tiddlers that are being edited
+&lt;&lt;option chkTopOfPageMode&gt;&gt; Open tiddlers at the top of the page
+&lt;&lt;option chkBottomOfPageMode&gt;&gt; Open tiddlers at the bottom of the page
+&lt;&lt;option chkSinglePageAutoScroll&gt;&gt; Automatically scroll tiddler into view (if needed)
+
+Notes:
+* {{block{
+The &quot;display one tiddler at a time&quot; option can also be //temporarily// set/reset by including a 'paramifier' in the document URL: {{{#SPM:true}}} or {{{#SPM:false}}}. You can also use {{{SPM:expression}}}, where 'expression' is any javascript statement that evaluates to true or false.  This allows you to create hard-coded links in other documents that can selectively enable/disable the use of this option based on various programmatic conditions, such as the current username. For example, using
+&amp;nbsp;&amp;nbsp;&amp;nbsp;{{{#SPM:config.options.txtUserName!=&quot;SomeName&quot;}}}
+enables 'one tiddler at a time' display for all users //other than// &quot;~SomeName&quot;)}}}
+* If more than one display mode is selected, 'one at a time' display takes precedence over both 'top' and 'bottom' settings, and if 'one at a time' setting is not used, 'top of page' takes precedence over 'bottom of page'.
+* When using Apple's Safari browser, automatically setting the permalink causes an error and is disabled.
+&lt;&lt;&lt;
+!!!!!Revisions
+&lt;&lt;&lt;
+2008.10.17 2.9.6 changed chkSinglePageAutoScroll default to false
+2008.06.12 2.9.5 corrected 'scroll to top of page' logic in auto-scroll handling
+2008.06.11 2.9.4 added chkSinglePageKeepEditedTiddlers option
+2008.06.05 2.9.3 in displayTiddler(), bypass single/top/bottom mode handling if startingUp.  Allows multiple tiddlers to be displayed during startup processing (e.g., #story:DefaultTiddlers), even if single/top/bottom mode is enabled.
+2008.04.18 2.9.2 in displayTiddler() and checkLastURL(), handling for Unicode in tiddler titles (remove explicit conversion between Unicode and UTF, as this is apparently done automatically by encode/decodeURIComponent, resulting in double-encoding!
+2008.04.08 2.9.1 don't automatically add options to AdvancedOptions shadow tiddler
+2008.04.02 2.9.0 in displayTiddler(), when single-page mode is in use and a tiddler is being edited, ask for permission to save-and-close that tiddler, instead of just leaving it open.
+2008.03.29 2.8.3 in displayTiddler(), get title from tiddler object (if needed).  Fixes errors caused when calling function passes a tiddler *object* instead of a tiddler *title*
+2008.03.14 2.8.2 in displayTiddler(), if editing specified tiddler, just move it to top/bottom of story *without* re-rendering (prevents discard of partial edits).
+2008.03.06 2.8.1 in paramifier handler, start 'checkURL' timer if chkSinglePageMode is enabled
+2008.03.06 2.8.0 added option, {{{config.options.chkSinglePageKeepFoldedTiddlers}}}, so folded tiddlers won't be closed when using single-page mode.  Also, in checkURL(), if hash is a ''permaview'' (e.g., &quot;#foo bar baz&quot;), then display multiple tiddlers rather than attempting to display &quot;foo bar baz&quot; as a single tiddler
+2008.03.05 2.7.0 added support for &quot;SPM:&quot; URL paramifier
+2008.03.01 2.6.0 in hijack of displayTiddler(), added 'title' argument to closeAllTiddlers() so that target tiddler isn't closed-and-reopened if it was already displayed.  Also, added config.options.chkSinglePageAutoScrolloption to bypass automatic 'scroll into view' logic (note: core still does it's own ensureVisible() handling)
+2007.12.22 2.5.3 in checkLastURL(), use decodeURIComponent() instead of decodeURI so that tiddler titles with commas (and/or other punctuation) are correctly handled.
+2007.10.26 2.5.2 documentation cleanup
+2007.10.08 2.5.1 in displayTiddler(), when using single-page or top-of-page mode, scrollTo(0,0) to ensure that page header is in view.
+2007.09.13 2.5.0 for TPM/BPM modes, don't force tiddler to redisplay if already shown.  Allows transition between view/edit or collapsed/view templates, without repositioning displayed tiddler.
+2007.09.12 2.4.0 added option to disable automatic permalink feature.  Also, Safari is now excluded from permalinking action to avoid bug where tiddlers don't display after hash is updated.
+2007.03.03 2.3.1 fix typo when adding BPM option to AdvancedOptions (prevented checkbox from appearing)
+2007.03.03 2.3.0 added support for BottomOfPageMode (BPM) based on request from DaveGarbutt
+2007.02.06 2.2.3 in Story.prototype.displayTiddler(), use convertUnicodeToUTF8() for correct I18N string handling when creating URL hash string from tiddler title (based on bug report from BidiX)
+2007.01.08 2.2.2 use apply() to invoke hijacked core functions
+2006.07.04 2.2.1 in hijack for displayTiddlers(), suspend TPM as well as SPM so that DefaultTiddlers displays in the correct order.
+2006.06.01 2.2.0 added chkTopOfPageMode (TPM) handling
+2006.02.04 2.1.1 moved global variable declarations to config.* to avoid FireFox 1.5.0.1 crash bug when assigning to globals
+2005.12.27 2.1.0 hijack displayTiddlers() so that SPM can be suspended during startup while displaying the DefaultTiddlers (or #hash list).  Also, corrected initialization for undefined SPM flag to &quot;false&quot;, so default behavior is to display multiple tiddlers
+2005.12.27 2.0.0 Update for TW2.0
+2005.11.24 1.1.2 When the back and forward buttons are used, the page now changes to match the URL.  Based on code added by Clint Checketts
+2005.10.14 1.1.1 permalink creation now calls encodeTiddlyLink() to handle tiddler titles with spaces in them
+2005.10.14 1.1.0 added automatic setting of window title and location bar ('auto-permalink').  feature suggestion by David Dickens.
+2005.10.09 1.0.1 combined documentation and code in a single tiddler
+2005.08.15 1.0.0 Initial Release
+&lt;&lt;&lt;</pre>
 </div>
 <div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201311291055" tags="system excludeLists" changecount="8">
 <pre>Examples &lt;html&gt;&lt;sub&gt;(extended-kernel)&lt;/sub&gt;&lt;/html&gt;</pre>

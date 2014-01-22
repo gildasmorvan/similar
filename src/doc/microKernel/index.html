@@ -969,7 +969,7 @@ This state still has to define the public local state of the environment, of the
 *''IllegalArgumentException:'' If an argument is null.
 }}}</pre>
 </div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201401151146" changecount="46">
+<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201401220938" changecount="47">
 <pre>The micro kernel of SIMILAR is characterized by three components.
 !Micro kernel API
 [&lt;img(25%,)[images/guidelines.png]]
@@ -985,7 +985,7 @@ The ''common libraries'' of the micro kernel, containing generic implementations
 *Disambiguation operators;
 *Generic default implementations (empty states/perceived data);
 *Abstract implementations of most interfaces of the micro kernel.
-{{linkbigbtn center {[[Common libraries index|./commonLibs/index.html]]}}}
+{{linkbigbtn center {[[Common libraries index|./commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}
 !Micro-kernel usage examples
 [&lt;img(25%,)[images/examples.png]]
 The examples illustrating the use of the micro kernel and the common libraries to design simulations. These examples include:
@@ -1004,7 +1004,7 @@ This simulation can be used to study the execution mechanisms of a simulation, o
 }}}
 ===
 
-{{linkbigbtn center {[[Usage examples index|./examples/index.html]]}}}</pre>
+{{linkbigbtn center {[[Usage examples index|./examples/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}</pre>
 </div>
 <div title="DropDownMenuPlugin" creator="Designer" modifier="Designer" created="201311151101" modified="201401150903" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***
@@ -1460,8 +1460,280 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 }
 //}}}</pre>
 </div>
-<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201311291041" tags="excludeLists system" changecount="31">
-<pre>{{toparent{[[back to parent|../README.html]]}}}
+<div title="InlineJavascriptPlugin" creator="Designer" modifier="Designer" created="201401211625" tags="plugin systemConfig excludeLists" changecount="1">
+<pre>/***
+|Name|InlineJavascriptPlugin|
+|Source|http://www.TiddlyTools.com/#InlineJavascriptPlugin|
+|Documentation|http://www.TiddlyTools.com/#InlineJavascriptPluginInfo|
+|Version|1.9.6|
+|Author|Eric Shulman|
+|License|http://www.TiddlyTools.com/#LegalStatements|
+|~CoreVersion|2.1|
+|Type|plugin|
+|Description|Insert Javascript executable code directly into your tiddler content.|
+''Call directly into TW core utility routines, define new functions, calculate values, add dynamically-generated TiddlyWiki-formatted output'' into tiddler content, or perform any other programmatic actions each time the tiddler is rendered.
+!!!!!Documentation
+&gt;see [[InlineJavascriptPluginInfo]]
+!!!!!Revisions
+&lt;&lt;&lt;
+2010.12.15 1.9.6 allow (but ignore) type=&quot;...&quot; syntax
+|please see [[InlineJavascriptPluginInfo]] for additional revision details|
+2005.11.08 1.0.0 initial release
+&lt;&lt;&lt;
+!!!!!Code
+***/
+//{{{
+version.extensions.InlineJavascriptPlugin= {major: 1, minor: 9, revision: 6, date: new Date(2010,12,15)};
+
+config.formatters.push( {
+	name: &quot;inlineJavascript&quot;,
+	match: &quot;\\&lt;script&quot;,
+	lookahead: &quot;\\&lt;script(?: type=\\\&quot;[^\\\&quot;]*\\\&quot;)?(?: src=\\\&quot;([^\\\&quot;]*)\\\&quot;)?(?: label=\\\&quot;([^\\\&quot;]*)\\\&quot;)?(?: title=\\\&quot;([^\\\&quot;]*)\\\&quot;)?(?: key=\\\&quot;([^\\\&quot;]*)\\\&quot;)?( show)?\\&gt;((?:.|\\n)*?)\\&lt;/script\\&gt;&quot;,
+	handler: function(w) {
+		var lookaheadRegExp = new RegExp(this.lookahead,&quot;mg&quot;);
+		lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = lookaheadRegExp.exec(w.source)
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			var src=lookaheadMatch[1];
+			var label=lookaheadMatch[2];
+			var tip=lookaheadMatch[3];
+			var key=lookaheadMatch[4];
+			var show=lookaheadMatch[5];
+			var code=lookaheadMatch[6];
+			if (src) { // external script library
+				var script = document.createElement(&quot;script&quot;); script.src = src;
+				document.body.appendChild(script); document.body.removeChild(script);
+			}
+			if (code) { // inline code
+				if (show) // display source in tiddler
+					wikify(&quot;{{{\n&quot;+lookaheadMatch[0]+&quot;\n}}}\n&quot;,w.output);
+				if (label) { // create 'onclick' command link
+					var link=createTiddlyElement(w.output,&quot;a&quot;,null,&quot;tiddlyLinkExisting&quot;,wikifyPlainText(label));
+					var fixup=code.replace(/document.write\s*\(/gi,'place.bufferedHTML+=(');
+					link.code=&quot;function _out(place,tiddler){&quot;+fixup+&quot;\n};_out(this,this.tiddler);&quot;
+					link.tiddler=w.tiddler;
+					link.onclick=function(){
+						this.bufferedHTML=&quot;&quot;;
+						try{ var r=eval(this.code);
+							if(this.bufferedHTML.length || (typeof(r)===&quot;string&quot;)&amp;&amp;r.length)
+								var s=this.parentNode.insertBefore(document.createElement(&quot;span&quot;),this.nextSibling);
+							if(this.bufferedHTML.length)
+								s.innerHTML=this.bufferedHTML;
+							if((typeof(r)===&quot;string&quot;)&amp;&amp;r.length) {
+								wikify(r,s,null,this.tiddler);
+								return false;
+							} else return r!==undefined?r:false;
+						} catch(e){alert(e.description||e.toString());return false;}
+					};
+					link.setAttribute(&quot;title&quot;,tip||&quot;&quot;);
+					var URIcode='javascript:void(eval(decodeURIComponent(%22(function(){try{';
+					URIcode+=encodeURIComponent(encodeURIComponent(code.replace(/\n/g,' ')));
+					URIcode+='}catch(e){alert(e.description||e.toString())}})()%22)))';
+					link.setAttribute(&quot;href&quot;,URIcode);
+					link.style.cursor=&quot;pointer&quot;;
+					if (key) link.accessKey=key.substr(0,1); // single character only
+				}
+				else { // run script immediately
+					var fixup=code.replace(/document.write\s*\(/gi,'place.innerHTML+=(');
+					var c=&quot;function _out(place,tiddler){&quot;+fixup+&quot;\n};_out(w.output,w.tiddler);&quot;;
+					try	 { var out=eval(c); }
+					catch(e) { out=e.description?e.description:e.toString(); }
+					if (out &amp;&amp; out.length) wikify(out,w.output,w.highlightRegExp,w.tiddler);
+				}
+			}
+			w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
+		}
+	}
+} )
+//}}}
+
+// // Backward-compatibility for TW2.1.x and earlier
+//{{{
+if (typeof(wikifyPlainText)==&quot;undefined&quot;) window.wikifyPlainText=function(text,limit,tiddler) {
+	if(limit &gt; 0) text = text.substr(0,limit);
+	var wikifier = new Wikifier(text,formatter,null,tiddler);
+	return wikifier.wikifyPlain();
+}
+//}}}
+
+// // GLOBAL FUNCTION: $(...) -- 'shorthand' convenience syntax for document.getElementById()
+//{{{
+if (typeof($)=='undefined') { function $(id) { return document.getElementById(id.replace(/^#/,'')); } }
+//}}}</pre>
+</div>
+<div title="InlineJavascriptPluginInfo" creator="Designer" modifier="Designer" created="201401211627" tags="pluginInfo excludeLists" changecount="1">
+<pre>/***
+|Name|InlineJavascriptPluginInfo|
+|Source|http://www.TiddlyTools.com/#InlineJavascriptPlugin|
+|Documentation|http://www.TiddlyTools.com/#InlineJavascriptPluginInfo|
+|Version|1.9.6|
+|Author|Eric Shulman|
+|License|http://www.TiddlyTools.com/#LegalStatements|
+|~CoreVersion|2.1|
+|Type|documentation|
+|Description|Documentation for InlineJavascriptPlugin|
+''Call directly into TW core utility routines, define new functions, calculate values, add dynamically-generated TiddlyWiki-formatted output'' into tiddler content, or perform any other programmatic actions each time the tiddler is rendered.
+!!!!!Usage
+&lt;&lt;&lt;
+This plugin adds wiki syntax for surrounding tiddler content with {{{&lt;script&gt;}}} and {{{&lt;/script&gt;}}} markers, so that it can be recognized as embedded javascript code.  When a tiddler is rendered, the plugin automatically invokes any embedded scripts, which can be used to construct and return dynamically-generated output that is inserted into the tiddler content.
+{{{
+&lt;script type=&quot;...&quot; src=&quot;...&quot; label=&quot;...&quot; title=&quot;...&quot; key=&quot;...&quot; show&gt;
+	/* javascript code goes here... */
+&lt;/script&gt;
+}}}
+All parameters are //optional//.    When the ''show'' keyword is used, the plugin will also include the script source code in the output that it displays in the tiddler.  This is helpful when creating examples for documentation purposes (such as used in this tiddler!)
+
+__''Deferred execution from an 'onClick' link''__
+&lt;script label=&quot;click here&quot; title=&quot;mouseover tooltip text&quot; key=&quot;X&quot; show&gt;
+	/* javascript code goes here... */
+	alert('you clicked on the link!');
+&lt;/script&gt;
+By including a {{{label=&quot;...&quot;}}} parameter in the initial {{{&lt;script&gt;}}} marker, the plugin will create a link to an 'onclick' script that will only be executed when that specific link is clicked, rather than running the script each time the tiddler is rendered.  You may also include a {{{title=&quot;...&quot;}}} parameter to specify the 'tooltip' text that will appear whenever the mouse is moved over the onClick link text, and a {{{key=&quot;X&quot;}}} parameter to specify an //access key// (which must be a //single// letter or numeric digit only).
+
+__''Loading scripts from external source files''__
+&lt;script src=&quot;URL&quot; show&gt;
+	/* optional javascript code goes here... */
+&lt;/script&gt;You can also load javascript directly from an external source URL, by including a src=&quot;...&quot; parameter in the initial {{{&lt;script&gt;}}} marker (e.g., {{{&lt;script src=&quot;demo.js&quot;&gt;&lt;/script&gt;}}}).  This is particularly useful when incorporating third-party javascript libraries for use in custom extensions and plugins.  The 'foreign' javascript code remains isolated in a separate file that can be easily replaced whenever an updated library file becomes available.
+
+In addition to loading the javascript from the external file, you can also use this feature to invoke javascript code contained within the {{{&lt;script&gt;...&lt;/script&gt;}}} markers.  This code is invoked //after// the external script file has been processed, and can make immediate use of the functions and/or global variables defined by the external script file.
+&gt;Note: To ensure that your javascript functions are always available when needed, you should load the libraries from a tiddler that is rendered as soon as your TiddlyWiki document is opened, such as MainMenu.  For example: put your {{{&lt;script src=&quot;...&quot;&gt;&lt;/script&gt;}}} syntax into a separate 'library' tiddler (e.g., LoadScripts), and then add {{{&lt;&lt;tiddler LoadScripts&gt;&gt;}}} to MainMenu so that the library is loaded before any other tiddlers that rely upon the functions it defines. 
+&gt;
+&gt;Normally, loading external javascript in this way does not produce any direct output, and should not have any impact on the appearance of your MainMenu.  However, if your LoadScripts tiddler contains notes or other visible content, you can suppress this output by using 'inline CSS' in the MainMenu, like this: {{{@@display:none;&lt;&lt;tiddler LoadScripts&gt;&gt;@@}}}
+&lt;&lt;&lt;
+!!!!!Creating dynamic tiddler content and accessing the ~TiddlyWiki DOM
+&lt;&lt;&lt;
+An important difference between TiddlyWiki inline scripting and conventional embedded javascript techniques for web pages is the method used to produce output that is dynamically inserted into the document: in a typical web document, you use the {{{document.write()}}} (or {{{document.writeln()}}}) function to output text sequences (often containing HTML tags) that are then rendered when the entire document is first loaded into the browser window.
+
+However, in a ~TiddlyWiki document, tiddlers (and other DOM elements) are created, deleted, and rendered &quot;on-the-fly&quot;, so writing directly to the global 'document' object does not produce the results you want (i.e., replacing the embedded script within the tiddler content), and instead will //completely replace the entire ~TiddlyWiki document in your browser window (which is clearly not a good thing!)//.  In order to allow scripts to use {{{document.write()}}}, the plugin automatically converts and buffers all HTML output so it can be safely inserted into your tiddler content, immediately following the script.
+
+''Note that {{{document.write()}}} can only be used to output &quot;pure HTML&quot; syntax.  To produce //wiki-formatted// output, your script should instead return a text value containing the desired wiki-syntax content'', which will then be automatically rendered immediately following the script.  If returning a text value is not sufficient for your needs, the plugin also provides an automatically-defined variable, 'place', that gives the script code ''direct access to the //containing DOM element//'' into which the tiddler output is being rendered.  You can use this variable to ''perform direct DOM manipulations'' that can, for example:
+* generate wiki-formatted output using {{{wikify(&quot;...content...&quot;,place)}}}
+* vary the script's actions based upon the DOM element in which it is embedded
+* access 'tiddler-relative' DOM information using {{{story.findContainingTiddler(place)}}}
+Note:
+''When using an 'onclick' script, the 'place' element actually refers to the onclick //link text// itself, instead of the containing DOM element.''  This permits you to directly reference or modify the link text to reflect any 'stateful' conditions that might set by the script.  To refer to the containing DOM element from within an 'onclick' script, you can use &quot;place.parentNode&quot; instead.
+&lt;&lt;&lt;
+!!!!!Instant &quot;bookmarklets&quot;
+&lt;&lt;&lt;
+You can also use an 'onclick' link to define a &quot;bookmarklet&quot;: a small piece of javascript that can be ''invoked directly from the browser without having to be defined within the current document.''  This allows you to create 'stand-alone' commands that can be applied to virtually ANY TiddlyWiki document... even remotely-hosted documents that have been written by others!!  To create a bookmarklet, simply define an 'onclick' script and then grab the resulting link text and drag-and-drop it onto your browser's toolbar (or right-click and use the 'bookmark this link' command to add it to the browser's menu).
+
+Notes:
+*When writing scripts intended for use as bookmarklets, due to the ~URI-encoding required by the browser, ''you cannot not use ANY double-quotes (&quot;) within the bookmarklet script code.''
+*All comments embedded in the bookmarklet script must ''use the fully-delimited {{{/* ... */}}} comment syntax,'' rather than the shorter {{{//}}} comment syntax.
+*Most importantly, because bookmarklets are invoked directly from the browser interface and are not embedded within the TiddlyWiki document, there is NO containing 'place' DOM element surrounding the script.  As a result, ''you cannot use a bookmarklet to generate dynamic output in your document,''  and using {{{document.write()}}} or returning wiki-syntax text or making reference to the 'place' DOM element will halt the script and report a &quot;Reference Error&quot; when that bookmarklet is invoked.  
+Please see [[InstantBookmarklets]] for many examples of 'onclick' scripts that can also be used as bookmarklets.
+&lt;&lt;&lt;
+!!!!!Special reserved function name
+&lt;&lt;&lt;
+The plugin 'wraps' all inline javascript code inside a function, {{{_out()}}}, so that any return value you provide can be correctly handled by the plugin and inserted into the tiddler.  To avoid unpredictable results (and possibly fatal execution errors), this function should never be redefined or called from ''within'' your script code.
+&lt;&lt;&lt;
+!!!!!$(...) 'shorthand' function
+&lt;&lt;&lt;
+As described by Dustin Diaz [[here|http://www.dustindiaz.com/top-ten-javascript/]], the plugin defines a 'shorthand' function that allows you to write:
+{{{
+$(id)
+}}}
+in place of the normal standard javascript syntax:
+{{{
+document.getElementById(id)
+}}}
+This function is provided merely as a convenience for javascript coders that may be familiar with this abbreviation, in order to allow them to save a few bytes when writing their own inline script code.
+&lt;&lt;&lt;
+!!!!!Examples
+&lt;&lt;&lt;
+simple dynamic output:
+&gt;&lt;script show&gt;
+	document.write(&quot;The current date/time is: &quot;+(new Date())+&quot;&lt;br&gt;&quot;);
+	return &quot;link to current user: [[&quot;+config.options.txtUserName+&quot;]]\n&quot;;
+&lt;/script&gt;
+dynamic output using 'place' to get size information for current tiddler:
+&gt;&lt;script show&gt;
+	if (!window.story) window.story=window;
+	var title=story.findContainingTiddler(place).getAttribute(&quot;tiddler&quot;);
+	var size=store.getTiddlerText(title).length;
+	return title+&quot; is using &quot;+size+&quot; bytes&quot;;
+&lt;/script&gt;
+dynamic output from an 'onclick' script, using {{{document.write()}}} and/or {{{return &quot;...&quot;}}}
+&gt;&lt;script label=&quot;click here&quot; show&gt;
+	document.write(&quot;&lt;br&gt;The current date/time is: &quot;+(new Date())+&quot;&lt;br&gt;&quot;);
+	return &quot;link to current user: [[&quot;+config.options.txtUserName+&quot;]]\n&quot;;
+&lt;/script&gt;
+creating an 'onclick' button/link that accesses the link text AND the containing tiddler:
+&gt;&lt;script label=&quot;click here&quot; title=&quot;clicking this link will show an 'alert' box&quot; key=&quot;H&quot; show&gt;
+	if (!window.story) window.story=window;
+	var txt=place.firstChild.data;
+	var tid=story.findContainingTiddler(place).getAttribute('tiddler');
+	alert('Hello World!\nlinktext='+txt+'\ntiddler='+tid);
+&lt;/script&gt;
+dynamically setting onclick link text based on stateful information:
+&gt;{{block{
+{{{
+&lt;script label=&quot;click here&quot;&gt;
+	/* toggle &quot;txtSomething&quot; value */
+	var on=(config.txtSomething==&quot;ON&quot;);
+	place.innerHTML=on?&quot;enable&quot;:&quot;disable&quot;;
+	config.txtSomething=on?&quot;OFF&quot;:&quot;ON&quot;;
+	return &quot;\nThe current value is: &quot;+config.txtSomething;
+&lt;/script&gt;&lt;script&gt;
+	/* initialize onclick link text based on current &quot;txtSomething&quot; value */
+	var on=(config.txtSomething==&quot;ON&quot;);
+	place.lastChild.previousSibling.innerHTML=on?&quot;disable&quot;:&quot;enable&quot;;
+&lt;/script&gt;
+}}}
+&lt;script label=&quot;click here&quot;&gt;
+	/* toggle &quot;txtSomething&quot; value */
+	var on=(config.txtSomething==&quot;ON&quot;);
+	place.innerHTML=on?&quot;enable&quot;:&quot;disable&quot;;
+	config.txtSomething=on?&quot;OFF&quot;:&quot;ON&quot;;
+	return &quot;\nThe current value is: &quot;+config.txtSomething;
+&lt;/script&gt;&lt;script&gt;
+	/* initialize onclick link text based on current &quot;txtSomething&quot; value */
+	var on=(config.txtSomething==&quot;ON&quot;);
+	place.lastChild.innerHTML=on?&quot;enable&quot;:&quot;disable&quot;;
+&lt;/script&gt;
+}}}
+loading a script from a source url:
+&gt;http://www.TiddlyTools.com/demo.js contains:
+&gt;&gt;{{{function inlineJavascriptDemo() { alert('Hello from demo.js!!') } }}}
+&gt;&gt;{{{displayMessage('InlineJavascriptPlugin: demo.js has been loaded');}}}
+&gt;note: When using this example on your local system, you will need to download the external script file from the above URL and install it into the same directory as your document.
+&gt;
+&gt;&lt;script src=&quot;demo.js&quot; show&gt;
+	return &quot;inlineJavascriptDemo() function has been defined&quot;
+&lt;/script&gt;
+&gt;&lt;script label=&quot;click to invoke inlineJavascriptDemo()&quot; key=&quot;D&quot; show&gt;
+	inlineJavascriptDemo();
+&lt;/script&gt;
+&lt;&lt;&lt;
+!!!!!Revisions
+&lt;&lt;&lt;
+2010.12.15 1.9.6 allow (but ignore) type=&quot;...&quot; syntax
+2009.04.11 1.9.5 pass current tiddler object into wrapper code so it can be referenced from within 'onclick' scripts
+2009.02.26 1.9.4 in $(), handle leading '#' on ID for compatibility with JQuery syntax
+2008.06.11 1.9.3 added $(...) function as 'shorthand' for document.getElementById()
+2008.03.03 1.9.2 corrected fallback declaration of wikifyPlainText() (fixes Safari &quot;parse error&quot;)
+2008.02.23 1.9.1 in onclick function, use string instead of array for 'bufferedHTML' (fixes IE errors)
+2008.02.21 1.9.0 output from 'onclick' scripts (return value or document.write() calls) are now buffered and rendered into into a span following the script.  Also, added default 'return false' handling if no return value provided (prevents HREF from being triggered -- return TRUE to allow HREF to be processed).  Thanks to Xavier Verges for suggestion and preliminary code.
+2008.02.14 1.8.1 added backward-compatibility for use of wikifyPlainText() in TW2.1.3 and earlier
+2008.01.08 [*.*.*] plugin size reduction: documentation moved to ...Info tiddler
+2007.12.28 1.8.0 added support for key=&quot;X&quot; syntax to specify custom access key definitions
+2007.12.15 1.7.0 autogenerate URI encoded HREF on links for onclick scripts.  Drag links to browser toolbar to create bookmarklets.  IMPORTANT NOTE: place is NOT defined when scripts are used as bookmarklets.  In addition, double-quotes will cause syntax errors.  Thanks to PaulReiber for debugging and brainstorming.
+2007.11.26 1.6.2 when converting &quot;document.write()&quot; function calls in inline code, allow whitespace between &quot;write&quot; and &quot;(&quot; so that &quot;document.write ( foobar )&quot; is properly converted.
+2007.11.16 1.6.1 when rendering &quot;onclick scripts&quot;, pass label text through wikifyPlainText() to parse any embedded wiki-syntax to enable use of HTML entities or even TW macros to generate dynamic label text.
+2007.02.19 1.6.0 added support for title=&quot;...&quot; to specify mouseover tooltip when using an onclick (label=&quot;...&quot;) script
+2006.10.16 1.5.2 add newline before closing '}' in 'function out_' wrapper.  Fixes error caused when last line of script is a comment.
+2006.06.01 1.5.1 when calling wikify() on script return value, pass hightlightRegExp and tiddler params so macros that rely on these values can render properly
+2006.04.19 1.5.0 added 'show' parameter to force display of javascript source code in tiddler output
+2006.01.05 1.4.0 added support 'onclick' scripts.  When label=&quot;...&quot; param is present, a button/link is created using the indicated label text, and the script is only executed when the button/link is clicked.  'place' value is set to match the clicked button/link element.
+2005.12.13 1.3.1 when catching eval error in IE, e.description contains the error text, instead of e.toString().  Fixed error reporting so IE shows the correct response text.  Based on a suggestion by UdoBorkowski
+2005.11.09 1.3.0 for 'inline' scripts (i.e., not scripts loaded with src=&quot;...&quot;), automatically replace calls to 'document.write()' with 'place.innerHTML+=' so script output is directed into tiddler content.  Based on a suggestion by BradleyMeck
+2005.11.08 1.2.0 handle loading of javascript from an external URL via src=&quot;...&quot; syntax
+2005.11.08 1.1.0 pass 'place' param into scripts to provide direct DOM access 
+2005.11.08 1.0.0 initial release
+&lt;&lt;&lt;</pre>
+</div>
+<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201401220938" tags="excludeLists system" changecount="32">
+<pre>{{toparent{[[back to parent|../README.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}
 ''General''
 ----
 *[[Home]]
@@ -1475,8 +1747,8 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 *[[Execution|Simulation execution]]
 ''Micro-kernel helpers''
 ----
-*[[Common libraries|./commonLibs/index.html]]
-*[[Usage examples|./examples/index.html]]</pre>
+*[[Common libraries|./commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;
+*[[Usage examples|./examples/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;</pre>
 </div>
 <div title="MathJaxPlugin" creator="Administrator" modifier="Designer" created="201311150900" modified="201311151031" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***

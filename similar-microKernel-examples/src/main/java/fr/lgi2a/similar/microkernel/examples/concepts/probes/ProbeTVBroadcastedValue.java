@@ -52,8 +52,8 @@ import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 
 /**
  * This observation probe displays the strange physical manifestations threshold broadcasted by TV.

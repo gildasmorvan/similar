@@ -52,7 +52,7 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.levels.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
@@ -69,12 +69,7 @@ import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutio
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ActorAgent extends AbstractLearningAgent {
-	/**
-	 * The category of this agent class, <i>i.e.</i> a unique identifier.
-	 */
-	public static final String CATEGORY = "Actor";
-	
+public class ActorAgent extends AbstractLearningAgent {	
 	/**
 	 * Builds an initialized instance of the 'Actor' agent category.
 	 * @param trace The trace where the execution of the simulation is tracked.
@@ -83,7 +78,7 @@ public class ActorAgent extends AbstractLearningAgent {
 	public ActorAgent(
 			SimulationExecutionTrace trace
 	) {
-		super( CATEGORY, trace);
+		super( TraceUsage1AgentCategories.ACTOR, trace);
 		// Initialize the global memory state of the agent.
 		// This state has to be an instance of the Learning_GlobalMemoryState class from the common libs to ensure that the evolution of that
 		// state can be tracked by the trace of the simulation.

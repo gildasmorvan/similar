@@ -44,56 +44,35 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social;
+package fr.lgi2a.similar.microkernel.examples.concepts.level;
 
-import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
-import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * Models the public local state of a 'Editor in chief' agent for the 'social' level.
- * 
- * <h1>Naming convention</h1>
- * In the name of the class:
- * <ul>
- * 	<li>"Agt" stands for "Agent"</li>
- * 	<li>"PLS" stands for "Public Local State"</li>
- * </ul>
- * These rules were defined to reduce the size of the name of the class.
- * 
- * <h1>Public local state of an agent in the SIMILAR API suite.</h1>
+ * Defines the identifier of the levels used in this simulation.
  * <p>
- * 	In the micro-kernel of SIMILAR, the public local state of an agent is implemented as an 
- * 	instance of either the {@link fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent} interface, or of the {@link AbstractPublicLocalStateOfAgent} 
- * 	abstract class.
- * 	In this example, we use the abstract class which is easier to implement.
+ * 	The objects defined in this class refer to the levels of the simulation in the other classes of the model.
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AgtEditorInChiefPLSSocial extends AbstractPublicLocalStateOfAgent {
-	/**
-	 * The city where the editor in chief lives.
-	 */
-	private Cities address;
+public class ConceptsSimulationLevelIdentifiers {
 
 	/**
-	 * Builds an instance of the public local state of a 'Editor in chief' agent in the 'Social' level.
-	 * @param owner The 'Editor in chief' agent to which this public local state belongs.
-	 * @param address The city where the editor in chief lives.
+	 * Protected constructor allowing the extension of this level identifier enumeration, 
+	 * without allowing the instantiation of this class.
 	 */
-	public AgtEditorInChiefPLSSocial( IAgent owner, Cities address ) {
-		// The super constructor requires the identifier of the level for which this public
-		// local state is defined.
-		super( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, owner );
-		this.address = address;
-	}
+	protected ConceptsSimulationLevelIdentifiers( ) { }
 
 	/**
-	 * Gets the city where the editor in chief lives.
-	 * @return The city where the editor in chief lives.
+	 * The 'Social' level of the simulation, where media spread information about abductions.
 	 */
-	public Cities getAddress( ) {
-		return this.address;
-	}
+	public static final LevelIdentifier SOCIAL_LEVEL = new LevelIdentifier( "Social" );
+	/**
+	 * The 'Physical' level of the simulation where everything not related to the media happens on earth.
+	 */
+	public static final LevelIdentifier PHYSICAL_LEVEL = new LevelIdentifier( "Physical" );
+	/**
+	 * The 'Space' level where aliens lie most of the time.
+	 */
+	public static final LevelIdentifier SPACE_LEVEL = new LevelIdentifier( "Space" );
 }

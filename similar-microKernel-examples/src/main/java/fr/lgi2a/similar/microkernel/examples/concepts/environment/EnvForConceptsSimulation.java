@@ -49,12 +49,12 @@ package fr.lgi2a.similar.microkernel.examples.concepts.environment;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.space.EnvPLSSpace;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalSetTimeOfTheDay;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 
 /**

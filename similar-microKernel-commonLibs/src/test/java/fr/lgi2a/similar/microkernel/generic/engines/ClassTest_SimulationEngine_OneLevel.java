@@ -66,6 +66,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import fr.lgi2a.similar.microkernel.AgentCategory;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IProbe;
@@ -79,8 +80,8 @@ import fr.lgi2a.similar.microkernel.generic.engines.tools.Test_LevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.AbstractLearningSimulationModel;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment;
-import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningLevel;
+import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceAgentPublicLocalStateUpdate;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.influence.LearningInfluenceEnvironmentPublicLocalStateUpdate;
@@ -219,7 +220,7 @@ public abstract class ClassTest_SimulationEngine_OneLevel implements IProbe {
 				List<AbstractLearningAgent> result = new LinkedList<AbstractLearningAgent>( );
 				int agentId = 1;
 				for( LevelIdentifier[] levelsId : agentLevels ){
-					Test_Agent agent = new Test_Agent( "Agent#" + (agentId++), trace );
+					Test_Agent agent = new Test_Agent( new AgentCategory( "Agent#" + (agentId++) ), trace );
 					agent.initializeGlobalMemoryState( new LearningGlobalMemoryState( agent ) );
 					for( LevelIdentifier levelId : levelsId ){
 						agent.includeNewLevel( levelId, new LearningPublicLocalStateOfAgent( levelId, agent ) );

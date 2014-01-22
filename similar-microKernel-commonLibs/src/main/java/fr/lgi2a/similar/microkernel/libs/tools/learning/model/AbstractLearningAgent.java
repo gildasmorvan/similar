@@ -49,6 +49,7 @@ package fr.lgi2a.similar.microkernel.libs.tools.learning.model;
 import java.util.Map;
 import java.util.Set;
 
+import fr.lgi2a.similar.microkernel.AgentCategory;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IInfluence;
@@ -82,7 +83,7 @@ public abstract class AbstractLearningAgent extends AbstractAgent {
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public AbstractLearningAgent( 
-			String category, 
+			AgentCategory category, 
 			SimulationExecutionTrace trace 
 	) {
 		super(category);

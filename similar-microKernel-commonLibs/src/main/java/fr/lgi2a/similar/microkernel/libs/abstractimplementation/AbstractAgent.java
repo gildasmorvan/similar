@@ -51,6 +51,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import fr.lgi2a.similar.microkernel.AgentCategory;
 import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
@@ -75,7 +76,7 @@ public abstract class AbstractAgent implements IAgent {
 	/**
 	 * The category of the agent.
 	 */
-	private final String category;
+	private final AgentCategory category;
 	/**
 	 * The global memory state of the agent.
 	 */
@@ -108,7 +109,7 @@ public abstract class AbstractAgent implements IAgent {
 	 * </ul>
 	 * @throws IllegalArgumentException if the argument is <code>null</code>.
 	 */
-	public AbstractAgent( String category ) {
+	public AbstractAgent( AgentCategory category ) {
 		if( category == null ){
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "category" ) );
 		}
@@ -120,7 +121,7 @@ public abstract class AbstractAgent implements IAgent {
 	/**
 	 * {@inheritDoc}
 	 */
-	public String getCategory() {
+	public AgentCategory getCategory() {
 		return this.category;
 	}
 

@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.traceusage1;
+package fr.lgi2a.similar.microkernel.examples.traceusage1.levels;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
@@ -58,9 +58,10 @@ public class MyLevelIdentifiers {
 	 * Models the identifier of the level where the "one level - two agents - trace" simulation takes place.
 	 */
 	public static final LevelIdentifier SIMULATION_LEVEL = new LevelIdentifier( "Level 1" );
-	
+
 	/**
-	 * This constructor is never used.
+	 * Protected constructor allowing the extension of this level identifier enumeration, 
+	 * without allowing the instantiation of this class.
 	 */
-	protected MyLevelIdentifiers( ){ }
+	protected MyLevelIdentifiers( ) { }
 }

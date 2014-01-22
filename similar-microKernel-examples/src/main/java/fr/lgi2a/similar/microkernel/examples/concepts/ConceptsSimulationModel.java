@@ -61,6 +61,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtFa
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.AgtFBI;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.EnvForConceptsSimulation;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.level.PhysicalLevel;
 import fr.lgi2a.similar.microkernel.examples.concepts.level.SocialLevel;
 import fr.lgi2a.similar.microkernel.examples.concepts.level.SpaceLevel;

@@ -46,9 +46,9 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.social;
 
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPerceivedDataOfAgent;
 
 /**

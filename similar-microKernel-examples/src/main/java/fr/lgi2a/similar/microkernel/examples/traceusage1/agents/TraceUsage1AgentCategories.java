@@ -44,56 +44,27 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social;
+package fr.lgi2a.similar.microkernel.examples.traceusage1.agents;
 
-import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
-import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.AgentCategory;
 
 /**
- * Models the public local state of a 'Editor in chief' agent for the 'social' level.
- * 
- * <h1>Naming convention</h1>
- * In the name of the class:
- * <ul>
- * 	<li>"Agt" stands for "Agent"</li>
- * 	<li>"PLS" stands for "Public Local State"</li>
- * </ul>
- * These rules were defined to reduce the size of the name of the class.
- * 
- * <h1>Public local state of an agent in the SIMILAR API suite.</h1>
- * <p>
- * 	In the micro-kernel of SIMILAR, the public local state of an agent is implemented as an 
- * 	instance of either the {@link fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent} interface, or of the {@link AbstractPublicLocalStateOfAgent} 
- * 	abstract class.
- * 	In this example, we use the abstract class which is easier to implement.
- * </p>
+ * This class sums up the agent categories used in the "one level - two agents - trace" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AgtEditorInChiefPLSSocial extends AbstractPublicLocalStateOfAgent {
+public class TraceUsage1AgentCategories {
 	/**
-	 * The city where the editor in chief lives.
+	 * Protected constructor allowing the extension of this agent categories enumeration, 
+	 * without allowing the instantiation of this class.
 	 */
-	private Cities address;
-
+	protected TraceUsage1AgentCategories( ) { }
+	
 	/**
-	 * Builds an instance of the public local state of a 'Editor in chief' agent in the 'Social' level.
-	 * @param owner The 'Editor in chief' agent to which this public local state belongs.
-	 * @param address The city where the editor in chief lives.
+	 * The unique category of the 'actor' agents.
 	 */
-	public AgtEditorInChiefPLSSocial( IAgent owner, Cities address ) {
-		// The super constructor requires the identifier of the level for which this public
-		// local state is defined.
-		super( ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL, owner );
-		this.address = address;
-	}
-
+	public static final AgentCategory ACTOR = new AgentCategory( "Actor" );
 	/**
-	 * Gets the city where the editor in chief lives.
-	 * @return The city where the editor in chief lives.
+	 * The unique category of the 'procrastinator' agents.
 	 */
-	public Cities getAddress( ) {
-		return this.address;
-	}
+	public static final AgentCategory PROCRASTINATOR = new AgentCategory( "Procrastinator" );
 }

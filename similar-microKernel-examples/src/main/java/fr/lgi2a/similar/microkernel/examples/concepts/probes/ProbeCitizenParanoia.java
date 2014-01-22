@@ -53,7 +53,7 @@ import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizen;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizenGMS;
 
 /**
@@ -120,7 +120,7 @@ public class ProbeCitizenParanoia implements IProbe {
 		double averageParanoiaLevel = 0;
 		for( IAgent agent : agentsOfSimulation ) {
 			// Check if the agent is a citizen.
-			if( AgtCitizen.CATEGORY.equals( agent.getCategory() ) ){
+			if( ConceptsSimulationAgentCategories.CITIZEN.equals( agent.getCategory() ) ){
 				// If the agent is a citizen, update the observed data by using the 
 				// current paranoia level of the agent from its global memory state.
 				AgtCitizenGMS memoryState = (AgtCitizenGMS) agent.getGlobalMemoryState();

@@ -44,33 +44,35 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts;
+package fr.lgi2a.similar.microkernel.examples.concepts.agents;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.AgentCategory;
 
 /**
- * Defines the identifier of the levels used in this simulation.
- * <p>
- * 	The objects defined in this class refer to the levels of the simulation in the other classes of the model.
- * </p>
- * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * Defines the agent categories used in this simulation.
  */
-public class ConceptsSimulationLevelIdentifiers {
-	/**
-	 * This constructor is unused since this class only defines static values.
-	 */
-	protected ConceptsSimulationLevelIdentifiers(){ }
+public class ConceptsSimulationAgentCategories {
 
 	/**
-	 * The 'Social' level of the simulation, where media spread information about abductions.
+	 * Protected constructor allowing the extension of this agent category enumeration, 
+	 * without allowing the instantiation of this class.
 	 */
-	public static final LevelIdentifier SOCIAL_LEVEL = new LevelIdentifier( "Social" );
+	protected ConceptsSimulationAgentCategories( ) { }
+
 	/**
-	 * The 'Physical' level of the simulation where everything not related to the media happens on earth.
+	 * The category of the "alien" agents.
 	 */
-	public static final LevelIdentifier PHYSICAL_LEVEL = new LevelIdentifier( "Physical" );
+	public static final AgentCategory ALIEN = new AgentCategory( "Alien" );
 	/**
-	 * The 'Space' level where aliens lie most of the time.
+	 * The category of the "citizen" agents.
 	 */
-	public static final LevelIdentifier SPACE_LEVEL = new LevelIdentifier( "Space" );
+	public static final AgentCategory CITIZEN = new AgentCategory( "Citizen" );
+	/**
+	 * The category of the "editor in chief" agents.
+	 */
+	public static final AgentCategory EDITOR_IN_CHIEF = new AgentCategory( "Editor in chief" );
+	/**
+	 * The category of the "FBI" agents.
+	 */
+	public static final AgentCategory FBI = new AgentCategory( "FBI" );
 }

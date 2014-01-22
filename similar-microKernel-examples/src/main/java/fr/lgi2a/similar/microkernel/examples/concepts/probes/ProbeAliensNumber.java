@@ -53,7 +53,7 @@ import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.AgtAlien;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 
 /**
  * This observation probe displays the number of aliens in the simulation.
@@ -115,7 +115,7 @@ public class ProbeAliensNumber implements IProbe {
 	) {
 		int alienNumber = 0;
 		for( IAgent agent : agentsOfSimulation ){
-			if( AgtAlien.CATEGORY.equals( agent.getCategory() ) ){
+			if( ConceptsSimulationAgentCategories.ALIEN.equals( agent.getCategory() ) ){
 				alienNumber++;
 			}
 		}

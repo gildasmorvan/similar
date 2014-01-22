@@ -60,8 +60,8 @@ import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPDFPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.space.AgtAlienPDFSpace;
@@ -72,6 +72,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPh
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalPerformExperiment;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalTakeOffFromEarth;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tospace.RISpaceSendExperimentReport;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
@@ -96,16 +97,7 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AgtAlien extends AbstractAgent {
-	/**
-	 * The category of this agent class (telling that the agent is an 'Alien' agent).
-	 * <p>
-	 * 	This category is defined as a static value to facilitate the identification of the nature of the
-	 * 	agents for instance when data about the agent are printed on screen.
-	 * </p>
-	 */
-	public static final String CATEGORY = "Alien";
-	
+public class AgtAlien extends AbstractAgent {	
 	/**
 	 * Builds an 'Alien' agent initially lying in the 'space' level.
 	 * @param perceptibleCitiesPerTime This parameter of the agent tells how much cities it is able to scrutinize each time it 
@@ -123,7 +115,7 @@ public class AgtAlien extends AbstractAgent {
 			double efficiencyInExperiments
 	) {
 		// The super constructor requires the definition of the category of the agent.
-		super( CATEGORY );
+		super( ConceptsSimulationAgentCategories.ALIEN );
 		//
 		// Define the initial private local states of the agent.
 		//

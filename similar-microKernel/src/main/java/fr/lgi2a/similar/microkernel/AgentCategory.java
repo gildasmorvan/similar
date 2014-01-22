@@ -44,68 +44,87 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial;
-
-import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
-import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
-import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
+package fr.lgi2a.similar.microkernel;
 
 /**
- * Models the influence sent by a 'Citizen' agent when it wishes to report an alien experiment 
- * on the Internet.
+ * The object identifying the category of an agent involved in a simulation.
  * 
- * <h1>Naming convention</h1>
- * In the name of the class:
- * <ul>
- * 	<li>"RI" stands for "Regular Influence"</li>
- * </ul>
- * These rules were defined to reduce the size of the name of the class.
- * 
- * <h1>Regular influences in the SIMILAR API suite.</h1>
+ * <h1>Usage</h1>
  * <p>
- * 	In the micro-kernel of SIMILAR, the regular influences are implemented as an 
- * 	instance of either the {@link fr.lgi2a.similar.microkernel.IInfluence} interface or the {@link RegularInfluence} 
- * 	abstract class.
- * 	In this example, we use the abstract class which is easier to implement.
+ * 	To facilitate the access to agent categories, it is recommended to create 
+ * 	a class containing each agent category of the simulation as a static value. This avoids
+ * 	any misspelling when referring to a level.
  * </p>
- * 
- * <h1>Best practice</h1>
+ * <h2>Example</h2>
  * <p>
- * 	The category of the influence is a unique identifier for the influence. It is defined to avoid
- * 	using <code>instanceof</code> instructions in the reaction of the level to identify the nature of the
- * 	influence and the operations that have to be performed in reaction to the influence.
+ * 	The following code shows how to create the agent categories for a simulation of the road traffic,
+ * 	containing a "Vehicle" and "Pedestrian" agent categories.
  * </p>
+<pre>
+public class CategoriesOfRoadTrafficSimulation {
+	public static final AgentCategory VEHICLE = new AgentCategory( "Vehicle" );
+	public static final AgentCategory PEDESTRIAN = new AgentCategory( "Pedestrian" );
+}
+</pre>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class RISocialPublishExperimentReport extends RegularInfluence {
+public final class AgentCategory {
 	/**
-	 * The category of the influence, used as a unique identifier in the reaction of the 'social' 
-	 * level to determine the nature of the influence.
+	 * The string identifier of the category.
 	 */
-	public static final String CATEGORY = "Report experiment";
+	private final String identifier;
 	
 	/**
-	 * The post sent to the Internet.
+	 * Builds an instance of this class using a specific value for the agent category.
+	 * @param identifier The identifier of the agent category. This value should be unique.
+	 * @throws IllegalArgumentException If <code>identifier</code> is <code>null</code>.
 	 */
-	private PostOnConspiracyForum post;
-	
-	/**
-	 * Builds a regular influence modeling the will of a 'Citizen' to post a message on the Internet.
-	 * @param post The post sent to the Internet.
-	 */
-	public RISocialPublishExperimentReport(
-			PostOnConspiracyForum post
-	) {
-		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
-		this.post = post;
+	public AgentCategory( String identifier ) {
+		if( identifier == null ){
+			throw new IllegalArgumentException( "The first argument cannot be null." );
+		}
+		this.identifier = identifier;
 	}
 	
 	/**
-	 * Gets the post sent to the Internet.
-	 * @return The post sent to the Internet.
+	 * Gets a printable version of the agent category.
+	 * <p>
+	 * 	This identifier is used in the various simulation traces defined in the common libraries.
+	 * </p>
+	 * @return A string representation of the agent category.
 	 */
-	public PostOnConspiracyForum getPost( ) {
-		return this.post;
+	@Override
+	public String toString() {
+		return this.identifier;
+	}
+	
+	/**
+	 * Check if this agent category is equal to another agent category.
+	 * @param o The other object used to check equality.
+	 * @return <code>true</code> if the two objects are equal, <i>i.e.</i> if they are both 
+	 * agent category having the same string identifier.
+	 */
+	@Override
+	public boolean equals( Object o ) {
+		if( o == null ){
+			return false;
+		} else {
+			if( ! ( o instanceof AgentCategory )  ){
+				return false;
+			} else {
+				AgentCategory otherIdentifier = (AgentCategory) o;
+				return this.identifier.equals( otherIdentifier.identifier );
+			}
+		}
+	}
+	
+	/**
+	 * Gets the hash code of this object.
+	 * @return The hash code of this object.
+	 */
+	@Override
+	public int hashCode(){
+		return this.identifier.hashCode();
 	}
 }

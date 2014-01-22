@@ -53,12 +53,11 @@ import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationTimeInterpretationModel;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.AgtAlien;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPLSPhysical;
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizen;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalCaptureAndDissectAlien;
@@ -213,12 +212,12 @@ public class PhysicalLevel extends AbstractLevel {
 				// Get the public local state that was added to the level.
 				IPublicLocalStateOfAgent agentState = castedInfluence.getPublicLocalState();
 				// If it is a citizen, add it to the 'citizen' data structure of the environment.
-				if( agentState.getOwner().getCategory().equals( AgtCitizen.CATEGORY ) ){
+				if( agentState.getOwner().getCategory().equals( ConceptsSimulationAgentCategories.CITIZEN ) ){
 					AgtCitizenPLSPhysical castedAgentState = (AgtCitizenPLSPhysical) agentState;
 					envPLS.addCitizen( castedAgentState, castedAgentState.getAddress() );
 				}
 				// If it is an alien, add it to the 'alien' data structure of the environment.
-				if( agentState.getOwner().getCategory().equals( AgtAlien.CATEGORY ) ){
+				if( agentState.getOwner().getCategory().equals( ConceptsSimulationAgentCategories.ALIEN ) ){
 					AgtAlienPLSPhysical castedAgentState = (AgtAlienPLSPhysical) agentState;
 					envPLS.addAlien( castedAgentState, castedAgentState.getLocation() );
 				}

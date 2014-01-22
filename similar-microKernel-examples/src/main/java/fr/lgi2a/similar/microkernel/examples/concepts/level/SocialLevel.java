@@ -53,9 +53,8 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationTimeInterpretationModel;
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.fbi.AgtFBI;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialChangeBroadcast;
@@ -345,7 +344,7 @@ public class SocialLevel extends AbstractLevel {
 		// Tells that the FBI did set the value.
 		boolean valueSetByTheFBI = false;
 		for( RISocialChangeBroadcast influence : broadcastInfluences ){
-			if( AgtFBI.CATEGORY.equals( influence.getAuthorCategory() ) ){
+			if( ConceptsSimulationAgentCategories.FBI.equals( influence.getAuthorCategory() ) ){
 				valueSetByTheFBI = true;
 				valueToBroadCast = influence.getNewThreshold();
 			} else if( ! valueSetByTheFBI ) {

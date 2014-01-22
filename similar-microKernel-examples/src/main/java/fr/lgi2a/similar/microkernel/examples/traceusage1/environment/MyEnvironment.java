@@ -55,7 +55,7 @@ import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.levels.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningEnvironment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPublicLocalStateOfEnvironment;

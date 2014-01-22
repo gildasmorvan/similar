@@ -46,9 +46,9 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial;
 
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtEditorInChief;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social.AgtEditorInChiefPLSSocial;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 
 /**

@@ -46,7 +46,8 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial;
 
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.AgentCategory;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 
 /**
@@ -91,7 +92,7 @@ public class RISocialChangeBroadcast extends RegularInfluence {
 	/**
 	 * The category of the agent that authored this modification.
 	 */
-	private String authorCategory;
+	private AgentCategory authorCategory;
 	
 	/**
 	 * Builds a regular influence modeling the will of an 'Editor in chief' or of the 'FBI' to change
@@ -101,7 +102,7 @@ public class RISocialChangeBroadcast extends RegularInfluence {
 	 */
 	public RISocialChangeBroadcast(
 			int newThreshold,
-			String authorCategory
+			AgentCategory authorCategory
 	) {
 		super( CATEGORY, ConceptsSimulationLevelIdentifiers.SOCIAL_LEVEL );
 		this.newThreshold = newThreshold;
@@ -120,7 +121,7 @@ public class RISocialChangeBroadcast extends RegularInfluence {
 	 * Gets the category of the agent that authored this modification.
 	 * @return The category of the agent that authored this modification.
 	 */
-	public String getAuthorCategory( ) {
+	public AgentCategory getAuthorCategory( ) {
 		return this.authorCategory;
 	}
 }

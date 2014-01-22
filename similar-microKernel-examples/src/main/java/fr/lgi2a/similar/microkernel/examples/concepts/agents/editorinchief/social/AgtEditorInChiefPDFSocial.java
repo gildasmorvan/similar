@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.social;
 
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPerceivedDataOfAgent;
 
 /**

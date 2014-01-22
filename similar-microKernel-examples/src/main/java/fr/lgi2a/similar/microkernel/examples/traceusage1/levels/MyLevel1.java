@@ -47,7 +47,6 @@
 package fr.lgi2a.similar.microkernel.examples.traceusage1.levels;
 
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningLevel;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
 

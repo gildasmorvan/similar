@@ -51,7 +51,7 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.examples.traceusage1.MyLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.traceusage1.levels.MyLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.AbstractLearningAgent;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.model.LearningPerceivedDataOfAgent;
@@ -81,7 +81,7 @@ public class ProcrastinatorAgent extends AbstractLearningAgent {
 	public ProcrastinatorAgent(
 			SimulationExecutionTrace trace
 	) {
-		super( CATEGORY, trace);
+		super( TraceUsage1AgentCategories.PROCRASTINATOR, trace);
 		// Initialize the global memory state of the agent.
 		// This state has to be an instance of the Learning_GlobalMemoryState class from the common libs to ensure that the evolution of that
 		// state can be tracked by the trace of the simulation.

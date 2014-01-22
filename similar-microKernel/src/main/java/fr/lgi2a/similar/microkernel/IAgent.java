@@ -79,7 +79,7 @@ public interface IAgent {
 	 * </ul>
 	 * @return The 'category' of the agent.
 	 */
-	String getCategory( );
+	AgentCategory getCategory( );
 	
 	/**
 	 * Gets the collection of the levels where this agent lies, <i>i.e.</i> the levels where this agent 

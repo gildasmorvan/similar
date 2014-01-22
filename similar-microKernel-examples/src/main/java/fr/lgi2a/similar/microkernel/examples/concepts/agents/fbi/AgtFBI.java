@@ -56,9 +56,8 @@ import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.alien.physical.AgtAlienPLSPhysical;
-import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.AgtCitizen;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtEditorInChief;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.editorinchief.AgtFactoryEditorInChief;
@@ -75,6 +74,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISoci
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialRemoveAllPublications;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialRemovePublications;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialReplaceEditorInChief;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
@@ -99,16 +99,7 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyPublicLocalStateOfAgent;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AgtFBI extends AbstractAgent {
-	/**
-	 * The category of this agent class (telling that the agent is an 'FBI' agent).
-	 * <p>
-	 * 	This category is defined as a static value to facilitate the identification of the nature of the
-	 * 	agents for instance when data about the agent are printed on screen.
-	 * </p>
-	 */
-	public static final String CATEGORY = "FBI";
-	
+public class AgtFBI extends AbstractAgent {	
 	/**
 	 * Builds an initialized 'FBI' agent lying in both the 'Physical' and in the 'Social' levels.
 	 * @param citizenPostsThresholdBeforeLobotomy The threshold of citizens posts number before a citizen is sent to lobotomy by the FBI.
@@ -121,7 +112,7 @@ public class AgtFBI extends AbstractAgent {
 			int thresholdForStrangePhysicalManifestationsAdvisedByFBI
 	) {
 		// The super constructor requires the definition of the category of the agent.
-		super( CATEGORY );
+		super( ConceptsSimulationAgentCategories.FBI );
 		//
 		// Define the initial private local states of the agent.
 		//
@@ -209,7 +200,7 @@ public class AgtFBI extends AbstractAgent {
 		// Find the editor in chief of the TV broadcast.
 		AgtEditorInChiefPLSSocial editorInChief = null;
 		for( IPublicLocalStateOfAgent agentState : socialDynamicState.getPublicLocalStateOfAgents() ){
-			if( AgtEditorInChief.CATEGORY.equals( agentState.getOwner().getCategory() ) ){
+			if( ConceptsSimulationAgentCategories.EDITOR_IN_CHIEF.equals( agentState.getOwner().getCategory() ) ){
 				editorInChief = (AgtEditorInChiefPLSSocial) agentState;
 			}
 		}
@@ -276,7 +267,7 @@ public class AgtFBI extends AbstractAgent {
 		// Find dangerous citizens.
 		for( IPublicLocalStateOfAgent agentState : levelsPublicLocalObservableDynamicState.get( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL ).getPublicLocalStateOfAgents() ){
 			// Check if the agent is a citizen.
-			if( AgtCitizen.CATEGORY.equals( agentState.getOwner().getCategory() ) ){
+			if( ConceptsSimulationAgentCategories.CITIZEN.equals( agentState.getOwner().getCategory() ) ){
 				// If the agent is a citizen, find the number of posts that were written by him.
 				AgtCitizenPLSPhysical citizenState = (AgtCitizenPLSPhysical) agentState;
 				Set<PostOnConspiracyForum> posts = envSocial.getPostsFor( citizenState );

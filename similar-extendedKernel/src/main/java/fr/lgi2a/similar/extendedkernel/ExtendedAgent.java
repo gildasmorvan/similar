@@ -50,6 +50,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import fr.lgi2a.similar.microkernel.AgentCategory;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
@@ -147,7 +148,7 @@ public class ExtendedAgent extends AbstractAgent {
 	 * </ul>
 	 * @throws IllegalArgumentException if the argument is <code>null</code>.
 	 */
-	public ExtendedAgent( String category ) {
+	public ExtendedAgent( AgentCategory category ) {
 		super( category );
 		this.perceptionModels = new HashMap<LevelIdentifier, IAgtPerceptionModel>( );
 		this.decisionModels = new HashMap<LevelIdentifier, IAgtDecisionModel>( );

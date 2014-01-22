@@ -49,6 +49,7 @@ package fr.lgi2a.similar.microkernel.generic.engines.tools;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import fr.lgi2a.similar.microkernel.AgentCategory;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.IPublicLocalDynamicState;
@@ -76,7 +77,7 @@ public class Test_Agent extends AbstractLearningAgent {
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public Test_Agent(
-			String category, 
+			AgentCategory category, 
 			SimulationExecutionTrace trace
 	) {
 		super(category, trace);

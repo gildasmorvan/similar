@@ -54,8 +54,8 @@ import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
+import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPDFPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.Cities;
@@ -64,6 +64,7 @@ import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSS
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.PostOnConspiracyForum;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tophysical.RIPhysicalGoToWork;
 import fr.lgi2a.similar.microkernel.examples.concepts.influences.tosocial.RISocialPublishExperimentReport;
+import fr.lgi2a.similar.microkernel.examples.concepts.level.ConceptsSimulationLevelIdentifiers;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 
 /**
@@ -86,23 +87,14 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AgtCitizen extends AbstractAgent {
-	/**
-	 * The category of this agent class (telling that the agent is an 'Citizen' agent).
-	 * <p>
-	 * 	This category is defined as a static value to facilitate the identification of the nature of the
-	 * 	agents for instance when data about the agent are printed on screen.
-	 * </p>
-	 */
-	public static final String CATEGORY = "Citizen";
-	
+public class AgtCitizen extends AbstractAgent {	
 	/**
 	 * Builds a 'Citizen' agent initially lying in the 'physical' level.
 	 * @param address The address of the citizen in the 'physical' level.
 	 */
 	public AgtCitizen( Cities address ) {
 		// The super constructor requires the definition of the category of the agent.
-		super( CATEGORY );
+		super( ConceptsSimulationAgentCategories.CITIZEN );
 		//
 		// Define the initial global memory state of the agent.
 		//

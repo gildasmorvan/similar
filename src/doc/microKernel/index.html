@@ -608,7 +608,7 @@ config.options.chkHideTabsBarWhenSingleTab=true;
 <div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311281641" modified="201401211546" tags="system excludeLists" changecount="4">
 <pre>[[Home]]</pre>
 </div>
-<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201401150857" modified="201401221602" changecount="8">
+<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201401150857" modified="201401231603" changecount="9">
 <pre>*[[Start|Simulation models]]
 *[[Preparation|SMD - Preparation]]
 **[[Packages tree|SMD - Package tree]]
@@ -622,8 +622,8 @@ config.options.chkHideTabsBarWhenSingleTab=true;
 **[[Environment skeleton|SMD - Environment skeleton]]
 **[[Agents skeleton|SMD - Agents skeleton]]
 **[[Time model|SMD - Time model]]
-**[[Influences|SMD - Influences]]
 **[[Public states|SMD - Public local states]]
+**[[Influences|SMD - Influences]]
 *[[Low level|SMD - Low level specifications]]
 **[[Perception|SMD - Perception]]
 **[[Global state|SMD - Global state]]
@@ -2434,7 +2434,7 @@ if( MyAgentCategoriesList.CAR.equals( state.getOwner( ).getCategory( ) ) ){
 ----
 [[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Agents identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]}}}</pre>
 </div>
-<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201401231228" changecount="70">
+<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201401231331" changecount="73">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Environment skeleton]]  {{stepTitle{Agents skeleton}}}  [[next step &gt;&gt;|SMD - Time model]]
 ----}}}
 The agents of the simulation also rely on an incremental design process. Therefore, a skeleton has to be defined for them before going for the operational code of the simulation.
@@ -2895,10 +2895,10 @@ Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild
 === providing a default implementation of these features.
 }}}</pre>
 </div>
-<div title="SMD - Agents skeleton - Structure" creator="Designer" modifier="Designer" created="201401221549" modified="201401221549" changecount="2">
+<div title="SMD - Agents skeleton - Structure" creator="Designer" modifier="Designer" created="201401221549" modified="201401231332" changecount="4">
 <pre>!Structure of an agent in SIMILAR
 [&gt;img(50%,)[images/simulationModel/highLevel/agentDesignOutline1.png]]
-In SIMILAR, a level is the sum of the following elements^^''1''^^:
+In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 *A ''category'', modeling the //&quot;type&quot;// of the agent;
 *A ''global memory state'';
 *A ''memory revision'' process;
@@ -2908,7 +2908,7 @@ In SIMILAR, a level is the sum of the following elements^^''1''^^:
 *A ''decision'' process for each level of the agent.
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
-<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201401231252" changecount="45">
+<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201401231623" changecount="48">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Level skeleton]]  {{stepTitle{Environment skeleton}}}  [[next step &gt;&gt;|SMD - Agents skeleton]]
 ----}}}
 The environment of the simulation also relies on an incremental design process. Therefore, a skeleton has to be defined for it before going for the operational code of the simulation.
@@ -2917,7 +2917,7 @@ The environment of the simulation also relies on an incremental design process. 
 In SIMILAR, the environment is the sum of the following elements:
 *A ''public local state'' for each level of the simulation;
 *A ''natural action'' process from each level of the simulation.
-!Implementation
+!Specifications and implementation instructions
 [&gt;img(50%,)[images/simulationModel/highLevel/environmentDesignOutline2.png]]
 In SIMILAR, the environment is modeled as an instance of the +++^34em^*@[&lt;strong&gt;IEnvironment&lt;/strong&gt;]
 The {{{IEnvironment}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
@@ -3047,7 +3047,7 @@ To facilitate the extension of the model of the agents, we also advise designers
 Knowing all these information, and that a public local state of an environment is an instance of the +++^34em^*@[&lt;strong&gt;IPublicLocalState&lt;/strong&gt;]The {{{IPublicLocalStateOfAgent}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
 === interface, the environment should declare a field having the type {{{Map&lt;LevelIdentifier,IPublicLocalState&gt;}}}.</pre>
 </div>
-<div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201401221313" changecount="9">
+<div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201401231325" changecount="10">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]
 ----}}}
 The following step in the design of a simulation model is the ''description of the simulation at a coarse grain''. During this step, no attention is paid to the inner mechanisms of the levels, the agents and the environment. Instead, the design is focused on the general description of the simulation: the identification of the levels, the agents, the environment, their public local states and the influences that can be produced.
@@ -3059,15 +3059,15 @@ This following step create the content of the simulation model at a coarse grain
 *Creation of the [[skeleton of the environment|SMD - Environment skeleton]]
 *Creation of the [[skeleton of the agents|SMD - Agents skeleton]]
 *Definition of the [[time model|SMD - Time model]] of the levels
-*Creation of the [[influences|SMD - Influences]]
 *Creation of the [[public local states|SMD - Public local states]] of the environment and of the agents
+*Creation of the [[influences|SMD - Influences]]
 
 {{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Levels identification]]}}}
 {{guidelinesNavMenu{
 ----
 [[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
 </div>
-<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201401231307" changecount="90">
+<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201401231329" changecount="91">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents identification]]  {{stepTitle{Level skeleton}}}  [[next step &gt;&gt;|SMD - Environment skeleton]]
 ----}}}
 After the identification of the levels, the objects modeling them can be created. Note that ''at this stage, these objects are'' mere +++^60em^*@[&lt;strong&gt;skeletons&lt;/strong&gt;]&lt;html&gt;&lt;h1&gt;Why skeletons?&lt;/h1&gt;&lt;/html&gt;
@@ -3127,8 +3127,8 @@ The following code illustrates the implementation of the environment using both 
 
 }}}===</pre>
 </div>
-<div title="SMD - Level skeleton - Implementation" creator="Designer" modifier="Designer" created="201401231258" modified="201401231301" changecount="3">
-<pre>!Implementation
+<div title="SMD - Level skeleton - Implementation" creator="Designer" modifier="Designer" created="201401231258" modified="201401231329" changecount="4">
+<pre>!Specifications and implementation instructions
 [&lt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline2.png]]
 In SIMILAR, levels are modeled as instances of the +++^34em^*@[&lt;strong&gt;ILevel&lt;/strong&gt;]
 The {{{ILevel}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
@@ -3460,7 +3460,7 @@ IPublicLocalStateOfAgent state = agent.getPublicLocalState( MyAwesomeLevelList.C
 ----
 [[&lt;&lt; previous step|SMD - High level specifications]]  {{stepTitle{Levels identification}}}  [[next step &gt;&gt;|SMD - Agents identification]]}}}</pre>
 </div>
-<div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201401221003" changecount="31">
+<div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201401231328" changecount="32">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Preparation]]  {{stepTitle{Package tree}}}  [[next step &gt;&gt;|SMD - Tools preparation]]
 ----}}}
 The first step of the design of a simulation model consists in creating the tree hierarchy where the sources are put. We recommend users to use a hierarchy where the source files are split by themes.
@@ -3542,6 +3542,256 @@ This first main step creates the general structure of the simulation model:
 {{guidelinesNavMenu{
 ----
 [[&lt;&lt; previous step|Simulation models]]  {{stepTitle{Preparation}}}  [[next step &gt;&gt;|SMD - Package tree]]}}}</pre>
+</div>
+<div title="SMD - Public local states" creator="Designer" modifier="Designer" created="201401231605" modified="201401231624" changecount="8">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Time model]]  {{stepTitle{Public local states}}}  [[next step &gt;&gt;|SMD - Influences]]
+----}}}
+The next step of the methodology consists in identifying the part of the ''local state'' of the agents (and of the environment) that can be perceived. Once identified, a ''public local state'' can be created for each of these entities. Note that the non-perceptible part, called ''private local state'' belongs to the inner mechanisms of the behavior of the agents and of the environment. They are declared elsewhere (see the [[perception|SMD - Perception]], [[global state|SMD - Global state]], [[decision|SMD - Decision]] and [[natural|SMD - Natural]] phases).
+
+Note that the identification of all the perceptible information at this stage is difficult, especially in big models. Consequently, the content of the public local states is completed during the whole process. Despite this, we highly recommend to identify as much elements as possible at this stage.
+!Structure of a public local state in SIMILAR
+&lt;&lt;tiddler [[SMD - Public local states - Structure]]&gt;&gt;
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Influences]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Time model]]  {{stepTitle{Public local states}}}  [[next step &gt;&gt;|SMD - Influences]]}}}</pre>
+</div>
+<div title="SMD - Public local states - Structure" creator="Designer" modifier="Designer" created="201401231612" modified="201401231626" changecount="11">
+<pre>In SIMILAR, we distinguish the ''public local state'' of the agents and of the environment. Indeed, during its behavior, an agent might filter agents public local state using the the category of the agent. This implies that the owner of the public local state of an agent can be known.
+[&gt;img(47%,)[images/simulationModel/highLevel/publicLocalStateOutline1.png]]
+The ''public local state'' of an agent in a level is characterized by:
+*The ''identifier of the level'' where it lies;
+*The ''agent it belongs to'';
+*The ''perceptible data'' about the agent in that level.
+[&lt;img(47%,)[images/simulationModel/highLevel/publicLocalStateOutline2.png]]
+The ''public local state'' of the environment in a level is characterized by:
+*The ''identifier of the level'' where it lies;
+*The ''perceptible data'' about the environment in that level.
+</pre>
+</div>
+<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201401231605" changecount="54">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents skeleton]]  {{stepTitle{Time model}}}  [[next step &gt;&gt;|SMD - Public local states]]
+----}}}
+Once the levels are identified, we have to determine how time moves in each level. This step is fundamental, since it conditions the execution of the behavior of the agents and the environment.
+
+Managing explicitly the time in a simulation is not necessarily an easy task. Indeed, a simulation often relies on the notion of &quot;time step&quot; whereas simulated phenomena rely on notions like hours/minutes/seconds, seasons, years, etc. Therefore, before going for the kill, we remind the users about the ''time model'' related terminology used in SIMILAR.
+
+{{linkbigbtn center{&lt;html&gt;&lt;a href=&quot;../README.html#[[Structure - Simulation model - Time model - Time stamps model]]&quot;&gt;Read more about the time model&lt;/a&gt;&lt;/html&gt;}}}
+!Structure of a time model in SIMILAR
+&lt;&lt;tiddler [[SMD - Time model - Structure]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Time model - Implementation]]&gt;&gt;
+!Time model of a level
+&lt;&lt;tiddler [[SMD - Time model - Level]]&gt;&gt;
+!Time conversion model
+&lt;&lt;tiddler [[SMD - Time model - Conversion]]&gt;&gt;
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Public local states]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Agents skeleton]]  {{stepTitle{Time model}}}  [[next step &gt;&gt;|SMD - Public local states]]}}}</pre>
+</div>
+<div title="SMD - Time model - Conversion" creator="Designer" modifier="Designer" created="201401231541" modified="201401231601" changecount="9">
+<pre>In simulations where the behavior is tightly bound with real time, using time stamps is not precise enough to model the behavior of the agents. For instance, in a road traffic simulation, we have to know the real time ellapsed during a transitory period to determine the distance they moved since the last consistent time.
+
+For that purpose, users might have to define a ''time conversion model'', providing two conversion methods:
+*A method converting a real time into a time stamp;
+*A method converting a time stamp into real time.
+Note that since the time stamps are an approximation of real time, the conversion model has to provide heuristics to convert real time into time stamps.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Time conversion example&lt;/span&gt;]
+{{exsection {
+This example illustrates a time conversion class, in which the time ellapsing between two consecutive time stamps (//i.e.// time stamps which identifiers differ by one) equals to 5 milliseconds.
+In the case where a time is not a multiple of 5 milliseconds, the floor of that value is used.
+!Code
+{{{
+public class ExampleTimeConvertor {
+
+	public static final double UNIT = 0.005;
+
+	public double convert( SimulationTimeStamp time ) {
+		long identifier = time.getIdentifier( );
+		return identifier * UNIT;
+	}
+
+	public SimulationTimeStamp convert( double time ) {
+		double dblIdentifier = time / UNIT;
+		if( dblIdentifier &gt;= Long.MAX_VALUE ){
+			throw new IllegalArgumentException( &quot;Precision exceeded.&quot; );
+		} else if( dbldentifier &lt;= Long.MIN_VALUE ){
+			throw new IllegalArgumentException( &quot;Precision exceeded.&quot; );
+		} else {
+			return (long) Math.floor( dblIdentifier );
+		}
+	}
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201401231540" changecount="53">
+<pre>In SIMILAR, the notion of time model is reified with the +++^24em^*@[&lt;strong&gt;ITimeModel&lt;/strong&gt;]
+The {{{ITimeModel}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
+=== interface and the +++^24em^*@[&lt;strong&gt;SimulationTimeStamp&lt;/strong&gt;]
+The {{{SimulationTimeStamp}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
+=== class. The main role of the modeler is to provide an implementation to the methods defined in the {{{ITimeModel}}} interface.
+[&lt;img(47%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(47%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
+
+!!Time stamps
+In SIMILAR, time stamps are instances of the {{{SimulationTimeStamp}}} class. They are characterized by:
+*An ''identifier'' modeled as a {{{long}}} number. This value is the one used to order the time stamps; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The access to the ''identifier'' of a ''time stamp'' is defined by the following methods of the {{{SimulationTimeStamp}}} class:
+*''Getting'' the identifier of a time stamp; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection{
+In SIMILAR, the access to a ''identifier'' of a time stamp is made using the following method :
+{{{
+public long getIdentifier( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the unique identifier of this time stamp.
+
+''Returns:''
+*The unique identifier of this time stamp.
+}}}
+}}} ===
+
+*''Setting'' the identifier of a time stamp. +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection{
+Time stamps are read-only values. Therefore, the modification of the identifier of a time stamp can only be achieved by creating a new instance, using the constructor.
+}}} ===
+
+}}} ===
+
+*A ''comparison criterion'' telling if a time stamp is greater, equal or lesser than another time stamp;  +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+In SIMILAR, the comparison of two time stamps relies on the method defined in the {{{Comparable}}} interface:
+{{{
+public int compareTo( SimulationTimeStamp otherTimeStamp );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Compares the identifier of this time stamp to the identifier of another time stamp.
+
+''Parameters:''
+*''Parameter (//otherTimeStamp//):'' The other time stamp used in the comparison.
+''Returns:''
+*The difference between the identifier of this time stamp and the identifier of the parameter:
+**{{{0}}} if the identifiers are identical
+**a negative value if the identifier of this time stamp is lesser than the identifier of the time stamp of the parameter
+**a positive value if the identifier of this time stamp is greater than the identifier of the time stamp of the parameter
+*If the difference goes out of the bounds of the {{{Integer}}} type, the value is either set to {{{Integer#MAX_VALUE}}} or to {{{@link Integer#MIN_VALUE}}}.
+''Throws:''
+*''IllegalArgumentException:'' If the parameter is {{{null}}}.
+}}}
+}}} ===
+
+*A ''constructor'' defining its identifier. +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The constructor of the {{{SimulationTimeStamp}}} has the following constructor:
+{{{
+public SimulationTimeStamp( long identifier );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Builds a time stamp having a specific identifier.
+
+''Parameters:''
+*''Parameter (//identifier//):'' The identifier of the time stamp.
+}}}
+}}} ===
+
+!!Time model
+In SIMILAR, time models are instances of the {{{ITimeModel}}} interface. They are characterized by:
+*A method computing the ''successor'' of a time stamp;  +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+In SIMILAR, the computation of the ''successor of a time stamp'' is made using the following method :
+{{{
+public SimulationTimeStamp getNextTime( 
+	SimulationTimeStamp currentTime 
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the time stamp following a specific time stamp in this model.
+
+Note: for simulation consistency reasons, this method has to be deterministic: calling twice this method with the same parameter has to produce the same output.
+
+''Parameters:''
+*''Parameter (//currentTime//):'' The time stamp for which this method computes a successor.
+''Returns:''
+*The time stamp following the {{{currentTime}}} time stamp.
+}}}
+}}} === +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+For simulation consistency reasons, the {{{getNextTime(...)}}} method has to be deterministic: calling twice this method with the same parameter has to produce the same output.
+
+This method consists in determining the identifier of the time stamp succeeding the time stamp in the parameters. Once it is done, then the method returns a new time stamp having that identifier.
+}}} === +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In this example, the time model uses a period of 5 units.
+!Code
+{{{
+public Period5TimeModel implements ITimeModel {
+	
+	private final long period = 5;
+
+	@Override
+	public SimulationTimeStamp getNextTime( 
+		SimulationTimeStamp currentTime 
+	) {
+		long currentId = currentTime.getIdentifier( );
+		return new SimulationTimeStamp( currentId + this.period );
+	}
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Time model - Level" creator="Designer" modifier="Designer" created="201401231538" modified="201401231546" changecount="4">
+<pre>[&gt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline3.png]]
+In SIMILAR, each level has to define a ''time model''. For this purpose, the {{{ILevel}}} interface extends the {{{ITimeModel}}} interface. Therefore, each instance of a level has to define the successor computation method, using the instructions provided in the previous section.
+
+This step of the design methodology consists in providing the operational code of the {{{getNextTime(...)}}} method of all the levels that were identified so far.
+
+A second part to this step related to the time model is necessary for some simulation. This case is described in the next section.
+
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Level implementation example&lt;/span&gt;]
+{{exsection {
+This section illustrates the specification of the time model in the context of the definition of a level declared into the {{{CityLevel}}} class.
+
+In this example, the time model uses a period of 5 units.
+!Code
+{{{
+public CityLevel implements ILevel {
+
+	[...]
+	
+	private final long period = 5;
+
+	[...]
+
+	@Override
+	public SimulationTimeStamp getNextTime( 
+		SimulationTimeStamp currentTime 
+	) {
+		long currentId = currentTime.getIdentifier( );
+		return new SimulationTimeStamp( currentId + this.period );
+	}
+
+	[...]
+
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Time model - Structure" creator="Designer" modifier="Designer" created="201401231332" modified="201401231402" changecount="6">
+<pre>[&gt;img(50%,)[images/simulationModel/highLevel/timeModelStructure.png]]
+To preserve the freedom of defining custom time models, SIMILAR does not impose a specific method to identify the time stamps: a time model is the sum of the following elements^^''1''^^:
+*An initial ''time stamp'';
+*A method identifying the successor of a ''time stamp'';
+\(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
 <div title="SMD - Tools preparation" creator="Designer" modifier="Designer" created="201401151002" modified="201401221003" changecount="7">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Package tree]]  {{stepTitle{Tools preparation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Random]]

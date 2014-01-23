@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import fr.lgi2a.mysimulation.model.agents.MyAgentCategoriesList;
+import fr.lgi2a.similar.microkernel.AgentCategory;
 import fr.lgi2a.similar.microkernel.IAgent;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
@@ -12,8 +14,6 @@ import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-
-import fr.lgi2a.mysimulation.model.agents.MyAgentCategoriesList;
 
 /**
  * The "City bus" agent.
@@ -46,7 +46,7 @@ public class CityBusAgent implements IAgent {
     * {@inheritDoc}
     */
    @Override
-   public String getCategory() {
+   public AgentCategory getCategory() {
       return MyAgentCategoriesList.CITY_BUS;
    }
 

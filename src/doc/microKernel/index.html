@@ -2353,13 +2353,15 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201401221438" changecount="34">
+<div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201401241353" changecount="46">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Agents identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]
 ----}}}
 The second concrete step in the design of the simulation model is the identification of the agents participating in the simulation. In this step, no precise knowledge about the agents is necessary. The only important point here is to ''identify the existence of the agents, and give them a unique category''^^''1''^^.
 
-Once the levels and their names is known, the user can create a class summing up these information.
-\(_{\underline{1:}\text{A name identifying the equivalence class of the agent. Usually (but not necessarily), agents having the same category have the same perceptible state.}}\)
+Once the agent categories are known, the user can create a class summing up these information.
+
+{{focusemphasisblock{This step focuses on the creation of a class listing all the agent categories of the simulation.}}}
+~~//''__1:__ A name identifying the equivalence class of the agent. Usually, agents having the same category have the same perceptible state.''//~~
 !Creating an agent category
 In SIMILAR, an agent category is modeled as an instance of the +++^34em^*@[&lt;strong&gt;AgentCategory&lt;/strong&gt;]
 The {{{AgentCategory}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
@@ -2434,10 +2436,14 @@ if( MyAgentCategoriesList.CAR.equals( state.getOwner( ).getCategory( ) ) ){
 ----
 [[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Agents identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]}}}</pre>
 </div>
-<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201401231331" changecount="73">
+<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201401241041" changecount="77">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Environment skeleton]]  {{stepTitle{Agents skeleton}}}  [[next step &gt;&gt;|SMD - Time model]]
 ----}}}
 The agents of the simulation also rely on an incremental design process. Therefore, a skeleton has to be defined for them before going for the operational code of the simulation.
+
+{{focusemphasisblock{
+This step focuses on the creation of a skeleton class for each agent that was identified during the [[agents identification|SMD - Agents identification]] phase.
+}}}
 &lt;&lt;tiddler [[SMD - Agents skeleton - Structure]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Agents skeleton - Create class]]&gt;&gt;
@@ -2447,9 +2453,8 @@ The agents of the simulation also rely on an incremental design process. Therefo
 ----
 [[&lt;&lt; previous step|SMD - Environment skeleton]]  {{stepTitle{Agents skeleton}}}  [[next step &gt;&gt;|SMD - Time model]]}}}</pre>
 </div>
-<div title="SMD - Agents skeleton - Create class" creator="Designer" modifier="Designer" created="201401221555" modified="201401231227" changecount="27">
+<div title="SMD - Agents skeleton - Create class" creator="Designer" modifier="Designer" created="201401221555" modified="201401241043" changecount="31">
 <pre>!Creating an agent class in SIMILAR
-[&gt;img[images/simulationModel/highLevel/agentSkeletonTree.png]]
 The constructor of the agent has to comply with the following requirements:
 *Its category has to be set;
 *Its initial global memory state is set later (see [[details|SMD - Agent creation]]);
@@ -2467,7 +2472,8 @@ The implementation of the methods of the skeleton (see the previous section) has
 
 +++?[&lt;a class=&quot;exbigbtn&quot;&gt;Agent skeleton full example&lt;/a&gt;]
 {{exsection {
-This step illustrates the creation of an agent named &quot;City bus&quot;. The source of the class modeling the &quot;City bus&quot; agent is located in the ''agents.citybus'' package of the source tree hierarchy (see the image):
+[&gt;img[images/simulationModel/highLevel/agentSkeletonTree.png]]
+This step illustrates the creation of an agent named &quot;City bus&quot;. The source of the class modeling the &quot;City bus&quot; agent is located in the ''agents.citybus'' package of the source tree hierarchy (see the image):@@clear:right;display:block;margin:0;padding:0;@@
 *Micro-kernel only approach +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
 {{implsection {
 The following code illustrates the implementation of the &quot;City bus&quot; agent using only the micro-kernel. The implementation of its methods follows the implementation recommendations of each method. The following code is also available as a [[stand alone file|./files/simulationModel/highLevel/CityBusAgent.java]]:
@@ -2908,10 +2914,14 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 *A ''decision'' process for each level of the agent.
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
-<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201401231623" changecount="48">
+<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201401241041" changecount="52">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Level skeleton]]  {{stepTitle{Environment skeleton}}}  [[next step &gt;&gt;|SMD - Agents skeleton]]
 ----}}}
 The environment of the simulation also relies on an incremental design process. Therefore, a skeleton has to be defined for it before going for the operational code of the simulation.
+
+{{focusemphasisblock{
+This step focuses on the creation of a skeleton class for the environment.
+}}}
 !Structure of the environment in SIMILAR
 [&gt;img(50%,)[images/simulationModel/highLevel/environmentDesignOutline1.png]]
 In SIMILAR, the environment is the sum of the following elements:
@@ -3007,16 +3017,17 @@ public class EnvironmentModel implements IEnvironment {
 === providing a default implementation to this method.}}}
 \(_{\underline{1:}\text{ At this stage, only the structure supporting the acces to the public local states is defined. The actual public local states are defined later.}}\)
 !Creating the environment in SIMILAR
-[&gt;img[images/simulationModel/highLevel/environmentSkeletonTree.png]]
 The constructor of the environment has to comply with the following requirements:
 *The ''initial public local states'' of the environment are set later (see [[details|SMD - Initial state]]);
 The generated class has to:
 *Be located in the ''environment'' package of the package tree hierarchy.
-
 The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{{AbstractEnvironment}}} class (micro-kernel with common libs).
+
 +++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Environment skeleton full example&lt;/span&gt;]
 {{exsection{
+[&gt;img[images/simulationModel/highLevel/environmentSkeletonTree.png]]
 This example illustrates the creation of the skeleton of an environment named {{{EnvironmentSkeleton}}}. The source of class modeling the environment is located in the {{{environment}}} package of the source tree hierarchy (see the image):
+@@display:block;margin:0;padding:0;clear:right;@@
 *Micro-kernel only approach +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The following code illustrates the implementation of the environment using only the micro-kernel. The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/EnvironmentSkeleton.java]]:
@@ -3067,7 +3078,16 @@ This following step create the content of the simulation model at a coarse grain
 ----
 [[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
 </div>
-<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201401231329" changecount="91">
+<div title="SMD - Influences" creator="Designer" modifier="Designer" created="201401241516" modified="201401241519" changecount="5">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]
+----}}}
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Low level specifications]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]}}}</pre>
+</div>
+<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201401240826" changecount="103">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents identification]]  {{stepTitle{Level skeleton}}}  [[next step &gt;&gt;|SMD - Environment skeleton]]
 ----}}}
 After the identification of the levels, the objects modeling them can be created. Note that ''at this stage, these objects are'' mere +++^60em^*@[&lt;strong&gt;skeletons&lt;/strong&gt;]&lt;html&gt;&lt;h1&gt;Why skeletons?&lt;/h1&gt;&lt;/html&gt;
@@ -3075,6 +3095,10 @@ The simulation design process is rarely straightforward. Indeed, having an overv
 
 The design guidelines of SIMILAR take into consideration this point by creating first the skeleton of all the entities involved in the simulation. After these high-level specifications, the operational code of these classes is included incrementally during the low-level specifications.
 ===, since the level-related specifications (time model and reaction) are not specified yet.
+
+{{focusemphasisblock{
+This step focuses on the creation of a skeleton class for each level that was identified during the [[levels identification|SMD - Levels identification]] step.
+}}}
 &lt;&lt;tiddler [[SMD - Level skeleton - Structure]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Level skeleton - Implementation]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Level skeleton - Creation]]&gt;&gt;
@@ -3085,9 +3109,8 @@ The design guidelines of SIMILAR take into consideration this point by creating 
 ----
 [[&lt;&lt; previous step|SMD - Agents identification]]  {{stepTitle{Level skeleton}}}  [[next step &gt;&gt;|SMD - Environment skeleton]]}}}</pre>
 </div>
-<div title="SMD - Level skeleton - Creation" creator="Designer" modifier="Designer" created="201401231259" modified="201401231317" changecount="18">
+<div title="SMD - Level skeleton - Creation" creator="Designer" modifier="Designer" created="201401231259" modified="201401241039" changecount="22">
 <pre>!Creating a level  skeleton in SIMILAR
-[&gt;img[images/simulationModel/highLevel/levelSkeletonTree.png]]
 The constructor of a level has to comply with the following requirements:
 *The last consistent state has to be partially initialized:
 **The +++^34em^*@[&lt;strong&gt;time stamp&lt;/strong&gt; of that state]
@@ -3102,6 +3125,7 @@ The generated class has to:
 The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{{Abstractlevel}}} class (micro-kernel with common libs).
 
 +++?[&lt;a class=&quot;exbigbtn&quot;&gt;Level skeleton full example&lt;/a&gt;]{{exsection {
+[&gt;img[images/simulationModel/highLevel/levelSkeletonTree.png]]
 This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
 *A &quot;slumbs&quot; level
@@ -3110,7 +3134,7 @@ This example is a continuation of the previous step where four different levels 
 This step illustrates the creation of a level named &quot;city&quot; such that:
 *The perception relation graph contains the &quot;city&quot; and &quot;slumbs&quot; levels;
 *The influence relation graph contains the &quot;city&quot;, &quot;slumbs&quot; and &quot;country&quot; levels.
-The source of the class modeling the &quot;City&quot; level is located in the //levels// package of the source tree hierarchy (see the image). 
+*The source of the class modeling the &quot;City&quot; level is located in the //levels// package of the source tree hierarchy (see the image). 
 
 This example illustrates two implementation approaches of this class:
 *Micro-kernel only approach +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
@@ -3389,12 +3413,14 @@ In SIMILAR, a level is the sum of the following elements^^''1''^^:
 \(_{\underline{2:}\text{ More precisely, the out neighborhood of the level in that graph.}}\)
 \(_{\underline{3:}\text{ In SIMILAR, the model of a level stores the lastly computed consistent state. The management of the transitory states is left to the simulation engines.}}\)</pre>
 </div>
-<div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201401151130" modified="201401221420" changecount="16">
+<div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201401151130" modified="201401240825" changecount="22">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - High level specifications]]  {{stepTitle{Levels identification}}}  [[next step &gt;&gt;|SMD - Agents identification]]
 ----}}}
 The first concrete step in the design of the simulation model is the identification of the levels where the simulation takes place. In this step, no precise knowledge about the levels is necessary. The only important point here is to ''identify the existence of the levels, and give them a unique name''.
 
 Once the levels and their names is known, the user can create a class summing up these information.
+
+{{focusemphasisblock{This step focuses on the creation of a class listing the identifier of all the levels of the simulation.}}}
 !Creating the identifier of a level
 In SIMILAR, the identifier of a level is modeled as an instance of the +++^34em^*@[&lt;strong&gt;LevelIdentifier&lt;/strong&gt;]
 The {{{LevelIdentifier}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
@@ -3543,38 +3569,210 @@ This first main step creates the general structure of the simulation model:
 ----
 [[&lt;&lt; previous step|Simulation models]]  {{stepTitle{Preparation}}}  [[next step &gt;&gt;|SMD - Package tree]]}}}</pre>
 </div>
-<div title="SMD - Public local states" creator="Designer" modifier="Designer" created="201401231605" modified="201401231624" changecount="8">
+<div title="SMD - Public local states" creator="Designer" modifier="Designer" created="201401231605" modified="201401241516" changecount="25">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Time model]]  {{stepTitle{Public local states}}}  [[next step &gt;&gt;|SMD - Influences]]
 ----}}}
 The next step of the methodology consists in identifying the part of the ''local state'' of the agents (and of the environment) that can be perceived. Once identified, a ''public local state'' can be created for each of these entities. Note that the non-perceptible part, called ''private local state'' belongs to the inner mechanisms of the behavior of the agents and of the environment. They are declared elsewhere (see the [[perception|SMD - Perception]], [[global state|SMD - Global state]], [[decision|SMD - Decision]] and [[natural|SMD - Natural]] phases).
 
+{{focusemphasisblock{
+This step focuses on the creation of public local state classes:
+*A class for each agent category and for each level where an agent from that category can lie;
+*A class for each level where the environment is.
+}}}
 Note that the identification of all the perceptible information at this stage is difficult, especially in big models. Consequently, the content of the public local states is completed during the whole process. Despite this, we highly recommend to identify as much elements as possible at this stage.
 !Structure of a public local state in SIMILAR
 &lt;&lt;tiddler [[SMD - Public local states - Structure]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Public local states - Implementation]]&gt;&gt;
+!Creating public local states in SIMILAR
+&lt;&lt;tiddler [[SMD - Public local states - Creation]]&gt;&gt;
 
 {{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Influences]]}}}
 {{guidelinesNavMenu{
 ----
 [[&lt;&lt; previous step|SMD - Time model]]  {{stepTitle{Public local states}}}  [[next step &gt;&gt;|SMD - Influences]]}}}</pre>
 </div>
-<div title="SMD - Public local states - Structure" creator="Designer" modifier="Designer" created="201401231612" modified="201401231626" changecount="11">
-<pre>In SIMILAR, we distinguish the ''public local state'' of the agents and of the environment. Indeed, during its behavior, an agent might filter agents public local state using the the category of the agent. This implies that the owner of the public local state of an agent can be known.
-[&gt;img(47%,)[images/simulationModel/highLevel/publicLocalStateOutline1.png]]
-The ''public local state'' of an agent in a level is characterized by:
+<div title="SMD - Public local states - Creation" creator="Designer" modifier="Designer" created="201401241035" modified="201401241350" changecount="42">
+<pre>The constructor of a public local state has to comply with the following requirements:
+*The ''identifier of the level'' of the state has to be set;
+*The ''owner'' of the state has to be set (//public local state of agents only//);
+*The ''topology'' of the environment has to be created and empty (//public local state of environment only//);
+*The ''perceptible data'' of the state have to be initialized, using constructor arguments;
+The generated class for a public local state in a level identified by &quot;lvl&quot; has to:
+*Be located in the package ''agents.agtCat.lvl'' package, if the local state belongs to an agent which category is &quot;agtCat&quot;;
+*Be located in the package ''environment.lvl'' package, if the local state belongs to the environment;
+*Be named:
+**Explictly after the level they are lying in;
+**Explicitly after the category of the agent they belong to (//public local state of agents only//);
+**Intelligibly named, in order to be readable^^//''1''//^^
+*Define accessors to the perceptible data.
+The implementation of the generic methods (see the previous section) is either done manually (micro-kernel only approach) or with the {{{AbstractPublicLocalState}}} or {{{AbstractPublicLocalStateOfAgent}}} classes (micro-kernel with common libs).
+~~//''__1:__ For instance using &quot;PLS&quot; in replacement for &quot;Public Local State of&quot;, &quot;Env&quot; for &quot;Environment&quot; or &quot;Agt&quot; for &quot;Agent&quot;.''//~~
+
++++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Example of a public local state of the environment&lt;/span&gt;]
+{{exsection{
+In this example, we illustrate the creation of the ''public local state'' of the environment in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
+*The ambient temperature
+*The ambient humidity level
+It also defines a &quot;grid&quot; topology, where the public local state of the agents of that level are put.
+
+The created state is named {{{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{{fr.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
+!Code
+This model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]].
+*Implementation of the public local state with the micro-kernel only; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/PLSEnvInSavannahLevel.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/PLSEnvInSavannahLevel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+*Implementation of the public local state with the micro-kernel and the common libs; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/PLSEnvInSavannahLevel2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/PLSEnvInSavannahLevel2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+~~//''__2:__ &quot;PLSEnv&quot; stands for &quot;Public Local State of the Environment&quot;. The name is purposely shortened to keep readable class names.''//~~
+}}} ===
+
+
++++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Example of a public local state of an agent&lt;/span&gt;]
+{{exsection{
+In this example, we illustrate the creation of the ''public local state'' of an agent from the category &quot;Lion&quot; in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
+*The coordinates of the lion in the environment;
+*The age of the lion.
+The created state is named {{{PLSAgtLionInSavannahLevel}}}^^//''3''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{{fr.lgi2a.wildlifesimulation.model.agents.lion.savannah}}} package.
+!Code
+This model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]].
+*Implementation of the public local state with the micro-kernel only; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/PLSAgtLionInSavannahLevel.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/PLSAgtLionInSavannahLevel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+*Implementation of the public local state with the micro-kernel and the common libs; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/PLSAgtLionInSavannahLevel2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/PLSAgtLionInSavannahLevel2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+~~//''__3:__ &quot;PLSAgt&quot; stands for &quot;Public Local State of the Agent&quot;. The name is purposely shortened to keep readable class names.''//~~
+}}} ===</pre>
+</div>
+<div title="SMD - Public local states - Implementation" creator="Designer" modifier="Designer" created="201401240803" modified="201401241235" changecount="85">
+<pre>[&gt;img(47%,)[images/simulationModel/highLevel/environmentDesignOutline3.png]]
+In SIMILAR, any public local state is modeled as an instance of the +++^26em^*@[&lt;strong&gt;IPublicLocalState&lt;/strong&gt;]The {{{IPublicLocalState}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package. === interface. This interface defines only an access method to the identifier of the level where the state is located. The perceptible data contained in the state are not explicitly specified in the interface, since they can take very different shapes. It is up to the user to define and grant access to them in the implementation of the interface.
+
+Each class implementing the {{{IPublicLocalState}}} interface have to define the following method:
+*Get the ''identifier of the level'' where the state is located; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The access to the identifier of the level where the public local state lies is defined by the following method of the {{{IPublicLocalState}}} interface:
+{{{
+public LevelIdentifier getLevel( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the level for which this public local state was defined.
+
+''Returns:''
+*The identifier of the level for which this public local state was defined.
+}}}
+}}} ===  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method usually consists in either:
+*Adding a field to the class having the type {{{LevelIdentifier}}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (i.e. {{{getLevel( )}}}).
+Or:
+*Directly returning a reference to the level identifier defined in the levels identifier list.
+}}} ===
+
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractPublicLocalState}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
+=== providing a default implementation to this method.}}}
+@@clear:right;display:block;margin:0;padding:0;@@
+[&lt;img(47%,)[images/simulationModel/highLevel/agentDesignOutline3.png]]
+The public local state of the agents has to implement a more specialized interface called +++^30em^*@[&lt;strong&gt;IPublicLocalStateOfAgent&lt;/strong&gt;]The {{{IPublicLocalStateOfAgent}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package. It extends the {{{IPublicLocalState}}} interface.===, which also specifies an accessor to the owner of the state. Likely to the public state of the environment, the perceptible data contained in the local state of an agent are not explicitly specified in the interface, since they can take very different shapes. It is up to the user to define and grant access to them in the implementation of the interface.
+
+Note that from the user side, this access method is not intended for any other use than the access to the category of the agent owning the public local state. This method has also other uses that +++^31em^*@[&lt;em&gt;exceed the bounds of a simulation model&lt;/em&gt;]This method is also used in the simulation engines for optimization purposes. ===.
+
+Each class implementing the {{{IPublicLocalStateOfAgent}}} interface have to define the following methods:
+*Get the ''identifier of the level'' where the state is located (see above);
+*Get the ''owner'' of the state; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The access to the identifier of the level where the public local state lies is defined by the following method of the {{{IPublicLocalState}}} interface:
+{{{
+public IAgent getOwner( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the owner of the public local state, //i.e.// the agent which public local state at a specific level is this public local state.
+
+This method is defined for optimization purposes, since keeping an association between public local states and agents within the simulation engine would be too memory consuming.
+
+''Returns:''
+*The owner of the public local state.
+}}}
+}}} ===  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{{IAgent}}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (i.e. {{{getOwner( )}}}).
+}}} ===
+
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractPublicLocalStateOfAgent}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
+=== providing a default implementation to these methods.}}}</pre>
+</div>
+<div title="SMD - Public local states - Structure" creator="Designer" modifier="Designer" created="201401231612" modified="201401241012" changecount="56">
+<pre>In SIMILAR, we distinguish the ''public local state'' of the agents and of the environment. This distinction is made because during its behavior, an agent might want to perceive only the public local state of agents from a specific category. This implies that the owner of the public local state of an agent can be known.
+[&gt;img(45%,)[images/simulationModel/highLevel/publicLocalStateOutline1.png]]
+The ''public local state'' of an agent in a level is the sum of the following elements:
 *The ''identifier of the level'' where it lies;
-*The ''agent it belongs to'';
+*The ''owner'' of the state, //i.e.// the agent it belongs to;
 *The ''perceptible data'' about the agent in that level.
-[&lt;img(47%,)[images/simulationModel/highLevel/publicLocalStateOutline2.png]]
-The ''public local state'' of the environment in a level is characterized by:
+@@clear:right;display:block;margin:0;padding:0;@@
+[&lt;img(45%,)[images/simulationModel/highLevel/publicLocalStateOutline2.png]]
+The ''public local state'' of the environment in a level is the sum of the following elements:
 *The ''identifier of the level'' where it lies;
 *The ''perceptible data'' about the environment in that level.
-</pre>
+@@clear:left;display:block;margin:0;padding:0;@@
+Note that the perceptible data about the environment contain ''&quot;regular&quot; perceptible data'' (//e.g.// an ambient temperature) and ''topology-related data''. The topology related data can take different shapes, but share the same principle: they offer a data structure facilitating the access to the public local state of all (or a subset of) the agents lying in the level.
+
++++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Topology example: an agent grid&lt;/span&gt;]
+{{exsection{
+[&gt;img(25%,)[images/simulationModel/highLevel/netlogo_wolfsheep.png]]
+In predatory/prey simulations, it is not unusual to organize the environment in a grid, where each animal has an \((x,y)\) coordinate. In this context, the environment can provide a data structure ensuring a fast access to the animals located in a specific area of the grid (instead of iterating over each animal and checking their coordinates).
+
+If we assume that the level identified by &quot;field&quot; contains the animals, then:
+*The public local state of the animal agents in the &quot;field&quot; level specifies the coordinate of the animal in that grid, as a couple of floating point values;
+*The public local state of the environment in the &quot;field&quot; level maintains a two dimentionnal array named &quot;grid&quot;, where:
+**The cell \(grid[x][y]\) contains the public local state of the animals having \((a,b)\) as their current coordinate, where \(a=\lfloor{}x\rfloor{}\) and \(b=\lfloor{}y\rfloor{}\).
+The coherence of the &quot;grid&quot; contained in the public local state of the environment is managed during the [[reaction phase|SMD - Reaction]] of the level, when handling different influences:
+*The addition of an &quot;animal&quot; agent to the level implies its addition in the corresponding cell of the grid;
+*The removal of an &quot;animal&quot; agent from the level implies its removal from the corresponding cell of the grid;
+*The modification of the coordinate of an &quot;animal&quot; agent in the level implies its removal from its previous position in the grid and its addition to its new position in the grid;
+~~//''* The image comes from the website of the [[netlogo platform|http://ccl.northwestern.edu/netlogo/models/WolfSheepPredation]]''//~~
+}}} ===
+
+
++++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Topology example: agents per category&lt;/span&gt;]
+{{exsection{
+In simulations containing many different agent categories and many agents, it becomes more efficient to keep track of the agents according to their category instead of searching systematically for them in the dynamic state of the simulation. In this context, the environment can provide a data structure ensuring a fast access to the agents having a specific category.
+
+In such a simulation, the public local state of the environment in a level can specify a data structure mapping an agent category to the set of public local state of agents having that category.
+
+The coherence of the data structure contained in the public local state of the environment is managed during the [[reaction phase|SMD - Reaction]] of the level, when handling different influences:
+*The addition of an agent to the level implies its addition in the data mapping of the environment;
+*The removal of an agent from the level implies its removal from the data mapping of the environment;
+}}}</pre>
 </div>
-<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201401231605" changecount="54">
+<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201401240832" changecount="60">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents skeleton]]  {{stepTitle{Time model}}}  [[next step &gt;&gt;|SMD - Public local states]]
 ----}}}
 Once the levels are identified, we have to determine how time moves in each level. This step is fundamental, since it conditions the execution of the behavior of the agents and the environment.
 
+{{focusemphasisblock{
+This step focuses on the specification of the time model of each level, inside the skeleton class of each level.
+}}}
 Managing explicitly the time in a simulation is not necessarily an easy task. Indeed, a simulation often relies on the notion of &quot;time step&quot; whereas simulated phenomena rely on notions like hours/minutes/seconds, seasons, years, etc. Therefore, before going for the kill, we remind the users about the ''time model'' related terminology used in SIMILAR.
 
 {{linkbigbtn center{&lt;html&gt;&lt;a href=&quot;../README.html#[[Structure - Simulation model - Time model - Time stamps model]]&quot;&gt;Read more about the time model&lt;/a&gt;&lt;/html&gt;}}}
@@ -3629,16 +3827,15 @@ public class ExampleTimeConvertor {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201401231540" changecount="53">
+<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201401240831" changecount="60">
 <pre>In SIMILAR, the notion of time model is reified with the +++^24em^*@[&lt;strong&gt;ITimeModel&lt;/strong&gt;]
 The {{{ITimeModel}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
 === interface and the +++^24em^*@[&lt;strong&gt;SimulationTimeStamp&lt;/strong&gt;]
 The {{{SimulationTimeStamp}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
 === class. The main role of the modeler is to provide an implementation to the methods defined in the {{{ITimeModel}}} interface.
-[&lt;img(47%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(47%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
+[img(48%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(48%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
 
-!!Time stamps
-In SIMILAR, time stamps are instances of the {{{SimulationTimeStamp}}} class. They are characterized by:
+In SIMILAR, ''time stamps'' are instances of the {{{SimulationTimeStamp}}} class. They are characterized by:
 *An ''identifier'' modeled as a {{{long}}} number. This value is the one used to order the time stamps; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the ''identifier'' of a ''time stamp'' is defined by the following methods of the {{{SimulationTimeStamp}}} class:
@@ -3702,8 +3899,7 @@ Builds a time stamp having a specific identifier.
 }}}
 }}} ===
 
-!!Time model
-In SIMILAR, time models are instances of the {{{ITimeModel}}} interface. They are characterized by:
+In SIMILAR, ''time models'' are instances of the {{{ITimeModel}}} interface. They are characterized by:
 *A method computing the ''successor'' of a time stamp;  +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 In SIMILAR, the computation of the ''successor of a time stamp'' is made using the following method :
@@ -5007,7 +5203,7 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201311260931" tags="CSS excludeLists" changecount="9">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201401240819" tags="CSS excludeLists" changecount="11">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
@@ -5024,6 +5220,18 @@ span.center.caption {
 /*}}}*/
 /*{{{*/
 /* Block putting a big emphasis on text. */
+
+.focusemphasisblock{
+	display:block;
+	border:1px solid #008000;
+	background-color: #DEFEDE;
+	padding: 1.5em;
+	font-weight: bold;
+	color: #008000;
+}
+/*}}}*/
+/*{{{*/
+/* Block putting a strong emphasis on text. */
 
 .bigemphasisblock {
 	display:block;

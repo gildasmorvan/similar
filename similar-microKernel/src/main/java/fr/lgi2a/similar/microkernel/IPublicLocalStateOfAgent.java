@@ -61,7 +61,7 @@ package fr.lgi2a.similar.microkernel;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface IPublicLocalStateOfAgent {
+public interface IPublicLocalStateOfAgent extends IPublicLocalState {
 	/**
 	 * Gets the owner of the public local state, <i>i.e.</i> the agent which public local state at a 
 	 * specific level is this public local state.

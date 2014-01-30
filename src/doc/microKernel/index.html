@@ -3078,7 +3078,7 @@ This following step create the content of the simulation model at a coarse grain
 ----
 [[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
 </div>
-<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201401241617" changecount="30">
+<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201401300810" changecount="36">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Influences skeleton - Introduction]]&gt;&gt;
@@ -3086,11 +3086,25 @@ This following step create the content of the simulation model at a coarse grain
 &lt;&lt;tiddler [[SMD - Influences skeleton - Structure]]&gt;&gt;
 !Specifications and implementation instructions
 &lt;&lt;tiddler [[SMD - Influences skeleton - Specification]]&gt;&gt;
+!Creating an influence skeleton with SIMILAR
+&lt;&lt;tiddler [[SMD - Influences skeleton - Creation]]&gt;&gt;
 
 {{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Low level specifications]]}}}
 {{guidelinesNavMenu{
 ----
 [[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]}}}</pre>
+</div>
+<div title="SMD - Influences skeleton - Creation" creator="Designer" modifier="Designer" created="201401300810" modified="201401300820" changecount="7">
+<pre>The constructor of an influence has to comply with the following requirements:
+*The ''category'' of the influence has to be set using the static value defined in the class;
+*The ''identifier of the level'' at which the influence is aimed has to be set;
+*The ''parameters'' of the influence have to be initialized using the arguments of the constructor;
+The generated class has to:
+*Be located in the ''influences.toXYZ'' package, where ''XYZ'' is the identifier of the level at which the influence is aimed.
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Influence skeleton full example&lt;/span&gt;]
+{{exsection{
+This example illustrates the creation of the skeleton of an influence from the ''accelerate'' category. This influence is aimed at the ''''
+}}} ===</pre>
 </div>
 <div title="SMD - Influences skeleton - Introduction" creator="Designer" modifier="Designer" created="201401241547" modified="201401241551" changecount="4">
 <pre>The last step of the high level specifications of a simulation consist in the identification of the ''influences'' that are sent by the agents and the environment to the different levels of the simulation. During this phase, modelers have to determine:
@@ -3123,7 +3137,7 @@ This step focuses on the identification and creation of the skeleton of the infl
 }}}
 Note that the identification of all the influences at this stage is difficult, especially in big models. Consequently, new influences are added during the whole simulation design process. Despite this, we highly recommend to identify as much elements as possible at this stage.</pre>
 </div>
-<div title="SMD - Influences skeleton - Specification" creator="Designer" modifier="Designer" created="201401241606" modified="201401241626" changecount="10">
+<div title="SMD - Influences skeleton - Specification" creator="Designer" modifier="Designer" created="201401241606" modified="201401300807" changecount="24">
 <pre>[&gt;img(45%,)[images/simulationModel/highLevel/influenceOutline2.png]]
 In SIMILAR, the influences are modeled as instances of the +++^34em^*@[&lt;strong&gt;IInfluence&lt;/strong&gt;]
 The {{{IInfluence}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
@@ -3131,8 +3145,29 @@ The {{{IInfluence}}} interface is located in the {{{fr.lgi2a.similar.microkernel
 The {{{RegularInfluence}}} class is located in the {{{fr.lgi2a.similar.microkernel.influences}}} package.
 ===.
 
-Because the influences are often specific to a level, we do not define an influence category list like we did for agent categories and level identifiers. Instead, we consider that each influence class embeds as a static value its category.
-@@clear:right;display:block;margin:0;padding:0;@@</pre>
+Because the influences are often specific to a level, we do not define an influence category list like we did for agent categories and level identifiers. Instead, we consider that each influence class embeds its category as a static value.
+@@clear:right;display:block;margin:0;padding:0;@@
+The {{{RegularInfluence}}} class already defines the access to the ''category'' and the ''identifier of the level'' of the influence. Their value is set using the constructor of that class. +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+Instances of the {{{RegularInfluence}}} class are created using its constructor having the following signature:
+{{{
+public RegularInfluence( 
+	String category, 
+	LevelIdentifier targetLevel 
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Builds a regular influence from a specific category.
+The reaction to this influence will be managed into a specific target level.
+
+''Parameters:''
+*''Parameter (//category//):'' The category of the influence, as described in the API of the {{{getCategory()}}} method of the {{{fr.lgi2a.similar.microkernel.IInfluence}}} interface.
+*''Parameter (//targetLevel//):'' The target level of the influence, as described in the API of the {{{getTargetLevel()}}} method of the {{{fr.lgi2a.similar.microkernel.IInfluence}}} interface.
+''Throws:''
+*''//IllegalArgumentException//:'' If one of the arguments is &lt;code&gt;null&lt;/code&gt;.
+}}}
+}}} ===</pre>
 </div>
 <div title="SMD - Influences skeleton - Structure" creator="Designer" modifier="Designer" created="201401241551" modified="201401241625" changecount="14">
 <pre>[&gt;img(45%,)[images/simulationModel/highLevel/influenceOutline.png]]

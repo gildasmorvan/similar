@@ -605,10 +605,132 @@ config.options.chkSinglePageMode=true;
 config.options.chkHideTabsBarWhenSingleTab=true;
 /*}}}*/</pre>
 </div>
+<div title="Consistent local dynamic state of a level" creator="Designer" modifier="Designer" created="201401301250" modified="201401301409" changecount="55">
+<pre>The ''dynamic state'' of the simulation models the state of the simulation and of all its content at a specific time. In multi-level simulations, each level embodies a diffent viewpoint on the simulated phenomenon, and therefore has its own ''local dynamic state''. A local dynamic state is said ''consistent'' if it models the state of the simulation at a time stamp of the time model.
+!!Structure of a local dynamic state of a level in SIMILAR
+[&gt;img(50%,)[images/simulationModel/lowLevel/dynamicStateOutline.png]]
+In SIMILAR, a local dynamic state of a level is the sum of the following elements:
+*the ''identifier of the level'' for which the state is defined;
+*the ''time'' for which the state is defined;
+*a ''state valuation'' containing the value of the ''public local state of each agent'' lying in that level and the value of the ''public local state of the environment'' at that time;
+*a ''state dynamics'' containing the +++^14em^*@[actions]modeled by influences=== that were +++^30em^*@[still being performed]If \(t\) is the consistent time of the dynamic state, then such actions started before \(t\) and will end after \(t\)=== in that level at that time.
+!!Specifications
+In SIMILAR, the consistent dynamic state of a level is modeled with an instance of the +++^34em^*@[&lt;strong&gt;IPublicLocalDynamicState&lt;/strong&gt;]The {{{IPublicLocalDynamicState}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.=== interface. This interface is the parent of all the possible dynamic states of the simulation. Usually, two concrete classes implement this interface:
+*The {{{ConsistentPublicLocalDynamicState}}} class, modeling consistent local dynamic states;
+*The {{{TransitoryPublicLocalDynamicState}}} class, modeling transitory local dynamic states;
+{{bigemphasisblock {
+In the general case, only the methods from the {{{IPublicLocalDynamicState}}} interface are necessary to build the behavior of the agents. The two concrete classes are useful only if the user defines a custom ''disambiguation criterion'' in a ''simulation engine''.
+}}}
+The {{{IPublicLocalDynamicState}}} interface defines the following access methods:
+*An access to the ''identifier of the level'' for which the local dynamic state is defined; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''identifier of the level'' of this local dynamic state is obtained with the following method of the {{{IPublicLocalDynamicState}}} interface:
+{{{
+public LevelIdentifier getLevel( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the level for which the public local dynamic state is defined.
+
+''Returns:''
+*The level for which the public local dynamic state is defined.
+}}}
+}}} ===
+
+*An access to the ''time'' for which the local dynamic state is defined; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''time'' of this local dynamic state is obtained with the following method of the {{{IPublicLocalDynamicState}}} interface:
+{{{
+public SimulationTimeStamp getTime();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the time for which this public dynamic state is defined.
+
+''Returns:''
+*The time for which this public dynamic state is defined.
+}}}
+}}} ===
+
+*An access to the ''public local state of the environment'' at that time; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''public local state of the environment'' for this local dynamic state is obtained with the following method of the {{{IPublicLocalDynamicState}}} interface:
+{{{
+public IPublicLocalState getPublicLocalStateOfEnvironment( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the public local state of the environment contained in this public local dynamic state.
+
+''Returns:''
+*The public local state of the environment contained in this public local dynamic state.
+}}}
+}}} ===
+
+*An access to the ''public local state of the agents'' of that level at that time; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''public local state of the agents'' of the agent lying in the level at that specific time is obtained with the following method of the {{{IPublicLocalDynamicState}}} interface:
+{{{
+public Set&lt;IPublicLocalStateOfAgent&gt; getPublicLocalStateOfAgents();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Test
+}}}
+}}} ===
+
+*An access to the ''state dynamics'' of that level at that time; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The state dynamics of the local dynamic state is obtained with the following methods of the {{{IPublicLocalDynamicState}}} interface:
+*Get all the influences; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection{
+{{{
+public Set&lt;IInfluence&gt; getStateDynamics();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the state dynamics of this public local dynamic state, //i.e.// the influences that are still active (being performed) when the level was in this state.
+
+''Returns:''
+*The state dynamics of this public local dynamic state.
+}}}
+}}} ===
+
+*Get the system influences only; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection{
+{{{
+public Set&lt;IInfluence&gt; getSystemInfluencesOfStateDynamics();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the system influences contained in the state transitory dynamics.
+
+''Returns:''
+*The system influences of the value returned by the {{{getStateDynamics()}}} method of the {{{IPublicLocalDynamicState}}} class.
+}}}
+}}} ===
+
+*Get the regular influences only; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection{
+{{{
+public Set&lt;IInfluence&gt; getRegularInfluencesOfStateDynamics();
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the non-system influences contained in the state transitory dynamics.
+
+''Returns:''
+*The regular influences of the value returned by the {{{getStateDynamics()}}} method of the {{{IPublicLocalDynamicState}}} class.
+}}}
+}}} ===
+
+}}} ===
+</pre>
+</div>
 <div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311281641" modified="201401211546" tags="system excludeLists" changecount="4">
 <pre>[[Home]]</pre>
 </div>
-<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201401150857" modified="201401241524" changecount="11">
+<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201401150857" modified="201401300926" changecount="12">
 <pre>*[[Start|Simulation models]]
 *[[Preparation|SMD - Preparation]]
 **[[Packages tree|SMD - Package tree]]
@@ -628,9 +750,9 @@ config.options.chkHideTabsBarWhenSingleTab=true;
 **[[Perception|SMD - Perception]]
 **[[Global state|SMD - Global state]]
 **[[Decision|SMD - Decision]]
+**[[Create agents|SMD - Agent creation]]
 **[[Natural|SMD - Natural]]
 **[[Reaction|SMD - Reaction]]
-**[[Create agents|SMD - Agent creation]]
 *[[Final steps|SMD - Final steps]]
 **[[Initial state|SMD - Initial state]]
 **[[Execution|SMD - Running the simulation]]
@@ -2453,7 +2575,7 @@ This step focuses on the creation of a skeleton class for each agent that was id
 ----
 [[&lt;&lt; previous step|SMD - Environment skeleton]]  {{stepTitle{Agents skeleton}}}  [[next step &gt;&gt;|SMD - Time model]]}}}</pre>
 </div>
-<div title="SMD - Agents skeleton - Create class" creator="Designer" modifier="Designer" created="201401221555" modified="201401241043" changecount="31">
+<div title="SMD - Agents skeleton - Create class" creator="Designer" modifier="Designer" created="201401221555" modified="201401301205" changecount="32">
 <pre>!Creating an agent class in SIMILAR
 The constructor of the agent has to comply with the following requirements:
 *Its category has to be set;
@@ -3078,7 +3200,7 @@ This following step create the content of the simulation model at a coarse grain
 ----
 [[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
 </div>
-<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201401300810" changecount="36">
+<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201401301053" changecount="40">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Influences skeleton - Introduction]]&gt;&gt;
@@ -3094,16 +3216,22 @@ This following step create the content of the simulation model at a coarse grain
 ----
 [[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]}}}</pre>
 </div>
-<div title="SMD - Influences skeleton - Creation" creator="Designer" modifier="Designer" created="201401300810" modified="201401300820" changecount="7">
+<div title="SMD - Influences skeleton - Creation" creator="Designer" modifier="Designer" created="201401300810" modified="201401301054" changecount="19">
 <pre>The constructor of an influence has to comply with the following requirements:
 *The ''category'' of the influence has to be set using the static value defined in the class;
 *The ''identifier of the level'' at which the influence is aimed has to be set;
 *The ''parameters'' of the influence have to be initialized using the arguments of the constructor;
 The generated class has to:
-*Be located in the ''influences.toXYZ'' package, where ''XYZ'' is the identifier of the level at which the influence is aimed.
+*Be located in the ''influences.toXYZ'' package of the hierarchy, where ''XYZ'' is the identifier of the level at which the influence is aimed. If the influence can be aimed at more than one level, then it has to be located in the ''influences'' package of the hierarchy.
+*Be named explicitly after the category of the influence;
+*Define a {{{public static final}}} field identifying the ''category'' of the influence.
 +++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Influence skeleton full example&lt;/span&gt;]
 {{exsection{
-This example illustrates the creation of the skeleton of an influence from the ''accelerate'' category. This influence is aimed at the ''''
+[&gt;img[images/simulationModel/highLevel/influenceSkeletonTree.png]]
+This example illustrates the creation of the skeleton of an influence from the ''grow old'' category. This influence is aimed at the ''savanah'' level of a ''wildlife'' simulation. This influence is located in the {{{influences.tosavannah}}} package of the source tree hierarchy (see the image).
+@@clear:right;display:block;margin:0;padding:0;&lt;html&gt;&lt;h2&gt;Code&lt;/h2&gt;&lt;/html&gt;@@
+The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/GrowOldInfluence.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;400&quot; type='text/plain' data='files/simulationModel/highLevel/GrowOldInfluence.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===</pre>
 </div>
 <div title="SMD - Influences skeleton - Introduction" creator="Designer" modifier="Designer" created="201401241547" modified="201401241551" changecount="4">
@@ -3137,7 +3265,7 @@ This step focuses on the identification and creation of the skeleton of the infl
 }}}
 Note that the identification of all the influences at this stage is difficult, especially in big models. Consequently, new influences are added during the whole simulation design process. Despite this, we highly recommend to identify as much elements as possible at this stage.</pre>
 </div>
-<div title="SMD - Influences skeleton - Specification" creator="Designer" modifier="Designer" created="201401241606" modified="201401300807" changecount="24">
+<div title="SMD - Influences skeleton - Specification" creator="Designer" modifier="Designer" created="201401241606" modified="201401300907" changecount="25">
 <pre>[&gt;img(45%,)[images/simulationModel/highLevel/influenceOutline2.png]]
 In SIMILAR, the influences are modeled as instances of the +++^34em^*@[&lt;strong&gt;IInfluence&lt;/strong&gt;]
 The {{{IInfluence}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
@@ -3169,7 +3297,7 @@ The reaction to this influence will be managed into a specific target level.
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Influences skeleton - Structure" creator="Designer" modifier="Designer" created="201401241551" modified="201401241625" changecount="14">
+<div title="SMD - Influences skeleton - Structure" creator="Designer" modifier="Designer" created="201401241551" modified="201401301007" changecount="15">
 <pre>[&gt;img(45%,)[images/simulationModel/highLevel/influenceOutline.png]]
 In SIMILAR, an influence is the sum of the following elements:
 *The ''category'' of the influence^^//''1''//^^;
@@ -3249,7 +3377,7 @@ The following code illustrates the implementation of the environment using both 
 
 }}}===</pre>
 </div>
-<div title="SMD - Level skeleton - Implementation" creator="Designer" modifier="Designer" created="201401231258" modified="201401231329" changecount="4">
+<div title="SMD - Level skeleton - Implementation" creator="Designer" modifier="Designer" created="201401231258" modified="201401301224" changecount="5">
 <pre>!Specifications and implementation instructions
 [&lt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline2.png]]
 In SIMILAR, levels are modeled as instances of the +++^34em^*@[&lt;strong&gt;ILevel&lt;/strong&gt;]
@@ -3440,7 +3568,7 @@ void setLastConsistentPublicLocalDynamicState(
 The implementation of these methods usually consists in:
 *Adding a field to the class having the type {{{ConsistentPublicLocalDynamicState }}};
 *Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (//i.e.// {{{getInfluenceableLevels( )}}}).
+*Granting access to that field in the appropriate methods (//i.e.// {{{getLastConsistentPublicLocalDynamicState( )}}}).
 !!Setting the initial value
 Contrary to the other elements of the level, the dynamic state requires specific information to be fully initialized:
 *A time stamp modeling the time for which this dynamic state is defined;
@@ -3584,6 +3712,55 @@ IPublicLocalStateOfAgent state = agent.getPublicLocalState( MyAwesomeLevelList.C
 ----
 [[&lt;&lt; previous step|SMD - High level specifications]]  {{stepTitle{Levels identification}}}  [[next step &gt;&gt;|SMD - Agents identification]]}}}</pre>
 </div>
+<div title="SMD - Low level - Agents intro" creator="Designer" modifier="Designer" created="201401301410" modified="201401301441" changecount="9">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Low level specifications]]  {{stepTitle{Low level agent specifications}}}  [[next step &gt;&gt;|SMD - Perception]]
+----}}}
+The behavior of an agent is defined by three different steps (see the image):
+*The ''perception phase'', where the agent decodes the data from the public local dynamic state of the perceptible levels, identifies the relevant data and stores them into a ''perceived data set'';
+*The ''global state revision phase'', where the agent revises its global state using the value of its former global state and the recently perceived data;
+*The ''decision phase'', where the agent uses its perceived data and its revised global state to determine +++^15em^*@[what it does]//i.e.// create influences and send them to influenceable levels.===;
+[img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel.png]]
+
+{{focusemphasisblock{
+The next steps of the methodology consist in defining the operational code of the three parts of the bheavior of each agent, for each level where they can lie.
+}}}
+{{bigemphasisblock{
+Note that the specification process is not straightforward: it often consists in looping on these three phases:
+*First define a basic structure (a skeleton);
+*Then write a first specification of the decision process;
+*Deduce from it the perceived data and the global state required by the behavior;
+*Write the perception model retrieving the perceived data;
+*Write the global state revision model updating the global state;
+*Write a more precise specification of the decision process;
+*//etc.//
+}}}
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Perception]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Low level specifications]]  {{stepTitle{Low level agent specifications}}}  [[next step &gt;&gt;|SMD - Low level - Agents intro]]}}}</pre>
+</div>
+<div title="SMD - Low level specifications" creator="Designer" modifier="Designer" created="201401300911" modified="201401301411" changecount="18">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Influences skeleton]]  {{stepTitle{Low level specifications}}}  [[next step &gt;&gt;|SMD - Low level - Agents intro]]
+----}}}
+The ''high level specifications'' can be written only having a vague overview on the simulation, without knowing its precise inner mechanisms. To the contrary, the ''low level specifications'' phase of the methodology provide the precise implementation and operational code of the behavior of the agents, the natural action of the environment and of the reaction of the levels.
+
+The low level specifications contain the following steps:
+*Specification of the ''agents'':
+**Specification of the [[perception|SMD - Perception]] phase of the agents;
+**Specification of the [[global state|SMD - Global state]] of the agents;
+**Specification of the [[decision|SMD - Decision]] phase of the agents;
+**Specification of the [[agent creation|SMD - Agent creation]] mechanism;
+*Specification of the ''environment'':
+**Specification of the [[natural action|SMD - Natural]] phase of the environment;
+*Specification of the ''levels'':
+**Specification of the [[reaction|SMD - Reaction]] phase of the levels;
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Low level - Agents intro]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Influences skeleton]]  {{stepTitle{Low level specifications}}}  [[next step &gt;&gt;|SMD - Low level - Agents intro]]}}}</pre>
+</div>
 <div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201401231328" changecount="32">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Preparation]]  {{stepTitle{Package tree}}}  [[next step &gt;&gt;|SMD - Tools preparation]]
 ----}}}
@@ -3651,6 +3828,161 @@ This example illustrates the full directory structure of a plane traffic simulat
 {{guidelinesNavMenu{
 ----
 [[&lt;&lt; previous step|SMD - Preparation]]  {{stepTitle{Package tree}}}  [[next step &gt;&gt;|SMD - Tools preparation]]}}}</pre>
+</div>
+<div title="SMD - Perception" creator="Designer" modifier="Designer" created="201401300922" modified="201401301426" changecount="47">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Low level - Agents intro]]  {{stepTitle{Perception}}}  [[next step &gt;&gt;|SMD - Global state]]
+----}}}
+&lt;&lt;tiddler [[SMD - Perception - Introduction]]&gt;&gt;
+!Structure of the perception model in SIMILAR
+&lt;&lt;tiddler [[SMD - Perception - Structure]]&gt;&gt;
+!!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Perception - Specifications]]&gt;&gt;
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Global state]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Low level - Agents intro]]  {{stepTitle{Perception}}}  [[next step &gt;&gt;|SMD - Global state]]}}}</pre>
+</div>
+<div title="SMD - Perception - Introduction" creator="Designer" modifier="Designer" created="201401300926" modified="201401301416" changecount="36">
+<pre>The behavior of an agent is defined by three different steps (see the image):
+*The ''perception phase'', where the agent decodes the data from the public local dynamic state of the perceptible levels, identifies the relevant data and stores them into a ''perceived data set'';
+*The ''global state revision phase'', where the agent revises its global state using the value of its former global state and the recently perceived data;
+*The ''decision phase'', where the agent uses its perceived data and its revised global state to determine what it does;
+{{focusemphasisblock{
+This step of the methology focuses on the creation of both the //perceived data set// and the //perception phase// of each agent, for each level where the agent can lie.
+}}}
+[img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_perception.png]]</pre>
+</div>
+<div title="SMD - Perception - Perceived data" creator="Designer" modifier="Designer" created="201401300939" modified="201401301043" changecount="47">
+<pre>The ''perceived data set'' of an agent from a specific level models the data from the public dynamic state of the perceptible levels that are read by the decision process of the agent. Roughly said, it models //&quot;what the agent sees from the various perceptible level&quot;//.
+!!Structure of the perceived data in SIMILAR
+&lt;&lt;tiddler [[SMD - Perception - Perceived data - Structure]]&gt;&gt;
+!!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Perception - Perceived data - Specifications]]&gt;&gt;
+!!Creating a perceived data set in SIMILAR
+&lt;&lt;tiddler [[SMD - Perception - Perceived data - Creation]]&gt;&gt;</pre>
+</div>
+<div title="SMD - Perception - Perceived data - Creation" creator="Designer" modifier="Designer" created="201401301043" modified="201401301207" changecount="23">
+<pre>The constructor of the perceived data set has to comply with the following requirements:
+*The ''level'' from which the data were perceived has to be set;
+The generated class has to:
+*Be located in the ''agents.XYZ.ABC'' where ''XYZ'' is the category of the agent performing the perception and ''ABC'' is the identifier of the level from which the perception was made;
+*Be named:
+**Explicitly after the level from which they were perceived;
+**Explicitly after the category of the agent performing the perception;
+**Intelligibly named, in order to be readable^^//''1''//^^;
+*Either:
+**Define {{{public final}}} fields containing the perceived data;
+**Define read access methods to the perceived data;
+The implementation of the obligatory method of the perceived data (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{{AbstractPerceivedDataOfAgent}}} class (micro-kernel with common libs approach).
+~~//''__1:__ For instance using &quot;PDF&quot; in replacement for &quot;Perceived Data From&quot; and &quot;Agt&quot; for &quot;Agent&quot;.''//~~
+
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Perceived data set full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[images/simulationModel/lowLevel/perceivedDataTree.png][images/simulationModel/lowLevel/perceivedDataTree.png]]
+This example illustrates an implementation of the perceived data set of a ''lion'' agent from the ''Savannah'' level, in the context of a ''wildlife'' simulation. In this simulation, the lion takes into consideration the nearby preys it sees in the ''Savannah'' level and the location of neayby vultures in the ''Sky'' level to determine where it will hunt preys.
+
+These perceived data are defined in the {{{AgtLionPDFSavannah}}} class, in the {{{agents.lion.savannah}}} package.
+@@clear:right;display:block;margin:0;padding:0;@@
+The following code implements such a class, if the level identifier list has [[this implementation|files/simulationModel/highLevel/WildlifeLevelList.java]]:
+*Micro-kernel only approach +++?*[&lt;span class=&quot;implsmallbtn &quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The following code illustrates the implementation of the perceived data set using only the micro-kernel. The sources of this class are also available in a [[stand alone file|files/simulationModel/lowLevel/AgtLionPDFSavannah.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/AgtLionPDFSavannah.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+*Micro-kernel with common libs approach  +++?*[&lt;span class=&quot;implsmallbtn &quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The following code illustrates the implementation of the perceived data set using only the micro-kernel. The sources of this class are also available in a [[stand alone file|files/simulationModel/lowLevel/AgtLionPDFSavannah2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/AgtLionPDFSavannah2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+}}} ===</pre>
+</div>
+<div title="SMD - Perception - Perceived data - Specifications" creator="Designer" modifier="Designer" created="201401301023" modified="201401301042" changecount="25">
+<pre>In SIMILAR, a perceived data set is modeled as an instance of the +++^34em^*@[&lt;strong&gt;IPerceivedDataOfAgent&lt;/strong&gt;]The {{{IPerceivedDataOfAgent}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.=== interface. This interface defines a method granting access to the level from which the perception was made. The concrete perceived data have to be ''defined as fields'' and have to be ''accessed through read only methods''.
+
+In the created classes, the following element has to be defined:
+*The access to the ''level'' from which the perception was made; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+In SIMILAR, the access to the ''identifier of the level'' from which the perception was made to obtain these perceived data is made using the following method:
+{{{
+public LevelIdentifier getLevel( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the level from which these data were perceived.
+
+''Returns:''
+*The identifier of the level for which these data were perceived.
+}}}
+}}} === +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{{IPerceivedDataOfAgent}}};
+*Setting its value in the constructor of the class;
+*Granting access to that field in the appropriate method (//i.e.// {{{getLevel()}}}).
+}}} ===
+
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractPerceivedDataOfAgent}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
+=== providing a default implementation to this method.}}}</pre>
+</div>
+<div title="SMD - Perception - Perceived data - Structure" creator="Designer" modifier="Designer" created="201401301026" modified="201401301211" changecount="3">
+<pre>[&gt;img(40%,)[images/simulationModel/lowLevel/perceivedDataOutline.png]]
+In SIMILAR, the perceived data set can contain:
+*+++^36em^*@[&lt;strong&gt;raw data&lt;/strong&gt;]//i.e.// a reference to the data already existing in the dynamic state.=== from the dynamic state; +++?*[&lt;span class=&quot;exsmallbtn &quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+The perceived data set can contain a ''reference'' to the public local state of a perceived agent. For instance, in the context of wildlife simulation, a predator can eat a prey. Therefore, the predator has to perceive its potential preys, as a set of public local state of agents.
+}}} ===
+
+*+++^36em^*@[&lt;strong&gt;interpreted data&lt;/strong&gt;]//i.e.// data that are deducted from the raw data of the dynamic state.=== from the dynamic state. +++?*[&lt;span class=&quot;exsmallbtn &quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In a road traffic simulation, the public local state of an agent embeds its location in the road network. The behavior of most vehicles consist in adapting their acceleration in accordance with the current speed, the acceleration and the distance from the leading vehicle. The distance between two vehicles does not exist in the dynamic state of the simulation: it has to be computed using the absolute location of the vehicles.
+
+Therefore, in the perceived data of a vehicle:
+*the current ''speed'' and ''acceleration'' of the leading vehicle are raw data (they already exist in the public local state of the vehicle agents);
+*the ''distance from the leading vehicle'' is deducted from the position of the vehicle performing the perception and the position of the leading vehicle: it is an interpretation of the raw data from the dynamic state.
+}}} ===
+
+Moreover, since perception is always relative to a level, the perceived data set of an agent always identify ''the level'' from which the perception was made.</pre>
+</div>
+<div title="SMD - Perception - Specifications" creator="Designer" modifier="Designer" created="201401301419" modified="201401301445" changecount="10">
+<pre>[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline4.png]]
+In the micro-kernel of SIMILAR, the perception model of an agent from a specific level is modeled as the following method of the {{{IAgent}}} interface:
+{{{
+public IPerceivedDataOfAgent perceive( 
+	LevelIdentifier level,
+	IPublicLocalStateOfAgent publicLocalStateInLevel,
+	IDynamicStateMap levelsLocalObservableDynamicState
+);
+}}}
+This method defines three parameters:
+*The {{{level}}} parameter defines the identifier of the level from which perception is made;
+*The {{{publicLocalStateInLevel}}} parameter identifies the public local state of the agent in that level;
+*The {{{levelsLocalObservableDynamicState}}} parameter is a data structure listing the local dynamic state of the perceptible levels from {{{level}}};
+The implementation of this method consists in:
+*Casting the public local state of the agent in the appropriate class, to access its various data;
+*Getting the local dynamic state of the relevant levels;
+*Getting and casting the public local state of the environment in each level, to access its various data;
+*Getting and casting the public local state of the agents in each level, to access their various data;</pre>
+</div>
+<div title="SMD - Perception - Structure" creator="Designer" modifier="Designer" created="201401301216" modified="201401301421" changecount="36">
+<pre>In SIMILAR, the perception model can be seen as an ''application'' taking into parameters the ''dynamic state of the perceptible levels'', and returning a ''perceived data set''.
+
+The ''perceived data set'' of an agent from a specific level models the data from the public dynamic state of the perceptible levels that are read by the decision process of the agent. Roughly said, it models //&quot;what the agent sees from the various perceptible levels&quot;//.
+
+From now, this section assumes that the user:
+*Has already created the class modeling the perceived data set returned by the perception model; +++?*[&lt;span class=&quot;moresmallbtn &quot;&gt;Read more&lt;/span&gt;]
+{{moresection{
+&lt;&lt;tiddler [[SMD - Perception - Perceived data]]&gt;&gt;
+}}} ===
+
+*Understands the class modeling the public local dynamic state of the simulation. +++?*[&lt;span class=&quot;moresmallbtn &quot;&gt;Read more&lt;/span&gt;]
+{{moresection{
+&lt;&lt;tiddler [[Consistent local dynamic state of a level]]&gt;&gt;
+}}} ===
+
+Pay especially attention to the implementation of the model of the perceived data sets, since these elements are the result of the perception process of the agents.</pre>
 </div>
 <div title="SMD - Preparation" creator="Designer" modifier="Designer" created="201401150920" modified="201401221002" changecount="16">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|Simulation models]]  {{stepTitle{Preparation}}}  [[next step &gt;&gt;|SMD - Package tree]]
@@ -3863,7 +4195,7 @@ The coherence of the data structure contained in the public local state of the e
 *The removal of an agent from the level implies its removal from the data mapping of the environment;
 }}}</pre>
 </div>
-<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201401240832" changecount="60">
+<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201401301320" changecount="62">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents skeleton]]  {{stepTitle{Time model}}}  [[next step &gt;&gt;|SMD - Public local states]]
 ----}}}
 Once the levels are identified, we have to determine how time moves in each level. This step is fundamental, since it conditions the execution of the behavior of the agents and the environment.
@@ -4362,7 +4694,7 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 <div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="2">
 <pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201401221000" changecount="25">
+<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201401301322" changecount="26">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt;
 This part of the documentation is dedicated to the design and the implementation of SIMILAR simulation models using the micro-kernel only. At the same time, it describes best practices facilitating the organization of the implementation of the simulation. Note that the guidelines provided here are not absolute rules. They only make the design of simulations either easier, or more robust to model revisions.
 

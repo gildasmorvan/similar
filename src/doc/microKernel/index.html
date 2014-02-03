@@ -3038,6 +3038,86 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 *A ''decision'' process for each level of the agent.
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
+<div title="SMD - Decision" creator="Designer" modifier="Designer" created="201402031641" modified="201402031705" changecount="11">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]
+----}}}
+&lt;&lt;tiddler [[SMD - Decision - Introduction]]&gt;&gt;
+!Structure of the decision process
+&lt;&lt;tiddler [[SMD - Decision - Structure]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Decision - Specifications]]&gt;&gt;
+!Writing the decision phase of an agent class
+&lt;&lt;tiddler [[SMD - Decision - Creation]]&gt;&gt;
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Agent creation]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]}}}</pre>
+</div>
+<div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" changecount="1">
+<pre>Type the text for 'New Tiddler'</pre>
+</div>
+<div title="SMD - Decision - Introduction" creator="Designer" modifier="Designer" created="201402031647" modified="201402031649" changecount="2">
+<pre>The behavior of an agent is defined by three different steps (see the image):
+*The ''perception phase'', where the agent decodes the data from the public local dynamic state of the perceptible levels, identifies the relevant data and stores them into a ''perceived data set'';
+*The ''global state revision phase'', where the agent revises its global state using the value of its former global state and the recently perceived data;
+*The ''decision phase'', where the agent uses its perceived data and its revised global state to determine what it does;
+{{focusemphasisblock{
+This step of the methology focuses on the implementation of the //decision phase// of each agent.
+}}}
+[img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_decision.png]]</pre>
+</div>
+<div title="SMD - Decision - Specifications" creator="Designer" modifier="Designer" created="201402031705" modified="201402031726" changecount="11">
+<pre>[&gt;img(45%,)[images\simulationModel\lowLevel\agentDesignOutline6.png]]
+In the micro-kernel of SIMILAR, the decision process is modeled by the following method of the {{{IAgent}}} interface:
+{{{
+public void decide(
+	LevelIdentifier level,
+	IGlobalMemoryState globalState,
+	IPerceivedDataOfAgent perceivedData,
+	InfluencesMap producedInfluences
+);
+}}}
+@@display:block;clear:right;@@
+This method defines the following parameters:
+*The {{{level}}} parameter corresponds to the identifier of the level from which the decision is made;
+*The {{{globalState}}} parameter corresponds to the revised global state of the agent on which the decisions are based;
+*The {{{perceivedData}}} parameter corresponds to the perceived data, on which the decisions are based;
+*The {{{producedInfluences}}} parameter models where the influences produced by the decisions of the agents are stored. Basically, it corresponds to the value returned by the decision application presented above;
+!!Influences
+The influences added to the {{{producedInfluences}}} set can either be the influences defined during the [[influence creation step|SMD - Influences skeleton]], or the following system influences:
+*Addition of an agent to the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+Prerequisite: agent fully initialized;
+Consequence: cascade of agent addition influences to levels. Managed during the respective reaction of the levels.
+}}} ===
+
+*Removal of an agent from the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+Consequence: cascade of agent removal influences from levels. Managed during the respective reaction of the levels.
+}}} ===
+
+*Addition of an agent to a level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+Prerequisite: agent having a public local state defined for that level;
+}}} ===
+
+*Removal of an agent from a level. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+Consequence: public local state not listed in the dynamic state;
+}}} ===</pre>
+</div>
+<div title="SMD - Decision - Structure" creator="Designer" modifier="Designer" created="201402031705" modified="201402031714" changecount="8">
+<pre>In SIMILAR, the decision model can be seen as an ''application'' taking into parameters the ''perceived data'' from the level where the decision is made and the +++^31em^*@[&lt;strong&gt;revised global state&lt;/strong&gt;]The value of the global state of the agent after the global state revision phase.=== of the agent, and returning the ''influences'' modeling the actions the agent wishes to perform in the various influenceable levels.
+
+The influences resulting from this phase can be:
+*''Regular influences'' modeling domain and case-dependent influences;
+*''System influences'' modeling generic influences that can be found in any simulation. They currently include:
+**The addition of a +++^34em^*@[fully initialized]Including the specification of the initial global state and the public local state in each level where they initially lie (see [[this step|SMD - Agent creation]] of the methodology).=== agent to the simulation
+**The removal of an agent from the simulation (and from all the levels where it lies);
+**The addition of an agent to a level;
+**The removal of an agent from a level.</pre>
+</div>
 <div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201401241537" changecount="53">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Level skeleton]]  {{stepTitle{Environment skeleton}}}  [[next step &gt;&gt;|SMD - Agents skeleton]]
 ----}}}
@@ -3192,11 +3272,12 @@ This step of the methology focuses on the creation of both the //global state// 
 }}}
 [img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_global.png]]</pre>
 </div>
-<div title="SMD - Global state - Plan" creator="Designer" modifier="Designer" created="201402031014" modified="201402031205" changecount="13">
+<div title="SMD - Global state - Plan" creator="Designer" modifier="Designer" created="201402031014" modified="201402031657" changecount="14">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Perception]]  {{stepTitle{Global state - foreword}}}  [[next step &gt;&gt;|SMD - Global state model]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Global state - Introduction]]&gt;&gt;
 !Specifying the global state revision process of an agent class
+[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline5.png]]
 The specification of the global state revision process of an agent relies on the implementation of two distinct elements:
 *A class modeling the global state of the agent;
 *A method of the {{{IAgent}}} interface determining how the global state model is updated, using its previous value and the lastly perceived data from all the levels where the agent lies;
@@ -3310,7 +3391,7 @@ The implementation of this method usually consists in:
 {{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractGlobalMemoryState}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
 === providing a default implementation to this method.}}}</pre>
 </div>
-<div title="SMD - Global state revision" creator="Designer" modifier="Designer" created="201402031337" modified="201402031432" changecount="13">
+<div title="SMD - Global state revision" creator="Designer" modifier="Designer" created="201402031337" modified="201402031702" changecount="17">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state model]]  {{stepTitle{Global state revision model}}}  [[next step &gt;&gt;|SMD - Decision]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Global state revision - Intro]]&gt;&gt;
@@ -3360,12 +3441,12 @@ Then the implementation of the global state revision process of the ''test subje
 
 {{focusemphasisblock{This step of the methology focuses on the creation of the global state revision process of each agent.}}}</pre>
 </div>
-<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402031430" changecount="17">
+<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402031657" changecount="21">
 <pre>In the micro-kernel of SIMILAR, the global state revision process is modeled by the following method of the {{{IAgent}}} interface:
 {{{
 void reviseMemory( 
-	Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt; perceivedData, 
-	IGlobalMemoryState globalState
+    Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt; perceivedData, 
+    IGlobalMemoryState globalState
 );
 }}}
 This method defines two parameters:

@@ -77,8 +77,9 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMe
  * </p>
  * <ul>
  * 	<li>
- * 		The same data can appear in different levels using different forms. For instance a the total number of agents, 
- * 		and the number of agents per category. In this case, it becomes difficult to tell if the number of agents per category should be
+ * 		The same data can be used in the bahavior of the agent in different levels using different forms. 
+ * 		For instance a the total number of agents (for a level), 
+ * 		and the number of agents per category (for the other). In this case, it becomes difficult to tell if the number of agents per category should be
  * 		placed in a global dynamic state and if the total number of agents should be computed using the memorized data, or if the data should
  * 		appear in the private local state of the different levels of the agent.
  * 	</li>

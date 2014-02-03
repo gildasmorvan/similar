@@ -1,4 +1,4 @@
-package fr.lgi2a.mysimulation.model;
+package fr.lgi2a.mysimulation.tools;
 
 /**
  * Defines the random value generation methods that can be used in this simulation.

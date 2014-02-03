@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="agtBehavior.svg"
-   inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentBehaviorModel_perception.png"
+   inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentBehaviorModel_global.png"
    inkscape:export-xdpi="143.35631"
    inkscape:export-ydpi="143.35631">
   <defs
@@ -92,7 +92,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="484.13714"
+     inkscape:cx="397.87011"
      inkscape:cy="-55.155828"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
@@ -745,7 +745,7 @@
   </g>
   <g
      transform="translate(13.1875,-91.34375)"
-     style="display:inline"
+     style="display:none"
      inkscape:label="Perception"
      id="g3030"
      inkscape:groupmode="layer">
@@ -837,7 +837,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Global state"
-     style="display:none">
+     style="display:inline">
     <rect
        style="fill:#c3ffc3;fill-opacity:1;stroke:#008000;stroke-width:2.79899955;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect4216"

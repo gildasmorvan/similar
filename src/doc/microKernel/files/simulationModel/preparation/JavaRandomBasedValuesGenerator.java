@@ -1,4 +1,4 @@
-package fr.lgi2a.mysimulation.model;
+package fr.lgi2a.mysimulation.tools;
 
 import java.util.Random;
 

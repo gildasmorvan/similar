@@ -183,9 +183,9 @@ public interface IAgent {
 	 * 	TODO formal notation
 	 * </p>
 	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
-	 * @param memoryState The previous value of the global memory state of the agent being updated by this method call.
+	 * @param globalState The previous value of the global memory state of the agent being updated by this method call.
 	 */
-	void reviseMemory( Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData, IGlobalMemoryState memoryState );
+	void reviseMemory( Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData, IGlobalMemoryState globalState );
 	
 	/**
 	 * Produces the influences resulting from the decisions of an agent from a specific level.

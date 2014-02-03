@@ -70,6 +70,9 @@
 	    <fileSet>
 	      <directory>../src/doc</directory>
 	      <outputDirectory>/docs</outputDirectory>
+	      <excludes>
+	      	<exclude>../src/doc/src/</exclude>
+	      </excludes>
 	    </fileSet>
             
         <!-- Add the javadoc to the documentation -->

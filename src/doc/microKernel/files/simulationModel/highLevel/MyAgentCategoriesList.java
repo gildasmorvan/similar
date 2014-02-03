@@ -3,7 +3,7 @@ package fr.lgi2a.mysimulation.model.agents;
 import fr.lgi2a.similar.microkernel.AgentCategory;
 
 /**
- * The list of levels of my awesome simulation.
+ * The list of agent categories of my awesome simulation.
  */
 public class MyAgentCategoriesList {
 	/**

@@ -14,9 +14,19 @@ public class WildlifeAgentCategoriesList {
 	protected WildlifeAgentCategoriesList ( ){ }
 
 	/**
-	 * The "Animal" agent category.
+	 * The "Lion" agent category.
 	 */
-	public static final AgentCategory ANIMAL = new AgentCategory( "Animal" );
+	public static final AgentCategory LION = new AgentCategory( "Lion" );
+
+	/**
+	 * The "Vulture" agent category.
+	 */
+	public static final AgentCategory VULTURE = new AgentCategory( "Vulture" );
+
+	/**
+	 * The "Gazelle" agent category.
+	 */
+	public static final AgentCategory GAZELLE = new AgentCategory( "Gazelle" );
 
 	/**
 	 * The "Poacher" agent category.

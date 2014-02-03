@@ -3,15 +3,14 @@ package fr.lgi2a.wildlifesimulation.model.agents.lion.savannah;
 import java.awt.geom.Point2D;
 
 import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractPublicLocalStateOfAgent;
 import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
- * The public local state of an agent from the "Lion" category in the 
-  * level identified by "Savannah".
+ * The public local state of an agent from the "Lion" category in the level 
+ * identified by "Savannah".
  */
-public class PLSAgtLionInSavannahLevel implements IPublicLocalStateOfAgent {
+public class AgtLionPLSInSavannahLevel2 extends AbstractPublicLocalStateOfAgent {
 	/**
 	 * Builds an initialized instance of this public local state.
 	 * @param owner The agent owning this public local state. This value cannot 
@@ -22,51 +21,19 @@ public class PLSAgtLionInSavannahLevel implements IPublicLocalStateOfAgent {
 	 * cannot be negative.
 	 * @throws IllegalArgumentException If an argument had an inappropriate value.
 	 */
-	public PLSAgtLionInSavannahLevel(
+	public AgtLionPLSInSavannahLevel2(
 		IAgent owner,
 		double initialX,
 		double initialY,
 		long initialAge
 	){
-		if( owner == null ){
-			throw new IllegalArgumentException( 
-				"The owner of the public local state cannot be null." 
-			);
-		} else {
-			this.owner = owner;
-		}
+		super( 
+			WildlifeLevelList.SAVANNAH, 
+			owner 
+		);
 		this.coordinates = new Point2D.Double( );
 		this.setCoordinates( initialX, initialY );
 		this.setAge( initialAge );
-	}
-
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //   //
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //   //
-	// // 
-	// //   Generic methods of the public local state
-	// //
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //   //
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //   //
-
-	/**
-	 * The agent owning this public local state.
-	 */
-	private IAgent owner;
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public LevelIdentifier getLevel() {
-		return WildlifeLevelList.SAVANNAH;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public IAgent getOwner() {
-		return this.owner;
 	}
 
 	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //   //

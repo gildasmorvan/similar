@@ -71,7 +71,7 @@ public interface IDynamicStateMap {
 	 * @param level The level of the dynamic state.
 	 * @return The dynamic state of the level.
 	 * @throws IllegalArgumentException If the argument is <code>null</code>.
-	 * @throws java.util.NoSuchElementException If the <code>level</code> level is not in this map.
+	 * @throws java.util.NoSuchElementException If the <code>level</code> identifier is not a key in this map.
 	 */
 	IPublicLocalDynamicState get( LevelIdentifier level );
 	

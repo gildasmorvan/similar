@@ -334,13 +334,11 @@ public class PhysicalLevel extends AbstractLevel {
 		AgtCitizenPLSPhysical experimentSubject = influence.getExperimentSubject();
 		AgtAlien alienAgent = influence.getAlienAgent();
 		SystemInfluenceAddPublicLocalStateToDynamicState addInfluence = new SystemInfluenceAddPublicLocalStateToDynamicState( 
-				ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL, 
 				new AgtAlienPLSPhysical( alienAgent, experimentSubject.getAddress(), experimentSubject )
 		);
 		remainingInfluences.add( addInfluence );
 		// The agent is then removed from the 'space' level. This operation is also done by creating the appropriate system influence.
 		SystemInfluenceRemovePublicLocalStateFromDynamicState rmInfluence = new SystemInfluenceRemovePublicLocalStateFromDynamicState(
-				ConceptsSimulationLevelIdentifiers.SPACE_LEVEL, 
 				alienAgent.getPublicLocalState( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL )
 		);
 		remainingInfluences.add( rmInfluence );
@@ -363,13 +361,11 @@ public class PhysicalLevel extends AbstractLevel {
 		// The agent is first added to the 'space' level. This operation is done by creating the appropriate system influence.
 		AgtAlien alienAgent = influence.getAlienAgent();
 		SystemInfluenceAddPublicLocalStateToDynamicState addInfluence = new SystemInfluenceAddPublicLocalStateToDynamicState( 
-				ConceptsSimulationLevelIdentifiers.SPACE_LEVEL, 
 				new EmptyPublicLocalStateOfAgent( ConceptsSimulationLevelIdentifiers.SPACE_LEVEL, alienAgent )
 		);
 		remainingInfluences.add( addInfluence );
 		// The agent is then removed from the 'physical' level. This operation is also done by creating the appropriate system influence.
 		SystemInfluenceRemovePublicLocalStateFromDynamicState rmInfluence = new SystemInfluenceRemovePublicLocalStateFromDynamicState(
-				ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL, 
 				alienAgent.getPublicLocalState( ConceptsSimulationLevelIdentifiers.PHYSICAL_LEVEL )
 		);
 		remainingInfluences.add( rmInfluence );

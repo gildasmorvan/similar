@@ -47,7 +47,6 @@
 package fr.lgi2a.similar.microkernel.influences.system;
 
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
 
 /**
@@ -76,21 +75,34 @@ public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfl
 	 */
 	private IPublicLocalStateOfAgent publicLocalState;
 	
+	
+	/**
+	 * Checks the validity of the <code>publicLocalState</code> parameter of the constructor.
+	 * @param publicLocalState The parameter of the constructor.
+	 */
+	private static IPublicLocalStateOfAgent checkParameterValidity( 
+			IPublicLocalStateOfAgent publicLocalState 
+	) {
+		if( publicLocalState == null ){
+			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
+		} else {
+			return publicLocalState;
+		}
+	}
+	
 	/**
 	 * Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the 
 	 * dynamic state of a specific level during the next reaction of that level.
-	 * @param targetLevel The target level of the influence, as defined in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}.
 	 * @param publicLocalState The public local state to add to the public dynamic local state of the level.
-	 * @throws IllegalArgumentException If the target level or the public local state are <code>null</code>.
+	 * @throws IllegalArgumentException If the public local state is <code>null</code>.
 	 */
 	public SystemInfluenceAddPublicLocalStateToDynamicState( 
-			LevelIdentifier targetLevel, 
 			IPublicLocalStateOfAgent publicLocalState 
 	) {
-		super( CATEGORY, targetLevel );
-		if( publicLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
-		}
+		super( 
+			CATEGORY, 
+			checkParameterValidity( publicLocalState ).getLevel() 
+		);
 		this.publicLocalState = publicLocalState;
 	}
 

@@ -147,7 +147,7 @@ public final class LearningInfluenceCopier {
 			) );
 		}
 		LearningPublicLocalStateOfAgent castedState = (LearningPublicLocalStateOfAgent) castedInfluence.getPublicLocalState();
-		return new SystemInfluenceAddPublicLocalStateToDynamicState( castedState.getLevel(), castedState.createCopy() );
+		return new SystemInfluenceAddPublicLocalStateToDynamicState( castedState.createCopy() );
 	}
 	
 	/**
@@ -180,6 +180,6 @@ public final class LearningInfluenceCopier {
 			) );
 		}
 		LearningPublicLocalStateOfAgent castedState = (LearningPublicLocalStateOfAgent) castedInfluence.getPublicLocalState();
-		return new SystemInfluenceRemovePublicLocalStateFromDynamicState( castedState.getLevel(), castedState.createCopy() );
+		return new SystemInfluenceRemovePublicLocalStateFromDynamicState( castedState.createCopy() );
 	}
 }

@@ -2477,6 +2477,50 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
+<div title="SMD - Agent creation" creator="Designer" modifier="Designer" created="201402041344" modified="201402041414" changecount="21">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Decision]]  {{stepTitle{Creating agent instances}}}  [[next step &gt;&gt;|SMD - Natural]]
+----}}}
+&lt;&lt;tiddler [[SMD - Agent creation - Intro]]&gt;&gt;
+!Structure of an agent factory
+&lt;&lt;tiddler [[SMD - Agent creation - Structure]]&gt;&gt;
+!Creating an agent factory
+&lt;&lt;tiddler [[SMD - Agent creation - Creation]]&gt;&gt;
+!Using an agent factory
+&lt;&lt;tiddler [[SMD - Agent creation - Usage]]&gt;&gt;
+
+{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Natural]]}}}
+{{guidelinesNavMenu{
+----
+[[&lt;&lt; previous step|SMD - Decision]]  {{stepTitle{Creating agent instances}}}  [[next step &gt;&gt;|SMD - Natural]]}}}</pre>
+</div>
+<div title="SMD - Agent creation - Creation" creator="Designer" modifier="Designer" created="201402041413" modified="201402041416" changecount="2">
+<pre>The agent factory usually takes the form of a class using the //factory// design pattern storing the instance of the parameter class as a static value.</pre>
+</div>
+<div title="SMD - Agent creation - Intro" creator="Designer" modifier="Designer" created="201402041412" modified="201402041413" changecount="2">
+<pre>We strongly recommend designers to keep from using directly the constructor of the agents to create new agents. Indeed:
+*The [[parameters class|SMD - Tools preparation - Parameters]] of the simulation is more difficult to use in that context, since a reference to the parameters has to be available;
+*The addition of new initialization profiles for the agents implies the modification of the agent class. It implies the addition of new constructors to the agent class. Therefore, the more initialization profiles are defined, the more unreadable the class of the agent becomes.
+Instead, agents are created using a factory, embodying ''one'' initialization profile.
+
+[img(100%,)[images/simulationModel/lowLevel/agentFactoryPrinciple.png]]</pre>
+</div>
+<div title="SMD - Agent creation - Structure" creator="Designer" modifier="Designer" created="201402041413" modified="201402041419" changecount="7">
+<pre>The initialization profile defined in an agent factory is characterized by:
+*Some parameters coming from the [[parameters class|SMD - Tools preparation - Parameters]] of the simulation;
+*Other parameters coming from the context of the construction of the agent; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance the current density of a specific agent population in the simulation, the current value of a private local state of an agent, etc.
+}}} ===
+
+*The way these parameters are used to:
+**Call the constructor of the agent (to initialize the private local state of the agent);
+**Create the initial global state of the agent;
+**Create the initial public local states of the agent;
+An agent is then created by the factory only by calling the factory method, and providing a value to the context dependent parameters.</pre>
+</div>
+<div title="SMD - Agent creation - Usage" creator="Designer" modifier="Designer" created="201402041414" changecount="1">
+<pre>Type the text for 'New Tiddler'</pre>
+</div>
 <div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201401241353" changecount="46">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Agents identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]
 ----}}}
@@ -3038,7 +3082,7 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 *A ''decision'' process for each level of the agent.
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
-<div title="SMD - Decision" creator="Designer" modifier="Designer" created="201402031641" modified="201402031705" changecount="11">
+<div title="SMD - Decision" creator="Designer" modifier="Designer" created="201402031641" modified="201402041344" changecount="12">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Decision - Introduction]]&gt;&gt;
@@ -3054,8 +3098,47 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 ----
 [[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]}}}</pre>
 </div>
-<div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" changecount="1">
-<pre>Type the text for 'New Tiddler'</pre>
+<div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" modified="201402041339" changecount="14">
+<pre>The implementation of this method consists in:
+*Identifying the level from which the decisions are made;
+*Casting the global state of the agent in the appropriate class, to access its various data;
+*Casting the perceived data of the agent in the appropriate class, to access its various data;
+*Creating influences based on the read information, and adding them to the {{{producedInfluences}}} map;
+During the redaction of the decision process, the information required by the decisions can become clearer. Therefore, this step will likely lead to the revision of:
+*The [[perceived data|SMD - Perception - Perceived data]] necessary to perform the decisions;
+*The [[perception process|SMD - Perception]] as a side effect of the revision of the perceived data;
+*The data from the [[global state|SMD - Global state model]] that are necessary to perform the decisions;
+*The [[global state revision process|SMD - Global state revision]] as a side effect of the revision of the global state;
+*The [[regular influences|SMD - Influences skeleton]] produced by the decisions: it can lead either to the addition of new metadata to existing regular influences, or the creation of new regular influences;
+*The [[influence relation graph|SMD - Level skeleton]]: new levels can be added to the levels that can be influenced by the level from which the decision is made;
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Decision process full example&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the example started in the documentation of the [[perceived data model|SMD - Perception - Perceived data]].
+In this example, a ''lion'' agent decides to ''eat'' the closest ''gazelle'' agent. If the agent is close enough, it directly eats the gazelle. Otherwise, it ''moves towards'' the gazelle. Note that if two gazelles are at the same distance, then the agent chooses one of them randomly.
+!Code
+We assume that the following influences are defined:
+*The ''eat'' influence is implemented as the {{{RISavannahEat}}} class, defining a constructor having the following signature:
+{{{
+public RISavannahEat( 
+	AgtLionPLSInSavannahLevel predator, 
+	AgtGazellePLSInSavannahLevel prey 
+)
+}}}
+*The ''move towards'' influence is implemented as the {{{RISavannahMove}}} class, defining a constructor having the following signature:
+{{{
+public RISavannahMove( 
+	AgtLionPLSInSavannahLevel predator,
+	double desiredX,
+	double desiredY
+)
+}}}
+We also assume that the [[random number generation class|SMD - Tools preparation - Random]] provides the following tool method getting a random element within a list:
+{{{
+public &lt;T&gt; T randomElement( List&lt;T&gt; list );
+}}}
+The implementation of such a decision process of the ''lion'' agent from the ''Savannah'' level corresponds to the following code. The sources of this class are also available in a [[stand alone file|files/simulationModel/lowLevel/AgtLion2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/AgtLion2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
 </div>
 <div title="SMD - Decision - Introduction" creator="Designer" modifier="Designer" created="201402031647" modified="201402031649" changecount="2">
 <pre>The behavior of an agent is defined by three different steps (see the image):
@@ -3067,7 +3150,7 @@ This step of the methology focuses on the implementation of the //decision phase
 }}}
 [img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_decision.png]]</pre>
 </div>
-<div title="SMD - Decision - Specifications" creator="Designer" modifier="Designer" created="201402031705" modified="201402031726" changecount="11">
+<div title="SMD - Decision - Specifications" creator="Designer" modifier="Designer" created="201402031705" modified="201402041206" changecount="29">
 <pre>[&gt;img(45%,)[images\simulationModel\lowLevel\agentDesignOutline6.png]]
 In the micro-kernel of SIMILAR, the decision process is modeled by the following method of the {{{IAgent}}} interface:
 {{{
@@ -3078,33 +3161,72 @@ public void decide(
 	InfluencesMap producedInfluences
 );
 }}}
-@@display:block;clear:right;@@
+
+
 This method defines the following parameters:
 *The {{{level}}} parameter corresponds to the identifier of the level from which the decision is made;
 *The {{{globalState}}} parameter corresponds to the revised global state of the agent on which the decisions are based;
 *The {{{perceivedData}}} parameter corresponds to the perceived data, on which the decisions are based;
-*The {{{producedInfluences}}} parameter models where the influences produced by the decisions of the agents are stored. Basically, it corresponds to the value returned by the decision application presented above;
-!!Influences
+*The {{{producedInfluences}}} parameter models where the influences produced by the decisions of the agents are stored. Basically, it corresponds to the value returned by the decision application presented above; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+The {{{InfluencesMap}}} is a data structure that was created mainly for engine design purposes. From the point of view of the decision process, only the following addition methods are put to use:
+*A method adding one influence to the data structure; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection {
+This method has the following signature:
+{{{
+public void add( IInfluence influence );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Adds an influence to this influence map.
+
+''Parameters:''
+*''Parameter (//influence//):'' The influence to add to this influence map.
+''Throws:''
+*''IllegalArgumentException:'' If the {{{influence}}} parameter was {{{null}}}.
+}}}
+}}} ===
+
+*A method adding a collection of influences to the data structure; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsubsection {
+This method has the following signature:
+{{{
+public void addAll( Collection&lt;IInfluence&gt; toAdd );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Adds all the influences contained in a collection of influences into this influence map.
+
+Note that if this influence map was already containing elements of the added influences, these influence will be present twice in this map.
+
+''Parameters:''
+*''Parameter (//toAdd//):'' The collection which content has to be added to this influence map.
+''Throws:''
+*''IllegalArgumentException:'' If the {{{toAdd}}} argument is {{{null}}}.
+}}}
+}}} ===
+
+}}} ===
+
 The influences added to the {{{producedInfluences}}} set can either be the influences defined during the [[influence creation step|SMD - Influences skeleton]], or the following system influences:
-*Addition of an agent to the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*An influence ''adding'' an agent ''to the simulation''; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection {
-Prerequisite: agent fully initialized;
-Consequence: cascade of agent addition influences to levels. Managed during the respective reaction of the levels.
+&lt;&lt;tiddler [[System influence - Adding an agent to the simulation]]&gt;&gt;
 }}} ===
 
-*Removal of an agent from the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*An influence ''removing'' an agent ''from the simulation''; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection {
-Consequence: cascade of agent removal influences from levels. Managed during the respective reaction of the levels.
+&lt;&lt;tiddler [[System influence - Removing an agent from the simulation]]&gt;&gt;
 }}} ===
 
-*Addition of an agent to a level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*An influence ''adding'' an agent ''to a level''; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection {
-Prerequisite: agent having a public local state defined for that level;
+&lt;&lt;tiddler [[System influence - Adding an agent to a level]]&gt;&gt;
 }}} ===
 
-*Removal of an agent from a level. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*An influence ''removing'' an agent ''from a level''. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection {
-Consequence: public local state not listed in the dynamic state;
+&lt;&lt;tiddler [[System influence - Removing an agent from a level]]&gt;&gt;
 }}} ===</pre>
 </div>
 <div title="SMD - Decision - Structure" creator="Designer" modifier="Designer" created="201402031705" modified="201402031714" changecount="8">
@@ -3407,12 +3529,15 @@ The implementation of this method usually consists in:
 ----
 [[&lt;&lt; previous step|SMD - Global state model]]  {{stepTitle{Global state revision model}}}  [[next step &gt;&gt;|SMD - Decision]]}}}</pre>
 </div>
-<div title="SMD - Global state revision - Creation" creator="Designer" modifier="Designer" created="201402031432" modified="201402031629" changecount="21">
+<div title="SMD - Global state revision - Creation" creator="Designer" modifier="Designer" created="201402031432" modified="201402041205" changecount="22">
 <pre>The implementation of this method consists in:
 *Casting the global state of the agent in the appropriate class, to read or write data from it;
 *Getting the perceived data of the relevant levels;
 *Casting the perceived data in the appropriate class, to read data from it;
 *Modifying the global state according to the information being read, in accordance with the revision model;
+During the redaction of the global state revision process, the information required by the revision can become clearer. Therefore, this step will likely lead to the revision of:
+*The [[perceived data|SMD - Perception - Perceived data]] necessary to perform the revision.
+*The [[perception process|SMD - Perception]] as a side effect of the revision of the perceived data;
 +++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Global state revision process full example&lt;/span&gt;]
 {{exsection{
 [&gt;img(30%,)[images/simulationModel/lowLevel/globalStateRevisionTree.png]]
@@ -3441,7 +3566,7 @@ Then the implementation of the global state revision process of the ''test subje
 
 {{focusemphasisblock{This step of the methology focuses on the creation of the global state revision process of each agent.}}}</pre>
 </div>
-<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402031657" changecount="21">
+<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402041205" changecount="25">
 <pre>In the micro-kernel of SIMILAR, the global state revision process is modeled by the following method of the {{{IAgent}}} interface:
 {{{
 void reviseMemory( 
@@ -4120,13 +4245,18 @@ This example illustrates the full directory structure of a plane traffic simulat
 ----
 [[&lt;&lt; previous step|SMD - Perception - Plan]]  {{stepTitle{Perception}}}  [[next step &gt;&gt;|SMD - Global state - Plan]]}}}</pre>
 </div>
-<div title="SMD - Perception - Creation" creator="Designer" modifier="Designer" created="201402030724" modified="201402031434" changecount="18">
+<div title="SMD - Perception - Creation" creator="Designer" modifier="Designer" created="201402030724" modified="201402041224" changecount="23">
 <pre>The implementation of this method consists in:
 *Identifying the level from which the perception is made;
 *Casting the public local state of the agent in the appropriate class, to access its various data;
 *Getting the local dynamic state of the relevant levels;
 *Getting and casting the public local state of the environment in each level, to access its various data;
 *Getting and casting the public local state of the agents in each level, to access their various data;
+*Creating the perceived data and initializing its content;
+During the redaction of the perception process, the information from the public local states that are required by the perception can become clearer. Therefore, this step will likely lead to the revision of:
+*The [[public local state|SMD - Public local states]] of the agent or of the perceived agents;
+*The [[public local state|SMD - Public local states]] of the environment;
+*The [[perception relation graph|SMD - Level skeleton]]: new levels can be added to the levels that can be perceived by the level from which the perception is made;
 +++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Perception process full example&lt;/span&gt;]
 {{exsection{
 This example is a continuation of the example started in the documentation of the [[perceived data model|SMD - Perception - Perceived data]].
@@ -6269,6 +6399,104 @@ ul.suckerfish.vertical li:hover ul li, ul.suckerfish.vertical li.sfhover ul li {
 
 /***** END LAYOUT AND APPEARANCE: VERTICAL *****/
 /*}}}*/</pre>
+</div>
+<div title="System influence - Adding an agent to a level" creator="Designer" modifier="Designer" created="201402040835" modified="201402040905" changecount="5">
+<pre>The addition of an agent to the simulation is done using the {{{SystemInfluenceAddPublicLocalStateToDynamicState}}} system influence from the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
+
+The influence requires the agent to define the added public local state: a call to the {{{getPublicLocalState( ... )}}} method of the agent must return a valid value for that level.
+!Specifications
+Such an influence is created using the following constructor:
+{{{
+public SystemInfluenceAddPublicLocalStateToDynamicState( 
+	IPublicLocalStateOfAgent publicLocalState 
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the dynamic state of a specific level during the next reaction of that level.
+
+''Parameters:''
+*''Parameter (//publicLocalState//):'' The public local state to add to the public dynamic local state of the level.
+''Throws:''
+*''IllegalArgumentException:'' If the target level or the public local state are {{{null}}}.
+}}}
+!Important notes
+Note that:
+*The addition of the public local state of the agent will be effective after the next reaction of the level for which the public local state is declared.</pre>
+</div>
+<div title="System influence - Adding an agent to the simulation" creator="Designer" modifier="Designer" created="201402040733" modified="201402040830" changecount="16">
+<pre>The addition of an agent to the simulation is done using the {{{SystemInfluenceAddAgent}}} system influence from the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
+
+This influence requires the added agent to be ''fully initialized''. This means that:
+*The global state of the agent has to be initialized;
+*The public local states of the agent have to +++^34em^*@[be defined]//i.e.// a call to the {{{getPublicLocalState( ... )}}} method of the agent must return a valid value for each level.=== for each level where the agent initially lies.
+!Specifications
+Such an influence is created using the following constructor:
+{{{
+public SystemInfluenceAddAgent(
+	LevelIdentifier targetLevel,
+	IAgent agent
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
+
+''Parameters:''
+*''Parameter (//targetLevel//):'' The target level as described in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface.
+*''Parameter (//agent//):'' The agent to add to the simulation.
+''Throws:''
+*''IllegalArgumentException:'' If the target level or the agent are {{{null}}}.
+}}}
+!Important notes
+Note that:
+*The {{{target level}}} of the influence defines when the public local states of the agent will begin to appear in the dynamic state of their respective levels: during the reaction of their respective levels occurring at the same time or after the reaction of {{{target level}}};
+*The reaction of this influence consists in creating a //&quot;public local state addition&quot;// influence for each public local state of the agent. These influences are processed either immediately if the level of the public local state is currently computing a reaction or during the next reaction of that level;
+*If this influence is used on an agent already lying in the simulation, this influence will the public local states of the agent to their corresponding level, if they are not already present in the dynamic state of the level.</pre>
+</div>
+<div title="System influence - Removing an agent from a level" creator="Designer" modifier="Designer" created="201402040835" modified="201402041146" changecount="6">
+<pre>The removal of an agent from a level is done using the {{{SystemInfluenceRemovePublicLocalStateFromDynamicState}}} system influence from the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
+!Specifications
+Such an influence is created using the following constructor:
+{{{
+public SystemInfluenceRemovePublicLocalStateFromDynamicState( 
+	IPublicLocalStateOfAgent publicLocalState 
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Builds a 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the dynamic state of a specific level during the next reaction of that level.
+
+''Parameters:''
+*''Parameter (//publicLocalState//):'' The public local state to remove from the public local dynamic state of the level.
+''Throws:''
+*''IllegalArgumentException:'' If the public local state is {{{null}}}.
+}}}</pre>
+</div>
+<div title="System influence - Removing an agent from the simulation" creator="Designer" modifier="Designer" created="201402040835" modified="201402040845" changecount="6">
+<pre>The removal of an agent from the simulation is done using the {{{SystemInfluenceRemoveAgent}}} system influence from the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
+!Specifications
+Such an influence is created using the following constructor:
+{{{
+public SystemInfluenceRemoveAgent( 
+	LevelIdentifier targetLevel, 
+	IPublicLocalStateOfAgent publicLocalStateOfAgent 
+)
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
+
+''Parameters:''
+*''Parameter (//targetLevel//):'' The target level as described in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface.
+*''Parameter (//publicLocalStateOfAgent//):'' A public local state of the agent to remove from the simulation.
+''Throws:''
+*''IllegalArgumentException:'' If the target level or the agent are {{{null}}}.
+}}}
+!Important notes
+Note that:
+*The {{{target level}}} of the influence defines when the public local states of the agent will begin to disappear from the dynamic state of their respective levels: during the reaction of their respective levels occurring at the same time or after the reaction of {{{target level}}};
+*The reaction of this influence consists in creating a //&quot;public local state removal&quot;// influence for each public local state of the agent. These influences are processed either immediately if the level of the public local state is currently computing a reaction or during the next reaction of that level.</pre>
 </div>
 <div title="TagsTreeStyleSheet" creator="Designer" modifier="Designer" created="201311150935" tags="excludeLists" changecount="1">
 <pre>/*{{{*/

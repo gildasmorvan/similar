@@ -100,6 +100,11 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedDataOfAgent;
  * 	the general algorithm of SIMILAR, to favor the execution of more efficient simulations: the algorithm performs less calls to the 
  * 	perception method and to the disambiguation operator.
  * </p>
+ * <p>
+ * 	This simulation engine assumes that no conflicts occurs between system influences (<i>e.g.</i> no reaction model has to 
+ * 	manage during the same reaction both the addition and the removal of a public dynamic state). If such a case happens, then the simulation
+ * 	results are likely to become inconsistent.
+ * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
@@ -980,7 +985,6 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 		IAgent agentToAdd = systemInfluence.getAgent( );
 		for( LevelIdentifier levelId : agentToAdd.getLevels() ){
 			producedInfluences.add( new SystemInfluenceAddPublicLocalStateToDynamicState( 
-					levelId,
 					agentToAdd.getPublicLocalState( levelId ) 
 			) );
 		}
@@ -1020,7 +1024,6 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 		IAgent agentToRemove = systemInfluence.getAgent( );
 		for( LevelIdentifier levelId : agentToRemove.getLevels() ){
 			producedInfluences.add( new SystemInfluenceRemovePublicLocalStateFromDynamicState( 
-					levelId,
 					agentToRemove.getPublicLocalState( levelId ) 
 			) );
 		}

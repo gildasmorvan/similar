@@ -199,7 +199,7 @@ public final class InfluencesMap {
 	 * 	Note that if this influence map was already containing elements of the added influences, these influence 
 	 * 	will be present twice in this map.
 	 * </p>
-	 * @param toAdd The influence map which content has to be added to this influence map.
+	 * @param toAdd The collection which content has to be added to this influence map.
 	 * @throws IllegalArgumentException If the <code>toAdd</code> argument is <code>null</code>.
 	 */
 	public void addAll( Collection<IInfluence> toAdd ) {

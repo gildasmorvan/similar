@@ -2496,9 +2496,10 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="SMD - Agent creation" creator="Designer" modifier="Designer" created="201402041344" modified="201402051049" changecount="28">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Decision]]  {{stepTitle{Creating agent instances}}}  [[next step &gt;&gt;|SMD - Natural]]
-----}}}
+<div title="SMD - Agent creation" creator="Designer" modifier="Designer" created="201402041344" modified="201402051401" changecount="36">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the agent initialization profiles}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Decision]]  |  [[next step &gt;&gt;|SMD - Natural]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Agent creation - Intro]]&gt;&gt;
 !Structure of an agent factory
 &lt;&lt;tiddler [[SMD - Agent creation - Structure]]&gt;&gt;
@@ -2506,11 +2507,7 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;&lt;tiddler [[SMD - Agent creation - Specifications]]&gt;&gt;
 !Creating an agent factory
 &lt;&lt;tiddler [[SMD - Agent creation - Creation]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Natural]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Decision]]  {{stepTitle{Creating agent instances}}}  [[next step &gt;&gt;|SMD - Natural]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Natural]]}}}</pre>
 </div>
 <div title="SMD - Agent creation - Creation" creator="Designer" modifier="Designer" created="201402041413" modified="201402051016" changecount="21">
 <pre>The agent factory class has to:
@@ -2682,9 +2679,10 @@ An agent is created with such factories by calling one of its factory methods an
 
 [img(100%,)[images/simulationModel/lowLevel/agentFactoryPrinciple.png]]</pre>
 </div>
-<div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201401241353" changecount="46">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Agents identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]
-----}}}
+<div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201402051357" changecount="49">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Identification of the agents}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Levels identification]]  |  [[next step &gt;&gt;|SMD - Level skeleton]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The second concrete step in the design of the simulation model is the identification of the agents participating in the simulation. In this step, no precise knowledge about the agents is necessary. The only important point here is to ''identify the existence of the agents, and give them a unique category''^^''1''^^.
 
 Once the agent categories are known, the user can create a class summing up these information.
@@ -2759,15 +2757,12 @@ if( MyAgentCategoriesList.CAR.equals( state.getOwner( ).getCategory( ) ) ){
 }}}
 }}} ===
 
-\({}_{}\)
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Level skeleton]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Agents identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Level skeleton]]}}}</pre>
 </div>
-<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201401241041" changecount="77">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Environment skeleton]]  {{stepTitle{Agents skeleton}}}  [[next step &gt;&gt;|SMD - Time model]]
-----}}}
+<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201402051358" changecount="80">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the agents}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Environment skeleton]]  |  [[next step &gt;&gt;|SMD - Time model]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The agents of the simulation also rely on an incremental design process. Therefore, a skeleton has to be defined for them before going for the operational code of the simulation.
 
 {{focusemphasisblock{
@@ -2776,11 +2771,7 @@ This step focuses on the creation of a skeleton class for each agent that was id
 &lt;&lt;tiddler [[SMD - Agents skeleton - Structure]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Agents skeleton - Create class]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Time model]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Environment skeleton]]  {{stepTitle{Agents skeleton}}}  [[next step &gt;&gt;|SMD - Time model]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Time model]]}}}</pre>
 </div>
 <div title="SMD - Agents skeleton - Create class" creator="Designer" modifier="Designer" created="201401221555" modified="201401301205" changecount="32">
 <pre>!Creating an agent class in SIMILAR
@@ -3237,9 +3228,10 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 *A ''decision'' process for each level of the agent.
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
-<div title="SMD - Decision" creator="Designer" modifier="Designer" created="201402031641" modified="201402051051" changecount="14">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]
-----}}}
+<div title="SMD - Decision" creator="Designer" modifier="Designer" created="201402031641" modified="201402051401" changecount="18">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the decision}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state revision]]  |  [[next step &gt;&gt;|SMD - Agent creation]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Decision - Introduction]]&gt;&gt;
 !Structure of the decision process 
 &lt;&lt;tiddler [[SMD - Decision - Structure]]&gt;&gt;
@@ -3247,11 +3239,7 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 &lt;&lt;tiddler [[SMD - Decision - Specifications]]&gt;&gt;
 !Writing the decision phase of an agent class
 &lt;&lt;tiddler [[SMD - Decision - Creation]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Agent creation]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Agent creation]]}}}</pre>
 </div>
 <div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" modified="201402051054" changecount="17">
 <pre>The implementation of this method consists in:
@@ -3396,9 +3384,10 @@ The influences resulting from this phase can be:
 **The addition of an agent to a level;
 **The removal of an agent from a level.</pre>
 </div>
-<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201401241537" changecount="53">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Level skeleton]]  {{stepTitle{Environment skeleton}}}  [[next step &gt;&gt;|SMD - Agents skeleton]]
-----}}}
+<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201402051358" changecount="56">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the environment}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Level skeleton]]  |  [[next step &gt;&gt;|SMD - Agents skeleton]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The environment of the simulation also relies on an incremental design process. Therefore, a skeleton has to be defined for it before going for the operational code of the simulation.
 
 {{focusemphasisblock{
@@ -3524,11 +3513,7 @@ The following code illustrates the implementation of the environment using both 
 
 }}} ===
 
-\({}_{}\)
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Agents skeleton]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Level skeleton]]  {{stepTitle{Environment skeleton}}}  [[next step &gt;&gt;|SMD - Agents skeleton]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Agents skeleton]]}}}</pre>
 </div>
 <div title="SMD - Environment skeleton - Public local states" creator="Designer" modifier="Designer" created="201401221036" changecount="1">
 <pre>To facilitate the design of simulations where the initial state of the simulation can easily be changed, we advise users to avoid creating the public local states of the environment during its construction. Indeed, having different initialization process for the environment would require the definition of a constructor per initialization process. This goes against the best practices in object oriented engineering.
@@ -3550,23 +3535,21 @@ This step of the methology focuses on the creation of both the //global state// 
 }}}
 [img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_global.png]]</pre>
 </div>
-<div title="SMD - Global state - Plan" creator="Designer" modifier="Designer" created="201402031014" modified="201402050722" changecount="15">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Perception]]  {{stepTitle{Global state - foreword}}}  [[next step &gt;&gt;|SMD - Global state model]]
-----}}}
+<div title="SMD - Global state - Plan" creator="Designer" modifier="Designer" created="201402031014" modified="201402051400" changecount="18">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the global state}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Perception]]  {{stepTitle{Global state - foreword}}}  [[next step &gt;&gt;|SMD - Global state model]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Global state - Introduction]]&gt;&gt;
 !Specifying the global state revision process of an agent class
 The specification of the global state revision process of an agent relies on the implementation of two distinct elements:
 *A class modeling the global state of the agent;
 *A method of the {{{IAgent}}} interface determining how the global state model is updated, using its previous value and the lastly perceived data from all the levels where the agent lies;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Global state model]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Perception]]  {{stepTitle{Global state - foreword}}}  [[next step &gt;&gt;|SMD - Global state model]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Global state model]]}}}</pre>
 </div>
-<div title="SMD - Global state model" creator="Designer" modifier="Designer" created="201402031044" modified="201402050724" changecount="18">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state - Plan]]  {{stepTitle{Global state model}}}  [[next step &gt;&gt;|SMD - Global state revision]]
-----}}}
+<div title="SMD - Global state model" creator="Designer" modifier="Designer" created="201402031044" modified="201402051400" changecount="21">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the global state model}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state - Plan]]  |  [[next step &gt;&gt;|SMD - Global state revision]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The ''global state'' of an agent models the cross-level information used by the decision process of an agent. This state usually contains cross-level plans or mind states.
 !Content of the gobal state of an agent
 &lt;&lt;tiddler [[SMD - Global state model - Content]]&gt;&gt;
@@ -3574,11 +3557,7 @@ The ''global state'' of an agent models the cross-level information used by the 
 &lt;&lt;tiddler [[SMD - Global state model - Specifications]]&gt;&gt;
 !Creating the global state of an agent in SIMILAR
 &lt;&lt;tiddler [[SMD - Global state model - Creation]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Global state revision]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Global state - Plan]]  {{stepTitle{Global state model}}}  [[next step &gt;&gt;|SMD - Global state revision]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Global state revision]]}}}</pre>
 </div>
 <div title="SMD - Global state model - Content" creator="Designer" modifier="Designer" created="201402031236" modified="201402031258" changecount="18">
 <pre>The identification of the data that should be in the ''global state'' and the data that should be in the ''private local state'' of the agent is a hard task. Indeed, their only difference lies in the number of level where the decision uses the same information.
@@ -3666,19 +3645,16 @@ The implementation of this method usually consists in:
 {{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractGlobalMemoryState}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
 === providing a default implementation to this method.}}}</pre>
 </div>
-<div title="SMD - Global state revision" creator="Designer" modifier="Designer" created="201402031337" modified="201402050725" changecount="19">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state model]]  {{stepTitle{Global state revision model}}}  [[next step &gt;&gt;|SMD - Decision]]
-----}}}
+<div title="SMD - Global state revision" creator="Designer" modifier="Designer" created="201402031337" modified="201402051401" changecount="23">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the global state revision model}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state model]]  |  [[next step &gt;&gt;|SMD - Decision]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Global state revision - Intro]]&gt;&gt;
 !Specifications and implementation instructions
 &lt;&lt;tiddler [[SMD - Global state revision - Specifications]]&gt;&gt;
 !Writing the global state revision phase of an agent class
 &lt;&lt;tiddler [[SMD - Global state revision - Creation]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Decision]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Global state model]]  {{stepTitle{Global state revision model}}}  [[next step &gt;&gt;|SMD - Decision]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Decision]]}}}</pre>
 </div>
 <div title="SMD - Global state revision - Creation" creator="Designer" modifier="Designer" created="201402031432" modified="201402041205" changecount="22">
 <pre>The implementation of this method consists in:
@@ -3731,9 +3707,10 @@ This method defines two parameters:
 *The {{{globalState}}} parameter defines the former value of the global state of the agent;
 This method directly modifies the value of {{{globalState}}}: as a side effect of this method call, {{{globalState}}} becomes the revised global state of the agent.</pre>
 </div>
-<div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201401241525" changecount="11">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]
-----}}}
+<div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201402051357" changecount="17">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{High-level specifications of the simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  |  [[next step &gt;&gt;|SMD - Levels identification]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The following step in the design of a simulation model is the ''description of the simulation at a coarse grain''. During this step, no attention is paid to the inner mechanisms of the levels, the agents and the environment. Instead, the design is focused on the general description of the simulation: the identification of the levels, the agents, the environment, their public local states and the influences that can be produced.
 
 This following step create the content of the simulation model at a coarse grain:
@@ -3745,15 +3722,12 @@ This following step create the content of the simulation model at a coarse grain
 *Definition of the [[time model|SMD - Time model]] of the levels
 *Creation of the [[public local states|SMD - Public local states]] of the environment and of the agents
 *Creation of the [[skeleton of the influences|SMD - Influences skeleton]]
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Levels identification]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
 </div>
-<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201401301053" changecount="40">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]
-----}}}
+<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201402051359" changecount="44">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the influences}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Public local states]]  |  [[next step &gt;&gt;|SMD - Low level specifications]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Influences skeleton - Introduction]]&gt;&gt;
 !Structure of an influence in SIMILAR
 &lt;&lt;tiddler [[SMD - Influences skeleton - Structure]]&gt;&gt;
@@ -3761,11 +3735,7 @@ This following step create the content of the simulation model at a coarse grain
 &lt;&lt;tiddler [[SMD - Influences skeleton - Specification]]&gt;&gt;
 !Creating an influence skeleton with SIMILAR
 &lt;&lt;tiddler [[SMD - Influences skeleton - Creation]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Low level specifications]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Public local states]]  {{stepTitle{Influences}}}  [[next step &gt;&gt;|SMD - Low level specifications]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Low level specifications]]}}}</pre>
 </div>
 <div title="SMD - Influences skeleton - Creation" creator="Designer" modifier="Designer" created="201401300810" modified="201401301054" changecount="19">
 <pre>The constructor of an influence has to comply with the following requirements:
@@ -3864,9 +3834,10 @@ For instance:
 ~~//''__1:__ This notion is similar to the notion of agent category''//~~
 @@clear:right;display:block;margin:0;padding:0;@@</pre>
 </div>
-<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201401240826" changecount="103">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents identification]]  {{stepTitle{Level skeleton}}}  [[next step &gt;&gt;|SMD - Environment skeleton]]
-----}}}
+<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201402051357" changecount="111">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the levels}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents identification]]  |  [[next step &gt;&gt;|SMD - Environment skeleton]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 After the identification of the levels, the objects modeling them can be created. Note that ''at this stage, these objects are'' mere +++^60em^*@[&lt;strong&gt;skeletons&lt;/strong&gt;]&lt;html&gt;&lt;h1&gt;Why skeletons?&lt;/h1&gt;&lt;/html&gt;
 The simulation design process is rarely straightforward. Indeed, having an overview on all the implementation details of the model is next to impossible. Instead, models are built incrementally, by adding bits of information each time.
 
@@ -3879,12 +3850,7 @@ This step focuses on the creation of a skeleton class for each level that was id
 &lt;&lt;tiddler [[SMD - Level skeleton - Structure]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Level skeleton - Implementation]]&gt;&gt;
 &lt;&lt;tiddler [[SMD - Level skeleton - Creation]]&gt;&gt;
-
-\({}_{}\)
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Environment skeleton]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Agents identification]]  {{stepTitle{Level skeleton}}}  [[next step &gt;&gt;|SMD - Environment skeleton]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Environment skeleton]]}}}</pre>
 </div>
 <div title="SMD - Level skeleton - Creation" creator="Designer" modifier="Designer" created="201401231259" modified="201401241039" changecount="22">
 <pre>!Creating a level  skeleton in SIMILAR
@@ -4190,9 +4156,10 @@ In SIMILAR, a level is the sum of the following elements^^''1''^^:
 \(_{\underline{2:}\text{ More precisely, the out neighborhood of the level in that graph.}}\)
 \(_{\underline{3:}\text{ In SIMILAR, the model of a level stores the lastly computed consistent state. The management of the transitory states is left to the simulation engines.}}\)</pre>
 </div>
-<div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201401151130" modified="201401240825" changecount="22">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - High level specifications]]  {{stepTitle{Levels identification}}}  [[next step &gt;&gt;|SMD - Agents identification]]
-----}}}
+<div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201401151130" modified="201402051357" changecount="26">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Identification of the levels}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - High level specifications]] | [[next step &gt;&gt;|SMD - Agents identification]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The first concrete step in the design of the simulation model is the identification of the levels where the simulation takes place. In this step, no precise knowledge about the levels is necessary. The only important point here is to ''identify the existence of the levels, and give them a unique name''.
 
 Once the levels and their names is known, the user can create a class summing up these information.
@@ -4257,15 +4224,12 @@ IPublicLocalStateOfAgent state = agent.getPublicLocalState( MyAwesomeLevelList.C
 }}}
 }}} ===
 
-\({}_{}\)
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Agents identification]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - High level specifications]]  {{stepTitle{Levels identification}}}  [[next step &gt;&gt;|SMD - Agents identification]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Agents identification]]}}}</pre>
 </div>
-<div title="SMD - Low level - Agents intro" creator="Designer" modifier="Designer" created="201401301410" modified="201402030742" changecount="11">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Low level specifications]]  {{stepTitle{Low level agent specifications}}}  [[next step &gt;&gt;|SMD - Perception - Plan]]
-----}}}
+<div title="SMD - Low level - Agents intro" creator="Designer" modifier="Designer" created="201401301410" modified="201402051400" changecount="15">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the agents}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Low level specifications]]  |  [[next step &gt;&gt;|SMD - Perception - Plan]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The behavior of an agent is defined by three different steps (see the image):
 *The ''perception phase'', where the agent decodes the data from the public local dynamic state of the perceptible levels, identifies the relevant data and stores them into a ''perceived data set'';
 *The ''global state revision phase'', where the agent revises its global state using the value of its former global state and the recently perceived data;
@@ -4285,15 +4249,12 @@ Note that the specification process is not straightforward. It often consists in
 *Write a more precise specification of the decision process;
 *//etc.//
 }}}
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Perception - Plan]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Low level specifications]]  {{stepTitle{Low level agent specifications}}}  [[next step &gt;&gt;|SMD - Perception - Plan]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Perception - Plan]]}}}</pre>
 </div>
-<div title="SMD - Low level specifications" creator="Designer" modifier="Designer" created="201401300911" modified="201402031038" changecount="23">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Influences skeleton]]  {{stepTitle{Low level specifications}}}  [[next step &gt;&gt;|SMD - Low level - Agents intro]]
-----}}}
+<div title="SMD - Low level specifications" creator="Designer" modifier="Designer" created="201401300911" modified="201402051359" changecount="26">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Low-level specifications of the simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Influences skeleton]]  |  [[next step &gt;&gt;|SMD - Low level - Agents intro]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The ''high level specifications'' can be written only having a vague overview on the simulation, without knowing its precise inner mechanisms. To the contrary, the ''low level specifications'' phase of the methodology provide the precise implementation and operational code of the behavior of the agents, the natural action of the environment and of the reaction of the levels.
 
 The low level specifications contain the following steps:
@@ -4306,15 +4267,19 @@ The low level specifications contain the following steps:
 **Specification of the [[natural action|SMD - Natural]] phase of the environment;
 *Specification of the ''levels'':
 **Specification of the [[reaction|SMD - Reaction]] phase of the levels;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Low level - Agents intro]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Influences skeleton]]  {{stepTitle{Low level specifications}}}  [[next step &gt;&gt;|SMD - Low level - Agents intro]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Low level - Agents intro]]}}}</pre>
 </div>
-<div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201401231328" changecount="32">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Preparation]]  {{stepTitle{Package tree}}}  [[next step &gt;&gt;|SMD - Tools preparation]]
-----}}}
+<div title="SMD - Natural" creator="Designer" modifier="Designer" created="201402051217" modified="201402051401" changecount="7">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the environment}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agent creation]]  |  [[next step &gt;&gt;|SMD - Reaction]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+Content to write.
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction]]}}}</pre>
+</div>
+<div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201402051353" changecount="42">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creating the directories and packages tree}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Preparation]]  |  [[next step &gt;&gt;|SMD - Tools preparation]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The first step of the design of a simulation model consists in creating the tree hierarchy where the sources are put. We recommend users to use a hierarchy where the source files are split by themes.
 !Naming the simulation model
 The name of the simulation model has first to be determined. It has to illustrate precisely the nature of the simulation model. Moreover, the name also has to respect the packages naming constraints of java:
@@ -4374,25 +4339,18 @@ This example illustrates the full directory structure of a plane traffic simulat
 &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
 }}}===
 
-\({}_{}\)
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Tools preparation]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Preparation]]  {{stepTitle{Package tree}}}  [[next step &gt;&gt;|SMD - Tools preparation]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Tools preparation]]}}}</pre>
 </div>
-<div title="SMD - Perception" creator="Designer" modifier="Designer" created="201401300922" modified="201402031037" changecount="66">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Perception - Plan]]  {{stepTitle{Perception}}}  [[next step &gt;&gt;|SMD - Global state - Plan]]
-----}}}
+<div title="SMD - Perception" creator="Designer" modifier="Designer" created="201401300922" modified="201402051400" changecount="69">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the perception model}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Perception - Plan]]  |  [[next step &gt;&gt;|SMD - Global state - Plan]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Perception - Structure]]&gt;&gt;
 !Specifications and implementation instructions
 &lt;&lt;tiddler [[SMD - Perception - Specifications]]&gt;&gt;
 !Writing the perception phase of an agent class
 &lt;&lt;tiddler [[SMD - Perception - Creation]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Global state - Plan]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Perception - Plan]]  {{stepTitle{Perception}}}  [[next step &gt;&gt;|SMD - Global state - Plan]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Global state - Plan]]}}}</pre>
 </div>
 <div title="SMD - Perception - Creation" creator="Designer" modifier="Designer" created="201402030724" modified="201402041224" changecount="23">
 <pre>The implementation of this method consists in:
@@ -4525,9 +4483,10 @@ Therefore, in the perceived data of a vehicle:
 
 Moreover, since perception is always relative to a level, the perceived data set of an agent always identify ''the level'' from which the perception was made.</pre>
 </div>
-<div title="SMD - Perception - Plan" creator="Designer" modifier="Designer" created="201402030744" modified="201402031028" changecount="20">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Low level - Agents intro]]  {{stepTitle{Perception - foreword}}}  [[next step &gt;&gt;|SMD - Perception]]
-----}}}
+<div title="SMD - Perception - Plan" creator="Designer" modifier="Designer" created="201402030744" modified="201402051400" changecount="27">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the perception}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Low level - Agents intro]]  |  [[next step &gt;&gt;|SMD - Perception]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Perception - Introduction]]&gt;&gt;
 !Specifying the perception process of an agent class
 The specification of the perception process of an agent relies on the implementation of two distinct elements:
@@ -4540,11 +4499,7 @@ Therefore, before writing the perception process itself, the following elements 
 From now, this guidelines assume that the user:
 *Has already created the class modeling the perceived data set returned by the perception model of the agents (one per agent per level where the agent can perform decisions);
 *Understands the class modeling the public local dynamic state of the simulation.
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Perception]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Low level - Agents intro]]  {{stepTitle{Perception - foreword}}}  [[next step &gt;&gt;|SMD - Perception]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Perception]]}}}</pre>
 </div>
 <div title="SMD - Perception - Specifications" creator="Designer" modifier="Designer" created="201401301419" modified="201402030739" changecount="17">
 <pre>[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline4.png]]
@@ -4619,9 +4574,10 @@ Puts a dynamic state into this map.
 
 The ''perceived data set'' of an agent from a specific level models the data from the public dynamic state of the perceptible levels that are read by the decision process of the agent. Roughly said, it models //&quot;what the agent sees from the various perceptible levels&quot;//.</pre>
 </div>
-<div title="SMD - Preparation" creator="Designer" modifier="Designer" created="201401150920" modified="201401221002" changecount="16">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|Simulation models]]  {{stepTitle{Preparation}}}  [[next step &gt;&gt;|SMD - Package tree]]
-----}}}
+<div title="SMD - Preparation" creator="Designer" modifier="Designer" created="201401150920" modified="201402051353" changecount="29">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{{{stepMainTitle{Preparing the design}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|Simulation models]]  |  [[next step &gt;&gt;|SMD - Package tree]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 Before heading into the code of the simulation model, we have first to organize and prepare the sources. Indeed, the revision of a model is made easier if the code to update can be identified and located quickly. The first step of the simulation design consists in creating such a source tree structure.
 
 This first main step creates the general structure of the simulation model:
@@ -4629,14 +4585,12 @@ This first main step creates the general structure of the simulation model:
 *The [[tools|SMD - Tools preparation]] that are used in many classes of the simulation model:
 **The [[random values generation|SMD - Tools preparation - Random]] tool
 **The [[parameters management|SMD - Tools preparation - Parameters]] tool
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Package tree]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|Simulation models]]  {{stepTitle{Preparation}}}  [[next step &gt;&gt;|SMD - Package tree]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Package tree]]}}}</pre>
 </div>
-<div title="SMD - Public local states" creator="Designer" modifier="Designer" created="201401231605" modified="201401241551" changecount="28">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Time model]]  {{stepTitle{Public local states}}}  [[next step &gt;&gt;|SMD - Influences skeleton]]
-----}}}
+<div title="SMD - Public local states" creator="Designer" modifier="Designer" created="201401231605" modified="201402051359" changecount="33">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the public local states}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Time model]]  |  [[next step &gt;&gt;|SMD - Influences skeleton]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The next step of the methodology consists in identifying the part of the ''local state'' of the agents (and of the environment) that can be perceived. Once identified, a ''public local state'' can be created for each of these entities. Note that the non-perceptible part, called ''private local state'' belongs to the inner mechanisms of the behavior of the agents and of the environment. They are declared elsewhere (see the [[perception|SMD - Perception]], [[global state|SMD - Global state]], [[decision|SMD - Decision]] and [[natural|SMD - Natural]] phases).
 
 {{focusemphasisblock{
@@ -4651,11 +4605,7 @@ Note that the identification of all the perceptible information at this stage is
 &lt;&lt;tiddler [[SMD - Public local states - Implementation]]&gt;&gt;
 !Creating public local states in SIMILAR
 &lt;&lt;tiddler [[SMD - Public local states - Creation]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Influences skeleton]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Time model]]  {{stepTitle{Public local states}}}  [[next step &gt;&gt;|SMD - Influences skeleton]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Influences skeleton]]}}}</pre>
 </div>
 <div title="SMD - Public local states - Creation" creator="Designer" modifier="Designer" created="201401241035" modified="201402030814" changecount="44">
 <pre>The constructor of a public local state has to comply with the following requirements:
@@ -4830,9 +4780,10 @@ The coherence of the data structure contained in the public local state of the e
 *The removal of an agent from the level implies its removal from the data mapping of the environment;
 }}}</pre>
 </div>
-<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201401301320" changecount="62">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents skeleton]]  {{stepTitle{Time model}}}  [[next step &gt;&gt;|SMD - Public local states]]
-----}}}
+<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201402051358" changecount="65">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the time model}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents skeleton]]  |  [[next step &gt;&gt;|SMD - Public local states]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 Once the levels are identified, we have to determine how time moves in each level. This step is fundamental, since it conditions the execution of the behavior of the agents and the environment.
 
 {{focusemphasisblock{
@@ -4849,11 +4800,7 @@ Managing explicitly the time in a simulation is not necessarily an easy task. In
 &lt;&lt;tiddler [[SMD - Time model - Level]]&gt;&gt;
 !Time conversion model
 &lt;&lt;tiddler [[SMD - Time model - Conversion]]&gt;&gt;
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Public local states]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Agents skeleton]]  {{stepTitle{Time model}}}  [[next step &gt;&gt;|SMD - Public local states]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Public local states]]}}}</pre>
 </div>
 <div title="SMD - Time model - Conversion" creator="Designer" modifier="Designer" created="201401231541" modified="201401231601" changecount="9">
 <pre>In simulations where the behavior is tightly bound with real time, using time stamps is not precise enough to model the behavior of the agents. For instance, in a road traffic simulation, we have to know the real time ellapsed during a transitory period to determine the distance they moved since the last consistent time.
@@ -5054,21 +5001,19 @@ To preserve the freedom of defining custom time models, SIMILAR does not impose 
 *A method identifying the successor of a ''time stamp'';
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
-<div title="SMD - Tools preparation" creator="Designer" modifier="Designer" created="201401151002" modified="201401221003" changecount="7">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Package tree]]  {{stepTitle{Tools preparation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Random]]
-----}}}
+<div title="SMD - Tools preparation" creator="Designer" modifier="Designer" created="201401151002" modified="201402051354" changecount="13">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creating the tool classes}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Package tree]]  |  [[next step &gt;&gt;|SMD - Tools preparation - Random]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 A second preliminary step is necessary before writing the simulation model: the reification of the ''random values generator'' and of the ''parameters of the simulation''.
 
 This step is fundamental in many regards. Yet it is often underestimated and disseminated in the code of the simulation. Their reification as concrete classes is necessary to replace easily the random values generation heuristic or the parameters used within the simulation.
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Tools preparation - Random]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Package tree]]  {{stepTitle{Tools preparation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Random]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Tools preparation - Random]]}}}</pre>
 </div>
-<div title="SMD - Tools preparation - Parameters" creator="Designer" modifier="Designer" created="201401151041" modified="201401221004" changecount="11">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Random]]  {{stepTitle{Parameters of the simulation}}}  [[next step &gt;&gt;|SMD - High level specifications]]
-----}}}
+<div title="SMD - Tools preparation - Parameters" creator="Designer" modifier="Designer" created="201401151041" modified="201402051357" changecount="16">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Managing the simulation parameters}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Random]]  |  [[next step &gt;&gt;|SMD - High level specifications]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 To facilitate the definition of various experiments, the parameters used in the simulation shouldn't be disseminated into the various classes of the project. Otherwise, the modification of the value of a parameter becomes really difficult, since we first have to find where the parameter was declared.
 
 A possible solution to this problem is to define one parameter class (or many classes divided by themes) shared among all the classes of the simulation.
@@ -5090,15 +5035,12 @@ This example is also available in a [[stand alone file|./files/simulationModel/p
 }}} ===
 !Usage of the parameters class
 The parameter classes are used only in the initialization process of the simulation. Since talking about simulation initialization is premature at this step of the methodology, we defer the description of the usage of this class to a [[later step of the methodology|SMD - Initial state]].
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - High level specifications]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Tools preparation - Random]]  {{stepTitle{Parameters of the simulation}}}  [[next step &gt;&gt;|SMD - High level specifications]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - High level specifications]]}}}</pre>
 </div>
-<div title="SMD - Tools preparation - Random" creator="Designer" modifier="Designer" created="201401151005" modified="201401221004" changecount="23">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation]]  {{stepTitle{Random values generation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Parameters]]
-----}}}
+<div title="SMD - Tools preparation - Random" creator="Designer" modifier="Designer" created="201401151005" modified="201402051354" changecount="29">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Generation of random values}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation]]  |  [[next step &gt;&gt;|SMD - Tools preparation - Parameters]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The generation of random values is important in simulation since it provides the means to include noise and heterogeneity in a model. Yet, the production of random values cannot be wild: a simulation has to be +++^34em^*@[reproducible]
 Using a set of parameters (including the parameters of the random values generator) twice should produce the same outcomes, even if random values generation is involved in the simulation process.
 ===. Thus users should have control over the way random values are generated.
@@ -5161,11 +5103,7 @@ RandomValueFactory.getStrategy( ).randomDouble( );
 }}}===
 
 __//Note://__ These operations assume that the random value factory exists and is already initialized.
-
-{{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Tools preparation - Parameters]]}}}
-{{guidelinesNavMenu{
-----
-[[&lt;&lt; previous step|SMD - Tools preparation]]  {{stepTitle{Random values generation}}}  [[next step &gt;&gt;|SMD - Tools preparation - Parameters]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Tools preparation - Parameters]]}}}</pre>
 </div>
 <div title="SimpleSearchPlugin" creator="Designer" modifier="Designer" created="201311151015" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
@@ -5329,11 +5267,12 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 <div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="2">
 <pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201401301322" changecount="26">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt;
+<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201402051353" changecount="66">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Simulation model design}}}
+{{guidelinesNavMenu{&amp;lt;&amp;lt; previous step |  [[next step &gt;&gt;|SMD - Preparation]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 This part of the documentation is dedicated to the design and the implementation of SIMILAR simulation models using the micro-kernel only. At the same time, it describes best practices facilitating the organization of the implementation of the simulation. Note that the guidelines provided here are not absolute rules. They only make the design of simulations either easier, or more robust to model revisions.
-
-{{linkbigbtn center{[[Start creating a new model!|SMD - Preparation]]}}}</pre>
+{{nextButton{[[Start creating a new model!|SMD - Preparation]]}}}</pre>
 </div>
 <div title="SinglePageModePlugin" creator="Designer" modifier="Designer" created="201401211538" modified="201401211542" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***
@@ -6373,7 +6312,7 @@ when the &quot;+ + +&quot; maccro is used without a text between &quot;[ ]&quot;
 /*}}}*/
 [[StyleSheetCustomization - Wikispecific - GuidelinesNavMenu]]</pre>
 </div>
-<div title="StyleSheetCustomization - Wikispecific - GuidelinesNavMenu" creator="Designer" modifier="Designer" created="201401150858" modified="201401150931" changecount="18">
+<div title="StyleSheetCustomization - Wikispecific - GuidelinesNavMenu" creator="Designer" modifier="Designer" created="201401150858" modified="201402051353" changecount="53">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
@@ -6388,8 +6327,8 @@ when the &quot;+ + +&quot; maccro is used without a text between &quot;[ ]&quot;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
-
-.guidelinesNavMenu hr {
+hr.topSep, hr.botSep {
+	margin-bottom: -0.5em;
 	width: 100%;
 	height: 2px;
 	border: 0;
@@ -6398,12 +6337,57 @@ when the &quot;+ + +&quot; maccro is used without a text between &quot;[ ]&quot;
 	background: -ms-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
 	background: linear-gradient(to right,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
 }
-
-/* Style of the navigation title displayed in the design guidelines */
-.stepTitle {
-	margin: 0em 3em;
+hr.topSep {
+	margin-top: -1em;
+}
+/*}}}*/
+/*{{{*/
+/* Style of the title displayed in the design guidelines */
+.stepMainTitle {
+	color: rgb(191,35,35);
+	text-align: center;
+	font-family: Impact;
+	font-size: 300%;
 	font-weight: bold;
-	text-decoration: underline;
+	text-align: center;
+	letter-spacing:2px;
+	display:block;
+	margin-top:0.5em;
+}
+/*}}}*/
+/*{{{*/
+/* Style of the button displayed at the bottom of the design guidelines */
+.nextButton {
+	display:block;
+	text-align:center;
+	margin-top: 1em;
+}
+.nextButton a, .nextButton a:hover {
+	width:100%;
+	text-indent:0;
+	border: 0;
+	display:inline-block;
+	font-family:Arial;
+	font-size:22px;
+	font-weight:bold;
+	font-style:normal;
+	height:50px;
+	line-height:50px;
+	color:#ffffff;
+	text-align:center;
+	background: -webkit-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -o-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -ms-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+	background: linear-gradient(to right,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+}
+.nextButton a {
+	text-decoration:none;
+}
+.nextButton a:hover {
+	text-decoration:underline;
+}
+.nextButton a:active {
+	position:relative;
 }
 /*}}}*/
 [[StyleSheetDropDownMenuPlugin]]</pre>

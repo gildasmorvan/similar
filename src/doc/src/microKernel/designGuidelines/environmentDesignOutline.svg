@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="environmentDesignOutline.svg"
-   inkscape:export-filename="C:\Users\yoakubera\Desktop\similarDoc\microKernel\images\simulationModelDesign\highLevel\environmentDesignOutline4.png"
+   inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\environmentDesignOutline4.png"
    inkscape:export-xdpi="147.95"
    inkscape:export-ydpi="147.95">
   <defs
@@ -93,14 +93,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="185.79416"
+     inkscape:cx="142.22273"
      inkscape:cy="124.01902"
      inkscape:document-units="px"
      inkscape:current-layer="g3293"
      showgrid="false"
-     inkscape:window-width="1680"
-     inkscape:window-height="1028"
-     inkscape:window-x="1912"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -150,7 +150,7 @@
        sodipodi:cy="144.99266"
        sodipodi:rx="231.57747"
        sodipodi:ry="130.05714"
-       d="m 639.42656,144.99266 a 231.57747,130.05714 0 1 1 -463.15494,0 231.57747,130.05714 0 1 1 463.15494,0 z"
+       d="m 639.42656,144.99266 c 0,71.82858 -103.68076,130.05714 -231.57747,130.05714 -127.8967,0 -231.57747,-58.22856 -231.57747,-130.05714 0,-71.828577 103.68077,-130.057144 231.57747,-130.057144 127.89671,0 231.57747,58.228567 231.57747,130.057144 z"
        transform="matrix(0.49857459,0,0,0.38211926,-38.398471,0.62676182)" />
     <path
        sodipodi:type="inkscape:offset"
@@ -231,7 +231,7 @@
          sodipodi:role="line">Environment</tspan></text>
     <path
        transform="matrix(0.49857459,0,0,0.38211926,-38.398471,0.62676)"
-       d="m 639.42656,144.99266 a 231.57747,130.05714 0 1 1 -463.15494,0 231.57747,130.05714 0 1 1 463.15494,0 z"
+       d="m 639.42656,144.99266 c 0,71.82858 -103.68076,130.05714 -231.57747,130.05714 -127.8967,0 -231.57747,-58.22856 -231.57747,-130.05714 0,-71.828577 103.68077,-130.057144 231.57747,-130.057144 127.89671,0 231.57747,58.228567 231.57747,130.057144 z"
        sodipodi:ry="130.05714"
        sodipodi:rx="231.57747"
        sodipodi:cy="144.99266"

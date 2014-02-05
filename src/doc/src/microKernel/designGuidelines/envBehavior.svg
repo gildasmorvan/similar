@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="905"
+   height="61.018002"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="envBehavior.svg"
+   inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\envBehaviorModel.png"
+   inkscape:export-xdpi="143.35631"
+   inkscape:export-ydpi="143.35631">
+  <defs
+     id="defs4">
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect4123"
+       is_visible="true"
+       bendpath="m 292.88064,173.57803 c 47.69883,-39.64785 142.12703,-29.4739 152.91448,-13.41609"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect4021"
+       is_visible="true"
+       bendpath="m 103.98212,175.59833 c 12.66644,-23.49492 39.87407,-26.8833 46.8169,-14.45781"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3960"
+       is_visible="true"
+       bendpath="m 107.70775,174.33563 c 23.21289,-53.56529 58.07012,-28.03323 57.62309,0"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3919"
+       is_visible="true"
+       bendpath="M 169.13323,173.57803 229.65779,163.4765"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3917"
+       is_visible="true"
+       bendpath="m 105.29011,173.57803 c 25.70416,-47.23141 32.46343,-24.99429 57.99918,-0.50507"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3858"
+       is_visible="true"
+       bendpath="m 107.74331,172.82041 c 26.99973,-38.47314 31.03461,-19.21116 53.06489,2.52538"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3917-8"
+       is_visible="true"
+       bendpath="m 167.52588,175.15289 c 10.0468,-38.64511 20.84668,-20.4486 57.99918,-0.50507"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="225.21015"
+     inkscape:cy="-124.32852"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Main"
+     style="display:inline"
+     transform="translate(13.1875,-132.83475)">
+    <g
+       id="g3893"
+       transform="translate(-14.656851,-296.05814)" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ececec;stroke:#999999;stroke-width:2.79899955;stroke-miterlimit:4;stroke-dasharray:none;display:inline"
+       d="m 354.78125,137.23438 0,52.21874 40,0 73.0625,0 40,0 0,-52.21874 -40,0 -73.0625,0 -40,0 z"
+       id="rect3119-1" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3105-7"
+       y="169.68066"
+       x="375.68652"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="169.68066"
+         x="375.68652"
+         sodipodi:role="line"
+         id="tspan3030-4">Natural action</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="31.5625"
+       y="157.53485"
+       id="text3909-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="31.5625"
+         y="157.53485"
+         id="tspan3063">dynamic state of perceptible levels</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="528.5625"
+       y="157.53485"
+       id="text3915-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="528.5625"
+         y="157.53485"
+         id="tspan3919-8">influences aimed at influenceable levels</tspan></text>
+    <path
+       style="fill:none;stroke:#999999;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 513.5625,163.34375 360.5,0"
+       id="path3937-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       sodipodi:type="star"
+       style="fill:#999999;fill-opacity:1;stroke:none;display:inline"
+       id="path3949-9-5"
+       sodipodi:sides="3"
+       sodipodi:cx="-54"
+       sodipodi:cy="-52"
+       sodipodi:r1="9.0553856"
+       sodipodi:r2="4.5276928"
+       sodipodi:arg1="0"
+       sodipodi:arg2="1.0471976"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m -44.944614,-52 -13.583079,7.842194 0,-15.684388 z"
+       transform="matrix(0.5153471,0,0,1,904.72458,215.34375)"
+       inkscape:transform-center-x="-1.1666734" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path3011"
+       d="m -2.437503,163.34375 343.000003,0"
+       style="fill:none;stroke:#999999;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:transform-center-x="-1.1666734"
+       transform="matrix(0.5153471,0,0,1,369.22457,215.34375)"
+       d="m -44.944614,-52 -13.583079,7.842194 0,-15.684388 z"
+       inkscape:randomized="0"
+       inkscape:rounded="0"
+       inkscape:flatsided="true"
+       sodipodi:arg2="1.0471976"
+       sodipodi:arg1="0"
+       sodipodi:r2="4.5276928"
+       sodipodi:r1="9.0553856"
+       sodipodi:cy="-52"
+       sodipodi:cx="-54"
+       sodipodi:sides="3"
+       id="path3013"
+       style="fill:#999999;fill-opacity:1;stroke:none;display:inline"
+       sodipodi:type="star" />
+  </g>
+</svg>

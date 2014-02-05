@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="328.29959"
+   height="73.236061"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="agentFactoryStructure.svg"
+   inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx2.png"
+   inkscape:export-xdpi="189.47"
+   inkscape:export-ydpi="189.47">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4502-2"
+       id="linearGradient4519-1"
+       gradientUnits="userSpaceOnUse"
+       x1="93.721703"
+       y1="-7.8835039"
+       x2="91.377495"
+       y2="-11.94379" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4502-2">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4504-3" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4506-3" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4502-3"
+       id="linearGradient4519-9"
+       gradientUnits="userSpaceOnUse"
+       x1="93.721703"
+       y1="-7.8835039"
+       x2="91.377495"
+       y2="-11.94379" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4502-3">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4504-1" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4506-9" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4502-0"
+       id="linearGradient4519-5"
+       gradientUnits="userSpaceOnUse"
+       x1="93.721703"
+       y1="-7.8835039"
+       x2="91.377495"
+       y2="-11.94379" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4502-0">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4504-9" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4506-0" />
+    </linearGradient>
+    <filter
+       id="filter3305"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood3307"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite3309"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur3311"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset3313"
+         dx="2"
+         dy="2"
+         result="offset" />
+      <feComposite
+         id="feComposite3315"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3317" />
+      <feGaussianBlur
+         id="feGaussianBlur3319"
+         result="result6"
+         stdDeviation="1.5"
+         in="fbSourceGraphic" />
+      <feComposite
+         id="feComposite3321"
+         in2="result6"
+         operator="atop"
+         in="fbSourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3323"
+         in2="fbSourceGraphicAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter3327"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3329"
+         result="result6"
+         stdDeviation="1.5" />
+      <feComposite
+         id="feComposite3331"
+         in2="result6"
+         operator="atop"
+         in="SourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3333"
+         in2="SourceAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter3305-1"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood3307-7"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite3309-4"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur3311-0"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset3313-9"
+         dx="2"
+         dy="2"
+         result="offset" />
+      <feComposite
+         id="feComposite3315-4"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3317-8" />
+      <feGaussianBlur
+         id="feGaussianBlur3319-8"
+         result="result6"
+         stdDeviation="1.5"
+         in="fbSourceGraphic" />
+      <feComposite
+         id="feComposite3321-2"
+         in2="result6"
+         operator="atop"
+         in="fbSourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3323-4"
+         in2="fbSourceGraphicAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter4210"
+       inkscape:label="Drop Shadow"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood4212"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite4214"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4216"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset4218"
+         dx="2"
+         dy="2"
+         result="offset" />
+      <feComposite
+         id="feComposite4220"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+    <filter
+       id="filter4270"
+       inkscape:label="Drop Shadow"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood4272"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite4274"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4276"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset4278"
+         dx="1"
+         dy="1"
+         result="offset" />
+      <feComposite
+         id="feComposite4280"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+    <filter
+       id="filter3305-17"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood3307-4"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite3309-0"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur3311-9"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset3313-4"
+         dx="2"
+         dy="2"
+         result="offset" />
+      <feComposite
+         id="feComposite3315-8"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3317-82" />
+      <feGaussianBlur
+         id="feGaussianBlur3319-4"
+         result="result6"
+         stdDeviation="1.5"
+         in="fbSourceGraphic" />
+      <feComposite
+         id="feComposite3321-5"
+         in2="result6"
+         operator="atop"
+         in="fbSourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3323-5"
+         in2="fbSourceGraphicAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter3327-1"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3329-7"
+         result="result6"
+         stdDeviation="1.5" />
+      <feComposite
+         id="feComposite3331-1"
+         in2="result6"
+         operator="atop"
+         in="SourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3333-1"
+         in2="SourceAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter3327-1-8"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3329-7-5"
+         result="result6"
+         stdDeviation="1.5" />
+      <feComposite
+         id="feComposite3331-1-7"
+         in2="result6"
+         operator="atop"
+         in="SourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3333-1-6"
+         in2="SourceAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter3305-17-1"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood3307-4-8"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite3309-0-9"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur3311-9-2"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset3313-4-7"
+         dx="2"
+         dy="2"
+         result="offset" />
+      <feComposite
+         id="feComposite3315-8-9"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix3317-82-5" />
+      <feGaussianBlur
+         id="feGaussianBlur3319-4-4"
+         result="result6"
+         stdDeviation="1.5"
+         in="fbSourceGraphic" />
+      <feComposite
+         id="feComposite3321-5-3"
+         in2="result6"
+         operator="atop"
+         in="fbSourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3323-5-1"
+         in2="fbSourceGraphicAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter4270-7"
+       inkscape:label="Drop Shadow"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood4272-7"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite4274-9"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4276-3"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset4278-1"
+         dx="1"
+         dy="1"
+         result="offset" />
+      <feComposite
+         id="feComposite4280-9"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+    <filter
+       id="filter3327-1-6"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3329-7-50"
+         result="result6"
+         stdDeviation="1.5" />
+      <feComposite
+         id="feComposite3331-1-2"
+         in2="result6"
+         operator="atop"
+         in="SourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite3333-1-8"
+         in2="SourceAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter4270-7-4"
+       inkscape:label="Drop Shadow"
+       color-interpolation-filters="sRGB">
+      <feFlood
+         id="feFlood4272-7-8"
+         flood-opacity="0.5"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite4274-9-6"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4276-3-5"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset4278-1-0"
+         dx="1"
+         dy="1"
+         result="offset" />
+      <feComposite
+         id="feComposite4280-9-9"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="141.68049"
+     inkscape:cy="38.990102"
+     inkscape:document-units="px"
+     inkscape:current-layer="g3416"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Agent - full specification"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none"
+     transform="translate(-8.7750216,-1.7381915)">
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4270);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 157.5625,29.34375 -0.375,0.34375 -7.0625,7.09375 -0.34375,0.34375 0.34375,0.34375 7.0625,7.0625 0.375,0.375 0.34375,-0.375 6.90625,-6.90625 33.09375,0 -1.9375,0.875 a 0.50005,0.50005 0 1 0 0.40625,0.90625 l 4.09375,-1.8125 L 201.5,37.125 200.46875,36.65625 196.375,34.84375 a 0.50005,0.50005 0 0 0 -0.34375,-0.03125 0.50005,0.50005 0 0 0 -0.0625,0.9375 l 1.9375,0.875 -33.09375,0 -6.90625,-6.9375 -0.34375,-0.34375 z m 0,1.40625 6.34375,6.375 -6.34375,6.375 -6.375,-6.375 6.375,-6.375 z"
+       transform="translate(-1.8315808,1.0402724)"
+       id="rect3422"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g3395">
+      <path
+         id="rect3230"
+         d="m 14.239848,6.7545571 132.949432,0 0,62.8050999 -132.949432,0 z"
+         style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3305)"
+         inkscape:connector-curvature="0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3232"
+         y="25.325987"
+         x="40.286343"
+         style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+         xml:space="preserve"><tspan
+           style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans"
+           y="25.325987"
+           x="40.286343"
+           id="tspan3234"
+           sodipodi:role="line">MyAgentFactory</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text3236"
+         y="13.897415"
+         x="66.659386"
+         style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+         xml:space="preserve"><tspan
+           style="font-size:6px"
+           y="13.897415"
+           x="66.659386"
+           id="tspan3238"
+           sodipodi:role="line">&lt;&lt;class&gt;&gt;</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text3240"
+         y="40.246761"
+         x="21.618374"
+         style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+         xml:space="preserve"><tspan
+           id="tspan3252"
+           style="font-style:normal;-inkscape-font-specification:Sans"
+           y="40.246761"
+           x="21.618374"
+           sodipodi:role="line">+static IAgent generate( </tspan><tspan
+           id="tspan3264"
+           style="font-style:normal;-inkscape-font-specification:Sans"
+           y="47.746761"
+           x="21.618374"
+           sodipodi:role="line">                 Object contextDependentParam1,</tspan><tspan
+           id="tspan3260"
+           style="font-style:normal;-inkscape-font-specification:Sans"
+           y="55.246761"
+           x="21.618374"
+           sodipodi:role="line">                 Object contextDependentParam2,</tspan><tspan
+           id="tspan3262"
+           style="font-style:normal;-inkscape-font-specification:Sans"
+           y="62.746761"
+           x="21.618374"
+           sodipodi:role="line">                 ... )</tspan></text>
+      <rect
+         y="30.884163"
+         x="14.240062"
+         height="0.75761443"
+         width="132.94901"
+         id="rect3325"
+         style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3327)" />
+    </g>
+    <g
+       id="g3414"
+       transform="translate(29.294423,12.879445)">
+      <path
+         id="rect3230-5"
+         d="m 169.83717,11.499362 132.94944,0 0,25.176918 -132.94944,0 z"
+         style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3305-1)"
+         inkscape:connector-curvature="0" />
+      <g
+         id="g3408">
+        <text
+           xml:space="preserve"
+           style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+           x="182.11487"
+           y="30.070789"
+           id="text3232-5"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3234-1"
+             x="182.11487"
+             y="30.070789"
+             style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans">SimulationParameters</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+           x="222.2567"
+           y="18.64222"
+           id="text3236-7"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3238-1"
+             x="222.2567"
+             y="18.64222"
+             style="font-size:6px">&lt;&lt;class&gt;&gt;</tspan></text>
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Example 1"
+     style="display:none">
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3305-17)"
+       d="m 4.822259,5.9730961 132.949431,0 0,62.8050999 -132.949431,0 z"
+       id="rect3230-2" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="34.335793"
+       y="24.544525"
+       id="text3232-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3234-6"
+         x="34.335793"
+         y="24.544525"
+         style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans">AgtLionFactory</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="57.241798"
+       y="13.115954"
+       id="text3236-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3238-4"
+         x="57.241798"
+         y="13.115954"
+         style="font-size:6px">&lt;&lt;class&gt;&gt;</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="12.200785"
+       y="43.465302"
+       id="text3240-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="12.200785"
+         y="43.465302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3262-1">+static AgtLion generate( </tspan><tspan
+         sodipodi:role="line"
+         x="12.200785"
+         y="50.965302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3166">                           Point2D initialLocation </tspan><tspan
+         sodipodi:role="line"
+         x="12.200785"
+         y="58.465302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3164">            )</tspan></text>
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3327-1)"
+       id="rect3325-6"
+       width="132.94901"
+       height="0.75761443"
+       x="4.8224726"
+       y="30.102701" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3305-17-1)"
+       d="m 189.83119,5.9730962 132.94943,0 0,62.8051008 -132.94943,0 z"
+       id="rect3230-2-2" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="196.93652"
+       y="24.544525"
+       id="text3232-7-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3234-6-3"
+         x="196.93652"
+         y="24.544525"
+         style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans">WildlifeSimulationParam</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="242.25073"
+       y="13.115954"
+       id="text3236-1-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3238-4-1"
+         x="242.25073"
+         y="13.115954"
+         style="font-size:6px">&lt;&lt;class&gt;&gt;</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="195.20972"
+       y="39.465302"
+       id="text3240-2-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="195.20972"
+         y="39.465302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3340">+ static final int gazellePercepRadius = 500</tspan><tspan
+         sodipodi:role="line"
+         x="195.20972"
+         y="46.965302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3344">+ static final long gazelleAgeThresholdMin = 0</tspan><tspan
+         sodipodi:role="line"
+         x="195.20972"
+         y="54.465302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3346">+ static final long gazelleAgeThresholdMax = 5</tspan></text>
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3327-1-8)"
+       id="rect3325-6-2"
+       width="132.94901"
+       height="0.75761443"
+       x="189.83141"
+       y="30.102701" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4270-7);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 145.88616,26.883383 -0.375,0.34375 -7.0625,7.09375 -0.34375,0.34375 0.34375,0.34375 7.0625,7.0625 0.375,0.375 0.34375,-0.375 6.90625,-6.90625 33.09375,0 -1.9375,0.875 a 0.50005,0.50005 0 1 0 0.40625,0.90625 l 4.09375,-1.8125 1.03125,-0.46875 -1.03125,-0.46875 -4.09375,-1.8125 a 0.50005,0.50005 0 0 0 -0.34375,-0.03125 0.50005,0.50005 0 0 0 -0.0625,0.9375 l 1.9375,0.875 -33.09375,0 -6.90625,-6.9375 -0.34375,-0.34375 z m 0,1.40625 6.34375,6.375 -6.34375,6.375 -6.375,-6.375 6.375,-6.375 z"
+       id="rect3422-8"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     style="display:none"
+     inkscape:label="Example 2"
+     id="g3350"
+     inkscape:groupmode="layer">
+    <path
+       id="path3352"
+       d="m 4.822259,5.9730961 132.949431,0 0,62.8050999 -132.949431,0 z"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3305-17)"
+       inkscape:connector-curvature="0" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3354"
+       y="24.544525"
+       x="34.335793"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"><tspan
+         style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans"
+         y="24.544525"
+         x="34.335793"
+         id="tspan3356"
+         sodipodi:role="line">AgtLionFactory</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3358"
+       y="13.115954"
+       x="57.241798"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"><tspan
+         style="font-size:6px"
+         y="13.115954"
+         x="57.241798"
+         id="tspan3360"
+         sodipodi:role="line">&lt;&lt;class&gt;&gt;</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3362"
+       y="39.465302"
+       x="12.200785"
+       style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"><tspan
+         id="tspan3368"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="39.465302"
+         x="12.200785"
+         sodipodi:role="line">+static AgtLion generateNormal( </tspan><tspan
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="46.965302"
+         x="12.200785"
+         sodipodi:role="line"
+         id="tspan3402">                           Point2D initialLocation )</tspan><tspan
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="54.465302"
+         x="12.200785"
+         sodipodi:role="line"
+         id="tspan3404">+static AgtLion generateFierce( </tspan><tspan
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="61.965302"
+         x="12.200785"
+         sodipodi:role="line"
+         id="tspan3410">                           Point2D initialLocation )</tspan></text>
+    <rect
+       y="30.102701"
+       x="4.8224726"
+       height="0.75761443"
+       width="132.94901"
+       id="rect3370"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3327-1)" />
+    <path
+       id="path3372"
+       d="m 189.83119,5.9730962 132.94943,0 0,62.8051008 -132.94943,0 z"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3305-17-1)"
+       inkscape:connector-curvature="0" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3374"
+       y="24.544525"
+       x="196.93652"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"><tspan
+         style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans"
+         y="24.544525"
+         x="196.93652"
+         id="tspan3376"
+         sodipodi:role="line">WildlifeSimulationParam</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3378"
+       y="13.115954"
+       x="242.25073"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"><tspan
+         style="font-size:6px"
+         y="13.115954"
+         x="242.25073"
+         id="tspan3380"
+         sodipodi:role="line">&lt;&lt;class&gt;&gt;</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3382"
+       y="39.465302"
+       x="195.20972"
+       style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"><tspan
+         id="tspan3384"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="39.465302"
+         x="195.20972"
+         sodipodi:role="line">+ static final int gazellePercepRadius = 500</tspan><tspan
+         id="tspan3386"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="46.965302"
+         x="195.20972"
+         sodipodi:role="line">+ static final long gazelleAgeThresholdMin = 0</tspan><tspan
+         id="tspan3388"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="54.465302"
+         x="195.20972"
+         sodipodi:role="line">+ static final long gazelleAgeThresholdMax = 5</tspan></text>
+    <rect
+       y="30.102701"
+       x="189.83141"
+       height="0.75761443"
+       width="132.94901"
+       id="rect3390"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3327-1-8)" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3392"
+       d="m 145.88616,26.883383 -0.375,0.34375 -7.0625,7.09375 -0.34375,0.34375 0.34375,0.34375 7.0625,7.0625 0.375,0.375 0.34375,-0.375 6.90625,-6.90625 33.09375,0 -1.9375,0.875 a 0.50005,0.50005 0 1 0 0.40625,0.90625 l 4.09375,-1.8125 1.03125,-0.46875 -1.03125,-0.46875 -4.09375,-1.8125 a 0.50005,0.50005 0 0 0 -0.34375,-0.03125 0.50005,0.50005 0 0 0 -0.0625,0.9375 l 1.9375,0.875 -33.09375,0 -6.90625,-6.9375 -0.34375,-0.34375 z m 0,1.40625 6.34375,6.375 -6.34375,6.375 -6.375,-6.375 6.375,-6.375 z"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4270-7);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g3416"
+     inkscape:label="Example 3"
+     style="display:inline">
+    <rect
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3572"
+       width="330.71429"
+       height="110"
+       x="-0.35714287"
+       y="0.021775831"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3305-17)"
+       d="m 4.822259,5.9730961 132.949431,0 0,46.8050999 -132.949431,0 z"
+       id="path3418"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="16.589699"
+       y="24.544525"
+       id="text3420"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         sodipodi:role="line"
+         id="tspan3422"
+         x="16.589699"
+         y="24.544525"
+         style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans">AgtLionNormalFactory</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="57.241798"
+       y="13.115954"
+       id="text3424"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         sodipodi:role="line"
+         id="tspan3426"
+         x="57.241798"
+         y="13.115954"
+         style="font-size:6px">&lt;&lt;class&gt;&gt;</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="12.200785"
+       y="39.465302"
+       id="text3428"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         sodipodi:role="line"
+         x="12.200785"
+         y="39.465302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3430">+static AgtLion generate( </tspan><tspan
+         id="tspan3436"
+         sodipodi:role="line"
+         x="12.200785"
+         y="46.965302"
+         style="font-style:normal;-inkscape-font-specification:Sans">                           Point2D initialLocation )</tspan></text>
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3327-1)"
+       id="rect3438"
+       width="132.94901"
+       height="0.75761443"
+       x="4.8224726"
+       y="30.102701"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3305-17-1)"
+       d="m 189.83119,5.9730962 132.94943,0 0,62.8051008 -132.94943,0 z"
+       id="path3440"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="196.93652"
+       y="24.544525"
+       id="text3442"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         sodipodi:role="line"
+         id="tspan3444"
+         x="196.93652"
+         y="24.544525"
+         style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans">WildlifeSimulationParam</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="242.25073"
+       y="13.115954"
+       id="text3446"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         sodipodi:role="line"
+         id="tspan3448"
+         x="242.25073"
+         y="13.115954"
+         style="font-size:6px">&lt;&lt;class&gt;&gt;</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       x="195.20972"
+       y="39.465302"
+       id="text3450"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         sodipodi:role="line"
+         x="195.20972"
+         y="39.465302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3452">+ static final int gazellePercepRadius = 500</tspan><tspan
+         sodipodi:role="line"
+         x="195.20972"
+         y="46.965302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3454">+ static final long gazelleAgeThresholdMin = 0</tspan><tspan
+         sodipodi:role="line"
+         x="195.20972"
+         y="54.465302"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         id="tspan3456">+ static final long gazelleAgeThresholdMax = 5</tspan></text>
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3327-1-8)"
+       id="rect3458"
+       width="132.94901"
+       height="0.75761443"
+       x="189.83141"
+       y="30.102701"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4270-7);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 145.88616,26.883383 -0.375,0.34375 -7.0625,7.09375 -0.34375,0.34375 0.34375,0.34375 7.0625,7.0625 0.375,0.375 0.34375,-0.375 6.90625,-6.90625 33.09375,0 -1.9375,0.875 a 0.50005,0.50005 0 1 0 0.40625,0.90625 l 4.09375,-1.8125 1.03125,-0.46875 -1.03125,-0.46875 -4.09375,-1.8125 a 0.50005,0.50005 0 0 0 -0.34375,-0.03125 0.50005,0.50005 0 0 0 -0.0625,0.9375 l 1.9375,0.875 -33.09375,0 -6.90625,-6.9375 -0.34375,-0.34375 z m 0,1.40625 6.34375,6.375 -6.34375,6.375 -6.375,-6.375 6.375,-6.375 z"
+       id="path3460"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <path
+       id="path3462"
+       d="m 4.822259,57.973096 132.949431,0 0,46.805104 -132.949431,0 z"
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;filter:url(#filter3305-17)"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3464"
+       y="76.544533"
+       x="19.038918"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         style="font-size:11px;font-style:normal;font-weight:normal;-inkscape-font-specification:Sans"
+         y="76.544533"
+         x="19.038918"
+         id="tspan3466"
+         sodipodi:role="line">AgtLionFierceFactory</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3468"
+       y="65.115952"
+       x="57.241798"
+       style="font-size:18px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         style="font-size:6px"
+         y="65.115952"
+         x="57.241798"
+         id="tspan3470"
+         sodipodi:role="line">&lt;&lt;class&gt;&gt;</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3472"
+       y="91.465302"
+       x="12.200785"
+       style="font-size:6px;font-style:oblique;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Oblique"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189"><tspan
+         id="tspan3474"
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="91.465302"
+         x="12.200785"
+         sodipodi:role="line">+static AgtLion generate( </tspan><tspan
+         style="font-style:normal;-inkscape-font-specification:Sans"
+         y="98.965302"
+         x="12.200785"
+         sodipodi:role="line"
+         id="tspan3480">                           Point2D initialLocation )</tspan></text>
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3327-1-6)"
+       id="rect3438-2"
+       width="132.94901"
+       height="0.75761443"
+       x="4.8224721"
+       y="82.102707"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4270-7-4);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 146.20759,56.52624 -0.375,0.34375 -7.0625,7.09375 -0.34375,0.34375 0.34375,0.34375 7.0625,7.0625 0.375,0.375 0.34375,-0.375 6.90625,-6.90625 33.09375,0 -1.9375,0.875 a 0.50005,0.50005 0 1 0 0.40625,0.90625 l 4.09375,-1.8125 1.03125,-0.46875 -1.03125,-0.46875 -4.09375,-1.8125 a 0.50005,0.50005 0 0 0 -0.34375,-0.03125 0.50005,0.50005 0 0 0 -0.0625,0.9375 l 1.9375,0.875 -33.09375,0 -6.90625,-6.9375 -0.34375,-0.34375 z m 0,1.40625 6.34375,6.375 -6.34375,6.375 -6.375,-6.375 6.375,-6.375 z"
+       id="path3460-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\yoakubera\eclipse-workspaces\similar\similar\src\doc\microKernel\images\simulationModel\lowLevel\agentFactoryStructureEx3.png"
+       inkscape:export-xdpi="189"
+       inkscape:export-ydpi="189" />
+  </g>
+</svg>

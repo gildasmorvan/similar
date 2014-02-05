@@ -1410,6 +1410,25 @@ This documentation provides ''design guidelines'' to implement SIMILAR simulatio
 
 {{linkbigbtn{[[Documentation content|Documentation content]]}}}</pre>
 </div>
+<div title="IAgent - public local state initialization - Documentation" creator="Designer" modifier="Designer" created="201402051026" changecount="1">
+<pre>A public local state can be added to an agent using the following method:
+{{{
+public void includeNewLevel( 
+	   LevelIdentifier levelIdentifier, 
+	   IPublicLocalStateOfAgent publicLocalState 
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Include a new level in the specification of this agent.
+
+If the agent already lies in the specified level when this method is called, then this method does nothing.
+
+''Parameters:''
+*''Parameter (//levelIdentifier//):'' The identifier of the specified level;
+*''Parameter (//publicLocalState//):'' The public local state of the agent in that level.
+}}}</pre>
+</div>
 <div title="ImageSizePlugin" creator="Administrator" modifier="Administrator" created="201311150900" tags="systemConfig excludeLists plugin" changecount="1">
 <pre>/***
 |Name|ImageSizePlugin|
@@ -2477,49 +2496,191 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="SMD - Agent creation" creator="Designer" modifier="Designer" created="201402041344" modified="201402041414" changecount="21">
+<div title="SMD - Agent creation" creator="Designer" modifier="Designer" created="201402041344" modified="201402051049" changecount="28">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Decision]]  {{stepTitle{Creating agent instances}}}  [[next step &gt;&gt;|SMD - Natural]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Agent creation - Intro]]&gt;&gt;
 !Structure of an agent factory
 &lt;&lt;tiddler [[SMD - Agent creation - Structure]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Agent creation - Specifications]]&gt;&gt;
 !Creating an agent factory
 &lt;&lt;tiddler [[SMD - Agent creation - Creation]]&gt;&gt;
-!Using an agent factory
-&lt;&lt;tiddler [[SMD - Agent creation - Usage]]&gt;&gt;
 
 {{linkbigbtn center{[[Go to the next step &gt;&gt;|SMD - Natural]]}}}
 {{guidelinesNavMenu{
 ----
 [[&lt;&lt; previous step|SMD - Decision]]  {{stepTitle{Creating agent instances}}}  [[next step &gt;&gt;|SMD - Natural]]}}}</pre>
 </div>
-<div title="SMD - Agent creation - Creation" creator="Designer" modifier="Designer" created="201402041413" modified="201402041416" changecount="2">
-<pre>The agent factory usually takes the form of a class using the //factory// design pattern storing the instance of the parameter class as a static value.</pre>
+<div title="SMD - Agent creation - Creation" creator="Designer" modifier="Designer" created="201402041413" modified="201402051016" changecount="21">
+<pre>The agent factory class has to:
+*Be located in the same package than the class of the agent (see [[this page|SMD - Agents skeleton]]);
+*Be named explicitly after the category of the agent;
+*Be named explicitly after the profile of the created agents;
+*Define a static field containing a reference to the ''simulation parameters'';
+The method generating an agent instance has to:
+*Define the context dependent parameters as arguments;
+*Call the appropriate constructor of the agent class, using the values from the arguments and the static parameters;
+*Create and set the initial global state of the agent;
+*Create, initialize and set all the public local states of the agent;
+
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+[&gt;img[images/simulationModel/lowLevel/factoryTree.png]]
+This example is a continuation of the example stated in the definition of [[public local states|SMD - Public local states]] and of the [[perception process|SMD - Perception]] of the ''lion'' agent of a ''wildlife simulation''.
+
+The ''lion'' agent is defined in the [[AgtLion class|files/simulationModel/lowLevel/AgtLion.java]]. It lies only in the ''Savannah'' level and therefore is characterized by:
+*A public local state implemented as the [[AgtLionPLSInSavannahLevel class|files/simulationModel/highLevel/AgtLionPLSInSavannahLevel.java]] and defining:
+**Its age;
+**Its location;
+*A private local state implemented inside the [[AgtLion class|files/simulationModel/lowLevel/AgtLion.java]] and defining:
+**A threshold age over which the lion ignores gazelles;
+**A threshold distance over which the lion cannot see gazelles;
+*An empty global state defined by the [[AgtLionGS class|files/simulationModel/lowLevel/AgtLionGS.java]]
+In this example, we assume that:
+*The parameters of the simulation are defined in the [[WildlifeSimulationParam class|files/simulationModel/lowLevel/WildlifeSimulationParam.java]];
+*The random generation strategy defines a method:
+{{{
+public long randomLong( long rangeMin, long rangeMax );
+}}}
+The initialization profile defined in this example is such that:
+*The age is initially equal to {{{0}}};
+*The initial location is a context dependent value;
+*The threshold age is a random value within the range {{{[0;5]}}} defined in the simulation parameters;
+*The threshold distance is defined in the simulation parameters as equal to {{{500}}};
+!Code
+Such a lion agent generation factory is implemented with the following code. The sources of this class are also available as a [[stand alone|files/simulationModel/lowLevel/AgtLionFactory]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/lowLevel/AgtLionFactory.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
 </div>
-<div title="SMD - Agent creation - Intro" creator="Designer" modifier="Designer" created="201402041412" modified="201402041413" changecount="2">
+<div title="SMD - Agent creation - Intro" creator="Designer" modifier="Designer" created="201402041412" modified="201402050731" changecount="11">
 <pre>We strongly recommend designers to keep from using directly the constructor of the agents to create new agents. Indeed:
 *The [[parameters class|SMD - Tools preparation - Parameters]] of the simulation is more difficult to use in that context, since a reference to the parameters has to be available;
-*The addition of new initialization profiles for the agents implies the modification of the agent class. It implies the addition of new constructors to the agent class. Therefore, the more initialization profiles are defined, the more unreadable the class of the agent becomes.
-Instead, agents are created using a factory, embodying ''one'' initialization profile.
-
-[img(100%,)[images/simulationModel/lowLevel/agentFactoryPrinciple.png]]</pre>
+*The addition of initialization profiles to an agent implies the modification of its class (//i.e.// addition of new constructors). Therefore, the more initialization profiles are defined, the more unreadable the class of the agent becomes.
+Instead, we defend that agents have to be created using ''factories'', where each factory embodies ''one'' initialization profile.</pre>
 </div>
-<div title="SMD - Agent creation - Structure" creator="Designer" modifier="Designer" created="201402041413" modified="201402041419" changecount="7">
+<div title="SMD - Agent creation - Specifications" creator="Designer" modifier="Designer" created="201402050742" modified="201402051048" changecount="38">
+<pre>The agent factory usually takes the form of a class using the ''//factory// design pattern'', storing the instance of the ''parameter'' class as a ''static value''. Agents are created using ''static factory methods'' having the ''context dependent'' parameters ''as arguments''.
+
+[img(100%,)[images/simulationModel/lowLevel/agentFactoryStructure.png]]
+
+The role of the factory method is to:
+*Create the instance of the agent class (//i.e.// an instance of the {{{IAgent}}} interface);
+*Initialize the global state of the created agent; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+&lt;&lt;tiddler [[IAgent - public local state initialization - Documentation]]&gt;&gt;
+}}} === +++?*[&lt;span class=&quot;exsmallbtn &quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+The initialization of the public local state of an agent in a ''Savannah'' level is made with the following instructions:
+{{{
+IAgent theAgent = ...;
+IPublicLocalStateOfAgent initialPublicLocalStateInSavannah = ...;
+LevelIdentifier savannahIdentifier = ...;
+theAgent.includeNewLevel(
+	savannahIdentifier,
+	initialPublicLocalStateInSavannah
+);
+}}}
+}}} ===
+
+*Initialize the public local states of the created agent; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+No specific method is defined in the {{{IAgent}}} interface to perform such a task, since this is an implementation-dependent feature. The {{{AbstractAgent}}} class from the common libs includes such a feature, with the following method:
+{{{
+public void initializeGlobalMemoryState( 
+	IGlobalMemoryState initialGlobalState 
+);
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Sets the value of the initial memory state of the agent.
+
+''Parameters:''
+*''Parameter (//initialGlobalState//):'' The value of the initial global state of the agent. This state cannot be {{{null}}}.
+''Throws:''
+*''IllegalArgumentException:'' If the argument is {{{null}}}.
+}}}
+}}} === +++?*[&lt;span class=&quot;exsmallbtn &quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+The initialization of the global state of an agent is made with the following instructions:
+{{{
+AbstractAgent theAgent = ...;
+IGlobalMemoryState initialGlobalState = ...;
+theAgent.initializeGlobalMemoryState(
+	initialGlobalState
+);
+}}}
+}}} ===
+
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Structure example: Default case&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the example stated in the definition of [[public local states|SMD - Public local states]] and of the [[perception process|SMD - Perception]] of the ''lion'' agent of a ''wildlife simulation''.
+
+The ''lion'' agent is characterized by:
+*A public local state defining:
+**Its age;
+**Its location;
+*A private local state defining:
+**A threshold age over which the lion ignores gazelles;
+**A threshold distance over which the lion cannot see gazelles.
+In this example, we assume that:
+*The [[parameters of the simulation|SMD - Tools preparation - Parameters]] are defined in the {{{WildlifeSimulationParam}}} class;
+*The age is initially equal to {{{0}}};
+*The initial location is a context dependent value;
+*The threshold age is a random value within the range {{{[0;5]}}} defined in the simulation parameters;
+*The threshold distance is defined in the simulation parameters as equal to {{{500}}};
+Then, the lion agent generation factory has the following shape:
+
+[img(98%,)[images/simulationModel/lowLevel/agentFactoryStructureEx1.png]]
+}}} ===
+
+
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Structure example: Defining two initialization profiles&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the example stated in the definition of [[public local states|SMD - Public local states]] and of the [[perception process|SMD - Perception]] of the ''lion'' agent of a ''wildlife simulation''.
+
+The ''lion'' agent is characterized by:
+*A public local state defining:
+**Its age;
+**Its location;
+*A private local state defining:
+**A threshold age over which the lion ignores gazelles;
+**A threshold distance over which the lion cannot see gazelles.
+In this example, we assume that:
+*The [[parameters of the simulation|SMD - Tools preparation - Parameters]] are defined in the {{{WildlifeSimulationParam}}} class;
+*The age is initially equal to {{{0}}};
+*The initial location is a context dependent value;
+*The threshold age is a value within the range {{{[0;5]}}} defined in the simulation parameters;
+*The threshold distance is defined in the simulation parameters as equal to {{{500}}};
+*The lions can have two different profiles:
+**''Normal'' lions chase gazelles that are in the second half of the threshold age range (in this example {{{[2.5;5]}}});
+**''Fierce'' lions chase gazelles that are below the maximal age {{{5}}};
+In this case, two different shapes can be given to the lion agent factory:
+!Single factory approach
+[img(98%,)[images/simulationModel/lowLevel/agentFactoryStructureEx2.png]]
+!Multiple factories approach
+[img(98%,)[images/simulationModel/lowLevel/agentFactoryStructureEx3.png]]
+}}} ===</pre>
+</div>
+<div title="SMD - Agent creation - Structure" creator="Designer" modifier="Designer" created="201402041413" modified="201402050947" changecount="17">
 <pre>The initialization profile defined in an agent factory is characterized by:
-*Some parameters coming from the [[parameters class|SMD - Tools preparation - Parameters]] of the simulation;
+*Some parameters coming from the [[parameters class|SMD - Tools preparation - Parameters]] of the simulation;  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance parameters related to the default values of the elements of the public or private local states (//e.g.// a default value, a range for the default values) or related to computations precision (//e.g.// the epsilon used in double values comparison)
+}}} ===
+
 *Other parameters coming from the context of the construction of the agent; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
 For instance the current density of a specific agent population in the simulation, the current value of a private local state of an agent, etc.
 }}} ===
 
-*The way these parameters are used to:
+*The way these parameters are used, in order to:
 **Call the constructor of the agent (to initialize the private local state of the agent);
 **Create the initial global state of the agent;
 **Create the initial public local states of the agent;
-An agent is then created by the factory only by calling the factory method, and providing a value to the context dependent parameters.</pre>
-</div>
-<div title="SMD - Agent creation - Usage" creator="Designer" modifier="Designer" created="201402041414" changecount="1">
-<pre>Type the text for 'New Tiddler'</pre>
+An agent is created with such factories by calling one of its factory methods and providing a value to the context dependent parameters (see the image).
+
+[img(100%,)[images/simulationModel/lowLevel/agentFactoryPrinciple.png]]</pre>
 </div>
 <div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201401241353" changecount="46">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Levels identification]]  {{stepTitle{Agents identification}}}  [[next step &gt;&gt;|SMD - Level skeleton]]
@@ -2658,7 +2819,7 @@ The following code illustrates the implementation of the &quot;City bus&quot; ag
 
 \(_{\underline{2:}\text{ These constraints come from java best practices.}}\)</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation" creator="Designer" modifier="Designer" created="201401221550" modified="201401231229" changecount="11">
+<div title="SMD - Agents skeleton - Implementation" creator="Designer" modifier="Designer" created="201401221550" modified="201402051033" changecount="21">
 <pre>!Specifications and implementation instructions
 [&lt;img(50%,)[images/simulationModel/highLevel/agentDesignOutline2.png]]
 In SIMILAR, the agents are modeled as instances of the +++^34em^*@[&lt;strong&gt;IAgent&lt;/strong&gt;]
@@ -2670,7 +2831,18 @@ To facilitate simulation revisions, each core element and behavior is reified as
 In the first step of the specification of the agents, only subset of the content of each agent is specified and implemented. Therefore, the unspecified methods have to throw an {{{UnsupportedOperationException}}} at this stage.
 
 In this skeleton, the following elements have to be defined:
-*The ''category'' of the agent; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The ''category'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Category buttons]]&gt;&gt;
+*The access to the ''levels'' where the agent lies; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Levels buttons]]&gt;&gt;
+*The access to the ''perceived data'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Perception buttons]]&gt;&gt;
+*The access to the ''global state'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Global state buttons]]&gt;&gt;
+*The access to the ''public local states'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Public local states buttons]]&gt;&gt;
+{{bigemphasisblock{
+Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines a +++^34em^*@[class]@@font-weight:normal;The {{{AbstractAgent}}} class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
+=== providing a default implementation of these features.
+}}}</pre>
+</div>
+<div title="SMD - Agents skeleton - Implementation - Category buttons" creator="Designer" modifier="Designer" created="201402051029" changecount="1">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the category of the agent is defined by the following method of the {{{IAgent}}} interface:
 {{{
@@ -2695,9 +2867,66 @@ The implementation of these methods usually consists in:
 *Adding a field to the class having the type {{{AgentCategory}}};
 *Setting its initial value in the constructor of the class;
 *Granting access to that field in the appropriate methods (//i.e.// {{{getCategory( )}}}).
-}}} ===
+}}} ===</pre>
+</div>
+<div title="SMD - Agents skeleton - Implementation - Global state buttons" creator="Designer" modifier="Designer" created="201402051032" modified="201402051036" changecount="2">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The access to the global state of the agent is defined by the following method of the {{{IAgent}}} interface:
+{{{
+public IGlobalMemoryState getGlobalMemoryState( );
+}}}
+{{javadoctitle{Javadoc:}}}
+{{javadocsection{
+Gets the global memory state of the agent.
 
-*The access to the ''levels'' where the agent lies; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+''Returns:''
+*The global memory state of the agent.
+}}}
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+In SIMILAR, the global memory state of an agent is an instance of the +++^34em^*@[&lt;strong&gt;IGlobalMemoryState&lt;/strong&gt;]
+The {{{IGlobalMemoryState}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
+=== class. This class and its usage are [[described later|SMD - Memory]].
+
+To facilitate the definition of various initialization profiles of the global state of the agent, its inital value should not be defined within the constructor. Instead, we uphold that a ''setter has to be defined, to delay the initialization'' when it becomes appropriate.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+This example illustrates the management of the global state of an agent named &quot;City bus&quot;. This agent is declared in the class called {{{CityBusAgent}}}.
+{{{
+public class CityBusAgent implements IAgent {
+
+	[...]
+
+	private IGlobalMemoryState globalMemoryState;
+
+	[...]
+
+	@Override
+	public IGlobalMemoryState getGlobalMemoryState() {
+		return this.globalMemoryState;
+	}
+
+	/**
+	 * Sets the value of the initial memory state of the agent.
+	 * @param newState The value of the initial memory state of the agent.
+	 * This memory state cannot be &lt;code&gt;null&lt;/code&gt;.
+	 */
+	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) {
+		if( initialMemoryState == null ){
+			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+		}
+		this.globalMemoryState = initialMemoryState;
+	}
+
+	[...]
+	
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Agents skeleton - Implementation - Levels buttons" creator="Designer" modifier="Designer" created="201402051030" modified="201402051030" changecount="2">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the levels where the agent lies is defined by the following method of the {{{IAgent}}} interface:
 {{{
@@ -2743,9 +2972,10 @@ public class CityBusAgent implements IAgent {
 
 }
 }}}
-}}} ===
-
-*The access to the ''perceived data'' of the agent; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+}}} ===</pre>
+</div>
+<div title="SMD - Agents skeleton - Implementation - Perception buttons" creator="Designer" modifier="Designer" created="201402051031" modified="201402051031" changecount="2">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the perceived data of the agent is defined by three methods of the {{{IAgent}}} interface:
 *One method ''getting'' the lastly perceived data from ''all the levels'' where the agent lies; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
@@ -2861,64 +3091,10 @@ public class CityBusAgent implements IAgent {
 
 }
 }}}
-}}} ===
-
-*The access to the ''global state'' of the agent; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-The access to the global state of the agent is defined by the following method of the {{{IAgent}}} interface:
-{{{
-public IGlobalMemoryState getGlobalMemoryState( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the global memory state of the agent.
-
-''Returns:''
-*The global memory state of the agent.
-}}}
-}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-In SIMILAR, the global memory state of an agent is an instance of the +++^34em^*@[&lt;strong&gt;IGlobalMemoryState&lt;/strong&gt;]
-The {{{IGlobalMemoryState}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== class. This class and its usage are [[described later|SMD - Memory]].
-
-To facilitate the definition of various initialization profiles of the global state of the agent, its inital value should not be defined within the constructor. Instead, we uphold that a ''setter has to be defined, to delay the initialization'' when it becomes appropriate.
-}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
-{{exsection{
-This example illustrates the management of the global state of an agent named &quot;City bus&quot;. This agent is declared in the class called {{{CityBusAgent}}}.
-{{{
-public class CityBusAgent implements IAgent {
-
-	[...]
-
-	private IGlobalMemoryState globalMemoryState;
-
-	[...]
-
-	@Override
-	public IGlobalMemoryState getGlobalMemoryState() {
-		return this.globalMemoryState;
-	}
-
-	/**
-	 * Sets the value of the initial memory state of the agent.
-	 * @param newState The value of the initial memory state of the agent.
-	 * This memory state cannot be &lt;code&gt;null&lt;/code&gt;.
-	 */
-	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) {
-		if( initialMemoryState == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		}
-		this.globalMemoryState = initialMemoryState;
-	}
-
-	[...]
-	
-}
-}}}
-}}} ===
-
-*The access to the ''public local states'' of the agent; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+}}} ===</pre>
+</div>
+<div title="SMD - Agents skeleton - Implementation - Public local states buttons" creator="Designer" modifier="Designer" created="201402051033" changecount="1">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The notion of level where an agent lies is tightly bound with the notion of public local state. Indeed, if an agent has a public local state in a specific level, then the agent is necessarily lying in that level. Therefore, adding a public local state to an agent is often synonym of adding that agent to a level.
 !Specification of the access methods
@@ -2946,23 +3122,7 @@ Gets the public local state of the agent located in a specific level of the simu
 
 *''Adding'' a public local state of the agent for a specific level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsubsection{
-A public local state can be added to an agent using the following method:
-{{{
-public void includeNewLevel( 
-	   LevelIdentifier levelIdentifier, 
-	   IPublicLocalStateOfAgent publicLocalState 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Include a new level in the specification of this agent.
-
-If the agent already lies in the specified level when this method is called, then this method does nothing.
-
-''Parameters:''
-*''Parameter (//levelIdentifier//):'' The identifier of the specified level;
-*''Parameter (//publicLocalState//):'' The public local state of the agent in that level.
-}}}
+&lt;&lt;tiddler [[IAgent - public local state initialization - Documentation]]&gt;&gt;
 }}} ===
 
 *''Removing'' a public local state of the agent for a specific level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
@@ -3062,12 +3222,7 @@ public class CityBusAgent implements IAgent {
 
 }
 }}}
-}}} ===
-
-{{bigemphasisblock{
-Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines a +++^34em^*@[class]@@font-weight:normal;The {{{AbstractAgent}}} class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
-=== providing a default implementation of these features.
-}}}</pre>
+}}} ===</pre>
 </div>
 <div title="SMD - Agents skeleton - Structure" creator="Designer" modifier="Designer" created="201401221549" modified="201401231332" changecount="4">
 <pre>!Structure of an agent in SIMILAR
@@ -3082,11 +3237,11 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 *A ''decision'' process for each level of the agent.
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
-<div title="SMD - Decision" creator="Designer" modifier="Designer" created="201402031641" modified="201402041344" changecount="12">
+<div title="SMD - Decision" creator="Designer" modifier="Designer" created="201402031641" modified="201402051051" changecount="14">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Decision - Introduction]]&gt;&gt;
-!Structure of the decision process
+!Structure of the decision process 
 &lt;&lt;tiddler [[SMD - Decision - Structure]]&gt;&gt;
 !Specifications and implementation instructions
 &lt;&lt;tiddler [[SMD - Decision - Specifications]]&gt;&gt;
@@ -3098,7 +3253,7 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 ----
 [[&lt;&lt; previous step|SMD - Global state revision]]  {{stepTitle{Decision}}}  [[next step &gt;&gt;|SMD - Agent creation]]}}}</pre>
 </div>
-<div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" modified="201402041339" changecount="14">
+<div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" modified="201402051054" changecount="17">
 <pre>The implementation of this method consists in:
 *Identifying the level from which the decisions are made;
 *Casting the global state of the agent in the appropriate class, to access its various data;
@@ -3113,6 +3268,7 @@ During the redaction of the decision process, the information required by the de
 *The [[influence relation graph|SMD - Level skeleton]]: new levels can be added to the levels that can be influenced by the level from which the decision is made;
 +++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Decision process full example&lt;/span&gt;]
 {{exsection{
+[&gt;img[images/simulationModel/lowLevel/decisionTree.png]]
 This example is a continuation of the example started in the documentation of the [[perceived data model|SMD - Perception - Perceived data]].
 In this example, a ''lion'' agent decides to ''eat'' the closest ''gazelle'' agent. If the agent is close enough, it directly eats the gazelle. Otherwise, it ''moves towards'' the gazelle. Note that if two gazelles are at the same distance, then the agent chooses one of them randomly.
 !Code
@@ -3394,12 +3550,11 @@ This step of the methology focuses on the creation of both the //global state// 
 }}}
 [img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_global.png]]</pre>
 </div>
-<div title="SMD - Global state - Plan" creator="Designer" modifier="Designer" created="201402031014" modified="201402031657" changecount="14">
+<div title="SMD - Global state - Plan" creator="Designer" modifier="Designer" created="201402031014" modified="201402050722" changecount="15">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Perception]]  {{stepTitle{Global state - foreword}}}  [[next step &gt;&gt;|SMD - Global state model]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Global state - Introduction]]&gt;&gt;
 !Specifying the global state revision process of an agent class
-[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline5.png]]
 The specification of the global state revision process of an agent relies on the implementation of two distinct elements:
 *A class modeling the global state of the agent;
 *A method of the {{{IAgent}}} interface determining how the global state model is updated, using its previous value and the lastly perceived data from all the levels where the agent lies;
@@ -3409,12 +3564,10 @@ The specification of the global state revision process of an agent relies on the
 ----
 [[&lt;&lt; previous step|SMD - Perception]]  {{stepTitle{Global state - foreword}}}  [[next step &gt;&gt;|SMD - Global state model]]}}}</pre>
 </div>
-<div title="SMD - Global state model" creator="Designer" modifier="Designer" created="201402031044" modified="201402031339" changecount="16">
+<div title="SMD - Global state model" creator="Designer" modifier="Designer" created="201402031044" modified="201402050724" changecount="18">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state - Plan]]  {{stepTitle{Global state model}}}  [[next step &gt;&gt;|SMD - Global state revision]]
 ----}}}
 The ''global state'' of an agent models the cross-level information used by the decision process of an agent. This state usually contains cross-level plans or mind states.
-
-{{focusemphasisblock{This step of the methology focuses on the creation of the global state of each agent.}}}
 !Content of the gobal state of an agent
 &lt;&lt;tiddler [[SMD - Global state model - Content]]&gt;&gt;
 !Specifications and implementation instructions
@@ -3513,12 +3666,10 @@ The implementation of this method usually consists in:
 {{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractGlobalMemoryState}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
 === providing a default implementation to this method.}}}</pre>
 </div>
-<div title="SMD - Global state revision" creator="Designer" modifier="Designer" created="201402031337" modified="201402031702" changecount="17">
+<div title="SMD - Global state revision" creator="Designer" modifier="Designer" created="201402031337" modified="201402050725" changecount="19">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Global state model]]  {{stepTitle{Global state revision model}}}  [[next step &gt;&gt;|SMD - Decision]]
 ----}}}
 &lt;&lt;tiddler [[SMD - Global state revision - Intro]]&gt;&gt;
-!Structure of the global state revision process
-&lt;&lt;tiddler [[SMD - Global state revision - Structure]]&gt;&gt;
 !Specifications and implementation instructions
 &lt;&lt;tiddler [[SMD - Global state revision - Specifications]]&gt;&gt;
 !Writing the global state revision phase of an agent class
@@ -3561,13 +3712,14 @@ Then the implementation of the global state revision process of the ''test subje
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/AgtTestSubject.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===</pre>
 </div>
-<div title="SMD - Global state revision - Intro" creator="Designer" modifier="Designer" created="201402031338" modified="201402031345" changecount="4">
-<pre>The value of the global state of an agent is revised every time the agent perceives things from the perspective of a level.
+<div title="SMD - Global state revision - Intro" creator="Designer" modifier="Designer" created="201402031338" modified="201402050725" changecount="6">
+<pre>The value of the global state of an agent is revised every time the agent perceives things from the perspective of a level. This process relies on a ''global state revision'' model to determine how this revision is made.
 
-{{focusemphasisblock{This step of the methology focuses on the creation of the global state revision process of each agent.}}}</pre>
+In SIMILAR, the global state revision model can be seen as an ''application'' taking into parameters the ''most recent perceived data'' from each level where the agent lies and the former value of the ''global state'', and returning the ''revised value of the global state''.</pre>
 </div>
-<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402041205" changecount="25">
-<pre>In the micro-kernel of SIMILAR, the global state revision process is modeled by the following method of the {{{IAgent}}} interface:
+<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402050723" changecount="26">
+<pre>[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline5.png]]
+In the micro-kernel of SIMILAR, the global state revision process is modeled by the following method of the {{{IAgent}}} interface:
 {{{
 void reviseMemory( 
     Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt; perceivedData, 
@@ -3578,9 +3730,6 @@ This method defines two parameters:
 *The {{{perceivedData}}} parameter defines the most recently perceived data from the perspective of all the levels where the agent lies;
 *The {{{globalState}}} parameter defines the former value of the global state of the agent;
 This method directly modifies the value of {{{globalState}}}: as a side effect of this method call, {{{globalState}}} becomes the revised global state of the agent.</pre>
-</div>
-<div title="SMD - Global state revision - Structure" creator="Designer" modifier="Designer" created="201402031345" changecount="1">
-<pre>In SIMILAR, the global state revision model can be seen as an ''application'' taking into parameters the ''most recent perceived data'' from each level where the agent lies and the former value of the ''global state'', and returning the ''revised value of the global state''.</pre>
 </div>
 <div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201401241525" changecount="11">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  {{stepTitle{High level specifications}}}  [[next step &gt;&gt;|SMD - Levels identification]]

@@ -46,16 +46,24 @@
  */
 package fr.lgi2a.similar.microkernel;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * The object identifying the category of an agent involved in a simulation.
  * 
- * <h1>Usage</h1>
+ * <h1>Role</h1>
  * <p>
  * 	To facilitate the access to agent categories, it is recommended to create 
  * 	a class containing each agent category of the simulation as a static value. This avoids
  * 	any misspelling when referring to a level.
  * </p>
- * <h2>Example</h2>
+ * <p>
+ * 	This class supports the definition of relations between categories (for instance a "Car" is a "Vehicle"),
+ * 	with its {@link AgentCategory#defineAsA(AgentCategory)} and {@link AgentCategory#isA(AgentCategory)} methods.
+ * 	This relationship implies an inheritance between their public local states.
+ * </p>
+ * <h1>Usage example</h1>
  * <p>
  * 	The following code shows how to create the agent categories for a simulation of the road traffic,
  * 	containing a "Vehicle" and "Pedestrian" agent categories.
@@ -74,6 +82,10 @@ public final class AgentCategory {
 	 * The string identifier of the category.
 	 */
 	private final String identifier;
+	/**
+	 * The parent categories of this agent category.
+	 */
+	private Set<AgentCategory> parentCategories;
 	
 	/**
 	 * Builds an instance of this class using a specific value for the agent category.
@@ -85,6 +97,47 @@ public final class AgentCategory {
 			throw new IllegalArgumentException( "The first argument cannot be null." );
 		}
 		this.identifier = identifier;
+		this.parentCategories = new HashSet<AgentCategory>();
+	}
+	
+	/**
+	 * Determines if this category defines an agent that can also be seen as belonging to another category.
+	 * <p>
+	 * 	For instance, a "Lion cub" can be seen as a "Lion" and as a "Cub".
+	 * </p>
+	 * @param category The category to check.
+	 * @return <code>true</code> if this category defines an agent that can also be seen as belonging to another category.
+	 */
+	public boolean isA( AgentCategory category ) {
+		if( this.equals( category ) ) {
+			return true;
+		} else {
+			for( AgentCategory parent : this.parentCategories ) {
+				if( parent.isA( category ) ){
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	
+	/**
+	 * Creates a semantic link between this category and a parent category, such that
+	 * an agent from this category can be seen as also belonging to another category.
+	 * <p>
+	 * 	For instance, a "Lion cub" can be seen as a "Lion" and as a "Cub".
+	 * </p>
+	 * This relationship implies that the public local state of the "Lion cub" inherits from 
+	 * the public local state of the "Lion" and of the "Cub".
+	 * @param parent The agent category to add as a parent of this category.
+	 * @throws IllegalArgumentException If the addition of the <code>parent</code> category creates 
+	 * a cycle.
+	 */
+	public void defineAsA( AgentCategory parent ) {
+		if( parent.isA( this ) ){
+			throw new IllegalArgumentException( "The addition of this category creates an cycle between categories." );
+		}
+		this.parentCategories.add( parent );
 	}
 	
 	/**

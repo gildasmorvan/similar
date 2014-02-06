@@ -17,6 +17,7 @@ import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPDFSavannah
 import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPLSInSavannahLevel;
 import fr.lgi2a.wildlifesimulation.model.environment.savannah.PLSEnvInSavannahLevel;
 import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models an agent from the 'Lion' category.
@@ -73,12 +74,14 @@ public class AgtLion extends AbstractAgent {
 	@Override
 	public IPerceivedDataOfAgent perceive(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
 		if( level.equals( WildlifeLevelList.SAVANNAH ) ){
 			return this.perceiveFromSavannah(
 					level, 
+					time,
 					publicLocalStateInLevel, 
 					levelsPublicLocalObservableDynamicState
 			);
@@ -94,6 +97,7 @@ public class AgtLion extends AbstractAgent {
 	 */
 	private AgtLionPDFSavannah perceiveFromSavannah(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
@@ -155,6 +159,7 @@ public class AgtLion extends AbstractAgent {
 	 */
 	@Override
 	public void reviseMemory(
+			SimulationTimeStamp time,
 			Map<LevelIdentifier, 
 			IPerceivedDataOfAgent> perceivedData,
 			IGlobalMemoryState memoryState
@@ -168,7 +173,9 @@ public class AgtLion extends AbstractAgent {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void decide(LevelIdentifier level, 
+	public void decide(
+			LevelIdentifier level, 
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences

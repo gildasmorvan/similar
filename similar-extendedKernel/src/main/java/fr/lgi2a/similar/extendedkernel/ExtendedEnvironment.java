@@ -54,6 +54,7 @@ import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IPublicLocalState;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 
 /**
@@ -187,6 +188,7 @@ public class ExtendedEnvironment extends AbstractEnvironment {
 	@Override
 	public void natural(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState,
 			InfluencesMap producedInfluences
 	) {
@@ -194,6 +196,10 @@ public class ExtendedEnvironment extends AbstractEnvironment {
 		if( naturalActionModel == null ){
 			throw new IllegalStateException( "No natural action model is defined for the level '" + level + "'." );
 		}
-		naturalActionModel.natural( levelsPublicLocalObservableDynamicState, producedInfluences );
+		naturalActionModel.natural( 
+				time, 
+				levelsPublicLocalObservableDynamicState, 
+				producedInfluences 
+		);
 	}
 }

@@ -53,18 +53,54 @@ import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
- * A probe of the 'common libs' printing on the standard output 
- * the trace of an exception that was thrown during the execution of the simulation.
- * 
+ * This probe tracks the execution of the simulation and prints notification messages
+ * in an stream printer.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ProbeExceptionPrinter implements IProbe {
+public class ProbeExecutionTracker implements IProbe {
+	/**
+	 * The stream where the data are written.
+	 */
+	private PrintStream target;
+	/**
+	 * Determines if the verbose mode has to include the simulation steps.
+	 */
+	private boolean printSteps;
+	
+	/**
+	 * Creates an instance of this probe writing in a specific print stream.
+	 * @param target The stream where the data are written.
+	 * @param printSteps <code>true</code> if the verbose mode has to include the simulation steps.
+	 * @throws IllegalArgumentException If the <code>target</code> is <code>null</code>.
+	 */
+	public ProbeExecutionTracker(
+		PrintStream target,
+		boolean printSteps
+	){
+		this.target = target;
+		this.printSteps = printSteps;
+	}
+	
+	/**
+	 * Creates an instance of this probe writing in a specific print stream.
+	 * @param target The stream where the data are written.
+	 * @throws IllegalArgumentException If the <code>target</code> is <code>null</code>.
+	 */
+	public ProbeExecutionTracker(
+		PrintStream target
+	){
+		this(
+			target,
+			true
+		);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void prepareObservation() {
-		// Does nothing.
+		this.target.println( "Starting a new simulation." );
 	}
 
 	/**
@@ -75,7 +111,7 @@ public class ProbeExceptionPrinter implements IProbe {
 			SimulationTimeStamp initialTimestamp,
 			ISimulationEngine simulationEngine
 	) {
-		// Does nothing.
+		this.target.println( "Simulation initialized (starting at " + initialTimestamp + " )." );
 	}
 
 	/**
@@ -86,7 +122,9 @@ public class ProbeExceptionPrinter implements IProbe {
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
 	) {
-		// Does nothing.
+		if( this.printSteps ){
+			this.target.println( "Reached half-consistent time " + timestamp + "." );
+		}
 	}
 
 	/**
@@ -96,8 +134,17 @@ public class ProbeExceptionPrinter implements IProbe {
 	public void observeAtFinalTime(
 			SimulationTimeStamp finalTimestamp,
 			ISimulationEngine simulationEngine
-	) {
-		// Does nothing.
+	) {	
+		this.target.println( "Simulation finished at the stamp " + finalTimestamp + "." );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void endObservation() {
+		this.target.println( "The simulation has ended." );
+		this.target.flush();
 	}
 
 	/**
@@ -107,10 +154,8 @@ public class ProbeExceptionPrinter implements IProbe {
 	public void reactToError(
 			String errorMessage, 
 			Throwable cause
-	) {
-		PrintStream streamPrinter = System.err;
-		streamPrinter.println( "An error was met during the execution of the simulation: " + errorMessage );
-		cause.printStackTrace( streamPrinter );
+	) { 
+		this.target.println( "An exception was raised.\nCause (" + cause.getClass().getSimpleName() + "): " + errorMessage );
 	}
 
 	/**
@@ -120,15 +165,7 @@ public class ProbeExceptionPrinter implements IProbe {
 	public void reactToAbortion(
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
-	) {
-		// Does nothing.
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void endObservation() {
-		// Does nothing.
+	) { 
+		this.target.println( "Simulation aborted at the stamp " + timestamp + "." );
 	}
 }

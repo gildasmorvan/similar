@@ -52,6 +52,7 @@ import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IInfluence;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.AbstractLearningEngineOperationMoment;
 import fr.lgi2a.similar.microkernel.libs.tools.learning.trace.SimulationExecutionTrace;
@@ -83,11 +84,12 @@ public abstract class AbstractLearningEnvironment extends AbstractEnvironment {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.IEnvironment#natural(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.IDynamicStateMap, fr.lgi2a.similar.microkernel.InfluencesMap)
+	 * @see fr.lgi2a.similar.microkernel.IEnvironment#natural(LevelIdentifier, fr.lgi2a.similar.microkernel.SimulationTimeStamp, IDynamicStateMap, InfluencesMap)
 	 */
 	@Override
 	public void natural(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState,
 			InfluencesMap producedInfluences
 	) {

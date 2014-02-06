@@ -50,6 +50,7 @@ import fr.lgi2a.similar.extendedkernel.libs.abstractimplementation.AbstractEnvNa
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models a natural action model producing no influences.
@@ -71,6 +72,7 @@ public final class EmptyEnvNaturalModel extends AbstractEnvNaturalModel {
 	 */
 	@Override
 	public void natural(
+			SimulationTimeStamp time,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState,
 			InfluencesMap producedInfluences
 	) {

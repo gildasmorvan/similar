@@ -51,6 +51,7 @@ import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedDataOfAgent;
 
 /**
@@ -79,6 +80,7 @@ public final class EmptyAgtPerceptionModel extends AbstractAgtPerceptionModel {
 	 */
 	@Override
 	public IPerceivedDataOfAgent perceive(
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {

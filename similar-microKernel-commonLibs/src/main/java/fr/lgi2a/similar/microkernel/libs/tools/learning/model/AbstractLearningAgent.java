@@ -118,11 +118,12 @@ public abstract class AbstractLearningAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.IAgent#perceive(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent, fr.lgi2a.similar.microkernel.IDynamicStateMap)
+	 * @see fr.lgi2a.similar.microkernel.IAgent#perceive(LevelIdentifier, SimulationTimeStamp, IPublicLocalStateOfAgent, IDynamicStateMap)
 	 */
 	@Override
 	public IPerceivedDataOfAgent perceive(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
@@ -154,10 +155,11 @@ public abstract class AbstractLearningAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.IAgent#reviseMemory(java.util.Map, fr.lgi2a.similar.microkernel.IGlobalMemoryState)
+	 * @see fr.lgi2a.similar.microkernel.IAgent#reviseMemory(SimulationTimeStamp, Map, IGlobalMemoryState)
 	 */
 	@Override
 	public void reviseMemory(
+			SimulationTimeStamp time,
 			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
 			IGlobalMemoryState memoryState
 	) {
@@ -200,11 +202,12 @@ public abstract class AbstractLearningAgent extends AbstractAgent {
 
 	/**
 	 * {@inheritDoc}
-	 * @see fr.lgi2a.similar.microkernel.IAgent#decide(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.IGlobalMemoryState, fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent, fr.lgi2a.similar.microkernel.InfluencesMap)
+	 * @see fr.lgi2a.similar.microkernel.IAgent#decide(LevelIdentifier, SimulationTimeStamp, IGlobalMemoryState, IPerceivedDataOfAgent, InfluencesMap)
 	 */
 	@Override
 	public void decide(
 			LevelIdentifier level, 
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences

@@ -55,6 +55,7 @@ import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 
 /**
@@ -88,11 +89,12 @@ public class PassiveAgent extends AbstractAgent {
 
 	/**
 	 * Models a perception model perceiving nothing.
-	 * @see AbstractAgent#perceive(LevelIdentifier, IPublicLocalStateOfAgent, IDynamicStateMap)
+	 * @see AbstractAgent#perceive(LevelIdentifier, SimulationTimeStamp, IPublicLocalStateOfAgent, IDynamicStateMap)
 	 */
 	@Override
 	public IPerceivedDataOfAgent perceive(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
@@ -101,21 +103,23 @@ public class PassiveAgent extends AbstractAgent {
 
 	/**
 	 * Models a global state revision model doing nothing.
-	 * @see AbstractAgent#reviseMemory(Map, IGlobalMemoryState)
+	 * @see AbstractAgent#reviseMemory(SimulationTimeStamp, Map, IGlobalMemoryState)
 	 */
 	@Override
 	public void reviseMemory(
+			SimulationTimeStamp time,
 			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
 			IGlobalMemoryState globalState
 	) { }
 
 	/**
 	 * Models a decision model doing nothing.
-	 * @see AbstractAgent#decide(LevelIdentifier, IGlobalMemoryState, IPerceivedDataOfAgent, InfluencesMap)
+	 * @see AbstractAgent#decide(LevelIdentifier, SimulationTimeStamp, IGlobalMemoryState, IPerceivedDataOfAgent, InfluencesMap)
 	 */
 	@Override
 	public void decide(
 			LevelIdentifier level, 
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences

@@ -50,6 +50,7 @@ import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models the decision process used by an agent to make decision from a specific level.
@@ -67,11 +68,14 @@ public interface IAgtDecisionModel {
 	 * <p>
 	 * 	TODO formal notation
 	 * </p>
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>getLevel( )</sub>[ for which 
+	 * the decision is made.
 	 * @param memoryState The global memory state of the agent when it made a decision.
 	 * @param perceivedData The data that were perceived about the level and its perceptible levels.
 	 * @param producedInfluences The map where the influences resulting from the decisions are stored.
 	 */
 	void decide(
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences

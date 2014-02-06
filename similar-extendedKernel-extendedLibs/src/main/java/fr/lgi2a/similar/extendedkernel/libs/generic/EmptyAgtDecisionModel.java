@@ -51,6 +51,7 @@ import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models a decision model producing no influences.
@@ -72,6 +73,7 @@ public final class EmptyAgtDecisionModel extends AbstractAgtDecisionModel {
 	 */
 	@Override
 	public void decide(
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences

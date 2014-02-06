@@ -54,6 +54,7 @@ import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.examples.concepts.ConceptsSimulationRandom;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.ConceptsSimulationAgentCategories;
 import fr.lgi2a.similar.microkernel.examples.concepts.agents.citizen.physical.AgtCitizenPDFPhysical;
@@ -116,6 +117,7 @@ public class AgtCitizen extends AbstractAgent {
 	/**
 	 * This method defines the data being perceived by the agent, depending on the level from which perception is made.
 	 * @param levelId The identifier of the level from which the perception is made.
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>levelId</sub>[ for which the perception is made.
 	 * @param publicLocalStateInLevel The public local state of this agent in the level which identifier is <code>levelId</code>.
 	 * @param levelsPublicLocalObservableDynamicState The public dynamic state of the levels that can be perceived from 
 	 * the level having the identifier <code>levelId</code>.
@@ -123,6 +125,7 @@ public class AgtCitizen extends AbstractAgent {
 	@Override
 	public IPerceivedDataOfAgent perceive(
 			LevelIdentifier levelId,
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
@@ -162,11 +165,13 @@ public class AgtCitizen extends AbstractAgent {
 	/**
 	 * Defines how the agent uses the data that were perceived to revise the content of its
 	 * global memory state.
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt[ for which the revision is made.
 	 * @param perceivedData The last data that were perceived by the agent from the various levels where it lies.
 	 * @param memoryState The revised memory state, which value is changed by this method call.
 	 */
 	@Override
 	public void reviseMemory(
+			SimulationTimeStamp time,
 			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
 			IGlobalMemoryState memoryState
 	) { 
@@ -190,6 +195,7 @@ public class AgtCitizen extends AbstractAgent {
 	 * This method defines the influences that are produced by the decisions made by this agent, when it performs a decision
 	 * from a specific level.
 	 * @param levelId The identifier of the level from which a decision is made.
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>levelId</sub>[ for which the decision is made.
 	 * @param memoryState The global memory state of the agent when the decision is made.
 	 * @param perceivedData The data that were lastly perceived from the <code>levelId</code> by the agent.
 	 * @param producedInfluences The map where the influences produced by the decisions of this agent are put.
@@ -197,6 +203,7 @@ public class AgtCitizen extends AbstractAgent {
 	@Override
 	public void decide(
 			LevelIdentifier levelId, 
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences

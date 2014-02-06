@@ -14,6 +14,7 @@ import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * The "City bus" agent.
@@ -185,6 +186,7 @@ public class CityBusAgent implements IAgent {
    @Override
    public IPerceivedDataOfAgent perceive(
          LevelIdentifier level,
+         SimulationTimeStamp time,
          IPublicLocalStateOfAgent publicLocalStateInLevel,
          IDynamicStateMap levelsPublicLocalObservableDynamicState
    ) {
@@ -198,6 +200,7 @@ public class CityBusAgent implements IAgent {
     */
    @Override
    public void reviseMemory(
+         SimulationTimeStamp time,
          Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
          IGlobalMemoryState memoryState
    ) {
@@ -212,6 +215,7 @@ public class CityBusAgent implements IAgent {
    @Override
    public void decide(
          LevelIdentifier level, 
+         SimulationTimeStamp time,
          IGlobalMemoryState memoryState,
          IPerceivedDataOfAgent perceivedData,
          InfluencesMap producedInfluences

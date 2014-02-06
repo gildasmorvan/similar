@@ -49,6 +49,7 @@ package fr.lgi2a.similar.microkernel.examples.concepts.environment;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.EnvPLSPhysical;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.physical.TimeOfTheDay;
 import fr.lgi2a.similar.microkernel.examples.concepts.environment.social.EnvPLSSocial;
@@ -102,6 +103,7 @@ public class EnvForConceptsSimulation extends AbstractEnvironment {
 	/**
 	 * Models the natural action of the environment on the simulation, from a specific level.
 	 * @param levelId The identifier of the level from which the natural action of the environment is made.
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>levelId</sub>[ for which the natural action is made.
 	 * @param levelsPublicLocalObservableDynamicState The public dynamic state of the levels that can be perceived from 
 	 * the level having the identifier <code>levelId</code>.
 	 * @param producedInfluences The map where the influences produced by the natural action of this environment are put.
@@ -109,6 +111,7 @@ public class EnvForConceptsSimulation extends AbstractEnvironment {
 	@Override
 	public void natural(
 			LevelIdentifier levelId,
+			SimulationTimeStamp time,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState,
 			InfluencesMap producedInfluences
 	) {

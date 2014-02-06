@@ -49,6 +49,7 @@ package fr.lgi2a.similar.microkernel.libs.generic;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironment;
 
 /**
@@ -58,11 +59,12 @@ import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractEnvironm
 public class SimpleEnvironment extends AbstractEnvironment {
 	/**
 	 * Models a natural action doing nothing.
-	 * @see AbstractEnvironment#natural(LevelIdentifier, IDynamicStateMap, InfluencesMap)
+	 * @see AbstractEnvironment#natural(LevelIdentifier, fr.lgi2a.similar.microkernel.SimulationTimeStamp, IDynamicStateMap, InfluencesMap)
 	 */
 	@Override
 	public void natural(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState,
 			InfluencesMap producedInfluences
 	) { }

@@ -52,6 +52,7 @@ import fr.lgi2a.similar.extendedkernel.IAgtMemoryRevisionModel;
 import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models a memory revision model performing no changes in the global memory state of the agent.
@@ -63,6 +64,7 @@ public final class IdentityAgtMemoryRevisionModel implements IAgtMemoryRevisionM
 	 */
 	@Override
 	public void reviseMemory(
+			SimulationTimeStamp time,
 			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
 			IGlobalMemoryState memoryState
 	) {

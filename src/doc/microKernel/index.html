@@ -3384,12 +3384,13 @@ This step of the methology focuses on the implementation of the //decision phase
 }}}
 [img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_decision.png]]</pre>
 </div>
-<div title="SMD - Decision - Specifications" creator="Designer" modifier="Designer" created="201402031705" modified="201402051534" changecount="32">
+<div title="SMD - Decision - Specifications" creator="Designer" modifier="Designer" created="201402031705" modified="201402061320" changecount="34">
 <pre>[&gt;img(45%,)[images\simulationModel\lowLevel\agentDesignOutline6.png]]
 In the micro-kernel of SIMILAR, the decision process is modeled by the following method of the {{{IAgent}}} interface:
 {{{
 public void decide(
 	LevelIdentifier level,
+	SimulationTimeStamp time,
 	IGlobalMemoryState globalState,
 	IPerceivedDataOfAgent perceivedData,
 	InfluencesMap producedInfluences
@@ -3399,6 +3400,7 @@ public void decide(
 
 This method defines the following parameters:
 *The {{{level}}} parameter corresponds to the identifier of the level from which the decision is made;
+*The {{{time}}} parameter identifies the transitory period {{{]time, time +dt}}}~~level~~{{{[}}} for which the decision is made;
 *The {{{globalState}}} parameter corresponds to the revised global state of the agent on which the decisions are based;
 *The {{{perceivedData}}} parameter corresponds to the perceived data, on which the decisions are based;
 *The {{{producedInfluences}}} parameter models where the influences produced by the decisions of the agents are stored. Basically, it corresponds to the value returned by the decision application presented above; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
@@ -3722,16 +3724,18 @@ Then the implementation of the global state revision process of the ''test subje
 
 In SIMILAR, the global state revision model can be seen as an ''application'' taking into parameters the ''most recent perceived data'' from each level where the agent lies and the former value of the ''global state'', and returning the ''revised value of the global state''.</pre>
 </div>
-<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402050723" changecount="26">
+<div title="SMD - Global state revision - Specifications" creator="Designer" modifier="Designer" created="201402031346" modified="201402061318" changecount="27">
 <pre>[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline5.png]]
 In the micro-kernel of SIMILAR, the global state revision process is modeled by the following method of the {{{IAgent}}} interface:
 {{{
-void reviseMemory( 
+void reviseMemory(
+    SimulationTimeStamp time,
     Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt; perceivedData, 
     IGlobalMemoryState globalState
 );
 }}}
 This method defines two parameters:
+*The {{{time}}} parameter identifies the transitory period {{{]time,time + dt[}}} during which the global state revision takes place;
 *The {{{perceivedData}}} parameter defines the most recently perceived data from the perspective of all the levels where the agent lies;
 *The {{{globalState}}} parameter defines the former value of the global state of the agent;
 This method directly modifies the value of {{{globalState}}}: as a side effect of this method call, {{{globalState}}} becomes the revised global state of the agent.</pre>
@@ -4311,7 +4315,7 @@ The low level specifications contain the following steps:
 &lt;&lt;tiddler [[SMD - Natural - Creation]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction]]}}}</pre>
 </div>
-<div title="SMD - Natural - Creation" creator="Designer" modifier="Designer" created="201402051542" modified="201402051556" changecount="11">
+<div title="SMD - Natural - Creation" creator="Designer" modifier="Designer" created="201402051542" modified="201402060932" changecount="14">
 <pre>The implementation of this method consists in:
 *Identifying the level from which the natural action is made;
 *Getting the local dynamic state of the relevant levels;
@@ -4325,10 +4329,10 @@ During the redaction of the natural action process, the information required by 
 {{exsection{
 This example illustrates the use of the natural action of the environment in the context of a ''bubble chamber'' simulation.
 &lt;&lt;&lt;
-A bubble chamber is a vessel filled with a superheated transparent liquid (most often liquid hydrogen) used to detect electrically charged particles moving through it.
+//A bubble chamber is a vessel filled with a superheated transparent liquid (most often liquid hydrogen) used to detect electrically charged particles moving through it.
 [...]
-As particles enter the chamber, a piston suddenly decreases its pressure, and the liquid enters into a superheated, metastable phase. Charged particles create an ionisation track, around which the liquid vaporises, forming microscopic bubbles.
-@@display:block;text-align:right;__Source:__ // en.wikipedia.org/wiki/Bubble_chamber//@@
+As particles enter the chamber, a piston suddenly decreases its pressure, and the liquid enters into a superheated, metastable phase. Charged particles create an ionisation track, around which the liquid vaporises, forming microscopic bubbles.//
+@@display:block;text-align:right;__Source:__ [[http://en.wikipedia.org/wiki/Bubble_chamber]]@@
 &lt;&lt;&lt;
 In this simulation, agents from the ''particle canon'' category fire ''particles'' into the ''bubble chamber'' level. The behavior of the ''particle'' agents only consists in moving. The environment (//i.e.// the superheated transparent liquid) generates the ''bubbles'' along the path of the ''particles'' with its natural action.
 !Code
@@ -4608,18 +4612,20 @@ From now, this guidelines assume that the user:
 *Understands the class modeling the public local dynamic state of the simulation.
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Perception]]}}}</pre>
 </div>
-<div title="SMD - Perception - Specifications" creator="Designer" modifier="Designer" created="201401301419" modified="201402051541" changecount="18">
+<div title="SMD - Perception - Specifications" creator="Designer" modifier="Designer" created="201401301419" modified="201402061312" changecount="24">
 <pre>[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline4.png]]
 In the micro-kernel of SIMILAR, the perception model of an agent from a specific level is modeled as the following method of the {{{IAgent}}} interface:
 {{{
 public IPerceivedDataOfAgent perceive( 
 	LevelIdentifier level,
+	SimulationTimeStamp time,
 	IPublicLocalStateOfAgent publicLocalStateInLevel,
 	IDynamicStateMap levelsLocalObservableDynamicState
 );
 }}}
 This method defines three parameters:
 *The {{{level}}} parameter defines the identifier of the level from which perception is made;
+*The {{{time}}} parameter identifies the transitory period {{{]time, time+dt}}}~~level~~{{{[}}} during which the perception is made;
 *The {{{publicLocalStateInLevel}}} parameter identifies the public local state of the agent in that level;
 *The {{{levelsLocalObservableDynamicState}}} parameter is a data structure listing the local dynamic state of the perceptible levels from {{{level}}};  +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{

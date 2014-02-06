@@ -21,6 +21,7 @@ import fr.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahEat;
 import fr.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahMove;
 import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 import fr.lgi2a.wildlifesimulation.tools.RandomValueFactory;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models an agent from the 'Lion' category.
@@ -76,12 +77,14 @@ public class AgtLion2 extends AbstractAgent {
     @Override
     public void decide(
         LevelIdentifier level, 
+	SimulationTimeStamp time,
         IGlobalMemoryState memoryState,
         IPerceivedDataOfAgent perceivedData,
         InfluencesMap producedInfluences
     ) {
         if( level.equals( WildlifeLevelList.SAVANNAH ) ){
                 this.decideFromSavannah(
+			time,
                         memoryState, 
                         perceivedData, 
                         producedInfluences
@@ -97,6 +100,7 @@ public class AgtLion2 extends AbstractAgent {
     * Models the decision from the Savannah level.
     */
    public void decideFromSavannah(
+	SimulationTimeStamp time,
         IGlobalMemoryState memoryState,
         IPerceivedDataOfAgent perceivedData,
         InfluencesMap producedInfluences
@@ -169,6 +173,7 @@ public class AgtLion2 extends AbstractAgent {
     @Override
     public IPerceivedDataOfAgent perceive(
             LevelIdentifier level,
+	    SimulationTimeStamp time,
             IPublicLocalStateOfAgent publicLocalStateInLevel,
             IDynamicStateMap levelsPublicLocalObservableDynamicState
     ) {
@@ -182,6 +187,7 @@ public class AgtLion2 extends AbstractAgent {
      */
     @Override
     public void reviseMemory(
+            SimulationTimeStamp time,
             Map<LevelIdentifier, 
             IPerceivedDataOfAgent> perceivedData,
             IGlobalMemoryState memoryState

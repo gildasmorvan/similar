@@ -540,7 +540,10 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 					this.levels.values() 
 			);
 			// Then revise their memory.
-			this.memorizationPhase( agentHavingToReviseMemory );
+			this.memorizationPhase( 
+					lastPartlyConsistentStateTimestamp,
+					agentHavingToReviseMemory 
+			);
 			// Then trigger the decision of agents / natural action of the environment.
 			this.naturalAndDecisionPhase( 
 					lastPartlyConsistentStateTimestamp, 
@@ -571,7 +574,10 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 						levelsWherePerceptionNaturalAndDesicionAreMade
 				);
 				// Then revise their memory.
-				this.memorizationPhase( agentHavingToReviseMemory );
+				this.memorizationPhase( 
+						lastPartlyConsistentStateTimestamp,
+						agentHavingToReviseMemory 
+				);
 				// Then trigger the decision of agents / natural action of the environment.
 				this.naturalAndDecisionPhase( 
 						lastPartlyConsistentStateTimestamp, 
@@ -665,6 +671,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 				// Perform the perception
 				IPerceivedDataOfAgent perceivedData = agent.perceive(
 						levelId, 
+						currentTime,
 						agent.getPublicLocalState( levelId ), 
 						perceptibleLocalDynamicStates
 				);
@@ -683,11 +690,19 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 	
 	/**
 	 * Performs the memory revision phase of the simulation for a specific set of agents.
+	 * @param currentTime The current simulation time.
 	 * @param agentsHavingToMemorize The set of agents that have to memorize.
 	 */
-	protected void memorizationPhase( Set<IAgent> agentsHavingToMemorize ){
+	protected void memorizationPhase( 
+			SimulationTimeStamp currentTime,
+			Set<IAgent> agentsHavingToMemorize 
+	){
 		for( IAgent agent : agentsHavingToMemorize ){
-			agent.reviseMemory( agent.getPerceivedData( ), agent.getGlobalMemoryState() );
+			agent.reviseMemory( 
+					currentTime,
+					agent.getPerceivedData( ), 
+					agent.getGlobalMemoryState() 
+			);
 		}
 	}
 	
@@ -713,6 +728,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			//
 			this.environment.natural(
 					levelId, 
+					currentTime,
 					perceptibleLocalDynamicStates, 
 					producedInfluences
 			);
@@ -723,6 +739,7 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			for( IAgent agent : this.agents.get( levelId ) ) {
 				agent.decide(
 						levelId, 
+						currentTime,
 						agent.getGlobalMemoryState(), 
 						agent.getPerceivedData( levelId ), 
 						producedInfluences
@@ -963,12 +980,12 @@ public class MonoThreadedDefaultDisambiguationSimulationEngine extends AbstractS
 			//
 			// Manage the system influence telling to delete an agent from the simulation.
 			//
-			this.manageSystemInfluence( (SystemInfluenceRemoveAgent) systemInfluence );
+			producedInfluences = this.manageSystemInfluence( (SystemInfluenceRemoveAgent) systemInfluence );
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemovePublicLocalStateFromDynamicState.CATEGORY ) ) {
 			//
 			// Manage the influence telling that the physical state of an agent disappears from a level.
 			//
-			this.manageSystemInfluence( (SystemInfluenceRemovePublicLocalStateFromDynamicState) systemInfluence );
+			producedInfluences = this.manageSystemInfluence( (SystemInfluenceRemovePublicLocalStateFromDynamicState) systemInfluence );
 		} else {
 			throw new UnsupportedOperationException( "The system influence '" + systemInfluence.getCategory() + "' cannot " +
 					"be managed by the '" + this.getClass().getSimpleName() + "' simulation engine." );

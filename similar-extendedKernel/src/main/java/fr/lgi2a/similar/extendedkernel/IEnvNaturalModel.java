@@ -49,6 +49,7 @@ package fr.lgi2a.similar.extendedkernel;
 import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models the natural action process used by an environment to produce influences from a specific level.
@@ -66,11 +67,14 @@ public interface IEnvNaturalModel {
 	 * <p>
 	 * 	TODO formal notation
 	 * </p>
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>getLevel( )</sub>[ for which the 
+	 * natural action is made.
 	 * @param levelsPublicLocalObservableDynamicState The dynamic state of the levels that are perceptible 
 	 * from the <code>level</code> level.
 	 * @param producedInfluences The map containing the influences that were produced by the natural action of the environment.
 	 */
 	void natural(
+		SimulationTimeStamp time,
 		IDynamicStateMap levelsPublicLocalObservableDynamicState,
 		InfluencesMap producedInfluences
 	);

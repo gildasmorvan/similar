@@ -176,6 +176,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements IProbe {
 		AbstractEnvironment environment = new AbstractEnvironment() {
 			public void natural(
 					LevelIdentifier level,
+					SimulationTimeStamp time,
 					IDynamicStateMap levelsPublicLocalObservableDynamicState,
 					InfluencesMap producedInfluences
 			) {
@@ -233,6 +234,7 @@ public abstract class ClassTest_SimulationEngine_LimitCases implements IProbe {
 		AbstractEnvironment environment = new AbstractEnvironment() {
 			public void natural(
 					LevelIdentifier level,
+					SimulationTimeStamp time,
 					IDynamicStateMap levelsPublicLocalObservableDynamicState,
 					InfluencesMap producedInfluences
 			) {

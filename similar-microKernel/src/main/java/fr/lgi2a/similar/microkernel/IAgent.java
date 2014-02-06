@@ -99,7 +99,10 @@ public interface IAgent {
 	 * @param levelIdentifier The identifier of the specified level.
 	 * @param publicLocalState The public local state of the agent in that level.
 	 */
-	void includeNewLevel( LevelIdentifier levelIdentifier, IPublicLocalStateOfAgent publicLocalState );
+	void includeNewLevel( 
+			LevelIdentifier levelIdentifier, 
+			IPublicLocalStateOfAgent publicLocalState 
+	);
 
 	/**
 	 * Excludes a level from the specification of this agent.
@@ -108,7 +111,9 @@ public interface IAgent {
 	 * </p>
 	 * @param levelIdentifier The identifier of the level from which the agent is excluded.
 	 */
-	void excludeFromLevel( LevelIdentifier levelIdentifier );
+	void excludeFromLevel( 
+			LevelIdentifier levelIdentifier 
+	);
 	
 	/**
 	 * Gets the public local state of the agent located in a specific level of the simulation.
@@ -119,7 +124,9 @@ public interface IAgent {
 	 * @return The public local state of the agent in the specified level.
 	 * @throws java.util.NoSuchElementException If the agent does not define a public local state for the provided level identifier.
 	 */
-	IPublicLocalStateOfAgent getPublicLocalState( LevelIdentifier levelIdentifier );
+	IPublicLocalStateOfAgent getPublicLocalState( 
+			LevelIdentifier levelIdentifier 
+	);
 	
 	/**
 	 * Gets the global memory state of the agent.
@@ -147,7 +154,9 @@ public interface IAgent {
 	 * @param levelIdentifier The identifier of the level from which the data were perceived.
 	 * @return The data that were lastly perceived by the agent from the <code>levelIdentifier</code> level.
 	 */
-	IPerceivedDataOfAgent getPerceivedData( LevelIdentifier levelIdentifier );
+	IPerceivedDataOfAgent getPerceivedData( 
+			LevelIdentifier levelIdentifier 
+	);
 	
 	/**
 	 * Sets the data that were lastly perceived by the agent from a specific level where it lies.
@@ -157,7 +166,10 @@ public interface IAgent {
 	 * @param levelIdentifier The identifier of the level from which the data were perceived.
 	 * @param perceivedData The data that were lastly perceived by the agent from the <code>levelIdentifier</code> level.
 	 */
-	void setPerceivedData( LevelIdentifier levelIdentifier, IPerceivedDataOfAgent perceivedData );
+	void setPerceivedData( 
+			LevelIdentifier levelIdentifier, 
+			IPerceivedDataOfAgent perceivedData 
+	);
 	
 	/**
 	 * Creates the data perceived by an agent located in a specific level.
@@ -165,6 +177,7 @@ public interface IAgent {
 	 * 	TODO formal notation
 	 * </p>
 	 * @param level The level from which perception is made.
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>level</sub>[ for which the perception is made.
 	 * @param publicLocalStateInLevel The public local state of the agent in the level from which perception is made.
 	 * @param levelsPublicLocalObservableDynamicState The observable dynamic state of the various levels that can be perceived from the 
 	 * level <code>level</code>.
@@ -172,6 +185,7 @@ public interface IAgent {
 	 */
 	IPerceivedDataOfAgent perceive( 
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	);
@@ -182,10 +196,15 @@ public interface IAgent {
 	 * <p>
 	 * 	TODO formal notation
 	 * </p>
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt[ for which the revision is made.
 	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
 	 * @param globalState The previous value of the global memory state of the agent being updated by this method call.
 	 */
-	void reviseMemory( Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData, IGlobalMemoryState globalState );
+	void reviseMemory( 
+			SimulationTimeStamp time,
+			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData, 
+			IGlobalMemoryState globalState 
+	);
 	
 	/**
 	 * Produces the influences resulting from the decisions of an agent from a specific level.
@@ -193,12 +212,14 @@ public interface IAgent {
 	 * 	TODO formal notation
 	 * </p>
 	 * @param level The level from which the decision is made.
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>level</sub>[ for which the decision is made.
 	 * @param memoryState The global memory state of the agent when it made a decision.
 	 * @param perceivedData The data that were perceived about the level and its perceptible levels.
 	 * @param producedInfluences The map where the influences resulting from the decisions are stored.
 	 */
 	void decide(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences

@@ -13,6 +13,7 @@ import fr.lgi2a.underpressure.model.agents.SimulationAgentCategories;
 import fr.lgi2a.underpressure.model.agents.testsubject.physical.AgtTestSubjectPDFPhysical;
 import fr.lgi2a.underpressure.model.agents.testsubject.social.AgtTestSubjectPDFSocialLevel;
 import fr.lgi2a.underpressure.model.levels.SimulationLevels;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models an agent from the 'Test subject' category.
@@ -60,6 +61,7 @@ public class AgtTestSubject extends AbstractAgent {
     */
    @Override
    public void reviseMemory(
+           SimulationTimeStamp time,
    	   Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
    	   IGlobalMemoryState globalState
    ) {
@@ -104,6 +106,7 @@ public class AgtTestSubject extends AbstractAgent {
    @Override
    public IPerceivedDataOfAgent perceive(
       LevelIdentifier level,
+      SimulationTimeStamp time,
       IPublicLocalStateOfAgent publicLocalStateInLevel,
       IDynamicStateMap levelsPublicLocalObservableDynamicState
    ) {
@@ -116,7 +119,9 @@ public class AgtTestSubject extends AbstractAgent {
      * {@inheritDoc}
      */
    @Override
-   public void decide(LevelIdentifier level, 
+   public void decide(
+	 LevelIdentifier level, 
+         SimulationTimeStamp time,
          IGlobalMemoryState memoryState,
          IPerceivedDataOfAgent perceivedData,
          InfluencesMap producedInfluences

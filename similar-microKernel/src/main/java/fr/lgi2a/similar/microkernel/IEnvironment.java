@@ -75,12 +75,15 @@ public interface IEnvironment {
 	 * 	TODO formal notation
 	 * </p>
 	 * @param level The level for which the natural action of the environment is computed.
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>level</sub>[ for which the 
+	 * natural action is made.
 	 * @param levelsPublicLocalObservableDynamicState The dynamic state of the levels that are perceptible 
 	 * from the <code>level</code> level.
 	 * @param producedInfluences The map containing the influences that were produced by the natural action of the environment.
 	 */
 	void natural(
 		LevelIdentifier level,
+		SimulationTimeStamp time,
 		IDynamicStateMap levelsPublicLocalObservableDynamicState,
 		InfluencesMap producedInfluences
 	);

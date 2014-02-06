@@ -50,6 +50,7 @@ import fr.lgi2a.similar.microkernel.IDynamicStateMap;
 import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * Models the perception process used by an agent to produce perceived data from a specific level.
@@ -67,12 +68,15 @@ public interface IAgtPerceptionModel {
 	 * <p>
 	 * 	TODO formal notation
 	 * </p>
+	 * @param time Identifies the transitory period ]<code>time</code>, <code>time</code>+dt<sub>getLevel()</sub>[ for which 
+	 * the perception is made.
 	 * @param publicLocalStateInLevel The public local state of the agent in the level from which perception is made.
 	 * @param levelsPublicLocalObservableDynamicState The observable dynamic state of the various levels that can be perceived from the 
 	 * level <code>level</code>.
 	 * @return The data being perceived by an agent located in the <code>level</code> level.
 	 */
 	IPerceivedDataOfAgent perceive( 
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	);

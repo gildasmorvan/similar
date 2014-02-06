@@ -57,6 +57,7 @@ import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
 import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.InfluencesMap;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractAgent;
 
 /**
@@ -308,6 +309,7 @@ public class ExtendedAgent extends AbstractAgent {
 	@Override
 	public IPerceivedDataOfAgent perceive(
 			LevelIdentifier level,
+			SimulationTimeStamp time,
 			IPublicLocalStateOfAgent publicLocalStateInLevel,
 			IDynamicStateMap levelsPublicLocalObservableDynamicState
 	) {
@@ -316,6 +318,7 @@ public class ExtendedAgent extends AbstractAgent {
 			throw new IllegalStateException( "No perception model is defined for the level '" + level + "' for the agent   " + this.getCategory() );
 		} else {
 			return perceptionModel.perceive(
+					time,
 					publicLocalStateInLevel, 
 					levelsPublicLocalObservableDynamicState
 			);
@@ -327,11 +330,12 @@ public class ExtendedAgent extends AbstractAgent {
 	 */
 	@Override
 	public void reviseMemory(
+			SimulationTimeStamp time,
 			Map<LevelIdentifier, IPerceivedDataOfAgent> perceivedData,
 			IGlobalMemoryState memoryState
 	) {
 		if( this.memoryRevisionModel != null ){
-			this.memoryRevisionModel.reviseMemory( perceivedData, memoryState );
+			this.memoryRevisionModel.reviseMemory( time, perceivedData, memoryState );
 		} else {
 			throw new IllegalStateException( "No memory revision model was defined for the agent '" + this.getCategory() + "'" );
 		}
@@ -343,6 +347,7 @@ public class ExtendedAgent extends AbstractAgent {
 	@Override
 	public void decide(
 			LevelIdentifier level, 
+			SimulationTimeStamp time,
 			IGlobalMemoryState memoryState,
 			IPerceivedDataOfAgent perceivedData,
 			InfluencesMap producedInfluences
@@ -351,7 +356,7 @@ public class ExtendedAgent extends AbstractAgent {
 		if( perceptionModel == null ){
 			throw new IllegalStateException( "No decision model is defined for the level '" + level + "'' for the agent  " + this.getCategory() );
 		} else {
-			perceptionModel.decide( memoryState, perceivedData, producedInfluences );
+			perceptionModel.decide( time, memoryState, perceivedData, producedInfluences );
 		}
 	}
 

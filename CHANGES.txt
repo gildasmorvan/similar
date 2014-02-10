@@ -1,0 +1,4 @@
+This file lists the changes between this version and the previous version of SIMILAR:
+
+	*Changed the general structure of the SIMILAR API to take into considerations the 
+advances made in the theory of SIMILAR.

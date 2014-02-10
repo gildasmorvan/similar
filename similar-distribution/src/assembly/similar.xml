@@ -22,22 +22,19 @@
     
     <moduleSets>
     
-   		<!-- Include the site of the module in the appropriate place of the archive. -->
+   		<!-- Include the doc-files directory of the documentation into the documentation directory. -->
     
     	<moduleSet>
-    		<!-- Enable access to all projects in the current multimodule build! -->
     		<useAllReactorProjects>true</useAllReactorProjects>
-    		
     		<sources>
-    			<outputDirectoryMapping>/docs/${module.artifactId}</outputDirectoryMapping>
-    			<includeModuleDirectory>true</includeModuleDirectory>
+    			<includeModuleDirectory>false</includeModuleDirectory>
     			<fileSets>
     				<fileSet>
-    					<directory>target/site</directory>
-    					<outputDirectory>/</outputDirectory>
-    					<excludes>
-    						<exclude>TiddlySaver.jar</exclude>
-    					</excludes>
+    					<outputDirectory>/docs/api</outputDirectory>
+    					<directory>src/main/javadoc</directory>
+    					<includes>
+    						<include>**/doc-files/**</include>
+    					</includes>
     				</fileSet>
     			</fileSets>
     		</sources>
@@ -71,7 +68,7 @@
 	      <directory>../src/doc</directory>
 	      <outputDirectory>/docs</outputDirectory>
 	      <excludes>
-	      	<exclude>../src/doc/src/</exclude>
+	      	<exclude>src/</exclude>
 	      </excludes>
 	    </fileSet>
             

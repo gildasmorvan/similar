@@ -145,13 +145,15 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 				</executions>
 				<configuration>
                		<use>false</use>
+					<docfilessubdirs>true</docfilessubdirs>
+					<stylesheetfile>javadoc.css</stylesheetfile>
                 	<links>
                    		<link>http://java.sun.com/javase/7/docs/api/</link>
                 	</links>
 					<groups>
 						<group>
 							<title>Micro-kernel</title>
-							<packages>fr.lgi2a.similar.microkernel:fr.lgi2a.similar.microkernel.dynamicstate*:fr.lgi2a.similar.microkernel.influences*</packages>
+							<packages>fr.lgi2a.similar.microkernel:fr.lgi2a.similar.microkernel.dynamicstate*:fr.lgi2a.similar.microkernel.influences*:fr.lgi2a.similar.microkernel.agents*:fr.lgi2a.similar.microkernel.environment*:fr.lgi2a.similar.microkernel.levels*</packages>
 						</group>
 						<group>
 							<title>Common libs</title>

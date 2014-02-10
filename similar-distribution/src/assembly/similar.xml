@@ -131,5 +131,24 @@
 				<include>traceUsage_example_README.txt</include>
 			</includes>
 		</fileSet>
+		
+		<!-- Add the "Bubble chamber" simulation example -->
+		<fileSet>
+			<directory>../similar-microKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/microKernel/bubblechamber/src</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>**/microkernel/examples/bubblechamber/**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-microKernel-examples/src/main/doc/</directory>
+			<outputDirectory>/examples/microKernel/bubblechamber</outputDirectory>
+			<includes>
+				<include>bubblechamber_example_README.txt</include>
+			</includes>
+		</fileSet>
     </fileSets>
 </assembly>

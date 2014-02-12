@@ -106,6 +106,17 @@ public final class AgentCategory {
 	}
 	
 	/**
+	 * Determines if an agent having this category is considered as belonging to the 
+	 * category provided in parameter.
+	 * @param category The category to check.
+	 * @return <code>true</code> if an agent having this category is considered as belonging to the 
+	 * category provided in parameter.
+	 */
+	public boolean isA( AgentCategory category ) {
+		return this.equals( category );
+	}
+	
+	/**
 	 * Check if this agent category is equal to another agent category.
 	 * @param o The other object used to check equality.
 	 * @return <code>true</code> if the two objects are equal, <i>i.e.</i> if they are both 

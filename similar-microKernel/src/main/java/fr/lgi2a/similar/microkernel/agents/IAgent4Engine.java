@@ -66,6 +66,21 @@ import fr.lgi2a.similar.microkernel.LevelIdentifier;
  */
 public interface IAgent4Engine extends IAgent {
 	/**
+	 * Include a new level in the specification of this agent.
+	 * <p>
+	 * 	If the agent already lies in the specified level when this method is called, then this method does nothing.
+	 * </p>
+	 * @param levelIdentifier The identifier of the specified level.
+	 * @param publicLocalState The public local state of the agent in that level.
+	 * @param privateLocalState The private local state of the agent in that level.
+	 */
+	public void includeNewLevel( 
+			LevelIdentifier levelIdentifier, 
+			ILocalStateOfAgent publicLocalState,
+			ILocalStateOfAgent privateLocalState 
+	);
+	
+	/**
 	 * Removes a level from the specification of this agent.
 	 * <h2>Usage and safety</h2>
 	 * <p>

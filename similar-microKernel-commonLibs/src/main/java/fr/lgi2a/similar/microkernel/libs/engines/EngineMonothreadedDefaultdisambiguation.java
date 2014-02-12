@@ -44,72 +44,68 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.tools.engine;
+package fr.lgi2a.similar.microkernel.libs.engines;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
+import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
+import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
+import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
 
 /**
- * The map-based implementation of a dynamic state map.
+ * Models a simulation engine using monothreaded algorithms and the default disambiguation mechanism.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class DynamicStateMap implements IPublicDynamicStateMap {
+public class EngineMonothreadedDefaultdisambiguation extends AbstractMonothreadedEngine {
 	/**
-	 * The map containing the dynamic states.
+	 * A dynamic state containing only the most recent consistent state of the levels.
 	 */
-	private Map<LevelIdentifier,IPublicLocalDynamicState> dynamicStates;
+	private DynamicStateMap dynamicStateContainingOnlyConsistentStates;
 	
 	/**
-	 * Builds an initially empty map.
-	 */
-	public DynamicStateMap( ) {
-		this.dynamicStates = new LinkedHashMap<LevelIdentifier, IPublicLocalDynamicState>();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public Set<LevelIdentifier> keySet() {
-		return this.dynamicStates.keySet();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public IPublicLocalDynamicState get(
-			LevelIdentifier level
+	protected SimulationTimeStamp performSimulation(
+			ISimulationModel simulationModel,
+			DynamicStateMap currentSimulationDynamicState,
+			LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
+			IEnvironment4Engine environment
 	) {
-		if( level == null ) {
-			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
+		// Instead of always recreating the value "dynamicStateContainingOnlyConsistentStates", we
+		// benefit from the fact that consistent states are updated rather than recreated by the
+		// simulation engine: we initialize the map with the initial consistent state of each level.
+		// Since the reference to the current consistent state of a level never changes during the 
+		// simulation, the map "dynamicStateContainingOnlyConsistentStates" always contains the
+		// most recent consistent dynamic state of a level.
+		this.dynamicStateContainingOnlyConsistentStates = new DynamicStateMap( );
+		for( LevelIdentifier levelId : currentSimulationDynamicState.keySet() ){
+			this.dynamicStateContainingOnlyConsistentStates.put(
+				currentSimulationDynamicState.get( levelId )
+			);
 		}
-		IPublicLocalDynamicState result = this.dynamicStates.get( level );
-		if( result == null ){
-			throw new NoSuchElementException( "No dynamic state is defined for the level '" + level + "'." );
-		} else {
-			return result;
-		}
+		return super.performSimulation(
+			simulationModel,
+			currentSimulationDynamicState,
+			levels,
+			agents,
+			environment
+		);
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void put(
-			IPublicLocalDynamicState state
+	protected DynamicStateMap buildDynamicStateDisambiguation(
+			DynamicStateMap currentSimulationHalfConsistentState
 	) {
-		if( state == null ){
-			throw new IllegalArgumentException( "The 'state' argument cannot be null." );
-		} else {
-			this.dynamicStates.put( state.getLevel(), state );
-		}
+		return this.dynamicStateContainingOnlyConsistentStates;
 	}
 }

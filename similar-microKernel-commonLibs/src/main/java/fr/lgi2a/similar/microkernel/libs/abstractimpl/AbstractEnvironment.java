@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.abstractimpl;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -80,8 +80,8 @@ public abstract class AbstractEnvironment implements IEnvironment, IEnvironment4
 	 * {@link AbstractEnvironment#includeNewLevel(LevelIdentifier, ILocalStateOfEnvironment, ILocalStateOfEnvironment)} method.
 	 */
 	public AbstractEnvironment( ) {
-		this.publicLocalStates = new HashMap<LevelIdentifier, ILocalStateOfEnvironment>();
-		this.privateLocalStates = new HashMap<LevelIdentifier, ILocalStateOfEnvironment>();
+		this.publicLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfEnvironment>();
+		this.privateLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfEnvironment>();
 	}
 
 	/**

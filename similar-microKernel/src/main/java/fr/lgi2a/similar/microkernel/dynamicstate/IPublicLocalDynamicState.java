@@ -92,6 +92,10 @@ public interface IPublicLocalDynamicState {
 	 * 	for each agent lying in the level identified by <code>getLevel( )</code> at the time "t" (resp. during 
 	 * 	the transitory period ]t,t&prime;[).
 	 * </p>
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
 	 * @return The public local state of the agents lying in the level of this dynamic state.
 	 */
 	Set<ILocalStateOfAgent> getPublicLocalStateOfAgents();
@@ -103,18 +107,30 @@ public interface IPublicLocalDynamicState {
      * 		It returns the value &gamma;(t, <code>getLevel( )</code>) or 
      * 		&gamma;(]t,t&prime;[, <code>getLevel( )</code>).
      * </p>
+     * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+     * </p>
      * @return The state dynamics of this public local dynamic state.
      */
-    Set<IInfluence> getStateDynamics();
+	Set<IInfluence> getStateDynamics();
     
     /**
 	 * Gets the system influences contained in the state dynamics.
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
 	 * @return The system influences of the value returned by the {@link IPublicLocalDynamicState#getStateDynamics()} method.
 	 */
 	Set<IInfluence> getSystemInfluencesOfStateDynamics();
 	
 	/**
 	 * Gets the non-system influences contained in the state dynamics.
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
 	 * @return The non-system influences of the value returned by the 
 	 * {@link IPublicLocalDynamicState#getStateDynamics()} method.
 	 */

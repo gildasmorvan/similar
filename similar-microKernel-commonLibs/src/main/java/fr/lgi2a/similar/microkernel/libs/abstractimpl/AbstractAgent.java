@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.libs.abstractimpl;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -126,9 +126,9 @@ public abstract class AbstractAgent implements IAgent, IAgent4Engine {
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "category" ) );
 		}
 		this.category = category;
-		this.publicLocalStates = new HashMap<LevelIdentifier, ILocalStateOfAgent>();
-		this.privateLocalStates = new HashMap<LevelIdentifier, ILocalStateOfAgent>();
-		this.lastPerceivedData = new HashMap<LevelIdentifier, IPerceivedData>();
+		this.publicLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfAgent>();
+		this.privateLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfAgent>();
+		this.lastPerceivedData = new LinkedHashMap<LevelIdentifier, IPerceivedData>();
 	}
 	
 	/**
@@ -213,13 +213,7 @@ public abstract class AbstractAgent implements IAgent, IAgent4Engine {
 	}
 	
 	/**
-	 * Include a new level in the specification of this agent.
-	 * <p>
-	 * 	If the agent already lies in the specified level when this method is called, then this method does nothing.
-	 * </p>
-	 * @param levelIdentifier The identifier of the specified level.
-	 * @param publicLocalState The public local state of the agent in that level.
-	 * @param privateLocalState The private local state of the agent in that level.
+	 * {@inheritDoc}
 	 */
 	public void includeNewLevel( 
 			LevelIdentifier levelIdentifier, 

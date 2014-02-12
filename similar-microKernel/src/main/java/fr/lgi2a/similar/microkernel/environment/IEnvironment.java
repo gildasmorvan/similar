@@ -50,7 +50,6 @@ import java.util.Map;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 
@@ -121,7 +120,7 @@ public interface IEnvironment {
 		SimulationTimeStamp timeLowerBound,
 		SimulationTimeStamp timeUpperBound,
 		Map<LevelIdentifier, ILocalStateOfEnvironment> publicLocalStates,
-		ILocalStateOfAgent privateLocalState,
+		ILocalStateOfEnvironment privateLocalState,
 		IPublicDynamicStateMap dynamicStates,
 		InfluencesMap producedInfluences
 	);

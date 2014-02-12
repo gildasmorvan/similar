@@ -57,7 +57,10 @@ import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
  * 
  * <h1>Usage</h1>
  * <p>
- * 	The agent has to be fully initialized before being added using this influence.
+ * 	The agent has to be fully initialized before being added using this influence. 
+ * 	This initialization has to include calls to the 
+ * 	{@link IAgent4Engine#includeNewLevel(LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)}
+ * 	to specify where the agent initially lies.
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>

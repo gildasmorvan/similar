@@ -63,6 +63,10 @@ import fr.lgi2a.similar.microkernel.LevelIdentifier;
 public interface IPublicDynamicStateMap {
 	/**
 	 * Gets the levels which dynamic state is contained in this map.
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
 	 * @return The identifier of the levels contained in this map.
 	 */
 	Set<LevelIdentifier> keySet( );

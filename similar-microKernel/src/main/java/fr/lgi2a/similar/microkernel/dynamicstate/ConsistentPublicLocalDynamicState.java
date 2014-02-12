@@ -107,7 +107,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 * 	lying in the level <code>level</code> at the time <code>time</code>.
 	 * </p>
 	 */
-	private Set<ILocalStateOfAgent> publicLocalStateOfAgents;
+	private LinkedHashSet<ILocalStateOfAgent> publicLocalStateOfAgents;
 	
 	/**
 	 * Models the dynamics of this local dynamic state, <i>i.e.</i> the influences that are still active (being performed) when the level
@@ -119,13 +119,13 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 * arrived into the consistent state.
 	 * This field contains only system influences.
 	 */
-	private Set<IInfluence> stateDynamicsSystemInfluences;
+	private LinkedHashSet<IInfluence> stateDynamicsSystemInfluences;
 	/**
 	 * Models the dynamics of this local dynamic state, <i>i.e.</i> the influences that are still active (being performed) when the level
 	 * arrived into the consistent state.
 	 * This field contains only regular influences.
 	 */
-	private Set<IInfluence> stateDynamicsRegularInfluences;
+	private LinkedHashSet<IInfluence> stateDynamicsRegularInfluences;
 	
 	/**
 	 * Builds a consistent public local state for a specific time stamp.

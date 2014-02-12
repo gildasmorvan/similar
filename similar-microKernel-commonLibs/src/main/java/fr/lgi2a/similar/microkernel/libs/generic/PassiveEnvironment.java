@@ -72,7 +72,7 @@ public class PassiveEnvironment extends AbstractEnvironment {
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound,
 			Map<LevelIdentifier, ILocalStateOfEnvironment> publicLocalStates,
-			ILocalStateOfAgent privateLocalState,
+			ILocalStateOfEnvironment privateLocalState,
 			IPublicDynamicStateMap dynamicStates,
 			InfluencesMap producedInfluences
 	) {

@@ -46,6 +46,8 @@
  */
 package fr.lgi2a.similar.microkernel.libs.tools.engine;
 
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+
 /**
  * The exception thrown when the simulation has finished because it was aborted.
  * 
@@ -56,4 +58,34 @@ public class ExceptionSimulationAborted extends RuntimeException {
 	 * Serialization ID.
 	 */
 	private static final long serialVersionUID = -7249417947876291761L;
+	
+	/**
+	 * The last time the simulation was half-consistent before the abortion of the simulation.
+	 */
+	private SimulationTimeStamp lastConsistentTimeBeforeAbortion;
+	
+	/**
+	 * Builds an initialized instance of this exception, where the time stamp of the abortion
+	 * is set.
+	 * @param lastConsistentTimeBeforeAbortion The last time the simulation was half-consistent 
+	 * before the abortion of the simulation.
+	 */
+	public ExceptionSimulationAborted(
+		SimulationTimeStamp lastConsistentTimeBeforeAbortion
+	){
+		if( lastConsistentTimeBeforeAbortion == null ){
+			throw new IllegalArgumentException( 
+				"The argument cannot be null." 
+			);
+		}
+		this.lastConsistentTimeBeforeAbortion = lastConsistentTimeBeforeAbortion;
+	}
+
+	/**
+	 * Gets the last time the simulation was half-consistent before the abortion of the simulation.
+	 * @return The last time the simulation was half-consistent before the abortion of the simulation.
+	 */
+	public SimulationTimeStamp getLastConsistentTimeBeforeAbortion( ){
+		return this.lastConsistentTimeBeforeAbortion;
+	}
 }

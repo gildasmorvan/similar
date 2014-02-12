@@ -54,6 +54,7 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 
 /**
  * Models a level of the simulation.
@@ -210,12 +211,8 @@ public interface ILevel extends ITimeModel {
 	TransitoryPublicLocalDynamicState getLastTransitoryState( );
 	
 	/**
-	 * Performs a user-defined reaction to the regular influences that were lying in the last consistent dynamic state of 
-	 * the level (at the time <code>t<sub>l</sub></code>) plus the influences that were added into the transitory dynamic state
-	 * of the level during the time range <code>]t<sub>l</sub>, t<sub>l</sub>+dt<sub>l</sub>[</code>.
-	 * This reaction updates the content of the last consistent dynamic state of the 
-	 * level (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub> )</code>), to participate in its 
-	 * transformation into the new last consistent dynamic state (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub>+dt<sub>l</sub> )</code>).
+	 * Performs a user-defined reaction to the regular influences that were lying in the most recent consistent dynamic state of 
+	 * the level and to the influences that were added into the transitory dynamic state of the level.
 	 * 
 	 * <h2>Usage</h2>
 	 * <p>
@@ -223,7 +220,7 @@ public interface ILevel extends ITimeModel {
 	 * </p>
 	 * <ul>
 	 * 	<li>
-	 * 		Update the public local state of the environment and of the agents contained in the consistent dynamic state
+	 * 		Update the local state of the environment and of the agents contained in the consistent dynamic state
 	 *  	<code>consistentState</code> argument of this method according to the modifications depicted by the regular influences.
 	 *  </li>
 	 *  <li>
@@ -249,63 +246,53 @@ public interface ILevel extends ITimeModel {
 	 * 		inconsistent state.
 	 * 	</li>
 	 * </ul>
-	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, 
-	 * <i>i.e.</i> the starting time of the transitory phase being ended by this reaction (<code>t<sub>l</sub></code> in the description
-	 * of the method).
-	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, 
-	 * <i>i.e.</i> the ending time of the transitory phase being ended by this reaction (<code>t<sub>l</sub>+dt<sub>l</sub></code> in the description
-	 * of the method).
-	 * @param consistentState The consistent state being modified by this user reaction.
-	 * The operations performed in this reaction participate in the transition of the consistent dynamic state 
-	 * <code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into its new value <code>&delta;<sub>l</sub>(t<sub>l</sub>+dt<sub>l</sub>)</code>.
+	 * @param transitoryTimeMin The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param transitoryTimeMax The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param consistentState The consistent state being updated by this user reaction.
 	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
-	 * @param remainingInfluences The set that will contain the influences that were produced by the user during the invocation of 
+	 * @param remainingInfluences The data structure that will contain the influences that were produced by the user during the invocation of 
 	 * this method, or the influences that persist after this reaction.
 	 */
 	void makeRegularReaction(
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
+			SimulationTimeStamp transitoryTimeMin,
+			SimulationTimeStamp transitoryTimeMax,
 			ConsistentPublicLocalDynamicState consistentState,
 			Set<IInfluence> regularInfluencesOftransitoryStateDynamics,
-			Set<IInfluence> remainingInfluences
+			InfluencesMap remainingInfluences
 	);
 	
 	/**
-	 * Performs a user-defined reaction to the system influences that are currently lying in the last consistent dynamic state of 
-	 * the level (at the time <code>t<sub>l</sub></code>) plus the influences that were added into the transitory dynamic state
-	 * of the level during the time range <code>]t<sub>l</sub>, t<sub>l</sub>+dt<sub>l</sub>[</code>.
+	 * Performs a user-defined reaction to the system influences that are lying in the most recent consistent dynamic state of 
+	 * the level and to the influences that were added into the transitory dynamic state of the level.
 	 * This method is called twice during the reaction phase of the level:
 	 * <ul>
 	 * 	<li>
 	 * 		A first time right after the system reaction to the system influences happening at the beginning of the reaction phase.
 	 * 		It gives the opportunity to perform a user-defined reaction to the system influences that were added to the transitory
-	 * 		dynamic state of the level during the time range <code>]t<sub>l</sub>, t<sub>l</sub>+dt<sub>l</sub>[</code>.
+	 * 		dynamic state of the level during the transitory period (for instance to add an agent to the topology of the environment).
 	 * 	</li>
 	 * 	<li>
 	 * 		A second time right after the system reaction to the system influences happening after the user-defined reaction to the
 	 * 		regular influences.
-	 * 		It gives the opportunity to perform a user-defined reaction to the system influences that were added to the transitory
-	 * 		dynamic state of the level during the user-defined reactions of the levels currently performing a reaction.
+	 * 		It gives the opportunity to perform a user-defined reaction to the system influences that were created by the user during the
+	 * 		user reaction to the regular influences.
 	 * 	</li>
 	 * </ul>
-	 * This reaction updates the content of the last consistent dynamic state of the 
-	 * level (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub> )</code>), to participate in its 
-	 * transformation into the new last consistent dynamic state (<i>i.e.</i><code>&delta;<sub>l</sub>( t<sub>l</sub>+dt<sub>l</sub> )</code>).
 	 * <h2>Usage</h2>
 	 * <p>
 	 * 	<b>This method can:</b>
 	 * </p>
 	 * <ul>
 	 * 	<li>
-	 * 		Update the public local state of the environment and of the agents contained in the consistent dynamic state
-	 *  	<code>consistentState</code> argument of this method according.
+	 * 		Update the local state of the environment and of the agents contained in the consistent dynamic state
+	 *  	<code>consistentState</code> argument of this method according  to the modifications depicted by the system influences.
 	 *  	For instance, if the public local state of the environment defines an agent grid, this method can add the public local state 
-	 *  	of an agent to the grid, in reaction to the 'add public local state of agent to level' system influence.
+	 *  	of an agent to the grid, in reaction to the 'add agent to level' system influence.
 	 *  </li>
 	 *  <li>
 	 *  	Add to the <code>newInfluencesToProcess</code> set the new influences that were produced by 
-	 *  	this reaction (for instance the addition of an agent to the simulation).
+	 *  	this reaction (for instance the addition of a new agent to the simulation).
 	 *  	The influences added in such a way will be processed either during the next reaction of the level 
 	 *  	they are aimed at (<code>happensBeforeRegularReaction</code> <code>false</code> or the level being targeted
 	 *  	by the influence is not currently computing a reaction).
@@ -320,28 +307,22 @@ public interface ILevel extends ITimeModel {
 	 * 		inconsistent state.
 	 * 	</li>
 	 * </ul>
-	 * @param previousConsistentStateTime The previous time stamp when the dynamic state of this level was consistent, 
-	 * <i>i.e.</i> the starting time of the transitory phase being ended by this reaction (<code>t<sub>l</sub></code> in the description
-	 * of the method).
-	 * @param newConsistentStateTime The next time stamp when the dynamic state of this level will be consistent, 
-	 * <i>i.e.</i> the ending time of the transitory phase being ended by this reaction (<code>t<sub>l</sub>+dt<sub>l</sub></code> in the description
-	 * of the method).
-	 * @param consistentState The consistent state being modified by this user reaction.
-	 * The operations performed in this reaction participate in the transition of the consistent dynamic state 
-	 * <code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into its new value <code>&delta;<sub>l</sub>(t<sub>l</sub>+dt<sub>l</sub>)</code>.
+	 * @param transitoryTimeMin The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param transitoryTimeMax The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param consistentState The consistent state being updated by this user reaction. Note that this state already include the result
+	 * of the system influences listed in the <code>systemInfluencesToManage</code> argument.
 	 * @param systemInfluencesToManage The <b>system</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
 	 * @param happensBeforeRegularReaction <code>true</code> if this user-defined system reaction is performed before the call to the
 	 * {@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, Set)} method.
-	 * @param newInfluencesToProcess The set that will contain the influences that were produced by the user during the invocation of 
-	 * this method.
+	 * @param newInfluencesToProcess The data structure where the influences resulting from this user reaction have to be added.
 	 */
 	void makeSystemReaction(
-			SimulationTimeStamp previousConsistentStateTime,
-			SimulationTimeStamp newConsistentStateTime,
+			SimulationTimeStamp transitoryTimeMin,
+			SimulationTimeStamp transitoryTimeMax,
 			ConsistentPublicLocalDynamicState consistentState,
 			Collection<IInfluence> systemInfluencesToManage,
 			boolean happensBeforeRegularReaction,
-			Collection<IInfluence> newInfluencesToProcess
+			InfluencesMap newInfluencesToProcess
 	);
 }

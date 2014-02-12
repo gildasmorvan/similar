@@ -115,12 +115,20 @@ public interface ISimulationEngine {
 	 * <p>
 	 * 	This method is used in probes to read the data about the simulation, when the simulation reaches a time stamp.
 	 * </p>
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
 	 * @return The set of all the agents lying in the simulation.
 	 */
 	Set<IAgent4Engine> getAgents( );
 	
 	/**
 	 * Gets the list of levels contained in the simulation.
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
 	 * @return The list of levels contained in the simulation.
 	 */
 	Set<LevelIdentifier> getLevels( );
@@ -130,6 +138,10 @@ public interface ISimulationEngine {
 	 * <h2>Usage</h2>
 	 * <p>
 	 * 	This method is used in probes to read the data about the simulation, when the simulation reaches a time stamp.
+	 * </p>
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
 	 * </p>
 	 * @param level The levels where to get the agents.
 	 * @return The set of all the agents lying in a specific level of in the simulation.

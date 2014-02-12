@@ -46,44 +46,46 @@
  */
 package fr.lgi2a.similar.microkernel.influences.system;
 
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
 import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent4Engine;
 import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
 
 /**
- * The system influence sent to a level when the reaction of that level has to add the public local state of an agent into the 
- * public dynamic state of the level.
+ * The system influence sent to a level when the reaction of that level has to remove an agent from the level.
+ * This influence implies that the public and the private local state of the agent also have to be removed from 
+ * the agent itself.
  * 
  * <h1>Usage</h1>
  * <p>
- * 	When an agent is added to the simulation, this influence is sent to the levels where the agent resides, to include 
- * 	the public local state of the agent into the dynamic state of these levels.
- * </p>
- * <p>
- * 	This influence has to be generated only by the simulation engine, in reaction to an {@link SystemInfluenceAddAgent} influence.
+ * 	This influence is sent to the levels from which the agent is being removed, to exclude 
+ * 	the local states of the agent from the dynamic state of these levels as well as from the specifications 
+ * 	of the agent.
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfluence {
+public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 	/**
 	 * The category of this influence.
 	 */
-	public static final String CATEGORY = "System influence - Add public local state agent";
-	
+	public static final String CATEGORY = "System influence - Remove agent from a level";
+
 	/**
-	 * The public local state to add to the public dynamic local state of the level.
+	 * The agent being removed from the level.
 	 */
-	private ILocalStateOfAgent4Engine publicLocalState;
-	
+	private IAgent4Engine agent;
 	
 	/**
-	 * Checks the validity of the <code>publicLocalState</code> parameter of the constructor.
-	 * @param publicLocalState The parameter of the constructor.
+	 * Checks the validity of the parameters of the constructor.
+	 * @param publicLocalState The second parameter of the constructor.
+	 * @return The value of <code>publicLocalState</code>. This returned value is a trick allowing the integration of this tests 
+	 * in the parameters of the super constructor call.
 	 */
 	private static ILocalStateOfAgent4Engine checkParameterValidity( 
-			ILocalStateOfAgent publicLocalState 
+			ILocalStateOfAgent publicLocalState
 	) {
 		if( publicLocalState == null ){
 			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
@@ -96,14 +98,15 @@ public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfl
 	}
 	
 	/**
-	 * Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the 
+	 * Builds a 'Remove agent from a level' system influence, removing an agent from the 
 	 * dynamic state of a specific level during the next reaction of that level.
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
-	 * @param publicLocalState The public local state to add to the public dynamic local state of the level.
+	 * @param publicLocalState The public local state identifying both the agent and the level from which it has to
+	 * be removed.
 	 * @throws IllegalArgumentException If the public local state is <code>null</code>.
 	 */
-	public SystemInfluenceAddPublicLocalStateToDynamicState( 
+	public SystemInfluenceRemoveAgentFromLevel( 
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound, 
 			ILocalStateOfAgent publicLocalState 
@@ -114,16 +117,44 @@ public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfl
 			timeLowerBound,
 			timeUpperBound
 		);
-		this.publicLocalState = (ILocalStateOfAgent4Engine) publicLocalState;
+		this.agent = ( (ILocalStateOfAgent4Engine)publicLocalState ).getOwner();
 	}
-
 	
 	/**
-	 * Gets the public local state to add to the public dynamic local state of the level.
-	 * @return The public local state to add to the public dynamic local state of the level.
+	 * Builds a 'Remove agent from a level' system influence, removing an agent from the 
+	 * dynamic state of a specific level during the next reaction of that level.
+	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
+	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
+	 * @param agent The agent being removed from the level having the identifier <code>levelId</code>.
+	 * @param levelId The identifier of the level from which the agent is removed.
 	 */
-	public ILocalStateOfAgent getPublicLocalState( ) {
-		return this.publicLocalState;
+	public SystemInfluenceRemoveAgentFromLevel(
+			SimulationTimeStamp timeLowerBound,
+			SimulationTimeStamp timeUpperBound, 
+			IAgent4Engine agent,
+			LevelIdentifier levelId
+	){
+		super(
+			CATEGORY,
+			levelId,
+			timeLowerBound,
+			timeUpperBound
+		);
+		if( agent == null ){
+			throw new IllegalArgumentException( "The agent cannot be null." );
+		} else if( ! agent.getLevels().contains( levelId ) ){
+			throw new IllegalArgumentException( "The agent was not in the level '" + levelId + "'." );
+		} else {
+			this.agent = agent;
+		}
+	}
+	
+	/**
+	 * Gets the agent being removed from the level.
+	 * @return The agent being removed from the level.
+	 */
+	public IAgent4Engine getAgent( ){
+		return this.agent;
 	}
 
 	/**
@@ -132,6 +163,6 @@ public class SystemInfluenceAddPublicLocalStateToDynamicState extends SystemInfl
 	 * @return The concatenation of the category, the target level and the added owner of the public local state of the influence.
 	 */
 	public String toString(){
-		return super.toString() + ", with owner " + this.publicLocalState;
+		return super.toString() + ", with owner " + this.agent;
 	}
 }

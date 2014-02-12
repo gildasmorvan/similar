@@ -106,6 +106,10 @@ public interface IAgent {
 	 * <p>
 	 * 	This method has to be used only in the simulation engine.
 	 * </p>
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
 	 * @return A collection containing the identifier of the levels where this agent lies.
 	 */
 	Set<LevelIdentifier> getLevels( );
@@ -227,7 +231,7 @@ public interface IAgent {
 	 * agent (<i>i.e.</i> "t" in the notations).
 	 * @param timeUpperBound Is the upper bound of the transitory period for which the decision is made by this 
 	 * agent (<i>i.e.</i> "t+dt" in the notations).
-	 * @param memoryState The revised global state of the agent when it made a decision (<i>i.e.</i> &mu;<sub>a</sub>(t+dt) in the 
+	 * @param globalState The revised global state of the agent when it made a decision (<i>i.e.</i> &mu;<sub>a</sub>(t+dt) in the 
 	 * notations).
 	 * @param perceivedData The data that were perceived about the level identified by <code>levelId</code> and its perceptible levels.
 	 * @param producedInfluences The map where the influences resulting from the decisions are stored.
@@ -236,7 +240,7 @@ public interface IAgent {
 			LevelIdentifier levelId,
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound,
-			IGlobalState memoryState,
+			IGlobalState globalState,
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences
 	);

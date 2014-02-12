@@ -47,7 +47,7 @@
 package fr.lgi2a.similar.microkernel.influences;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +71,7 @@ public final class InfluencesMap {
 	 * Builds an empty influences map.
 	 */
 	public InfluencesMap( ){
-		this.influencesMap = new HashMap<LevelIdentifier, List<IInfluence>>();
+		this.influencesMap = new LinkedHashMap<LevelIdentifier, List<IInfluence>>();
 	}
 	
 	/**

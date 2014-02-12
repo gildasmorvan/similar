@@ -62,7 +62,7 @@ import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicSta
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @see ILevel
  */
-public interface ILevel4Engine {
+public interface ILevel4Engine extends ILevel {
 	/**
 	 * Sets the initial value of the last consistent and the last transitory 
 	 * public state of the level.

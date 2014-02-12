@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.engines;
+package fr.lgi2a.similar.microkernel.libs.tools.engine;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -70,10 +70,7 @@ import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgentToL
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgentFromLevel;
 import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractSimulationEngineWithInitialization;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateFilteredMap;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
 
 /**
  * A simulation engine using a mono-threaded simulation engine.
@@ -144,6 +141,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 				agents,
 				currentSimulationDynamicState
 			);
+			lastPartlyConsistentStateTimestamp = nextPartlyConsistentStateTimestamp;
 			// The simulation is now in an half-consistent state: the observation of the simulation is triggered.
 			for( IProbe probe : this.getProbes() ){
 				probe.observeAtPartialConsistentTime( lastPartlyConsistentStateTimestamp, this );
@@ -226,7 +224,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @return The levels that are currently starting a new transitory period.
 	 */
 	private Collection<ILevel4Engine> identifyLevelsStartingNewTransitoryPeriod(
-			SimulationTimeStamp halfConsistentTime,
+		SimulationTimeStamp halfConsistentTime,
 		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels
 	){
 		Collection<ILevel4Engine> result = new LinkedHashSet<ILevel4Engine>();
@@ -474,6 +472,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 					transitoryPeriodMin, 
 					transitoryPeriodMax, 
 					agent.getGlobalState(), 
+					agent.getPrivateLocalState( levelId ), 
 					agent.getPerceivedData().get( levelId ), 
 					producedInfluences
 				);
@@ -539,7 +538,10 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		//
 		// Then perform the user-defined reaction to the regular influences of the levels where a reaction is computed.
 		//
-		this.userReactionToRegularInfluences( levelsEndingTransitoryPeriod );
+		this.userReactionToRegularInfluences( 
+			levelsEndingTransitoryPeriod,
+			levels
+		);
 		//
 		// Then perform a second loop where the reaction to system influences is handled after the reaction to
 		// the regular influences.
@@ -811,7 +813,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 				addedPublicLocalState
 			);
 			// Add the agent to the list of agents contained in the level.
-			agents.get( level ).add( addedAgent );
+			LevelIdentifier levelId = level.getIdentifier();
+			agents.get( levelId ).add( addedAgent );
 			// Add the local states to the agent.
 			addedAgent.includeNewLevel(
 				level.getIdentifier(), 
@@ -912,9 +915,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * 	As a side-effect, this method removes the processed regular influences from the transitory state and the consistent state.
 	 * 	The influences persisting after the reaction are located in the transitory state of the levels after the call to this method.
 	 * </p>
+	 * @param levelsEndingTransitoryPeriod The levels for which a reaction is performed.
+	 * @param levels The levels of the simulation.
 	 */
 	private void userReactionToRegularInfluences( 
-			Collection<ILevel4Engine> levelsEndingTransitoryPeriod
+			Collection<ILevel4Engine> levelsEndingTransitoryPeriod,
+			LinkedHashMap<LevelIdentifier, ILevel4Engine> levels
 	) {
 		// Create the data structure where the influences produced by the user reaction are stored, before
 		// dispatching them between the transitory dynamic state of the targeted levels.
@@ -931,6 +937,16 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 				level.getLastTransitoryState().getRegularInfluencesOfStateDynamics(), 
 				userInfluences
 			);
+			// Remove the regular influences from the transitory state.
+			transitoryState.clearRegularInfluences();
+		}
+		// Include the influences in the transitory state of the targeted levels.
+		for( LevelIdentifier levelId : userInfluences.getDefinedKeys() ) {
+			ILevel4Engine level = levels.get( levelId );
+			TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState( );
+			for( IInfluence influence : userInfluences.getInfluencesForLevel( levelId ) ){
+				transitoryState.addInfluence( influence );
+			}
 		}
 	}
 }

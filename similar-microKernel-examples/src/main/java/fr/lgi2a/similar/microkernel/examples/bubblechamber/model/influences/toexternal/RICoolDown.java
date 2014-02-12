@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,56 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import java.util.HashSet;
+import java.util.Set;
+
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
- * 
+ * This influence is sent by the environment in the "External" level to naturally cool down 
+ * overheated cannons.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class RICoolDown extends RegularInfluence {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * The category of this influence.
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
+	public static final String CATEGORY = "Cool down";
+
+	/**
+	 * The ambient external temperature.
+	 */
+	public final double ambientTemperature;
+	/**
+	 * The cannons being cooled down.
+	 */
+	public final Set<AgtCannonPLSInExternal> cannon;
 	
 	/**
-	 * Builds an empty global state for an agent.
+	 * Builds a partly initialized instance of this influence.
+	 * The {@link Set#add(Object)} method has still to be called on the 
+	 * {@link RICoolDown#ambientTemperature} field for each cannon to cool down.
+	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
+	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
+	 * @param ambientTemperature The external ambient temperature.
 	 */
-	public EmptyGlobalState( ) { }
+	public RICoolDown(
+			SimulationTimeStamp timeLowerBound,
+			SimulationTimeStamp timeUpperBound,
+			double ambientTemperature
+	){
+		super(
+				CATEGORY,
+				BubbleChamberLevelList.EXTERNAL,
+				timeLowerBound, 
+				timeUpperBound
+		);
+		this.ambientTemperature = ambientTemperature;
+		this.cannon = new HashSet<AgtCannonPLSInExternal>();
+	}
 }

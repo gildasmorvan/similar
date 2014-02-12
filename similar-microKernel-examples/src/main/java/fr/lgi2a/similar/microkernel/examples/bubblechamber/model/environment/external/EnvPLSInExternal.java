@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,46 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.environment.external;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfEnvironment;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
+ * The public local state of the environment in the "External" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class EnvPLSInExternal extends AbstractLocalStateOfEnvironment {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * Builds an initialized instance of this public local state.
+	 * @param initialAmbientTemperature The initial ambient temperature 
+	 * of the external level.
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
+	public EnvPLSInExternal(
+			double initialAmbientTemperature
+	) {
+		super(
+			BubbleChamberLevelList.EXTERNAL
+		);
+		this.ambientTemperature = initialAmbientTemperature;
+	}
 	
+	//
+	//
+	// Declaration of the content of the public local state
+	//
+	//
+
 	/**
-	 * Builds an empty global state for an agent.
+	 * The ambient external temperature.
 	 */
-	public EmptyGlobalState( ) { }
+	private double ambientTemperature;
+
+	/**
+	 * The ambient external temperature.
+	 */
+	public double getAmbientTemperature( ){
+		return this.ambientTemperature;
+	}
 }

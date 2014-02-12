@@ -44,28 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
-
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
+ * Defines the model of the "External" level related specifications of the 
+ * environment of this simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
-	/**
-	 * The instance modeling an empty global state for any agent.
-	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
-	
-	/**
-	 * Builds an empty global state for an agent.
-	 */
-	public EmptyGlobalState( ) { }
-}
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.environment.external;

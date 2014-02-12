@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.abstractimpl;
+package fr.lgi2a.similar.microkernel.libs.tools.engine;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -71,9 +71,8 @@ import fr.lgi2a.similar.microkernel.influences.IInfluence;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 import fr.lgi2a.similar.microkernel.levels.ILevel;
 import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractSimulationEngine;
 import fr.lgi2a.similar.microkernel.libs.disambiguation.DisambiguationOperatorReturningLastConsistentState;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.ExceptionSimulationAborted;
 
 /**
  * An abstract implementation of the {@link ISimulationEngine} interface, providing algorithms to the initialization
@@ -654,7 +653,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 			// Update the time stamp of the consistent state.
 			consistentState.setTime( finalTime );
 			// Update the time stamp of the transitory state.
-			transitoryState.setTransitoryPeriodMax( finalTime );
+			transitoryState.setTransitoryPeriodMax( new SimulationTimeStamp( Long.MAX_VALUE ) );
 			// Tell that the last dynamic state of that level was the consistent one.
 			this.currentSimulationDynamicState.put( level.getLastConsistentState() );
 		}

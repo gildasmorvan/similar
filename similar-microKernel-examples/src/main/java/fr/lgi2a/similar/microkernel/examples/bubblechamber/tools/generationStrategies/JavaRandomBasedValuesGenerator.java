@@ -1,5 +1,5 @@
 /**
- * Copyright or Â© or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,43 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.generationStrategies;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import java.util.Random;
+
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.IRandomValuesGenerator;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
- * 
+ * A random value generation strategy based on the java.util.Random java class.
+ * @see Random
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class JavaRandomBasedValuesGenerator implements IRandomValuesGenerator  {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * The java.util.Random object generating random numbers in this strategy.
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
-	
+	private Random javaRandomHelper;
+
 	/**
-	 * Builds an empty global state for an agent.
+	 * Builds a random values generation strategy relying on the java Random class.
+	 * @param seed The seed used to initialize the java random values generator.
 	 */
-	public EmptyGlobalState( ) { }
+	public JavaRandomBasedValuesGenerator ( long seed ) {
+		this.javaRandomHelper = new Random( seed );
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public double randomDouble(
+			double lowerBound, 
+			double higherBound
+	) {
+		if( lowerBound >= higherBound ) {
+			throw new IllegalArgumentException( "The lower bound " + lowerBound + " is greater " +
+					"or equal to the higher bound " + higherBound  );
+		}
+		return (higherBound - lowerBound) * this.javaRandomHelper.nextDouble() + lowerBound;
+	}
 }

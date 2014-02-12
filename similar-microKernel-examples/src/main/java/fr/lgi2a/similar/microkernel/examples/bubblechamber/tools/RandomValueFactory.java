@@ -1,5 +1,5 @@
 /**
- * Copyright or Â© or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,38 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.tools;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.generationStrategies.JavaRandomBasedValuesGenerator;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
+ * The random values factory used in the simulation.
  * <p>
- * 	This global state is used when the agent makes decisions using local information only.
+ *	By default, this factory uses a strategy based on a java.util.Random instance using the seed "1000".
  * </p>
- * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class RandomValueFactory {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * The random values generation strategy currently used in the simulation.
+	 * The default strategy is based on a java.util.Random instance using the seed "1000".
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
-	
+	private static IRandomValuesGenerator INSTANCE = new JavaRandomBasedValuesGenerator( 1000 );
+
 	/**
-	 * Builds an empty global state for an agent.
+	 * Sets the random value generation strategy used in the simulation.
+	 * @param strategy The random value generation strategy used in the simulation.
 	 */
-	public EmptyGlobalState( ) { }
+	public static void setStrategy( IRandomValuesGenerator  strategy ) {
+		if( strategy != null ) {
+			INSTANCE = strategy ;
+		}
+	}
+
+	/**
+	 * Gets the random value generation strategy used in the simulation.
+	 */
+	public static IRandomValuesGenerator getStrategy( ) {
+		return INSTANCE;
+	}
 }

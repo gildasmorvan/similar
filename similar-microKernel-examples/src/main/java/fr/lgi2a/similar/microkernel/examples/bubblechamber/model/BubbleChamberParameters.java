@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,60 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import java.awt.geom.Rectangle2D;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
+ * The parameters used in the "Bubble chamber" simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class BubbleChamberParameters {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * The default diameter of a bubble.
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
+	public double bubbleDiameter;
+	/**
+	 * The default temperature over which cannons overheat and cannot fire particles.
+	 */
+	public double cannonOverheatTemperature;
+	/**
+	 * The ratio used to convert a power into a temperature.
+	 */
+	public double powerToTemperatureConversionRatio;
+	/**
+	 * The bounds of the bubble chamber.
+	 */
+	public Rectangle2D chamberBounds;
+	/**
+	 * The initial ambient temperature.
+	 */
+	public double initialAmbientTemperature;
+	/**
+	 * The range within which the power of the cannons is defined.
+	 * This array contains two elements (the lower and higher bound of the range).
+	 */
+	public double[] cannonPowerRange;
 	
 	/**
-	 * Builds an empty global state for an agent.
+	 * Creates a new set of parameters for the "Bubble chamber" 
+	 * simulation having default values.
 	 */
-	public EmptyGlobalState( ) { }
+	public BubbleChamberParameters( ){
+		this.bubbleDiameter = 0.9;
+		this.cannonOverheatTemperature = 40.0;
+		this.powerToTemperatureConversionRatio = 10;
+		this.chamberBounds = new Rectangle2D.Double(
+				0,
+				0,
+				200,
+				200
+		);
+		this.initialAmbientTemperature = 20;
+		this.cannonPowerRange = new double[]{
+			0.5,
+			10
+		};
+	}
 }

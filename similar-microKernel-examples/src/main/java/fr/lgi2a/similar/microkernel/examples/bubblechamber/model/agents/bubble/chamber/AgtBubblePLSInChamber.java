@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,82 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.chamber;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import java.awt.geom.Point2D;
+
+import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
- * 
+ * The public local state of the "Bubble" agent in the "Chamber" level.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class AgtBubblePLSInChamber extends AbstractLocalStateOfAgent {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * Builds an initialized instance of this public local state.
+	 * @param owner The agent owning this public local state.
+	 * @param initialX The initial x coordinate of the bubble.
+	 * @param initialY The initial y coordinate of the bubble.
+	 * @param initialDiameter The initial diameter of the bubble.
+	 * @throws IllegalArgumentException If the diameter is lower or equal to 0.
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
+	public AgtBubblePLSInChamber(
+			IAgent4Engine owner,
+			double initialX,
+			double initialY,
+			double initialDiameter
+	) {
+		super(
+			BubbleChamberLevelList.CHAMBER,
+			owner
+		);
+		this.location = new Point2D.Double( initialX, initialY );
+		if( initialDiameter <= 0 ){
+			throw new IllegalArgumentException( "The diameter of the bubble cannot be null." );
+		} else {
+			this.diameter = initialDiameter;
+		}
+	}
+	
+	//
+	//
+	// Declaration of the content of the public local state
+	//
+	//
 	
 	/**
-	 * Builds an empty global state for an agent.
+	 * The location of the center of the bubble in the chamber.
 	 */
-	public EmptyGlobalState( ) { }
+	private Point2D location;
+
+	/**
+	 * Gets the location of the center of the bubble in the chamber.
+	 * @return The location of the center of the bubble in the chamber.
+	 */
+	public Point2D getLocation( ){
+		return this.location;
+	}
+
+	/**
+	 * The diameter of the bubble.
+	 */
+	private double diameter;
+
+	/**
+	 * Gets the diameter of the bubble.
+	 * @return The diameter of the bubble.
+	 */
+	public double getDiameter( ){
+		return this.diameter;
+	}
+
+	/**
+	 * Sets the diameter of the bubble.
+	 * @param diameter The new diameter of the bubble.
+	 */
+	public void setDiameter( double diameter ){
+		this.diameter = diameter;
+	}
 }

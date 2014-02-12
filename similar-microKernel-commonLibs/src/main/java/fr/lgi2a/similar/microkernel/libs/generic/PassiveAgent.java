@@ -123,14 +123,15 @@ public class PassiveAgent extends AbstractAgent {
 
 	/**
 	 * Models a decision model doing nothing.
-	 * @see AbstractAgent#decide(LevelIdentifier, SimulationTimeStamp, SimulationTimeStamp, IGlobalState, IPerceivedData, InfluencesMap)
+	 * @see AbstractAgent#decide(LevelIdentifier, SimulationTimeStamp, SimulationTimeStamp, IGlobalState, ILocalStateOfAgent, IPerceivedData, InfluencesMap)
 	 */
 	@Override
 	public void decide(
 			LevelIdentifier levelId,
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound, 
-			IGlobalState memoryState,
+			IGlobalState globalState,
+			ILocalStateOfAgent privateLocalState,
 			IPerceivedData perceivedData, 
 			InfluencesMap producedInfluences
 	) {

@@ -55,6 +55,7 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
 import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
 import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
+import fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine;
 import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
 
 /**

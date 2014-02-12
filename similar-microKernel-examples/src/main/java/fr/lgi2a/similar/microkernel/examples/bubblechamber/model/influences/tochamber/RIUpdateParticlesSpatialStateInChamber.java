@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,63 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.tochamber;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import java.util.HashSet;
+import java.util.Set;
+
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
- * 
+ * This influence is sent by the environment to the "Chamber" level to trigger the computation 
+ * of the new acceleration, speed and location of the "Particle" agents.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class RIUpdateParticlesSpatialStateInChamber extends RegularInfluence {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * The category of this influence.
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
+	public static final String CATEGORY = "Update particles spatial state";
 	
 	/**
-	 * Builds an empty global state for an agent.
+	 * The particles which state has to be updated.
 	 */
-	public EmptyGlobalState( ) { }
+	private Set<AgtParticlePLSInChamber> particles;
+	
+	/**
+	 * Builds an initialized instance of this influence.
+	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
+	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
+	 */
+	public RIUpdateParticlesSpatialStateInChamber(
+		SimulationTimeStamp timeLowerBound,
+		SimulationTimeStamp timeUpperBound
+	) {
+		super(
+			CATEGORY, 
+			BubbleChamberLevelList.CHAMBER,
+			timeLowerBound, 
+			timeUpperBound
+		);
+		this.particles = new HashSet<AgtParticlePLSInChamber>();
+	}
+
+	/**
+	 * Gets the particles which state has to be updated.
+	 * @return The particles which state has to be updated.
+	 */
+	public Set<AgtParticlePLSInChamber> getParticlesToUpdate(){
+		return this.particles;
+	}
+	
+	/**
+	 * Adds a particle to update in reaction to this influence.
+	 * @param particle The particle that has to be udpated.
+	 */
+	public void addParticleToUpdate( AgtParticlePLSInChamber particle ) {
+		this.particles.add( particle );
+	}
 }

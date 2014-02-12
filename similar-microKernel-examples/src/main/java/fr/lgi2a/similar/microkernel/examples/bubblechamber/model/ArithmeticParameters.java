@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,28 +44,16 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.generic;
-
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model;
 
 /**
- * Models a global state containing no information.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This global state is used when the agent makes decisions using local information only.
- * </p>
+ * This class defines the parameters used for the precision of critical arithmetic operations.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
+public class ArithmeticParameters {
 	/**
-	 * The instance modeling an empty global state for any agent.
+	 * The precision of the double number comparisons.
 	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
-	
-	/**
-	 * Builds an empty global state for an agent.
-	 */
-	public EmptyGlobalState( ) { }
+	public static double DOUBLE_PRECISION = 0.0001;
 }

@@ -233,6 +233,8 @@ public interface IAgent {
 	 * agent (<i>i.e.</i> "t+dt" in the notations).
 	 * @param globalState The revised global state of the agent when it made a decision (<i>i.e.</i> &mu;<sub>a</sub>(t+dt) in the 
 	 * notations).
+	 * @param publicLocalState  The public local state of the agent in the level from which decision is made (<i>i.e.</i> 
+	 * &phi;<sub>a</sub><sup>+</sup>( t, <code>level</code> ) in the notations).
 	 * @param privateLocalState The private local state of the agent in the level from which decision is made (<i>i.e.</i> 
 	 * &phi;<sub>a</sub><sup>-</sup>( t, <code>level</code> ) in the notations).
 	 * @param perceivedData The data that were perceived about the level identified by <code>levelId</code> and its perceptible levels.
@@ -243,6 +245,7 @@ public interface IAgent {
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound,
 			IGlobalState globalState,
+			ILocalStateOfAgent publicLocalState,
 			ILocalStateOfAgent privateLocalState,
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences

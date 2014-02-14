@@ -54,7 +54,7 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
 import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
+import fr.lgi2a.similar.microkernel.levels.ILevel;
 
 
 /**
@@ -82,7 +82,7 @@ public interface ISimulationModel {
 	 * @param initialTime The initial time of the simulation.
 	 * @return The bare levels of the simulation.
 	 */
-	List<ILevel4Engine> generateLevels( SimulationTimeStamp initialTime );
+	List<ILevel> generateLevels( SimulationTimeStamp initialTime );
 	
 	/**
 	 * Generates the environment of the simulation. At this stage, no agent are generated in the simulation.
@@ -96,7 +96,7 @@ public interface ISimulationModel {
 	 */
 	EnvironmentInitializationData generateEnvironment( 
 			SimulationTimeStamp initialTime, 
-			Map<LevelIdentifier, ILevel4Engine> levels 
+			Map<LevelIdentifier, ILevel> levels 
 	);
 	
 	/**
@@ -111,7 +111,7 @@ public interface ISimulationModel {
 	 */
 	AgentInitializationData generateAgents( 
 			SimulationTimeStamp initialTime, 
-			Map<LevelIdentifier, ILevel4Engine> levels 
+			Map<LevelIdentifier, ILevel> levels 
 	);
 	
 	/**

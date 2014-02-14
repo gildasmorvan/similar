@@ -44,167 +44,23 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.levels;
+package fr.lgi2a.similar.extendedkernel.levels;
 
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.influences.IInfluence;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.lgi2a.similar.microkernel.levels.ILevel;
 
 /**
- * Models a level of the simulation.
- * 
- * <h1>Correspondence with theory</h1>
- * <p>
- * 	An instance of this class models a level l&isin;&#x1D543;
- * </p>
- * 
- * <h1>Usage</h1>
- * <p>
- * 	The reaction of a level is a process changing the value of the last consistent public local dynamic state of the level from 
- * 	a time stamp <code>t<sub>l</sub></code> to the next time stamp of the level <code>t<sub>l</sub>+dt<sub>l</sub></code>. 
- * 	This process relies on the following steps:
- * </p>
- * <ol>
- * 	<li>
- * 		The engine first loops over the system influences located in both the last consistent dynamic state 
- * 		<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> and the ones located in the transitory dynamic state 
- * 		of the level right before the computation of the reaction.
- * 		During this loop, the engine removes the processed system influences from the both dynamic states.
- * 		This process might add new influences to the simulation (for instance the 'add agent to simulation' influence
- * 		produces 'add public local state of agent to level' influences).
- * 		In such a case, if at least one added influence is a system influence, the engine performs another loop to manage them.
- *	</li>
- *	<li>
- *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
- *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, Collection)}
- *		method.
- *		This user-defined reaction:
- * 		<ul>
- * 			<li>
- * 				Updates the public local state of the environment and of the agents contained in the last consistent dynamic state, 
- * 				according to the modifications depicted by the regular influences.
- * 				This operation is part of the transformation of the last consistent dynamic state 
- * 				<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into the new last consistent dynamic state 
- * 				<code>&delta;<sub>l</sub>(t<sub>l</sub> + dt<sub>l</sub>)</code>.
- * 
- *  			For instance, if the public local state of the environment defines an agent grid, this method can add the 
- *  			public local state of an agent to the grid, in reaction to the 'add public local state of agent to level' 
- *  			system influence.
- *  		</li>
- *  		<li>
- *  			Can produce new influences (for instance the addition of an agent to the simulation).
- *  			The system influences added in such a way will be processed either during the next reaction of the level 
- *  			they are aimed at (if the targeted level is not currently computing its reaction), or during the current 
- *  			reaction (in the next steps of this process).
- *  		</li>
- * 		</ul>
- *	</li>
- *	<li>
- *		The engine then performs a user-defined reaction to the regular influences, as described by the 
- *		{@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, Set)}
- *		method.
- *		This user-defined reaction:
- *		<ul>
- * 			<li>
- * 				Updates the public local state of the environment and of the agents contained in the last consistent dynamic state, 
- * 				according to the modifications depicted by the regular influences.
- * 				This operation is part of the transformation of the last consistent dynamic state 
- * 				<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into the new last consistent dynamic state 
- * 				<code>&delta;<sub>l</sub>(t<sub>l</sub> + dt<sub>l</sub>)</code>.
- *  		</li>
- *  		<li>
- *  			Determines which regular influences do persist after the reaction and which ones are consumed by the 
- *  			reaction (and are thus not retained in the new last consistent dynamic state).
- *  		</li>
- *  		<li>
- *  			Can produce new influences (for instance the addition of an agent to the simulation).
- *  			The influences added in such a way will be processed either during the next reaction of the level 
- *  			they are aimed at (if the targeted level is not currently computing its reaction or if the influence is a 
- *  			regular influence), or during the current reaction (in the next steps of this process).
- *  		</li>
- *		</ul>
- *	</li>
- * 	<li>
- * 		The engine then loops again over the system influences that were added by the user-defined reactions into the levels that
- * 		are computing a reaction.
- * 		During this loop, the engine removes the processed system influences from the both dynamic states.
- * 		This process might add new influences to the simulation (for instance the 'add agent to simulation' influence
- * 		produces 'add public local state of agent to level' influences).
- * 		In such a case, if at least one added influence is a system influence, the engine performs another loop to manage them.
- *	</li>
- *	<li>
- *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
- *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, Collection)}
- *		method.
- *		This user-defined reaction:
- * 		<ul>
- * 			<li>
- * 				Updates the public local state of the environment and of the agents contained in the last consistent dynamic state, 
- * 				according to the modifications depicted by the regular influences.
- * 				This operation is part of the transformation of the last consistent dynamic state 
- * 				<code>&delta;<sub>l</sub>(t<sub>l</sub>)</code> into the new last consistent dynamic state 
- * 				<code>&delta;<sub>l</sub>(t<sub>l</sub> + dt<sub>l</sub>)</code>.
- * 
- *  			For instance, if the public local state of the environment defines an agent grid, this method can add the 
- *  			public local state of an agent to the grid, in reaction to the 'add public local state of agent to level' 
- *  			system influence.
- *  		</li>
- *  		<li>
- *  			Can produce new influences (for instance the addition of an agent to the simulation).
- *  			The influences added in such a way will be processed during the next reaction of the level 
- *  			they are aimed at.
- *  		</li>
- * 		</ul>
- *	</li>
- * </ol>
+ * Models the reaction process used by a level to react to the influences it received.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface ILevel extends ITimeModel {
-	/**
-	 * Gets the identifier of this level.
-	 * @return The identifier of this level.
-	 */
-	LevelIdentifier getIdentifier( );
-
-	/**
-	 * Gets the levels that can be perceived by agents located in this level.
-	 * <p>
-	 * 	It corresponds to the out neighborhood <i>N</i><sub>P</sub><sup>+</sup>( this )&sub;&#x1D53E;<sub>P</sub>
-	 * 	of the this level in the perception relation graph.
-	 * </p>
-	 * @return The levels that can be perceived by agents located in this level.
-	 */
-	Set<LevelIdentifier> getPerceptibleLevels( );
-
-	/**
-	 * Gets the levels that can be influenced by agents located in this level.
-	 * <p>
-	 * 	It corresponds to the out neighborhood <i>N</i><sub>I</sub><sup>+</sup>( this )&sub;&#x1D53E;<sub>I</sub>
-	 * 	of the this level in the perception relation graph.
-	 * </p>
-	 * @return The levels that can be influenced by agents located in this level.
-	 */
-	Set<LevelIdentifier> getInfluenceableLevels( );
-	
-	/**
-	 * Gets the last consistent dynamic state of the level.
-	 * @return The last consistent dynamic state of the level.
-	 */
-	ConsistentPublicLocalDynamicState getLastConsistentState( );
-	
-	/**
-	 * Gets the last transitory dynamic state of the level.
-	 * @return The last transitory dynamic state of the level.
-	 */
-	TransitoryPublicLocalDynamicState getLastTransitoryState( );
-	
+public interface ILevelReactionModel {	
 	/**
 	 * Performs a user-defined reaction to the regular influences that were lying in the most recent consistent dynamic state of 
 	 * the level and to the influences that were added into the transitory dynamic state of the level.

@@ -69,7 +69,7 @@ import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgentToLevel;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgentFromLevel;
-import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
+import fr.lgi2a.similar.microkernel.levels.ILevel;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
 
 /**
@@ -94,7 +94,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	protected SimulationTimeStamp performSimulation(
 			ISimulationModel simulationModel,
 			DynamicStateMap currentSimulationDynamicState,
-			LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+			LinkedHashMap<LevelIdentifier, ILevel> levels,
 			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 			IEnvironment4Engine environment
 	) {
@@ -130,7 +130,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			//		state of the simulation at the half-consistent time following the reaction.
 			// 	* The value of lastPartlyConsistentStateTimestamp changes.
 			SimulationTimeStamp nextPartlyConsistentStateTimestamp = this.getNextTime( levels.values() );
-			Collection<ILevel4Engine> levelsEndingTransitoryPeriod = this.identifyLevelsEndingTransitoryPeriod(
+			Collection<ILevel> levelsEndingTransitoryPeriod = this.identifyLevelsEndingTransitoryPeriod(
 				nextPartlyConsistentStateTimestamp, 
 				levels
 			);
@@ -152,7 +152,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			DynamicStateMap disambiguatedSimulationDynamicState = this.buildDynamicStateDisambiguation(
 					currentSimulationDynamicState
 			);
-			Collection<ILevel4Engine> levelsStartingNewTransitoryPeriod = this.identifyLevelsStartingNewTransitoryPeriod(
+			Collection<ILevel> levelsStartingNewTransitoryPeriod = this.identifyLevelsStartingNewTransitoryPeriod(
 				lastPartlyConsistentStateTimestamp, 
 				levels
 			);
@@ -194,10 +194,10 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @return The next time new transitory periods will start.
 	 */
 	private SimulationTimeStamp getNextTime(
-		Collection<ILevel4Engine> levels
+		Collection<ILevel> levels
 	) {
 		SimulationTimeStamp result = null;
-		for( ILevel4Engine level : levels ){
+		for( ILevel level : levels ){
 			SimulationTimeStamp levelTime = level.getLastTransitoryState().getTransitoryPeriodMax();
 			if( result == null ){
 				result = levelTime;
@@ -223,12 +223,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param levels A map containing the levels of the simulation.
 	 * @return The levels that are currently starting a new transitory period.
 	 */
-	private Collection<ILevel4Engine> identifyLevelsStartingNewTransitoryPeriod(
+	private Collection<ILevel> identifyLevelsStartingNewTransitoryPeriod(
 		SimulationTimeStamp halfConsistentTime,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels
+		LinkedHashMap<LevelIdentifier, ILevel> levels
 	){
-		Collection<ILevel4Engine> result = new LinkedHashSet<ILevel4Engine>();
-		for( ILevel4Engine level : levels.values() ){
+		Collection<ILevel> result = new LinkedHashSet<ILevel>();
+		for( ILevel level : levels.values() ){
 			if( level.getLastTransitoryState().getTransitoryPeriodMin().equals( halfConsistentTime ) ){
 				result.add( level );
 			}
@@ -244,12 +244,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @return The levels ending their transitory period at the half-consistent time 
 	 * <code>halfConsistentTime</code>.
 	 */
-	private Collection<ILevel4Engine> identifyLevelsEndingTransitoryPeriod(
+	private Collection<ILevel> identifyLevelsEndingTransitoryPeriod(
 		SimulationTimeStamp halfConsistentTime,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels
+		LinkedHashMap<LevelIdentifier, ILevel> levels
 	){
-		Collection<ILevel4Engine> result = new LinkedHashSet<ILevel4Engine>();
-		for( ILevel4Engine level : levels.values() ){
+		Collection<ILevel> result = new LinkedHashSet<ILevel>();
+		for( ILevel level : levels.values() ){
 			if( level.getLastTransitoryState().getTransitoryPeriodMax().equals( halfConsistentTime ) ){
 				result.add( level );
 			}
@@ -274,8 +274,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		ISimulationModel simulationModel,
 		SimulationTimeStamp lastPartlyConsistentStateTimestamp,
 		DynamicStateMap disambiguatedSimulationDynamicState,
-		Collection<ILevel4Engine> levelsStartingNewTransitoryPeriod,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+		Collection<ILevel> levelsStartingNewTransitoryPeriod,
+		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 		IEnvironment4Engine environment
 	){
@@ -338,7 +338,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	private Set<IAgent4Engine> perceptionPhase( 
 			SimulationTimeStamp lastPartlyConsistentStateTimestamp,
 			DynamicStateMap disambiguatedSimulationDynamicState,
-			Collection<ILevel4Engine> levelsStartingNewTransitoryPeriod,
+			Collection<ILevel> levelsStartingNewTransitoryPeriod,
 			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
 	) {
 		//
@@ -348,7 +348,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		//
 		// Iterate over the levels to trigger the perception of the agents.
 		//
-		for( ILevel4Engine level : levelsStartingNewTransitoryPeriod ){
+		for( ILevel level : levelsStartingNewTransitoryPeriod ){
 			LevelIdentifier levelId = level.getIdentifier( );
 			// Hide the dynamic state of the not perceptible levels.
 			IPublicDynamicStateMap perceptibleLocalDynamicStates = new DynamicStateFilteredMap(
@@ -420,12 +420,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 */
 	private void naturalPhase( 
 		SimulationTimeStamp lastPartlyConsistentStateTimestamp,
-		Collection<ILevel4Engine> levelsStartingNewTransitoryPeriod,
+		Collection<ILevel> levelsStartingNewTransitoryPeriod,
 		DynamicStateMap disambiguatedSimulationDynamicState,
 		IEnvironment4Engine environment,
 		InfluencesMap producedInfluences
 	){
-		for( ILevel4Engine level : levelsStartingNewTransitoryPeriod ) {
+		for( ILevel level : levelsStartingNewTransitoryPeriod ) {
 			LevelIdentifier levelId = level.getIdentifier( );
 			// Hide the dynamic state of the not perceptible levels.
 			IPublicDynamicStateMap perceptibleLocalDynamicStates = new DynamicStateFilteredMap(
@@ -457,11 +457,11 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 */
 	private void decisionPhase( 
 		SimulationTimeStamp lastPartlyConsistentStateTimestamp,
-		Collection<ILevel4Engine> levelsStartingNewTransitoryPeriod,
+		Collection<ILevel> levelsStartingNewTransitoryPeriod,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 		InfluencesMap producedInfluences
 	){
-		for( ILevel4Engine level : levelsStartingNewTransitoryPeriod ) {
+		for( ILevel level : levelsStartingNewTransitoryPeriod ) {
 			LevelIdentifier levelId = level.getIdentifier( );
 			SimulationTimeStamp transitoryPeriodMin = level.getLastTransitoryState().getTransitoryPeriodMin();
 			SimulationTimeStamp transitoryPeriodMax = level.getLastTransitoryState().getTransitoryPeriodMax();
@@ -472,7 +472,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 					transitoryPeriodMin, 
 					transitoryPeriodMax, 
 					agent.getGlobalState(), 
-					agent.getPrivateLocalState( levelId ), 
+					agent.getPublicLocalState( levelId ), 
+					agent.getPrivateLocalState( levelId ),
 					agent.getPerceivedData().get( levelId ), 
 					producedInfluences
 				);
@@ -516,8 +517,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 */
 	private void reactionPhase( 
 		SimulationTimeStamp newHalfConsistentTimeAfterReaction,
-		Collection<ILevel4Engine> levelsEndingTransitoryPeriod,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+		Collection<ILevel> levelsEndingTransitoryPeriod,
+		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 		DynamicStateMap currentSimulationHalfConsistentState
 	) {
@@ -563,7 +564,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		// Also sets the state dynamics of the consistent states as equal to the content of the transitory
 		// states.
 		//
-		for( ILevel4Engine level : levelsEndingTransitoryPeriod ){
+		for( ILevel level : levelsEndingTransitoryPeriod ){
 			ConsistentPublicLocalDynamicState consistentState = level.getLastConsistentState();
 			TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState();
 			// Update the time and next time of the last consistent and current transitory states.
@@ -578,7 +579,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		// Change the value of the current dynamic state of the simulation.
 		// It becomes equal to a combination of transitory states and consistent states
 		//
-		for( ILevel4Engine level : levels.values() ){
+		for( ILevel level : levels.values() ){
 			if( level.getLastConsistentState().getTime().equals( newHalfConsistentTimeAfterReaction ) ){
 				currentSimulationHalfConsistentState.put( level.getLastConsistentState() );
 			} else {
@@ -604,8 +605,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @return The system influences that were managed during the call of this method.
 	 */
 	private InfluencesMap systemReactionToSystemInfluences(
-		Collection<ILevel4Engine> levelsEndingTransitoryPeriod,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+		Collection<ILevel> levelsEndingTransitoryPeriod,
+		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
 	){
 		InfluencesMap result = new InfluencesMap();
@@ -632,7 +633,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			// Then clear the content of "influencesToProcessInNextLoop".
 			influencesToProcessInNextLoop.clear();
 			// Process the system influences contained in the transitory state of the levels.
-			for( ILevel4Engine level : levelsEndingTransitoryPeriod ){
+			for( ILevel level : levelsEndingTransitoryPeriod ){
 				TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState();
 				SimulationTimeStamp transitoryTimeMin = transitoryState.getTransitoryPeriodMin();
 				SimulationTimeStamp transitoryTimeMax = transitoryState.getTransitoryPeriodMax();
@@ -675,7 +676,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			SimulationTimeStamp transitoryTimeMin,
 			SimulationTimeStamp transitoryTimeMax,
 			IInfluence systemInfluence,
-			LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+			LinkedHashMap<LevelIdentifier, ILevel> levels,
 			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 			InfluencesMap producedInfluences
 	){
@@ -793,10 +794,10 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		SimulationTimeStamp transitoryTimeMin,
 		SimulationTimeStamp transitoryTimeMax,
 		SystemInfluenceAddAgentToLevel systemInfluence,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
 	){
-		ILevel4Engine level = levels.get( systemInfluence.getTargetLevel() );
+		ILevel level = levels.get( systemInfluence.getTargetLevel() );
 		ILocalStateOfAgent4Engine addedPublicLocalState = systemInfluence.getPublicLocalState();
 		ILocalStateOfAgent4Engine addedPrivateLocalState = systemInfluence.getPrivateLocalState();
 		IAgent4Engine addedAgent = systemInfluence.getPublicLocalState().getOwner();
@@ -839,10 +840,10 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		SimulationTimeStamp transitoryTimeMin,
 		SimulationTimeStamp transitoryTimeMax,
 		SystemInfluenceRemoveAgentFromLevel systemInfluence,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
 	){
-		ILevel4Engine level = levels.get( systemInfluence.getTargetLevel() );
+		ILevel level = levels.get( systemInfluence.getTargetLevel() );
 		IAgent4Engine removedAgent = systemInfluence.getAgent();
 		// Check the existence of the level from which the agent is removed.
 		if( level == null ){
@@ -877,8 +878,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param beforeRegularReaction <code>true</code> if this method is called before the user-defined reaction to regular influences.
 	 */
 	private void userReactionToSystemInfluences( 
-			Collection<ILevel4Engine> levelsEndingTransitoryPeriod,
-			LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+			Collection<ILevel> levelsEndingTransitoryPeriod,
+			LinkedHashMap<LevelIdentifier, ILevel> levels,
 			InfluencesMap influencesManagedDuringSystemReaction,
 			boolean beforeRegularReaction
 	) {
@@ -886,7 +887,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		// dispatching them between the transitory dynamic state of the targeted levels.
 		InfluencesMap userInfluences = new InfluencesMap( );
 		// Run the user reactions.
-		for( ILevel4Engine level : levelsEndingTransitoryPeriod ){
+		for( ILevel level : levelsEndingTransitoryPeriod ){
 			TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState();
 			SimulationTimeStamp transitoryTimeMin = transitoryState.getTransitoryPeriodMin();
 			SimulationTimeStamp transitoryTimeMax = transitoryState.getTransitoryPeriodMax();
@@ -901,7 +902,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		}
 		// Then include the produced influences to the transitory states
 		for( LevelIdentifier levelId : userInfluences.getDefinedKeys() ) {
-			ILevel4Engine level = levels.get( levelId );
+			ILevel level = levels.get( levelId );
 			for( IInfluence influence : userInfluences.getInfluencesForLevel( levelId ) ){
 				level.getLastTransitoryState().addInfluence( influence );
 			}
@@ -919,14 +920,14 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param levels The levels of the simulation.
 	 */
 	private void userReactionToRegularInfluences( 
-			Collection<ILevel4Engine> levelsEndingTransitoryPeriod,
-			LinkedHashMap<LevelIdentifier, ILevel4Engine> levels
+			Collection<ILevel> levelsEndingTransitoryPeriod,
+			LinkedHashMap<LevelIdentifier, ILevel> levels
 	) {
 		// Create the data structure where the influences produced by the user reaction are stored, before
 		// dispatching them between the transitory dynamic state of the targeted levels.
 		InfluencesMap userInfluences = new InfluencesMap( );
 		// Run the user reactions.
-		for( ILevel4Engine level : levelsEndingTransitoryPeriod ){
+		for( ILevel level : levelsEndingTransitoryPeriod ){
 			TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState();
 			SimulationTimeStamp transitoryTimeMin = transitoryState.getTransitoryPeriodMin();
 			SimulationTimeStamp transitoryTimeMax = transitoryState.getTransitoryPeriodMax();
@@ -942,7 +943,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		}
 		// Include the influences in the transitory state of the targeted levels.
 		for( LevelIdentifier levelId : userInfluences.getDefinedKeys() ) {
-			ILevel4Engine level = levels.get( levelId );
+			ILevel level = levels.get( levelId );
 			TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState( );
 			for( IInfluence influence : userInfluences.getInfluencesForLevel( levelId ) ){
 				transitoryState.addInfluence( influence );

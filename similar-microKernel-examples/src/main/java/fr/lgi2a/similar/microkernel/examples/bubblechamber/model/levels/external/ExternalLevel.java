@@ -78,9 +78,11 @@ public class ExternalLevel extends AbstractLevel {
 	 * @param powerToTemperatureConversionRatio The ratio used to convert a power into a temperature.
 	 */
 	public ExternalLevel(
-			double powerToTemperatureConversionRatio
+		SimulationTimeStamp initialTime,
+		double powerToTemperatureConversionRatio
 	){
 		super(
+			initialTime,
 			BubbleChamberLevelList.EXTERNAL
 		);
 		this.addInfluenceableLevel( BubbleChamberLevelList.CHAMBER );

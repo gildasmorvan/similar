@@ -127,6 +127,7 @@ public class AgtCannon extends AbstractAgent {
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound, 
 			IGlobalState globalState,
+			ILocalStateOfAgent publicLocalState, 
 			ILocalStateOfAgent privateLocalState, 
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences
@@ -136,6 +137,7 @@ public class AgtCannon extends AbstractAgent {
 					timeLowerBound,
 					timeUpperBound,
 					globalState, 
+					(AgtCannonPLSInExternal) publicLocalState,
 					(AgtCannonHLSInExternal) privateLocalState,
 					perceivedData, 
 					producedInfluences
@@ -156,14 +158,13 @@ public class AgtCannon extends AbstractAgent {
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound, 
 			IGlobalState globalState,
+			AgtCannonPLSInExternal publicLocalState, 
 			AgtCannonHLSInExternal privateLocalState, 
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences
 	) {
 		// Get the current temperature of the cannon.
-		AgtCannonPLSInExternal castedState = (AgtCannonPLSInExternal)
-				this.getPublicLocalState( BubbleChamberLevelList.EXTERNAL );
-		double temperature = castedState.getTemperature();
+		double temperature = publicLocalState.getTemperature();
 		// Get the overheat temperature of the cannon.
 		double overheatTemperature = privateLocalState.getOverheatTemperature();
 		// Check if it is not overheating.
@@ -171,16 +172,16 @@ public class AgtCannon extends AbstractAgent {
 			// If the cannon is not overheating, then fire a new particle.
 			// First create the particle.
 			AgtParticle particleAgt = AgtParticleFactory.generate(
-					castedState.getEntryPointInChamber().getX(), 
-					castedState.getEntryPointInChamber().getY(), 
-					castedState.getDirection().getX() * castedState.getPower(),
-					castedState.getDirection().getY() * castedState.getPower()
+					publicLocalState.getEntryPointInChamber().getX(), 
+					publicLocalState.getEntryPointInChamber().getY(), 
+					publicLocalState.getDirection().getX() * publicLocalState.getPower(),
+					publicLocalState.getDirection().getY() * publicLocalState.getPower()
 			);
 			// Then fire it in the simulation.
 			RIFireParticle influence = new RIFireParticle( 
 					timeLowerBound,
 					timeUpperBound,
-					castedState, 
+					publicLocalState, 
 					particleAgt
 			);
 			producedInfluences.add( influence );

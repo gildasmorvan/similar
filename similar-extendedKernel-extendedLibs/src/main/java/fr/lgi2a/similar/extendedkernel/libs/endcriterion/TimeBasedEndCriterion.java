@@ -44,69 +44,52 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.engines;
+package fr.lgi2a.similar.extendedkernel.libs.endcriterion;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-
-import fr.lgi2a.similar.microkernel.ISimulationModel;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.extendedkernel.simulationmodel.IEndCriterionModel;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
 
 /**
- * Models a simulation engine using monothreaded algorithms and the default disambiguation mechanism.
- * 
+ * A simulation end criterion based on a final time stamp to reach.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class EngineMonothreadedDefaultdisambiguation extends AbstractMonothreadedEngine {
+public final class TimeBasedEndCriterion implements IEndCriterionModel {
 	/**
-	 * A dynamic state containing only the most recent consistent state of the levels.
+	 * The final time stamp of the simulation.
 	 */
-	private DynamicStateMap dynamicStateContainingOnlyConsistentStates;
+	private SimulationTimeStamp finalTimeStamp;
 	
 	/**
-	 * {@inheritDoc}
+	 * Builds a simulation end criterion based on a final time stamp to reach.
+	 * @param finalTimeStamp The final time stamp of the simulation.
+	 * @throws IllegalArgumentException If the argument is <code>null</code>.
 	 */
-	protected SimulationTimeStamp performSimulation(
-			ISimulationModel simulationModel,
-			DynamicStateMap currentSimulationDynamicState,
-			LinkedHashMap<LevelIdentifier, ILevel> levels,
-			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
-			IEnvironment4Engine environment
-	) {
-		// Instead of always recreating the value "dynamicStateContainingOnlyConsistentStates", we
-		// benefit from the fact that consistent states are updated rather than recreated by the
-		// simulation engine: we initialize the map with the initial consistent state of each level.
-		// Since the reference to the current consistent state of a level never changes during the 
-		// simulation, the map "dynamicStateContainingOnlyConsistentStates" always contains the
-		// most recent consistent dynamic state of a level.
-		this.dynamicStateContainingOnlyConsistentStates = new DynamicStateMap( );
-		for( LevelIdentifier levelId : currentSimulationDynamicState.keySet() ){
-			this.dynamicStateContainingOnlyConsistentStates.put(
-				currentSimulationDynamicState.get( levelId )
-			);
+	public TimeBasedEndCriterion(
+			SimulationTimeStamp finalTimeStamp
+	){
+		if( finalTimeStamp == null ){
+			throw new IllegalArgumentException( "The argument cannot be null." );
 		}
-		return super.performSimulation(
-			simulationModel,
-			currentSimulationDynamicState,
-			levels,
-			agents,
-			environment
-		);
+		this.finalTimeStamp = finalTimeStamp;
 	}
 	
+	/**
+	 * Gets the final time stamp of the simulation.
+	 * @return The final time stamp of the simulation.
+	 */
+	public SimulationTimeStamp getFinalTimeStamp( ) {
+		return this.finalTimeStamp;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected DynamicStateMap buildDynamicStateDisambiguation(
-			DynamicStateMap currentSimulationHalfConsistentState
+	public boolean isFinalTimeOrAfter(
+			SimulationTimeStamp currentTime,
+			ISimulationEngine engine
 	) {
-		return this.dynamicStateContainingOnlyConsistentStates;
+		return this.finalTimeStamp.compareTo( currentTime ) <= 0;
 	}
 }

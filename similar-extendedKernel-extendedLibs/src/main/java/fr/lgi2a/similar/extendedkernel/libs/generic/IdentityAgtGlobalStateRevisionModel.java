@@ -44,29 +44,32 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.levels;
+package fr.lgi2a.similar.extendedkernel.libs.generic;
 
-import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import java.util.Map;
+
+import fr.lgi2a.similar.extendedkernel.agents.IAgtGlobalStateRevisionModel;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
 
 /**
- * Models an agent contained in the simulation, which specifications include engine optimization related methods.
- * 
- * <h1>Usage</h1>
- * <p>
- * 	This is the pragmatic interface of a level instance, including 
- * 	implementation constraints.
- * 	In practice, the methods defined in this interface are used by the simulation engine. Therefore, 
- * 	simulation designers will only manipulate methods from the {@link ILevel} parent 
- * 	interface.
- * </p>
+ * Models a global state revision model performing no changes in the global state of the agent.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
- * @see ILevel
  */
-public interface ILevel4Engine extends ILevel {
+public final class IdentityAgtGlobalStateRevisionModel implements IAgtGlobalStateRevisionModel {
+
 	/**
-	 * Sets the initial value of the last consistent and the last transitory 
-	 * public state of the level.
-	 * @param lastConsistentState The initial value of the last consistent state of this level.
+	 * {@inheritDoc}
 	 */
-	void initializeStates( ConsistentPublicLocalDynamicState lastConsistentState );
+	@Override
+	public void reviseGlobalState(
+		SimulationTimeStamp timeLowerBound,
+		SimulationTimeStamp timeUpperBound,
+		Map<LevelIdentifier, IPerceivedData> perceivedData,
+		IGlobalState globalState
+	) {
+		// Does nothing.
+	}
 }

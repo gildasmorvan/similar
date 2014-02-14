@@ -63,7 +63,7 @@ import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleCh
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.chamber.ChamberLevel;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.external.ExternalLevel;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.RandomValueFactory;
-import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
+import fr.lgi2a.similar.microkernel.levels.ILevel;
 import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractSimulationModel;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfEnvironment;
 
@@ -117,18 +117,19 @@ public class BubbleChamberSimulation extends AbstractSimulationModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<ILevel4Engine> generateLevels(
+	public List<ILevel> generateLevels(
 			SimulationTimeStamp initialTime
 	) {
-		List<ILevel4Engine> result = new LinkedList<ILevel4Engine>();
+		List<ILevel> result = new LinkedList<ILevel>();
 		
 		// Create the "external" level of the simulation.
 		ExternalLevel external = new ExternalLevel(
+			initialTime,
 			this.parameters.powerToTemperatureConversionRatio
 		);
 		result.add( external );
 		// Create the "chamber" level of the simulation.
-		ChamberLevel chamber = new ChamberLevel( );
+		ChamberLevel chamber = new ChamberLevel( initialTime );
 		result.add( chamber );
 		
 		return result;
@@ -140,7 +141,7 @@ public class BubbleChamberSimulation extends AbstractSimulationModel {
 	@Override
 	public EnvironmentInitializationData generateEnvironment(
 			SimulationTimeStamp initialTime, 
-			Map<LevelIdentifier, ILevel4Engine> levels
+			Map<LevelIdentifier, ILevel> levels
 	) {
 		// Create the environment.
 		BubbleChamberEnvironment environment = new BubbleChamberEnvironment( );
@@ -165,7 +166,7 @@ public class BubbleChamberSimulation extends AbstractSimulationModel {
 	@Override
 	public AgentInitializationData generateAgents(
 			SimulationTimeStamp initialTime, 
-			Map<LevelIdentifier, ILevel4Engine> levels
+			Map<LevelIdentifier, ILevel> levels
 	) {
 		AgentInitializationData result = new AgentInitializationData();
 		

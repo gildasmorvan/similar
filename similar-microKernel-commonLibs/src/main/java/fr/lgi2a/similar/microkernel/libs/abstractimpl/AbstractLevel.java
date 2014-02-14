@@ -50,10 +50,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
 
 /**
  * An abstract implementation of the {@link ILevel} and {@link ILevel4Engine} interfaces, 
@@ -63,7 +63,7 @@ import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractLevel implements ILevel, ILevel4Engine {
+public abstract class AbstractLevel implements ILevel {
 	/**
 	 * The identifier of the level.
 	 */
@@ -88,14 +88,16 @@ public abstract class AbstractLevel implements ILevel, ILevel4Engine {
 	/**
 	 * Builds an initialized instance of level having a specific identifier, a perception and influence 
 	 * relation graph containing only an edge between this level and itself and an empty initial consistent dynamic state.
-	 * This dynamic state has to be initialized using the following method:
+	 * This dynamic state has to be initialized using the following method on the last consistent state of the level:
 	 * <ul>
-	 * <li>{@link ILevel4Engine#initializeStates(ConsistentPublicLocalDynamicState)}</li>
+	 * 	<li>{@link ConsistentPublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)}</li>
+	 * </ul>
 	 * @param initialTime The initial time stamp of the level.
 	 * @param identifier The identifier of the level.
 	 * @throws IllegalArgumentException if an argument is <code>null</code>.
 	 */
 	protected AbstractLevel(
+			SimulationTimeStamp initialTime,
 			LevelIdentifier identifier
 	){
 		if( identifier == null ){
@@ -108,7 +110,13 @@ public abstract class AbstractLevel implements ILevel, ILevel4Engine {
 		// Create the out neighborhood of the influence relation graph for this level.
 		this.influenceableLevels = new LinkedHashSet<LevelIdentifier>( );
 		this.influenceableLevels.add( identifier );
-
+		// Create a partially initialized instance of the dynamic state of the level.
+		this.initializeStates(
+			new ConsistentPublicLocalDynamicState(
+				initialTime,
+				identifier
+			)
+		);
 	}
 
 	/**
@@ -145,9 +153,11 @@ public abstract class AbstractLevel implements ILevel, ILevel4Engine {
 		}
 		return this.lastTransitoryPublicLocalDynamicState;
 	}
-	
+
 	/**
-	 * {@inheritDoc}
+	 * Sets the initial value of the last consistent and the last transitory 
+	 * public state of the level.
+	 * @param lastConsistentState The initial value of the last consistent state of this level.
 	 */
 	public void initializeStates( 
 			ConsistentPublicLocalDynamicState lastConsistentState 

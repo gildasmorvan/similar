@@ -44,53 +44,19 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.agents;
+package fr.lgi2a.similar.extendedkernel.simulationmodel;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 
 /**
- * Models the decision process used by an agent to make decision from a specific level.
+ * The parent interface of the parameters used in a simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public interface IAgtDecisionModel {
+public interface ISimulationParameters { 
 	/**
-	 * Gets the level from which the decision is made.
-	 * @return The level from which the decision is made.
+	 * Gets the initial time of the simulation.
+	 * @return The initial time of the simulation.
 	 */
-	LevelIdentifier getLevel( );
-	
-	/**
-	 * Produces the influences resulting from the decisions of an agent from the level identified by
-	 * {@link IAgtDecisionModel#getLevel()}, for a specific transitory period.
-	 * <p>
-	 * 	This method corresponds to the application decision<sub>a, ]t,t+dt<sub>l</sub>[,l</sub> of this agent.
-	 * </p>
-	 * @param timeLowerBound Is the lower bound of the transitory period for which the decision is made by this 
-	 * agent (<i>i.e.</i> "t" in the notations).
-	 * @param timeUpperBound Is the upper bound of the transitory period for which the decision is made by this 
-	 * agent (<i>i.e.</i> "t+dt" in the notations).
-	 * @param globalState The revised global state of the agent when it made a decision (<i>i.e.</i> &mu;<sub>a</sub>(t+dt) in the 
-	 * notations).
-	 * @param publicLocalState The public local state of the agent in the level from which decision is made (<i>i.e.</i> 
-	 * &phi;<sub>a</sub><sup>+</sup>( t, <code>level</code> ) in the notations).
-	 * @param privateLocalState The private local state of the agent in the level from which decision is made (<i>i.e.</i> 
-	 * &phi;<sub>a</sub><sup>-</sup>( t, <code>level</code> ) in the notations).
-	 * @param perceivedData The data that were perceived about the level identified by <code>levelId</code> and its perceptible levels.
-	 * @param producedInfluences The map where the influences resulting from the decisions are stored.
-	 */
-	void decide(
-			SimulationTimeStamp timeLowerBound,
-			SimulationTimeStamp timeUpperBound,
-			IGlobalState globalState,
-			ILocalStateOfAgent publicLocalState,
-			ILocalStateOfAgent privateLocalState,
-			IPerceivedData perceivedData,
-			InfluencesMap producedInfluences
-	);
+	SimulationTimeStamp getInitialTime();
 }

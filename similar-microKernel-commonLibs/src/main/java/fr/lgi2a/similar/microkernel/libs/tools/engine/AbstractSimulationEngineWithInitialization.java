@@ -70,7 +70,6 @@ import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
 import fr.lgi2a.similar.microkernel.influences.IInfluence;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.levels.ILevel4Engine;
 import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractSimulationEngine;
 import fr.lgi2a.similar.microkernel.libs.disambiguation.DisambiguationOperatorReturningLastConsistentState;
 
@@ -92,7 +91,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	/**
 	 * A map associating a level to its identifier.
 	 */
-	private LinkedHashMap<LevelIdentifier, ILevel4Engine> levels;
+	private LinkedHashMap<LevelIdentifier, ILevel> levels;
 	/**
 	 * A map associating the agents lying in each level of the simulation to the identifier of the level.
 	 */
@@ -118,7 +117,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * Builds an instance of this simulation engine.
 	 */
 	public AbstractSimulationEngineWithInitialization( ) {
-		this.levels = new LinkedHashMap<LevelIdentifier, ILevel4Engine>( );
+		this.levels = new LinkedHashMap<LevelIdentifier, ILevel>( );
 		this.agents = new LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>>();
 		this.resetData( );
 	}
@@ -302,8 +301,6 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 		SimulationTimeStamp initialTime = simulationModel.getInitialTime();
 		// Generate the list of the levels of the simulation.
 		this.generateLevels( simulationModel, initialTime );
-		// Perform the first step of the initialization of the levels
-		this.initializeLevels( initialTime );
 		// Create the environment where the simulation will take place, and
 		// include its public local states to the dynamic state of the levels.
 		InfluencesMap influencesProducedByEnvironment = this.createEnvironment( 
@@ -336,11 +333,11 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 			ISimulationModel simulationModel, 
 			SimulationTimeStamp initialTime 
 	) {
-		List<ILevel4Engine> createdLevels = simulationModel.generateLevels( initialTime );
+		List<ILevel> createdLevels = simulationModel.generateLevels( initialTime );
 		// Check that the list is valid (not null, not empty).
 		this.checkLevelsListValidity( createdLevels );
 		// Add the levels to the engine while checking that each level is unique
-		for( ILevel4Engine generatedLevel : createdLevels ){
+		for( ILevel generatedLevel : createdLevels ){
 			if( generatedLevel == null ){
 				throw new IllegalStateException( "The list of levels cannot contain the null element." );
 			}
@@ -351,6 +348,10 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 				throw new IllegalStateException( "Two levels share the same identifier '" + levelId + "'." );
 			}
 			this.levels.put( levelId, generatedLevel );
+			this.agents.put( levelId, new LinkedHashSet<IAgent4Engine>( ) );
+			// Tell that initially, the dynamic state of this level in the simulation is the consistent one
+			// (it stays as such until the first simulation step is performed).
+			this.currentSimulationDynamicState.put( generatedLevel.getLastConsistentState( ) );
 		}
 	}
 	
@@ -358,34 +359,11 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * Checks the validity of the list of levels created by the {@link ISimulationModel#generateLevels(SimulationTimeStamp)} method.
 	 * @param createdLevels The levels list that was created.
 	 */
-	private void checkLevelsListValidity( List<ILevel4Engine> createdLevels ){
+	private void checkLevelsListValidity( List<ILevel> createdLevels ){
 		if( createdLevels == null ){
 			throw new IllegalStateException( "The simulation model has to provide a valid list of levels. The list was null." );
 		} else if( createdLevels.isEmpty( ) ){
 			throw new IllegalStateException( "The simulation model has to contain at least one level." );
-		}
-	}
-	
-	/**
-	 * Initialize the content of each level of the simulation (create the agents list, 
-	 * create the dynamic state).
-	 * @param initialTime The initial time of the simulation.
-	 */
-	private void initializeLevels( 
-			SimulationTimeStamp initialTime 
-	){
-		for( ILevel4Engine level : this.levels.values() ){
-			LevelIdentifier levelId = level.getIdentifier( );
-			this.agents.put( levelId, new LinkedHashSet<IAgent4Engine>( ) );
-			level.initializeStates(
-				new ConsistentPublicLocalDynamicState(
-					initialTime, 
-					level.getIdentifier()
-				)
-			);
-			// Tell that initially, the dynamic state of this level in the simulation is the consistent one
-			// (it stays as such until the first simulation step is performed).
-			this.currentSimulationDynamicState.put( level.getLastConsistentState( ) );
 		}
 	}
 	
@@ -615,7 +593,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	protected abstract SimulationTimeStamp performSimulation(
 		ISimulationModel simulationModel,
 		DynamicStateMap currentSimulationDynamicState,
-		LinkedHashMap<LevelIdentifier, ILevel4Engine> levels,
+		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 		IEnvironment4Engine environment
 	);
@@ -634,7 +612,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 		InfluencesMap influencesAtEnd = new InfluencesMap( );
 		// Store in a temporary variable all the influences that were lying in the transitory 
 		// state dynamics of the levels.
-		for( ILevel4Engine level : this.levels.values() ){
+		for( ILevel level : this.levels.values() ){
 			TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState( );
 			Set<IInfluence> dynamics = transitoryState.getStateDynamics();
 			for( IInfluence influence : dynamics ){
@@ -642,7 +620,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 			}
 		}
 		// Update the state dynamics of the transitory and consistent state
-		for( ILevel4Engine level : this.levels.values() ){
+		for( ILevel level : this.levels.values() ){
 			// Remove all the influences from the last transitory and last consistent state of that level.
 			TransitoryPublicLocalDynamicState transitoryState = level.getLastTransitoryState();
 			transitoryState.clearRegularInfluences( );

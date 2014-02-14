@@ -44,69 +44,38 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.engines;
+package fr.lgi2a.similar.extendedkernel.libs.abstractimpl;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-
-import fr.lgi2a.similar.microkernel.ISimulationModel;
+import fr.lgi2a.similar.extendedkernel.environment.IEnvNaturalModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
 
 /**
- * Models a simulation engine using monothreaded algorithms and the default disambiguation mechanism.
+ * An abstract implementation of the {@link IEnvNaturalModel} interface, providing a default behavior to the generic methods.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class EngineMonothreadedDefaultdisambiguation extends AbstractMonothreadedEngine {
+public abstract class AbstractEnvNaturalModel implements IEnvNaturalModel {
 	/**
-	 * A dynamic state containing only the most recent consistent state of the levels.
+	 * The identifier of the level for which this natural action model is defined.
 	 */
-	private DynamicStateMap dynamicStateContainingOnlyConsistentStates;
+	private LevelIdentifier levelIdentifier;
 	
 	/**
-	 * {@inheritDoc}
+	 * Creates a bare instance of a natural action model, using a specific level identifier.
+	 * @param levelIdentifier The identifier of the level for which this natural action model is defined.
 	 */
-	protected SimulationTimeStamp performSimulation(
-			ISimulationModel simulationModel,
-			DynamicStateMap currentSimulationDynamicState,
-			LinkedHashMap<LevelIdentifier, ILevel> levels,
-			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
-			IEnvironment4Engine environment
-	) {
-		// Instead of always recreating the value "dynamicStateContainingOnlyConsistentStates", we
-		// benefit from the fact that consistent states are updated rather than recreated by the
-		// simulation engine: we initialize the map with the initial consistent state of each level.
-		// Since the reference to the current consistent state of a level never changes during the 
-		// simulation, the map "dynamicStateContainingOnlyConsistentStates" always contains the
-		// most recent consistent dynamic state of a level.
-		this.dynamicStateContainingOnlyConsistentStates = new DynamicStateMap( );
-		for( LevelIdentifier levelId : currentSimulationDynamicState.keySet() ){
-			this.dynamicStateContainingOnlyConsistentStates.put(
-				currentSimulationDynamicState.get( levelId )
-			);
+	public AbstractEnvNaturalModel( LevelIdentifier levelIdentifier ) {
+		if( levelIdentifier == null ){
+			throw new IllegalArgumentException( "The argument cannot be null." );
 		}
-		return super.performSimulation(
-			simulationModel,
-			currentSimulationDynamicState,
-			levels,
-			agents,
-			environment
-		);
+		this.levelIdentifier = levelIdentifier;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected DynamicStateMap buildDynamicStateDisambiguation(
-			DynamicStateMap currentSimulationHalfConsistentState
-	) {
-		return this.dynamicStateContainingOnlyConsistentStates;
+	public LevelIdentifier getLevel() {
+		return this.levelIdentifier;
 	}
 }

@@ -363,6 +363,7 @@ public class ExtendedAgent extends AbstractAgent {
 		SimulationTimeStamp timeLowerBound,
 		SimulationTimeStamp timeUpperBound, 
 		IGlobalState globalState,
+		ILocalStateOfAgent publicLocalState, 
 		ILocalStateOfAgent privateLocalState, 
 		IPerceivedData perceivedData,
 		InfluencesMap producedInfluences
@@ -371,6 +372,7 @@ public class ExtendedAgent extends AbstractAgent {
 			timeLowerBound, 
 			timeUpperBound, 
 			globalState, 
+			publicLocalState,
 			privateLocalState, 
 			perceivedData, 
 			producedInfluences

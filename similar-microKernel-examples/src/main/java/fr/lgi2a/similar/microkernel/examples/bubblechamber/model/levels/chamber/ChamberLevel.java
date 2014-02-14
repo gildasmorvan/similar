@@ -75,8 +75,11 @@ public class ChamberLevel extends AbstractLevel {
 	 * </p>
 	 * @param initialTime The initial time of the simulation.
 	 */
-	public ChamberLevel( ) {
+	public ChamberLevel( 
+		SimulationTimeStamp initialTime
+	) {
 		super(
+			initialTime,
 			BubbleChamberLevelList.CHAMBER
 		);
 	}

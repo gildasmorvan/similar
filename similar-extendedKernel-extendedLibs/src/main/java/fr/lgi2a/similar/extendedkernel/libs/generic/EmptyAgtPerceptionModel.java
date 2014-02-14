@@ -44,69 +44,49 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.engines;
+package fr.lgi2a.similar.extendedkernel.libs.generic;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.Map;
 
-import fr.lgi2a.similar.microkernel.ISimulationModel;
+import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractAgtPerceptionModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine;
-import fr.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
+import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
 
 /**
- * Models a simulation engine using monothreaded algorithms and the default disambiguation mechanism.
+ * Models a perception model perceiving no data.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class EngineMonothreadedDefaultdisambiguation extends AbstractMonothreadedEngine {
+public final class EmptyAgtPerceptionModel extends AbstractAgtPerceptionModel {	
 	/**
-	 * A dynamic state containing only the most recent consistent state of the levels.
+	 * Creates an empty perception  model, using a specific level identifier.
+	 * @param levelIdentifier The identifier of the level for which this perception model is defined.
 	 */
-	private DynamicStateMap dynamicStateContainingOnlyConsistentStates;
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	protected SimulationTimeStamp performSimulation(
-			ISimulationModel simulationModel,
-			DynamicStateMap currentSimulationDynamicState,
-			LinkedHashMap<LevelIdentifier, ILevel> levels,
-			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
-			IEnvironment4Engine environment
+	public EmptyAgtPerceptionModel(
+			LevelIdentifier levelIdentifier
 	) {
-		// Instead of always recreating the value "dynamicStateContainingOnlyConsistentStates", we
-		// benefit from the fact that consistent states are updated rather than recreated by the
-		// simulation engine: we initialize the map with the initial consistent state of each level.
-		// Since the reference to the current consistent state of a level never changes during the 
-		// simulation, the map "dynamicStateContainingOnlyConsistentStates" always contains the
-		// most recent consistent dynamic state of a level.
-		this.dynamicStateContainingOnlyConsistentStates = new DynamicStateMap( );
-		for( LevelIdentifier levelId : currentSimulationDynamicState.keySet() ){
-			this.dynamicStateContainingOnlyConsistentStates.put(
-				currentSimulationDynamicState.get( levelId )
-			);
-		}
-		return super.performSimulation(
-			simulationModel,
-			currentSimulationDynamicState,
-			levels,
-			agents,
-			environment
-		);
+		super(levelIdentifier);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected DynamicStateMap buildDynamicStateDisambiguation(
-			DynamicStateMap currentSimulationHalfConsistentState
+	public IPerceivedData perceive(
+		SimulationTimeStamp timeLowerBound,
+		SimulationTimeStamp timeUpperBound,
+		Map<LevelIdentifier, ILocalStateOfAgent> publicLocalStates,
+		ILocalStateOfAgent privateLocalState,
+		IPublicDynamicStateMap dynamicStates
 	) {
-		return this.dynamicStateContainingOnlyConsistentStates;
+		return new EmptyPerceivedData(
+			this.getLevel(), 
+			timeLowerBound, 
+			timeUpperBound
+		);
 	}
 }

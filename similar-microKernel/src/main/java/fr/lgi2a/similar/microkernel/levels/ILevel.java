@@ -82,7 +82,7 @@ import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
  *	</li>
  *	<li>
  *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
- *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, Collection)}
+ *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, InfluencesMap)}
  *		method.
  *		This user-defined reaction:
  * 		<ul>
@@ -107,7 +107,7 @@ import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
  *	</li>
  *	<li>
  *		The engine then performs a user-defined reaction to the regular influences, as described by the 
- *		{@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, Set)}
+ *		{@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, InfluencesMap)}
  *		method.
  *		This user-defined reaction:
  *		<ul>
@@ -140,7 +140,7 @@ import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
  *	</li>
  *	<li>
  *		Once all the system influences are processed, the engine performs a user-defined reaction to the system influences, as described 
- *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, Collection)}
+ *		by the {@link ILevel#makeSystemReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Collection, boolean, InfluencesMap)}
  *		method.
  *		This user-defined reaction:
  * 		<ul>
@@ -309,7 +309,7 @@ public interface ILevel extends ITimeModel {
 	 * @param systemInfluencesToManage The <b>system</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
 	 * @param happensBeforeRegularReaction <code>true</code> if this user-defined system reaction is performed before the call to the
-	 * {@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, Set)} method.
+	 * {@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, InfluencesMap)} method.
 	 * @param newInfluencesToProcess The data structure where the influences resulting from this user reaction have to be added.
 	 */
 	void makeSystemReaction(

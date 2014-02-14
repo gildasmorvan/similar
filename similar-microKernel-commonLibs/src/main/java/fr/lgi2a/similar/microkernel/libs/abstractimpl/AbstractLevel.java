@@ -56,7 +56,7 @@ import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicSta
 import fr.lgi2a.similar.microkernel.levels.ILevel;
 
 /**
- * An abstract implementation of the {@link ILevel} and {@link ILevel4Engine} interfaces, 
+ * An abstract implementation of the {@link ILevel} interface, 
  * providing a default behavior to most methods.
  * <p>
  * 	It also provides setters for the perception and the influence relation graph.
@@ -170,7 +170,7 @@ public abstract class AbstractLevel implements ILevel {
 		this.lastConsistentPublicLocalDynamicState = lastConsistentState;
 		this.lastTransitoryPublicLocalDynamicState = new TransitoryPublicLocalDynamicState(
 				this.lastConsistentPublicLocalDynamicState, 
-				this.getNextTime( this.lastConsistentPublicLocalDynamicState.getTime( ) )
+				new SimulationTimeStamp( Long.MAX_VALUE )
 		);
 	}
 

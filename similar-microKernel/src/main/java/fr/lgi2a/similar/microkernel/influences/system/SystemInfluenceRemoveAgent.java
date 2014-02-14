@@ -72,7 +72,7 @@ public final class SystemInfluenceRemoveAgent extends SystemInfluence {
 	
 	/**
 	 * Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}
+	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.influences.IInfluence#getTargetLevel()}
 	 * @param publicLocalStateOfAgent A public local state of the agent to remove from the simulation
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created..

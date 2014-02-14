@@ -67,8 +67,8 @@ import fr.lgi2a.similar.microkernel.influences.IInfluence;
  * <h1>Usage</h1>
  * <p>
  * 	Such a public local dynamic state is valid only if the local state of the environment and of the agents are set, using the 
- * 	appropriate methods ( {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(IPublicLocalState)} and 
- * {@link IModifiablePublicLocalDynamicState#addPublicLocalStateOfAgent(IPublicLocalStateOfAgent)} ).
+ * 	appropriate methods ( {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(ILocalStateOfEnvironment)} and 
+ * {@link IModifiablePublicLocalDynamicState#addPublicLocalStateOfAgent(ILocalStateOfAgent)} ).
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>

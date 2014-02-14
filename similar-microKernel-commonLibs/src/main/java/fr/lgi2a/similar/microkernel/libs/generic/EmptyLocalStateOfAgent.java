@@ -69,11 +69,11 @@ public final class EmptyLocalStateOfAgent extends AbstractLocalStateOfAgent {
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public EmptyLocalStateOfAgent(
-			LevelIdentifier level,
+			LevelIdentifier levelIdentifier,
 			IAgent4Engine owner
 	) {
 		super(
-			level,
+			levelIdentifier,
 			owner
 		);
 	}

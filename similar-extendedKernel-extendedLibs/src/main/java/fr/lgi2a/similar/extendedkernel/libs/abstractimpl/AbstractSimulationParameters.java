@@ -58,7 +58,7 @@ public class AbstractSimulationParameters implements ISimulationParameters {
 	/**
 	 * The initial time of the simulation.
 	 */
-	private final SimulationTimeStamp initialTime;
+	public SimulationTimeStamp initialTime;
 	
 	/**
 	 * Builds an initialized instance of this class.

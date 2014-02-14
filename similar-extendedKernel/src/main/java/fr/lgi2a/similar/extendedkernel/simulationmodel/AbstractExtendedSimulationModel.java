@@ -142,7 +142,7 @@ public abstract class AbstractExtendedSimulationModel extends AbstractSimulation
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isFinalTimeOrAfter(
+	public final boolean isFinalTimeOrAfter(
 			SimulationTimeStamp currentTime,
 			ISimulationEngine engine
 	) {
@@ -156,7 +156,7 @@ public abstract class AbstractExtendedSimulationModel extends AbstractSimulation
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<ILevel> generateLevels(
+	public final List<ILevel> generateLevels(
 		SimulationTimeStamp initialTime
 	) {
 		return this.generateLevels(
@@ -177,7 +177,7 @@ public abstract class AbstractExtendedSimulationModel extends AbstractSimulation
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EnvironmentInitializationData generateEnvironment(
+	public final EnvironmentInitializationData generateEnvironment(
 		SimulationTimeStamp initialTime,
 		Map<LevelIdentifier, ILevel> levels
 	) {
@@ -206,7 +206,7 @@ public abstract class AbstractExtendedSimulationModel extends AbstractSimulation
 	 * {@inheritDoc}
 	 */
 	@Override
-	public AgentInitializationData generateAgents(
+	public final AgentInitializationData generateAgents(
 			SimulationTimeStamp initialTime,
 			Map<LevelIdentifier, ILevel> levels
 	) {

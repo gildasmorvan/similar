@@ -212,7 +212,6 @@ public interface IAgent {
 	 * agent (<i>i.e.</i> "t+dt" in the notations).
 	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
 	 * @param globalState The previous value of the global state of the agent being updated by this method call.
-	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
 	 */
 	void reviseGlobalState(
 			SimulationTimeStamp timeLowerBound,

@@ -138,11 +138,13 @@ public class ExtendedLevel extends AbstractLevel {
 	 * @param initialTime The initial time stamp of the level.
 	 * @param identifier The identifier of the level.
 	 * @param timeModel The time model used by this level.
+	 * @param reactionModel The reaction model used by this level.
 	 */
-	protected ExtendedLevel(
+	public ExtendedLevel(
 		SimulationTimeStamp initialTime,
 		LevelIdentifier identifier,
-		ITimeModel timeModel
+		ITimeModel timeModel,
+		ILevelReactionModel reactionModel
 	) {
 		super(
 			initialTime,
@@ -154,7 +156,14 @@ public class ExtendedLevel extends AbstractLevel {
 				"' cannot be null." 
 			);
 		}
+		if( reactionModel == null ){
+			throw new IllegalArgumentException( 
+				"The 'reactionModel' of the level '" + identifier + "" +
+				"' cannot be null." 
+			);
+		}
 		this.timeModel = timeModel;
+		this.reactionModel = reactionModel;
 	}
 
 	//

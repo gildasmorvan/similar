@@ -45,6 +45,11 @@
 	  	<artifactId>similar-extendedKernel-extendedLibs</artifactId>
 	  	<version>${fr.lgi2a.similar.version}</version>
 	  </dependency>
+	  <dependency>
+	  	<groupId>fr.lgi2a</groupId>
+	  	<artifactId>similar-extendedKernel-examples</artifactId>
+	  	<version>${fr.lgi2a.similar.version}</version>
+	  </dependency>
   </dependencies>
 
 	<build>

@@ -349,6 +349,11 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 			}
 			this.levels.put( levelId, generatedLevel );
 			this.agents.put( levelId, new LinkedHashSet<IAgent4Engine>( ) );
+			// Initialize the consistent and transitory states.
+			generatedLevel.getLastConsistentState().setTime( initialTime );
+			generatedLevel.getLastTransitoryState().setTransitoryPeriodMax( generatedLevel.getNextTime(
+				initialTime
+			) );
 			// Tell that initially, the dynamic state of this level in the simulation is the consistent one
 			// (it stays as such until the first simulation step is performed).
 			this.currentSimulationDynamicState.put( generatedLevel.getLastConsistentState( ) );

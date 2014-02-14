@@ -55,7 +55,7 @@ import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.A
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticleFactory;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.probes.ProbePrintingParticleLocationOverTime;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.RandomValueFactory;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.generationStrategies.JavaRandomBasedValuesGenerator;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
 import fr.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
 import fr.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
 import fr.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;

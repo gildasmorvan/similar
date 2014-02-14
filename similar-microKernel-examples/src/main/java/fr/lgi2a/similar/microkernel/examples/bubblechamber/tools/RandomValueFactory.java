@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or ï¿½ or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.examples.bubblechamber.tools;
 
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.generationStrategies.JavaRandomBasedValuesGenerator;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
 
 /**
  * The random values factory used in the simulation.

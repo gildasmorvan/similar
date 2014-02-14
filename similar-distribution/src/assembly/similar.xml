@@ -109,5 +109,26 @@
 				<include>bubblechamber_example_README.txt</include>
 			</includes>
 		</fileSet>
+		
+		<!-- include the sources of the usage examples of the extended-kernel -->
+		
+		<!-- Add the "Bubble chamber" simulation example -->
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/extendedKernel/bubblechamber/src</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>**/extendedkernel/examples/bubblechamber/**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/doc/</directory>
+			<outputDirectory>/examples/extendedKernel/bubblechamber</outputDirectory>
+			<includes>
+				<include>bubblechamber_example_README.txt</include>
+			</includes>
+		</fileSet>
     </fileSets>
 </assembly>

@@ -50,7 +50,6 @@ import java.util.Map;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
@@ -64,7 +63,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractEnvironment;
 public class PassiveEnvironment extends AbstractEnvironment {
 	/**
 	 * Models a natural action doing nothing.
-	 * @see AbstractEnvironment#natural(LevelIdentifier, SimulationTimeStamp, SimulationTimeStamp, Map, ILocalStateOfAgent, IPublicDynamicStateMap, InfluencesMap)
+	 * @see AbstractEnvironment#natural(LevelIdentifier, SimulationTimeStamp, SimulationTimeStamp, Map, ILocalStateOfEnvironment, IPublicDynamicStateMap, InfluencesMap)
 	 */
 	@Override
 	public void natural(

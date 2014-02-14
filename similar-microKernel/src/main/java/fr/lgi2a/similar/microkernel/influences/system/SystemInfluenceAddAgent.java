@@ -78,7 +78,7 @@ public final class SystemInfluenceAddAgent extends SystemInfluence {
 	
 	/**
 	 * Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
-	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}
+	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.influences.IInfluence#getTargetLevel()}
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
 	 * @param agent The agent to add to the simulation.

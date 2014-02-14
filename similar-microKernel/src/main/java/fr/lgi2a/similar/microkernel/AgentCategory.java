@@ -56,11 +56,6 @@ package fr.lgi2a.similar.microkernel;
  * 	a class containing each agent category of the simulation as a static value. This avoids
  * 	any misspelling when referring to a level.
  * </p>
- * <p>
- * 	This class supports the definition of relations between categories (for instance a "Car" is a "Vehicle"),
- * 	with its {@link AgentCategory#defineAsA(AgentCategory)} and {@link AgentCategory#isA(AgentCategory)} methods.
- * 	This relationship implies an inheritance between their public local states.
- * </p>
  * <h1>Usage example</h1>
  * <p>
  * 	The following code shows how to create the agent categories for a simulation of the road traffic,

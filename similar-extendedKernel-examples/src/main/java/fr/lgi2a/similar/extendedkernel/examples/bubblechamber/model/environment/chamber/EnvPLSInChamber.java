@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,11 +44,61 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber;
+
+import java.awt.geom.Rectangle2D;
+
+import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfEnvironment;
 
 /**
- * Defines the concrete implementations of the random number generation 
- * strategies of this simulation.
+ * The public local state of the environment in the "Chamber" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.generationStrategies;
+public class EnvPLSInChamber extends AbstractLocalStateOfEnvironment {
+	/**
+	 * Builds an initialized instance of this public local state.
+	 * @param owner The agent owning this public local state.
+	 * @param bounds The bounds of the chamber.
+	 * @throws IllegalArgumentException If the <code>bounds</code> are null
+	 * or if its dimensions are lower or equal to 0.
+	 */
+	public EnvPLSInChamber(
+			Rectangle2D bounds
+	) {
+		super(
+			BubbleChamberLevelList.CHAMBER
+		);
+		if( bounds == null ){
+			throw new IllegalArgumentException( "The argument cannot be null." );
+		} else if( bounds.getWidth() <=0 || bounds.getHeight() <= 0 ){
+			throw new IllegalArgumentException( "The dimensions cannot be lower or equal to 0." );
+		} else {
+			this.bounds = new Rectangle2D.Double(
+					bounds.getX(), 
+					bounds.getY(), 
+					bounds.getWidth(), 
+					bounds.getHeight()
+			);
+		}
+	}
+	
+	//
+	//
+	// Declaration of the content of the public local state
+	//
+	//
+
+	/**
+	 * The bounds of the chamber.
+	 */
+	private Rectangle2D bounds;
+
+	/**
+	 * The bounds of the chamber.
+	 */
+	public Rectangle2D getBounds( ) {
+		return this.bounds;
+	}
+}

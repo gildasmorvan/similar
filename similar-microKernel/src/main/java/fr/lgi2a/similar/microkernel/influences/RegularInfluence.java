@@ -58,8 +58,8 @@ public class RegularInfluence extends AbstractInfluence {
 	/**
 	 * Builds a regular influence from a specific category.
 	 * The reaction to this influence will be managed into a specific target level.
-	 * @param category The category of the influence, as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getCategory()}
-	 * @param targetLevel The target level of the influence, as described in {@link fr.lgi2a.similar.microkernel.IInfluence#getTargetLevel()}
+	 * @param category The category of the influence, as described in {@link fr.lgi2a.similar.microkernel.influences.IInfluence#getCategory()}
+	 * @param targetLevel The target level of the influence, as described in {@link fr.lgi2a.similar.microkernel.influences.IInfluence#getTargetLevel()}
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
 	 * @throws IllegalArgumentException If one of the arguments is <code>null</code>.

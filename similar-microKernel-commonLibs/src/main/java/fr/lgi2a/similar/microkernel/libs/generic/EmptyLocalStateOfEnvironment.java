@@ -67,10 +67,10 @@ public final class EmptyLocalStateOfEnvironment extends AbstractLocalStateOfEnvi
 	 * @throws IllegalArgumentException If an argument is <code>null</code>.
 	 */
 	public EmptyLocalStateOfEnvironment(
-			LevelIdentifier level
+			LevelIdentifier levelIdentifier
 	) {
 		super(
-			level
+			levelIdentifier
 		);
 	}
 }

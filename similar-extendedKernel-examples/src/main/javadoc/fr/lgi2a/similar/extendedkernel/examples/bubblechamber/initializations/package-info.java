@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or Â© or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,43 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.generationStrategies;
-
-import java.util.Random;
-
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.IRandomValuesGenerator;
 
 /**
- * A random value generation strategy based on the java.util.Random java class.
- * @see Random
+ * Defines the various initializations of the simulation model used in 
+ * this simulation.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class JavaRandomBasedValuesGenerator implements IRandomValuesGenerator  {
-	/**
-	 * The java.util.Random object generating random numbers in this strategy.
-	 */
-	private Random javaRandomHelper;
-
-	/**
-	 * Builds a random values generation strategy relying on the java Random class.
-	 * @param seed The seed used to initialize the java random values generator.
-	 */
-	public JavaRandomBasedValuesGenerator ( long seed ) {
-		this.javaRandomHelper = new Random( seed );
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double randomDouble(
-			double lowerBound, 
-			double higherBound
-	) {
-		if( lowerBound >= higherBound ) {
-			throw new IllegalArgumentException( "The lower bound " + lowerBound + " is greater " +
-					"or equal to the higher bound " + higherBound  );
-		}
-		return (higherBound - lowerBound) * this.javaRandomHelper.nextDouble() + lowerBound;
-	}
-}
+package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.initializations;

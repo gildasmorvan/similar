@@ -81,6 +81,7 @@ public final class PeriodicTimeModel implements ITimeModel {
 	) {
 		this.checkConstructorArgumentsValidity(
 				period, 
+				phaseShift,
 				initialTime
 		);
 		this.period = period;
@@ -91,15 +92,19 @@ public final class PeriodicTimeModel implements ITimeModel {
 	/**
 	 * Checks the validity of the arguments of the constructor.
 	 * @param period The period of the time model. This value has to be strictly positive.
+	 * @param phaseShift The phase shift of the time model.
 	 * @param initialTime The initial time stamp of the simulation. This value cannot be <code>null</code>.
 	 * @throws IllegalArgumentException If an argument is invalid.
 	 */
 	private void checkConstructorArgumentsValidity(
 			long period,
+			long phaseShift,
 			SimulationTimeStamp initialTime
 	){
 		if( period <= 0 ){
 			throw new IllegalArgumentException( "The period has to be a strictly positive value (was '" + period + "')." );
+		} else if( phaseShift < 0 ){
+			throw new IllegalArgumentException( "The phase shift has to be a positive value (was '" + phaseShift + "')." );
 		}
 		if( initialTime == null ){
 			throw new IllegalArgumentException( "The initial time cannot be null." );
@@ -130,7 +135,7 @@ public final class PeriodicTimeModel implements ITimeModel {
 		// If the simulation engine works appropriately, this method will be called either
 		// if currentTime is the initial time, or if the identifier of the currentTime has the form
 		// initialTimeId + phaseShift + N * period.
-		if( currentTime.equals( this.initialTime ) ){
+		if( currentTime.equals( this.initialTime ) && this.phaseShift != 0 ){
 			return new SimulationTimeStamp( currentTime.getIdentifier() + this.phaseShift );
 		} else {
 			// Case where The currentTime has the form "initialTimeId + phaseShift + N * period"

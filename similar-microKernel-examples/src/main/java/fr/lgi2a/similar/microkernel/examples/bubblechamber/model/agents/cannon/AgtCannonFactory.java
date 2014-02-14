@@ -89,8 +89,12 @@ public class AgtCannonFactory {
 	
 	/**
 	 * Generates a new agent of the "Cannon" category.
-	 * @param cannonEndX 
-	 * @param cannonEndY 
+	 * @param cannonEndX The x axis coordinate of the point where the cannon points to.
+	 * @param cannonEndY The y axis coordinate of the point where the cannon points to.
+	 * @param initialDirectionX The direction of the cannon along the x axis.
+	 * @param initialDirectionY The direction of the cannon along the y axis.
+	 * @param initialPower The initial power of the cannon.
+	 * @param ambientTemperature The ambient temperature when the cannon was created.
 	 * @return The newly created instance.
 	 */
 	public static AgtCannon generate(

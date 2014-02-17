@@ -732,7 +732,7 @@ Gets the non-system influences contained in the state transitory dynamics.
 <div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311281641" modified="201401211546" tags="system excludeLists" changecount="4">
 <pre>[[Home]]</pre>
 </div>
-<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201401150857" modified="201402031038" changecount="14">
+<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201401150857" modified="201402171600" changecount="16">
 <pre>*[[Start|Simulation models]]
 *[[Preparation|SMD - Preparation]]
 **[[Packages tree|SMD - Package tree]]
@@ -747,6 +747,7 @@ Gets the non-system influences contained in the state transitory dynamics.
 **[[Agents skeleton|SMD - Agents skeleton]]
 **[[Time model|SMD - Time model]]
 **[[Public states|SMD - Public local states]]
+**[[Private states|SMD - Private local states]]
 **[[Influences skeleton|SMD - Influences skeleton]]
 *[[Low level|SMD - Low level specifications]]
 **[[Perception|SMD - Perception - Plan]]
@@ -2769,7 +2770,7 @@ An agent is created with such factories by calling one of its factory methods an
 
 [img(100%,)[images/simulationModel/lowLevel/agentFactoryPrinciple.png]]</pre>
 </div>
-<div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201402051357" changecount="49">
+<div title="SMD - Agents identification" creator="Designer" modifier="Designer" created="201401221313" modified="201402171221" changecount="54">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Identification of the agents}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Levels identification]]  |  [[next step &gt;&gt;|SMD - Level skeleton]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -2780,13 +2781,11 @@ Once the agent categories are known, the user can create a class summing up thes
 {{focusemphasisblock{This step focuses on the creation of a class listing all the agent categories of the simulation.}}}
 ~~//''__1:__ A name identifying the equivalence class of the agent. Usually, agents having the same category have the same perceptible state.''//~~
 !Creating an agent category
-In SIMILAR, an agent category is modeled as an instance of the +++^34em^*@[&lt;strong&gt;AgentCategory&lt;/strong&gt;]
-The {{{AgentCategory}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== class. An agent category is built using the following constructor:
+In SIMILAR, an agent category is modeled as an instance of the {{className{[[AgentCategory|../api/fr/lgi2a/similar/microkernel/AgentCategory.html]]}}} class. An agent category is built using the following constructor:
 {{{
 public AgentCategory( String levelName );
 }}}
-Note that the ''levelName'' argument cannot be null. Moreover, its value has to be different for each category being modeled.
+Note that the {{argumentName{levelName}}} argument cannot be null. Moreover, its value has to be different for each category being modeled.
 
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Agent category creation example&lt;/span&gt;]
 {{exsection {
@@ -2809,10 +2808,10 @@ This class has to:
 *Define a single //protected// constructor with no arguments;
 *Contain as many //public statc final// fields from the {{{AgentCategory}}} class as the number of agent categories in the simulation.
 *Be located into the ''&quot;agents''&quot; package.
-
+{{clear{}}}
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Agent category creation example&lt;/span&gt;]
 {{exsection {
-This example illustrates the creation of a level identifiers list called {{{MyAgentCategoriesList}}}. This list contains the &quot;car&quot;, &quot;pedestrian&quot;, &quot;city bus&quot; and &quot;market&quot; agent categories.
+This example illustrates the creation of a level identifiers list called {{className{MyAgentCategoriesList}}}. This list contains the &quot;car&quot;, &quot;pedestrian&quot;, &quot;city bus&quot; and &quot;market&quot; agent categories.
 
 This example is also available in a [[stand alone file|./files/simulationModel/highLevel/MyAgentCategoriesList.java]].
 !Code
@@ -2820,7 +2819,7 @@ This example is also available in a [[stand alone file|./files/simulationModel/h
 }}} ===
 
 !!Using the list of agent categories
-Once the class of the agent categories list is declared, it becomes no longer necessary to create instances of the {{{AgentCategory}}} class to have access to the feratures of the simulation. Instead, users have to refer to a static field of the ''&quot;agent categories list&quot;'' class.
+Once the class of the agent categories list is declared, it becomes no longer necessary to create instances of the {{className{[[AgentCategory|../api/fr/lgi2a/similar/microkernel/AgentCategory.html]]}}} class to have access to the feratures of the simulation. Instead, users have to refer to a static field of the ''&quot;agent categories list&quot;'' class.
 
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
 {{exsection {
@@ -2828,9 +2827,9 @@ This example illustrates the use of the &quot;agent categories list&quot; in rep
 
 Without using the &quot;agent categories list&quot;, the comparison is made with the following instructions:
 {{{
-IPublicLocalStateOfAgent state = ...;
+ILocalStateOfAgent state = ...;
 AgentCategory agtCat = new AgentCategory ( &quot;Car&quot; );
-if( agtCat.equals( state.getOwner( ).getCategory( ) ) ){
+if( state.getCategoryOfAgent().isA( agtCat ) ){
 	// The agent is a &quot;car&quot;
 } else {
 	// The agent is not a &quot;car&quot;
@@ -2838,8 +2837,8 @@ if( agtCat.equals( state.getOwner( ).getCategory( ) ) ){
 }}}
 When using the list, the code becomes:
 {{{
-IPublicLocalStateOfAgent state = ...;
-if( MyAgentCategoriesList.CAR.equals( state.getOwner( ).getCategory( ) ) ){
+ILocalStateOfAgent state = ...;
+if( state.getCategoryOfAgent().isA( MyAgentCategoriesList.CAR) ){
 	// The agent is a &quot;car&quot;
 } else {
 	// The agent is not a &quot;car&quot;
@@ -2849,7 +2848,7 @@ if( MyAgentCategoriesList.CAR.equals( state.getOwner( ).getCategory( ) ) ){
 
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Level skeleton]]}}}</pre>
 </div>
-<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201402051358" changecount="80">
+<div title="SMD - Agents skeleton" creator="Designer" modifier="Designer" created="201401221221" modified="201402171255" changecount="81">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the agents}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Environment skeleton]]  |  [[next step &gt;&gt;|SMD - Time model]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -2863,14 +2862,13 @@ This step focuses on the creation of a skeleton class for each agent that was id
 &lt;&lt;tiddler [[SMD - Agents skeleton - Create class]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Time model]]}}}</pre>
 </div>
-<div title="SMD - Agents skeleton - Create class" creator="Designer" modifier="Designer" created="201401221555" modified="201401301205" changecount="32">
+<div title="SMD - Agents skeleton - Create class" creator="Designer" modifier="Designer" created="201401221555" modified="201402171410" changecount="36">
 <pre>!Creating an agent class in SIMILAR
 The constructor of the agent has to comply with the following requirements:
 *Its category has to be set;
-*Its initial global memory state is set later (see [[details|SMD - Agent creation]]);
-*Its initial public local states is set later (see [[details|SMD - Agent creation]]);
-*Its +++^34em^*@[private local state]The user-defined non-perceptible fields used by the perception, global state revision or decision process. For instance the 'desired speed' of a driver
-=== is initialized with arguments of the constructor (see [[perception|SMD - Perception]], [[global state|SMD - Global state]] and [[decision|SMD - Decision]] steps);
+*Its initial global state is set later (see [[details|SMD - Agent creation]]);
+*Its initial public local states are set later (see [[details|SMD - Agent creation]]);
+*Its initial private local states are set later (see [[details|SMD - Agent creation]]);
 The generated class has to:
 *Be located in a sub-package of the ''agents'' package:
 **The sub-package has to be named after the category of the agent;
@@ -2878,19 +2876,19 @@ The generated class has to:
 **The sub-package has to start with a letter\(^2\);
 *Be named explicitly after the category of the agent;
 
-The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{{AbstractAgent}}} class (micro-kernel with common libs).
+The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{className{[[AbstractAgent|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html]]}}} class (micro-kernel with common libs).
 
 +++?[&lt;a class=&quot;exbigbtn&quot;&gt;Agent skeleton full example&lt;/a&gt;]
 {{exsection {
 [&gt;img[images/simulationModel/highLevel/agentSkeletonTree.png]]
 This step illustrates the creation of an agent named &quot;City bus&quot;. The source of the class modeling the &quot;City bus&quot; agent is located in the ''agents.citybus'' package of the source tree hierarchy (see the image):@@clear:right;display:block;margin:0;padding:0;@@
-*Micro-kernel only approach +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
+*The micro-kernel only approach is implemented as the {{className{CityBusAgent}}} class +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
 {{implsection {
 The following code illustrates the implementation of the &quot;City bus&quot; agent using only the micro-kernel. The implementation of its methods follows the implementation recommendations of each method. The following code is also available as a [[stand alone file|./files/simulationModel/highLevel/CityBusAgent.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/CityBusAgent.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===
 
-*Micro-kernel with common libs approach +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
+*The micro-kernel with common libs approach is implemented as the {{className{CityBusAgent2}}} class +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
 {{implsection {
 The following code illustrates the implementation of the &quot;City bus&quot; agent using both the micro-kernel and the common libs. The following code is also available as a [[stand alone file|./files/simulationModel/highLevel/CityBusAgent2.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/CityBusAgent2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
@@ -2900,16 +2898,14 @@ The following code illustrates the implementation of the &quot;City bus&quot; ag
 
 \(_{\underline{2:}\text{ These constraints come from java best practices.}}\)</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation" creator="Designer" modifier="Designer" created="201401221550" modified="201402051033" changecount="21">
+<div title="SMD - Agents skeleton - Implementation" creator="Designer" modifier="Designer" created="201401221550" modified="201402171308" changecount="27">
 <pre>!Specifications and implementation instructions
 [&lt;img(50%,)[images/simulationModel/highLevel/agentDesignOutline2.png]]
-In SIMILAR, the agents are modeled as instances of the +++^34em^*@[&lt;strong&gt;IAgent&lt;/strong&gt;]
-The {{{IAgent}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== interface. This interface defines methods providing access to the core elements of an agent (global memory state and public local states) and defines the core behavior of the agent (perception, memory revision, decision).
+In SIMILAR, the agents are modeled as instances of the {{className{[[IAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}} interface. This interface defines methods providing access to the core elements of an agent (global memory state and public local states) and defines the core behavior of the agent (perception, memory revision, decision).
 
 To facilitate simulation revisions, each core element and behavior is reified as a separate method.
 
-In the first step of the specification of the agents, only subset of the content of each agent is specified and implemented. Therefore, the unspecified methods have to throw an {{{UnsupportedOperationException}}} at this stage.
+In the first step of the specification of the agents, only subset of the content of each agent is specified and implemented. Therefore, the unspecified methods have to throw an {{className{UnsupportedOperationException}}} at this stage.
 
 In this skeleton, the following elements have to be defined:
 *The ''category'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Category buttons]]&gt;&gt;
@@ -2917,402 +2913,355 @@ In this skeleton, the following elements have to be defined:
 *The access to the ''perceived data'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Perception buttons]]&gt;&gt;
 *The access to the ''global state'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Global state buttons]]&gt;&gt;
 *The access to the ''public local states'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Public local states buttons]]&gt;&gt;
+*The access to the ''private local states'' of the agent; &lt;&lt;tiddler [[SMD - Agents skeleton - Implementation - Private local states buttons]]&gt;&gt;
 {{bigemphasisblock{
-Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines a +++^34em^*@[class]@@font-weight:normal;The {{{AbstractAgent}}} class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
-=== providing a default implementation of these features.
+Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines the {{className{[[AbstractAgent|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html]]}}} class providing a default implementation of these features.
 }}}</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Category buttons" creator="Designer" modifier="Designer" created="201402051029" changecount="1">
+<div title="SMD - Agents skeleton - Implementation - Category buttons" creator="Designer" modifier="Designer" created="201402051029" modified="201402171304" changecount="3">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The access to the category of the agent is defined by the following method of the {{{IAgent}}} interface:
-{{{
-public AgentCategory getCategory( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the 'category' of the agent. This method identifies the category of agents to which this instance belongs to.
-This method can return the name of this class, or any other string representation modeling the equivalence class of the agent.
-
-Examples:
-*&quot;Car&quot;
-*&quot;Prey&quot;
-*&quot;Water drop&quot;
-
-''Returns:''
-*The 'category' of the agent.
-}}}
+The access to the category of the agent is defined by the following methods:
+*The {{methodName{getCategory()}}} method; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getCategory()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of these methods usually consists in:
-*Adding a field to the class having the type {{{AgentCategory}}};
+*Adding a field to the class having the type {{className{AgentCategory}}};
 *Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (//i.e.// {{{getCategory( )}}}).
+*Granting access to that field in the appropriate methods (//i.e.// {{methodName{getCategory( )}}}).
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Global state buttons" creator="Designer" modifier="Designer" created="201402051032" modified="201402051036" changecount="2">
+<div title="SMD - Agents skeleton - Implementation - Global state buttons" creator="Designer" modifier="Designer" created="201402051032" modified="201402171329" changecount="7">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The access to the global state of the agent is defined by the following method of the {{{IAgent}}} interface:
-{{{
-public IGlobalMemoryState getGlobalMemoryState( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the global memory state of the agent.
-
-''Returns:''
-*The global memory state of the agent.
-}}}
+The access to the global state of the agent is defined by the following method:
+*The {{methodName{getGlobalState( )}}} method; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getGlobalState()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-In SIMILAR, the global memory state of an agent is an instance of the +++^34em^*@[&lt;strong&gt;IGlobalMemoryState&lt;/strong&gt;]
-The {{{IGlobalMemoryState}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== class. This class and its usage are [[described later|SMD - Memory]].
+In SIMILAR, the global state of an agent is a sub class of the {{className{[[IGlobalState|../api/fr/lgi2a/similar/microkernel/agents/IGlobalState.html]]}}} class. This class and its usage are [[described later|SMD - Global state - Plan]].
 
 To facilitate the definition of various initialization profiles of the global state of the agent, its inital value should not be defined within the constructor. Instead, we uphold that a ''setter has to be defined, to delay the initialization'' when it becomes appropriate.
 }}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-This example illustrates the management of the global state of an agent named &quot;City bus&quot;. This agent is declared in the class called {{{CityBusAgent}}}.
+This example illustrates the management of the global state of an agent named &quot;City bus&quot;. This agent is declared in the class called {{className{CityBusAgent}}}.
 {{{
-public class CityBusAgent implements IAgent {
-
-	[...]
-
-	private IGlobalMemoryState globalMemoryState;
-
-	[...]
-
-	@Override
-	public IGlobalMemoryState getGlobalMemoryState() {
-		return this.globalMemoryState;
-	}
-
-	/**
-	 * Sets the value of the initial memory state of the agent.
-	 * @param newState The value of the initial memory state of the agent.
-	 * This memory state cannot be &lt;code&gt;null&lt;/code&gt;.
-	 */
-	public void initializeGlobalMemoryState( IGlobalMemoryState initialMemoryState ) {
-		if( initialMemoryState == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		}
-		this.globalMemoryState = initialMemoryState;
-	}
-
+public class CityBusAgent implements IAgent4Engine {
+	
 	[...]
 	
+	private IGlobalState globalState;
+
+	[...]
+
+	public IGlobalState getGlobalState( ){
+		return this.globalState;
+	}
+	
+	public void initializeGlobalState(
+		IGlobalState initialGlobalState
+	){
+		if( initialGlobalState == null ){
+			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+		}
+		this.globalState = initialGlobalState;
+	}
+	
+	[...]
+
 }
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Levels buttons" creator="Designer" modifier="Designer" created="201402051030" modified="201402051030" changecount="2">
+<div title="SMD - Agents skeleton - Implementation - Levels buttons" creator="Designer" modifier="Designer" created="201402051030" modified="201402171319" changecount="8">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The access to the levels where the agent lies is defined by the following method of the {{{IAgent}}} interface:
-{{{
-public Set&lt;LevelIdentifier&gt; getLevels( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the collection of the levels where this agent lies, i.e. the levels where this agent has a local state.
-
-''Returns:''
-*A collection containing the identifier of the levels where this agent lies.
-}}}
+The access to the levels where the agent lies is defined by the following methods: 
+*The {{methodName{getLevels( )}}} method; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getLevels()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-Since this notion is tightly bound with the existence of a local state for that level. Therefore, to simplify our task, we consider that this method benefits from an appropriate data structure for the public local state of the agent (see the last item of this enumeration). Assuming that the public local states are stored using a {{{Map&lt;LevelIdentifier,IPublicLocalStateOfAgent&gt;}}} data structure, the implementation of this method consists in retrieving the keys of that structure.
+Since this notion is tightly bound with the existence of a local state for that level. Therefore, to simplify our task, we consider that this method benefits from an appropriate data structure for the public local state of the agent (see the last item of this enumeration). Assuming that the public local states are stored using a {{className{Map&lt;LevelIdentifier,ILocalStateOfAgent&gt;}}} data structure, the implementation of this method consists in retrieving the keys of that structure.
 }}} ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-Assuming that the public local states of the agent are stored in a field named {{{publicLocalStates}}}, the code of the skeleton of the &quot;City bus&quot; agent becomes:
+Assuming that the public local states of the agent are stored in a field named {{fieldName{publicLocalStates}}}, the code of the skeleton of the &quot;City bus&quot; agent becomes:
 {{{
-public class CityBusAgent implements IAgent {
-
+public class CityBusAgent implements IAgent4Engine {
+	
 	[...]
 
-	private Map&lt;LevelIdentifier,IPublicLocalStateOfAgent&gt; publicLocalStates;
-
+	private Map&lt;LevelIdentifier,ILocalStateOfAgent&gt; publicLocalStates;
+	
 	[...]
-
-	public CityBusAgent( ) {
+			
+	public CityBusAgent(){
 
 		[...]
 
-		this.publicLocalStates = new HashMap&lt;LevelIdentifier, IPublicLocalStateOfAgent&gt;();
+		this.publicLocalStates = new LinkedHashMap&lt;LevelIdentifier, ILocalStateOfAgent&gt;();
 
 		[...]
 
 	}
 
-	public Set&lt;LevelIdentifier&gt; getLevels( ) {
-		return this.publicLocalStates.keySet( );
+	public Set&lt;LevelIdentifier&gt; getLevels() {
+		return this.publicLocalStates.keySet();
 	}
-
+	
 	[...]
 
 }
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Perception buttons" creator="Designer" modifier="Designer" created="201402051031" modified="201402051031" changecount="2">
+<div title="SMD - Agents skeleton - Implementation - Perception buttons" creator="Designer" modifier="Designer" created="201402051031" modified="201402171322" changecount="10">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The access to the perceived data of the agent is defined by three methods of the {{{IAgent}}} interface:
-*One method ''getting'' the lastly perceived data from ''all the levels'' where the agent lies; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-{{{
-public Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt; getPerceivedData( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the data that were lastly perceived by the agent, for all the levels where it lies.
-
-''Returns:''
-*The data that were lastly perceived by the agent, for all the levels where it lies.
-}}}
-}}} ===
-
-*One method ''getting'' the lastly perceived data from ''a level''; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-{{{
-public IPerceivedDataOfAgent getPerceivedData( 
-	LevelIdentifier levelIdentifier 
-) throws NoSuchElementException;
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the data that were lastly perceived by the agent from a specific level where it lies.
-
-''Parameters:''
-*''Parameter (//levelIdentifier//):'' The identifier of the level from which the data were perceived.
-''Returns:''
-*The data that were lastly perceived by the agent from the {{{levelIdentifier}}} level.
-}}}
-}}} ===
-
-*One method ''setting'' the lastly perceived data from ''a level''. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-{{{
-public void setPerceivedData( 
-	LevelIdentifier levelIdentifier, 
-	IPerceivedDataOfAgent perceivedData
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Sets the data that were lastly perceived by the agent from a specific level where it lies.
-
-''Parameters:''
-*''Parameter (//levelIdentifier//):''The identifier of the level from which the data were perceived.
-*''Parameter (//perceivedData//):''The data that were lastly perceived by the agent from the {{{levelIdentifier}}} level.
-}}}
-}}} ===
-
+The access to the perceived data of the agent is defined by the following methods:
+*{{methodName{getPerceivedData( )}}} gets the lastly perceived data from ''all the levels'' where the agent lies; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#getPerceivedData()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*{{methodName{setPerceivedData(...)}}} sets the lastly perceived data from ''a level''; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#setPerceivedData(fr.lgi2a.similar.microkernel.agents.IPerceivedData)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-In SIMILAR, the perceived data of an agent from a level are modeled as instances of the {{{IPerceivedDataOfAgent}}} class. Because of the signature of the perceived data-related methods, designers do not have much freedom in the implementation of this part of the IAgent interface. It has to revolve around a filed having the following type:
-{{{
-Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt;
-}}}
+In SIMILAR, the perceived data of an agent from a level are modeled as instances of the {{className{IPerceivedData}}} class. Because of the signature of the perceived data-related methods, designers do not have much freedom in the implementation of this part of the IAgent interface. It has to revolve around a filed having the type {{className{Map&lt;LevelIdentifier, IPerceivedData&gt;}}}.
 }}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-This example illustrates the implementation of the perceived data-related methods of an agent named &quot;City bus&quot;. This agent is declared in the class called {{{CityBusAgent}}}.
+This example illustrates the implementation of the perceived data-related methods of an agent named &quot;City bus&quot;. This agent is declared in the class called {{className{CityBusAgent}}}.
 {{{
-public class CityBusAgent implements IAgent {
-
+public class CityBusAgent implements IAgent4Engine {
+	
 	[...]
 
-	private Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt; lastPerceivedData;
-
+	private Map&lt;LevelIdentifier, IPerceivedData&gt; lastPerceivedData;
+	
 	[...]
-
-	public CityBusAgent( ) {
-		[...]
-
-		this.lastPerceivedData = new HashMap&lt;LevelIdentifier, IPerceivedDataOfAgent&gt;();
+			
+	public CityBusAgent(){
 
 		[...]
+
+		this.lastPerceivedData = new LinkedHashMap&lt;LevelIdentifier, IPerceivedData&gt;();
+
+		[...]
+
 	}
-
+	
 	[...]
 
-	public Map&lt;LevelIdentifier, IPerceivedDataOfAgent&gt; getPerceivedData() {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Map&lt;LevelIdentifier, IPerceivedData&gt; getPerceivedData() {
 		return this.lastPerceivedData;
 	}
 
-	public IPerceivedDataOfAgent getPerceivedData(
-			LevelIdentifier levelIdent
-	) throws NoSuchElementException {
-		if( levelIdent == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		}
-		IPerceivedDataOfAgent result = this.lastPerceivedData.get( levelIdent );
-		if( result == null ){
-			throw new NoSuchElementException( 
-				&quot;No perceived data were defined for the level '&quot; + levelIdent + &quot;'.&quot; 
-			);
-		}
-		return result;
-	}
-
+	/**
+	 * 
+	 * 
+	 * {@inheritDoc}
+	 * @param perceivedData
+	 */
+	@Override
 	public void setPerceivedData(
-			LevelIdentifier levelIden,
-			IPerceivedDataOfAgent perceivedData
-	) {
-		if( levelIden == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		} else if( perceivedData == null ){
+		IPerceivedData perceivedData
+	) {{
+		if( perceivedData == null ){
 			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
 		}
-		this.lastPerceivedData.put( levelIden, perceivedData );
+		this.lastPerceivedData.put( 
+			perceivedData.getLevel(), 
+			perceivedData 
+		);
 	}
-
+	
 	[...]
 
 }
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Public local states buttons" creator="Designer" modifier="Designer" created="201402051033" changecount="1">
+<div title="SMD - Agents skeleton - Implementation - Private local states buttons" creator="Designer" modifier="Designer" created="201402171345" modified="201402171348" changecount="3">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The notion of level where an agent lies is tightly bound with the notion of public local state. Indeed, if an agent has a public local state in a specific level, then the agent is necessarily lying in that level. Therefore, adding a public local state to an agent is often synonym of adding that agent to a level.
+The notion of level where an agent lies is tightly bound with the notion of private local state. Indeed, if an agent has a private local state in a specific level, then the agent is necessarily lying in that level. Therefore, adding a private local state to an agent is synonym of adding that agent to a level.
 !Specification of the access methods
-The access to the public local states of the agent is defined by the following method of the {{{IAgent}}} interface:
-*''Getting'' the public local state of an agent for a specific level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-The access to the public local states of the agent is defined by following method of the IAgent interface:
-{{{
-public IPublicLocalStateOfAgent getPublicLocalState( 
-	LevelIdentifier levelIdentifier 
-) throws NoSuchElementException;
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the public local state of the agent located in a specific level of the simulation.
-
-''Parameters:''
-*''Parameter (//levelIdentifier//):'' The identifier of the level of the public local state.
-''Returns:''
-*The public local state of the agent in the specified level.
-''Throws:''
-*''//NoSuchElementException//:'' If the agent does not define a public local state for the provided level identifier.
-}}}
-}}} ===
-
-*''Adding'' a public local state of the agent for a specific level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-&lt;&lt;tiddler [[IAgent - public local state initialization - Documentation]]&gt;&gt;
-}}} ===
-
-*''Removing'' a public local state of the agent for a specific level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-A public local state can be removed from an agent using the following method:
-{{{
-public void excludeFromLevel( 
-   LevelIdentifier levelIdentifier 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Excludes a level from the specification of this agent.
-
-If the agent is already absent from the specified level when this method is called, then this method does nothing.
-
-''Parameters:''
-*''Parameter (//levelIdentifier//):'' The identifier of the level from which the agent is excluded.
-}}}
-}}} ===
-
+The access to the private local states of the agent is defined by the following methods:
+*{{methodName{getPrivateLocalState(LevelIdentifier)}}} gets the private local state of an agent for a specific level; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getPrivateLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*{{methodName{includeNewLevel(...)}}} adds an agent to a level; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*{{methodName{excludeFromLevel(...)}}} removes the agent from a level; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#excludeFromLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
 }}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-In SIMILAR, the ''public local states'' of an agent from a level are modeled as instances of the {{{IPublicLocalStateOfAgent}}} class. This class and its usage are [[described later|SMD - Perception]].
+In SIMILAR, the ''private local states'' of an agent from a level are modeled as instances of the {{className{ILocalStateOfAgent4Engine}}} class. This class and its usage are [[described later|SMD - Perception]].
 
-Because of the signature of the public local state-related methods, designers do not have much freedom in the implementation of this part of the {{{IAgent}}} interface. It usually revolves around a filed having the following type:
-{{{
-Map&lt;LevelIdentifier,IPublicLocalStateOfAgent&gt;
-}}}
+Because of the signature of the private local state-related methods, designers do not have much freedom in the implementation of this part of the {{className{IAgent4Engine}}} interface. It usually revolves around a field having the type {{className{Map&lt;LevelIdentifier,ILocalStateOfAgent&gt;}}}
 }}} ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-This example illustrates the management of the public local states of an agent named &quot;City bus&quot;. This agent is declared in the class called {{{CityBusAgent}}}.
+This example illustrates the management of the private local states of an agent named &quot;City bus&quot;. This agent is declared in the class called {{className{CityBusAgent}}}.
 {{{
-public class CityBusAgent implements IAgent {
+public class CityBusAgent implements IAgent4Engine {
+   
+   [...]
 
-	[...]
+   private Map&lt;LevelIdentifier,ILocalStateOfAgent&gt; privateLocalStates;
 
-	private Map&lt;LevelIdentifier,IPublicLocalStateOfAgent&gt; publicLocalStates;
-
-	[...]
-
-	public CityBusAgent( ) {
-
-		[...]
-
-		this.publicLocalStates = new HashMap&lt;LevelIdentifier, IPublicLocalStateOfAgent&gt;();
-
-		[...]
-
-	}
-
-	[...]
-	
-	@Override
-	public void includeNewLevel( 
-			LevelIdentifier levelIdentifier, 
-			IPublicLocalStateOfAgent publicLocalState 
-	){
-		if( levelIdentifier == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		} else if( publicLocalState == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		}
-		if( ! this.getLevels().contains( levelIdentifier ) ){
-			this.publicLocalStates.put( levelIdentifier, publicLocalState );
-		}
-	}
-
-	@Override
-	public void excludeFromLevel( LevelIdentifier levelIdentifier ) {
-		if( levelIdentifier == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		}
-		if( this.getLevels().contains( levelIdentifier ) ){
-			this.publicLocalStates.remove( levelIdentifier );
-		}
-	}
-
-	@Override
-	public IPublicLocalStateOfAgent getPublicLocalState(
-			LevelIdentifier levelId
-	) throws NoSuchElementException {
-		if( levelId == null ){
-			throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
-		}
-		IPublicLocalStateOfAgent result = this.publicLocalStates.get( levelId );
-		if( result == null ){
-			throw new NoSuchElementException( 
-				&quot;The agent does not define a public local &quot; + 
-				&quot;state for the level '&quot; + levelId + &quot;'.&quot; 
-			);
-		}
-		return result;
-	}
-
-	[...]
+   [...]
+   
+   public CityBusAgent( ) {
+      
+      [...]
+            
+      this.privateLocalStates = new LinkedHashMap&lt;LevelIdentifier,ILocalStateOfAgent&gt;();
+      
+      [...]
+   }
+   
+   [...]
+   
+   public ILocalStateOfAgent getPrivateLocalState( 
+         LevelIdentifier levelIdentifier 
+   ) {
+      if( levelIdentifier == null ){
+         throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+      }
+      ILocalStateOfAgent result = this.privateLocalStates.get( levelIdentifier );
+      if( result == null ){
+         throw new NoSuchElementException( 
+            &quot;The agent does not define a private local &quot; + 
+            &quot;state for the level '&quot; + levelIdentifier + &quot;'.&quot; 
+         );
+      }
+      return result;
+   }
+   
+   public void includeNewLevel( 
+      LevelIdentifier levelIdentifier, 
+      ILocalStateOfAgent publicLocalState,
+      ILocalStateOfAgent privateLocalState 
+   ) {
+      if( levelIdentifier == null || publicLocalState == null || privateLocalState == null ){
+         throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+      }
+      if( ! this.getLevels().contains( levelIdentifier ) ){
+         this.privateLocalStates.put( levelIdentifier, privateLocalState );
+         [...]
+      }
+   }
+   
+   public void excludeFromLevel( 
+      LevelIdentifier levelIdentifier 
+   ) {
+      if( levelIdentifier == null ){
+         throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+      }
+      if( this.getLevels().contains( levelIdentifier ) ){
+         this.privateLocalStates.remove( levelIdentifier );
+         [...]
+      }
+   }
+   
+   [...]
 
 }
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Structure" creator="Designer" modifier="Designer" created="201401221549" modified="201401231332" changecount="4">
+<div title="SMD - Agents skeleton - Implementation - Public local states buttons" creator="Designer" modifier="Designer" created="201402051033" modified="201402171348" changecount="16">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The notion of level where an agent lies is tightly bound with the notion of public local state. Indeed, if an agent has a public local state in a specific level, then the agent is necessarily lying in that level. Therefore, adding a public local state to an agent is synonym of adding that agent to a level.
+!Specification of the access methods
+The access to the public local states of the agent is defined by the following methods:
+*{{methodName{getPublicLocalState(LevelIdentifier)}}} gets the public local state of an agent for a specific level; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getPublicLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*{{methodName{getPublicLocalStates( )}}} gets the public local state of an agent all the levels; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#getPublicLocalStates()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*{{methodName{includeNewLevel(...)}}} adds an agent to a level; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*{{methodName{excludeFromLevel(...)}}} removes the agent from a level; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#excludeFromLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+}}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+In SIMILAR, the ''public local states'' of an agent from a level are modeled as instances of the {{className{ILocalStateOfAgent4Engine}}} class. This class and its usage are [[described later|SMD - Perception]].
+
+Because of the signature of the public local state-related methods, designers do not have much freedom in the implementation of this part of the {{className{IAgent4Engine}}} interface. It usually revolves around a field having the type {{className{Map&lt;LevelIdentifier,ILocalStateOfAgent&gt;}}}
+}}} ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+This example illustrates the management of the public local states of an agent named &quot;City bus&quot;. This agent is declared in the class called {{className{CityBusAgent}}}.
+{{{
+public class CityBusAgent implements IAgent4Engine {
+   
+   [...]
+
+   private Map&lt;LevelIdentifier,ILocalStateOfAgent&gt; publicLocalStates;
+
+   [...]
+   
+   public CityBusAgent( ) {
+      
+      [...]
+            
+      this.publicLocalStates = new LinkedHashMap&lt;LevelIdentifier,ILocalStateOfAgent&gt;();
+      
+      [...]
+   }
+   
+   [...]
+   
+   public ILocalStateOfAgent getPublicLocalState( 
+         LevelIdentifier levelIdentifier 
+   ) {
+      if( levelIdentifier == null ){
+         throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+      }
+      ILocalStateOfAgent result = this.publicLocalStates.get( levelIdentifier );
+      if( result == null ){
+         throw new NoSuchElementException( 
+            &quot;The agent does not define a public local &quot; + 
+            &quot;state for the level '&quot; + levelIdentifier + &quot;'.&quot; 
+         );
+      }
+      return result;
+   }
+   
+   public Map&lt;LevelIdentifier,ILocalStateOfAgent&gt; getPublicLocalStates( ){
+      return this.publicLocalStates;
+   }
+   
+   public void includeNewLevel( 
+      LevelIdentifier levelIdentifier, 
+      ILocalStateOfAgent publicLocalState,
+      ILocalStateOfAgent privateLocalState 
+   ) {
+      if( levelIdentifier == null || publicLocalState == null || privateLocalState == null ){
+         throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+      }
+      if( ! this.getLevels().contains( levelIdentifier ) ){
+         this.publicLocalStates.put( levelIdentifier, publicLocalState );
+         [...]
+      }
+   }
+   
+   public void excludeFromLevel( 
+      LevelIdentifier levelIdentifier 
+   ) {
+      if( levelIdentifier == null ){
+         throw new IllegalArgumentException( &quot;The arguments cannot be null.&quot; );
+      }
+      if( this.getLevels().contains( levelIdentifier ) ){
+         this.publicLocalStates.remove( levelIdentifier );
+         [...]
+      }
+   }
+   
+   [...]
+
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Agents skeleton - Structure" creator="Designer" modifier="Designer" created="201401221549" modified="201402171256" changecount="5">
 <pre>!Structure of an agent in SIMILAR
 [&gt;img(50%,)[images/simulationModel/highLevel/agentDesignOutline1.png]]
 In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 *A ''category'', modeling the //&quot;type&quot;// of the agent;
-*A ''global memory state'';
-*A ''memory revision'' process;
+*A ''global state'';
+*A ''global state revision'' process;
 *A ''public local state'' for each level of the agent;
+*A ''private local state'' for each level of the agent;
 *A ''perceived data'' for each level of the agent;
 *A ''perception'' process for each level of the agent;
 *A ''decision'' process for each level of the agent.
@@ -3415,7 +3364,7 @@ This method defines the following parameters:
 
 &lt;&lt;tiddler [[System influences - Structure]]&gt;&gt;</pre>
 </div>
-<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201402051358" changecount="56">
+<div title="SMD - Environment skeleton" creator="Designer" modifier="Designer" created="201401221024" modified="201402171237" changecount="61">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the environment}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Level skeleton]]  |  [[next step &gt;&gt;|SMD - Agents skeleton]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -3425,39 +3374,75 @@ The environment of the simulation also relies on an incremental design process. 
 This step focuses on the creation of a skeleton class for the environment.
 }}}
 !Structure of the environment in SIMILAR
-[&gt;img(50%,)[images/simulationModel/highLevel/environmentDesignOutline1.png]]
-In SIMILAR, the environment is the sum of the following elements:
-*A ''public local state'' for each level of the simulation;
-*A ''natural action'' process from each level of the simulation.
+&lt;&lt;tiddler [[SMD - Environment skeleton - Structure]]&gt;&gt;
 !Specifications and implementation instructions
-[&gt;img(50%,)[images/simulationModel/highLevel/environmentDesignOutline2.png]]
-In SIMILAR, the environment is modeled as an instance of the +++^34em^*@[&lt;strong&gt;IEnvironment&lt;/strong&gt;]
-The {{{IEnvironment}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== interface. This interface defines methods providing access to the core elements of an environment (public local states) and to the core behavior of the environment (natural action process).
+&lt;&lt;tiddler [[SMD - Environment skeleton - Specifications]]&gt;&gt;
+!Creating the environment in SIMILAR
+&lt;&lt;tiddler [[SMD - Environment skeleton - Creation]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Agents skeleton]]}}}</pre>
+</div>
+<div title="SMD - Environment skeleton - Creation" creator="Designer" modifier="Designer" created="201402171217" modified="201402171353" changecount="6">
+<pre>The constructor of the environment has to comply with the following requirements:
+*The ''initial public local states'' of the environment are set later (see [[details|SMD - Initial state]]);
+*The ''initial private local states'' of the environment are set later (see [[details|SMD - Initial state]]);
+The generated class has to:
+*Be located in the ''environment'' package of the package tree hierarchy.
+The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{className{[[AbstractEnvironment|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html]]}}} class (micro-kernel with common libs).
+
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Environment skeleton full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[images/simulationModel/highLevel/environmentSkeletonTree.png]]
+This example illustrates the creation of the skeleton of an environment. The source of class modeling the environment is located in the {{packageName{environment}}} package of the source tree hierarchy (see the image):
+{{clear{}}}
+*The micro-kernel only approach is implemented as the {{className{EnvironmentSkeleton}}} class +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The following code illustrates the implementation of the environment using only the micro-kernel. The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/EnvironmentSkeleton.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/EnvironmentSkeleton.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+*The micro-kernel with common libs approach is implemented as the {{className{EnvironmentSkeleton2}}} class +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The following code illustrates the implementation of the environment using both the micro-kernel and the common libs. The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/EnvironmentSkeleton2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/EnvironmentSkeleton2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===
+
+}}} ===
+</pre>
+</div>
+<div title="SMD - Environment skeleton - Private local states" creator="Designer" modifier="Designer" created="201402171245" changecount="1">
+<pre>To facilitate the design of simulations where the initial state of the simulation can easily be changed, we advise users to avoid creating the private local states of the environment during its construction. Indeed, having different initialization process for the environment would require the definition of a constructor per initialization process. This goes against the best practices in object oriented engineering.
+
+Instead, we advise to create a method setting the value of each private local state. This way, the class of the environment won't be changed if a new initialization process is created for the environment.
+
+To facilitate the extension of the model of the agents, we also advise designers to rely on a map rather than on a field per level. Indeed, this approach supports the addition of new levels with less efforts.
+
+Knowing all these information, and that a private local state of an environment is an instance of the {{className{[[ILocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface, the environment should declare a field having the type {{className{Map&lt;LevelIdentifier,ILocalStateOfEnvironment&gt;}}}.</pre>
+</div>
+<div title="SMD - Environment skeleton - Public local states" creator="Designer" modifier="Designer" created="201401221036" modified="201402171244" changecount="4">
+<pre>To facilitate the design of simulations where the initial state of the simulation can easily be changed, we advise users to avoid creating the public local states of the environment during its construction. Indeed, having different initialization process for the environment would require the definition of a constructor per initialization process. This goes against the best practices in object oriented engineering.
+
+Instead, we advise to create a method setting the value of each public local state. This way, the class of the environment won't be changed if a new initialization process is created for the environment.
+
+To facilitate the extension of the model of the agents, we also advise designers to rely on a map rather than on a field per level. Indeed, this approach supports the addition of new levels with less efforts.
+
+Knowing all these information, and that a public local state of an environment is an instance of the {{className{[[ILocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface, the environment should declare a field having the type {{className{Map&lt;LevelIdentifier,ILocalStateOfEnvironment&gt;}}}.</pre>
+</div>
+<div title="SMD - Environment skeleton - Specifications" creator="Designer" modifier="Designer" created="201402171217" modified="201402171244" changecount="22">
+<pre>[&gt;img(50%,)[images/simulationModel/highLevel/environmentDesignOutline2.png]]
+In SIMILAR, the environment is modeled as an instance of the {{className{[[IEnvironment4Engine|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment4Engine.html]]}}} interface. This interface defines methods providing access to the core elements of an environment (public and private local states) and to the core behavior of the environment (natural action process).
 
 To facilitate simulation revisions, each core element and behavior is reified as a separate method.
 
-In the first step of the specification of the environment, only subset of this content is specified and implemented. Therefore, the unspecified methods have to throw an {{{UnsupportedOperationException}}} at this stage.
-
+In the first step of the specification of the environment, only subset of this content is specified and implemented. Therefore, the unspecified methods have to throw an {{className{UnsupportedOperationException}}} at this stage.
+{{clear{}}}
 In this skeleton, the following elements have to be defined:
 *The access\(^1\) to the ''public local states'' of the environment; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The public local state of the environment models the data that can be perceived about the environment in a specific level. It access is therefore crucial to the construction of a simulation.
-!Specification of the method
-In SIMILAR, the access to a ''public local state'' of the environment is made using the following method :
-{{{
-public IPublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoSuchElementException;
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Gets the public local state of the environment for a specific level.
 
-''Parameters:''
-*''Parameter (//level//):'' The level of the public local state of the environment.
-''Returns:''
-*The public local state of the environment for a specific level.
-''Throws:''
-*''//NoSuchElementException//:'' If no public local state was defined for the specified level.
-}}} 
+In SIMILAR, the access to a ''public local state'' of the environment is made using the following methods:
+*The {{methodName{getPublicLocalState( LevelIdentifier )}}} method granting access to a public local state; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html#getPublicLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*The {{methodName{getPublicLocalStates( )}}} method granting access to all the public local states; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/environment/IEnvironment4Engine.html#getPublicLocalStates()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
 }}}
 === +++?*[&lt;span class=&quot;implsmallbtn &quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
@@ -3468,25 +3453,25 @@ public IPublicLocalState getPublicLocalState( LevelIdentifier level ) throws NoS
 This example illustrates the definition of an environment skeleton following the implementation guidelines provided in this page.
 !Code
 {{{
-public class EnvironmentModel implements IEnvironment {
+public class EnvironmentModel implements IEnvironment4Engine {
 	[...]
 
-	private Map&lt;LevelIdentifier,IPublicLocalState&gt; publicLocalStates;
+	private Map&lt;LevelIdentifier,ILocalStateOfEnvironment&gt; publicLocalStates;
 
 	[...]
 
 	public EnvironmentModel( ) {
 		[...]
-		this.publicLocalStates = new HashMap&lt;LevelIdentifier, IPublicLocalState&gt;( );
+		this.publicLocalStates = new LinkedHashMap&lt;LevelIdentifier, ILocalStateOfEnvironment&gt;( );
 		[...]
 	}
 
 	[...]
 
-	public IPublicLocalState getPublicLocalState( 
+	public ILocalStateOfEnvironment getPublicLocalState( 
 		LevelIdentifier level 
 	) throws NoSuchElementException {
-		IPublicLocalState result = this.publicLocalStates.get( level );
+		ILocalStateOfEnvironment result = this.publicLocalStates.get( level );
 		if( result == null ){
 			throw new NoSuchElementException( 
 				&quot;No public local state is defined in the environment for the level '&quot; + 
@@ -3498,9 +3483,10 @@ public class EnvironmentModel implements IEnvironment {
 
 	public void includeNewLevel( 
 		LevelIdentifier level, 
-		IPublicLocalState publicLocalState 
+		ILocalStateOfEnvironment publicLocalState,
+		ILocalStateOfEnvironment privateLocalState 
 	){
-		if( level == null || publicLocalState == null){
+		if( level == null || publicLocalState == null || privateLocalState == null){
 			throw new IllegalArgumentException( &quot;An argument is null.&quot; );
 		} else if( this.publicLocalStates.containsKey( level ) ){
 			throw new IllegalArgumentException( 
@@ -3508,6 +3494,9 @@ public class EnvironmentModel implements IEnvironment {
 			);
 		}
 		this.publicLocalStates.put( level, publicLocalState );
+
+		[...]
+
 	}
 
 	[...]
@@ -3515,46 +3504,83 @@ public class EnvironmentModel implements IEnvironment {
 }}}
 }}} ===
 
-{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractEnvironment}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
-=== providing a default implementation to this method.}}}
-\(_{\underline{1:}\text{ At this stage, only the structure supporting the acces to the public local states is defined. The actual public local states are defined later.}}\)
-!Creating the environment in SIMILAR
-The constructor of the environment has to comply with the following requirements:
-*The ''initial public local states'' of the environment are set later (see [[details|SMD - Initial state]]);
-The generated class has to:
-*Be located in the ''environment'' package of the package tree hierarchy.
-The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{{AbstractEnvironment}}} class (micro-kernel with common libs).
+*The access\(^1\) to the ''private local states'' of the environment; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The private local state of the environment models the data that cannot be perceived about the environment in a specific level, but that participate in the computation of its natural action. It access is therefore crucial to the construction of a simulation.
 
-+++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Environment skeleton full example&lt;/span&gt;]
+In SIMILAR, the access to a ''private local state'' of the environment is made using the following method:
+*The {{methodName{getPrivateLocalState( LevelIdentifier )}}} method granting access to a private local state; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html#getPrivateLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+}}}
+=== +++?*[&lt;span class=&quot;implsmallbtn &quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+&lt;&lt;tiddler [[SMD - Environment skeleton - Private local states]]&gt;&gt;
+}}}
+=== +++?*[&lt;span class=&quot;exsmallbtn &quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-[&gt;img[images/simulationModel/highLevel/environmentSkeletonTree.png]]
-This example illustrates the creation of the skeleton of an environment named {{{EnvironmentSkeleton}}}. The source of class modeling the environment is located in the {{{environment}}} package of the source tree hierarchy (see the image):
-@@display:block;margin:0;padding:0;clear:right;@@
-*Micro-kernel only approach +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-The following code illustrates the implementation of the environment using only the micro-kernel. The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/EnvironmentSkeleton.java]]:
-&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/EnvironmentSkeleton.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+This example illustrates the definition of an environment skeleton following the implementation guidelines provided in this page.
+!Code
+{{{
+public class EnvironmentModel implements IEnvironment4Engine {
+	[...]
+
+	private Map&lt;LevelIdentifier,ILocalStateOfEnvironment&gt; privateLocalStates;
+
+	[...]
+
+	public EnvironmentModel( ) {
+		[...]
+		this.privateLocalStates = new LinkedHashMap&lt;LevelIdentifier, ILocalStateOfEnvironment&gt;( );
+		[...]
+	}
+
+	[...]
+
+	public ILocalStateOfEnvironment getPrivateLocalState( 
+		LevelIdentifier level 
+	) throws NoSuchElementException {
+		ILocalStateOfEnvironment result = this.privateLocalStates.get( level );
+		if( result == null ){
+			throw new NoSuchElementException( 
+				&quot;No private local state is defined in the environment for the level '&quot; + 
+				level + &quot;'.&quot; 
+			);
+		}
+		return result;
+	}
+
+	public void includeNewLevel( 
+		LevelIdentifier level, 
+		ILocalStateOfEnvironment publicLocalState,
+		ILocalStateOfEnvironment privateLocalState 
+	){
+		if( level == null || publicLocalState == null || privateLocalState == null){
+			throw new IllegalArgumentException( &quot;An argument is null.&quot; );
+		} else if( this.privateLocalStates.containsKey( level ) ){
+			throw new IllegalArgumentException( 
+				&quot;The level '&quot; + level + &quot;' is already defined for this environment.&quot; 
+			);
+		}
+		this.privateLocalStates.put( level, privateLocalState );
+
+		[...]
+
+	}
+
+	[...]
+}
+}}}
 }}} ===
 
-*Micro-kernel with common libs approach +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-The following code illustrates the implementation of the environment using both the micro-kernel and the common libs. The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/EnvironmentSkeleton2.java]]:
-&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/EnvironmentSkeleton2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
-}}} ===
-
-}}} ===
-
-{{nextButton{[[Go to the next step &gt;&gt;|SMD - Agents skeleton]]}}}</pre>
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define the {{className{[[AbstractEnvironment|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html]]}}} class providing a default implementation to these methods.}}}
+\(_{\underline{1:}\text{ At this stage, only the structure supporting the acces to the public and private local states is defined. The actual public and private local states are defined later.}}\)</pre>
 </div>
-<div title="SMD - Environment skeleton - Public local states" creator="Designer" modifier="Designer" created="201401221036" changecount="1">
-<pre>To facilitate the design of simulations where the initial state of the simulation can easily be changed, we advise users to avoid creating the public local states of the environment during its construction. Indeed, having different initialization process for the environment would require the definition of a constructor per initialization process. This goes against the best practices in object oriented engineering.
-
-Instead, we advise to create a method setting the value of each public local state. This way, the class of the environment won't be changed if a new initialization process is created for the environment.
-
-To facilitate the extension of the model of the agents, we also advise designers to rely on a map rather than on a field per level. Indeed, this approach supports the addition of new levels with less efforts.
-
-Knowing all these information, and that a public local state of an environment is an instance of the +++^34em^*@[&lt;strong&gt;IPublicLocalState&lt;/strong&gt;]The {{{IPublicLocalStateOfAgent}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== interface, the environment should declare a field having the type {{{Map&lt;LevelIdentifier,IPublicLocalState&gt;}}}.</pre>
+<div title="SMD - Environment skeleton - Structure" creator="Designer" modifier="Designer" created="201402171217" modified="201402171228" changecount="5">
+<pre>[&gt;img(50%,)[images/simulationModel/highLevel/environmentDesignOutline1.png]]
+In SIMILAR, the environment is the sum of the following elements:
+*A ''public local state'' for each level of the simulation;
+*A ''private local state'' for each level of the simulation;
+*A ''natural action'' process from each level of the simulation.
+{{clear{}}}</pre>
 </div>
 <div title="SMD - Global state - Introduction" creator="Designer" modifier="Designer" created="201402031026" modified="201402031205" changecount="3">
 <pre>The behavior of an agent is defined by three different steps (see the image):
@@ -3740,7 +3766,7 @@ This method defines two parameters:
 *The {{{globalState}}} parameter defines the former value of the global state of the agent;
 This method directly modifies the value of {{{globalState}}}: as a side effect of this method call, {{{globalState}}} becomes the revised global state of the agent.</pre>
 </div>
-<div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201402051357" changecount="17">
+<div title="SMD - High level specifications" creator="Designer" modifier="Designer" created="201401151051" modified="201402171559" changecount="18">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{High-level specifications of the simulation}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation - Parameters]]  |  [[next step &gt;&gt;|SMD - Levels identification]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -3754,12 +3780,13 @@ This following step create the content of the simulation model at a coarse grain
 *Creation of the [[skeleton of the agents|SMD - Agents skeleton]]
 *Definition of the [[time model|SMD - Time model]] of the levels
 *Creation of the [[public local states|SMD - Public local states]] of the environment and of the agents
+*Creation of the [[skeleton of the private local states|SMD - Private local states]] of the environment and of the agents
 *Creation of the [[skeleton of the influences|SMD - Influences skeleton]]
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Levels identification]]}}}</pre>
 </div>
-<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201402051359" changecount="44">
+<div title="SMD - Influences skeleton" creator="Designer" modifier="Designer" created="201401241516" modified="201402171559" changecount="45">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the influences}}}
-{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Public local states]]  |  [[next step &gt;&gt;|SMD - Low level specifications]]}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Private local states]]  |  [[next step &gt;&gt;|SMD - Low level specifications]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Influences skeleton - Introduction]]&gt;&gt;
 !Structure of an influence in SIMILAR
@@ -3867,7 +3894,7 @@ For instance:
 ~~//''__1:__ This notion is similar to the notion of agent category''//~~
 @@clear:right;display:block;margin:0;padding:0;@@</pre>
 </div>
-<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201402051357" changecount="111">
+<div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201402171557" changecount="112">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the levels}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents identification]]  |  [[next step &gt;&gt;|SMD - Environment skeleton]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -3885,41 +3912,42 @@ This step focuses on the creation of a skeleton class for each level that was id
 &lt;&lt;tiddler [[SMD - Level skeleton - Creation]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Environment skeleton]]}}}</pre>
 </div>
-<div title="SMD - Level skeleton - Creation" creator="Designer" modifier="Designer" created="201401231259" modified="201401241039" changecount="22">
+<div title="SMD - Level skeleton - Creation" creator="Designer" modifier="Designer" created="201401231259" modified="201402171223" changecount="35">
 <pre>!Creating a level  skeleton in SIMILAR
 The constructor of a level has to comply with the following requirements:
-*The last consistent state has to be partially initialized:
+*The most recent consistent state has to be partially initialized:
 **The +++^34em^*@[&lt;strong&gt;time stamp&lt;/strong&gt; of that state]
 More precisely the time stamp of the last consistent state of the level.
 === has to be equalt to the initial time stamp of the simulation;
 **The remaining initialization of the last consistent state is [[completed later|Design - Initial state]];
+*The most recent transitory state has to be initialized;
 *The ''perception relation graph'' of the level has to be initialized and contain at least its own identifier;
 *The ''influence relation graph'' of the level has to be initialized and contain at least its own identifier;
 The generated class has to:
-*Be located in the ''levels'' package of the package tree hierarchy;
+*Be located in the ''levels.XYZ'' package of the package tree hierarchy, where ''XYZ'' is the identifier of the level;
 *Be named explicitly after the level.
-The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{{Abstractlevel}}} class (micro-kernel with common libs).
+The implementation of the methods of the skeleton (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{className{[[AbstractLevel|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html]]}}} class (micro-kernel with common libs).
 
 +++?[&lt;a class=&quot;exbigbtn&quot;&gt;Level skeleton full example&lt;/a&gt;]{{exsection {
 [&gt;img[images/simulationModel/highLevel/levelSkeletonTree.png]]
-This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
 *A &quot;slumbs&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
 This step illustrates the creation of a level named &quot;city&quot; such that:
-*The perception relation graph contains the &quot;city&quot; and &quot;slumbs&quot; levels;
-*The influence relation graph contains the &quot;city&quot;, &quot;slumbs&quot; and &quot;country&quot; levels.
-*The source of the class modeling the &quot;City&quot; level is located in the //levels// package of the source tree hierarchy (see the image). 
-
+*The perception graph contains the &quot;city&quot; and &quot;slumbs&quot; levels;
+*The influence graph contains the &quot;city&quot;, &quot;slumbs&quot; and &quot;country&quot; levels.
+*The source of the class modeling the &quot;City&quot; level is located in the ''levels'' package of the source tree hierarchy (see the image). 
+{{clear{}}}
 This example illustrates two implementation approaches of this class:
-*Micro-kernel only approach +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
+*The micro-kernel only approach is implemented as the {{className{CityLevelSkeleton}}} class +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
 {{implsection {
 The following code illustrates the implementation of the environment using only the micro-kernel. These sources are also available in a [[stand alone file|./files/simulationModel/highLevel/CityLevelSkeleton.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/CityLevelSkeleton.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===
 
-*Micro-kernel with common libs approach +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
+*The micro-kernel with common libs approach is implemented as the {{className{CityLevelSkeleton2}}} class +++?[&lt;a class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/a&gt;]
 {{implsection {
 The following code illustrates the implementation of the environment using both the micro-kernel and the common libs. These sources are also available in a [[stand alone file|./files/simulationModel/highLevel/CityLevelSkeleton2.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/CityLevelSkeleton2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
@@ -3927,67 +3955,48 @@ The following code illustrates the implementation of the environment using both 
 
 }}}===</pre>
 </div>
-<div title="SMD - Level skeleton - Implementation" creator="Designer" modifier="Designer" created="201401231258" modified="201401301224" changecount="5">
+<div title="SMD - Level skeleton - Implementation" creator="Designer" modifier="Designer" created="201401231258" modified="201402171222" changecount="19">
 <pre>!Specifications and implementation instructions
 [&lt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline2.png]]
-In SIMILAR, levels are modeled as instances of the +++^34em^*@[&lt;strong&gt;ILevel&lt;/strong&gt;]
-The {{{ILevel}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== interface. This interface defines methods providing access to the core elements of a level (identifier, influence and perception relation graphs) and to the core behavior of the levels (time model and reaction).
+In SIMILAR, levels are modeled as instances of the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface. This interface defines methods providing access to the core elements of a level (identifier, influence and perception relation graphs) and to the core behavior of the levels (time model and reaction).
 
 To facilitate simulation revisions, each core element and behavior is reified as a separate method.
 
-In the first step of the specification of the levels, only subset of the content of each level is specified and implemented. Therefore, the unspecified methods have to throw an {{{UnsupportedOperationException}}} at this stage.
-
-
-In this skeleton, the following elements have to be defined:
-*The ''identifier'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+In the first step of the specification of the levels, only subset of the content of each level is specified and implemented. Therefore, the unspecified methods have to throw an {{className{UnsupportedOperationException}}} at this stage.
+{{clear{}}}
+In this skeleton, the following methods have to be defined:
+*The access to the ''identifier'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The access to the identifier of the level is defined by the following method of the {{{ILevel}}} interface:
-{{{
-public LevelIdentifier getIdentifier( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Gets the identifier of this level.
-
-''Returns:''
-*The identifier of this level;
-}}} 
+The access to the identifier of the level is defined by the following methods:
+*The {{methodName{[[getIdentifier()|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#getIdentifier()]]}}} method.
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of these methods usually consists in:
-*Adding a field to the class having the type {{{LevelIdentifier }}};
+*Adding a field to the class having the type {{className{LevelIdentifier }}};
 *Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (//i.e.// {{{getIdentifier( )}}}).
+*Granting access to that field in the appropriate methods (//i.e.// {{methodName{getIdentifier( )}}}).
 }}} ===
 
-*The ''perception relation graph'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The access to the ''perception relation graph'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 In SIMILAR, the perception relation graph is distributed among the levels. Each level embeds its out neighborhood of the perception relation graph. 
-!Specification of the method
-The access to the neighborhood is defined by the following method of the {{{ILevel}}} interface:
-{{{
-public Set&lt;LevelIdentifier&gt; getPerceptibleLevels( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Gets the levels that can be perceived by agents located in this level.
 
-''Returns:''
-*The levels that can be perceived by agents located in this level.
-}}} 
+The access to the out neighborhood is defined by the following methods:
+*The {{methodName{[[getPerceptibleLevels()|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#getPerceptibleLevels()]]}}} method.
 }}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-The implementation of these methods usually consists in:
-*Adding a field to the class having the type {{{Set&lt;LevelIdentifier&gt;}}};
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{className{Set&lt;LevelIdentifier&gt;}}};
 *Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (//i.e.// {{{getPerceptibleLevels( )}}}).
+*Granting access to that field in the appropriate methods (//i.e.// {{methodName{getPerceptibleLevels( )}}}).
 }}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
 *A &quot;slumbs&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
-It illustrates the implementation of the {{{getPerceptibleLevels(...)}}} method of a &quot;city&quot; level such that:
+It illustrates the implementation of the {{methodName{getPerceptibleLevels(...)}}} method of a &quot;city&quot; level such that:
 *The out neighborhood of the level in the perception relation graph contains the &quot;city&quot; and &quot;slumbs&quot; levels.
 !Code
 {{{
@@ -4002,7 +4011,7 @@ public class CityLevel implements ILevel {
 		[...] 
 	){
 		[...]
-		this.perceptibleLevels = new HashSet&lt;LevelIdentifier&gt;();
+		this.perceptibleLevels = new LinkedHashSet&lt;LevelIdentifier&gt;();
 		// First add the identifier of this level to the graph.
 		this.perceptibleLevels.add( MyAwesomeLevelList.CITY );
 		// Then add to the set the identifier of the perceptible levels.
@@ -4019,34 +4028,26 @@ public class CityLevel implements ILevel {
 }}}
 }}} ===
 
-*The ''influence relation graph'' of the level;  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The access to the ''influence relation graph'' of the level;  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 In SIMILAR, the influence relation graph is distributed among the levels. Each level embeds its out neighborhood of the influence relation graph. 
-!Specification of the method
-The access to the neighborhood is defined by the following method of the {{{ILevel}}} interface:
-{{{
-public Set&lt;LevelIdentifier&gt; getInfluenceableLevels( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Gets the levels that can be influenced by agents located in this level.
 
-''Returns:''
-*The levels that can be influenced by agents located in this level.
-}}} 
+The access to the out neighborhood is defined by the following methods:
+*The {{methodName{[[getInfluenceableLevels()|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#getInfluenceableLevels()]]}}} method.
 }}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-The implementation of these methods usually consists in:
-*Adding a field to the class having the type {{{Set&lt;LevelIdentifier&gt;}}};
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{className{Set&lt;LevelIdentifier&gt;}}};
 *Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (//i.e.// {{{getInfluenceableLevels( )}}}).
+*Granting access to that field in the appropriate methods (//i.e.// {{methodName{getInfluenceableLevels( )}}}).
 }}} ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
 *A &quot;slumbs&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
-It illustrates the implementation of the {{{getInfluenceableLevels(...)}}} method of a &quot;city&quot; level such that:
+It illustrates the implementation of the {{methodName{getInfluenceableLevels(...)}}} method of a &quot;city&quot; level such that:
 *The out neighborhood of the level in the influence relation graph contains the &quot;city&quot;, &quot;seashore&quot; and &quot;country&quot; levels.
 !Code
 {{{
@@ -4061,7 +4062,7 @@ public class CityLevel implements ILevel {
 		[...] 
 	){
 		[...]
-		this.influenceableLevels = new HashSet&lt;LevelIdentifier&gt;();
+		this.influenceableLevels = new LinkedHashSet&lt;LevelIdentifier&gt;();
 		// First add the identifier of this level to the graph.
 		this.influenceableLevels.add( MyAwesomeLevelList.SEASHORE );
 		// Then add to the set the identifier of the perceptible levels.
@@ -4082,56 +4083,28 @@ public class CityLevel implements ILevel {
 {{docsection{
 The most recent consistent dynamic state models the state of a level the last time it was readable (//i.e.// either the initial one, or its value right after the reaction of the level).
 !Specification of the access methods
-The access to the most recent consistent dynamic state of the level is done using two methods:
-*An accessor reading the value of such a dynamic state; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-The read access to the most recent consistent dynamic state of the level is defined by the following method of the {{{ILevel}}} interface:
-{{{
-ConsistentPublicLocalDynamicState getLastConsistentPublicLocalDynamicState( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Gets the last consistent dynamic state of the level.
-
-''Returns:''
-*The last consistent dynamic state of the level.
-}}}
-}}} ===
-
-*An accessor setting the value of such a dynamic state; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-The write access to the most recent consistent dynamic state of the level is defined by the following method of the {{{ILevel}}} interface:
-{{{
-void setLastConsistentPublicLocalDynamicState( 
-	ConsistentPublicLocalDynamicState lastConsistentState 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Sets the last consistent dynamic state of the level.
-
-''Parameters:''
-*''Parameter (//lastConsistentState//):'' The last consistent dynamic state of the level.
-}}}
-}}} ===
-
+The access to the most recent consistent dynamic state of the level is done using the following method:
+*An accessor reading the value of such a dynamic state ({{methodName{[[getLastConsistentState( )|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#getLastConsistentState()]]}}} method);
+*No setter is defined for this value since it is updated after each transitory state (rather than creating new instances each time).
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-The implementation of these methods usually consists in:
-*Adding a field to the class having the type {{{ConsistentPublicLocalDynamicState }}};
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{className{ConsistentPublicLocalDynamicState }}};
 *Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (//i.e.// {{{getLastConsistentPublicLocalDynamicState( )}}}).
+*Granting access to that field in the appropriate methods (//i.e.// {{methodName{getLastConsistentState( )}}}).
 !!Setting the initial value
 Contrary to the other elements of the level, the dynamic state requires specific information to be fully initialized:
 *A time stamp modeling the time for which this dynamic state is defined;
-*The public local state of the environment for the level;
-In the context of the constructor of a level, these values are the initial ones. At this current step of the methodology, only the initial time stamp will be defined. The definition of the initial public local state of the environment is made later.
+*The public and private local state of the environment for the level;
+In the context of the constructor of a level, these values are the initial ones. At this current step of the methodology, only the initial time stamp will be defined. The definition of the initial local state of the environment is made later.
 }}}  ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{{MyAwesomeLevelList}}} class:
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
 *A &quot;slumbs&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
-It illustrates the implementation of the {{{getLastConsistentPublicLocalDynamicState(...)}}} and {{{setLastConsistentPublicLocalDynamicState(...)}}} methods of a &quot;city&quot; level.
+It illustrates the implementation of the {{methodName{getLastConsistentState(...)}}} method of a &quot;city&quot; level.
 !Code
 {{{
 public class CityLevel implements ILevel {
@@ -4156,23 +4129,80 @@ public class CityLevel implements ILevel {
 
 	[...]
 	
-	public ConsistentPublicLocalDynamicState  getLastConsistentPublicLocalDynamicState() {
-		return this.mostRecentConsistentDynamicState;
-	}
+public ConsistentPublicLocalDynamicState  getLastConsistentState() {
+	return this.mostRecentConsistentDynamicState;
+}
+}
+}}}
+}}} ===
+
+*The ''most recent transitory dynamic state'' of the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The most recent transitory dynamic state models the state of a level since the last time it was readable (//i.e.// its value between two consecutive reactions of the level).
+!Specification of the access methods
+The access to the most recent transitory dynamic state of the level is done using the following method:
+*An accessor reading the value of such a dynamic state ({{methodName{[[getLastTransitoryState( )|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#getLastTransitoryState()]]}}} method);
+*No setter is defined for this value since it is updated after each reaction (rather than creating new instances each time).
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{className{TransitoryPublicLocalDynamicState}}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (//i.e.// {{methodName{getLastTransitoryState( )}}}).
+!!Setting the initial value
+Contrary to the other elements of the level, the dynamic state requires specific information to be fully initialized:
+*The consistent dynamic state to which it is attached (this state models the consistent state directly preceding this transitory state);
+*A time stamp modeling the moment when the transitory period ends. By default, it is easier to set this value to a maximal time stamp, since the engine will in the end override this value;
+The definition of the local state of the environment is unecessary in this constructor, since their value correspond to their value in the most recent consistent dynamic state.
+}}}  ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
+*A &quot;city&quot; level
+*A &quot;slumbs&quot; level
+*A &quot;country&quot; level
+*A &quot;seashore&quot; level
+It illustrates the implementation of the {{methodName{getLastTransitoryState(...)}}} method of a &quot;city&quot; level.
+!Code
+{{{
+public class CityLevel implements ILevel {
+	[...]
 	
-	public void setLastConsistentPublicLocalDynamicState( ConsistentPublicLocalDynamicState state ) {
-		this.mostRecentConsistentDynamicState = state;
+	private ConsistentPublicLocalDynamicState  mostRecentConsistentDynamicState;
+	
+	private TransitoryPublicLocalDynamicState mostRecentTransitoryDynamicState;
+	
+	[...]
+
+	public CityLevel( 
+		[...] 
+		SimulationTimeStamp initialTime,
+		[...] 
+	){
+		[...]
+		this.mostRecentConsistentDynamicState = new ConsistentPublicLocalDynamicState( 
+			initialTime, 
+			MyAwesomeLevelList.CITY 
+		);
+		this.mostRecentTransitoryDynamicState= new TransitoryPublicLocalDynamicState( 
+			this.mostRecentConsistentDynamicState
+		);
+		[...]
+	}
+
+	[...]
+	
+	public TransitoryPublicLocalDynamicState getLastTransitoryState( ) {
+		return this.mostRecentTransitoryDynamicState;
 	}
 }
 }}}
 }}} ===
 
 {{bigemphasisblock{
-Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines a +++^34em^*@[class]@@font-weight:normal;The {{{AbstractLevel}}} class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
-=== providing a default implementation of these features.
+Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines the {{className{[[AbstractLevel|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html]]}}} class providing a default implementation of these features.
 }}}</pre>
 </div>
-<div title="SMD - Level skeleton - Structure" creator="Designer" modifier="Designer" created="201401231256" modified="201401231257" changecount="2">
+<div title="SMD - Level skeleton - Structure" creator="Designer" modifier="Designer" created="201401231256" modified="201402171222" changecount="4">
 <pre>!Structure of a level in SIMILAR
 [&gt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline1.png]]
 In SIMILAR, a level is the sum of the following elements^^''1''^^:
@@ -4184,12 +4214,12 @@ In SIMILAR, a level is the sum of the following elements^^''1''^^:
 *A ''reaction to the influences'' aimed at the level:
 **A reaction for the ''system influences'';
 **A reaction for the ''regular influences''.
-
+{{clear{}}}
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)
 \(_{\underline{2:}\text{ More precisely, the out neighborhood of the level in that graph.}}\)
 \(_{\underline{3:}\text{ In SIMILAR, the model of a level stores the lastly computed consistent state. The management of the transitory states is left to the simulation engines.}}\)</pre>
 </div>
-<div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201401151130" modified="201402051357" changecount="26">
+<div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201401151130" modified="201402171221" changecount="31">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Identification of the levels}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - High level specifications]] | [[next step &gt;&gt;|SMD - Agents identification]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -4199,13 +4229,11 @@ Once the levels and their names is known, the user can create a class summing up
 
 {{focusemphasisblock{This step focuses on the creation of a class listing the identifier of all the levels of the simulation.}}}
 !Creating the identifier of a level
-In SIMILAR, the identifier of a level is modeled as an instance of the +++^34em^*@[&lt;strong&gt;LevelIdentifier&lt;/strong&gt;]
-The {{{LevelIdentifier}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== class. A level identifier is built using the following constructor:
+In SIMILAR, the identifier of a level is modeled as an instance of the {{className{[[LevelIdentifier|../api/fr/lgi2a/similar/microkernel/LevelIdentifier.html]]}}} class. A level identifier is built using the following constructor:
 {{{
 public LevelIdentifier( String levelName );
 }}}
-Note that the ''levelName'' argument cannot be null. Moreover, its value has to be different for each level being modeled.
+Note that the {{argumentName{levelName}}} argument cannot be null. Moreover, its value has to be different for each level being modeled.
 
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Level identifier creation example&lt;/span&gt;]
 {{exsection {
@@ -4227,10 +4255,10 @@ This class has to:
 *Define a single //protected// constructor with no arguments;
 *Contain as many //public statc final// fields from the {{{LevelIdentifier}}} class as the number of levels in the simulation.
 *Be located into the ''&quot;levels''&quot; package.
-
+{{clear{}}}
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Level identifiers list creation example&lt;/span&gt;]
 {{exsection {
-This example illustrates the creation of a level identifiers list called {{{MyAwesomeLevelList }}}. This list contains the &quot;city&quot;, &quot;slumbs&quot;, &quot;country&quot;, &quot;seashore&quot; levels.
+This example illustrates the creation of a level identifiers list called {{className{MyAwesomeLevelList }}}. This list contains the &quot;city&quot;, &quot;slumbs&quot;, &quot;country&quot;, &quot;seashore&quot; levels.
 
 This example is also available in a [[stand alone file|./files/simulationModel/highLevel/MyAwesomeLevelList.java]].
 !Code
@@ -4238,7 +4266,7 @@ This example is also available in a [[stand alone file|./files/simulationModel/h
 }}} ===
 
 !!Using the list of level identifier
-Once the class  of the level identifier list is declared, it becomes no longer necessary to create instances of the {{{LevelIdentifier}}} class to have access to the feratures of the simulation. Instead, users have to refer to a static field of the ''&quot;level identifiers list&quot;'' class.
+Once the class  of the level identifier list is declared, it becomes no longer necessary to create instances of the {{className{[[LevelIdentifier|../api/fr/lgi2a/similar/microkernel/LevelIdentifier.html]]}}} class to have access to the feratures of the simulation. Instead, users have to refer to a static field of the ''&quot;level identifiers list&quot;'' class.
 
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
 {{exsection {
@@ -4248,12 +4276,12 @@ Without using the &quot;level identifiers list&quot;, the public local state of 
 {{{
 IAgent agent = ...;
 LevelIdentifier levelId = new LevelIdentifier( &quot;city&quot; );
-IPublicLocalStateOfAgent state = agent.getPublicLocalState( levelId  );
+ILocalStateOfAgent state = agent.getPublicLocalState( levelId  );
 }}}
 When using the list, the code becomes:
 {{{
 IAgent agent = ...;
-IPublicLocalStateOfAgent state = agent.getPublicLocalState( MyAwesomeLevelList.CITY );
+ILocalStateOfAgent state = agent.getPublicLocalState( MyAwesomeLevelList.CITY );
 }}}
 }}} ===
 
@@ -4387,7 +4415,7 @@ In SIMILAR, the natural action model can be seen as an ''application'' taking in
 
 &lt;&lt;tiddler [[System influences - Structure]]&gt;&gt;</pre>
 </div>
-<div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201402051414" changecount="43">
+<div title="SMD - Package tree" creator="Designer" modifier="Designer" created="201401150935" modified="201402171220" changecount="48">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creating the directories and packages tree}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Preparation]]  |  [[next step &gt;&gt;|SMD - Tools preparation]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -4413,8 +4441,7 @@ The project where the simulation is written has to use a specific folder hierarc
 
 The {{{target/bin}}} directory will contain the compiled binary files of the simulation model. 
 
-The {{{README.txt}}} file contains the description of the simulation model: its purpose, its parameters, its output and how to interpret the output.
-
+The {{{README.txt}}} file contains the description of the simulation model: its purpose, its parameters, its output and how to interpret the output.{{clear{}}}
 
 This structure is compatible with the [[Maven|http://maven.apache.org/]] project management and comprehension tool. Therefore, a maven build can be used to compile the simulation model.
 !!Simulation model directory layout
@@ -4430,7 +4457,7 @@ Once the main directory hierarchy is installed, a package tree can be installed 
 **The ''levels'' package containing the model of the levels of the simulation;
 *The ''probes'' package containing the observation probes used in the simulation;
 *The ''tools'' package containing the miscellaneous tools that were used to implement the simulation.
-
+{{clear{}}}
 This structure is obviously not rigid. For instance, if the simulation uses predefined simulation engines and probes, and defines only one initial setting for the simulation, then a simplified package tree can be used.
 !!Simulation model declaration
 The declaration of the elements of the simulation model usually also creates a model-dependent sub-division of the presented hierarchy:
@@ -4447,7 +4474,7 @@ This example illustrates the full directory structure of a plane traffic simulat
 *There are two levels named ''Sky'' and ''Ground''
 *The simulation contains ''Plane'' agents navigating in the ''Sky'' level and taking off or landing in the ''Ground'' level.
 *The simulation contains ''Control tower'' agents telling ''Plane'' agents when they are authorized to land. These agents are only in the ''Ground'' level.
-&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+{{clear{}}}
 }}}===
 
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Tools preparation]]}}}</pre>
@@ -4650,11 +4677,70 @@ This first main step creates the general structure of the simulation model:
 **The [[parameters management|SMD - Tools preparation - Parameters]] tool
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Package tree]]}}}</pre>
 </div>
-<div title="SMD - Public local states" creator="Designer" modifier="Designer" created="201401231605" modified="201402051359" changecount="33">
-<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the public local states}}}
-{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Time model]]  |  [[next step &gt;&gt;|SMD - Influences skeleton]]}}}
+<div title="SMD - Private local states" creator="Designer" modifier="Designer" created="201402171557" modified="201402171618" changecount="11">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the private states}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Public local states]]  |  [[next step &gt;&gt;|SMD - Influences skeleton]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
-The next step of the methodology consists in identifying the part of the ''local state'' of the agents (and of the environment) that can be perceived. Once identified, a ''public local state'' can be created for each of these entities. Note that the non-perceptible part, called ''private local state'' belongs to the inner mechanisms of the behavior of the agents and of the environment. They are declared elsewhere (see the [[perception|SMD - Perception]], [[global state|SMD - Global state]], [[decision|SMD - Decision]] and [[natural|SMD - Natural]] phases).
+The next step of the methodology consists in identifying the part of the ''local state'' of the agents (and of the environment) that cannot be perceived. Once identified, a ''private local state'' can be created for each of these entities.
+
+{{focusemphasisblock{
+This step focuses on the creation of the skeleton of the private local state classes:
+*A class for each agent category and for each level where an agent from that category can lie;
+*A class for each level where the environment is.
+}}}
+Note that the content of the private local states is completed during the whole simulation design process. 
+!Structure of a private local state in SIMILAR
+&lt;&lt;tiddler [[SMD - Private local states - Structure]]&gt;&gt;
+!Specifications, implementation and creation instructions
+&lt;&lt;tiddler [[SMD - Private local states - Specifications]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Influences skeleton]]}}}</pre>
+</div>
+<div title="SMD - Private local states - Specifications" creator="Designer" modifier="Designer" created="201402171612" modified="201402171621" changecount="12">
+<pre>[&gt;img(47%,)[images/simulationModel/highLevel/environmentDesignOutline3.png]]
+In SIMILAR, a private local state of the environment is modeled as an instance of the {{className{[[ILocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface, just like for public local states. Therefore, refer to the [[previous step|SMD - Public local states]] to get the general instructions to implement a private state.
+
+Since ''private'' and ''public'' have the same abbreviation, we recommend to use the word &quot;''Hidden''&quot; in the abbreviation of the name of a private local state. 
+For instance //&quot;AgtLionHLSInSavannah&quot;// for the private local state of a //&quot;Lion&quot;// agent in the //&quot;Savannah&quot;// level.
+{{clearright{}}}
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define the {{className{[[AbstractLocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfEnvironment.html]]}}} abstract class providing a default implementation to this method.}}}
+[&lt;img(47%,)[images/simulationModel/highLevel/agentDesignOutline3.png]]
+The private local state of the agents has to implement a more specialized interface called {{className{[[ILocalStateOfAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html]]}}}, just like for public local states. Therefore, refer to the [[previous step|SMD - Public local states]] to get the general instructions to implement a private state.
+
+Since ''private'' and ''public'' have the same abbreviation, we recommend to use the word &quot;''Hidden''&quot; in the abbreviation of the name of a private local state. 
+For instance //&quot;AgtLionHLSInSavannah&quot;// for the private local state of a //&quot;Lion&quot;// agent in the //&quot;Savannah&quot;// level.
+{{clear{}}}
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define the {{className{[[AbstractLocalStateOfAgent|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfAgent.html]]}}} abstract class providing a default implementation to these methods.}}}
+</pre>
+</div>
+<div title="SMD - Private local states - Structure" creator="Designer" modifier="Designer" created="201402171602" modified="201402171622" changecount="9">
+<pre>In SIMILAR, a ''private local state'' models all the local information used to parameter:
+*The [[perception|SMD - Perception]] and [[decision|SMD - Decision]] processes of the agents; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection {
+The private local state of an agent can define the depth of its perception radius, the destinations it wishes to reach, a threshold triggering the creation of an influence, //etc.//
+}}} ===
+
+*The [[natural action process|SMD - Natural]] of the environment; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection {
+The private local state of the environment can define a threshold triggering the creation of an influence, the ambient temperature evolution speed, //etc.//
+}}} ===
+
+[&gt;img(45%,)[images/simulationModel/highLevel/privateLocalStateOutline1.png]]
+The ''private local state'' of an agent in a level is the sum of the following elements:
+*The ''identifier of the level'' where it lies;
+*The ''owner'' of the state, //i.e.// the agent it belongs to;
+*The ''non-perceptible data'' of the agent in that level.
+{{clearright{}}}
+[&lt;img(45%,)[images/simulationModel/highLevel/privateLocalStateOutline2.png]]
+The ''private local state'' of the environment in a level is the sum of the following elements:
+*The ''identifier of the level'' where it lies;
+*The ''non-perceptible data'' of the environment in that level.
+{{clearright{}}}</pre>
+</div>
+<div title="SMD - Public local states" creator="Designer" modifier="Designer" created="201401231605" modified="201402171558" changecount="38">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the public local states}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Time model]]  |  [[next step &gt;&gt;|SMD - Private local states]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The next step of the methodology consists in identifying the part of the ''local state'' of the agents (and of the environment) that can be perceived. Once identified, a ''public local state'' can be created for each of these entities. Note that the non-perceptible part, called ''private local state'' uses a similar structure (see the next step).
 
 {{focusemphasisblock{
 This step focuses on the creation of public local state classes:
@@ -4668,9 +4754,9 @@ Note that the identification of all the perceptible information at this stage is
 &lt;&lt;tiddler [[SMD - Public local states - Implementation]]&gt;&gt;
 !Creating public local states in SIMILAR
 &lt;&lt;tiddler [[SMD - Public local states - Creation]]&gt;&gt;
-{{nextButton{[[Go to the next step &gt;&gt;|SMD - Influences skeleton]]}}}</pre>
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Private local states]]}}}</pre>
 </div>
-<div title="SMD - Public local states - Creation" creator="Designer" modifier="Designer" created="201401241035" modified="201402030814" changecount="44">
+<div title="SMD - Public local states - Creation" creator="Designer" modifier="Designer" created="201401241035" modified="201402171553" changecount="50">
 <pre>The constructor of a public local state has to comply with the following requirements:
 *The ''identifier of the level'' of the state has to be set;
 *The ''owner'' of the state has to be set (//public local state of agents only//);
@@ -4682,28 +4768,30 @@ The generated class for a public local state in a level identified by &quot;lvl&
 *Be named:
 **Explictly after the level they are lying in;
 **Explicitly after the category of the agent they belong to (//public local state of agents only//);
-**Intelligibly named, in order to be readable^^//''1''//^^
+**Intelligibly named, in order to be readable^^//''2''//^^
 *Define accessors to the perceptible data.
-The implementation of the generic methods (see the previous section) is either done manually (micro-kernel only approach) or with the {{{AbstractPublicLocalState}}} or {{{AbstractPublicLocalStateOfAgent}}} classes (micro-kernel with common libs).
-~~//''__1:__ For instance using &quot;PLS&quot; in replacement for &quot;Public Local State of&quot;, &quot;Env&quot; for &quot;Environment&quot; or &quot;Agt&quot; for &quot;Agent&quot;.''//~~
+The implementation of the generic methods (see the previous section) is either done manually (micro-kernel only approach) or with the {{className{[[AbstractLocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfEnvironment.html]]}}} or {{className{[[AbstractLocalStateOfAgent|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfAgent.html]]}}} classes (micro-kernel with common libs).
+~~//''__2:__ For instance using &quot;PLS&quot; in replacement for &quot;Public Local State of&quot;, &quot;Env&quot; for &quot;Environment&quot; or &quot;Agt&quot; for &quot;Agent&quot;.''//~~
 
 +++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Example of a public local state of the environment&lt;/span&gt;]
 {{exsection{
+[&gt;img[images/simulationModel/highLevel/publicLocalStateTree1.png]]
 In this example, we illustrate the creation of the ''public local state'' of the environment in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
 *The ambient temperature
 *The ambient humidity level
 It also defines a &quot;grid&quot; topology, where the public local state of the agents of that level are put.
 
-The created state is named {{{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{{fr.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
+The created state is named {{className{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
+{{clear{}}}
 !Code
-This model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]].
-*Implementation of the public local state with the micro-kernel only; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+If the model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the environment can be implemented as the following classes:
+*As {{className{PLSEnvInSavannahLevel}}} with the micro-kernel only approach; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/PLSEnvInSavannahLevel.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/PLSEnvInSavannahLevel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===
 
-*Implementation of the public local state with the micro-kernel and the common libs; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*As {{className{PLSEnvInSavannahLevel2}}} with the micro-kernel with common libs approach;  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/PLSEnvInSavannahLevel2.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/PLSEnvInSavannahLevel2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
@@ -4715,19 +4803,21 @@ The sources of this class are also available in a [[stand alone file|./files/sim
 
 +++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Example of a public local state of an agent&lt;/span&gt;]
 {{exsection{
+[&gt;img[images/simulationModel/highLevel/publicLocalStateTree2.png]]
 In this example, we illustrate the creation of the ''public local state'' of an agent from the category &quot;Lion&quot; in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
 *The coordinates of the lion in the environment;
 *The age of the lion.
 The created state is named {{{AgtLionPLSInSavannahLevel}}}^^//''3''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{{fr.lgi2a.wildlifesimulation.model.agents.lion.savannah}}} package.
+{{clear{}}}
 !Code
-This model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]].
-*Implementation of the public local state with the micro-kernel only; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+If this model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the &quot;Lion&quot; agent in the &quot;Savannah&quot; level can be implemented as the following classes:
+*As {{className{AgtLionPLSInSavannahLevel}}} with the micro-kernel only approach; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/AgtLionPLSInSavannahLevel.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/AgtLionPLSInSavannahLevel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===
 
-*Implementation of the public local state with the micro-kernel and the common libs; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*As {{className{AgtLionPLSInSavannahLevel2}}} with the micro-kernel with common libs approach; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/AgtLionPLSInSavannahLevel2.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/highLevel/AgtLionPLSInSavannahLevel2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
@@ -4736,83 +4826,71 @@ The sources of this class are also available in a [[stand alone file|./files/sim
 ~~//''__3:__ &quot;PLS&quot; stands for &quot;Public Local State&quot;. The name is purposely shortened to keep readable class names.''//~~
 }}} ===</pre>
 </div>
-<div title="SMD - Public local states - Implementation" creator="Designer" modifier="Designer" created="201401240803" modified="201401241235" changecount="85">
+<div title="SMD - Public local states - Implementation" creator="Designer" modifier="Designer" created="201401240803" modified="201402171612" changecount="109">
 <pre>[&gt;img(47%,)[images/simulationModel/highLevel/environmentDesignOutline3.png]]
-In SIMILAR, any public local state is modeled as an instance of the +++^26em^*@[&lt;strong&gt;IPublicLocalState&lt;/strong&gt;]The {{{IPublicLocalState}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package. === interface. This interface defines only an access method to the identifier of the level where the state is located. The perceptible data contained in the state are not explicitly specified in the interface, since they can take very different shapes. It is up to the user to define and grant access to them in the implementation of the interface.
+In SIMILAR, a public local state of the environment is modeled as an instance of the {{className{[[ILocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface. This interface defines only an access method to the identifier of the level where the state is located. The perceptible data contained in the state are not explicitly specified in the interface, since they can take very different shapes. It is up to the user to define and grant access to them in the implementation of the interface.
 
-Each class implementing the {{{IPublicLocalState}}} interface have to define the following method:
-*Get the ''identifier of the level'' where the state is located; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-The access to the identifier of the level where the public local state lies is defined by the following method of the {{{IPublicLocalState}}} interface:
-{{{
-public LevelIdentifier getLevel( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the level for which this public local state was defined.
-
-''Returns:''
-*The identifier of the level for which this public local state was defined.
-}}}
-}}} ===  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+Each class implementing the {{className{IPublicLocalState}}} interface have to define the following method:
+*{{methodName{getLevel()}}} gets the ''identifier of the level'' where the state is located; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/ILocalState.html#getLevel()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in either:
-*Adding a field to the class having the type {{{LevelIdentifier}}};
+*Adding a field to the class having the type {{className{LevelIdentifier}}};
 *Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (i.e. {{{getLevel( )}}}).
+*Granting access to that field in the appropriate methods (i.e. {{methodName{getLevel( )}}}).
 Or:
 *Directly returning a reference to the level identifier defined in the levels identifier list.
 }}} ===
 
-{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractPublicLocalState}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
-=== providing a default implementation to this method.}}}
-@@clear:right;display:block;margin:0;padding:0;@@
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define the {{className{[[AbstractLocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfEnvironment.html]]}}} abstract class providing a default implementation to this method.}}}
+{{clear{}}}
 [&lt;img(47%,)[images/simulationModel/highLevel/agentDesignOutline3.png]]
-The public local state of the agents has to implement a more specialized interface called +++^30em^*@[&lt;strong&gt;IPublicLocalStateOfAgent&lt;/strong&gt;]The {{{IPublicLocalStateOfAgent}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package. It extends the {{{IPublicLocalState}}} interface.===, which also specifies an accessor to the owner of the state. Likely to the public state of the environment, the perceptible data contained in the local state of an agent are not explicitly specified in the interface, since they can take very different shapes. It is up to the user to define and grant access to them in the implementation of the interface.
-
-Note that from the user side, this access method is not intended for any other use than the access to the category of the agent owning the public local state. This method has also other uses that +++^31em^*@[&lt;em&gt;exceed the bounds of a simulation model&lt;/em&gt;]This method is also used in the simulation engines for optimization purposes. ===.
-
-Each class implementing the {{{IPublicLocalStateOfAgent}}} interface have to define the following methods:
-*Get the ''identifier of the level'' where the state is located (see above);
-*Get the ''owner'' of the state; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-The access to the identifier of the level where the public local state lies is defined by the following method of the {{{IPublicLocalState}}} interface:
-{{{
-public IAgent getOwner( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the owner of the public local state, //i.e.// the agent which public local state at a specific level is this public local state.
-
-This method is defined for optimization purposes, since keeping an association between public local states and agents within the simulation engine would be too memory consuming.
-
-''Returns:''
-*The owner of the public local state.
-}}}
-}}} ===  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+The public local state of the agents has to implement a more specialized interface called {{className{[[ILocalStateOfAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html]]}}}. This interface specifies:
+*an accessor to the level of the state;
+*an accessor to the category of the agent owning the state;
+*an accessor to the agent owning of the state^^''//1//''^^;
+*a method checking if an agent is the owner of the state.
+Likely to the public state of the environment, the perceptible data contained in the local state of an agent are not explicitly specified in the interface, since they can take very different shapes. It is up to the user to define and grant access to them in the implementation of the interface.
+{{clear{}}}
+Each class implementing the {{className{[[ILocalStateOfAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html]]}}} interface have to define the following methods:
+*{{methodName{getLevel()}}} gets the ''identifier of the level'' where the state is located (see above);
+*{{methodName{getCategory( )}}} gets the ''category of the owner'' of this state; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent.html#getCategoryOfAgent()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in:
-*Adding a field to the class having the type {{{IAgent}}};
-*Setting its initial value in the constructor of the class;
-*Granting access to that field in the appropriate methods (i.e. {{{getOwner( )}}}).
+*Getting the agent owning of the state (i.e. {{methodName{getOwner( )}}});
+*Returning the category of that agent (i.e. {{methodName{getCategory( )}}}).
 }}} ===
 
-{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define an +++^34em^*@[&lt;strong&gt;abstract class&lt;/strong&gt;]@@font-weight:normal;The {{{AbstractPublicLocalStateOfAgent}}} abstract class of the {{{fr.lgi2a.similar.microkernel.libs.abstractimplementation}}} package.@@
-=== providing a default implementation to these methods.}}}</pre>
+*{{methodName{getOwner()}}} gets the agent ''owning'' the state; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html#getOwner()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{className{[[IAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (i.e. {{methodName{getOwner( )}}}).
+}}} ===
+
+*{{methodName{isOwnedBy(...)}}} determines if an agent is the owner of the state or not; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent.html#isOwnedBy(fr.lgi2a.similar.microkernel.agents.IAgent)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method usually consists in:
+*Comparing the argument of the method and the value returned by the {{methodName{getOwner()}}} method.
+}}} ===
+
+~~//''__1:__ The access to the agent owning the stateis only used in the simulation engines for optimization purposes.''//~~
+
+{{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define the {{className{[[AbstractLocalStateOfAgent|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfAgent.html]]}}} abstract class providing a default implementation to these methods.}}}</pre>
 </div>
-<div title="SMD - Public local states - Structure" creator="Designer" modifier="Designer" created="201401231612" modified="201401241012" changecount="56">
+<div title="SMD - Public local states - Structure" creator="Designer" modifier="Designer" created="201401231612" modified="201402171610" changecount="60">
 <pre>In SIMILAR, we distinguish the ''public local state'' of the agents and of the environment. This distinction is made because during its behavior, an agent might want to perceive only the public local state of agents from a specific category. This implies that the owner of the public local state of an agent can be known.
 [&gt;img(45%,)[images/simulationModel/highLevel/publicLocalStateOutline1.png]]
 The ''public local state'' of an agent in a level is the sum of the following elements:
 *The ''identifier of the level'' where it lies;
 *The ''owner'' of the state, //i.e.// the agent it belongs to;
 *The ''perceptible data'' about the agent in that level.
-@@clear:right;display:block;margin:0;padding:0;@@
+{{clearright{}}}
 [&lt;img(45%,)[images/simulationModel/highLevel/publicLocalStateOutline2.png]]
 The ''public local state'' of the environment in a level is the sum of the following elements:
 *The ''identifier of the level'' where it lies;
 *The ''perceptible data'' about the environment in that level.
-@@clear:left;display:block;margin:0;padding:0;@@
+{{clearright{}}}
 Note that the perceptible data about the environment contain ''&quot;regular&quot; perceptible data'' (//e.g.// an ambient temperature) and ''topology-related data''. The topology related data can take different shapes, but share the same principle: they offer a data structure facilitating the access to the public local state of all (or a subset of) the agents lying in the level.
 
 +++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Topology example: an agent grid&lt;/span&gt;]
@@ -4902,101 +4980,14 @@ public class ExampleTimeConvertor {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201401240831" changecount="60">
-<pre>In SIMILAR, the notion of time model is reified with the +++^24em^*@[&lt;strong&gt;ITimeModel&lt;/strong&gt;]
-The {{{ITimeModel}}} interface is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== interface and the +++^24em^*@[&lt;strong&gt;SimulationTimeStamp&lt;/strong&gt;]
-The {{{SimulationTimeStamp}}} class is located in the {{{fr.lgi2a.similar.microkernel}}} package.
-=== class. The main role of the modeler is to provide an implementation to the methods defined in the {{{ITimeModel}}} interface.
+<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201402171457" changecount="75">
+<pre>In SIMILAR, the notion of time model is reified with the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface and the {{className{[[SimulationTimeStamp|../api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class. The main role of the modeler is to provide an implementation to the methods defined in the {{className{ITimeModel}}} interface.
 [img(48%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(48%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
-
-In SIMILAR, ''time stamps'' are instances of the {{{SimulationTimeStamp}}} class. They are characterized by:
-*An ''identifier'' modeled as a {{{long}}} number. This value is the one used to order the time stamps; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-The access to the ''identifier'' of a ''time stamp'' is defined by the following methods of the {{{SimulationTimeStamp}}} class:
-*''Getting'' the identifier of a time stamp; +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-In SIMILAR, the access to a ''identifier'' of a time stamp is made using the following method :
-{{{
-public long getIdentifier( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the unique identifier of this time stamp.
-
-''Returns:''
-*The unique identifier of this time stamp.
-}}}
-}}} ===
-
-*''Setting'' the identifier of a time stamp. +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsubsection{
-Time stamps are read-only values. Therefore, the modification of the identifier of a time stamp can only be achieved by creating a new instance, using the constructor.
-}}} ===
-
-}}} ===
-
-*A ''comparison criterion'' telling if a time stamp is greater, equal or lesser than another time stamp;  +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-In SIMILAR, the comparison of two time stamps relies on the method defined in the {{{Comparable}}} interface:
-{{{
-public int compareTo( SimulationTimeStamp otherTimeStamp );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Compares the identifier of this time stamp to the identifier of another time stamp.
-
-''Parameters:''
-*''Parameter (//otherTimeStamp//):'' The other time stamp used in the comparison.
-''Returns:''
-*The difference between the identifier of this time stamp and the identifier of the parameter:
-**{{{0}}} if the identifiers are identical
-**a negative value if the identifier of this time stamp is lesser than the identifier of the time stamp of the parameter
-**a positive value if the identifier of this time stamp is greater than the identifier of the time stamp of the parameter
-*If the difference goes out of the bounds of the {{{Integer}}} type, the value is either set to {{{Integer#MAX_VALUE}}} or to {{{@link Integer#MIN_VALUE}}}.
-''Throws:''
-*''IllegalArgumentException:'' If the parameter is {{{null}}}.
-}}}
-}}} ===
-
-*A ''constructor'' defining its identifier. +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-The constructor of the {{{SimulationTimeStamp}}} has the following constructor:
-{{{
-public SimulationTimeStamp( long identifier );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Builds a time stamp having a specific identifier.
-
-''Parameters:''
-*''Parameter (//identifier//):'' The identifier of the time stamp.
-}}}
-}}} ===
-
-In SIMILAR, ''time models'' are instances of the {{{ITimeModel}}} interface. They are characterized by:
-*A method computing the ''successor'' of a time stamp;  +++?*[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-In SIMILAR, the computation of the ''successor of a time stamp'' is made using the following method :
-{{{
-public SimulationTimeStamp getNextTime( 
-	SimulationTimeStamp currentTime 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the time stamp following a specific time stamp in this model.
-
-Note: for simulation consistency reasons, this method has to be deterministic: calling twice this method with the same parameter has to produce the same output.
-
-''Parameters:''
-*''Parameter (//currentTime//):'' The time stamp for which this method computes a successor.
-''Returns:''
-*The time stamp following the {{{currentTime}}} time stamp.
-}}}
-}}} === +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{clear{}}}
+In SIMILAR, ''time models'' are instances of the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface. They are characterized by the following methods:
+*{{methodName{getNextTime(...)}}} computes the ''successor'' of a time stamp;  &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt; +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-For simulation consistency reasons, the {{{getNextTime(...)}}} method has to be deterministic: calling twice this method with the same parameter has to produce the same output.
+For simulation consistency reasons, the {{methodName{getNextTime(...)}}} method has to be deterministic: calling twice this method with the same parameter has to produce the same output.
 
 This method consists in determining the identifier of the time stamp succeeding the time stamp in the parameters. Once it is done, then the method returns a new time stamp having that identifier.
 }}} === +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
@@ -5012,25 +5003,23 @@ public Period5TimeModel implements ITimeModel {
 	public SimulationTimeStamp getNextTime( 
 		SimulationTimeStamp currentTime 
 	) {
-		long currentId = currentTime.getIdentifier( );
-		return new SimulationTimeStamp( currentId + this.period );
+		return new SimulationTimeStamp( currentTime, this.period );
 	}
 }
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Time model - Level" creator="Designer" modifier="Designer" created="201401231538" modified="201401231546" changecount="4">
+<div title="SMD - Time model - Level" creator="Designer" modifier="Designer" created="201401231538" modified="201402171457" changecount="7">
 <pre>[&gt;img(50%,)[images/simulationModel/highLevel/levelDesignOutline3.png]]
-In SIMILAR, each level has to define a ''time model''. For this purpose, the {{{ILevel}}} interface extends the {{{ITimeModel}}} interface. Therefore, each instance of a level has to define the successor computation method, using the instructions provided in the previous section.
+In SIMILAR, each level has to define a ''time model''. For this purpose, the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface extends the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface. Therefore, each instance of a level has to define the successor computation method, using the instructions provided in the previous section.
 
-This step of the design methodology consists in providing the operational code of the {{{getNextTime(...)}}} method of all the levels that were identified so far.
+This step of the design methodology consists in providing the operational code of the {{methodName{getNextTime(...)}}} method of all the levels that were identified so far.
 
 A second part to this step related to the time model is necessary for some simulation. This case is described in the next section.
-
-
+{{clear{}}}
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Level implementation example&lt;/span&gt;]
 {{exsection {
-This section illustrates the specification of the time model in the context of the definition of a level declared into the {{{CityLevel}}} class.
+This section illustrates the specification of the time model in the context of the definition of a level declared into the {{className{CityLevel}}} class.
 
 In this example, the time model uses a period of 5 units.
 !Code
@@ -5057,11 +5046,12 @@ public CityLevel implements ILevel {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Time model - Structure" creator="Designer" modifier="Designer" created="201401231332" modified="201401231402" changecount="6">
+<div title="SMD - Time model - Structure" creator="Designer" modifier="Designer" created="201401231332" modified="201402171456" changecount="7">
 <pre>[&gt;img(50%,)[images/simulationModel/highLevel/timeModelStructure.png]]
 To preserve the freedom of defining custom time models, SIMILAR does not impose a specific method to identify the time stamps: a time model is the sum of the following elements^^''1''^^:
 *An initial ''time stamp'';
 *A method identifying the successor of a ''time stamp'';
+{{clear{}}}
 \(_{\underline{1:}\text{ See the reference papers on SIMILAR and IRM4MLS for the full description of these elements.}}\)</pre>
 </div>
 <div title="SMD - Tools preparation" creator="Designer" modifier="Designer" created="201401151002" modified="201402051354" changecount="13">
@@ -5100,7 +5090,7 @@ This example is also available in a [[stand alone file|./files/simulationModel/p
 The parameter classes are used only in the initialization process of the simulation. Since talking about simulation initialization is premature at this step of the methodology, we defer the description of the usage of this class to a [[later step of the methodology|SMD - Initial state]].
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - High level specifications]]}}}</pre>
 </div>
-<div title="SMD - Tools preparation - Random" creator="Designer" modifier="Designer" created="201401151005" modified="201402051354" changecount="29">
+<div title="SMD - Tools preparation - Random" creator="Designer" modifier="Designer" created="201401151005" modified="201402171041" changecount="31">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Generation of random values}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Tools preparation]]  |  [[next step &gt;&gt;|SMD - Tools preparation - Parameters]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -5109,16 +5099,16 @@ Using a set of parameters (including the parameters of the random values generat
 ===. Thus users should have control over the way random values are generated.
 
 The first tool used in a simulation is a random number generator. Since we do not want to depend on a specific implementation of the generator, the following classes have to be included in the project:
-*The {{{IRandomValuesGenerator}}} interface, containing the signature of the random value generation methods (usually one per type of value);
-*Implementations of the {{{IRandomValuesGenerator}}} interface, modeling various values generation strategies;
-*The {{{RandomValueFactory}}} class, embedding one value generation strategy. The generation of random value within the simulation has to be made using the static methods defined in that class.
+*The {{className{IRandomValuesGenerator}}} interface, containing the signature of the random value generation methods (usually one per type of value);
+*Implementations of the {{className{IRandomValuesGenerator}}} interface, modeling various values generation strategies;
+*The {{className{RandomValueFactory}}} class, embedding one value generation strategy. The generation of random value within the simulation has to be made using the static methods defined in that class.
 These classes are usually put in the ''&quot;tools&quot;'' directory of the package hierarchy.
 !!Signature of the random values generation methods
 There is no specific constraint on the declaration of this interface. It can define as much methods as necessary.
 
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Signature example&lt;/span&gt;]
 {{exsection {
-This example illustrates the implementation of the {{{IRandomValuesGenerator}}} interface where two generation methods are defined (one for {{{double}}} values, the other for {{{int}}} values).
+This example illustrates the implementation of the {{className{IRandomValuesGenerator}}} interface where two generation methods are defined (one for {{{double}}} values, the other for {{{int}}} values).
 
 This example is also available in a [[stand alone file|./files/simulationModel/preparation/IRandomValuesGenerator.java]].
 !Code
@@ -5133,7 +5123,7 @@ Using the same sequence of method calls in the heuristic should produce the same
 
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Heuristic example&lt;/span&gt;]
 {{exsection {
-This example illustrates the instanciation of the {{{IRandomValuesGenerator}}} interface described in the previous example. This instanciation is based on the {{{java.util.Random}}} class\(^1\).
+This example illustrates the instanciation of the {{className{IRandomValuesGenerator}}} interface described in the previous example. This instanciation is based on the {{className{java.util.Random}}} class\(^1\).
 
 This example is also available in a [[stand alone file|./files/simulationModel/preparation/JavaRandomBasedValuesGenerator.java]].
 !Code
@@ -5145,7 +5135,7 @@ The two previous classes can be used to specify a random value generation heuris
 
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Factory example&lt;/span&gt;]
 {{exsection {
-This example illustrates the implementation of the {{{RandomValueFactory}}} random number values factory used in the whole simulation. This implementation uses the java-based generation strategy defined in the examples above.
+This example illustrates the implementation of the {{className{RandomValueFactory}}} random number values factory used in the whole simulation. This implementation uses the java-based generation strategy defined in the examples above.
 
 This example is also available in a [[stand alone file|./files/simulationModel/preparation/RandomValueFactory.java]].
 !Code
@@ -6270,7 +6260,7 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201401240819" tags="CSS excludeLists" changecount="11">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402171604" tags="CSS excludeLists" changecount="21">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
@@ -6278,11 +6268,67 @@ span.center.caption {
  ******************************************************** */
 /*}}}*/
 /*{{{*/
+/* Image flush command */
+.clear {
+	display:block;
+	clear:both;
+	margin-bottom:-1em;
+}
+.clearright {
+	display:block;
+	clear:right;
+	margin-bottom:-1em;
+}
+.clearleft {
+	display:block;
+	clear:right;
+	margin-bottom:-1em;
+}
+/*}}}*/
+/*{{{*/
 /* alignment commands */
 
 .center {
 	display:block;
 	text-align:center;
+}
+/*}}}*/
+/*{{{*/
+/* figure related commands */
+.caption{
+	display:block;
+	text-align:center;
+	font-family: Impact;
+	font-style: italic;
+	font-size: 130%;
+}
+/*}}}*/
+/*{{{*/
+/* Java classes related commands */
+.className {
+	font-family: cursive;
+	font-weight: bold;
+}
+.methodName {
+	font-family: cursive;
+	font-weight: bold;
+	font-style: italic;
+}
+.fieldName {
+	font-family: cursive;
+	font-weight: bold;
+}
+.argumentName {
+	font-family: cursive;
+	font-weight: bold;
+}
+.packageName {
+	font-family: cursive;
+	font-style: italic;
+	font-weight: bold;
+}
+.packageName:before, .packageName:after, .methodName:before, .methodName:after {
+	content: '&quot;';
 }
 /*}}}*/
 /*{{{*/

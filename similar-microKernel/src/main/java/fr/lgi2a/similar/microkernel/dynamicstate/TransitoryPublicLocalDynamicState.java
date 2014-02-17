@@ -158,6 +158,26 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	}
 	
 	/**
+	 * Builds a transitory public local dynamic state modeling the state of the level for a time <i>t</i> between the time stamp of 
+	 * the last consistent dynamic state, and the time stamp of the next consistent dynamic state.
+	 * <p>
+	 * 	This constructor assumes that the value of the upper bound of the transitory period is not defined yet, and will be set later by
+	 * 	the simulation engine. It therefore provides a default value to that time stamp (where the identifier is the maximal one).
+	 * </p>
+	 * @param lastConsistentDynamicState The last consistent dynamic state preceding this transitory dynamic state.
+	 * If &delta;(]t, t+dt<sub>l</sub>[, l) is this transitory state, then this field models &delta;(t, l)
+	 * @throws IllegalArgumentException If an argument of this constructor is <code>null</code>.
+	 */
+	public TransitoryPublicLocalDynamicState( 
+			ConsistentPublicLocalDynamicState lastConsistentDynamicState
+	) {
+		this(
+			lastConsistentDynamicState,
+			new SimulationTimeStamp( Long.MAX_VALUE )
+		);
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

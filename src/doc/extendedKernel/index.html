@@ -3194,7 +3194,7 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201311260931" tags="CSS excludeLists" changecount="9">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402171040" tags="CSS excludeLists" changecount="10">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
@@ -3210,7 +3210,57 @@ span.center.caption {
 }
 /*}}}*/
 /*{{{*/
+/* figure related commands */
+.caption{
+	display:block;
+	text-align:center;
+	font-family: Impact;
+	font-style: italic;
+	font-size: 130%;
+}
+/*}}}*/
+/*{{{*/
+/* Java classes related commands */
+.className {
+	font-family: cursive;
+	font-weight: bold;
+}
+.methodName {
+	font-family: cursive;
+	font-weight: bold;
+	font-style: italic;
+}
+.fieldName {
+	font-family: cursive;
+	font-weight: bold;
+}
+.argumentName {
+	font-family: cursive;
+	font-weight: bold;
+}
+.packageName {
+	font-family: cursive;
+	font-style: italic;
+	font-weight: bold;
+}
+.packageName:before, .packageName:after, .methodName:before, .methodName:after {
+	content: '&quot;';
+}
+/*}}}*/
+/*{{{*/
 /* Block putting a big emphasis on text. */
+
+.focusemphasisblock{
+	display:block;
+	border:1px solid #008000;
+	background-color: #DEFEDE;
+	padding: 1.5em;
+	font-weight: bold;
+	color: #008000;
+}
+/*}}}*/
+/*{{{*/
+/* Block putting a strong emphasis on text. */
 
 .bigemphasisblock {
 	display:block;

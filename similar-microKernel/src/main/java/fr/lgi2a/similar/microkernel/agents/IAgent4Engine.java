@@ -74,7 +74,7 @@ public interface IAgent4Engine extends IAgent {
 	 * @param publicLocalState The public local state of the agent in that level.
 	 * @param privateLocalState The private local state of the agent in that level.
 	 */
-	public void includeNewLevel( 
+	void includeNewLevel( 
 			LevelIdentifier levelIdentifier, 
 			ILocalStateOfAgent publicLocalState,
 			ILocalStateOfAgent privateLocalState 

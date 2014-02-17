@@ -2847,59 +2847,77 @@ enables 'one tiddler at a time' display for all users //other than// &quot;~Some
 <div title="SiteTitleText" creator="Designer" modifier="Designer" created="201311151320" tags="system excludeLists" changecount="1">
 <pre>Similar API suite</pre>
 </div>
-<div title="Structure - Concepts mapping" creator="Designer" modifier="Designer" created="201311261612" modified="201401071038" changecount="9">
+<div title="Structure - Concepts mapping" creator="Designer" modifier="Designer" created="201311261612" modified="201402170942" changecount="18">
 <pre>The SIMILAR API suite was designed to provide a direct ''bijection between the theoretical concepts'' developed in SIMILAR ''and their implementation''. This bijection facilitates the comprehension of the code and embodies the proof that the benefits of the SIMILAR meta-model are not purely theoretical.
 
 The following arrays describe the correspondence between the theoretical concepts of SIMILAR and their implementation. Note that this list is not exhaustive and focuses on the core concepts of SIMILAR. See the documentation of the various classes of the micro-kernel and extended-kernel to have a better insight on the correspondance between the theory and this implementation.
-!!Level-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Level |Instances of the {{{ILevel}}} interface. |
-|Perception relation graph of the simulation |Spread among the instances of the {{{ILevel}}} interface of the simulation. The out neighborhood of the perception relation graph is returned by a call to the {{{getPerceptibleLevels()}}} method of the {{{ILevel}}} interface. |
-|Influence relation graph of the simulation |Spread among the instances of the {{{ILevel}}} interface of the simulation. The out neighborhood of the influence relation graph is returned by a call to the {{{getInfluenceableLevels()}}} method of the ILevel interface. |
-|Public local dynamic state of the simulation |Instances of the {{{IDynamicStateMap}}} interface. |
-|Public local dynamic state of a level |Instances of the {{{IPublicLocalDynamicState}}} interface. |
-|Consistent dynamic state of a level |Instances of the {{{ConsistentPublicLocalDynamicState}}} class. |
-|Transitory dynamic state of a level |Instances of the {{{TransitoryPublicLocalDynamicState}}} class. |
-|Reaction process of a level |Implementation of the {{{makeRegularReaction(...)}}} and {{{makeSystemReaction(...)}}} methods of the {{{ILevel}}} interface. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (levels) |c
-!!Environment-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Environment |Instances of the {{{IEnvironment}}} interface. |
-|Public local state of the environment |Instances of the {{{IPublicLocalState}}} interface. |
-|Private local state of the environment |Fields of the implementation of the {{{IEnvironment}}} interface. |
-|Natural action process of the environment from a level. |Implementation of the {{{natural(...)}}} method of the {{{IEnvironment}}} interface. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (environment) |c
-!!Agent-related elements
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Agent |Instances of the {{{IAgent}}} interface. |
-|Global memory state |Instances of the {{{IGlobalMemoryState}}} interface. |
-|Public local state of an agent |Instances of the {{{IPublicLocalStateOfAgent}}} interface. |
-|Private local state of an agent |Fields of the implementation of the {{{IAgent}}} interface. |
-|Perceived data of an agent |Instances of the {{{IPerceivedDataOfAgent}}} interface. |
-|Perception process of an agent from a level |Implementation of the {{{perceive(...)}}} method of the {{{IAgent}}} interface. |
-|Memory revision process of an agent |Implementation of the {{{reviseMemory(...)}}} method of the {{{IAgent}}} interface. |
-|Decision process of an agent from a level |Implementation of the {{{decide(...)}}} method of the {{{IAgent}}} interface. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (agents) |c
-!!Influence-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|An influence produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluence}}} interface. |
-|A set of influences produced by the decisions of the agents or the natural action of the environment |Instances of the {{{IInfluenceMap}}} interface |
-|System influences (generic influences) |Instances of the {{{SystemInfluence}}} abstract class |
-|Regular influences (simulation-dependent influences) |Instances of the {{{RegularInfluence}}} abstract class |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (influences) |c
-!!Time-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Time stamp |Instances of the {{{SimulationTimeStamp}}} class |
-|Time evolution model of a level |Implementation of the {{{getNextTime(...)}}} method of the {{{ITimeModel}}} class.&lt;br/&gt; __Note:__ The {{{ILevel}}} interface extends the {{{ITimeModel}}} interface. |
-|Initial time stamp |An instance of the {{{SimulationTimeStamp}}} class defined during the construction of the simulation model. |
-|Final time stamp |The {{{currentTime}}} argument of the {{{isFinalTimeOrAfter(...)}}} method of the {{{ISimulationModel}}} class when this method returns {{{true}}}. |
-|Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (time) |c
 !!Simulation-related elements:
-|!Full name in SIMILAR |!Element in the SIMILAR API suite |
-|Simulation model |Instances of the {{{ISimulationModel}}} interface |
-|Simulation engine |Instances of the {{{ISimulationEngine}}} interface |
-|Observation probe |Instances of the {{{IProbe}}} interface |
-| |c</pre>
+&lt;&lt;tiddler [[Structure - Concepts mapping - Simulation]]&gt;&gt;
+!!Level-related elements:
+&lt;&lt;tiddler [[Structure - Concepts mapping - Level]]&gt;&gt;
+!!Environment-related elements:
+&lt;&lt;tiddler [[Structure - Concepts mapping - Environment]]&gt;&gt;
+!!Agent-related elements
+&lt;&lt;tiddler [[Structure - Concepts mapping - Agent]]&gt;&gt;
+!!Influence-related elements:
+&lt;&lt;tiddler [[Structure - Concepts mapping - Influence]]&gt;&gt;
+!!Time-related elements:
+&lt;&lt;tiddler [[Structure - Concepts mapping - Time]]&gt;&gt;</pre>
+</div>
+<div title="Structure - Concepts mapping - Agent" creator="Designer" modifier="Designer" created="201402170923" modified="201402170929" changecount="8">
+<pre>|!Name in SIMILAR |!Mapping as a class/interface |!Location in the class/interface |
+|Agent | {{className{[[IAgent4Engine|api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}} |Implemented as an instance of the interface. |
+|Global state of an agent| {{className{[[IGlobalState|api/fr/lgi2a/similar/microkernel/agents/IGlobalState.html]]}}} |Implemented as an instance of the interface. |
+|Public local state of an agent| {{className{[[ILocalStateOfAgent4Engine|api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html]]}}} |Implemented as an instance of the interface. |
+|Private local state of an agent| {{className{[[ILocalStateOfAgent4Engine|api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html]]}}} |Implemented as an instance of the interface. |
+|Perceived data of an agent| {{className{[[IPerceivedData|api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html]]}}} |Implemented as an instance of the interface. |
+|Perception process of an agent from a level | {{className{[[IAgent4Engine|api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}} |Implementation of the {{methodName{perceive(...)}}} method of the interface. |
+|Global state revision process of an agent | {{className{[[IAgent4Engine|api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}} |Implementation of the {{methodName{reviseGlobalState(...)}}} method of the interface. |
+|Decision process of an agent from a level | {{className{[[IAgent4Engine|api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}} |Implementation of the {{methodName{decide(...)}}} method of the interface. |
+{{caption{Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (agents)}}}</pre>
+</div>
+<div title="Structure - Concepts mapping - Environment" creator="Designer" modifier="Designer" created="201402170855" modified="201402170921" changecount="13">
+<pre>|!Name in SIMILAR |!Mapping as a class/interface |!Location in the class/interface |
+|Environment | {{className{[[IEnvironment4Engine|api/fr/lgi2a/similar/microkernel/environment/IEnvironment4Engine.html]]}}} |Implemented as an instance of the interface. |
+|Public local state of the environment | {{className{[[ILocalStateOfEnvironment|api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} |Implemented as an instance of the interface. |
+|Private local state of the environment | {{className{[[ILocalStateOfEnvironment|api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} |Implemented as an instance of the interface. |
+|Natural action process of the environment from a level. | {{className{[[IEnvironment4Engine|api/fr/lgi2a/similar/microkernel/environment/IEnvironment4Engine.html]]}}} |Implementation of the {{methodName{natural(...)}}} method of the interface. |
+{{caption{Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (environment)}}}</pre>
+</div>
+<div title="Structure - Concepts mapping - Influence" creator="Designer" modifier="Designer" created="201402170930" modified="201402170933" changecount="6">
+<pre>|!Name in SIMILAR |!Mapping as a class/interface |!Location in the class/interface |
+|An influence produced by the decisions of the agents or the natural action of the environment | {{className{[[IInfluence|api/fr/lgi2a/similar/microkernel/influences/IInfluence.html]]}}} |Implemented as an instance of the interface. |
+|A set of influences produced by the decisions of the agents or the natural action of the environment | {{className{[[InfluencesMap|api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html]]}}} |Implemented as an instance of the class. |
+|System influences (generic influences) | {{className{[[SystemInfluence|api/fr/lgi2a/similar/microkernel/influences/SystemInfluence.html]]}}} |Implemented as sub-classes of the interface. |
+|Regular influences (simulation-dependent influences) | {{className{[[RegularInfluence|api/fr/lgi2a/similar/microkernel/influences/RegularInfluence.html]]}}} |Implemented as sub-classes of the interface. |
+{{caption{Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (influences)}}}</pre>
+</div>
+<div title="Structure - Concepts mapping - Level" creator="Designer" modifier="Designer" created="201402170836" modified="201402170919" changecount="37">
+<pre>|!Name in SIMILAR |!Mapping as a class/interface |!Location in the class/interface |
+|Level | {{className{[[ILevel|api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} |Implemented as an instance of the interface. |
+|Perception relation graph of the simulation | {{className{[[ILevel|api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} |The out neighborhood of a level in the perception relation graph is returned by a call to the {{methodName{getPerceptibleLevels()}}} method of the interface. |
+|Influence relation graph of the simulation | {{className{[[ILevel|api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} |The out neighborhood of a level in the influence relation graph is returned by a call to the {{methodName{getInfluenceableLevels()}}} method of the interface. |
+|Public local dynamic state of the simulation | {{className{[[IPublicDynamicStateMap|api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html]]}}} |Implemented as an instance of the interface. |
+|Public local dynamic state of a level | {{className{[[IPublicLocalDynamicState|api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicLocalDynamicState.html]]}}} |Implemented as an instance of the interface. |
+|Consistent dynamic state of a level | {{className{[[ConsistentPublicLocalDynamicState|api/fr/lgi2a/similar/microkernel/dynamicstate/ConsistentPublicLocalDynamicState.html]]}}} |Implemented as an instance of the class. |
+|Transitory dynamic state of a level | {{className{[[TransitoryPublicLocalDynamicState|api/fr/lgi2a/similar/microkernel/dynamicstate/TransitoryPublicLocalDynamicState.html]]}}} |Implemented as an instance of the class. |
+|Reaction process of a level | {{className{[[ILevel|api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} |Implementation of the {{methodName{makeRegularReaction(...)}}} and {{methodName{makeSystemReaction(...)}}} methods of the interface. |
+{{caption{Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (levels)}}}</pre>
+</div>
+<div title="Structure - Concepts mapping - Simulation" creator="Designer" modifier="Designer" created="201402170942" modified="201402170946" changecount="6">
+<pre>|!Name in SIMILAR |!Mapping as a class/interface |!Location in the class/interface |
+|A model of a simulation | {{className{[[ISimulationModel|api/fr/lgi2a/similar/microkernel/ISimulationModel.html]]}}} |Implemented as a sub-class of this interface. |
+|An engine running a simulation | {{className{[[ISimulationEngine|api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} |Implemented as a sub-class of this interface. |
+|A probe observing the execution of a simulation | {{className{[[IProbe|api/fr/lgi2a/similar/microkernel/IProbe.html]]}}} |Implemented as a sub-class of this interface. |
+{{caption{Link between the general decomposition of a simulation and the classes of the API suite.}}}</pre>
+</div>
+<div title="Structure - Concepts mapping - Time" creator="Designer" modifier="Designer" created="201402170934" modified="201402170941" changecount="7">
+<pre>|!Name in SIMILAR |!Mapping as a class/interface |!Location in the class/interface |
+|Time stamp | {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} |Implemented as an instance of the class. |
+|Time evolution model of a level | {{className{[[ITimeModel|api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} |Implemented as the {{methodName{getNextTime(...)}}} method in a sub-class of this interface. Note that the {{className{[[ILevel|api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface extends this interface. |
+|Initial time stamp | {{className{[[ISimulationModel|api/fr/lgi2a/similar/microkernel/ISimulationModel.html]]}}} |Implemented as the return value of the {{methodName{getInitialTime( )}}} method of the interface. |
+|Final time stamp | {{className{[[ISimulationModel|api/fr/lgi2a/similar/microkernel/ISimulationModel.html]]}}} |Implemented as the {{argumentName{currentTime}}} parameter of the {{methodName{isFinalTimeOrAfter(...)}}} method of the interface when this method returns {{{true}}}. |
+{{caption{Link between the theory of SIMILAR and Classes/Interfaces or other software elements of the micro-kernel (time)}}}</pre>
 </div>
 <div title="Structure - Probe" creator="Designer" modifier="Designer" created="201311280726" modified="201402051426" changecount="49">
 <pre>[&gt;img(45%,)[images/similarArchitectureIllustration4.png]]
@@ -3140,7 +3158,7 @@ We do not intend to describe formally these differences in this documentation. Y
 
 &lt;html&gt;&lt;sub&gt;1: The order of this presentation is not necessarily the order of the specification.&lt;/sub&gt;&lt;/html&gt;</pre>
 </div>
-<div title="Structure - Simulation model - Reaction model" creator="Designer" modifier="Designer" created="201311261644" modified="201401150938" changecount="54">
+<div title="Structure - Simulation model - Reaction model" creator="Designer" modifier="Designer" created="201311261644" modified="201402171002" changecount="55">
 <pre>In the [[IRM4MLS|Bibliography]] and [[IRM4S|Bibliography]] approaches, the reaction is considered as domain-dependent. As a consequence, the users are doomed to manually re-write the reaction every time, even though the reaction to some specific influences remains the same no matter the simulation.
 
 In SIMILAR, we consider that a simulation has to manage two kinds of influences:
@@ -3196,9 +3214,55 @@ We consider that \(L_r\) is the set of levels that are reacting at the same time
 
 &lt;html&gt;&lt;sub&gt;1: This can happen especially when two levels are consistent at the same time stamp.&lt;/sub&gt;&lt;/html&gt;</pre>
 </div>
-<div title="Structure - Simulation model - Reaction model - System influences" creator="Designer" modifier="Designer" created="201311261734" modified="201311261821" changecount="20">
+<div title="Structure - Simulation model - Reaction model - System influences" creator="Designer" modifier="Designer" created="201311261734" modified="201402171007" changecount="31">
 <pre>In the current implementation of SIMILAR, the system influences are:
-*The //addition of an agent to the simulation//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+*The //addition of an agent to the simulation//. &lt;&lt;tiddler [[Structure - Simulation model - Reaction model - System influences - Add agent to simulation]]&gt;&gt;
+*The //removal of an agent from the simulation//. &lt;&lt;tiddler [[Structure - Simulation model - Reaction model - System influences - Remove agent from simulation]]&gt;&gt;
+*The //addition of an agent to a level//. &lt;&lt;tiddler [[Structure - Simulation model - Reaction model - System influences - Add agent to level]]&gt;&gt;
+*The //removal of an agent from a level//. &lt;&lt;tiddler [[Structure - Simulation model - Reaction model - System influences - Remove agent from level]]&gt;&gt;</pre>
+</div>
+<div title="Structure - Simulation model - Reaction model - System influences - Add agent to level" creator="Designer" modifier="Designer" created="201402171005" modified="201402171025" changecount="14">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+As its name implies, this influence requests the addition of an agent to a specific level. This influence can be used in various contexts:
+*In //the behavior of the agents//, if their decisions lead to the apparition of an agent in a level;
+*In //the initial state of the simulation//, if the agent has to appear in a level during the first reaction of that level;
+*In //a reaction//, if an agent has to be added to a level in reaction to another influence.
+!!System reaction
+The reaction to this influence consists in:
+#Adding the public local state and the private local state defined in the influence to the state of the agent;
+#Adding this new public local state of the agent to the public local dynamic state of that level.
+!!Important notices
+*The level at which the influence is aimed has to be the level where the public local state appears.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+This influence is modeled in SIMILAR as an instance of the {{className{[[SystemInfluenceAddAgentToLevel|api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceAddAgentToLevel.html]]}}} class.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In this example, we consider that:
+*There is a level which identifier is //&quot;Earth&quot;//;
+*An agent &quot;agt&quot; has to be added to the //&quot;Earth&quot;// level;
+*The //&quot;newPublicLocalState&quot;// public local state is owned by &quot;agt&quot; and is not already in the public local dynamic state of the //&quot;Earth&quot;// level.
+*The //&quot;newPrivateLocalState&quot;// private local state is owned by &quot;agt&quot;.
+
+This example illustrates the apparition in the //&quot;Earth&quot;// level of the //&quot;agt&quot;// agent, during the next reaction of the //&quot;Earth&quot;// level. Note that in this example, the values {{{transitoryStateLowerBound }}} and {{{transitoryStateUpperBound}}} specify the bounds ]t,t+dt~~l~~[ of the transitory state during which the influence was produced.
+!!Code
+{{{
+SimulationTimeStamp transitoryStateLowerBound = ...;
+SimulationTimeStamp transitoryStateUpperBound = ...;
+ILocalStateOfAgent newPublicLocalState = ...;
+ILocalStateOfAgent newPrivateLocalState = ...;
+SystemInfluenceAddAgentToLevel influence = new SystemInfluenceAddAgentToLevel(
+	transitoryStateLowerBound, 
+	transitoryStateUpperBound, 
+	newPublicLocalState, 
+	newPrivateLocalState
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="Structure - Simulation model - Reaction model - System influences - Add agent to simulation" creator="Designer" modifier="Designer" created="201402171003" modified="201402171026" changecount="9">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 As its name implies, this influence requests the addition of an agent to the simulation. This influence can be used in various contexts:
 *In //the behavior of the agents//, if their decisions lead to the creation of new agents;
@@ -3215,45 +3279,84 @@ The reaction to this influence consists in:
 *The apparition of the public local state of the agent in the other levels is delayed to their next reaction.
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceAddAgent}}} class, located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package. 
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceAddAgent( LevelIdentifier targetLevel, IAgent agent );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds an 'Add agent' system influence adding a specific agent to the simulation during the next reaction of a specific level.
-
-''Parameters:''
-*''targetLevel:'' The target level as described in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface;
-*''agent:'' The agent to add to the simulation.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the agent are {{{null}}}.
-}}} 
-}}} ===
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+This influence is modeled in SIMILAR as an instance of the {{className{[[SystemInfluenceAddAgent|api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceAddAgent.html]]}}} class. 
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
 In this example, we consider that:
 *There is a level which identifier is //&quot;Earth&quot;//;
 *An agent was created and stored in the variable named //&quot;agentToAdd&quot;//;
+*This agent owns a public and a private local state for a non-empty set of levels;
 *The agent addition influence is aimed at the //&quot;Earth&quot;// level.
 
-This example illustrates the addition of the //&quot;agentToAdd&quot;// agent to the simulation during the next reaction of the //&quot;Earth&quot;// level.
+This example illustrates the addition of the //&quot;agentToAdd&quot;// agent to the simulation during the next reaction of the //&quot;Earth&quot;// level. As a reaction to this influence, the agent will be added in all the levels where the agent owns a public and a private local state. Note that in this example, the values {{{transitoryStateLowerBound }}} and {{{transitoryStateUpperBound}}} specify the bounds ]t,t+dt~~l~~[ of the transitory state during which the influence was produced.
 !!Code
 {{{
-IAgent agentToAdd = ...;
-LevelIdentifier identifier = new LevelIdentifier( &quot;Earth&quot; );
+SimulationTimeStamp transitoryStateLowerBound = ...;
+SimulationTimeStamp transitoryStateUpperBound = ...;
+IAgent4Engine agentToAdd = ...;
+LevelIdentifier levelId = new LevelIdentifier( &quot;Earth&quot; );
 SystemInfluenceAddAgent influence = new SystemInfluenceAddAgent(
-	identifier,
+	levelId, 
+	transitoryStateLowerBound, 
+	transitoryStateUpperBound, 
 	agentToAdd
 );
 }}}
-}}} ===
-}}} ===
-
-*The //removal of an agent from the simulation//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+}}} ===</pre>
+</div>
+<div title="Structure - Simulation model - Reaction model - System influences - Remove agent from level" creator="Designer" modifier="Designer" created="201402171005" modified="201402171032" changecount="8">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+As its name implies, this influence requests the removal of an agent from a specific level. This influence can be used in various contexts:
+*In //the behavior of the agents//, if their decisions lead to the disparition of an agent from a level;
+*In //the initial state of the simulation//, if the agent has to disappear from a level during the first reaction of that level;
+*In //a reaction//, if an agent has to be removed from a level in reaction to another influence.
+!!System reaction
+The reaction to this influence consists in:
+#Removing the public local state of the agent from the public local dynamic state of that level;
+#Removing the public and private local state of the agent defined for that level from the state of the agent.
+!!Important notices
+*The level at which the influence is aimed has to be the level where the public local state lies;
+*If the agent still lies in other levels, the agent still has a behavior in those levels.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+This influence is modeled in SIMILAR as an instance of the {{className{[[SystemInfluenceRemoveAgentFromLevel|api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceRemoveAgentFromLevel.html]]}}} class.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In this example, we consider that:
+*There is a level which identifier is //&quot;Earth&quot;//;
+*An agent owns a public local state for the level //&quot;Earth&quot;//, stored in the variable named //&quot;stateToRemove&quot;//;
+*The //&quot;stateToRemove&quot;// public local state is in the public local dynamic state of the //&quot;Earth&quot;// level.
+!!Example 1
+This example illustrates the removal from the //&quot;Earth&quot;// level of the agent owning the //&quot;stateToRemove&quot;// public local state, during the next reaction of the //&quot;Earth&quot;// level.
+{{{
+SimulationTimeStamp transitoryStateLowerBound = ...;
+SimulationTimeStamp transitoryStateUpperBound = ...;
+ILocalStateOfAgent4Engine publicLocalStateOfRemovedAgent = ...;
+SystemInfluenceRemoveAgentFromLevel influence = new SystemInfluenceRemoveAgentFromLevel(
+	transitoryStateLowerBound, 
+	transitoryStateUpperBound, 
+	publicLocalStateOfRemovedAgent
+);
+}}}
+!!Example 1
+This example illustrates the removal from the //&quot;Earth&quot;// level of the agent //&quot;agtToRemove&quot;//, during the next reaction of the //&quot;Earth&quot;// level.
+{{{
+SimulationTimeStamp transitoryStateLowerBound = ...;
+SimulationTimeStamp transitoryStateUpperBound = ...;
+LevelIdentifier levelId = new LevelIdentifier( &quot;Earth&quot; );
+IAgent4Engine agtToRemove = ...;
+SystemInfluenceRemoveAgentFromLevel influence = new SystemInfluenceRemoveAgentFromLevel(
+	transitoryStateLowerBound, 
+	transitoryStateUpperBound, 
+	agtToRemove,
+	levelId
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="Structure - Simulation model - Reaction model - System influences - Remove agent from simulation" creator="Designer" modifier="Designer" created="201402171005" modified="201402171035" changecount="7">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 As its name implies, this influence requests the removal of an agent from the simulation. This influence can be used in various contexts:
 *In //the behavior of the agents//, if their decisions lead to the destruction of an existing agent;
@@ -3272,29 +3375,8 @@ The reaction to this influence consists in:
 *The disparition of the public local state of the agent in the other levels is delayed to their next reaction.
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceRemoveAgent}}} class, located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceRemoveAgent( 
-	LevelIdentifier targetLevel, 
-	IPublicLocalStateOfAgent publicLocalStateOfAgent 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds a 'Remove agent' system influence removing a specific agent from the simulation during the next reaction of a specific level.
-
-''Parameters:''
-*''targetLevel:'' The target level as described in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface;
-*''publicLocalStateOfAgent:'' A public local state of the agent to remove from the simulation.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the agent are {{{null}}}.
-}}} 
-}}} ===
-
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+This influence is modeled in SIMILAR as an instance of the {{className{[[SystemInfluenceRemoveAgent|api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceRemoveAgent.html]]}}} class.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
 In this example, we consider that:
 *There is a level which identifier is //&quot;Earth&quot;//;
@@ -3304,125 +3386,17 @@ In this example, we consider that:
 This example illustrates the removal from the simulation of the agent owning the //&quot;stateOfRemovedAgent&quot;// public local state, during the next reaction of the //&quot;Earth&quot;// level.
 !!Code
 {{{
-IPublicLocalStateOfAgent stateOfRemovedAgent = ...;
-LevelIdentifier levelIdentifier = new LevelIdentifier( &quot;Earth&quot; );
+SimulationTimeStamp transitoryStateLowerBound = ...;
+SimulationTimeStamp transitoryStateUpperBound = ...;
+LevelIdentifier levelId = new LevelIdentifier( &quot;Earth&quot; );
+ILocalStateOfAgent4Engine publicLocalStateOfRemovedAgent = ...;
 SystemInfluenceRemoveAgent influence = new SystemInfluenceRemoveAgent(
-	levelIdentifier,
-	stateOfRemovedAgent
+	levelId,
+	transitoryStateLowerBound, 
+	transitoryStateUpperBound, 
+	publicLocalStateOfRemovedAgent
 );
 }}}
-}}} ===
-}}} ===
-
-*The //addition of an agent to a level//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-As its name implies, this influence requests the addition of an agent to a specific level. This influence can be used in various contexts:
-*In //the behavior of the agents//, if their decisions lead to the apparition of an agent in a level;
-*In //the initial state of the simulation//, if the agent has to appear in a level during the first reaction of that level;
-*In //a reaction//, if an agent has to be added to a level in reaction to another influence.
-!!System reaction
-The reaction to this influence consists in:
-#Adding the public local state of the agent to the public local dynamic state of that level.
-!!Important notices
-*The level at which the influence is aimed has to be the level where the public local state appears.
-}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceAddPublicLocalStateToDynamicState}}} class, located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceAddPublicLocalStateToDynamicState( 
-	LevelIdentifier targetLevel, 
-	IPublicLocalStateOfAgent publicLocalState 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds an 'Add the public local state of an agent' system influence, adding the local state of a specific agent to the dynamic state of a specific level during the next reaction of that level.
-
-''Parameters:''
-*''targetLevel:'' The target level of the influence, as defined in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface.
-*''publicLocalState:'' The public local state to add to the public dynamic local state of the level.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the public local state are &lt;code&gt;null&lt;/code&gt;.
-}}} 
-}}} ===
-
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
-{{exsection{
-In this example, we consider that:
-*There is a level which identifier is //&quot;Earth&quot;//;
-*An agent owns a public local state for the level //&quot;Earth&quot;//, stored in the variable named //&quot;stateToAdd&quot;//;
-*The //&quot;stateToAdd&quot;// public local state is not already in the public local dynamic state of the //&quot;Earth&quot;// level.
-
-This example illustrates the apparition in the //&quot;Earth&quot;// level of the //&quot;stateToAdd&quot;// public local state of an agent, during the next reaction of the //&quot;Earth&quot;// level.
-!!Code
-{{{
-IPublicLocalStateOfAgent stateToAdd = ...;
-LevelIdentifier levelIdentifier = new LevelIdentifier ( &quot;Earth&quot; );
-SystemInfluenceAddPublicLocalStateToDynamicState influence = new SystemInfluenceAddPublicLocalStateToDynamicState(
-	levelIdentifier,
-	stateToAdd
-);
-}}}
-}}} ===
-}}} ===
-
-*The //removal of an agent from a level//. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
-{{docsection{
-As its name implies, this influence requests the removal of an agent from a specific level. This influence can be used in various contexts:
-*In //the behavior of the agents//, if their decisions lead to the disparition of an agent from a level;
-*In //the initial state of the simulation//, if the agent has to disappear from a level during the first reaction of that level;
-*In //a reaction//, if an agent has to be removed from a level in reaction to another influence.
-!!System reaction
-The reaction to this influence consists in:
-#Removing the public local state of the agent from the public local dynamic state of that level.
-!!Important notices
-*The level at which the influence is aimed has to be the level where the public local state lies;
-*If the agent still lies in other levels, the agent still has a behavior in those levels.
-}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
-{{implsection{
-This influence is modeled in SIMILAR as an instance of the {{{SystemInfluenceRemovePublicLocalStateFromDynamicState}}} class is located in the {{{fr.lgi2a.similar.microkernel.influences.system}}} package.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Constructor documentation&lt;/span&gt;]
-{{docsection{
-This influence defines a single constructor with the following signature:
-{{{
-public SystemInfluenceRemovePublicLocalStateFromDynamicState( 
-	LevelIdentifier targetLevel, 
-	IPublicLocalStateOfAgent publicLocalState 
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{Builds a 'Remove the public local state of an agent' system influence, removing the local state of a specific agent from the dynamic state of a specific level during the next reaction of that level.
-
-''Parameters:''
-*''targetLevel:'' The target level of the influence, as defined in the {{{getTargetLevel()}}} method of the {{{IInfluence}}} interface;
-*''publicLocalState:'' The public local state to remove from the public dynamic local state of the level.
-''Throws:''
-*''IllegalArgumentException:'' If the target level or the public local state are {{{null}}}.
-}}} 
-}}} ===
-
-+++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
-{{exsection{
-In this example, we consider that:
-*There is a level which identifier is //&quot;Earth&quot;//;
-*An agent owns a public local state for the level //&quot;Earth&quot;//, stored in the variable named //&quot;stateToRemove&quot;//;
-*The //&quot;stateToRemove&quot;// public local state is in the public local dynamic state of the //&quot;Earth&quot;// level.
-
-This example illustrates the disappearance from the //&quot;Earth&quot;// level of the //&quot;stateToRemove&quot;// public local state of an agent, during the next reaction of the //&quot;Earth&quot;// level.
-!!Code
-{{{
-IPublicLocalStateOfAgent stateToRemove = ...;
-LevelIdentifier levelIdentifier = new LevelIdentifier( &quot;Earth&quot; );
-SystemInfluenceRemovePublicLocalStateFromDynamicState influence = new SystemInfluenceRemovePublicLocalStateFromDynamicState(
-	levelIdentifier,
-	stateToRemove 
-);
-}}}
-}}} ===
 }}} ===</pre>
 </div>
 <div title="Structure - Simulation model - Time model" creator="Designer" modifier="Designer" created="201311270745" modified="201401061356" changecount="97">
@@ -3489,7 +3463,7 @@ In SIMILAR, these issues are dealt by two means:
 
 {{center{[img(95%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Structure - Simulation model - Time model - Time stamps model" creator="Designer" modifier="Designer" created="201311271459" modified="201401061422" changecount="53">
+<div title="Structure - Simulation model - Time model - Time stamps model" creator="Designer" modifier="Designer" created="201311271459" modified="201402171000" changecount="66">
 <pre>In multi-level simulations, levels are not necessarily moving through time synchronously: there might be a phase shift between their evolution, they can move at different paces, etc.
 
 [img(98%,)[images/multiLevelTimeModel.png]]
@@ -3529,82 +3503,24 @@ In SIMILAR, the time stamps are characterized by:
 *Time stamps are ordered using their identifiers.
 +++?[&lt;span class=&quot;docbigbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-A time stamp is an instance of the {{{SimulationTimeStamp}}} class located in the {{{fr.lgi2a.similar.microkernel}}} package.
+A time stamp is an instance of the {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class.
 !!Construction
 A time stamp can be built using three different approaches:
-#Constructing the instance using a {{{long}}} value; +++
-{{docsubsection{
-A time stamp can be created using a constructor specifying the {{{long}}} value of the time stamp:
-{{{
-public SimulationTimeStamp( long identifier );
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Builds a time stamp having a specific identifier.
-
-''Parameters:''
-*''identifier:'' The identifier of the time stamp.
-}}}
-}}}
-===
-
-#Constructing the instance as a copy of another time stamp; +++
-{{docsubsection{
-A time stamp can be created using a constructor copying the identifier of another time stamp:
-{{{
-public SimulationTimeStamp( SimulationTimeStamp toCopy );
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Builds a time stamp having a specific identifier.
-
-''Parameters:''
-*''toCopy:'' The time stamp to copy.
-''Throws:''
-*''IllegalArgumentException:'' If the argument is {{{null}}}.
-}}}
-}}}
-===
-
-#Copying an exising instance; +++
-{{docsubsection{
-A time stamp can be created by cloning another time stamp:
-{{{
-public Object clone();
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Creates a copy of this object, having the same identifier.
-
-''Returns:''
-*A copy of this object.
-}}}
-}}}
-===
-
+#Constructing the instance using a {{{long}}} value; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(long)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+#Constructing the instance as a copy of another time stamp; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+#Constructing the instance relatively to the {{fieldName{identifier}}} of another time stamp; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp, int)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
 !!Usage
 A time stamp is used in three different contexts:
-*When the identifier of the time stamp has be known; +++
+*When the identifier of the time stamp has be known; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#getIdentifier()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*When two time stamps have to be compared; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsubsection{
-The identifier of a time stamp can be accessed using the following method:
-{{{
-public long getIdentifier( );
-}}}
-{{javadoctitle{javadoc}}}
-{{javadocsection{Gets the unique identifier of this time stamp.
-
-''Returns:''
-*The unique identifier of this time stamp.
-}}}
+The {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class implements the {{className{Comparable}}} interface. Its comparison method returns the difference between the identifier of the time stamps.
 }}}
 ===
 
-*When two time stamps have to be compared; +++
+*When the evenness of two time stamps has to be checked. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsubsection{
-The {{{SimulationTimeStamp}}} class implements the {{{Comparable}}} interface. Its comparison method returns the difference between the identifier of the time stamps.
-}}}
-===
-
-*When the evenness of two time stamps has to be checked. +++
-{{docsubsection{
-The {{{SimulationTimeStamp}}} class redefines the {{{equals(...)}}} and {{{hashCode()}}} methods to check the evenness of two objects.
+The {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class redefines the {{methodName{equals(...)}}} and {{methodName{hashCode()}}} methods to check the evenness of two objects.
 }}}
 ===
 
@@ -4244,7 +4160,7 @@ h3 {font-size: 14px;}
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201311291042" changecount="24">
+<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201402170842" changecount="25">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the custom 
@@ -4288,15 +4204,6 @@ ul {
 }
 /*}}}*/
 /*{{{*/
-/* Set the caption of images as bold. */
-
-span.center.caption {
-	font-family: Impact;
-	font-style: italic;
-	font-size: 130%;
-}
-/*}}}*/
-/*{{{*/
 /* Use the same style for internal and external links. */
 .externalLink {
 	font-weight: bold;
@@ -4304,7 +4211,7 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201311261443" tags="CSS excludeLists" changecount="17">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402171039" tags="CSS excludeLists" changecount="34">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
@@ -4320,7 +4227,57 @@ span.center.caption {
 }
 /*}}}*/
 /*{{{*/
+/* figure related commands */
+.caption{
+	display:block;
+	text-align:center;
+	font-family: Impact;
+	font-style: italic;
+	font-size: 130%;
+}
+/*}}}*/
+/*{{{*/
+/* Java classes related commands */
+.className {
+	font-family: cursive;
+	font-weight: bold;
+}
+.methodName {
+	font-family: cursive;
+	font-weight: bold;
+	font-style: italic;
+}
+.fieldName {
+	font-family: cursive;
+	font-weight: bold;
+}
+.argumentName {
+	font-family: cursive;
+	font-weight: bold;
+}
+.packageName {
+	font-family: cursive;
+	font-style: italic;
+	font-weight: bold;
+}
+.packageName:before, .packageName:after, .methodName:before, .methodName:after {
+	content: '&quot;';
+}
+/*}}}*/
+/*{{{*/
 /* Block putting a big emphasis on text. */
+
+.focusemphasisblock{
+	display:block;
+	border:1px solid #008000;
+	background-color: #DEFEDE;
+	padding: 1.5em;
+	font-weight: bold;
+	color: #008000;
+}
+/*}}}*/
+/*{{{*/
+/* Block putting a strong emphasis on text. */
 
 .bigemphasisblock {
 	display:block;

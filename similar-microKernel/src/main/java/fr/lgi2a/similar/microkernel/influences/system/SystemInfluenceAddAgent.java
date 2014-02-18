@@ -60,7 +60,7 @@ import fr.lgi2a.similar.microkernel.influences.SystemInfluence;
  * 	The agent has to be fully initialized before being added using this influence. 
  * 	This initialization has to include calls to the 
  * 	{@link IAgent4Engine#includeNewLevel(LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)}
- * 	to specify where the agent initially lies.
+ * 	method to specify where the agent initially lies.
  * </p>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
@@ -81,7 +81,10 @@ public final class SystemInfluenceAddAgent extends SystemInfluence {
 	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.influences.IInfluence#getTargetLevel()}
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
-	 * @param agent The agent to add to the simulation.
+	 * @param agent The agent to add to the simulation. The agent has to be fully initialized before being added using this influence. 
+	 * This initialization has to include calls to the 
+	 * {@link IAgent4Engine#includeNewLevel(LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)} 
+	 * method to specify where the agent initially lies.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
 	public SystemInfluenceAddAgent( 

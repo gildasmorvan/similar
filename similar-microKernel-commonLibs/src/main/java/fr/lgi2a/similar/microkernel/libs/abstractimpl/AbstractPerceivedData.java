@@ -52,7 +52,7 @@ import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
 
 /**
  * An abstract implementation of the {@link IPerceivedData} interface, providing a 
- * default behavior to the method of the interface.
+ * default behavior to the methods of the interface.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public class AbstractPerceivedData implements IPerceivedData {

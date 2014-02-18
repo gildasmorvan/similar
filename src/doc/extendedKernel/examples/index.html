@@ -3234,81 +3234,272 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402171040" tags="CSS excludeLists" changecount="11">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402180948" tags="CSS excludeLists" changecount="12">
 <pre>/*{{{*/
 /* ********************************************************
- * This tiddler contains the CSS rules for the classes
- * that are used in any wiki of this documentation.
+ * This tiddler contains the CSS rules for the buttons
+ * used to expand or collapse a block, using the nested
+ * sliders plugin.
+ * It also defines the CSS rules of the expanded blocks.
+ ******************************************************** */
+/*}}}*/
+
+/*{{{*/
+/* ********************************************************
+ * Buttons common features
+ ******************************************************** */
+.docsmallbtn, .implsmallbtn, .exsmallbtn, .moresmallbtn, .implbigbtn, .docbigbtn, .exbigbtn , .morebigbtn, .doclink a, .morelink a {
+	text-indent:0;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	text-decoration:none;
+	margin-top: 1px ;
+	margin-bottom: 1px ;
+}
+.docsmallbtn:hover, .implsmallbtn.hover, .exsmallbtn:hover, .moresmallbtn:hover, .implbigbtn:hover, .docbigbtn:hover, .exbigbtn:hover, .morebigbtn:hover, .morelink a:hover, .doclink a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.docsmallbtn:active, .implsmallbtn:active, .exsmallbtn:active, .moresmallbtn:active, .implbigbtn:active, .docbigbtn:active, .exbigbtn:active, .morebigbtn:active, .morelink a:active, .doclink a:active {
+	position:relative;
+	top:1px;
+}
+/* ********************************************************
+ * Small buttons common features
+ ******************************************************** */
+.docsmallbtn, .implsmallbtn, .exsmallbtn, .moresmallbtn, .morelink a, .doclink a {
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	line-height:24px;
+	height:24px;
+	text-align:center;
+	width:120px;
+}
+/* ********************************************************
+ * Big buttons common features
+ ******************************************************** */
+.implbigbtn, .docbigbtn, .exbigbtn, .morebigbtn {
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:11px;
+	-moz-border-radius-topright:11px;
+	border-top-right-radius:11px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	height:40px;
+	line-height:40px;
+	padding-left: 2.5em;
+	width:75%;
+}
+/*}}}*/
+
+/*{{{*/
+/* ********************************************************
+ * Common features of blocks following a big or small button
+ ******************************************************** */
+.implsection, .exsection, .docsection, .docsubsection, .moresection {
+	display:block;
+	padding: 0.5em;
+	margin-top:0.25em;
+	margin-bottom:0.25em;
+}
+/*}}}*/
+
+/*{{{*/
+/* ********************************************************
+ * Implementation-related declarations
  ******************************************************** */
 /*}}}*/
 /*{{{*/
-/* alignment commands */
+/* Definition of the common features of the small 
+ * and big buttons that can be put 
+ * in a line to display the implementation */
+/* This button was generated using CSSButtonGenerator.com */
+.implsmallbtn, .implbigbtn {
+	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	box-shadow:inset 0px 1px 0px 0px #c1ed9c;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9dce2c), color-stop(1, #8cb82b) );
+	background:-moz-linear-gradient( center top, #9dce2c 5%, #8cb82b 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9dce2c', endColorstr='#8cb82b');
+	background-color:#9dce2c;
+	border:1px solid #83c41a;
+	text-shadow:1px 1px 0px #689324;
+}
+.implsmallbtn:hover, .implbigbtn:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8cb82b), color-stop(1, #9dce2c) );
+	background:-moz-linear-gradient( center top, #8cb82b 5%, #9dce2c 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8cb82b', endColorstr='#9dce2c');
+	background-color:#8cb82b;
+}
+/* Definition of the block under the button displaying the implementation */
+.implsection {
+	border:1px solid #30BF30;
+	background-color: #C3FFC3;
+}
+/* Change the color of the titles inside an implementation section. */
+.implsection h1, .implsection h2, .implsection h3, .implsection h4, .implsection h5 {
+	color: #30BF30;
+}
+/*}}}*/
 
-.center {
-	display:block;
-	text-align:center;
-}
+/*{{{*/
+/* ********************************************************
+ * Documentation-related declarations
+ ******************************************************** */
 /*}}}*/
 /*{{{*/
-/* figure related commands */
-.caption{
-	display:block;
-	text-align:center;
-	font-family: Impact;
-	font-style: italic;
-	font-size: 130%;
+/* Definition of the common features of the small 
+ * and big buttons that can be put 
+ * in a line to display the documentation */
+/* This button was generated using CSSButtonGenerator.com */
+.docsmallbtn, .docbigbtn, .doclink a {
+	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+	background-color:#79bbff;
+	border:1px solid #84bbf3;
+	text-shadow:1px 1px 0px #528ecc;
 }
-/*}}}*/
-/*{{{*/
-/* Java classes related commands */
-.className {
-	font-family: cursive;
-	font-weight: bold;
+.docsmallbtn:hover, .docbigbtn:hover, .doclink a:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+	background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+	background-color:#378de5;
 }
-.methodName {
-	font-family: cursive;
-	font-weight: bold;
-	font-style: italic;
-}
-.fieldName {
-	font-family: cursive;
-	font-weight: bold;
-}
-.argumentName {
-	font-family: cursive;
-	font-weight: bold;
-}
-.packageName {
-	font-family: cursive;
-	font-style: italic;
-	font-weight: bold;
-}
-.packageName:before, .packageName:after, .methodName:before, .methodName:after {
-	content: '&quot;';
-}
-/*}}}*/
-/*{{{*/
-/* Block putting a big emphasis on text. */
 
-.focusemphasisblock{
-	display:block;
-	border:1px solid #008000;
-	background-color: #DEFEDE;
-	padding: 1.5em;
+/* Definition of the block under the button displaying the documentation */
+.docsection {
+	border:1px solid #528fcc;
+	background-color: #d6eafc;
+}
+.docsubsection {
+	border:1px solid #528fcc;
+	background-color: #96d9f5;
+}
+/* Change the color of the titles inside a document section. */
+.docsection h1, .docsection h2, .docsection h3, .docsection h4, .docsection h5 {
+	color: #528fcc;
+}
+
+/* Definition of a title style for the javadoc */
+.javadoctitle {
+	display: block;
 	font-weight: bold;
-	color: #008000;
+	font-size:130%;
+	text-decoration: underline;
+	color: #528fcc;
+	margin-top: 1em;
+}
+
+/* Definition of a block displaying the javadoc */
+.javadocsection {
+	display: block;
+	border:1px solid #528fcc;
+	padding: 0.5em;
+	background: #FFFFFF;
+	margin-top:-1em;
+	margin-bottom:0.25em;
+	margin-left: 1em;
 }
 /*}}}*/
-/*{{{*/
-/* Block putting a strong emphasis on text. */
 
-.bigemphasisblock {
-	display:block;
-	border:1px solid #A60000;
-	background-color: #FF7373;
-	padding: 1.5em;
-	font-weight: bold;
-	color: #FEFEFE;
+
+/*{{{*/
+/* ********************************************************
+ * Example-related declarations
+ ******************************************************** */
+/*}}}*/
+/*{{{*/
+/* Definition of the common features of the small 
+ * and big buttons that can be put 
+ * in a line to display an example */
+/* This button was generated using CSSButtonGenerator.com */
+.exsmallbtn, .exbigbtn {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fed897;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fed897;
+	box-shadow:inset 0px 1px 0px 0px #fed897;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f6b33d), color-stop(1, #d29105) );
+	background:-moz-linear-gradient( center top, #f6b33d 5%, #d29105 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6b33d', endColorstr='#d29105');
+	background-color:#f6b33d;
+	border:1px solid #eda933;
+	text-shadow:1px 1px 0px #cd8a15;
+}
+.exsmallbtn:hover, .exbigbtn:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d29105), color-stop(1, #f6b33d) );
+	background:-moz-linear-gradient( center top, #d29105 5%, #f6b33d 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d29105', endColorstr='#f6b33d');
+	background-color:#d29105;
+}
+/* Definition of the block under the button displaying the example */
+.exsection {
+	border:1px solid #eda933;
+	background-color: #fae4bd;
+}
+/* Change the color of the titles inside an example section. */
+.exsection h1, .exsection h2, .exsection h3, .exsection h4, .exsection h5 {
+	color: #eda933;
+}
+/*}}}*/
+
+/*{{{*/
+/* ********************************************************
+ * Read more-related declarations
+ ******************************************************** */
+/*}}}*/
+/*{{{*/
+/* Definition of the common features of the small 
+ * and big buttons that can be put 
+ * in a line to display more information*/
+/* This button was generated using CSSButtonGenerator.com */
+.moresmallbtn, .morebigbtn, .morelink a {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	box-shadow:inset 0px 1px 0px 0px #f29c93;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+	background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
+	background-color:#fe1a00;
+	border:1px solid #d83526;
+	text-shadow:1px 1px 0px #b23e35;
+}
+.moresmallbtn:hover, .morebigbtn:hover, .morelink a:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
+	background-color:#ce0100;
+}
+/* Definition of the block under the button displaying the additional information */
+.moresection {
+	border:1px solid #dcdcdc;
+	background-color: #f9f9f9;
+}
+/* Change the color of the titles inside additional information. */
+.moresection h1, .moresection h2, .moresection h3, .moresection h4, .moresection h5 {
+	color: #ce0100;
 }
 /*}}}*/</pre>
 </div>

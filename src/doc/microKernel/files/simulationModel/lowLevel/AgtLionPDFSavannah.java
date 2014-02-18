@@ -1,26 +1,34 @@
 package fr.lgi2a.wildlifesimulation.model.agents.lion.savannah;
 
 import java.awt.geom.Point2D;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.IPerceivedDataOfAgent;
-import fr.lgi2a.similar.microkernel.IPublicLocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
 import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
  * Models the data being perceived by a "lion" agent from the "Savannah" level.
  */
-public class AgtLionPDFSavannah implements IPerceivedDataOfAgent {
+public class AgtLionPDFSavannah implements IPerceivedData {
 	/**
 	 * Builds an initialized instance of these perceived data.
+	 * @param transitoryPeriodMin The lower bound of the transitory period for which these data were perceived.
+	 * @param transitoryPeriodMax The higher bound of the transitory period for which these data were perceived.
 	 */
-	public AgtLionPDFSavannah( ) {
+	public AgtLionPDFSavannah( 
+		SimulationTimeStamp transitoryPeriodMin,
+		SimulationTimeStamp transitoryPeriodMax
+	) {
+		this.transitoryPeriodMin = transitoryPeriodMin;
+		this.transitoryPeriodMax = transitoryPeriodMax;
 		this.level = WildlifeLevelList.SAVANNAH;
-		this.nearbyPreys = new HashSet<>();
-		this.vulturesLocation = new HashSet<>();
+		this.nearbyPreys = new LinkedHashSet<ILocalStateOfAgent>();
+		this.vulturesLocation = new LinkedHashSet<Point2D>();
 	}
 
 	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  // 
@@ -45,6 +53,32 @@ public class AgtLionPDFSavannah implements IPerceivedDataOfAgent {
 		return this.level;
 	}
 
+	/**
+	 * The lower bound of the transitory period for which these data were perceived.
+	 */
+	private SimulationTimeStamp transitoryPeriodMin;
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SimulationTimeStamp getTransitoryPeriodMin() {
+		return this.transitoryPeriodMin;
+	}
+	
+	/**
+	 * The higher bound of the transitory period for which these data were perceived.
+	 */
+	private SimulationTimeStamp transitoryPeriodMax;
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SimulationTimeStamp getTransitoryPeriodMax() {
+		return this.transitoryPeriodMax;
+	}
+
 	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //
 	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //
 	// // 
@@ -56,13 +90,13 @@ public class AgtLionPDFSavannah implements IPerceivedDataOfAgent {
 	/**
 	 * The set containing the nearby preys.
 	 */
-	private Set<IPublicLocalStateOfAgent> nearbyPreys;
+	private Set<ILocalStateOfAgent> nearbyPreys;
 	
 	/**
 	 * Gets a new iterator over the set of nearby preys.
 	 * @return A new iterator over the set of nearby preys.
 	 */
-	public Iterator<IPublicLocalStateOfAgent> nearbyPreysIterator( ) {
+	public Iterator<ILocalStateOfAgent> nearbyPreysIterator( ) {
 		return this.nearbyPreys.iterator();
 	}
 	
@@ -72,7 +106,7 @@ public class AgtLionPDFSavannah implements IPerceivedDataOfAgent {
 	 * @throws IllegalArgumentException If an argument had an 
 	 * inappropriate value.
 	 */
-	public void addNearbyPrey( IPublicLocalStateOfAgent prey ) {
+	public void addNearbyPrey( ILocalStateOfAgent prey ) {
 		if( prey == null ){
 			throw new IllegalArgumentException(
 				"The prey cannot be null."

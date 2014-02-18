@@ -2,8 +2,9 @@ package fr.lgi2a.wildlifesimulation.model.agents.lion;
 
 import java.awt.geom.Point2D;
 
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
 import fr.lgi2a.wildlifesimulation.model.WildlifeSimulationParam;
+import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionHLSInSavannahLevel;
 import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPLSInSavannahLevel;
 import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 import fr.lgi2a.wildlifesimulation.tools.RandomValueFactory;
@@ -74,22 +75,28 @@ public class AgtLionFactory {
                 getParameters().gazelleAgeThresholdMin, 
                 getParameters().gazelleAgeThresholdMax
         );
-        AgtLion newAgent = new AgtLion(
-                getParameters().gazellePercepRadius, 
-                gazelleAgeThreshold
-        );
+        AgtLion newAgent = new AgtLion( );
         // Then create its initial global state.
-        newAgent.initializeGlobalMemoryState(
-            new EmptyGlobalMemoryState( newAgent )
+        newAgent.initializeGlobalState(
+            new EmptyGlobalState( )
         );
-        // Finally create the public local states and add them to the agents.
+        // Finally create the public and private local states and add them to the agents.
         AgtLionPLSInSavannahLevel plsInSavannah = new AgtLionPLSInSavannahLevel(
                 newAgent, 
                 initialLocation.getX(), 
                 initialLocation.getY(), 
                 0
         );
-        newAgent.includeNewLevel( WildlifeLevelList.SAVANNAH, plsInSavannah );
+        AgtLionHLSInSavannahLevel hlsInSavannah = new AgtLionHLSInSavannahLevel(
+        		newAgent, 
+        		getParameters().gazellePercepRadius, 
+        		gazelleAgeThreshold
+        );
+        newAgent.includeNewLevel( 
+        		WildlifeLevelList.SAVANNAH, 
+        		plsInSavannah ,
+        		hlsInSavannah
+    	);
         return newAgent;
     }
 }

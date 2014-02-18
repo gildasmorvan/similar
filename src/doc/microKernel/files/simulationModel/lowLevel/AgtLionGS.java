@@ -1,17 +1,15 @@
 package fr.lgi2a.wildlifesimulation.model.agents.lion;
 
-import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.libs.abstractimplementation.AbstractGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.agents.IGlobalState;
 
 /**
- * The global state of the "Lion" agent.
+ * Models the global state of the "Lion" agent.
  */
-public class AgtLionGS extends AbstractGlobalMemoryState {
+public class AgtLionGS implements IGlobalState {
 	/**
-	 *  Builds an initialized instance of the global state.
-	 * @param owner The agent owning this global state.
+	 * Builds an initialized instance of the global state.
 	 */
-	public AgtLionGS(IAgent owner) {
-		super(owner);
+	public AgtLionGS( ) {
+		
 	}
 }

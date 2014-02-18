@@ -1,6 +1,6 @@
-package fr.lgi2a.wildlifesimulation.model.influences;
+package fr.lgi2a.wildlifesimulation.model.influences.tosavannah;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
@@ -15,15 +15,22 @@ public class GrowOldInfluence extends RegularInfluence {
 	public static final String CATEGORY = "Grow old";
 	
 	/**
-	 * Builds an instance of this influence
+	 * Builds an instance of this influence created during the transitory 
+	 * period <code>] timeLowerBound, timeUpperBound [</code>.
+	 * @param timeLowerBound The lower bound of the transitory period 
+	 * during which this influence was created.
+	 * @param timeUpperBound The upper bound of the transitory period 
+	 * during which this influence was created.
 	 */
 	public GrowOldInfluence(
-			String category, 
-			LevelIdentifier targetLevel
+			SimulationTimeStamp timeLowerBound,
+			SimulationTimeStamp timeUpperBound
 	) {
 		super(
 				GrowOldInfluence.CATEGORY, 
-				WildlifeLevelList.SAVANNAH
+				WildlifeLevelList.SAVANNAH,
+				timeLowerBound,
+				timeUpperBound
 		);
 	}
 }

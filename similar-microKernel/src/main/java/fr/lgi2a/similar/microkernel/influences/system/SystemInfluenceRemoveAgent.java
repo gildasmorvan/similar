@@ -75,7 +75,7 @@ public final class SystemInfluenceRemoveAgent extends SystemInfluence {
 	 * @param targetLevel The target level as described in {@link fr.lgi2a.similar.microkernel.influences.IInfluence#getTargetLevel()}
 	 * @param publicLocalStateOfAgent A public local state of the agent to remove from the simulation
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
-	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created..
+	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
 	 * @throws IllegalArgumentException If the target level or the agent are <code>null</code>.
 	 */
 	public SystemInfluenceRemoveAgent( 

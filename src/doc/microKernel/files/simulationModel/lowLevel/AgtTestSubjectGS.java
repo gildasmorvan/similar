@@ -1,50 +1,20 @@
 package fr.lgi2a.underpressure.model.agents.testsubject;
 
-import fr.lgi2a.similar.microkernel.IAgent;
-import fr.lgi2a.similar.microkernel.IGlobalMemoryState;
+import fr.lgi2a.similar.microkernel.agents.IGlobalState;
 
 /**
- * The global state of a 'Test subject' agent, implemented using the 
-*  micro-kernel only.
+ * The global state of a 'Test subject' agent.
  */
-public class AgtTestSubjectGS implements IGlobalMemoryState {
+public class AgtTestSubjectGS implements IGlobalState {
 	/**
 	 * Builds an initialized instance of the global state.
 	 * @param owner The agent owning this global state.
 	 * @param initialStressDegree The initial stress degree of the agent.
 	 */
 	public AgtTestSubjectGS(
-		IAgent owner,
 		double initialStressDegree
 	){
-		if( owner == null ){
-			throw new IllegalArgumentException(
-				"The owner of the state cannot be null."
-			);
-		}
-		this.owner = owner;
 		this.stressDegree = initialStressDegree;
-	}
-
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  // 
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //
-	// // 
-	// //   Generic methods of the global state
-	// //
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //
-	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  //
-	
-	/**
-	 * The owner of this global state.
-	 */
-	private final IAgent owner;
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public IAgent getOwner() {
-		return this.owner;
 	}
 
 	// //  //   //  // //  //   //  // //  //   //  // //  //   //  // //  // 

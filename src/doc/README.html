@@ -3506,12 +3506,12 @@ In SIMILAR, the time stamps are characterized by:
 A time stamp is an instance of the {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class.
 !!Construction
 A time stamp can be built using three different approaches:
-#Constructing the instance using a {{{long}}} value; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(long)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
-#Constructing the instance as a copy of another time stamp; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
-#Constructing the instance relatively to the {{fieldName{identifier}}} of another time stamp; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp, int)&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+#Constructing the instance using a {{{long}}} value; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(long)]]}}}
+#Constructing the instance as a copy of another time stamp; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}}
+#Constructing the instance relatively to the {{fieldName{identifier}}} of another time stamp; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp, int)]]}}}
 !!Usage
 A time stamp is used in three different contexts:
-*When the identifier of the time stamp has be known; &lt;html&gt;&lt;a target=&quot;_blank&quot; class=&quot;docsmallbtn&quot; href=&quot;api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#getIdentifier()&quot;&gt;Documentation&lt;/a&gt;&lt;/html&gt;
+*When the identifier of the time stamp has be known; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#getIdentifier()]]}}}
 *When two time stamps have to be compared; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsubsection{
 The {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class implements the {{className{Comparable}}} interface. Its comparison method returns the difference between the identifier of the time stamps.
@@ -3891,7 +3891,7 @@ h3 {font-size: 14px;}
 /* This button was generated using CSSButtonGenerator.com */
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201401061423" tags="CSS excludeLists" changecount="17">
+<div title="StyleSheetCustomization - Collapse buttons" creator="Designer" modifier="Designer" created="201311260931" modified="201402180947" tags="CSS excludeLists" changecount="18">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the buttons
@@ -3905,7 +3905,7 @@ h3 {font-size: 14px;}
 /* ********************************************************
  * Buttons common features
  ******************************************************** */
-.docsmallbtn, .implsmallbtn, .exsmallbtn, .moresmallbtn, .implbigbtn, .docbigbtn, .exbigbtn , .morebigbtn {
+.docsmallbtn, .implsmallbtn, .exsmallbtn, .moresmallbtn, .implbigbtn, .docbigbtn, .exbigbtn , .morebigbtn, .doclink a, .morelink a {
 	text-indent:0;
 	display:inline-block;
 	color:#ffffff;
@@ -3917,18 +3917,18 @@ h3 {font-size: 14px;}
 	margin-top: 1px ;
 	margin-bottom: 1px ;
 }
-.docsmallbtn:hover, .implsmallbtn.hover, .exsmallbtn:hover, .moresmallbtn:hover, .implbigbtn:hover, .docbigbtn:hover, .exbigbtn:hover, .morebigbtn:hover {
+.docsmallbtn:hover, .implsmallbtn.hover, .exsmallbtn:hover, .moresmallbtn:hover, .implbigbtn:hover, .docbigbtn:hover, .exbigbtn:hover, .morebigbtn:hover, .morelink a:hover, .doclink a:hover {
 	color: #FFFFFF;
 	text-decoration: none;
 }
-.docsmallbtn:active, .implsmallbtn:active, .exsmallbtn:active, .moresmallbtn:active, .implbigbtn:active, .docbigbtn:active, .exbigbtn:active, .morebigbtn:active {
+.docsmallbtn:active, .implsmallbtn:active, .exsmallbtn:active, .moresmallbtn:active, .implbigbtn:active, .docbigbtn:active, .exbigbtn:active, .morebigbtn:active, .morelink a:active, .doclink a:active {
 	position:relative;
 	top:1px;
 }
 /* ********************************************************
  * Small buttons common features
  ******************************************************** */
-.docsmallbtn, .implsmallbtn, .exsmallbtn, .moresmallbtn {
+.docsmallbtn, .implsmallbtn, .exsmallbtn, .moresmallbtn, .morelink a, .doclink a {
 	-webkit-border-top-left-radius:20px;
 	-moz-border-radius-topleft:20px;
 	border-top-left-radius:20px;
@@ -4029,7 +4029,7 @@ h3 {font-size: 14px;}
  * and big buttons that can be put 
  * in a line to display the documentation */
 /* This button was generated using CSSButtonGenerator.com */
-.docsmallbtn, .docbigbtn {
+.docsmallbtn, .docbigbtn, .doclink a {
 	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
@@ -4040,7 +4040,7 @@ h3 {font-size: 14px;}
 	border:1px solid #84bbf3;
 	text-shadow:1px 1px 0px #528ecc;
 }
-.docsmallbtn:hover, .docbigbtn:hover {
+.docsmallbtn:hover, .docbigbtn:hover, .doclink a:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
 	background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
@@ -4054,7 +4054,7 @@ h3 {font-size: 14px;}
 }
 .docsubsection {
 	border:1px solid #528fcc;
-	background-color: #76b9f5;
+	background-color: #96d9f5;
 }
 /* Change the color of the titles inside a document section. */
 .docsection h1, .docsection h2, .docsection h3, .docsection h4, .docsection h5 {
@@ -4132,7 +4132,7 @@ h3 {font-size: 14px;}
  * and big buttons that can be put 
  * in a line to display more information*/
 /* This button was generated using CSSButtonGenerator.com */
-.moresmallbtn, .morebigbtn {
+.moresmallbtn, .morebigbtn, .morelink a {
 	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
 	box-shadow:inset 0px 1px 0px 0px #f29c93;
@@ -4143,7 +4143,7 @@ h3 {font-size: 14px;}
 	border:1px solid #d83526;
 	text-shadow:1px 1px 0px #b23e35;
 }
-.moresmallbtn:hover, .morebigbtn:hover {
+.moresmallbtn:hover, .morebigbtn:hover, .morelink a:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
 	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');

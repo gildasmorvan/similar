@@ -4095,7 +4095,7 @@ The low level specifications contain the following steps:
 **Specification of the [[reaction|SMD - Reaction]] phase of the levels;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Low level - Agents intro]]}}}</pre>
 </div>
-<div title="SMD - Natural" creator="Designer" modifier="Designer" created="201402051217" modified="201402051542" changecount="16">
+<div title="SMD - Natural" creator="Designer" modifier="Designer" created="201402051217" modified="201402191013" changecount="18">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the environment}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agent creation]]  |  [[next step &gt;&gt;|SMD - Reaction]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -4108,14 +4108,14 @@ The low level specifications contain the following steps:
 &lt;&lt;tiddler [[SMD - Natural - Creation]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction]]}}}</pre>
 </div>
-<div title="SMD - Natural - Creation" creator="Designer" modifier="Designer" created="201402051542" modified="201402181554" changecount="17">
+<div title="SMD - Natural - Creation" creator="Designer" modifier="Designer" created="201402051542" modified="201402191000" changecount="18">
 <pre>The implementation of this method consists in:
 *Identifying the level from which the natural action is made;
 *Getting the local dynamic state of the relevant perceptible levels;
 *Getting and casting the public local state of the environment from the perceptible level, to access their various data;
 *Casting the private local state of the environment, to access its various data;
 *Getting and casting the public local state of the agents in each level, to access their various data;
-*Creating influences based on the read information, and adding them to the {{{producedInfluences}}} map;
+*Creating influences based on the read information, and adding them to the {{argumentName{producedInfluences}}} map;
 During the redaction of the natural action process, the information required by the natural action can become clearer. Therefore, this step will likely lead to the revision of:
 *The data from the [[private local state|SMD - Private local states]] used as a parameter of the natural actions;
 *The [[public local state of the perceived agents|SMD - Public local states]];
@@ -4192,8 +4192,8 @@ This method defines the following parameters:
 
 &lt;&lt;tiddler [[System influences - Specifications]]&gt;&gt;</pre>
 </div>
-<div title="SMD - Natural - Structure" creator="Designer" modifier="Designer" created="201402051432" modified="201402051527" changecount="7">
-<pre>The ''natural action of the environment'' defines the dynamics of a level that are not teh fruit of the behavior of the agents:
+<div title="SMD - Natural - Structure" creator="Designer" modifier="Designer" created="201402051432" modified="201402191034" changecount="8">
+<pre>The ''natural action of the environment'' defines the dynamics of a level that are not the fruit of the behavior of the agents:
 *The ''natural evolution'' of the ''state of the agents'', without the intervention of their behavior; +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
 In the context of an ecosystem simulation, agents age independently from their behavior. Therefore, //agents aging// comes from the natural action of the environment.
@@ -4738,7 +4738,116 @@ The coherence of the data structure contained in the public local state of the e
 *The removal of an agent from the level implies its removal from the data mapping of the environment;
 }}}</pre>
 </div>
-<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201402051358" changecount="65">
+<div title="SMD - Reaction" creator="Designer" modifier="Designer" created="201402191011" modified="201402191617" changecount="18">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the reaction of the levels}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Natural]]  |  [[next step &gt;&gt;|SMD - Reaction - To system influences]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - Intro]]&gt;&gt;
+!Structure of the reaction model of a level
+&lt;&lt;tiddler [[SMD - Reaction - Structure]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction - To system influences]]}}}</pre>
+</div>
+<div title="SMD - Reaction - Intro" creator="Designer" modifier="Designer" created="201402191014" modified="201402191033" changecount="12">
+<pre>The side effects on the simulation of the influences created by the behavior of the agents and of the environment are managed through the ''reaction phase'' of the levels (see the image). 
+
+[img(98%,)[images/simulationModel/lowLevel/levelReactionModel.png]]
+{{focusemphasisblock{
+This step of the methodology consist in defining the operational code of the reaction of each level of the simulation.
+}}}</pre>
+</div>
+<div title="SMD - Reaction - Structure" creator="Designer" modifier="Designer" created="201402191014" modified="201402191516" changecount="54">
+<pre>The ''reaction of a level'' determines how the influences are taken into account in the evolution of the simulation. It defines:
+*how the ''public or private local state'' of the agents and of the environment ''change'' according to the changes depicted by these influences; +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In the wildlife simulation example described in the previous steps of the methodology, a lion agent ages. Since aging does not come from the behavior of the lion, this phenomenon is modeled as an influence coming from the natural action of the environment.
+The ''Grow old'' influence sent by the natural action of the environment implies the update of the ''age'' field of the public local state of the ''Lion'' agent in the ''Savannah'' level during the reaction of the ''Savannah'' level.
+[img(98%,)[images/simulationModel/lowLevel/reactionExample1.png]]
+}}} ===
+
+*if an influence models an actions that has not finished yet. In such a case, the influence ''persists'' in the new consistent dynamic state of the level after the reaction; +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, in a road trafic simulation, a vehicle can decide to ''overtake'' another vehicle. The overtaking maneuver is not instantaneous. Therefore, the ''overtake'' influence can persist in the dynamic state of the simulation, so that each reaction moves little by little the vehicle towards its target lane.
+}}} ===
+
+*how influences requesting the access to the same resource (''colliding influences'') are managed.  +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+If the reaction to two individual influences implies writing and reading the same item of a public or private local state, then a ''collision'' occurs between the influences. Depending on the case, the collision can have a great impact on simulation results. Therefore, the reaction has to pay specific attention to them.
+!Colliding influences causing a conflict
+In the best cases, the colliding influences are mutually exclusive. The reaction has then to determine the influence that has to be taken into account, and the influences that have to be ignored.
+
+This is for instance the case of a predator/prey simulation, where two predators try to eat a prey at the same time (see the image).
+[img(98%,)[images/simulationModel/lowLevel/reactionExample2.png]]
+!Colliding influences causing an ambiguity
+In the worst case, colliding influences are not mutually exclusive. Though they have an effect the one on the other, nor error is caught when such cases appear.
+
+For instance, in a bubble chamber simulation where a magnetic field is applied:
+*the natural action of the environment influences the acceleration of particles with its magnetic field;
+*the particles decide to move forward in the chamber^^''//1//''^^.
+To preserve the consistency of the results, the mangetic field has to be applied either before or after the management of the move of all the particles.
+~~''//__1:__ The very same problem happens if the particle agents are not agentified: the natural action of the environment produces different influences that still have to be managed in the reaction.//''~~
+[img(98%,)[images/simulationModel/lowLevel/reactionExample3.png]]
+}}} ===
+
+In SIMILAR, the reaction model of a level can be seen as an ''application'' taking into parameters both the ''most recent consistent state'' of the level and the ''influences that were recently sent'' to the level, and returning the ''updated value of the consistent state'' of the level.
+
+[&lt;img(65%,)[images/simulationModel/lowLevel/levelReactionAlgorithm.png][images/simulationModel/lowLevel/levelReactionAlgorithm.png]] To include the generic algorithms managing the reaction to the system influences, the reaction process of the levels is performed in five steps:
+#The ''engine'' reacts to the ''system influences'' aimed at the levels computing a reaction, to add/remove agents to them;
+#The ''simulation model'' can react to the ''system influences'' of the previous step, to update the topology of the environment when an agent is added/removed;
+#The ''simulation model'' reacts to the ''regular influences'' aimed at the levels computing a reaction. If agents were to be added/removed during this reaction, then create system influences;
+#The ''engine'' reacts to the ''system influences'' produced in the previous step;
+#The ''simulation model'' can react to the ''system influences'' of the previous step.
+{{clearleft{}}}
+{{bigemphasisblock{
+Consequently, the model of a level has to specify two parts of the reaction:
+*A user-defined reaction to a set of system influences;
+*A user-defined reaction to a set of regular influences, possibly producing system influences.
+}}}</pre>
+</div>
+<div title="SMD - Reaction - To regular influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402191611" changecount="10">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Defining the reaction to regular influences}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction - To system influences]]  |  [[next step &gt;&gt;|SMD - Final steps]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To regular influences - Intro]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Reaction - To regular influences - Specifications]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Final steps]]}}}</pre>
+</div>
+<div title="SMD - Reaction - To regular influences - Intro" creator="Designer" modifier="Designer" created="201402191610" changecount="1">
+<pre>[&gt;img[images/simulationModel/lowLevel/reactionFocusOnRegular.png]]
+{{clearright{}}}</pre>
+</div>
+<div title="SMD - Reaction - To regular influences - Specifications" creator="Designer" modifier="Designer" created="201402191600" modified="201402191611" changecount="3">
+<pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline5.png]]
+In the micro-kernel of SIMILAR, the reaction process of a level is modeled by the following methods of the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface:
+*{{methodName{makeRegularReaction(...)}}} models the user reaction to the regular influences; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+{{clearright{}}}</pre>
+</div>
+<div title="SMD - Reaction - To system influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402191619" changecount="20">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Defining the reaction to system influences}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction]]  |  [[next step &gt;&gt;|SMD - Reaction - To regular influences]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Intro]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Specifications]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction - To regular influences]]}}}</pre>
+</div>
+<div title="SMD - Reaction - To system influences - Intro" creator="Designer" modifier="Designer" created="201402191609" modified="201402191620" changecount="34">
+<pre>[&gt;img(37%,)[images/simulationModel/lowLevel/reactionFocusOnSystem.png]]
+The model of the reaction of a level in a simulation model is decomposed in two parts:
+*A user-defined reaction to a set of ''system influences'';
+*A user-defined reaction to a set of ''regular influences''.
+@@display:block;width:60%;{{focusemphasisblock{
+This step of the methodology consist in defining the operational code of the reaction of each level to a set of system influences.
+}}}@@
+{{clearright{}}}</pre>
+</div>
+<div title="SMD - Reaction - To system influences - Specifications" creator="Designer" modifier="Designer" created="201402191558" modified="201402191611" changecount="5">
+<pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline4.png]]
+In the micro-kernel of SIMILAR, the reaction process of a level is modeled by the following methods of the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface:
+*{{methodName{makeSystemReaction(...)}}} models the user reaction to the system influences;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+{{clearright{}}}</pre>
+</div>
+<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201402191539" changecount="66">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the time model}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents skeleton]]  |  [[next step &gt;&gt;|SMD - Public local states]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -4797,9 +4906,9 @@ public class ExampleTimeConvertor {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201402171457" changecount="75">
+<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201402191602" changecount="77">
 <pre>In SIMILAR, the notion of time model is reified with the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface and the {{className{[[SimulationTimeStamp|../api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class. The main role of the modeler is to provide an implementation to the methods defined in the {{className{ITimeModel}}} interface.
-[img(48%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(48%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
+[img(47%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(47%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
 {{clear{}}}
 In SIMILAR, ''time models'' are instances of the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface. They are characterized by the following methods:
 *{{methodName{getNextTime(...)}}} computes the ''successor'' of a time stamp;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
@@ -6017,7 +6126,7 @@ h3 {font-size: 14px;}
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201311291041" changecount="22">
+<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201402191506" changecount="23">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the custom 
@@ -6056,7 +6165,7 @@ body {
 /*{{{*/
 /* Prevent bullets from overlapping a floating block */
 
-ul {
+ul, ol {
 	overflow: hidden;
 }
 /*}}}*/

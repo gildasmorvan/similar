@@ -3158,7 +3158,7 @@ We do not intend to describe formally these differences in this documentation. Y
 
 &lt;html&gt;&lt;sub&gt;1: The order of this presentation is not necessarily the order of the specification.&lt;/sub&gt;&lt;/html&gt;</pre>
 </div>
-<div title="Structure - Simulation model - Reaction model" creator="Designer" modifier="Designer" created="201311261644" modified="201402171002" changecount="55">
+<div title="Structure - Simulation model - Reaction model" creator="Designer" modifier="Designer" created="201311261644" modified="201402191513" changecount="56">
 <pre>In the [[IRM4MLS|Bibliography]] and [[IRM4S|Bibliography]] approaches, the reaction is considered as domain-dependent. As a consequence, the users are doomed to manually re-write the reaction every time, even though the reaction to some specific influences remains the same no matter the simulation.
 
 In SIMILAR, we consider that a simulation has to manage two kinds of influences:
@@ -3170,7 +3170,7 @@ Since the reaction to the system influence is domain independent, users shouldn'
 !Reaction process in SIMILAR
 &lt;&lt;tiddler [[Structure - Simulation model - Reaction model - Process]]&gt;&gt;</pre>
 </div>
-<div title="Structure - Simulation model - Reaction model - Process" creator="Designer" modifier="Designer" created="201311261816" modified="201401151021" changecount="17">
+<div title="Structure - Simulation model - Reaction model - Process" creator="Designer" modifier="Designer" created="201311261816" modified="201402191514" changecount="20">
 <pre>Before presenting the general algorithm itself, we would like to draw attention on three important problems in the reaction:
 #The //reaction to a system influence// can //produce other influences// +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
@@ -3201,7 +3201,8 @@ We consider that \(L_r\) is the set of levels that are reacting at the same time
 ##\(\forall{} l \in L_r :\)
 ###React to the unprocessed system influences of \(l\)
 ###If the reaction generated new system influences, tag the ones aimed at levels from \(L_r\) as unprocessed
-###Ask the level \(l\) to perform a user-defined reaction to the system influences aimed at \(l\) that were processed.
+#\(\forall{} l \in L_r :\)
+##Ask the level \(l\) to perform a user-defined reaction to the system influences aimed at \(l\) that were processed in 1).
 #\(\forall{} l \in L_r :\)
 ##Perform the user-defined reaction to the regular reactions aimed at \(l\)
 ###If the reaction generated new system influences, tag the ones aimed at levels from \(L_r\) as unprocessed
@@ -3209,7 +3210,8 @@ We consider that \(L_r\) is the set of levels that are reacting at the same time
 ##\(\forall{} l \in L_r :\)
 ###React to the unprocessed system influences of \(l\)
 ###If the reaction generated new system influences, tag the ones aimed at levels from \(L_r\) as unprocessed
-###Ask the level \(l\) to perform a user-defined reaction to the system influences aimed at \(l\) that were processed.
+#\(\forall{} l \in L_r :\)
+##Ask the level \(l\) to perform a user-defined reaction to the system influences aimed at \(l\) that were processed in 4).
 }}}===
 
 &lt;html&gt;&lt;sub&gt;1: This can happen especially when two levels are consistent at the same time stamp.&lt;/sub&gt;&lt;/html&gt;</pre>
@@ -4160,7 +4162,7 @@ h3 {font-size: 14px;}
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201402170842" changecount="25">
+<div title="StyleSheetCustomization - DefaultStyles" creator="Designer" modifier="Designer" created="201311260742" modified="201402191506" changecount="26">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the custom 
@@ -4199,8 +4201,17 @@ body {
 /*{{{*/
 /* Prevent bullets from overlapping a floating block */
 
-ul {
+ul, ol {
 	overflow: hidden;
+}
+/*}}}*/
+/*{{{*/
+/* Set the caption of images as bold. */
+
+span.center.caption {
+	font-family: Impact;
+	font-style: italic;
+	font-size: 130%;
 }
 /*}}}*/
 /*{{{*/

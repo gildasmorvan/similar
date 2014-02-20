@@ -844,7 +844,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
 	){
 		ILevel level = levels.get( systemInfluence.getTargetLevel() );
-		IAgent4Engine removedAgent = systemInfluence.getAgent();
+		ILocalStateOfAgent4Engine agentPublicLocalState = systemInfluence.getAgentLocalState();
+		IAgent4Engine removedAgent = agentPublicLocalState.getOwner( );
 		// Check the existence of the level from which the agent is removed.
 		if( level == null ){
 			throw new IllegalStateException( 
@@ -856,7 +857,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			LevelIdentifier levelId = level.getIdentifier();
 			// Remove the public local state of the agent from the public local dynamic state of the level.
 			level.getLastConsistentState().removePublicLocalStateOfAgent(
-				removedAgent.getPublicLocalState( levelId )
+				agentPublicLocalState
 			);
 			// Remove the agent from the list of agents contained in the level.
 			agents.get( levelId ).remove( removedAgent );

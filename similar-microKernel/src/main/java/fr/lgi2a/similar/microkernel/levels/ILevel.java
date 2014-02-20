@@ -242,7 +242,7 @@ public interface ILevel extends ITimeModel {
 	 * 	</li>
 	 * </ul>
 	 * @param transitoryTimeMin The lower bound of the transitory period of the level for which this reaction is performed.
-	 * @param transitoryTimeMax The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param transitoryTimeMax The upper bound of the transitory period of the level for which this reaction is performed.
 	 * @param consistentState The consistent state being updated by this user reaction.
 	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
@@ -303,9 +303,11 @@ public interface ILevel extends ITimeModel {
 	 * 	</li>
 	 * </ul>
 	 * @param transitoryTimeMin The lower bound of the transitory period of the level for which this reaction is performed.
-	 * @param transitoryTimeMax The lower bound of the transitory period of the level for which this reaction is performed.
-	 * @param consistentState The consistent state being updated by this user reaction. Note that this state already include the result
-	 * of the system influences listed in the <code>systemInfluencesToManage</code> argument.
+	 * @param transitoryTimeMax The upper bound of the transitory period of the level for which this reaction is performed.
+	 * @param consistentState The consistent state of the level being progressively updated by the reaction to go from its 
+	 * value at the time <code>transitoryTimeMin</code> to its value at the time <code>transitoryTimeMax</code>. Note that 
+	 * this state already includes the side effects of the system influences listed in the <code>systemInfluencesToManage</code> 
+	 * argument.
 	 * @param systemInfluencesToManage The <b>system</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
 	 * @param happensBeforeRegularReaction <code>true</code> if this user-defined system reaction is performed before the call to the

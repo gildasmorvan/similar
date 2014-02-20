@@ -4095,7 +4095,7 @@ The low level specifications contain the following steps:
 **Specification of the [[reaction|SMD - Reaction]] phase of the levels;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Low level - Agents intro]]}}}</pre>
 </div>
-<div title="SMD - Natural" creator="Designer" modifier="Designer" created="201402051217" modified="201402191013" changecount="18">
+<div title="SMD - Natural" creator="Designer" modifier="Designer" created="201402051217" modified="201402200836" changecount="19">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the environment}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agent creation]]  |  [[next step &gt;&gt;|SMD - Reaction]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -4803,49 +4803,245 @@ Consequently, the model of a level has to specify two parts of the reaction:
 *A user-defined reaction to a set of regular influences, possibly producing system influences.
 }}}</pre>
 </div>
-<div title="SMD - Reaction - To regular influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402191611" changecount="10">
+<div title="SMD - Reaction - To regular influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402201031" changecount="11">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Defining the reaction to regular influences}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction - To system influences]]  |  [[next step &gt;&gt;|SMD - Final steps]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Reaction - To regular influences - Intro]]&gt;&gt;
 !Specifications and implementation instructions
 &lt;&lt;tiddler [[SMD - Reaction - To regular influences - Specifications]]&gt;&gt;
+!Writing the reaction to regular influences of a level class
+&lt;&lt;tiddler [[SMD - Reaction - To regular influences - Creation]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Final steps]]}}}</pre>
 </div>
-<div title="SMD - Reaction - To regular influences - Intro" creator="Designer" modifier="Designer" created="201402191610" changecount="1">
-<pre>[&gt;img[images/simulationModel/lowLevel/reactionFocusOnRegular.png]]
+<div title="SMD - Reaction - To regular influences - Creation" creator="Designer" modifier="Designer" created="201402201031" modified="201402201248" changecount="33">
+<pre>The implementation of this method consists in:
+*Iterating over the system influences provided as an argument;
+**Checking the category of the influence; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+All the regular influence classes of a simulation have define a {{{public static final}}} field named {{fieldName{CATEGORY}}} corresponding to the category of the regular influence. Therefore, checking the category of the influence consists in comparing the category of the influence to the {{fieldName{CATEGORY}}} field of a regular influence class.
+}}} ===
+
+**Cast the influence in the appropriate type;
+**Checking if the influence might collide with other influences:
+***Storing the influence in a variable to delay its management;
+**Else
+***Processing its side effects immediately;
+***Include the influences that were created as a side effect into the {{argumentName{remainingInfluences}}} argument;
+*Grouping the influences by possible collisions;
+*Iterating over the groups of collisions:
+**Handling the reaction to each collision either by ordering the management of the colliding influences or by ignoring some of them;
+During the redaction of the reaction process, the information required by the reaction can become clearer. Therefore, this step will likely lead to the revision of:
+*The data from the [[public local state|SMD - Public local states]] of the environment or of the agents;
+*The [[regular influences|SMD - Influences skeleton]] produced by the decisions: it can lead either to the addition of new metadata to existing regular influences, or the creation of new regular influences;
+*The [[influence relation graph|SMD - Level skeleton]]: new levels can be added to the levels that can be influenced by the level from which the reaction is made;
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Reaction to regular influences full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[images/simulationModel/lowLevel/reactionTree.png]]
+This example illustrates the reaction to regular influences in the context of a wildlife simulation. In this simulation, the ''Savannah'' level defines a grid topology where ''Lion'' and ''Gazelle'' agents can ''move'' towards a designated location by 1 distance unit. In addition, a ''Lion'' agent can ''eat'' a ''Gazelle'', which removes the ''Gazelle'' from the simulation. Finally, the environment triggers the ''aging'' of each ''Lion'' and ''Gazelle''.
+
+We assume that the ''public local state'' of the environment in the ''Savannah'' level defines the following methods:
+*{{methodName{addAgent(ILocalStateOfAgent, double, double)}}} adding an agent at the specified coordinates of the grid;
+*{{methodName{removeAgent(ILocalStateOfAgent, double, double)}}} removing an agent located at the specified coordinates of the grid;
+*{{methodName{getAgentsLocatedAt(int,int)}}} getting the set of agents located in a 1x1 square of the grid which lower left coordinates are specified as an argument of this method.
+This public local state can for instance be implemented as the {{className{[[PLSEnvInSavannahLevel|files/simulationModel/highLevel/PLSEnvInSavannahLevel.java]]}}} class.
+
+We also assume that the public local state of the lions and the gazelle agents define both the following methods, embodied into the {{className{IAgtPLSInSavannah}}} interface extending the {{className{ILocalStateOfAgent4Engine}}} interface:
+*{{methodName{getCoordinates()}}} getting their coordinates as an instance of the {{className{Point2D}}} class;
+*{{methodName{setCoordinates(double,double)}}} setting these coordinates;
+*{{methodName{getAge()}}} getting their age expressed as a {{{long}}} value. It relies on a unit proportional to time stamp identifiers;
+*{{methodName{setAge(long)}}} setting their age in milliseconds as a {{{long}}} value;
+{{clearright{}}}
+Finally, we assume that the following influences are defined:
+*A {{className{[[RISavannahGrowOlder|files/simulationModel/lowLevel/RISavannahGrowOlder.java]]}}} influence defining the following methods:
+**{{methodName{getAgent( )}}} returning the set of agents that have to grow older;
+*A {{className{[[RISavannahEat|files/simulationModel/lowLevel/RISavannahEat.java]]}}} influence defining the following methods:
+**{{methodName{getPredator()}}} returning the predator wishing to eat a prey;
+**{{methodName{getPrey()}}} returning the predator wishing to eat a prey;
+*A {{className{[[RISavannahMove|files/simulationModel/lowLevel/RISavannahMove.java]]}}} influence defining the following methods:
+**{{methodName{getAgent()}}} returning the agent wishing to move;
+**{{methodName{getDesiredX()}}} returning the x coordinate of its desired destination;
+**{{methodName{getDesiredY()}}} returning the y coordinate of its desired destination.
+In this example, the reaction relies on the following principles:
+*The {{className{RISavannahGrowOlder}}} influence causes no collision: we assume that an agent being alive at the beginning of the transitory period has to age;
+*The {{className{RISavannahMove}}} influence causes no collision: we assume that a gazelle can move, even if it is targeted by a eat behavior;
+*The {{className{RISavannahEat}}} influence causes two types of collision: 
+**It collides {{className{RISavannahMove}}} influences: if a gazelle moves, it can get out of reach of the predator. In such a case, it is not eaten;
+**It collides {{className{RISavannahEat}}} influences: if the same gazelle is eaten by two predators, only one predator succeeds in eating the prey (the other one does nothing). The succeeding predator is chosen at random;
+!Code
+If we assume that the agent categories list is defined in the {{className{[[WildlifeAgentCategoriesList|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]}}} class, then the code of the ''Savannah'' level can be the following one. Note that the sources of this class are also available in a [[stand alone|files/simulationModel/lowLevel/SavannahLevel2.java]] file:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/SavannahLevel2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;{{bigemphasisblock{
+Note that the reaction of a level is not necessarily this complex. The complexity here comes from the ''eat'' influence creating collisions between influences.
+
+Note that ''eat'' influences targeting the same gazelle are not necessarily mutually exclusive. Indeed, we can imagine a reaction where two lions eating the same gazelle will share the nutritive properties of the prey rather than having a predator preventing the other from getting any food.
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Reaction - To regular influences - Intro" creator="Designer" modifier="Designer" created="201402191610" modified="201402201035" changecount="5">
+<pre>[&gt;img(37%,)[images/simulationModel/lowLevel/reactionFocusOnRegular.png]]
+The model of the reaction of a level in a simulation model is decomposed in two parts:
+*A user-defined reaction to a set of ''system influences'';
+*A user-defined reaction to a set of ''regular influences''.
+The role of the user-defined reaction to the regular influences mainly consists in updating the public and private local state of the agents according to the modifications implied by the metadata of the influences.
+
+@@display:block;width:60%;{{focusemphasisblock{
+This step of the methodology consist in defining the operational code of the reaction of each level to a set of regular influences.
+}}}@@
 {{clearright{}}}</pre>
 </div>
-<div title="SMD - Reaction - To regular influences - Specifications" creator="Designer" modifier="Designer" created="201402191600" modified="201402191611" changecount="3">
+<div title="SMD - Reaction - To regular influences - Specifications" creator="Designer" modifier="Designer" created="201402191600" modified="201402201044" changecount="11">
 <pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline5.png]]
 In the micro-kernel of SIMILAR, the reaction process of a level is modeled by the following methods of the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface:
 *{{methodName{makeRegularReaction(...)}}} models the user reaction to the regular influences; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
-{{clearright{}}}</pre>
+This method has for signature:
+{{{
+void makeRegularReaction(
+   SimulationTimeStamp transitoryTimeMin,
+   SimulationTimeStamp transitoryTimeMax,
+   ConsistentPublicLocalDynamicState consistentState,
+   Set&lt;IInfluence&gt; regularInfluences,
+   InfluencesMap remainingInfluences
+);
+}}}
+It defines the following arguments:
+*{{argumentName{transitoryTimeMin}}} modeling the lower bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{transitoryTimeMax}}} modeling the upper bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{consistentState}}} modeling the consistent state of the level being progressively updated by the reaction to go from its value at the time {{argumentName{transitoryTimeMin}}} to its value at the time {{argumentName{transitoryTimeMax}}};
+*{{argumentName{regularInfluences}}} models the regular influences for which a reaction has to be defined;
+*{{argumentName{remainingInfluences}}} models both the set of regular influences persisting in the dynamic state of the level after the reaction, and the system influences that were produced as a side effect of this reaction to regular influences. The side effects of such system influences is applied as soon as possible (either now for the levels computing a reaction, or during the next reaction of the other levels); +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+&lt;&lt;tiddler [[InfluencesMap - Documentation]]&gt;&gt;
+}}} ===
+
+{{clearright{}}}
+&lt;&lt;tiddler [[System influences - Specifications]]&gt;&gt;</pre>
 </div>
-<div title="SMD - Reaction - To system influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402191619" changecount="20">
+<div title="SMD - Reaction - To system influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402200839" changecount="25">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Defining the reaction to system influences}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction]]  |  [[next step &gt;&gt;|SMD - Reaction - To regular influences]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Reaction - To system influences - Intro]]&gt;&gt;
 !Specifications and implementation instructions
-&lt;&lt;tiddler [[SMD - Reaction - To system influences - Specifications]]&gt;&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Specifications]]&gt;&gt;&lt;html&gt;&lt;h1&gt;Writing the reaction to system influences of a level class&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Creation]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction - To regular influences]]}}}</pre>
 </div>
-<div title="SMD - Reaction - To system influences - Intro" creator="Designer" modifier="Designer" created="201402191609" modified="201402191620" changecount="34">
+<div title="SMD - Reaction - To system influences - Creation" creator="Designer" modifier="Designer" created="201402200836" modified="201402201009" changecount="22">
+<pre>The implementation of this method consists in:
+*Iterating over the system influences provided as an argument;
+*Checking the category of the influence; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+All the system influence classes of SIMILAR define a {{{public static final}}} field named {{fieldName{CATEGORY}}} corresponding to the category of the system influence. Therefore, checking the category of the influence consists in comparing the category of the influence to the {{fieldName{CATEGORY}}} field of a system influence class.
+
+The system influence of SIMILAR are currently:
+*{{className{[[SystemInfluenceAddAgent|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceAddAgent.html]]}}}
+*{{className{[[SystemInfluenceAddAgentToLevel|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceAddAgentToLevel.html]]}}}
+*{{className{[[SystemInfluenceRemoveAgent|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceRemoveAgent.html]]}}}
+*{{className{[[SystemInfluenceRemoveAgentFromLevel|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceRemoveAgentFromLevel.html]]}}}
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, retrieving the list of the newly added agents to the levels is made with the following instructions:
+{{{
+void makeSystemReaction(
+	SimulationTimeStamp transitoryTimeMin,
+	SimulationTimeStamp transitoryTimeMax,
+	ConsistentPublicLocalDynamicState consistentState,
+	Collection&lt;IInfluence&gt; systemInfluencesToManage,
+	boolean happensBeforeRegularReaction,
+	InfluencesMap newInfluencesToProcess
+){
+	Set&lt;ILocalStateOfAgent&gt; newlyAddedAgents = new LinkedHashSet&lt;ILocalStateOfAgent&gt;();
+	for( IInfluence influence : systemInfluencesToManage ){
+		if( influence.getCategory( ).equals( SystemInfluenceAddAgentToLevel.CATEGORY ) ){
+			// The influence models the addition of an agent to this level.
+			SystemInfluenceAddAgentToLevel castedInfluence = 
+					(SystemInfluenceAddAgentToLevel) influence;
+			newlyAddedAgents.add( castedInfluence.getPublicLocalState( ) );
+		}
+	}
+	// Now &quot;newlyAddedAgents &quot; contains the list of the newly added agents.
+}
+}}}
+}}} ===
+
+*Cast the influence in the appropriate type;
+*Get the metadata contained in the influence to build a reaction; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, if the environment defines a grid topology, then the addition and removal system influences have to be managed to identify the added/removed agent and its location in the grid and to update the content of the grid.
+}}} ===
+
+*Possibly creating influences and adding them to the {{argumentName{newInfluencesToProcess}}} map; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, if the addition of an agent from a specific category implies the addition of another agent in the simulation: //e.g.// when a person being haunted by a ghost enters the level, an influence adding the ghost agent to the level has to be created and managed.
+}}} ===
+
+During the redaction of the reaction process, the information required by the reaction can become clearer. Therefore, this step will likely lead to the revision of:
+*The data from the [[public local state|SMD - Public local states]] of the environment or of the agents;
+*The [[regular influences|SMD - Influences skeleton]] produced by the decisions: it can lead either to the addition of new metadata to existing regular influences, or the creation of new regular influences;
+*The [[influence relation graph|SMD - Level skeleton]]: new levels can be added to the levels that can be influenced by the level from which the reaction is made;
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Reaction to system influences full example&lt;/span&gt;]
+{{exsection{
+This example is a continuation of the wildlife simulation described in a [[previous step|SMD - Public local states]] of the methodology. In this simulation, the ''Savannah'' level defines a grid topology where ''Lion'' and ''Gazelle'' agents can move. Therefore, the user-defined reaction to system influences has to make sure that the grid is being updated upon the addition or removal of such agents.
+
+Therefore, we assume that the ''public local state'' of the environment in the ''Savannah'' level defines the following methods:
+*{{methodName{addAgent(ILocalStateOfAgent, double, double)}}} adding an agent at the specified coordinates of the grid;
+*{{methodName{removeAgent(ILocalStateOfAgent, double, double)}}} removing an agent located at the specified coordinates of the grid;
+*{{methodName{getAgentsLocatedAt(int,int)}}} getting the set of agents located in a 1x1 square of the grid which lower left coordinates are specified as an argument of this method.
+This public local state can for instance be implemented as the {{className{[[PLSEnvInSavannahLevel|files/simulationModel/highLevel/PLSEnvInSavannahLevel.java]]}}} class.
+
+We also assume that the following public local states are defined:
+*Lion agents define the {{className{AgtLionPLSInSavannah}}} public local state in the ''Savannah'' level;
+*Gazelle agents define the {{className{AgtGazellePLSInSavannah}}} public local state in the ''Savannah'' level;
+*Both of these states define a method {{methodName{getCoordinates()}}} getting their coordinates as an instance of the {{className{Point2D}}} class.
+!Code
+If we assume that the agent categories list is defined in the {{className{[[WildlifeAgentCategoriesList|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]}}} class, then the code of the ''Savannah'' level can be the following one. Note that the sources of this class are also available in a [[stand alone|files/simulationModel/lowLevel/SavannahLevel.java]] file:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/SavannahLevel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;{{bigemphasisblock{
+Note that even if the level is implemented as a sub-class of {{className{[[AbstractLevel|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html]]}}} in this example, the code of the reaction method remains the same with an implementation based only on the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface.
+
+Moreover, to simplify our example, we kept the public local state of gazelle and lions independent. Ideally, they should have extended a common interface {{className{AgtPLSInSavannah}}} extending the interface {{className{ILocalStateOfAgent}}} and defining the signature of the method accessing their coordinates.
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Reaction - To system influences - Intro" creator="Designer" modifier="Designer" created="201402191609" modified="201402200814" changecount="37">
 <pre>[&gt;img(37%,)[images/simulationModel/lowLevel/reactionFocusOnSystem.png]]
 The model of the reaction of a level in a simulation model is decomposed in two parts:
 *A user-defined reaction to a set of ''system influences'';
 *A user-defined reaction to a set of ''regular influences''.
+The role of the user-defined reaction consists mainly in updating the topology of the environment when agents are added/removed.
+
 @@display:block;width:60%;{{focusemphasisblock{
 This step of the methodology consist in defining the operational code of the reaction of each level to a set of system influences.
 }}}@@
 {{clearright{}}}</pre>
 </div>
-<div title="SMD - Reaction - To system influences - Specifications" creator="Designer" modifier="Designer" created="201402191558" modified="201402191611" changecount="5">
+<div title="SMD - Reaction - To system influences - Specifications" creator="Designer" modifier="Designer" created="201402191558" modified="201402200837" changecount="16">
 <pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline4.png]]
 In the micro-kernel of SIMILAR, the reaction process of a level is modeled by the following methods of the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface:
 *{{methodName{makeSystemReaction(...)}}} models the user reaction to the system influences;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
-{{clearright{}}}</pre>
+This method has for signature:
+{{{
+void makeSystemReaction(
+   SimulationTimeStamp transitoryTimeMin,
+   SimulationTimeStamp transitoryTimeMax,
+   ConsistentPublicLocalDynamicState consistentState,
+   Collection&lt;IInfluence&gt; systemInfluencesToManage,
+   boolean happensBeforeRegularReaction,
+   InfluencesMap newInfluencesToProcess
+)
+}}}
+It defines the following arguments:
+*{{argumentName{transitoryTimeMin}}} modeling the lower bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{transitoryTimeMax}}} modeling the upper bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{consistentState}}} modeling the consistent state of the level being progressively updated by the reaction to go from its value at the time {{argumentName{transitoryTimeMin}}} to its value at the time {{argumentName{transitoryTimeMax}}}. Note that this state already includes the side effects of the system influences listed in the {{argumentName{systemInfluencesToManage}}} argument;
+*{{argumentName{systemInfluencesToManage}}} models the system influences that were managed by the engine and that might require specific management by the user;
+*{{argumentName{happensBeforeRegularReaction}}} determines to which call this method corresponds to: {{{true}}} if it corresponds to the first one (upper one on the image) and {{{false}}} if it corresponds to the second one (lower one on the image);
+*{{argumentName{newInfluencesToProcess}}} models the set where the user has to put the influences produced as a side effect of this reaction. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+&lt;&lt;tiddler [[InfluencesMap - Documentation]]&gt;&gt;
+}}} ===
+
+{{clearright{}}}
+&lt;&lt;tiddler [[System influences - Specifications]]&gt;&gt;</pre>
 </div>
 <div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201402191539" changecount="66">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the time model}}}
@@ -6664,8 +6860,8 @@ This constructor defines the following arguments:
 *The {{argumentName{targetLevel}}} of the influence defines when the public local states of the agent will begin to disappear from the dynamic state of their respective levels: during the reaction of their respective levels occurring at the same time or after the reaction of {{argumentName{targetLevel}}};
 *The reaction of this influence consists in creating a //&quot;public local state removal&quot;// influence for each public local state of the agent. These influences are processed either immediately if the level of the public local state is currently computing a reaction or during the next reaction of that level.</pre>
 </div>
-<div title="System influences - Specifications" creator="Designer" modifier="Designer" created="201402051529" modified="201402181549" changecount="3">
-<pre>The influences added to the {{argumentName{producedInfluences}}} set can either be the influences defined during the [[influence creation step|SMD - Influences skeleton]], or the following system influences:
+<div title="System influences - Specifications" creator="Designer" modifier="Designer" created="201402051529" modified="201402201044" changecount="4">
+<pre>The influences added to the influences set can either be the influences defined during the [[influence creation step|SMD - Influences skeleton]], or the following system influences:
 *An influence ''adding'' an agent ''to the simulation''; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection {
 &lt;&lt;tiddler [[System influence - Adding an agent to the simulation]]&gt;&gt;

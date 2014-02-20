@@ -74,9 +74,9 @@ public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 	public static final String CATEGORY = "System influence - Remove agent from a level";
 
 	/**
-	 * The agent being removed from the level.
+	 * The public local state of the agent being removed from the level.
 	 */
-	private IAgent4Engine agent;
+	private ILocalStateOfAgent4Engine agent;
 	
 	/**
 	 * Checks the validity of the parameters of the constructor.
@@ -109,7 +109,7 @@ public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 	public SystemInfluenceRemoveAgentFromLevel( 
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound, 
-			ILocalStateOfAgent publicLocalState 
+			ILocalStateOfAgent4Engine publicLocalState 
 	) {
 		super( 
 			CATEGORY, 
@@ -117,7 +117,7 @@ public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 			timeLowerBound,
 			timeUpperBound
 		);
-		this.agent = ( (ILocalStateOfAgent4Engine)publicLocalState ).getOwner();
+		this.agent = publicLocalState;
 	}
 	
 	/**
@@ -134,26 +134,18 @@ public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 			IAgent4Engine agent,
 			LevelIdentifier levelId
 	){
-		super(
-			CATEGORY,
-			levelId,
+		this(
 			timeLowerBound,
-			timeUpperBound
+			timeUpperBound,
+			(ILocalStateOfAgent4Engine) agent.getPublicLocalState( levelId )
 		);
-		if( agent == null ){
-			throw new IllegalArgumentException( "The agent cannot be null." );
-		} else if( ! agent.getLevels().contains( levelId ) ){
-			throw new IllegalArgumentException( "The agent was not in the level '" + levelId + "'." );
-		} else {
-			this.agent = agent;
-		}
 	}
 	
 	/**
-	 * Gets the agent being removed from the level.
-	 * @return The agent being removed from the level.
+	 * Gets the public local state of the agent being removed from the level.
+	 * @return The public local state of the agent being removed from the level.
 	 */
-	public IAgent4Engine getAgent( ){
+	public ILocalStateOfAgent4Engine getAgentLocalState( ){
 		return this.agent;
 	}
 

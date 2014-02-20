@@ -3389,6 +3389,16 @@ In SIMILAR, the environment is the sum of the following elements:
 *A ''natural action'' process from each level of the simulation.
 {{clear{}}}</pre>
 </div>
+<div title="SMD - Final steps" creator="Designer" modifier="Designer" created="201402201340" modified="201402201410" changecount="12">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Final specifications of the simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction - To regular influences]]  |  [[next step &gt;&gt;|SMD - Initial state]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+At this stage of the simulation model design process, the general behavior of the simulation has been described. The ''final steps'' of the simualtion model design process consists in:
+*Specifying the [[initialization profile(s)|SMD - Initial state]] of a simulation model;
+*Writing the [[main class|SMD - Running the simulation]] performing the simulation;
+
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Initial state]]}}}</pre>
+</div>
 <div title="SMD - Global state - Introduction" creator="Designer" modifier="Designer" created="201402031026" modified="201402181230" changecount="4">
 <pre>The behavior of an agent is defined by three different steps (see the image):
 *The ''perception phase'', where the agent decodes the data from the public local dynamic state of the perceptible levels, identifies the relevant data and stores them into a ''perceived data set'';
@@ -3658,6 +3668,319 @@ For instance:
 {{clearright{}}}
 ~~//''__1:__ This notion is similar to the notion of agent category''//~~
 @@clear:right;display:block;margin:0;padding:0;@@</pre>
+</div>
+<div title="SMD - Initial state" creator="Designer" modifier="Designer" created="201402201410" modified="201402201417" changecount="8">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creating the initial state of a simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Final steps]]  |  [[next step &gt;&gt;|SMD - Running the simulation]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Initial state - Intro]]&gt;&gt;
+!Structure of an initialization profile of the simulation
+&lt;&lt;tiddler [[SMD - Initial state - Structure]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Initial state - Specifications]]&gt;&gt;
+!Creating an initialization profile for a simulation
+&lt;&lt;tiddler [[SMD - Initial state - Creation]]&gt;&gt;
+
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Running the simulation]]}}}</pre>
+</div>
+<div title="SMD - Initial state - Creation" creator="Designer" modifier="Designer" created="201402201415" changecount="1">
+<pre>Type the text for 'New Tiddler'</pre>
+</div>
+<div title="SMD - Initial state - Intro" creator="Designer" modifier="Designer" created="201402201416" modified="201402201422" changecount="4">
+<pre>Just like for the initialization of agents, different factors have an impact on the initial state of a simulation:
+*The simulation parameters;
+*The way the parameters are used to generate the initial state of the simulation;
+Consequently, different initialization profiles can be define for the same simulation model, depending on the goals of the simulation.
+
+{{focusemphasisblock{
+This step of the simulation focuses on the specifications of the various initialization profiles of a simulation model.
+}}}</pre>
+</div>
+<div title="SMD - Initial state - Specifications" creator="Designer" modifier="Designer" created="201402201415" modified="201402201543" changecount="17">
+<pre>In SIMILAR, the initialization profile of a simulation are modeled as instances of the {{className{[[ISimulationModel|../api/fr/lgi2a/similar/microkernel/ISimulationModel.html]]}}} interface. This interface defines methods determining the initial and final time stamps of the simulation, as well as the nature of the levels, agents, environments and influences lying in the initial dynamic state of the simulation.
+
+This interface defines the following elements:
+*The ''initial time'' of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Initial time]]&gt;&gt;
+*The ''ending criterion'' of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Ending criterion]]&gt;&gt;
+*The ''level generation'' profile of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Level generation]]&gt;&gt;
+*The ''environment generation'' profile of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Environment generation]]&gt;&gt;
+*The ''agent generation'' profile of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Agents generation]]&gt;&gt;
+{{bigemphasisblock{
+Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines the {{className{[[AbstractSimulationModel|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractSimulationModel.html]]}}} class providing a default implementation of the generic features of this interface (initial time).
+}}}</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Agents generation" creator="Designer" modifier="Designer" created="201402201508" modified="201402201511" changecount="2">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+Content
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+Content
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+Content
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Ending criterion" creator="Designer" modifier="Designer" created="201402201508" modified="201402201534" changecount="13">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ending criterion of a simulation model determines when the simulation has to stop. Instead of relying on a static value, this criterion is defined as an abstract method providing more lattitude to its definition. Ending critera can be defined as:
+*Reaching a specific time stamp (//i.e.// the final time stamp);
+*Reaching a specific agent density in a level;
+*Reaching a situation where no influences remain in the dynamic state of a level;
+*//etc.//
+The ending criterion is defined as the {{methodName{[[isFinalTimeOrAfter(...)|../api/fr/lgi2a/similar/microkernel/ISimulationModel.html#isFinalTimeOrAfter(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.ISimulationEngine)]]}}} method, which signature is:
+{{{
+public boolean isFinalTimeOrAfter( 
+	SimulationTimeStamp currentTime, 
+	ISimulationEngine engine 
+);
+}}}
+This method defines two arguments:
+*{{argumentName{currentTime}}} modeling the current half-consistent state of the simulation. This method checks if this current time will be the final time of the simulation or not;
+*{{argumentName{engine}}} modeling a reference to the simulation engine. This object contains all the information about the simulation being performed, including:
+**The agents currently lying in each level;
+**The environment of the simulation;
+**The dynamic state of each level;
+For more information about the {{argumentName{engine}}} argument, see the documentation of the [[observation probes|Observation probes]].
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The only requirements of this method are that:
+*The method has to be deterministic: calling this method twice with the same parameters (independently from the call context) has to produce the same output;
+*The method must have no side effects on the parameters.
+
+The ending criterion can be implemented as any condition based on the current value of:
+*The time of the current half-consistent state of the simulation;
+*The state of the agents lying in the simulation;
+*The state of the environment;
+*The dynamic state of each level.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+This example illustrates the implementation of an ending criterion checking if a final time having the identifier {{{500}}} has been reached.
+
+This example assumes that the simulation model defines a field named {{fieldName{finalTime}}} corresponding to that value.
+{{{
+public boolean isFinalTimeOrAfter( 
+	SimulationTimeStamp currentTime, 
+	ISimulationEngine engine 
+) {
+	return this.currentTime.compareTo( finalTime ) &gt;= 0;
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Environment generation" creator="Designer" modifier="Designer" created="201402201508" modified="201402201628" changecount="15">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''generation profile of the environment'' is a method creating the instance of the {{className{IEnvironment4Engine}}} interface modling the environment of the simulation. This method is named {{methodName{[[generateEnvironment(...)|../api/fr/lgi2a/similar/microkernel/ISimulationModel.html#generateEnvironment(fr.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map)]]}}} and has the following signature:
+{{{
+public EnvironmentInitializationData generateEnvironment( 
+	SimulationTimeStamp initialTime, 
+	Map&lt;LevelIdentifier, ILevel&gt; levels 
+);
+}}}
+This method defines the following argument:
+*{{argumentName{initialTime}}} corresponding to the initial time of the simulation;
+*{{argumentName{levels}}} modeling all the levels of the simulation that were created by the ''generation profile of the levels''. These levels are accessed by their ''level identifier'' defined as the key of this map;
+This method returns an instance of the {{className{[[EnvironmentInitializationData|../api/fr/lgi2a/similar/microkernel/ISimulationModel.EnvironmentInitializationData.html]]}}} class containing the initialized environment of the simulation.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The value returned this method has to be created using the following constructor:
+{{{
+public EnvironmentInitializationData(
+	IEnvironment4Engine environment
+);
+}}}
+This constructor takes as an argument the initialized environment of the simulation.
+
+The generation of the environment includes:
+*The creation of the instance of the {{className{IEnvironment4Engine}}} interface;
+*The creation of the public and private local states of the environment for all the levels that were defined by the ''generation profile of the levels'';
+*The addition of the public local state of the environment to the consistent dynamic state of the simulation, by:
+**Getting the level for the map using the {{methodName{get(Object)}}} method of the {{className{Map}}} interface, using the identifier of the level as a key;
+**Getting the most recent consistent state of that level using the {{methodName{[[getLastConsistentState()|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#getLastConsistentState()]]}}} method of the {{className{ILevel}}} interface;
+**Initializing the public local state of the environment using the {{methodName{[[setPublicLocalStateOfEnvironment(...)|../api/fr/lgi2a/similar/microkernel/dynamicstate/ConsistentPublicLocalDynamicState.html#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)]]}}} method of the {{className{[[ConsistentPublicLocalDynamicState|../api/fr/lgi2a/similar/microkernel/dynamicstate/ConsistentPublicLocalDynamicState.html]]}}} class;
+
+Note that for a cleaner definition of the simulation, the actual value of the parameters used to initialize the public and private local states have to come from the parameters of the simulation. Therefore, a simulation model has to define a field named {{fieldName{parameters}}} containing the simulation parameters being used by the initialization profile.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, in the context of a wildlife simulation with this [[list of levels|files/simulationModel/highLevel/WildlifeLevelList.java]], if we assume that the environment defines the following local states:
+*{{className{EnvPLSInSavannah}}} modeling the public local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have the following arguments:
+**{{argumentName{initialHumidity}}} modeling the initial humidity of the environment;
+**{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+**{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+*{{className{EnvHLSInSavannah}}} modeling a private local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have no arguments;
+*{{className{EnvPLSInSky}}} modeling the public local state of the environment in the &quot;sky&quot; level. Its constructor is assumed to have the following arguments:
+**{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+**{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+*{{className{EnvHLSInSky}}} modeling a private local state of the environment in the &quot;sky&quot; level. Its constructor is assumed to have no arguments;
+*{{className{EnvPLSInUnderground}}} modeling the public local state of the environment in the &quot;underground&quot; level. Its constructor is assumed to have the following arguments:
+**{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+**{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+*{{className{EnvHLSInUnderground}}} modeling a private local state of the environment in the &quot;underground&quot; level. Its constructor is assumed to have no arguments;
+If we assume that the environment is implemented as the {{className{WildlifeEnvironment}}} class extending the {{className{AbstractEnvironment}}} class and defining a constructor having no arguments.
+And if the simulation model defines a field {{fieldName{parameters}}} modeling a parameters class containing the following parameters:
+*{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
+*{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
+*{{fieldName{initialHumidity}}} modeling the initial humidity level in the &quot;Savannah&quot; level;
+Then the generation of the environment is made with the following code:
+{{{
+public EnvironmentInitializationData generateEnvironment( 
+	SimulationTimeStamp initialTime, 
+	Map&lt;LevelIdentifier, ILevel&gt; levels 
+){
+	WildlifeEnvironment environment = new WildlifeEnvironment( );
+	ILocalStateOfEnvironment envPls = new EnvPLSInSavannah(
+		this.parameters.initialHumidity,
+		this.parameters.envWidth,
+		this.parameters.envHeight
+	);
+	environment.includeNewLevel(
+		WildlifeLevelList.SAVANNAH,
+		envPls ,
+		new EnvHLSInSavannah( )
+	);
+	levels.get( WildlifeLevelList.SAVANNAH ).getLastConsistentState(
+			).setPublicLocalStateOfEnvironment( envPls  );
+
+	envPls = new EnvPLSInSky(
+		this.parameters.envWidth,
+		this.parameters.envHeight
+	);
+	environment.includeNewLevel(
+		WildlifeLevelList.SKY,
+		envPls ,
+		new EnvHLSInSky( )
+	);
+	levels.get( WildlifeLevelList.SKY ).getLastConsistentState(
+			).setPublicLocalStateOfEnvironment( envPls  );
+
+	envPls = new EnvPLSInUnderground(
+		this.parameters.envWidth,
+		this.parameters.envHeight
+	);
+	environment.includeNewLevel(
+		WildlifeLevelList.UNDERGROUND,
+		envPls ,
+		new EnvHLSInUnderground( )
+	);
+	levels.get( WildlifeLevelList.UNDERGROUND ).getLastConsistentState(
+			).setPublicLocalStateOfEnvironment( envPls  );
+
+	return new EnvironmentInitializationData( environment  );
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Initial time" creator="Designer" modifier="Designer" created="201402201508" modified="201402201519" changecount="9">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The access to the initial time of the simulation is defined by the {{methodName{[[getInitialTime()|../api/fr/lgi2a/similar/microkernel/ISimulationModel.html#getInitialTime()]]}}} method.
+This method has the following signature:
+{{{
+public SimulationTimeStamp getInitialTime();
+}}}
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method usually consists in:
+*Adding a field to the class having the type {{className{SimulationTimeStamp}}};
+*Setting its initial value in the constructor of the class;
+*Granting access to that field in the appropriate methods (i.e. {{methodName{getInitialTime( )}}}).
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Level generation" creator="Designer" modifier="Designer" created="201402201508" modified="201402201556" changecount="16">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''generation profile of the levels'' is a method creating the instances of the {{className{ILevel}}} interface modeling the various levels of the simulation. This method is named {{methodName{[[generateLevels(...)|../api/fr/lgi2a/similar/microkernel/ISimulationModel.html#generateLevels(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}} and has the following signature:
+{{{
+public List&lt;ILevel&gt; generateLevels( 
+	SimulationTimeStamp initialTime 
+);
+}}}
+This method defines the following argument:
+*{{argumentName{initialTime}}} corresponding to the initial time of the simulation;
+This method ''returns the list of levels'' of the simulation.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+This list return by this method has to contain the levels that will be used in the simulation defined by this profile. These levels have to initialize:
+*Their identifier;
+*Their out neighborhood in the perception relation graph;
+*Their out neighborhood in the influence relation graph;
+*The value of the parameters of their reaction process (see [[this step|SMD - Reaction - To regular influences]] of the methodology);
+The initialization of the public local states of the environment and the creation and addition of agents is made in other methods.
+
+Note that for a cleaner definition of the simulation, the actual value of the parameters used to initialize the reaction processes of the levels have to come from the parameters of the simulation. Therefore, a simulation model has to define a field named {{fieldName{parameters}}} containing the simulation parameters being used by the initialization profile.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, in the context of a wildlife simulation defining the following level classes:
+*{{className{SavannahLevel}}}, which constructor has the following arguments:
+*#the initial time stamp of the simulation;
+*#a threshold distance for the eat behavior of predators (see the example of [[this step|SMD - Reaction - To regular influences]] of the methodology);
+*{{className{SkyLevel}}}, which constructor has the following arguments:
+*#the initial time stamp of the simulation;
+*{{className{UndergroundLevel}}}, which constructor has the following arguments:
+*#the initial time stamp of the simulation;
+*All these constructors are assumed to create the influence and perception relation graphs of the levels;
+And if the simulation model defines a field {{fieldName{parameters}}} modeling a parameters class containing the following parameters:
+*{{fieldName{eatBehaviorThresholdDistance}}} modeling the maximal distance that can separate a predator from its prey for a &quot;eat&quot; behavior.
+Then the generation of the levels is made with the following code:
+{{{
+public List&lt;ILevel&gt; generateLevels( 
+	SimulationTimeStamp initialTime 
+){
+	List&lt;ILevel&gt; levels = new LinkedList&lt;ILevel&gt;( );
+	SavannahLevel savannah = new SavannahLevel( 
+		initialTime,
+		this.parameters.eatBehaviorThresholdDistance
+	);
+	levels.add( savannah );
+	SkyLevel sky = new SkyLevel( 
+		initialTime
+	);
+	levels.add( sky );
+	UndergroundLevel underground = new UndergroundLevel( 
+		initialTime
+	);
+	levels.add( underground );
+	return levels;
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Structure" creator="Designer" modifier="Designer" created="201402201415" modified="201402201502" changecount="22">
+<pre>[&gt;img(55%,)[images/simulationModel/finalStep/simulationModelOutline1.png]]
+The initialization profile defined for a simulation model is characterized by:
+*Some ''parameters'' coming from the [[parameters class|SMD - Tools preparation - Parameters]] of the simulation; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance the parameters can define the initial number of a specific type of agents in the simulation.
+}}} ===
+
+*The ''initial and final times'' of the simulation;
+*The ''levels'' that are lying in the simulation^^//''1''//^^;
+*The ''initial specification of the environment'' of the simulation;
+*The ''agents initially lying'' in the simulation.
+{{clearright{}}}
+~~//''__1:__ Note that the same simulation model can be used to run simulations having different complexities, owning to the initialization profiles. Indeed, an initialization profile has not to necessarily use all the levels that were defined in a simulation.''//~~ +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In the context of a simulation modeling the endogenous and exogenous dynamics of a cell, two levels can be defined: the ''endogenous'' level and the ''exogenous'' level of the simulation. With such a model, different types of simulations can be performed:
+*A simulation studying the interaction between the ''exogenous'' and ''endogenous'' middles of the simulation;
+*A simulation studying the behavior of the ''endogenous'' middle alone;
+*A simulation studying the behavior of the ''exogenous'' middle alone;
+Depending on the type of the simulation, a different subset of levels will be used in the simulation.
+}}} ===
+
+/%
+*When the ''initial and final times'' of the simulation;
+*The ''levels'' that are lying in the simulation^^//''1''//^^:
+**The specification of the reaction being used in each level (if more than one was specified for a level);
+**The parameters being used in such reactions;
+*The ''initial specification of the environment'' of the simulation:
+**Its initial public and private local states for each level of the simulation;
+**The specification of its natural action for each level (if more than one was specified for a level);
+*The ''agents initially lying'' in the simulation:
+**The number and types of agents lying in the simulation;
+**The initialization profile used for each of these agents;
+%/</pre>
 </div>
 <div title="SMD - Level skeleton" creator="Designer" modifier="Designer" created="201401151146" modified="201402171557" changecount="112">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the skeleton of the levels}}}
@@ -4803,7 +5126,7 @@ Consequently, the model of a level has to specify two parts of the reaction:
 *A user-defined reaction to a set of regular influences, possibly producing system influences.
 }}}</pre>
 </div>
-<div title="SMD - Reaction - To regular influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402201031" changecount="11">
+<div title="SMD - Reaction - To regular influences" creator="Designer" modifier="Designer" created="201402191549" modified="201402201339" changecount="12">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Defining the reaction to regular influences}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction - To system influences]]  |  [[next step &gt;&gt;|SMD - Final steps]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -5442,12 +5765,28 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 <div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="2">
 <pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201402051414" changecount="85">
+<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201402201405" changecount="87">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt;{{stepMainTitle{Simulation model design}}}
 {{guidelinesNavMenu{&amp;lt;&amp;lt; previous step | [[next step &gt;&gt;|SMD - Preparation]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 This part of the documentation is dedicated to the design and the implementation of SIMILAR simulation models using the micro-kernel only. At the same time, it describes best practices facilitating the organization of the implementation of the simulation. Note that the guidelines provided here are not absolute rules. They only make the design of simulations either easier, or more robust to model revisions.
+!Foreword
+&lt;&lt;tiddler [[Simulation models - Foreword]]&gt;&gt;
 {{nextButton{[[Start the creation of a new model!|SMD - Preparation]]}}}</pre>
+</div>
+<div title="Simulation models - Foreword" creator="Designer" modifier="Designer" created="201402201354" modified="201402201408" changecount="17">
+<pre>One of the most important features in complex system design is the ability to reproduce simulations, as long as the simulation paramerters are the same. This point is especially important to assert the correct behavior of the simulation, as well as reproduce implementation errors to identify their origin and correct them.
+
+To ensure this reproducibility, please ensure that:
+*The sequence of numbers being generated by the random number generator of the simulation has to be reproducible. This usually means that:
+**The ''seed'' that was used to initialize the random number generator has to be known;
+**The initialization of the random number generator has to take place right before the beginning of a simulation;
+*Particular attention has to be paid on threading:
+**Threads should not be used in the general case, since they can arbitrarily change the invocation context of the random number generation methods;
+**If threads are needed, each thread should define its own random generation heuristic, with its own seed;
+*The iteration order over data structures like {{className{Collection}}} or {{className{Map}}} objects has to be predictible. This implies that:
+**The {{className{LinkedHashSet}}} class should be used instead of the {{className{HashSet}}} class to implement the java {{className{Set}}} interface;
+**The {{className{LinkedHashMap}}} class should be used instead of the {{className{HashMap}}} class to implement the java {{className{Map}}} interface;</pre>
 </div>
 <div title="SinglePageModePlugin" creator="Designer" modifier="Designer" created="201401211538" modified="201401211542" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***

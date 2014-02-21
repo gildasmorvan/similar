@@ -47,7 +47,7 @@ public class SavannahLevel2 extends AbstractLevel {
     * @param eatBehaviorThresholdDistance Models the maximal distance that 
     * can separate a predator from its prey for a "eat" behavior.
     */
-   protected SavannahLevel2(
+   public SavannahLevel2(
       SimulationTimeStamp initialTime,
       double eatBehaviorThresholdDistance
    ) {

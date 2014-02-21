@@ -3669,7 +3669,7 @@ For instance:
 ~~//''__1:__ This notion is similar to the notion of agent category''//~~
 @@clear:right;display:block;margin:0;padding:0;@@</pre>
 </div>
-<div title="SMD - Initial state" creator="Designer" modifier="Designer" created="201402201410" modified="201402201417" changecount="8">
+<div title="SMD - Initial state" creator="Designer" modifier="Designer" created="201402201410" modified="201402211143" changecount="9">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creating the initial state of a simulation}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Final steps]]  |  [[next step &gt;&gt;|SMD - Running the simulation]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -3683,8 +3683,47 @@ For instance:
 
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Running the simulation]]}}}</pre>
 </div>
-<div title="SMD - Initial state - Creation" creator="Designer" modifier="Designer" created="201402201415" changecount="1">
-<pre>Type the text for 'New Tiddler'</pre>
+<div title="SMD - Initial state - Creation" creator="Designer" modifier="Designer" created="201402201415" modified="201402211141" changecount="21">
+<pre>The constructor of the simulation model initialization profile has to comply with the following requirements:
+*It has to take the simulation parameters class as an argument;
+*It has to set the value of the initial time stamp of the simulation;
+The generated class has to:
+*Be located in the ''initializations'' package of the tree hierarchy;
+*Generate at least one level.
+The implementation of the generic methods of the class (see the previous section) has either to be done manually (micro-kernel only approach) or with the {{className{[[AbstractSimulationModel|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractSimulationModel.html]]}}} class (micro-kernel with common libs).
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Simulation model initialization profile full example&lt;/span&gt;]
+{{exsection{
+We consider a wildlife simulation with this [[list of levels|files/simulationModel/highLevel/WildlifeLevelList.java]] and this [[list of agents|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]. In this example, we wish to define a wildlife simulation with lion and gazelle agents only. Therefore, this initialization profile:
+*creates only a &quot;Savannah&quot; level;
+*places only an initial number of agents of both classes in the simulation, at random locations;
+*stops when a final time is reached.
+!Code
+We assume that:
+*The &quot;Savannah&quot; level is modeled by the {{className{SavannahLevel}}} class, which constructor has the following arguments:
+*#{{argumentName{initialTime}}} modeling the initial time stamp of the simulation;
+*#{{argumentName{eatThreshold}}} modeling a threshold distance for the eat behavior of predators (see the example of [[this step|SMD - Reaction - To regular influences]] of the methodology);
+*The environment is implemented as a {{className{WildlifeEnvironment}}} extending the {{className{AbstractEnvironment}}} class from the common libs. {{className{WildlifeEnvironment}}} defines a constructor with no arguments, and has the following as public and private local states:
+**{{className{EnvPLSInSavannah}}} modeling the public local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have the following arguments:
+***{{argumentName{initialHumidity}}} modeling the initial humidity of the environment;
+***{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+***{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+**{{className{EnvHLSInSavannah}}} modeling a private local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have no arguments;
+*Agents from the ''gazelle'' category can be created using the {{className{AgtGazelleFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*Agents from the ''lion'' category can be created using the {{className{AgtLionFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*A [[random number generator|SMD - Tools preparation - Random]] class {{className{RandomValueFactory}}} defines in its strategy a method named {{methodName{randomLocationIn(doube,double)}}} getting a random location within the specified bounds having a width and a height provided as arguments;
+*The parameters of the simulation are declared as a field named {{fieldName{parameters}}}, containing the following public fields:
+**{{fieldName{initialTime}}} modeling the initial time of the simulation;
+**{{fieldName{finalTime}}} modeling the final time of the simulation;
+**{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
+**{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
+**{{fieldName{initialHumidity}}} modeling the initial humidity level in the &quot;Savannah&quot; level;
+**{{fieldName{initialNumOfGazelles}}} modeling the initial number of gazelle agents used in the simulation;
+**{{fieldName{initialNumOfLions}}} modeling the initial number of lion agents used in the simulation;
+**{{fieldName{eatBehaviorThresholdDistance}}} modeling the maximal distance that can separate a predator from its prey for a &quot;eat&quot; behavior.
+Based on these information, the corresponding ''simulation model initialization profile'' is implemented with the following code. The sources of this class are also available as a [[stand alone|files/simulationModel/finalStep/WildlifeSimulationModel.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/finalStep/WildlifeSimulationModel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
 </div>
 <div title="SMD - Initial state - Intro" creator="Designer" modifier="Designer" created="201402201416" modified="201402201422" changecount="4">
 <pre>Just like for the initialization of agents, different factors have an impact on the initial state of a simulation:
@@ -3709,16 +3748,74 @@ This interface defines the following elements:
 Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines the {{className{[[AbstractSimulationModel|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractSimulationModel.html]]}}} class providing a default implementation of the generic features of this interface (initial time).
 }}}</pre>
 </div>
-<div title="SMD - Initial state - Specifications - Agents generation" creator="Designer" modifier="Designer" created="201402201508" modified="201402201511" changecount="2">
+<div title="SMD - Initial state - Specifications - Agents generation" creator="Designer" modifier="Designer" created="201402201508" modified="201402211043" changecount="18">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-Content
+The ''generation profile of the agents'' is a method creating the instances of the {{className{IAgent4Engine}}} interface initially lying in the simulation. This method is named {{methodName{[[generateAgents(...)|../api/fr/lgi2a/similar/microkernel/ISimulationModel.html#generateAgents(fr.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map)]]}}} and has the following signature:
+{{{
+public AgentInitializationData generateAgents(
+	SimulationTimeStamp initialTime, 
+	Map&lt;LevelIdentifier, ILevel&gt; levels
+);
+}}}
+This method defines the following arguments:
+*{{argumentName{initialTime}}} corresponding to the initial time of the simulation;
+*{{argumentName{levels}}} modeling all the levels of the simulation that were created by the ''generation profile of the levels''. These levels are accessed by their ''level identifier'' defined as the key of this map;
+This method returns an instance of the {{className{[[AgentInitializationData|../api/fr/lgi2a/similar/microkernel/ISimulationModel.AgentInitializationData.html]]}}} class containing the initialized agent instances initially lying in the simulation.
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
-Content
+The value returned this method has to be created using the following constructor:
+{{{
+public AgentInitializationData( );
+}}}
+This constructor defines no arguments. The agents initially lying in the simulation have to be added to the agent list returned by its {{methodName{[[getAgents( )|../api/fr/lgi2a/similar/microkernel/ISimulationModel.AgentInitializationData.html#getAgents()]]}}} method.
+
+The creation of an initialized agent instance is made using the agent factories that were specified in a [[previous step|SMD - Agent creation]] of the methodology.
+
+Note that for a cleaner definition of the simulation, the actual value of the parameters used to create the agents have to come from the parameters of the simulation. Therefore, a simulation model has to define a field named {{fieldName{parameters}}} containing the simulation parameters being used by the initialization profile.
 }}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
-Content
+We consider a wildlife simulation with this [[list of levels|files/simulationModel/highLevel/WildlifeLevelList.java]] and this [[list of agents|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]. In this example, we wish to define a wildlife simulation with ''lion'' and ''gazelle'' agents only. This initialization profile places an initial number of agents of both classes in the simulation, at random locations.
+!Code
+We assume that:
+*Agents from the ''gazelle'' category can be created using the {{className{AgtGazelleFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*Agents from the ''lion'' category can be created using the {{className{AgtLionFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*A [[random number generator|SMD - Tools preparation - Random]] class {{className{RandomValueFactory}}} defines in its strategy a method named {{methodName{randomLocationIn(doube,double)}}} getting a random location within the specified bounds having a width and a height provided as arguments;
+*The parameters of the simulation are declared as a field named {{fieldName{parameters}}}, containing the following public fields:
+**{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
+**{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
+**{{fieldName{initialNumOfGazelles}}} modeling the initial number of gazelle agents used in the simulation;
+**{{fieldName{initialNumOfLions}}} modeling the initial number of lion agents used in the simulation;
+Then the generation of the initial agents of the simulation is made with the following code:
+{{{
+public AgentInitializationData generateAgents(
+	SimulationTimeStamp initialTime, 
+	Map&lt;LevelIdentifier, ILevel&gt; levels
+) {
+	AgentInitializationData result = new AgentInitializationData( );
+	// Create the initial gazelle agents.
+	for( int gazelleId = 0; gazelleId &lt; this.parameters.initialNumOfGazelles; gazelleId++ ){
+		IAgent4Engine gazelle = AgtGazelleFactory.generate(
+			RandomValueFactory.getStrategy().randomLocationIn(
+				this.parameters.envWidth, 
+				this.parameters.envHeight
+			)
+		);
+		result.getAgents().add( gazelle );
+	}
+	// Create the initial lion agents.
+	for( int lionId = 0; lionId &lt; this.parameters.initialNumOfLions; lionId++ ){
+		IAgent4Engine lion = AgtLionFactory.generate(
+			RandomValueFactory.getStrategy().randomLocationIn(
+				this.parameters.envWidth, 
+				this.parameters.envHeight
+			)
+		);
+		result.getAgents().add( lion );
+	}
+	return result;
+}
+}}}
 }}} ===</pre>
 </div>
 <div title="SMD - Initial state - Specifications - Ending criterion" creator="Designer" modifier="Designer" created="201402201508" modified="201402201534" changecount="13">
@@ -3769,7 +3866,7 @@ public boolean isFinalTimeOrAfter(
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Initial state - Specifications - Environment generation" creator="Designer" modifier="Designer" created="201402201508" modified="201402201628" changecount="15">
+<div title="SMD - Initial state - Specifications - Environment generation" creator="Designer" modifier="Designer" created="201402201508" modified="201402210912" changecount="25">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The ''generation profile of the environment'' is a method creating the instance of the {{className{IEnvironment4Engine}}} interface modling the environment of the simulation. This method is named {{methodName{[[generateEnvironment(...)|../api/fr/lgi2a/similar/microkernel/ISimulationModel.html#generateEnvironment(fr.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map)]]}}} and has the following signature:
@@ -3793,14 +3890,10 @@ public EnvironmentInitializationData(
 }}}
 This constructor takes as an argument the initialized environment of the simulation.
 
-The generation of the environment includes:
-*The creation of the instance of the {{className{IEnvironment4Engine}}} interface;
-*The creation of the public and private local states of the environment for all the levels that were defined by the ''generation profile of the levels'';
-*The addition of the public local state of the environment to the consistent dynamic state of the simulation, by:
-**Getting the level for the map using the {{methodName{get(Object)}}} method of the {{className{Map}}} interface, using the identifier of the level as a key;
-**Getting the most recent consistent state of that level using the {{methodName{[[getLastConsistentState()|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#getLastConsistentState()]]}}} method of the {{className{ILevel}}} interface;
-**Initializing the public local state of the environment using the {{methodName{[[setPublicLocalStateOfEnvironment(...)|../api/fr/lgi2a/similar/microkernel/dynamicstate/ConsistentPublicLocalDynamicState.html#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)]]}}} method of the {{className{[[ConsistentPublicLocalDynamicState|../api/fr/lgi2a/similar/microkernel/dynamicstate/ConsistentPublicLocalDynamicState.html]]}}} class;
-
+The generation of the initialized environment consists in:
+*Creating the instance of the environment (an instance of the {{className{IEnvironment4Engine}}} interface);
+*Creating the public and private local states of the environment for all the levels that were defined by the ''generation profile of the levels'';
+*Adding these states to the environment (for instance with the {{methodName{includeNewLevel(...)}}} method of the {{className{AbstractEnvironment}}} class);
 Note that for a cleaner definition of the simulation, the actual value of the parameters used to initialize the public and private local states have to come from the parameters of the simulation. Therefore, a simulation model has to define a field named {{fieldName{parameters}}} containing the simulation parameters being used by the initialization profile.
 }}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
 {{exsection{
@@ -3818,8 +3911,7 @@ For instance, in the context of a wildlife simulation with this [[list of levels
 **{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
 **{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
 *{{className{EnvHLSInUnderground}}} modeling a private local state of the environment in the &quot;underground&quot; level. Its constructor is assumed to have no arguments;
-If we assume that the environment is implemented as the {{className{WildlifeEnvironment}}} class extending the {{className{AbstractEnvironment}}} class and defining a constructor having no arguments.
-And if the simulation model defines a field {{fieldName{parameters}}} modeling a parameters class containing the following parameters:
+We assume that the environment is implemented as the {{className{WildlifeEnvironment}}} class extending the {{className{AbstractEnvironment}}} class and defining a constructor having no arguments. We also assume that the simulation model defines a field {{fieldName{parameters}}} modeling a parameters class containing the following parameters:
 *{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
 *{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
 *{{fieldName{initialHumidity}}} modeling the initial humidity level in the &quot;Savannah&quot; level;
@@ -3830,6 +3922,10 @@ public EnvironmentInitializationData generateEnvironment(
 	Map&lt;LevelIdentifier, ILevel&gt; levels 
 ){
 	WildlifeEnvironment environment = new WildlifeEnvironment( );
+	// First initialize the environment by setting its public and private
+	// local states in the various levels of the simulation.
+	// 
+	// Specify the &quot;Savannah&quot; level.
 	ILocalStateOfEnvironment envPls = new EnvPLSInSavannah(
 		this.parameters.initialHumidity,
 		this.parameters.envWidth,
@@ -3840,9 +3936,7 @@ public EnvironmentInitializationData generateEnvironment(
 		envPls ,
 		new EnvHLSInSavannah( )
 	);
-	levels.get( WildlifeLevelList.SAVANNAH ).getLastConsistentState(
-			).setPublicLocalStateOfEnvironment( envPls  );
-
+	// Specify the &quot;Sky&quot; level.
 	envPls = new EnvPLSInSky(
 		this.parameters.envWidth,
 		this.parameters.envHeight
@@ -3852,9 +3946,7 @@ public EnvironmentInitializationData generateEnvironment(
 		envPls ,
 		new EnvHLSInSky( )
 	);
-	levels.get( WildlifeLevelList.SKY ).getLastConsistentState(
-			).setPublicLocalStateOfEnvironment( envPls  );
-
+	// Specify the &quot;Underground&quot; level.
 	envPls = new EnvPLSInUnderground(
 		this.parameters.envWidth,
 		this.parameters.envHeight
@@ -3864,9 +3956,7 @@ public EnvironmentInitializationData generateEnvironment(
 		envPls ,
 		new EnvHLSInUnderground( )
 	);
-	levels.get( WildlifeLevelList.UNDERGROUND ).getLastConsistentState(
-			).setPublicLocalStateOfEnvironment( envPls  );
-
+	// Then return the environment initialization data.
 	return new EnvironmentInitializationData( environment  );
 }
 }}}
@@ -5365,6 +5455,147 @@ It defines the following arguments:
 
 {{clearright{}}}
 &lt;&lt;tiddler [[System influences - Specifications]]&gt;&gt;</pre>
+</div>
+<div title="SMD - Running the simulation" creator="Designer" modifier="Designer" created="201402211144" modified="201402211406" changecount="66">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Execution class of a simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Initial state]]  |  next step &gt;&gt;}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Running the simulation - Intro]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Structure of the simulation execution procedure&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Running the simulation - Structure]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Creating the simulation execution class&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Running the simulation - Creation]]&gt;&gt;
+{{nextButton{[[Run simulations with the command line|Simulation execution]]}}}</pre>
+</div>
+<div title="SMD - Running the simulation - Creation" creator="Designer" modifier="Designer" created="201402211320" modified="201402211410" changecount="6">
+<pre>The generated class has to:
+*Be located in the ''model'' package of the tree hierarchy;
+*Provide a javadoc ''documentation'' to that class. This documentation has to describe precisely the purpose of the simulation and how to read its results. This point is of utmost importance when different main classes are defined for a simulation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Simulation main class example&lt;/span&gt;]
+{{exsection{
+In this example, we describe the simulation execution procedure of a bubble chamber simulation where:
+*The simulation is run with the default engine of SIMILAR ({{className{[[EngineMonothreadedDefaultdisambiguation|../api/fr/lgi2a/similar/microkernel/libs/engines/EngineMonothreadedDefaultdisambiguation.html]]}}} from common libs)
+*The following observation probes are used:
+**A generic probe printing caught exceptions on the standard error stream ({{className{[[ProbeExceptionPrinter|../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExceptionPrinter.html]]}}} from common libs)
+**A generic probe printing the execution trace of the simulation ({{className{[[ProbeExecutionTracker|../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExecutionTracker.html]]}}} from common libs)
+**A probe printing the location of each particle agent over time ({{className{ProbePrintingParticleLocationOverTime}}} class);
+*The following agent factories are used:
+**The {{className{AgtBubbleFactory}}} agent factory, generating ''bubble'' agents;
+**The {{className{AgtCannonFactory}}} agent factory, generating ''particle cannon'' agents;
+**The {{className{AgtParticleFactory}}} agent factory, generating ''particle'' agents;
+*The {{className{JavaRandomBasedValuesGenerator}}} class is used a random number generation strategy. This strategy takes a number modeling its seed as a constructor argument;
+*The simulation parameters are defined as a {{className{BubbleChamberParameters}}} class containing:
+**A {{fieldName{initialTime}}} field defining the initial time of the simulation;
+**A {{fieldName{finalTime}}} field defining the final time of the simulation;
+**A {{fieldName{cannonPower}}} field defining the power of a cannon and therefore the initial speed of the particles it fires;
+**A {{fieldName{randomSeed}}} field defining the seed of the random generator being used;
+*The simulation model initialization procedure is implemented as the {{className{BubbleChamberSimulation}}}, using a simulation parameters as a constructor argument;
+In this example, we define a custom value only for the {{fieldName{initialTime}}}, the {{fieldName{finalTime}}} and {{fieldName{randomSeed}}} parameters. The {{fieldName{cannonPower}}} parameter will use its default value.
+!Code
+The corresponding main class of the simulation is implemented with the following code. The sources of this class are also available as a [[stand alone|files/simulationModel/finalStep/BubbleChamberMain.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/finalStep/BubbleChamberMain.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="SMD - Running the simulation - Intro" creator="Designer" modifier="Designer" created="201402211320" modified="201402211320" changecount="2">
+<pre>The final step in the design of a simulation model consists in declaring that model in the context of a ''simulation execution procedure''. This procedure gathers to various parts of a SIMILAR simulation and puts them together as a runnable program. 
+
+{{focusemphasisblock{
+This step of the simulation focuses on the creation of the class containing the execution procedure of the simulation.
+}}}</pre>
+</div>
+<div title="SMD - Running the simulation - Structure" creator="Designer" modifier="Designer" created="201402211320" modified="201402211406" changecount="24">
+<pre>The main steps of this procedure are:
+#Create an instance of the simulation parameters class, and set the value of its content;
+#Initialize the [[random number generator|SMD - Tools preparation - Random]], using a seed declared in the simulation parameters; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;] 
+{{implsection{
+This part is achied in two steps:
+#Create the random numbers generation strategy, and initialize its seed with the simulation parameters;
+#Set the generation strategy being used in the random number generation factory, //i.e.// call:
+{{{
+RandomValueFactory.setStrategy( theStrategyImUsing );
+}}}
+}}} ===
+
+#Bind the simulation parameters with the [[agent factories|SMD - Agent creation]] being used in the simulation; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;] 
+{{implsection{
+This step consists in setting the value of the static {{fieldName{simulationParameter}}} field of each factory.
+}}} ===
+
+#Create an instance of the [[simulation model initialization profile|SMD - Initial state]] that will be used to run the simulation;
+#Create an instance of the ''simulation engine'' that will run the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The simulation engine used in a simulation can be:
+*A ''generic'' engine located in the common libs of the micro-kernel of SIMILAR; {{morelink{[[More|./commonLibs/index.html#SimulationEngines]]}}}
+*A ''custom'' engine written by the used using the engine design methodology {{morelink{[[More|Simulation engines]]}}}
+}}} ===
+
+#Create the instance of each ''observation probe'' used in the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The observation probes used in a simulation can be:
+*''Generic'' and located in the common libs of the micro-kernel of SIMILAR; {{morelink{[[More|./commonLibs/index.html#Probes]]}}}
+*''Simulation dependent'' and designed using the probes design methodology. {{morelink{[[More|Observation probes]]}}}
+}}} ===
+
+#Bind the probes to the simulation engine; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;] 
+{{docsection{
+The binding of probes with a simulation engine is achieved using the {{methodName{[[addProbe(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#addProbe(java.lang.String, fr.lgi2a.similar.microkernel.IProbe)]]}}} method of the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} class. This method has the following signature:
+{{{
+public void addProbe(
+	String identifier, 
+	IProbe probe 
+);
+}}}
+This method declares the following arguments:
+*{{argumentName{identifier}}} modeling a readable identifier of the probe. This parameter is usefull if two instances of the same probe class but with different parameters are used in the same engine. +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+A simulation tracking the execution trace of the simulation on both the standard output and in a file will use two different instances of the {{className{ProbeExecutionTracker}}} probe from the common libs:
+*One instance using the {{{System.out}}} print stream;
+*One instance using a print stream to a file.
+}}} ===
+
+*{{argumentName{probe}}} modeling the probe being binded with the engine. After the call to this method, whenever the engine reaches a point where probes have to be notified, this probe will receive the notification;
+}}} ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;] 
+{{exsection{
+A simulation tracking the execution trace of the simulation on both the standard output and in a file will use two different instances of the {{className{ProbeExecutionTracker}}} probe from the common libs:
+*One instance using the {{{System.out}}} print stream;
+*One instance using a print stream to a file.
+The creation and binding of these probes to the engine is made with the following code:
+{{{
+ISimulationEngine engine = ...;
+ProbeExecutionTracker sysOutTracker = new ProbeExecutionTracker(
+	System.out
+);
+engine.addProbe(
+	&quot;Standard output simulation trace tracker&quot;,
+	sysOutTracker 
+);
+ProbeExecutionTracker fileTracker = new ProbeExecutionTracker(
+	new PrintStream( new File( &quot;simulationLog.txt&quot; ) )
+);
+engine.addProbe(
+	&quot;File simulation trace tracker&quot;,
+	fileTracker
+);
+}}}
+}}} ===
+
+#Run a simulation with the engine using the simulation model initialization profile. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;] 
+{{docsection{
+The execution of a simulation is achieved using the {{methodName{[[runNewSimulation(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#runNewSimulation(fr.lgi2a.similar.microkernel.ISimulationModel)]]}}} method from the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} interface. This method has the following signature:
+{{{
+public void runNewSimulation( 
+	ISimulationModel simulationModel 
+);
+}}}
+This method defines the following argument:
+*{{argumentName{simulationModel }}} modeling the simulation model initialization profile being used to initialize the dynamic state of the simulation.
+}}} ===
+
+{{bigemphasisblock{
+Note that the execution of a simulation will almost never directly throw an exception, even if an error is met. The exceptions are often intercepted by the simulation engine and forwarded to the probes. Therefore, the observation or errors requires the use of probes.
+
+The {{className{[[ProbeExceptionPrinter|../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExceptionPrinter.html]]}}} probe from the common libs was defined for this purpose.
+}}}</pre>
 </div>
 <div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201402191539" changecount="66">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the time model}}}

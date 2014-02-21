@@ -41,7 +41,7 @@ public class SavannahLevel extends AbstractLevel {
     * </ul>
     * @param initialTime The initial time stamp of the level.
     */
-   protected SavannahLevel(
+   public SavannahLevel(
       SimulationTimeStamp initialTime
    ) {
       super(

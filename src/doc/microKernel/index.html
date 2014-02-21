@@ -767,240 +767,7 @@ Tiddler.prototype.changed = function()
 };
 //}}}</pre>
 </div>
-<div title="Documentation - Consistent Local Dynamic State" creator="Designer" modifier="Designer" created="201401151247" modified="201401151424" changecount="41">
-<pre>The consistent public local dynamic state of a level is an instance of the {{{ConsistentPublicLocalDynamicState}}} class from the {{{fr.lgi2a.similar.microkernel.dynamicstate}}} package. 
-!Content
-This class embeds the information contained in the public local dynamic state of a level during consistent time stamps:
-*The ''time stamp'' when the dynamic state of the level was in this state; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get its value&lt;/span&gt;]
-{{docsection {
-The read access to the time stamp is defined by the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
-{{{
-public SimulationTimeStamp getTime();
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the time for which this public dynamic state is defined.
-
-''Returns:''
-*The time for which this public dynamic state is defined.
-}}}
-}}} === +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set its value&lt;/span&gt;]
-{{docsection {
-The value of the time stamp is set in the {{{ConsistentPublicLocalDynamicState}}} class either during ''the construction of the dynamic state'', or using the ''following setting method'':
-{{{
-public final void setTime( SimulationTimeStamp time );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Sets the time for which this modifiable public local dynamic state is defined.
-
-''Parameters:''
-*''Parameter (//time//):'' The time for which this public dynamic state is defined.
-}}}
-}}} ===
-
-*The ''public local state of the environment'' in the level at that time; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get its value&lt;/span&gt;]
-{{docsection {
-The access to the public local state of the environment is defined by the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
-{{{
-public IPublicLocalState getPublicLocalStateOfEnvironment( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the public local state of the environment contained in this public local dynamic state.
-
-''Returns:''
-*The public local state of the environment contained in this public local dynamic state.
-}}}
-}}} ===  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set its value&lt;/span&gt;]
-{{docsection {
-The public local state of the environment is set by the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
-{{{
-public void setPublicLocalStateOfEnvironment(
-		IPublicLocalState publicLocalState
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Sets the value of the public local state of the environment in this dynamic state.
-
-''Parameters:''
-*''Parameter (//publicLocalState//):'' The public local state of the environment.
-}}}
-}}} ===
-
-*The ''public local state of the agents'' in the level at that time; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get the value&lt;/span&gt;]
-{{docsection {
-The set of public local state of agents contained in the dynamic state can be read using the following method of the {{{ConsistentPublicLocalDynamicState}}} class:
-{{{
-public Set&lt;IPublicLocalStateOfAgent&gt; getPublicLocalStateOfAgents();
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the public local state of the agents lying in the level of this dynamic state.
-
-''Returns:''
-*The public local state of the agents lying in the level of this dynamic state.
-}}}
-}}} === +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set the value&lt;/span&gt;]
-{{docsection {
-The set of public local state of agents contained in the dynamic state can be modified using an ''addition'' or a ''removal'' method of the {{{ConsistentPublicLocalDynamicState}}} class.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Adding a public local state&lt;/span&gt;]
-{{docsubsection{
-{{{
-public void addPublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Adds the public local state of an agent to this public local dynamic state.
-This method does nothing if public local state of that agent is already in this dynamic state.
-
-''Parameters:''
-*''Parameter (//publicLocalState//):'' The public local state of the agent to add to the dynamic state.
-}}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Removing a public local state&lt;/span&gt;]
-{{docsubsection{
-{{{
-public void removePublicLocalStateOfAgent( IPublicLocalStateOfAgent publicLocalState );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Removes the public local state of an agent from this public local dynamic state.
-
-''Parameters:''
-*''Parameter (//publicLocalState//):'' The removed public local state being removed.
-}}}
-}}} ===
-}}} ===
-
-*The ''influences'' persisting in the dynamic state of the level at that time. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Get the value&lt;/span&gt;]
-{{docsection {
-The read access to the persistent influences of the level is obtained by the following methods of the {{{ConsistentPublicLocalDynamicState}}} class:
-*A method getting all the persistent influences;
-*A method getting all only the system influences;
-*A method getting all only the regular influences.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Get all the influences&lt;/span&gt;]
-{{docsubsection {
-{{{
-public Set&lt;IInfluence&gt; getStateDynamics();
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the state dynamics of this public local dynamic state, //i.e.// the influences that are still active (being performed) when the level was in this state.
-
-''Returns:''
-*The state dynamics of this public local dynamic state.
-}}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Get the system influences&lt;/span&gt;]
-{{docsubsection {
-{{{
-public Set&lt;IInfluence&gt; getSystemInfluencesOfStateDynamics();
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the system influences contained in the state transitory dynamics.
-
-''Returns:''
-*The system influences of the value returned by the IPublicLocalDynamicState#getStateDynamics() method.
-}}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Get the regular influences&lt;/span&gt;]
-{{docsubsection {
-{{{
-public Set&lt;IInfluence&gt; getRegularInfluencesOfStateDynamics();
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Gets the non-system influences contained in the state transitory dynamics.
-
-''Returns:''
-*The non-system influences of the value returned by the IPublicLocalDynamicState#getStateDynamics() method.
-}}}
-}}} ===
-
-}}} ===  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Set the value&lt;/span&gt;]
-{{docsection {
-The modification of the persistent influences of the level is obtained by the following methods of the {{{ConsistentPublicLocalDynamicState}}} class:
-*A method adding an influence to the dynamic state;
-*A method removing all the system influences from the dynamic state;
-*A method removing all the regular influences from the dynamic state.
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Add an influence&lt;/span&gt;]
-{{docsubsection {
-{{{
-public void addInfluence( IInfluence influence );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Adds an influence to this public local dynamic state.
-
-''Parameters:''
-*''Parameter (//influence//):'' The influence to add to this public local dynamic state.
-}}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Remove all the system influences&lt;/span&gt;]
-{{docsubsection {
-{{{
-public void clearSystemInfluences( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Remove all the system influences of this dynamic state.
-}}}
-}}} ===
-
-
-+++?[&lt;span class=&quot;docbigbtn&quot;&gt;Remove all the regular influences&lt;/span&gt;]
-{{docsubsection {
-{{{
-public void clearRegularInfluences( );
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Remove all the regular influences of this dynamic state.
-}}}
-}}} ===
-
-}}} ===
-
-!Construction
-The construction of a consistent public local dynamic state of a level relies on a constructor having two parameters:
-*The ''time stamp'' for which the dynamic state is defined;
-*The ''identifier'' of the level of the dynamic state;
-The following elements of the dynamic state are either null (public local state of the environment) or empty (public local state of the agents contained in the level, influences) and have to be initialized with the appropriate methods mentionned above.
-
-This constructor has the following signature:
-{{{
-public ConsistentPublicLocalDynamicState( 
-		SimulationTimeStamp time,
-		LevelIdentifier level
-);
-}}}
-{{javadoctitle{Javadoc:}}}
-{{javadocsection{
-Builds a consistent public local state for a specific time stamp.
-This state still has to define the public local state of the environment, of the agents and the initial influences lying into the state dynamics, using the appropriate setting methods.
-
-''Parameters:''
-*''Parameter (//time//):'' The time stamp for which the public local dynamic state is defined.
-*''Parameter (//level//):'' The level of the public local dynamic state.
-''Throws:''
-*''IllegalArgumentException:'' If an argument is null.
-}}}</pre>
-</div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201401220938" changecount="47">
+<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201402211422" changecount="49">
 <pre>The micro kernel of SIMILAR is characterized by three components.
 !Micro kernel API
 [&lt;img(25%,)[images/guidelines.png]]
@@ -4096,8 +3863,8 @@ The constructor of a level has to comply with the following requirements:
 *The most recent consistent state has to be partially initialized:
 **The +++^34em^*@[&lt;strong&gt;time stamp&lt;/strong&gt; of that state]
 More precisely the time stamp of the last consistent state of the level.
-=== has to be equalt to the initial time stamp of the simulation;
-**The remaining initialization of the last consistent state is [[completed later|Design - Initial state]];
+=== has to be equal to the initial time stamp of the simulation;
+**The remaining initialization of the last consistent state is [[completed later|SMD - Initial state]];
 *The most recent transitory state has to be initialized;
 *The ''perception relation graph'' of the level has to be initialized and contain at least its own identifier;
 *The ''influence relation graph'' of the level has to be initialized and contain at least its own identifier;
@@ -5993,14 +5760,58 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 <div title="Simulation engines" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="3">
 <pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="2">
-<pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
+<div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201402211624" changecount="76">
+<pre>{{stepMainTitle{Runnnig a simulation with SIMILAR}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+{{focusemphasisblock{
+This part of the documentation is dedicated to the execution of an existing simulation designed with SIMILAR.
+}}}
+To run simulations with SIMILAR, the various elements have to be previously defined. These elements can either be designed by the user, or come from existing classes of the [[common libraries|./commonLibs/index.html]] of SIMILAR:
+*A ''simulation model'', describing the initial state and the mechanics of the simulation; {{morelink{[[How to create|Simulation models]]}}}
+*''Observation probes'', describing how to retrieve the results of the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|./commonLibs/index.html#Probes]]}}}
+*A ''simulation engine'' defining the java algorithms used in the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|./commonLibs/index.html#Probes]]}}}
+Assuming that all these items are whether defined in the source directory of the simulation or within the libraries, then running a simulation consists in:
+#Compiling the sources of the simulation, using a //''javac''// like command;
+#Running the main class of the simulation, using the //''java''// command.
+!Requirements
+[&gt;img[images/execution/similarBinariesTree.png]]
+@@display:block;width:60%;{{bigemphasisblock{
+The instructions described in this part of the documentation assumes that the user did not change the directory tree of the SIMILAR binaries nor the files it contains (see image).
+}}}@@
+
+For both compilation and execution operations, the {{{javac}}} and {{{java}}} command lines have to include the binaries of SIMILAR within their classpath. To facilitate the work of designers, only the jar file whose name starts with {{{similar-distribution-}}} (on the image {{{similar-distribution-0.2.1.jar}}}) has to be mentionned in the classpath. This jar links automatically all the binaries of SIMILAR.
+{{clearright{}}}
+!Using apache Ant
+One of the best approaches to perform simulation is to use building tools like ''Maven'' or ''Ant''. Since understanding maven is not easy, we describe here how to use ant.
+
+{{bigemphasisblock{
+We assume that apache ant is already installed on the machine, and that the path to the ant binary is added to the PATH environment variable.
+}}}
+[&gt;img[images/execution/executionTreeExample.png]]
+The main task in ant consist in defining the ''build script'' that will run the simulation. Such a script usually takes the form of a &quot;{{{build.xml}}}&quot; file located at the root of the directory where the simulation is defined.
+Assuming that the SIMILAR binaries are located in a &quot;{{{/home/binaries/similar/}}}&quot; directory and that the simulation is declared in the &quot;{{{/home/me/projects/mysimulation/}}}&quot; directory, then the image provides an illustration of what the tree hierarchy should look like, and where the ''build.xml'' file should be.
+
+If we assume that the main class of the simulation is the {{className{SimulationMain}}} class from the {{packageName{fr.lgi2a.similar.custom.mysimulation}}}, then the build file should be [[this one|files/execution/build.xml]]. The simulation is then performed by running one of the following commands.
+
+__Compiling and then running the simulation:__
+{{{
+ant all
+}}}
+__Running the simulation without compiling:__
+{{{
+ant run
+}}}
+{{clearright{}}}</pre>
 </div>
-<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201402201405" changecount="87">
+<div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201402211428" changecount="89">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt;{{stepMainTitle{Simulation model design}}}
 {{guidelinesNavMenu{&amp;lt;&amp;lt; previous step | [[next step &gt;&gt;|SMD - Preparation]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
-This part of the documentation is dedicated to the design and the implementation of SIMILAR simulation models using the micro-kernel only. At the same time, it describes best practices facilitating the organization of the implementation of the simulation. Note that the guidelines provided here are not absolute rules. They only make the design of simulations either easier, or more robust to model revisions.
+{{focusemphasisblock{
+This part of the documentation is dedicated to the design and the implementation of SIMILAR simulation models using the micro-kernel only. At the same time, it describes best practices facilitating the organization of the implementation of the simulation. 
+}}}
+Note that the guidelines provided here are not absolute rules. They only make the design of simulations either easier, or more robust to model revisions.
 !Foreword
 &lt;&lt;tiddler [[Simulation models - Foreword]]&gt;&gt;
 {{nextButton{[[Start the creation of a new model!|SMD - Preparation]]}}}</pre>
@@ -7469,9 +7280,6 @@ This constructor defines the following arguments:
 .branch .button {border:1px solid #DDD; color:#AAA;font-size:9px;padding:0 2px;margin-right:0.3em;vertical-align:middle;text-align:center;}
 /*}}}*/</pre>
 </div>
-<div title="Test" creator="Designer" modifier="Designer" created="201401151245" modified="201401151248" changecount="4">
-<pre></pre>
-</div>
 <div title="TiddlersBarPlugin" creator="Administrator" modifier="Administrator" created="201311150853" modified="201311150900" tags="systemConfig excludeLists plugin" changecount="3">
 <pre>/***
 |''Name:''|TiddlersBarPlugin|
@@ -7668,7 +7476,7 @@ config.shadowTiddlers.PageTemplate=config.shadowTiddlers.PageTemplate.replace(/&
 
 //}}}</pre>
 </div>
-<div title="ToolbarCommands" creator="Designer" modifier="Designer" created="201311151419" changecount="1">
+<div title="ToolbarCommands" creator="Designer" modifier="Designer" created="201311151419" modified="201402211418" tags="excludeLists" changecount="2">
 <pre>|~ViewToolbar|closeTiddler closeOthers editTiddler &gt; fields syncing permalink references jump|
 |~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|</pre>
 </div>

@@ -114,6 +114,7 @@ public interface IProbe {
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
 	);
+	
 	/**
 	 * Ends the observation of a simulation.
 	 * <p>

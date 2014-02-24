@@ -160,6 +160,14 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * {@inheritDoc}
 	 */
 	@Override
+	public IEnvironment4Engine getEnvironment( ){
+		return this.environment;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public ConsistentPublicLocalDynamicState disambiguation(
 			TransitoryPublicLocalDynamicState transitoryDynamicState
 	) {

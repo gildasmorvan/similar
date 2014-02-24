@@ -767,7 +767,7 @@ Tiddler.prototype.changed = function()
 };
 //}}}</pre>
 </div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201402211422" changecount="49">
+<div title="Documentation content" creator="Designer" modifier="Designer" created="201311281648" modified="201402241323" changecount="52">
 <pre>The micro kernel of SIMILAR is characterized by three components.
 !Micro kernel API
 [&lt;img(25%,)[images/guidelines.png]]
@@ -787,22 +787,16 @@ The ''common libraries'' of the micro kernel, containing generic implementations
 !Micro-kernel usage examples
 [&lt;img(25%,)[images/examples.png]]
 The examples illustrating the use of the micro kernel and the common libraries to design simulations. These examples include:
-*A simulation where the FBI chases aliens that experiment on citizens. +++?[&lt;span class=&quot;expandbutton&quot;&gt;Usage details&lt;/span&gt;]
+*A bubble chamber simulation. +++?[&lt;span class=&quot;expandbutton&quot;&gt;Usage details&lt;/span&gt;]
 {{moresection{
 This simulation illustrates:
 *how the concepts of the formal model of SIMILAR are applied to a concrete simulation;
-*how to use the common libs to build simulations;
-*how many different simulation design problems are handled in SIMILAR.
+*how to use the common libs to build simulations.
 }}}
 ===
 
-*A simulation providing the complete trace of the simulation execution. +++?[&lt;span class=&quot;expandbutton&quot;&gt;Usage details&lt;/span&gt;]
-{{moresection{
-This simulation can be used to study the execution mechanisms of a simulation, on a detailed execution trace.
-}}}
-===
-
-{{linkbigbtn center {[[Usage examples index|./examples/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}</pre>
+{{linkbigbtn center {[[Usage examples index|./examples/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}
+{{clear{}}}</pre>
 </div>
 <div title="DropDownMenuPlugin" creator="Designer" modifier="Designer" created="201311151101" modified="201401150903" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***
@@ -2136,8 +2130,146 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 2005.11.03 1.0.0 initial public release
 &lt;&lt;&lt;</pre>
 </div>
-<div title="Observation probes" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="2">
-<pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
+<div title="Observation probes" creator="Designer" modifier="Designer" created="201311290923" modified="201402241235" changecount="15">
+<pre>{{stepMainTitle{Observing simulation results with SIMILAR}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Observation probes - Intro]]&gt;&gt;
+!Structure of a probe in SIMILAR
+&lt;&lt;tiddler [[Observation probes - Structure]]&gt;&gt;&lt;html&gt;
+&lt;h1&gt;Specifications and implementation instructions&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Observation probes - Specifications]]&gt;&gt;&lt;html&gt;
+&lt;h1&gt;Creation of a probe class&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Observation probes - Example]]&gt;&gt;</pre>
+</div>
+<div title="Observation probes - Accessing data" creator="Designer" modifier="Designer" created="201402241100" changecount="1">
+<pre>Type the text for 'New Tiddler'</pre>
+</div>
+<div title="Observation probes - Example" creator="Designer" modifier="Designer" created="201402241029" modified="201402241314" changecount="7">
+<pre>The generated class has to:
+*Be located in the ''probes'' package of the [[tree hierarchy|SMD - Package tree]], or at least in a sub-package of that package;
+*Be named explicitly after the role of the probe in the simulation.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Observation probe full example 1&lt;/span&gt;]
+{{exsection{
+This example illustrates the creation of a probe writing in a file the evolution of the population of agents from specific families in the simulation. This probe is named {{className{ProbeListingAgentsPerCategory}}} and will be put in the {{packageName{fr.lgi2a.similar.customprobes}}} package.
+!Code
+The following code illustrates the implementation of such a probe. This code is also available as a [[stand alone|files/probes/ProbeListingAgentsPerCategory.java]] file:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/probes/ProbeListingAgentsPerCategory.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="Observation probes - Intro" creator="Designer" modifier="Designer" created="201402241031" modified="201402241035" changecount="3">
+<pre>{{focusemphasisblock{
+This part of the documentation is dedicated to the design and the implementation of observation probes.
+}}}
+In SIMILAR, a probe is a ''read-only'' component that can ''observe the dynamic state'' of the simulation during ''consistent or half-consistent'' states to extract data from it. These data are then displayed using various means for the users.
+Usually, probes are defined to show or export the simulation results.</pre>
+</div>
+<div title="Observation probes - Specifications" creator="Designer" modifier="Designer" created="201402241029" modified="201402241321" changecount="44">
+<pre>An observation probe is a class extending the {{className{[[IProbe|../api/fr/lgi2a/similar/microkernel/IProbe.html]]}}} interface, and defining the following methods it defines:
+*{{methodName{prepareObservation( )}}}, called by the engine before even initializing the simulation;  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+This method prepares the observation of a new simulation. It is defined to open the streams or the other resources used during the observation of one simulation.
+{{{
+public void prepareObservation( );
+}}}
+}}} ===
+
+*{{methodName{observeAtInitialTimes( ... )}}}, called by the engine after the initialization of the simulation +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+This method triggers the observation of the state of the simulation when the initial time stamp is reached.
+{{{
+void observeAtInitialTimes(
+	SimulationTimeStamp initialTimestamp,
+	ISimulationEngine simulationEngine
+);
+}}}
+This method defines the following arguments:
+*{{argumentName{initialTimestamp}}} modeling the value of the initial time stamp of the simulation;
+*{{argumentName{simulationEngine}}} providing a reference to the simulation engine and the simulation it runs;
+}}} ===
+
+*{{methodName{observeAtPartialConsistentTime( ... )}}}, called by the engine after a reaction in the simulation +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+This method triggers the observation of the state of the simulation when at least one level reached a consistent state.
+{{{
+void observeAtPartialConsistentTime(
+	SimulationTimeStamp timestamp,
+	ISimulationEngine simulationEngine
+);
+}}}
+This method defines the following arguments:
+*{{argumentName{timestamp}}} modeling the value of the half-consistent time stamp of the simulation;
+*{{argumentName{simulationEngine}}} providing a reference to the simulation engine and the simulation it runs.
+}}} ===
+
+*{{methodName{observeAtFinalTime( ... )}}}, called by the engine after the last reaction of the simulation +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+This method triggers the observation of the state of the simulation when the final consistent state of the simulation is reached.
+{{{
+void observeAtFinalTime(
+	SimulationTimeStamp finalTimestamp,
+	ISimulationEngine simulationEngine
+);
+}}}
+This method defines the following arguments:
+*{{argumentName{finalTimestamp}}} modeling the value of the final time stamp of the simulation;
+*{{argumentName{simulationEngine}}} providing a reference to the simulation engine and the simulation it runs.
+}}} ===
+
+*{{methodName{reactToAbortion( ... )}}}, called by the engine when the simulation ended on the request of the user; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+This method triggers the observation of the last half-consistent state reached by the simulation before its abortion.
+{{{
+public void reactToAbortion( 
+	SimulationTimeStamp timestamp,
+	ISimulationEngine simulationEngine
+);
+}}}
+This method defines the following arguments:
+*{{argumentName{timestamp}}} modeling the time stamp of the last half-consistent state reached by the simulation before the abortion;
+*{{argumentName{simulationEngine}}} providing a reference to the simulation engine and the simulation it runs.
+}}} ===
+
+*{{methodName{reactToError( )}}}, called by the engine when the execution of the simulation caused an error;  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+This method triggers the observation of an error thrown by the currently running simulation.
+{{{
+public void reactToError(
+	String errorMessage,
+	Throwable cause
+);
+This method defines the following arguments:
+*{{argumentName{errorMessage}}} modeling the error message associated with the error;
+*{{argumentName{cause}}} modeling the error that caused the simulation to stop.
+}}}
+}}} ===
+
+*{{methodName{endObservation( )}}}, called by the engine at the very end of the simulation.  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+This method is called at the end of the simulation, whatever the reason that caused the simulation to stop (normal end, error, abortion). It is defined to close the streams or the other resources used during the observation of one simulation.
+{{{
+public void endObservation( );
+}}}
+}}} ===
+
+The observation of the simulation is based on specific accessors defined in the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} class. They are defined by the following methods:
+*{{methodName{[[getLevels()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getLevels()]]}}}, getting the identifier of the levels defined for the simulation;
+*{{methodName{[[getSimulationDynamicStates()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getSimulationDynamicStates()]]}}}, getting the dynamic state of each level of the simulation;
+*{{methodName{[[getEnvironment()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getEnvironment()]]}}}, getting the environment of the simulation;
+*{{methodName{[[getAgents()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getAgents()]]}}}, getting the agents currently lying in the simulation;
+*{{methodName{[[getAgents(LevelIdentifier)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getAgents(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}, getting the agents currently lying in a specific level of the simulation.</pre>
+</div>
+<div title="Observation probes - Structure" creator="Designer" modifier="Designer" created="201402241029" modified="201402241043" changecount="11">
+<pre>In SIMILAR, an ''observation probe'' is a software component that can observe and extract data from the dynamic state of the simulation:
+*At the ''initial time'' of the simulation;
+*At each ''consistent'' or ''half-consistent time'' of the simulation;
+*At the ''final time'' of the simulation;
+Since simulations do not always execute peacefully, probes also have to manage the case when the simulation fails because of an error. Moreover, since some probes might use external resources, they also have to be notified when a new simulation is about to start or has ended. Consequently, probes are also notified when:
+*A ''new simulation'' has been ''started'' with the simulation engine;
+*The ''simulation has ended'' (no matter the reason);
+*The ''simulation'' ends because of an ''error'';
+*The ''simulation'' has been ''aborted''.</pre>
 </div>
 <div title="PageTemplate" creator="Designer" modifier="Designer" created="201311150912" modified="201311151007" tags="HaemoglobinTheme excludeLists" changecount="19">
 <pre>&lt;!--{{{--&gt;
@@ -5757,14 +5889,113 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 //}}}
 </pre>
 </div>
-<div title="Simulation engines" creator="Designer" modifier="Designer" created="201311290923" modified="201311290928" changecount="3">
-<pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
+<div title="Simulation engines" creator="Designer" modifier="Designer" created="201311290923" modified="201402241326" changecount="5">
+<pre>{{stepMainTitle{Creating simulation engines for SIMILAR}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201402211624" changecount="76">
+<div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201402241325" changecount="94">
 <pre>{{stepMainTitle{Runnnig a simulation with SIMILAR}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
-{{focusemphasisblock{
+&lt;&lt;tiddler [[Simulation execution - Intro]]&gt;&gt;&lt;html&gt;
+&lt;h1&gt;Requirements&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Simulation execution - Requirements]]&gt;&gt;&lt;html&gt;
+&lt;h1&gt;Compiling and running simulations&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Simulation execution - Compile and run]]&gt;&gt;</pre>
+</div>
+<div title="Simulation execution - Ant" creator="Designer" modifier="Designer" created="201402240930" modified="201402241011" changecount="18">
+<pre>One of the best approaches to perform simulation is to use building tools like ''Maven'' or ''Ant''. Since maven has a steep learning curve, we only describe here how to use ant.
+
+{{bigemphasisblock{
+We assume that apache ant is already installed on the machine, and that the path to the ant binary is added to the PATH environment variable.
+}}}
+[&gt;img[images/execution/executionTreeExample_ant.png]]
+The main task in ant consist in defining the ''build script'' that will run the simulation. Such a script usually takes the form of a &quot;{{{build.xml}}}&quot; file located at the root of the directory where the simulation is defined.
+
+Assuming that the SIMILAR binaries are located in a &quot;{{{/home/binaries/similar/}}}&quot; directory, then the image provides an illustration of what the tree hierarchy should look like, and where the ''build.xml'' file should be.
+{{clearright{}}}
+The build can be written as the following file. Note that this file is also available as a [[stand alone file|files/execution/build.xml]].
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/execution/build.txt' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+!Compilation and execution commands
+Using this script, the simulation is performed by running one of the following commands.
+
+__Compiling the simulation:__
+{{{
+ant compile
+}}}
+__Running the simulation without compiling:__
+{{{
+ant run
+}}}
+__Compiling and then running the simulation:__
+{{{
+ant all
+}}}
+The latter command will produce the following output in the command shell:
+{{{
+/home/me/projects/mysimulation&gt;ant all
+Buildfile: /home/me/projects/mysimulation/build.xml
+
+clean:
+
+compile:
+    [javac] Compiling 2 source files to /home/me/projects/mysimulation/bin
+
+run:
+     [java] Running the simulation...
+     [java] Simulation done !
+
+all:
+
+BUILD SUCCESSFUL
+Total time: 1 second
+
+/home/me/projects/mysimulation&gt;
+}}}
+{{clearright{}}}</pre>
+</div>
+<div title="Simulation execution - Command line" creator="Designer" modifier="Designer" created="201402241012" modified="201402241024" changecount="6">
+<pre>Using the command line, the simulation is compiled using a ''javac'' like command and is performed using the ''java'' command.
+
+{{bigemphasisblock{
+We assume that a JavaSE JDK or SDK is already installed on the machine, and than the path to the java binaries is added to the PATH environment variable.
+}}}&lt;html&gt;
+&lt;h1&gt;Compilation&lt;/h1&gt;&lt;/html&gt;
+The compilation of the simulation is made using the following command line:
+{{{
+/home/me/projects/mysimulation&gt;
+javac -d target/bin -classpath &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar&quot; ALLJAVACLASSES
+}}}
+In this command, ALLJAVACLASSES is a space separated list of all the java classes that have to be compiled. In some environments, like Linux Bash, it is possible to use wildcards to simplify the command:
+{{{
+/home/me/projects/mysimulation&gt;
+shopt -s globstar
+/home/me/projects/mysimulation&gt;
+javac -d target/bin -classpath &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar&quot; /home/me/projects/mysimulation/src/main/java/**/*.java
+}}}
+!Execution
+The execusion of the simulation is made using the following command line:
+{{{
+/home/me/projects/mysimulation&gt;
+java -cp &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar:target/bin&quot; fr.lgi2a.similar.custom.mysimulation.SimulationMain
+}}}</pre>
+</div>
+<div title="Simulation execution - Compile and run" creator="Designer" modifier="Designer" created="201402240936" modified="201402241012" changecount="8">
+<pre>Various approaches can be used to compile and run java classes. In this section, we do not intend to list them all. Instead, we present two kinds of approaches:
+*A ''pure command line approach'', where the user has to specify everything; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;More&lt;/span&gt;]
+{{implsection{
+&lt;&lt;tiddler [[Simulation execution - Command line]]&gt;&gt;
+}}} ===
+
+*A ''script based approach'', where the user has to specify only the path to directories of the project and the name of the main class of the simulation; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;More&lt;/span&gt;]
+{{implsection{
+&lt;&lt;tiddler [[Simulation execution - Ant]]&gt;&gt;
+}}} ===</pre>
+</div>
+<div title="Simulation execution - Intro" creator="Designer" modifier="Designer" created="201402240930" modified="201402240931" changecount="2">
+<pre>{{focusemphasisblock{
 This part of the documentation is dedicated to the execution of an existing simulation designed with SIMILAR.
 }}}
 To run simulations with SIMILAR, the various elements have to be previously defined. These elements can either be designed by the user, or come from existing classes of the [[common libraries|./commonLibs/index.html]] of SIMILAR:
@@ -5773,36 +6004,24 @@ To run simulations with SIMILAR, the various elements have to be previously defi
 *A ''simulation engine'' defining the java algorithms used in the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|./commonLibs/index.html#Probes]]}}}
 Assuming that all these items are whether defined in the source directory of the simulation or within the libraries, then running a simulation consists in:
 #Compiling the sources of the simulation, using a //''javac''// like command;
-#Running the main class of the simulation, using the //''java''// command.
-!Requirements
-[&gt;img[images/execution/similarBinariesTree.png]]
+#Running the main class of the simulation, using the //''java''// command.</pre>
+</div>
+<div title="Simulation execution - Requirements" creator="Designer" modifier="Designer" created="201402240930" modified="201402241008" changecount="14">
+<pre>[&gt;img[images/execution/similarBinariesTree.png]]
 @@display:block;width:60%;{{bigemphasisblock{
 The instructions described in this part of the documentation assumes that the user did not change the directory tree of the SIMILAR binaries nor the files it contains (see image).
 }}}@@
 
 For both compilation and execution operations, the {{{javac}}} and {{{java}}} command lines have to include the binaries of SIMILAR within their classpath. To facilitate the work of designers, only the jar file whose name starts with {{{similar-distribution-}}} (on the image {{{similar-distribution-0.2.1.jar}}}) has to be mentionned in the classpath. This jar links automatically all the binaries of SIMILAR.
-{{clearright{}}}
-!Using apache Ant
-One of the best approaches to perform simulation is to use building tools like ''Maven'' or ''Ant''. Since understanding maven is not easy, we describe here how to use ant.
+[&lt;img[images/execution/executionTreeExample.png]]
 
-{{bigemphasisblock{
-We assume that apache ant is already installed on the machine, and that the path to the ant binary is added to the PATH environment variable.
-}}}
-[&gt;img[images/execution/executionTreeExample.png]]
-The main task in ant consist in defining the ''build script'' that will run the simulation. Such a script usually takes the form of a &quot;{{{build.xml}}}&quot; file located at the root of the directory where the simulation is defined.
-Assuming that the SIMILAR binaries are located in a &quot;{{{/home/binaries/similar/}}}&quot; directory and that the simulation is declared in the &quot;{{{/home/me/projects/mysimulation/}}}&quot; directory, then the image provides an illustration of what the tree hierarchy should look like, and where the ''build.xml'' file should be.
-
-If we assume that the main class of the simulation is the {{className{SimulationMain}}} class from the {{packageName{fr.lgi2a.similar.custom.mysimulation}}}, then the build file should be [[this one|files/execution/build.xml]]. The simulation is then performed by running one of the following commands.
-
-__Compiling and then running the simulation:__
-{{{
-ant all
-}}}
-__Running the simulation without compiling:__
-{{{
-ant run
-}}}
-{{clearright{}}}</pre>
+In this section, we illustrate how to compile and to run a simulation on an example assuming that the simulation has the following properties. These properties are summed up in the image displayed to the left:
+*The binaries of SIMILAR are located in a &quot;{{{/home/binaries/similar/}}}&quot; directory;
+*The simulation is declared in the &quot;{{{/home/me/projects/mysimulation/}}}&quot; directory;
+*The sources of the simulation are located in the {{{src/main/java/}}} directory of the simulation directory;
+*The main class of the simulation is the {{className{SimulationMain}}} class from the {{packageName{fr.lgi2a.similar.custom.mysimulation}}} package.
+Note that the binaries of similar or the directory where the simulation is declared can be placed in any other directory. In such cases, pay attention to replace the corresponding directory name in the examples provided below.
+{{clear{}}}</pre>
 </div>
 <div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201402211428" changecount="89">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt;{{stepMainTitle{Simulation model design}}}

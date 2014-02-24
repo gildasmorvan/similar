@@ -52,6 +52,7 @@ import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
 
 /**
  * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
@@ -148,6 +149,16 @@ public interface ISimulationEngine {
 	 * @throws java.util.NoSuchElementException If no such level was defined for the simulation.
 	 */
 	Set<IAgent4Engine> getAgents( LevelIdentifier level );
+	
+	/**
+	 * Gets the environment the simulation.
+	 * <h2>Usage</h2>
+	 * <p>
+	 * 	This method is used in probes to read the data about the simulation, when the simulation reaches a time stamp.
+	 * </p>
+	 * @return The environment of the simulation.
+	 */
+	IEnvironment4Engine getEnvironment( );
 	
 	/**
 	 * Disambiguates a public local dynamic state, <i>i.e.</i> transforms a transitory state into a fully observable state.

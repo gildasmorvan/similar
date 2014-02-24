@@ -596,6 +596,219 @@ config.macros.BackstageSidebarPlugin.init = function() {
 !(end of Stylesheet)
 ***/</pre>
 </div>
+<div title="CL - Abstract - Agent" creator="Designer" modifier="Designer" created="201402241538" modified="201402241546" changecount="13">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Agent}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation named {{className{[[AbstractAgent|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html]]}}} to the {{className{[[IAgent|../../api/fr/lgi2a/similar/microkernel/agents/IAgent.html]]}}} interface modeling an agent in the simulation. This abstract class provides the behavior to the generic and domain-independent methods. Only the following methods have still to be specified by the users:
+*{{methodName{perceive(...)}}} performing the perception process of the agent;
+*{{methodName{reviseGlobalState(...)}}} performing the global state revision process of the agent;
+*{{methodName{decide(...)}}} performing the decision process of the agent.
+Note that this class also provides a method initializing the value of the ''global state'' of the agent:
+*{{methodName{initializeGlobalState(IGlobalState)}}} setting the initial value of the global state of the agent; {{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html#initializeGlobalState(fr.lgi2a.similar.microkernel.agents.IGlobalState)]]}}}
+!Implementation instructions
+A class extending {{className{[[AbstractAgent|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+public AbstractAgent( 
+	AgentCategory category 
+);
+}}}
+This method defines the following arguments:
+*{{argumentName{category}}} modeling the category of the instances of this agent class.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/highLevel/agentSkeletonTree.png]]
+This step illustrates the creation of an agent named &quot;City bus&quot;. The source of the class modeling the &quot;City bus&quot; agent is located in the ''agents.citybus'' package of the source tree hierarchy (see the image).
+
+The following code illustrates the implementation of the &quot;City bus&quot; agent using both the micro-kernel and the common libs. The following code is also available as a [[stand alone file|../files/simulationModel/highLevel/CityBusAgent2.java]]:
+{{clearright{}}}
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='../files/simulationModel/highLevel/CityBusAgent2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="CL - Abstract - Environment" creator="Designer" modifier="Designer" created="201402241527" modified="201402241537" changecount="11">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Environment}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation named {{className{[[AbstractEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html]]}}} to the {{className{[[IEnvironment|../../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html]]}}} interface modeling the environment of a simulation. This abstract class provides the behavior to the generic and domain-independent methods of this class. Only the following methods have still to be specified by the users:
+*{{methodName{natural(...)}}} specifying the natural action of the environment from each level.
+Note that this class also determines a method initializing the public and local state of the environment:
+*{{methodName{includeNewLevel(LevelIdentifier,ILocalStateOfEnvironment,ILocalStateOfEnvironment)}}} determines the public and private local state (in this order) of the environment for a specific level;{{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment, fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)]]}}}
+!Implementation instructions
+A class extending {{className{[[AbstractEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractEnvironment( );
+}}}
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/highLevel/environmentSkeletonTree.png]]
+This example illustrates the creation of the skeleton of an environment. The source of class modeling the environment is located in the {{packageName{environment}}} package of the source tree hierarchy (see the image).
+
+The following code illustrates the implementation of the environment using both the micro-kernel and the common libs. The sources of this class are also available in a [[stand alone file|../files/simulationModel/highLevel/EnvironmentSkeleton2.java]]:
+{{clear{}}}
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='../files/simulationModel/highLevel/EnvironmentSkeleton2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="CL - Abstract - Level" creator="Designer" modifier="Designer" created="201402241512" modified="201402241535" changecount="15">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Level}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation named {{className{[[AbstractLevel|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html]]}}} to the {{className{[[ILevel|../../api/fr/lgi2a/similar/microkernel/ILevel.html]]}}} interface modeling a level of the simulation. This abstract class provides the behavior to the generic and domain-independent methods of this class. Only the following methods have still to be specified by the users:
+*{{methodName{getNextTime(...)}}} getting the successor of a time stamp in the time model of the level;
+*{{methodName{makeSystemReaction(...)}}} performing a user-defined reaction to a set of system influences;
+*{{methodName{makeRegularReaction(...)}}}  performing a user-defined reaction to a set of regular influences.
+Note that this class also changes the way the influence and perception relation graph are handled. By default, the level belongs to its out neighborhood in the perception and influence relation graphs. The addition of levels to these neighborhoods is made by calling the following method during the creation of the level or in its constructor:
+*{{methodName{addPerceptibleLevel(LevelIdentifier)}}} to add a perceptible level from this level; {{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addPerceptibleLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{addInfluenceableLevel(LevelIdentifier)}}} to add an influenceable level from this level.{{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addInfluenceableLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+!Implementation instructions
+A class extending {{className{[[AbstractLevel|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractLevel(
+	SimulationTimeStamp initialTime,
+	LevelIdentifier identifier
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{initialTime}}} modeling the initial time of the simulation;
+*{{argumentName{identifier}}} corresponding to the identifier of the level.
+Note that the constructor of the created class has also to define the {{argumentName{initialTime}}} argument, since its value is known only during the creation context of the level.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/highLevel/levelSkeletonTree.png]]
+This example describes the creation of a level in the context of a simulation where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
+*A &quot;city&quot; level
+*A &quot;slumbs&quot; level
+*A &quot;country&quot; level
+*A &quot;seashore&quot; level
+This step illustrates the creation of a level named &quot;city&quot; such that:
+*The perception graph contains the &quot;city&quot; and &quot;slumbs&quot; levels;
+*The influence graph contains the &quot;city&quot;, &quot;slumbs&quot; and &quot;country&quot; levels.
+*The source of the class modeling the &quot;City&quot; level is located in the ''levels'' package of the source tree hierarchy (see the image). 
+The following code illustrates the implementation of the environment using both the micro-kernel and the common libs. These sources are also available in a [[stand alone file|../files/simulationModel/highLevel/CityLevelSkeleton2.java]]:
+{{clear{}}}
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='../files/simulationModel/highLevel/CityLevelSkeleton2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="CL - Abstract - Simulation engine" creator="Designer" modifier="Designer" created="201402241442" modified="201402241505" changecount="15">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Simulation engine}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation named {{className{[[AbstractSimulationEngine|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractSimulationEngine.html]]}}} to the {{className{[[ISimulationEngine|../../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} interface modeling a simulation engine. This abstract class provides the behavior to the generic and domain-independent methods. Only the following methods have still to be specified by the users:
+*{{methodName{requestSimulationAbortion()}}}, called whenever the user asks the engine to abort the currently running simulation;
+*{{methodName{runNewSimulation(ISimulationModel)}}} creating, initializing and running a simulation using the provided model;
+*{{methodName{getSimulationDynamicStates()}}} getting the current half-dynamic state of the simulation;
+*{{methodName{getAgents()}}} getting the agents currently lying in the simulation;
+*{{methodName{getAgents(LevelIdentifier)}}} getting the agents located in a specific level at the current time;
+*{{methodName{getLevels()}}} getting the levels specified for the simulation;
+*{{methodName{getEnvironment()}}} getting the environment of the simulation;
+*{{methodName{disambiguation(TransitoryPublicLocalDynamicState)}}} getting the disambiguated dynamic state of a level.
+!Implementation instructions
+A class extending {{className{[[AbstractSimulationEngine|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractSimulationEngine.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractSimulationEngine(  );
+}}}
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+[img(98%,)[images/workInProgress.png]]
+}}}</pre>
+</div>
+<div title="CL - Abstract - Simulation model" creator="Designer" modifier="Designer" created="201402241500" modified="201402241523" changecount="15">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Simulation model}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation named {{className{[[AbstractSimulationModel|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractSimulationModel.html]]}}} to the {{className{[[ISimulationModel|../../api/fr/lgi2a/similar/microkernel/ISimulationModel.html]]}}} interface modeling a simulation model with a specific initial state. This abstract class provides the behavior to the generic and domain-independent methods of this class. Only the following methods have still to be specified by the users:
+*{{methodName{isFinalTimeOrAfter(...)}}} determining if the simulation currently has to stop;
+*{{methodName{generateLevels(...)}}} specifiying the levels that will be used in the simulation;
+*{{methodName{generateEnvironment(...)}}} specifiying the environment and its initial state used in the simulation;
+*{{methodName{generateAgents(...)}}} specifiying the agents initially lying in the simulation.
+!Implementation instructions
+A class extending {{className{[[AbstractSimulationEngine|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractSimulationEngine.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractSimulationModel(
+	SimulationTimeStamp initialTime
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{initialTime}}} modeling the initial time of the simulation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+We consider a wildlife simulation with this [[list of levels|../files/simulationModel/highLevel/WildlifeLevelList.java]] and this [[list of agents|../files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]. In this example, we wish to define a wildlife simulation with lion and gazelle agents only. Therefore, this initialization profile:
+*creates only a &quot;Savannah&quot; level;
+*places only an initial number of agents of both classes in the simulation, at random locations;
+*stops when a final time is reached.
+!Code
+We assume that:
+*The &quot;Savannah&quot; level is modeled by the {{className{SavannahLevel}}} class, which constructor has the following arguments:
+*#{{argumentName{initialTime}}} modeling the initial time stamp of the simulation;
+*#{{argumentName{eatThreshold}}} modeling a threshold distance for the eat behavior of predators (see the example of &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Reaction - To regular influences]]&quot;&gt;this step&lt;/a&gt;&lt;/html&gt; of the methodology);
+*The environment is implemented as a {{className{WildlifeEnvironment}}} extending the {{className{AbstractEnvironment}}} class from the common libs. {{className{WildlifeEnvironment}}} defines a constructor with no arguments, and has the following as public and private local states:
+**{{className{EnvPLSInSavannah}}} modeling the public local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have the following arguments:
+***{{argumentName{initialHumidity}}} modeling the initial humidity of the environment;
+***{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+***{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+**{{className{EnvHLSInSavannah}}} modeling a private local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have no arguments;
+*Agents from the ''gazelle'' category can be created using the {{className{AgtGazelleFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*Agents from the ''lion'' category can be created using the {{className{AgtLionFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*A &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Tools preparation - Random]]&quot;&gt;random number generator&lt;/a&gt;&lt;/html&gt; class {{className{RandomValueFactory}}} defines in its strategy a method named {{methodName{randomLocationIn(doube,double)}}} getting a random location within the specified bounds having a width and a height provided as arguments;
+*The parameters of the simulation are declared as a field named {{fieldName{parameters}}}, containing the following public fields:
+**{{fieldName{initialTime}}} modeling the initial time of the simulation;
+**{{fieldName{finalTime}}} modeling the final time of the simulation;
+**{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
+**{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
+**{{fieldName{initialHumidity}}} modeling the initial humidity level in the &quot;Savannah&quot; level;
+**{{fieldName{initialNumOfGazelles}}} modeling the initial number of gazelle agents used in the simulation;
+**{{fieldName{initialNumOfLions}}} modeling the initial number of lion agents used in the simulation;
+**{{fieldName{eatBehaviorThresholdDistance}}} modeling the maximal distance that can separate a predator from its prey for a &quot;eat&quot; behavior.
+Based on these information, the corresponding ''simulation model initialization profile'' is implemented with the following code. The sources of this class are also available as a [[stand alone|../files/simulationModel/finalStep/WildlifeSimulationModel.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='../files/simulationModel/finalStep/WildlifeSimulationModel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="CL - Abstract implementations" creator="Designer" modifier="Designer" created="201402241432" modified="201402241548" changecount="14">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract classes}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of SIMILAR define ''abstract classes'' providing a default implementation to the generic methods of the following elements of the micro-kernel:
+*A [[simulation engine|CL - Abstract - Simulation engine]];
+*A [[simulation model|CL - Abstract - Simulation model]];
+*A [[level|CL - Abstract - Level]];
+*An [[environment|CL - Abstract - Environment]];
+*An [[agent|CL - Abstract - Agent]];
+*A private or public [[local state of an agent or of the environment|CL - Abstract - Local states]];
+*[[Perceived data|CL - Abstract - Perceived data]] .</pre>
+</div>
+<div title="Common libs - Navigation menu" creator="Designer" modifier="Designer" created="201402241333" modified="201402241434" changecount="28">
+<pre>*[[|Home]]
+*[[Abstract implementations|CL - Abstract implementations]]
+**[[Simulation engine|CL - Abstract - Simulation engine]]
+**[[Simulation model|CL - Abstract - Simulation model]]
+**[[Level|CL - Abstract - Level]]
+**[[Environment|CL - Abstract - Environment]]
+**[[Agent|CL - Abstract - Agent]]
+**[[Local states|CL - Abstract - Local states]]
+**[[Perceived data|CL - Abstract - Perceived data]]
+*[[Generic implementations|CL - Generic implementations]]
+**[[Empty states]]
+**[[Empty perceived data]]
+**[[Passive agent]]
+**[[Passive environment]]
+*[[Simulation engines|CL - Engines]]
+**[[Default|CL - Engines - Mono threaded Default disambiguation]]
+*[[Observation probes|CL - Probes]]
+**[[Print exceptions|CL - Probes - ExceptionPrinter]]
+**[[Execution steps|CL - Probes - ExecutionTracker]]
+&lt;&lt;dropMenu&gt;&gt;</pre>
+</div>
 <div title="ConfigTweaks" creator="Administrator" modifier="Designer" created="201311150903" modified="201401211600" tags="excludeLists systemConfig" changecount="4">
 <pre>/*{{{*/
 config.options.txtUserName='Designer';
@@ -709,9 +922,6 @@ Tiddler.prototype.changed = function()
 			this.links.splice(this.links.indexOf(t[i]),1);
 };
 //}}}</pre>
-</div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311290947" modified="201311291023" changecount="11">
-<pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
 </div>
 <div title="DropDownMenuPlugin" creator="Designer" modifier="Designer" created="201311151101" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
@@ -976,20 +1186,17 @@ Tabulation content 2.
 <div title="HaemoSideBar" creator="Designer" modifier="Designer" created="201311150920" modified="201311150925" tags="HaemoglobinTheme excludeLists" changecount="5">
 <pre></pre>
 </div>
-<div title="Home" creator="Designer" modifier="Designer" created="201311290939" modified="201402211403" changecount="22">
-<pre>[&gt;img(45%,)[images/structure_microCommonlibs.png]]
+<div title="Home" creator="Designer" modifier="Designer" created="201311290939" modified="201402241549" changecount="32">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Micro kernel - Common libraries}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+[&gt;img(45%,)[images/structure_microCommonlibs.png]]
 The ''common libraries'' of the micro-kernel contain generic implementations of simulation algorithms and results exporting features. These libraries ''facilitate the design of simulations with the micro kernel'', owing to:
-*Concrete simulation engines;
-*Concrete probes;
-*Concrete disambiguation operators;
-*Default implementations of states and perceived data;
-*Abstract implementations of the interfaces of the micro kernel.
-This library also defines a &quot;learning&quot; tool ''illustrating the execution mecanics of a simulation'' with SIMILAR.
-
-{{linkbigbtn center{[[Documentation content]]}}}
-
-[[Probes]]
-[[SimulationEngines]]</pre>
+*Concrete [[simulation engines|CL - Engines]];
+*Concrete [[observation probes|CL - Probes]];
+*[[Abstract implementations|CL - Abstract implementations]] of the interfaces of the micro kernel;
+*[[Generic implementations|CL - Generic implementations]] of states and perceived data;
+{{clear{}}}</pre>
 </div>
 <div title="ImageSizePlugin" creator="Administrator" modifier="Administrator" created="201311150900" tags="systemConfig excludeLists plugin" changecount="1">
 <pre>/***
@@ -1478,11 +1685,17 @@ loading a script from a source url:
 2005.11.08 1.0.0 initial release
 &lt;&lt;&lt;</pre>
 </div>
-<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201401221007" tags="excludeLists system" changecount="33">
+<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201402241430" tags="excludeLists system" changecount="37">
 <pre>{{toparent{[[back to parent|../index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}
-''[[General|Home]]''
+''General''
 ----
-*[[Index|Documentation content]]</pre>
+*[[Index|Home]]
+''Common libs''
+----
+*[[Abstract classes|CL - Abstract implementations]]
+*[[Generic classes|CL - Generic implementations]]
+*[[Simulation engines|CL - Engines]]
+*[[Observation probes|CL - Probes]]</pre>
 </div>
 <div title="MathJaxPlugin" creator="Administrator" modifier="Designer" created="201311150900" modified="201311151031" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***
@@ -2084,8 +2297,8 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="Probes" creator="Designer" modifier="Designer" created="201402211348" changecount="1">
-<pre>Type the text for 'New Tiddler'</pre>
+<div title="Probes" creator="Designer" modifier="Designer" created="201402211348" modified="201402241425" changecount="2">
+<pre>&lt;&lt;tiddler [[CL - Probes]]&gt;&gt;</pre>
 </div>
 <div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201311151202" changecount="18">
 <pre>!Project Dependencies
@@ -2305,8 +2518,8 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 //}}}
 </pre>
 </div>
-<div title="SimulationEngines" creator="Designer" modifier="Designer" created="201402211403" changecount="1">
-<pre>Type the text for 'SimulationEngines'</pre>
+<div title="SimulationEngines" creator="Designer" modifier="Designer" created="201402211403" modified="201402241426" changecount="2">
+<pre>&lt;&lt;tiddler [[CL - Engines]]&gt;&gt;</pre>
 </div>
 <div title="SinglePageModePlugin" creator="Designer" modifier="Designer" created="201401211542" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
@@ -3241,12 +3454,30 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402171039" tags="CSS excludeLists" changecount="11">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402241416" tags="CSS excludeLists" changecount="12">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
  * that are used in any wiki of this documentation.
  ******************************************************** */
+/*}}}*/
+/*{{{*/
+/* Image flush command */
+.clear {
+	display:block;
+	clear:both;
+	margin-bottom:-1em;
+}
+.clearright {
+	display:block;
+	clear:right;
+	margin-bottom:-1em;
+}
+.clearleft {
+	display:block;
+	clear:right;
+	margin-bottom:-1em;
+}
 /*}}}*/
 /*{{{*/
 /* alignment commands */
@@ -3375,12 +3606,189 @@ when the &quot;+ + +&quot; maccro is used without a text between &quot;[ ]&quot;
 /* This button was generated using CSSButtonGenerator.com */
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Wikispecific" creator="Designer" modifier="Designer" created="201311260750" modified="201311260750" tags="CSS excludeLists" changecount="2">
+<div title="StyleSheetCustomization - Wikispecific" creator="Designer" modifier="Designer" created="201311260750" modified="201402241436" tags="CSS excludeLists" changecount="4">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
  * that are specific to this wiki.
  ******************************************************** */
+/*}}}*/
+/*{{{*/
+/* Style of the bar under the navigation buttons */
+.guidelinesNavMenu {
+	display:block;
+	text-align:center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+hr.topSep, hr.botSep {
+	margin-bottom: -0.5em;
+	width: 100%;
+	height: 2px;
+	border: 0;
+	background: -webkit-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -o-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -ms-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+	background: linear-gradient(to right,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+}
+hr.topSep {
+	margin-top: -1em;
+}
+/*}}}*/
+/*{{{*/
+/* Style of the title displayed in the design guidelines */
+.stepMainTitle {
+	color: rgb(191,35,35);
+	text-align: center;
+	font-family: Impact;
+	font-size: 300%;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing:2px;
+	display:block;
+	margin-top: 0.5em;
+}
+/*}}}*/</pre>
+</div>
+<div title="StyleSheetDropDownMenuPlugin" creator="Designer" modifier="Designer" created="201402241334" changecount="1">
+<pre>/*{{{*/
+/***** LAYOUT STYLES -  DO NOT EDIT! *****/
+ul.suckerfish, ul.suckerfish ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	line-height:1.4em;
+}
+
+ul.suckerfish  li {
+	display: inline-block; 
+	display: block;
+	float: left; 
+}
+
+ul.suckerfish li ul {
+	position: absolute;
+	left: -999em;
+}
+
+ul.suckerfish li:hover ul, ul.suckerfish li.sfhover ul {
+	left: auto;
+}
+
+ul.suckerfish ul li {
+	float: none;
+	border-right: 0;
+	border-left:0;
+}
+
+ul.suckerfish a, ul.suckerfish a:hover {
+	display: block;
+}
+
+ul.suckerfish li a.tiddlyLink, ul.suckerfish li a, #mainMenu ul.suckerfish li a {font-weight:bold;}
+/**** END LAYOUT STYLES *****/
+
+
+/**** COLORS AND APPEARANCE - DEFAULT *****/
+ul.suckerfish li a {
+	padding: 0.5em 1.5em;
+	font-weight:bold;
+	border-bottom: 0;
+	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	box-shadow:inset 0px 1px 0px 0px #f29c93;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+	background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
+	background-color:#fe1a00;
+	color:#ffffff;
+}
+
+ul.suckerfish li:hover a, ul.suckerfish li.sfhover a{
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
+	background-color:#ce0100;
+}
+
+ul.suckerfish li:hover ul a, ul.suckerfish li.sfhover ul a{
+	color: #d83526;
+	background: #ffeeee;
+}
+
+ul.suckerfish ul li a:hover {
+	background: #ffdddd;
+}
+
+ul.suckerfish li a{
+	width:9.5em;
+}
+
+ul.suckerfish ul li a, ul.suckerfish ul li a:hover{
+	display:inline-block;
+	width:9.5em;
+}
+
+ul.suckerfish li {
+	border:1px solid #d83526;
+}
+
+ul.suckerfish li ul li a {
+	border-style: solid;
+	border-color: #d83526;
+	border-top-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+}
+/***** END COLORS AND APPEARANCE - DEFAULT *****/
+
+
+/***** LAYOUT AND APPEARANCE: VERTICAL *****/
+ul.suckerfish.vertical li{
+	width:10em;
+	border-left: 0px solid #00558f;
+}
+
+ul.suckerfish.vertical ul li, ul.suckerfish.vertical li a, ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a {
+	border-left: 0.8em solid #00558f;
+}
+
+ul.suckerfish.vertical li a, ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a,  ul.suckerfish.vertical li.sfhover a:hover{
+	width:8em;
+}
+
+ul.suckerfish.vertical {
+	width:10em; text-align:left;
+	float:left;
+}
+
+ul.suckerfish.vertical li a {
+	padding: 0.5em 1em 0.5em 1em;
+	border-top:1px solid  #fff;
+}
+
+ul.suckerfish.vertical, ul.suckerfish.vertical ul {
+	line-height:1.4em;
+}
+
+ul.suckerfish.vertical li:hover ul, ul.suckerfish.vertical li.sfhover ul { 
+	margin: -2.4em 0 0 10.9em;
+}
+
+ul.suckerfish.vertical li:hover ul li a, ul.suckerfish.vertical li.sfhover ul li a {
+	border: 0px solid #FFF;
+}
+
+ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a{
+	padding-right:1.1em;
+}
+
+ul.suckerfish.vertical li:hover ul li, ul.suckerfish.vertical li.sfhover ul li {
+	border-bottom:1px solid  #fff;
+}
+
+/***** END LAYOUT AND APPEARANCE: VERTICAL *****/
 /*}}}*/</pre>
 </div>
 <div title="TagsTreeStyleSheet" creator="Designer" modifier="Designer" created="201311150935" tags="excludeLists" changecount="1">

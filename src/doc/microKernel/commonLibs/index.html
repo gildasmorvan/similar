@@ -695,6 +695,97 @@ The following code illustrates the implementation of the environment using both 
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='../files/simulationModel/highLevel/CityLevelSkeleton2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===</pre>
 </div>
+<div title="CL - Abstract - Local states" creator="Designer" modifier="Designer" created="201402281250" modified="201402281315" changecount="13">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Local states}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide the following default implementation for the local state of the agents and of the environment:
+*the default implementation of the {{className{[[ILocalStateOfEnvironment|../../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface is made in the {{className{[[AbstractLocalStateOfEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfEnvironment.html]]}}} class;
+*the default implementation of the {{className{[[ILocalStateOfAgent4Engine|../../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html]]}}} interface is made in the {{className{[[AbstractLocalStateOfAgent|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfAgent.html]]}}} class;
+These classes provide the behavior to all the generic methods defined in their parent interfaces.
+
+!!Implementation instructions (//Local state of the environment//)
+A class extending the {{className{[[AbstractLocalStateOfEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfEnvironment.html]]}}} class has to call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractLocalStateOfEnvironment(
+	LevelIdentifier level
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{level}}} The level for which this local state is defined.
++++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Example of a public local state of the environment&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/highLevel/publicLocalStateTree1.png]]
+In this example, we illustrate the creation of the ''public local state'' of the environment in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
+*The ambient temperature
+*The ambient humidity level
+It also defines a &quot;grid&quot; topology, where the public local state of the agents of that level are put.
+
+The created state is named {{className{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
+{{clear{}}}
+!Code
+If the model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|../files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|../files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the environment can be implemented as the {{className{PLSEnvInSavannahLevel2}}} class. The sources of this class are also available in a [[stand alone file|../files/simulationModel/highLevel/PLSEnvInSavannahLevel2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='../files/simulationModel/highLevel/PLSEnvInSavannahLevel2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+
+~~//''__2:__ &quot;PLSEnv&quot; stands for &quot;Public Local State of the Environment&quot;. The name is purposely shortened to keep readable class names.''//~~
+}}} ===
+
+!Implementation instructions (//Local state of an agent//)
+A class extending the {{className{[[AbstractLocalStateOfAgent|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfAgent.html]]}}} class has to call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractLocalStateOfAgent(
+	LevelIdentifier level,
+	IAgent4Engine owner
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{level}}} The level for which this local state is defined;
+*{{argumentName{owner}}} The agent owning this local state.
++++?*[&lt;span class=&quot;exbigbtn&quot;&gt;Example of a public local state of an agent&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/highLevel/publicLocalStateTree2.png]]
+In this example, we illustrate the creation of the ''public local state'' of an agent from the category &quot;Lion&quot; in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
+*The coordinates of the lion in the environment;
+*The age of the lion.
+The created state is named {{{AgtLionPLSInSavannahLevel}}}^^//''3''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{{fr.lgi2a.wildlifesimulation.model.agents.lion.savannah}}} package.
+{{clear{}}}
+!Code
+If this model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|../files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|../files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the &quot;Lion&quot; agent in the &quot;Savannah&quot; level can be implemented as the {{className{AgtLionPLSInSavannahLevel2}}} class. The sources of this class are also available in a [[stand alone file|../files/simulationModel/highLevel/AgtLionPLSInSavannahLevel2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='../files/simulationModel/highLevel/AgtLionPLSInSavannahLevel2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+
+~~//''__3:__ &quot;PLS&quot; stands for &quot;Public Local State&quot;. The name is purposely shortened to keep readable class names.''//~~
+}}} ===</pre>
+</div>
+<div title="CL - Abstract - Perceived data" creator="Designer" modifier="Designer" created="201402281317" modified="201402281325" changecount="10">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Perceived data of an agent}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation named {{className{[[AbstractPerceivedData|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractPerceivedData.html]]}}} to the {{className{[[IPerceivedData|../../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html]]}}} interface modeling the perceived data of an agent. This abstract class provides the behavior to the generic and domain-independent methods of this class (//i.e.// all the methods in this case).
+!Implementation instructions
+The constructor of a class extending {{className{[[AbstractPerceivedData|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractPerceivedData.html]]}}} should call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractPerceivedData(
+	LevelIdentifier levelIdentifier,
+	SimulationTimeStamp transitoryPeriodMin,
+	SimulationTimeStamp transitoryPeriodMax
+)
+}}}
+This constructor defines the following arguments:
+*{{argumentName{levelIdentifier}}} modeling the level from which the data were perceived;
+*{{argumentName{transitoryPeriodMin}}} modeling the lower bound of the transitory period during which perception was made;
+*{{argumentName{transitoryPeriodMax}}} modeling the upper bound of the transitory period during which perception was made.
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Perceived data set full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/lowLevel/perceivedDataTree.png]]
+This example illustrates an implementation of the perceived data set of a ''lion'' agent from the ''Savannah'' level, in the context of a ''wildlife'' simulation. In this simulation, the lion takes into consideration the nearby preys it sees in the ''Savannah'' level and the location of neayby vultures in the ''Sky'' level to determine where it will hunt preys.
+
+These perceived data are defined in the {{packageName{agents.lion.savannah}}} package of the model tree hierarchy (see the image).
+{{clearright{}}}
+!Code
+If this model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|../files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|../files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the perceived data of the &quot;Lion&quot; agent from the &quot;Savannah&quot; level can be implemented as the {{className{AgtLionPDFSavannah2}}} class. The sources of this class are also available in a [[stand alone file|../files/simulationModel/lowLevel/AgtLionPDFSavannah2.java]]:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='../files/simulationModel/lowLevel/AgtLionPDFSavannah2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
 <div title="CL - Abstract - Simulation engine" creator="Designer" modifier="Designer" created="201402241442" modified="201402241505" changecount="15">
 <pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Simulation engine}}}
 
@@ -787,7 +878,493 @@ The common libraries of SIMILAR define ''abstract classes'' providing a default 
 *A private or public [[local state of an agent or of the environment|CL - Abstract - Local states]];
 *[[Perceived data|CL - Abstract - Perceived data]] .</pre>
 </div>
-<div title="Common libs - Navigation menu" creator="Designer" modifier="Designer" created="201402241333" modified="201402241434" changecount="28">
+<div title="CL - Engines" creator="Designer" modifier="Designer" created="201402281421" modified="201402281431" changecount="5">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Simulation engines}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of SIMILAR define the following simulation engines:
+*{{className{[[EngineMonothreadedDefaultdisambiguation|CL - Engines - Mono threaded Default disambiguation]]}}}, a simulation engine running simulations with a mono-threaded algorithm and a default disambiguation algorithm;</pre>
+</div>
+<div title="CL - Engines - Mono threaded Default disambiguation" creator="Designer" modifier="Designer" created="201402281423" modified="201402281435" changecount="9">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Engine - default}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the simulation engine class where:
+*The simulation is performed using a single thread even when computations can be performed in parallel;
+*The disambiguation of a transitory dynamic state of a level consists in returning the most recent consistent state of that level.
+This class is called {{className{[[EngineMonothreadedDefaultdisambiguation|../../api/fr/lgi2a/similar/microkernel/libs/engines/EngineMonothreadedDefaultdisambiguation.html]]}}} and defines the following constructor:
+{{{
+public EngineMonothreadedDefaultdisambiguation( );
+}}}</pre>
+</div>
+<div title="CL - Generic - Empty perceived data" creator="Designer" modifier="Designer" created="201402281348" modified="201402281410" changecount="6">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Empty perceived data}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the perceived data of an agent in case these data contain nothing (//i.e.// if the decisions of the agent are based only on the global state of the agent and its public and local state). This class is called {{className{[[EmptyPerceivedData|../../api/fr/lgi2a/similar/microkernel/libs/generic/EmptyPerceivedData.html]]}}} and defines the following constructor:
+{{{
+public EmptyPerceivedData(
+	LevelIdentifier levelIdentifier,
+	SimulationTimeStamp transitoryPeriodMin,
+	SimulationTimeStamp transitoryPeriodMax
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{levelIdentifier}}} modeling the identifier of the level from which the data were perceived;
+*{{argumentName{transitoryPeriodMin}}} modeling the lower bound of the transitory period during which the data were perceived;
+*{{argumentName{transitoryPeriodMax}}} modeling the upper bound of the transitory period during which the data were perceived;</pre>
+</div>
+<div title="CL - Generic - Empty states" creator="Designer" modifier="Designer" created="201402281335" modified="201402281347" changecount="3">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic classes - Empty states}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation empty implementation to:
+*The public and local state of the environment;
+*The public and local state of the agents;
+*The global state of the agents.
+!Public and local state of the environment
+An empty public or private local state of the environment can be modeled as an instance of the {{className{[[EmptyLocalStateOfEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/generic/EmptyLocalStateOfEnvironment.html]]}}}, having the following constructor:
+{{{
+public EmptyLocalStateOfEnvironment(
+	LevelIdentifier levelIdentifier
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{levelIdentifier}}} modeling the identifier of the level for which the state is declared.
+!Public and local state of an agent
+An empty public or private local state of an agent can be modeled as an instance of the {{className{[[EmptyLocalStateOfAgent|../../api/fr/lgi2a/similar/microkernel/libs/generic/EmptyLocalStateOfAgent.html]]}}}, having the following constructor:
+{{{
+public EmptyLocalStateOfAgent(
+	LevelIdentifier levelIdentifier,
+	IAgent4Engine owner
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{levelIdentifier}}} modeling the identifier of the level for which the state is declared;
+*{{argumentName{owner}}} modeling the agent owning this state.
+!Global state of an agent
+An empty global state of an agent can be modeled as an instance of the {{className{[[EmptyGlobalState|../../api/fr/lgi2a/similar/microkernel/libs/generic/EmptyGlobalState.html]]}}}, having the following constructor:
+{{{
+public EmptyGlobalState( );
+}}}</pre>
+</div>
+<div title="CL - Generic - Passive agent" creator="Designer" modifier="Designer" created="201402281410" modified="201402281418" changecount="5">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Passive agents}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the agent class where the agent does nothing:
+*Its perception model returns [[empty percevied data|CL - Generic - Empty perceived data]];
+*Its global state revision model does nothing;
+*Its decision model produces no influences.
+This class is called {{className{[[PassiveAgent|../../api/fr/lgi2a/similar/microkernel/libs/generic/PassiveAgent.html]]}}} and defines the following constructor:
+{{{
+public PassiveAgent( 
+	AgentCategory category 
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{category}}} The category of the passive agent.</pre>
+</div>
+<div title="CL - Generic - Passive environment" creator="Designer" modifier="Designer" created="201402281419" modified="201402281423" changecount="2">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Passive environment}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the environment class where the environment does nothing:
+*Its natural action model produces no influences.
+This class is called {{className{[[PassiveEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/generic/PassiveEnvironment.html]]}}} and defines the following constructor:
+{{{
+public PassiveEnvironment( );
+}}}</pre>
+</div>
+<div title="CL - Generic implementations" creator="Designer" modifier="Designer" created="201402281327" modified="201402281421" changecount="9">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic classes}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of SIMILAR define the generic and reusable implementations of the following elements of the micro-kernel:
+*Public or private [[local states|CL - Generic - Empty states]] containing no data;
+*[[Global states|CL - Generic - Empty states]] containing no data;
+*[[Perceived data|CL - Generic - Empty perceived data]] containing no data;
+*[[Agents|CL - Generic - Passive agent]] doing nothing;
+*[[Environments|CL - Generic - Passive environment]] doing nothing.</pre>
+</div>
+<div title="CL - Probes" creator="Designer" modifier="Designer" created="201402281431" modified="201402281435" changecount="7">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Observation probes}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of SIMILAR define the following observation probes:
+*{{className{[[ProbeExceptionPrinter|CL - Probes - ExceptionPrinter]]}}} printing on a stream the exceptions that were caught during the simulation;
+*{{className{[[ProbeExecutionTracker|CL - Probes - ExecutionTracker]]}}} tracking on a stream the execution flow of the simulation (consistent times reached).</pre>
+</div>
+<div title="CL - Probes - ExceptionPrinter" creator="Designer" modifier="Designer" created="201402281435" modified="201402281447" changecount="7">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - Exception tracker}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the observation probe class where:
+*The stack trace of the exceptions occurring during the simulation is printed using the standard error output.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Example of an exception trace being printed by this probe&lt;/span&gt;]
+{{exsection{
+This section illustrates the type of trace being printed by the exception tracker probe when an exception occurs:
+{{{
+An error was met during the execution of the simulation: The simulation stopped because of an error.
+java.lang.NullPointerException: This exception was triggered intentionally.
+	at fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubble.decide(AgtBubble.java:81)
+	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.decisionPhase(AbstractMonothreadedEngine.java:458)
+	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.behaviorPhaseOfAgentsAndEnvironment(AbstractMonothreadedEngine.java:310)
+	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.performSimulation(AbstractMonothreadedEngine.java:161)
+	at fr.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation.performSimulation(EngineMonothreadedDefaultdisambiguation.java:94)
+	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.performSimulation(AbstractSimulationEngineWithInitialization.java:527)
+	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.runNewSimulationWithoutCheckingErrors(AbstractSimulationEngineWithInitialization.java:262)
+	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.runNewSimulation(AbstractSimulationEngineWithInitialization.java:208)
+	at fr.lgi2a.similar.microkernel.examples.bubblechamber.BubbleChamberMain.main(BubbleChamberMain.java:109)
+}}}
+}}} ===
+
+!Implementation
+Such a probe is implemented as the {{className{[[ProbeExecutionTracker|../../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExecutionTracker.html]]}}} and defines the following constructor:
+{{{
+public ProbeExceptionPrinter( );
+}}}</pre>
+</div>
+<div title="CL - Probes - ExecutionTracker" creator="Designer" modifier="Designer" created="201402281447" modified="201402281453" changecount="4">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - Execution flow tracker}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the observation probe class where:
+*The execution flow of the simulation is tracked and printed using a {{className{PrintStream}}} object.
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Example of an execution flow trace being printed by this probe&lt;/span&gt;]
+{{exsection{
+This section illustrates the type of trace being printed by the exception tracker probe:
+*If the intermediary steps of the simulation are not printed;
+{{{
+Starting a new simulation.
+Simulation initialized (starting at t(0) ).
+Simulation finished at the stamp t(300).
+The simulation has ended.
+}}}
+*If the intermediary steps of the simulation are printed;
+{{{
+Starting a new simulation.
+Simulation initialized (starting at t(0) ).
+Reached half-consistent time t(1).
+Reached half-consistent time t(2).
+Reached half-consistent time t(3).
+Reached half-consistent time t(4).
+Reached half-consistent time t(5).
+Reached half-consistent time t(6).
+Reached half-consistent time t(7).
+Reached half-consistent time t(8).
+Reached half-consistent time t(9).
+Reached half-consistent time t(10).
+Reached half-consistent time t(11).
+Reached half-consistent time t(12).
+Reached half-consistent time t(13).
+Reached half-consistent time t(14).
+Reached half-consistent time t(15).
+Reached half-consistent time t(16).
+Reached half-consistent time t(17).
+Reached half-consistent time t(18).
+Reached half-consistent time t(19).
+Reached half-consistent time t(20).
+Reached half-consistent time t(21).
+Reached half-consistent time t(22).
+Reached half-consistent time t(23).
+Reached half-consistent time t(24).
+Reached half-consistent time t(25).
+Reached half-consistent time t(26).
+Reached half-consistent time t(27).
+Reached half-consistent time t(28).
+Reached half-consistent time t(29).
+Reached half-consistent time t(30).
+Reached half-consistent time t(31).
+Reached half-consistent time t(32).
+Reached half-consistent time t(33).
+Reached half-consistent time t(34).
+Reached half-consistent time t(35).
+Reached half-consistent time t(36).
+Reached half-consistent time t(37).
+Reached half-consistent time t(38).
+Reached half-consistent time t(39).
+Reached half-consistent time t(40).
+Reached half-consistent time t(41).
+Reached half-consistent time t(42).
+Reached half-consistent time t(43).
+Reached half-consistent time t(44).
+Reached half-consistent time t(45).
+Reached half-consistent time t(46).
+Reached half-consistent time t(47).
+Reached half-consistent time t(48).
+Reached half-consistent time t(49).
+Reached half-consistent time t(50).
+Reached half-consistent time t(51).
+Reached half-consistent time t(52).
+Reached half-consistent time t(53).
+Reached half-consistent time t(54).
+Reached half-consistent time t(55).
+Reached half-consistent time t(56).
+Reached half-consistent time t(57).
+Reached half-consistent time t(58).
+Reached half-consistent time t(59).
+Reached half-consistent time t(60).
+Reached half-consistent time t(61).
+Reached half-consistent time t(62).
+Reached half-consistent time t(63).
+Reached half-consistent time t(64).
+Reached half-consistent time t(65).
+Reached half-consistent time t(66).
+Reached half-consistent time t(67).
+Reached half-consistent time t(68).
+Reached half-consistent time t(69).
+Reached half-consistent time t(70).
+Reached half-consistent time t(71).
+Reached half-consistent time t(72).
+Reached half-consistent time t(73).
+Reached half-consistent time t(74).
+Reached half-consistent time t(75).
+Reached half-consistent time t(76).
+Reached half-consistent time t(77).
+Reached half-consistent time t(78).
+Reached half-consistent time t(79).
+Reached half-consistent time t(80).
+Reached half-consistent time t(81).
+Reached half-consistent time t(82).
+Reached half-consistent time t(83).
+Reached half-consistent time t(84).
+Reached half-consistent time t(85).
+Reached half-consistent time t(86).
+Reached half-consistent time t(87).
+Reached half-consistent time t(88).
+Reached half-consistent time t(89).
+Reached half-consistent time t(90).
+Reached half-consistent time t(91).
+Reached half-consistent time t(92).
+Reached half-consistent time t(93).
+Reached half-consistent time t(94).
+Reached half-consistent time t(95).
+Reached half-consistent time t(96).
+Reached half-consistent time t(97).
+Reached half-consistent time t(98).
+Reached half-consistent time t(99).
+Reached half-consistent time t(100).
+Reached half-consistent time t(101).
+Reached half-consistent time t(102).
+Reached half-consistent time t(103).
+Reached half-consistent time t(104).
+Reached half-consistent time t(105).
+Reached half-consistent time t(106).
+Reached half-consistent time t(107).
+Reached half-consistent time t(108).
+Reached half-consistent time t(109).
+Reached half-consistent time t(110).
+Reached half-consistent time t(111).
+Reached half-consistent time t(112).
+Reached half-consistent time t(113).
+Reached half-consistent time t(114).
+Reached half-consistent time t(115).
+Reached half-consistent time t(116).
+Reached half-consistent time t(117).
+Reached half-consistent time t(118).
+Reached half-consistent time t(119).
+Reached half-consistent time t(120).
+Reached half-consistent time t(121).
+Reached half-consistent time t(122).
+Reached half-consistent time t(123).
+Reached half-consistent time t(124).
+Reached half-consistent time t(125).
+Reached half-consistent time t(126).
+Reached half-consistent time t(127).
+Reached half-consistent time t(128).
+Reached half-consistent time t(129).
+Reached half-consistent time t(130).
+Reached half-consistent time t(131).
+Reached half-consistent time t(132).
+Reached half-consistent time t(133).
+Reached half-consistent time t(134).
+Reached half-consistent time t(135).
+Reached half-consistent time t(136).
+Reached half-consistent time t(137).
+Reached half-consistent time t(138).
+Reached half-consistent time t(139).
+Reached half-consistent time t(140).
+Reached half-consistent time t(141).
+Reached half-consistent time t(142).
+Reached half-consistent time t(143).
+Reached half-consistent time t(144).
+Reached half-consistent time t(145).
+Reached half-consistent time t(146).
+Reached half-consistent time t(147).
+Reached half-consistent time t(148).
+Reached half-consistent time t(149).
+Reached half-consistent time t(150).
+Reached half-consistent time t(151).
+Reached half-consistent time t(152).
+Reached half-consistent time t(153).
+Reached half-consistent time t(154).
+Reached half-consistent time t(155).
+Reached half-consistent time t(156).
+Reached half-consistent time t(157).
+Reached half-consistent time t(158).
+Reached half-consistent time t(159).
+Reached half-consistent time t(160).
+Reached half-consistent time t(161).
+Reached half-consistent time t(162).
+Reached half-consistent time t(163).
+Reached half-consistent time t(164).
+Reached half-consistent time t(165).
+Reached half-consistent time t(166).
+Reached half-consistent time t(167).
+Reached half-consistent time t(168).
+Reached half-consistent time t(169).
+Reached half-consistent time t(170).
+Reached half-consistent time t(171).
+Reached half-consistent time t(172).
+Reached half-consistent time t(173).
+Reached half-consistent time t(174).
+Reached half-consistent time t(175).
+Reached half-consistent time t(176).
+Reached half-consistent time t(177).
+Reached half-consistent time t(178).
+Reached half-consistent time t(179).
+Reached half-consistent time t(180).
+Reached half-consistent time t(181).
+Reached half-consistent time t(182).
+Reached half-consistent time t(183).
+Reached half-consistent time t(184).
+Reached half-consistent time t(185).
+Reached half-consistent time t(186).
+Reached half-consistent time t(187).
+Reached half-consistent time t(188).
+Reached half-consistent time t(189).
+Reached half-consistent time t(190).
+Reached half-consistent time t(191).
+Reached half-consistent time t(192).
+Reached half-consistent time t(193).
+Reached half-consistent time t(194).
+Reached half-consistent time t(195).
+Reached half-consistent time t(196).
+Reached half-consistent time t(197).
+Reached half-consistent time t(198).
+Reached half-consistent time t(199).
+Reached half-consistent time t(200).
+Reached half-consistent time t(201).
+Reached half-consistent time t(202).
+Reached half-consistent time t(203).
+Reached half-consistent time t(204).
+Reached half-consistent time t(205).
+Reached half-consistent time t(206).
+Reached half-consistent time t(207).
+Reached half-consistent time t(208).
+Reached half-consistent time t(209).
+Reached half-consistent time t(210).
+Reached half-consistent time t(211).
+Reached half-consistent time t(212).
+Reached half-consistent time t(213).
+Reached half-consistent time t(214).
+Reached half-consistent time t(215).
+Reached half-consistent time t(216).
+Reached half-consistent time t(217).
+Reached half-consistent time t(218).
+Reached half-consistent time t(219).
+Reached half-consistent time t(220).
+Reached half-consistent time t(221).
+Reached half-consistent time t(222).
+Reached half-consistent time t(223).
+Reached half-consistent time t(224).
+Reached half-consistent time t(225).
+Reached half-consistent time t(226).
+Reached half-consistent time t(227).
+Reached half-consistent time t(228).
+Reached half-consistent time t(229).
+Reached half-consistent time t(230).
+Reached half-consistent time t(231).
+Reached half-consistent time t(232).
+Reached half-consistent time t(233).
+Reached half-consistent time t(234).
+Reached half-consistent time t(235).
+Reached half-consistent time t(236).
+Reached half-consistent time t(237).
+Reached half-consistent time t(238).
+Reached half-consistent time t(239).
+Reached half-consistent time t(240).
+Reached half-consistent time t(241).
+Reached half-consistent time t(242).
+Reached half-consistent time t(243).
+Reached half-consistent time t(244).
+Reached half-consistent time t(245).
+Reached half-consistent time t(246).
+Reached half-consistent time t(247).
+Reached half-consistent time t(248).
+Reached half-consistent time t(249).
+Reached half-consistent time t(250).
+Reached half-consistent time t(251).
+Reached half-consistent time t(252).
+Reached half-consistent time t(253).
+Reached half-consistent time t(254).
+Reached half-consistent time t(255).
+Reached half-consistent time t(256).
+Reached half-consistent time t(257).
+Reached half-consistent time t(258).
+Reached half-consistent time t(259).
+Reached half-consistent time t(260).
+Reached half-consistent time t(261).
+Reached half-consistent time t(262).
+Reached half-consistent time t(263).
+Reached half-consistent time t(264).
+Reached half-consistent time t(265).
+Reached half-consistent time t(266).
+Reached half-consistent time t(267).
+Reached half-consistent time t(268).
+Reached half-consistent time t(269).
+Reached half-consistent time t(270).
+Reached half-consistent time t(271).
+Reached half-consistent time t(272).
+Reached half-consistent time t(273).
+Reached half-consistent time t(274).
+Reached half-consistent time t(275).
+Reached half-consistent time t(276).
+Reached half-consistent time t(277).
+Reached half-consistent time t(278).
+Reached half-consistent time t(279).
+Reached half-consistent time t(280).
+Reached half-consistent time t(281).
+Reached half-consistent time t(282).
+Reached half-consistent time t(283).
+Reached half-consistent time t(284).
+Reached half-consistent time t(285).
+Reached half-consistent time t(286).
+Reached half-consistent time t(287).
+Reached half-consistent time t(288).
+Reached half-consistent time t(289).
+Reached half-consistent time t(290).
+Reached half-consistent time t(291).
+Reached half-consistent time t(292).
+Reached half-consistent time t(293).
+Reached half-consistent time t(294).
+Reached half-consistent time t(295).
+Reached half-consistent time t(296).
+Reached half-consistent time t(297).
+Reached half-consistent time t(298).
+Reached half-consistent time t(299).
+Reached half-consistent time t(300).
+Simulation finished at the stamp t(300).
+The simulation has ended.
+}}}
+}}} ===
+
+!Implementation
+Such a probe is implemented as the {{className{[[ProbeExecutionTracker|../../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExecutionTracker.html]]}}} and defines the following constructor:
+{{{
+public ProbeExecutionTracker(
+	PrintStream target,
+	boolean printSteps
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{target}}} The print stream being used to print the current status of the execution flow. It ususally is either {{{System.out}}} or {{{System.err}}};
+*{{argumentName{printSteps}}} Whether if the intermediary steps of the execution flow are printed or not.</pre>
+</div>
+<div title="Common libs - Navigation menu" creator="Designer" modifier="Designer" created="201402241333" modified="201402281329" changecount="29">
 <pre>*[[|Home]]
 *[[Abstract implementations|CL - Abstract implementations]]
 **[[Simulation engine|CL - Abstract - Simulation engine]]
@@ -798,10 +1375,10 @@ The common libraries of SIMILAR define ''abstract classes'' providing a default 
 **[[Local states|CL - Abstract - Local states]]
 **[[Perceived data|CL - Abstract - Perceived data]]
 *[[Generic implementations|CL - Generic implementations]]
-**[[Empty states]]
-**[[Empty perceived data]]
-**[[Passive agent]]
-**[[Passive environment]]
+**[[Empty states|CL - Generic - Empty states]]
+**[[Empty perceived data|CL - Generic - Empty perceived data]]
+**[[Passive agent|CL - Generic - Passive agent]]
+**[[Passive environment|CL - Generic - Passive environment]]
 *[[Simulation engines|CL - Engines]]
 **[[Default|CL - Engines - Mono threaded Default disambiguation]]
 *[[Observation probes|CL - Probes]]

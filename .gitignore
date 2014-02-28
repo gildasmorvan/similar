@@ -7,3 +7,7 @@
 # Maven generation directory #
 ##############################
 target/
+
+# API within sources         #
+##############################
+src/doc/api

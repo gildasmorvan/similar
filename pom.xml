@@ -180,10 +180,8 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 		<module>similar-distribution</module>
 		<module>similar-microKernel</module>
 		<module>similar-microKernel-commonLibs</module>
-		<module>similar-microKernel-examples</module>
 		<module>similar-extendedKernel</module>
 		<module>similar-extendedKernel-extendedLibs</module>
-		<module>similar-extendedKernel-examples</module>
 	</modules>
 	
 <!-- Manage the jar dependencies of all the children -->

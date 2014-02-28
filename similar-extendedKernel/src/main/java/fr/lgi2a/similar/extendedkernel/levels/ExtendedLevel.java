@@ -53,7 +53,6 @@ import java.util.Set;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.dynamicstate.IModifiablePublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.influences.IInfluence;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 import fr.lgi2a.similar.microkernel.levels.ITimeModel;
@@ -81,7 +80,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLevel;
  * 		The initialization of the dynamic state of the level, 
  * 		using the following methods:
  * 		<ul>
- * 			<li> {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)}</li>
+ * 			<li> {@link fr.lgi2a.similar.microkernel.dynamicstate.IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)}</li>
  * 		</ul>
  * 	</li>
  * 	<li>
@@ -127,7 +126,7 @@ public class ExtendedLevel extends AbstractLevel {
 	 * 		The initialization of the dynamic state of the level, 
 	 * 		using the following methods:
 	 * 		<ul>
-	 * 			<li> {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)}</li>
+	 * 			<li> {@link fr.lgi2a.similar.microkernel.dynamicstate.IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)}</li>
 	 * 		</ul>
 	 * 	</li>
 	 * 	<li>

@@ -51,7 +51,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.dynamicstate.IModifiablePublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.environment.IEnvironment;
 import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
 import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
@@ -120,7 +119,7 @@ public abstract class AbstractEnvironment implements IEnvironment, IEnvironment4
 	 * Introduces the level-related data of the environment for a new level.
 	 * <p>
 	 * 	Note that the public local state also has to be added to the first consistent public local dynamic state of the level:
-	 * 	the {@link IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(ILocalStateOfEnvironment)} method has to
+	 * 	the {@link fr.lgi2a.similar.microkernel.dynamicstate.IModifiablePublicLocalDynamicState#setPublicLocalStateOfEnvironment(ILocalStateOfEnvironment)} method has to
 	 * 	be called during the initialization of the simulation for the initial consistent state.
 	 * </p>
 	 * @param level The level for which data are added.
@@ -133,12 +132,8 @@ public abstract class AbstractEnvironment implements IEnvironment, IEnvironment4
 			ILocalStateOfEnvironment publicLocalState,
 			ILocalStateOfEnvironment privateLocalState 
 	){
-		if( level == null ){
-			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
-		} else if( publicLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
-		} else if( privateLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
+		if( level == null || publicLocalState == null || privateLocalState == null ){
+			throw new IllegalArgumentException( "The arguments cannot be null." );
 		} else if( ! level.equals( publicLocalState.getLevel())  || ! level.equals( privateLocalState.getLevel() ) ) {
 			throw new IllegalArgumentException( "The 'getLevel()' method of the 'publicLocalState' and" +
 					" 'publicLocalState' arguments have to be equal to the 'level' argument." );

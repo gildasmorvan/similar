@@ -120,15 +120,17 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 				lastPartlyConsistentStateTimestamp, 
 				simulationModel 
 		) ){
-			// Perform the reaction of the levels which transitory period has met its end.
-			// As a result of this operation:
-			// 	* The content of the consistent and transitory states of the above-mentioned levels
-			//		is updated (especially their time or time range);
-			//	* The content of the agents argument (telling which agents are contained in each levels)
-			//		is updated according to the processed system reactions;
-			//	* The content of the currentSimulationDynamicState argument changes to match the
-			//		state of the simulation at the half-consistent time following the reaction.
-			// 	* The value of lastPartlyConsistentStateTimestamp changes.
+			/*	
+			 * Perform the reaction of the levels which transitory period has met its end.
+			 *	As a result of this operation:
+			 *		* The content of the consistent and transitory states of the above-mentioned levels
+			 *			is updated (especially their time or time range);
+			 *		* The content of the agents argument (telling which agents are contained in each levels)
+			 *			is updated according to the processed system reactions;
+			 *		* The content of the currentSimulationDynamicState argument changes to match the
+			 *			state of the simulation at the half-consistent time following the reaction.
+			 *		* The value of lastPartlyConsistentStateTimestamp changes. 
+			 */
 			SimulationTimeStamp nextPartlyConsistentStateTimestamp = this.getNextTime( levels.values() );
 			Collection<ILevel> levelsEndingTransitoryPeriod = this.identifyLevelsEndingTransitoryPeriod(
 				nextPartlyConsistentStateTimestamp, 
@@ -285,7 +287,6 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		) ) {
 			// Tell the agents to perceive
 			Set<IAgent4Engine> agentHavingToReviseGlobalState = this.perceptionPhase( 
-				lastPartlyConsistentStateTimestamp,
 				disambiguatedSimulationDynamicState,
 				levelsStartingNewTransitoryPeriod,
 				agents
@@ -300,7 +301,6 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			InfluencesMap producedInfluencesDuringnewTransitoryPhases = new InfluencesMap();
 			// Then trigger the natural action of the environment.
 			this.naturalPhase( 
-					lastPartlyConsistentStateTimestamp,
 					levelsStartingNewTransitoryPeriod,
 					disambiguatedSimulationDynamicState,
 					environment,
@@ -308,7 +308,6 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			);
 			// Trigger the decision of the agents
 			this.decisionPhase( 
-					lastPartlyConsistentStateTimestamp,
 					levelsStartingNewTransitoryPeriod,
 					agents,
 					producedInfluencesDuringnewTransitoryPhases
@@ -326,8 +325,6 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 
 	/**
 	 * Tell the agents of the simulation located in specific levels to perceive.
-	 * @param lastPartlyConsistentStateTimestamp The time stamp of the last half-consistent 
-	 * state of the simulation (the beginning of the new transitory phase for which perception is made).
 	 * @param disambiguatedSimulationDynamicState The disambiguated dynamic state of 
 	 * the simulation.
 	 * @param levelsStartingNewTransitoryPeriod The identifier of the levels starting a new transitory period.
@@ -336,7 +333,6 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * It contains the agent that will have to revise their global state.
 	 */
 	private Set<IAgent4Engine> perceptionPhase( 
-			SimulationTimeStamp lastPartlyConsistentStateTimestamp,
 			DynamicStateMap disambiguatedSimulationDynamicState,
 			Collection<ILevel> levelsStartingNewTransitoryPeriod,
 			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
@@ -408,9 +404,6 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 
 	/**
 	 * Performs the natural action phase for a specific set of levels.
-	 * @param lastPartlyConsistentStateTimestamp The time stamp of the most recent half-consistent 
-	 * state of the simulation (the beginning of the new transitory phase for which the natural 
-	 * action is made).
 	 * @param levelsStartingNewTransitoryPeriod The identifier of the levels starting a new transitory period.
 	 * @param disambiguatedSimulationDynamicState The disambiguated dynamic state of 
 	 * the simulation.
@@ -419,7 +412,6 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * environment.
 	 */
 	private void naturalPhase( 
-		SimulationTimeStamp lastPartlyConsistentStateTimestamp,
 		Collection<ILevel> levelsStartingNewTransitoryPeriod,
 		DynamicStateMap disambiguatedSimulationDynamicState,
 		IEnvironment4Engine environment,
@@ -447,16 +439,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 
 	/**
 	 * Performs the decision phase of the agents lying in a specific set of levels.
-	 * @param lastPartlyConsistentStateTimestamp The time stamp of the most recent half-consistent 
-	 * state of the simulation (the beginning of the new transitory phase for which the natural 
-	 * action is made).
 	 * @param levelsStartingNewTransitoryPeriod The identifier of the levels starting a new transitory period.
 	 * @param agents The agents of the simulation.
 	 * @param producedInfluences The data structure where to put the influences that were produced by the 
 	 * environment.
 	 */
 	private void decisionPhase( 
-		SimulationTimeStamp lastPartlyConsistentStateTimestamp,
 		Collection<ILevel> levelsStartingNewTransitoryPeriod,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 		InfluencesMap producedInfluences
@@ -697,16 +685,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			);
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceAddAgentToLevel.CATEGORY ) ){
 			this.manageSystemInfluence( 
-				transitoryTimeMin,
-				transitoryTimeMax,
 				(SystemInfluenceAddAgentToLevel) systemInfluence,
 				levels,
 				agents
 			);
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemoveAgentFromLevel.CATEGORY ) ){
 			this.manageSystemInfluence( 
-				transitoryTimeMin,
-				transitoryTimeMax,
 				(SystemInfluenceRemoveAgentFromLevel) systemInfluence,
 				levels,
 				agents
@@ -781,18 +765,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	
 	/**
 	 * Manages the reaction to a {@link SystemInfluenceAddAgentToLevel} influence.
-	 * @param transitoryTimeMin The lower bound of the transitory period of the level at which the influence
-	 * is aimed.
-	 * @param transitoryTimeMax The upper bound of the transitory period of the level at which the influence
-	 * is aimed.
 	 * @param systemInfluence The system influence for which a system reaction is computed.
 	 * @param levels The levels of the simulation.
 	 * @param agents The agents of the simulation.
 	 * @return The influences that were produced in reaction to this influence. 
 	 */
 	private void manageSystemInfluence(
-		SimulationTimeStamp transitoryTimeMin,
-		SimulationTimeStamp transitoryTimeMax,
 		SystemInfluenceAddAgentToLevel systemInfluence,
 		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
@@ -827,18 +805,12 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	
 	/**
 	 * Manages the reaction to a {@link SystemInfluenceRemoveAgentFromLevel} influence.
-	 * @param transitoryTimeMin The lower bound of the transitory period of the level at which the influence
-	 * is aimed.
-	 * @param transitoryTimeMax The upper bound of the transitory period of the level at which the influence
-	 * is aimed.
 	 * @param systemInfluence The system influence for which a system reaction is computed.
 	 * @param levels The levels of the simulation.
 	 * @param agents The agents of the simulation.
 	 * @return The influences that were produced in reaction to this influence. 
 	 */
 	private void manageSystemInfluence(
-		SimulationTimeStamp transitoryTimeMin,
-		SimulationTimeStamp transitoryTimeMax,
 		SystemInfluenceRemoveAgentFromLevel systemInfluence,
 		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents

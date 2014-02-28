@@ -97,8 +97,7 @@ public abstract class AbstractExtendedSimulationModel extends AbstractSimulation
 				"The 'endCriterion' cannot be null." 
 			);
 		} else {
-			SimulationTimeStamp initialTime = simulationParameters.getInitialTime();
-			return initialTime;
+			return simulationParameters.getInitialTime();
 		}
 	}
 	

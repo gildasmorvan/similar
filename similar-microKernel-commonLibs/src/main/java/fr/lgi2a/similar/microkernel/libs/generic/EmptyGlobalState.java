@@ -58,12 +58,7 @@ import fr.lgi2a.similar.microkernel.agents.IGlobalState;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class EmptyGlobalState implements IGlobalState {
-	/**
-	 * The instance modeling an empty global state for any agent.
-	 */
-	public static final EmptyGlobalState EMPTY_STATE = new EmptyGlobalState( );
-	
+public final class EmptyGlobalState implements IGlobalState {	
 	/**
 	 * Builds an empty global state for an agent.
 	 */

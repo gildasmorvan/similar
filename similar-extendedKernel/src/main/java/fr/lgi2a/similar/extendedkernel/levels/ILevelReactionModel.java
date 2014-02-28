@@ -53,7 +53,6 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.influences.IInfluence;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
 
 /**
  * Models the reaction process used by a level to react to the influences it received.
@@ -165,7 +164,7 @@ public interface ILevelReactionModel {
 	 * @param systemInfluencesToManage The <b>system</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.
 	 * @param happensBeforeRegularReaction <code>true</code> if this user-defined system reaction is performed before the call to the
-	 * {@link ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, InfluencesMap)} method.
+	 * {@link fr.lgi2a.similar.microkernel.levels.ILevel#makeRegularReaction(SimulationTimeStamp, SimulationTimeStamp, ConsistentPublicLocalDynamicState, Set, InfluencesMap)} method.
 	 * @param newInfluencesToProcess The data structure where the influences resulting from this user reaction have to be added.
 	 */
 	void makeSystemReaction(

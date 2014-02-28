@@ -159,7 +159,7 @@ public abstract class AbstractLevel implements ILevel {
 	 * public state of the level.
 	 * @param lastConsistentState The initial value of the last consistent state of this level.
 	 */
-	public void initializeStates( 
+	public final void initializeStates( 
 			ConsistentPublicLocalDynamicState lastConsistentState 
 	){
 		if( lastConsistentState == null ){

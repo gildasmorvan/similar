@@ -53,7 +53,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.IProbe;
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.ISimulationModel;
 import fr.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
 import fr.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
@@ -74,7 +73,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractSimulationEngine;
 import fr.lgi2a.similar.microkernel.libs.disambiguation.DisambiguationOperatorReturningLastConsistentState;
 
 /**
- * An abstract implementation of the {@link ISimulationEngine} interface, providing algorithms to the initialization
+ * An abstract implementation of the {@link fr.lgi2a.similar.microkernel.ISimulationEngine} interface, providing algorithms to the initialization
  * process of the simulation, using a single threaded approach: the initialization of the levels is made in sequence.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>

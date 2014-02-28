@@ -82,5 +82,4 @@ public class AbstractSimulationParameters implements ISimulationParameters {
 	public SimulationTimeStamp getInitialTime() {
 		return this.initialTime;
 	}
-	
 }

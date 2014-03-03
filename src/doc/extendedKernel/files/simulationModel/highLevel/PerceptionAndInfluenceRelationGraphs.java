@@ -20,11 +20,11 @@ public class PerceptionAndInfluenceRelationGraphs {
       ){
          // By default, the "city" level is perceptible and influenceable
          // by agents in the "city" level.
-         level.addInfluenceableLevel( MyAwesomeLevelList.SLUMBS );
+         level.addInfluenceableLevel( MyAwesomeLevelList.SLUMS );
          level.addInfluenceableLevel( MyAwesomeLevelList.COUNTRY );
          level.addInfluenceableLevel( MyAwesomeLevelList.SEASHORE );
       } else if(
-         level.getIdentifier().equals( MyAwesomeLevelList.SLUMBS )
+         level.getIdentifier().equals( MyAwesomeLevelList.SLUMS )
       ){
          // By default, the "slumbs" level is perceptible and influenceable
          // by agents in the "slumbs" level.
@@ -35,7 +35,7 @@ public class PerceptionAndInfluenceRelationGraphs {
       ){
          // By default, the "country" level is perceptible and influenceable
          // by agents in the "country" level.
-         level.addPerceptibleLevel( MyAwesomeLevelList.SLUMBS );
+         level.addPerceptibleLevel( MyAwesomeLevelList.SLUMS );
          level.addPerceptibleLevel( MyAwesomeLevelList.COUNTRY );
          level.addPerceptibleLevel( MyAwesomeLevelList.SEASHORE );
          level.addInfluenceableLevel( MyAwesomeLevelList.SEASHORE );
@@ -44,7 +44,7 @@ public class PerceptionAndInfluenceRelationGraphs {
       ){
          // By default, the "seashore" level is perceptible and influenceable
          // by agents in the "seashore" level.
-         level.addPerceptibleLevel( MyAwesomeLevelList.SLUMBS );
+         level.addPerceptibleLevel( MyAwesomeLevelList.SLUMS );
          level.addPerceptibleLevel( MyAwesomeLevelList.COUNTRY );
          level.addPerceptibleLevel( MyAwesomeLevelList.SEASHORE );
          level.addInfluenceableLevel( MyAwesomeLevelList.COUNTRY );

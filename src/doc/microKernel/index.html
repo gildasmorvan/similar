@@ -2975,7 +2975,7 @@ In SIMILAR, an agent is the sum of the following elements^^''1''^^:
 &lt;&lt;tiddler [[SMD - Decision - Creation]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Agent creation]]}}}</pre>
 </div>
-<div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" modified="201402181406" changecount="23">
+<div title="SMD - Decision - Creation" creator="Designer" modifier="Designer" created="201402031705" modified="201403031621" changecount="24">
 <pre>The implementation of this method consists in:
 *Identifying the level from which the decisions are made;
 *Casting the global state of the agent in the appropriate class, to access its various data;
@@ -3003,7 +3003,9 @@ We assume that the following influences are defined:
 {{{
 public RISavannahEat( 
 	AgtLionPLSInSavannahLevel predator, 
-	AgtGazellePLSInSavannahLevel prey 
+	AgtGazellePLSInSavannahLevel prey,
+	SimulationTimeStamp timeLowerBound,
+	SimulationTimeStamp timeUpperBound
 )
 }}}
 *The ''move towards'' influence is implemented as the {{{RISavannahMove}}} class, defining a constructor having the following signature:
@@ -3011,14 +3013,16 @@ public RISavannahEat(
 public RISavannahMove( 
 	AgtLionPLSInSavannahLevel predator,
 	double desiredX,
-	double desiredY
+	double desiredY,
+	SimulationTimeStamp timeLowerBound,
+	SimulationTimeStamp timeUpperBound
 )
 }}}
 We also assume that the [[random number generation class|SMD - Tools preparation - Random]] provides the following tool method getting a random element within a list:
 {{{
 public &lt;T&gt; T randomElement( List&lt;T&gt; list );
 }}}
-Finally, we assume that the private local state of the agent is implemented as a {{className{AgtLionHLSInSavannahLevel}}} class defining the {{methodName{getEatDistanceThreshold()}}} method.
+Finally, we assume that the private local state of the agent is implemented as a {{className{AgtLionHLSInSavannahLevel}}} class defining the {{methodName{getEatDistanceThreshold()}}} method, modeling the maximal distance between a lion and a prey to consider them as &quot;close&quot;.
 
 The implementation of such a decision process of the ''lion'' agent from the ''Savannah'' level corresponds to the following code. The sources of this class are also available in a [[stand alone file|files/simulationModel/lowLevel/AgtLion2.java]]:
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/AgtLion2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
@@ -4009,12 +4013,12 @@ The implementation of the methods of the skeleton (see the previous section) has
 [&gt;img[images/simulationModel/highLevel/levelSkeletonTree.png]]
 This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
-*A &quot;slumbs&quot; level
+*A &quot;slums&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
 This step illustrates the creation of a level named &quot;city&quot; such that:
-*The perception graph contains the &quot;city&quot; and &quot;slumbs&quot; levels;
-*The influence graph contains the &quot;city&quot;, &quot;slumbs&quot; and &quot;country&quot; levels.
+*The perception graph contains the &quot;city&quot; and &quot;slums&quot; levels;
+*The influence graph contains the &quot;city&quot;, &quot;slums&quot; and &quot;country&quot; levels.
 *The source of the class modeling the &quot;City&quot; level is located in the ''levels'' package of the source tree hierarchy (see the image). 
 {{clear{}}}
 This example illustrates two implementation approaches of this class:
@@ -4070,11 +4074,11 @@ The implementation of this method usually consists in:
 {{exsection{
 This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
-*A &quot;slumbs&quot; level
+*A &quot;slums&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
 It illustrates the implementation of the {{methodName{getPerceptibleLevels(...)}}} method of a &quot;city&quot; level such that:
-*The out neighborhood of the level in the perception relation graph contains the &quot;city&quot; and &quot;slumbs&quot; levels.
+*The out neighborhood of the level in the perception relation graph contains the &quot;city&quot; and &quot;slums&quot; levels.
 !Code
 {{{
 public class CityLevel implements ILevel {
@@ -4092,7 +4096,7 @@ public class CityLevel implements ILevel {
 		// First add the identifier of this level to the graph.
 		this.perceptibleLevels.add( MyAwesomeLevelList.CITY );
 		// Then add to the set the identifier of the perceptible levels.
-		this.perceptibleLevels.add( MyAwesomeLevelList.SLUMBS );
+		this.perceptibleLevels.add( MyAwesomeLevelList.SLUMS );
 		[...]
 	}
 
@@ -4121,7 +4125,7 @@ The implementation of this method usually consists in:
 {{exsection{
 This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
-*A &quot;slumbs&quot; level
+*A &quot;slums&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
 It illustrates the implementation of the {{methodName{getInfluenceableLevels(...)}}} method of a &quot;city&quot; level such that:
@@ -4178,7 +4182,7 @@ In the context of the constructor of a level, these values are the initial ones.
 {{exsection{
 This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
-*A &quot;slumbs&quot; level
+*A &quot;slums&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
 It illustrates the implementation of the {{methodName{getLastConsistentState(...)}}} method of a &quot;city&quot; level.
@@ -4235,7 +4239,7 @@ The definition of the local state of the environment is unecessary in this const
 {{exsection{
 This example is a continuation of the previous step where four different levels were identified, and instanciated into the {{className{MyAwesomeLevelList}}} class:
 *A &quot;city&quot; level
-*A &quot;slumbs&quot; level
+*A &quot;slums&quot; level
 *A &quot;country&quot; level
 *A &quot;seashore&quot; level
 It illustrates the implementation of the {{methodName{getLastTransitoryState(...)}}} method of a &quot;city&quot; level.
@@ -4335,7 +4339,7 @@ This class has to:
 {{clear{}}}
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Level identifiers list creation example&lt;/span&gt;]
 {{exsection {
-This example illustrates the creation of a level identifiers list called {{className{MyAwesomeLevelList }}}. This list contains the &quot;city&quot;, &quot;slumbs&quot;, &quot;country&quot;, &quot;seashore&quot; levels.
+This example illustrates the creation of a level identifiers list called {{className{MyAwesomeLevelList }}}. This list contains the &quot;city&quot;, &quot;slums&quot;, &quot;country&quot;, &quot;seashore&quot; levels.
 
 This example is also available in a [[stand alone file|./files/simulationModel/highLevel/MyAwesomeLevelList.java]].
 !Code
@@ -4824,12 +4828,12 @@ Note that the content of the private local states is completed during the whole 
 &lt;&lt;tiddler [[SMD - Private local states - Specifications]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Influences skeleton]]}}}</pre>
 </div>
-<div title="SMD - Private local states - Specifications" creator="Designer" modifier="Designer" created="201402171612" modified="201402171621" changecount="12">
+<div title="SMD - Private local states - Specifications" creator="Designer" modifier="Designer" created="201402171612" modified="201403031015" changecount="14">
 <pre>[&gt;img(47%,)[images/simulationModel/highLevel/environmentDesignOutline3.png]]
 In SIMILAR, a private local state of the environment is modeled as an instance of the {{className{[[ILocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface, just like for public local states. Therefore, refer to the [[previous step|SMD - Public local states]] to get the general instructions to implement a private state.
 
 Since ''private'' and ''public'' have the same abbreviation, we recommend to use the word &quot;''Hidden''&quot; in the abbreviation of the name of a private local state. 
-For instance //&quot;AgtLionHLSInSavannah&quot;// for the private local state of a //&quot;Lion&quot;// agent in the //&quot;Savannah&quot;// level.
+For instance {{className{EnvHLSInSavannah}}} for the private local state of the environment in the //&quot;Savannah&quot;// level.
 {{clearright{}}}
 {{bigemphasisblock{Note that the [[common libraries|./commonlibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel define the {{className{[[AbstractLocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLocalStateOfEnvironment.html]]}}} abstract class providing a default implementation to this method.}}}
 [&lt;img(47%,)[images/simulationModel/highLevel/agentDesignOutline3.png]]

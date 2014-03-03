@@ -19,9 +19,9 @@ public class MyAwesomeLevelList {
 	public static final LevelIdentifier CITY = new LevelIdentifier( "city" );
 
 	/**
-	 * The identifier of the "slumbs" level.
+	 * The identifier of the "slums" level.
 	 */
-	public static final LevelIdentifier SLUMBS = new LevelIdentifier( "slumbs" );
+	public static final LevelIdentifier SLUMS = new LevelIdentifier( "slums" );
 
 	/**
 	 * The identifier of the "country" level.

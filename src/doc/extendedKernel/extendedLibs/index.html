@@ -710,9 +710,6 @@ Tiddler.prototype.changed = function()
 };
 //}}}</pre>
 </div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311290947" modified="201311291023" changecount="11">
-<pre>{{center{[img(98%,)[images/workInProgress.png]]}}}</pre>
-</div>
 <div title="DropDownMenuPlugin" creator="Designer" modifier="Designer" created="201311151101" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
 |''Name:''|DropDownMenuPlugin|
@@ -888,6 +885,97 @@ store.addNotification(&quot;StyleSheetDropDownMenuPlugin&quot;,refreshStyles);
 //!END-PLUGIN-CODE
 // %/</pre>
 </div>
+<div title="EL - Abstract - Parameters" creator="Designer" modifier="Designer" created="201403041603" modified="201403041621" changecount="19">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Simulation parameters}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractSimulationParameters|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractSimulationParameters.html]]}}} to the {{className{[[ISimulationParameters|../../api/fr/lgi2a/similar/extendedkernel/simulationmodel/ISimulationParameters.html]]}}} interface modeling the parameters of a simulation. This class provides the behavior to all the generic methods defined in the parent interface.
+!Implementation instructions
+A class extending {{className{[[AbstractSimulationParameters|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractSimulationParameters.html]]}}} has to call the ''super-constructor'' having the following signature:
+{{{
+protected AbstractSimulationParameters(
+	SimulationTimeStamp initialTime
+);
+}}}
+The constructor defines the following argument:
+*{{argumentName{initialTime}}} The initial time of the simulation.
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Parameters class example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/preparation/parametersTree.png]]
+We consider in this example a simulation relying on the following parameters:
+*''Initial number of agents'' (default value: 350)
+*''Agent initial speed'' (default value: 25)
+{{clearright{}}}&lt;html&gt;&lt;h1&gt;
+Code&lt;/h1&gt;&lt;/html&gt;
+Based on these information, the corresponding ''simulation parameters'' class is implemented with the following code. The sources of this class are also available as a [[stand alone|../files/simulationModel/preparation/MyParametersClass2.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='../files/simulationModel/preparation/MyParametersClass2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="EL - Abstract - Perception" creator="Designer" modifier="Designer" created="201403041616" modified="201403041620" changecount="3">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Perception model}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtPerceptionModel.html]]}}} to the {{className{[[IAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtPerceptionModel.html]]}}} interface modeling the perception model of an agent from a specific level. This abstract class provides the behavior to the generic and domain-independent methods. Only the following method has still to be specified by the users:
+*{{methodName{perceive(...)}}} defining how the agent perceives information from the simulation for a specific level.
+!Implementation instructions
+A class extending {{className{[[AbstractAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtPerceptionModel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+public AbstractAgtPerceptionModel(
+	LevelIdentifier levelIdentifier
+);
+}}}
+The constructor defines the following argument:
+*{{argumentName{levelIdentifier}}} The identifier of the level from which the perception is made in this class.
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Perception process full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/lowLevel/perceptionTree.png]]
+This example is a continuation of the example started in the documentation of the &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Perception - Perceived data]]&quot;&gt;perceived data model&lt;/a&gt;&lt;/html&gt;.
+We illustrate the implementation of the perception process of a ''lion'' agent, assuming that:
+*The ''Sky'' and ''Savannah'' levels use a 2D grid topology (see &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Public local states]]&quot;&gt;this page&lt;/a&gt;&lt;/html&gt;);
+*The ''Lion'' agent defines a 2D coordinate in the ''Savannah'' level (see &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Public local states]]&quot;&gt;this page&lt;/a&gt;&lt;/html&gt;);
+*The ''Gazelle'' agents define a public local state in the ''Savannah'' level named {{className{AgtGazellePLSInSavannahLevel}}}, where their age can be read using the {{methodName{getAge()}}} method;
+The perception process of a ''Lion'' consists in listing the young gazelles (younger than 3 years) agents in a 300 meters square centered on the location of the lion. This implies that the private local state of the &quot;Lion&quot; agent in the &quot;Savannah&quot; level contains two information:
+*The ''perception radius'' where the gazelles can be seen (here 300 meters)
+*The ''age threshold'' under which gazelles are preyed on (here 3 years).
+The {{className{[[AgtLionHLSInSavannahLevel|../files/simulationModel/lowLevel/AgtLionHLSInSavannahLevel.java]]}}} class implements such a private local state.
+{{clearright{}}}&lt;html&gt;&lt;h1&gt;
+Code&lt;/h1&gt;&lt;/html&gt;
+Based on these information, the corresponding ''perception model'' is implemented with the following code. The sources of this class are also available as a [[stand alone|../files/simulationModel/lowLevel/AgtLionPerceptionFromSavannah2.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='../files/simulationModel/lowLevel/AgtLionPerceptionFromSavannah2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="EL - Abstract implementations" creator="Designer" modifier="Designer" created="201403041601" modified="201403041603" changecount="6">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract classes}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of SIMILAR define ''abstract classes'' providing a default implementation to the generic methods of the following elements of the extended-kernel:
+*[[Simulation parameters|EL - Abstract - Parameters]];
+*A [[perception model|EL - Abstract - Perception]] of an agent from a level;
+*A [[decision model|EL - Abstract - Decision]] of an agent from a level;
+*A [[natural action model|EL - Abstract - Natural]] of the environment from a level.</pre>
+</div>
+<div title="Extended libs - Navigation menu" creator="Designer" modifier="Designer" created="201403041547" modified="201403041558" changecount="8">
+<pre>*[[|Home]]
+*[[Abstract implementations|EL - Abstract implementations]]
+**[[Simulation parameters|EL - Abstract - Parameters]]
+**[[Agent perception|EL - Abstract - Perception]]
+**[[Agent decision|EL - Abstract - Decision]]
+**[[Natural action|EL - Abstract - Natural]]
+*[[Generic implementations|EL - Generic implementations]]
+**[[Empty perception|EL - Generic - Empty perception]]
+**[[Empty decision|EL - Generic - Empty decision]]
+**[[Empty natural action|EL - Generic - Empty natural]]
+**[[Empty reaction|EL - Generic - Empty reaction]]
+**[[Still global state revision|EL - Generic - Identity revision]]
+**[[Simple parameters|EL - Generic - Simple parameters]]
+*[[Simulation end critera|EL - End critera]]
+**[[Time based|EL - End critera - Time based]]
+*[[Simulation time models|EL - Time models]]
+**[[Periodic|EL - Time models - Periodic]]
+&lt;&lt;dropMenu&gt;&gt;</pre>
+</div>
 <div title="GettingStarted" creator="Designer" modifier="Designer" created="201311150928" modified="201311290938" tags="system excludeLists" changecount="123">
 <pre>[[StyleSheetCustomization]]
 
@@ -976,17 +1064,16 @@ Tabulation content 2.
 <div title="HaemoSideBar" creator="Designer" modifier="Designer" created="201311150920" modified="201311150925" tags="HaemoglobinTheme excludeLists" changecount="5">
 <pre></pre>
 </div>
-<div title="Home" creator="Designer" modifier="Designer" created="201311290939" modified="201311291054" changecount="26">
-<pre>[&gt;img(45%,)[images/structure_extendedlibs.png]]
+<div title="Home" creator="Designer" modifier="Designer" created="201311290939" modified="201403041601" changecount="30">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Extended kernel - Extended libraries}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+[&gt;img(45%,)[images/structure_extendedlibs.png]]
 The ''extended libraries'' of the extended kernel, containing generic implementations of simulation algorithms and results exporting features. These libraries ''facilitate the design of simulations with the extended kernel'', owing to:
-*Generic and modular concrete implementations of most interfaces of the micro kernel;
-*+++^54em^*@[Specialized interfaces]
-These interfaces separate the implementation of:
-*The perception, memory revision and decision processes from the code of the agent class;
-*The natural action process from the code of the environment class;
-*The reaction process from the code of the level classes;
-=== specifying separately the content of these classes;
-*Generic default implementations of the specialized interfaces.
+*Concrete [[end criteria|EL - End criteria]];
+*Concrete [[time models|EL - Time models]] for the levels;
+*[[Abstract implementations|EL - Abstract implementations]] of the interfaces of the extended kernel;
+*[[Generic implementations||EL - Generic implementations]] of behaviors and parameters.
 
 {{linkbigbtn center{[[Documentation content]]}}}</pre>
 </div>
@@ -1477,11 +1564,17 @@ loading a script from a source url:
 2005.11.08 1.0.0 initial release
 &lt;&lt;&lt;</pre>
 </div>
-<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201401220958" tags="excludeLists system" changecount="32">
+<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201403041558" tags="excludeLists system" changecount="36">
 <pre>{{toparent{[[back to parent|../index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}
-''[[General|Home]]''
+''General''
 ----
-*[[Index|Documentation content]]</pre>
+*[[Index|Home]]
+''Extended libs''
+----
+*[[Abstract classes|EL - Abstract implementations]]
+*[[Generic classes|EL - Generic implementations]]
+*[[End criteria|EL - End criteria]]
+*[[Time models|EL - Time models]]</pre>
 </div>
 <div title="MathJaxPlugin" creator="Administrator" modifier="Designer" created="201311150900" modified="201311151031" tags="systemConfig plugin excludeLists" changecount="2">
 <pre>/***
@@ -3234,12 +3327,30 @@ span.center.caption {
 }
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201402171040" tags="CSS excludeLists" changecount="11">
+<div title="StyleSheetCustomization - Generic styles" creator="Designer" modifier="Designer" created="201311260747" modified="201403041621" tags="CSS excludeLists" changecount="12">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
  * that are used in any wiki of this documentation.
  ******************************************************** */
+/*}}}*/
+/*{{{*/
+/* Image flush command */
+.clear {
+	display:block;
+	clear:both;
+	margin-bottom:-1em;
+}
+.clearright {
+	display:block;
+	clear:right;
+	margin-bottom:-1em;
+}
+.clearleft {
+	display:block;
+	clear:right;
+	margin-bottom:-1em;
+}
 /*}}}*/
 /*{{{*/
 /* alignment commands */
@@ -3368,12 +3479,189 @@ when the &quot;+ + +&quot; maccro is used without a text between &quot;[ ]&quot;
 /* This button was generated using CSSButtonGenerator.com */
 /*}}}*/</pre>
 </div>
-<div title="StyleSheetCustomization - Wikispecific" creator="Designer" modifier="Designer" created="201311260750" modified="201311260750" tags="CSS excludeLists" changecount="2">
+<div title="StyleSheetCustomization - Wikispecific" creator="Designer" modifier="Designer" created="201311260750" modified="201403041550" tags="CSS excludeLists" changecount="3">
 <pre>/*{{{*/
 /* ********************************************************
  * This tiddler contains the CSS rules for the classes
  * that are specific to this wiki.
  ******************************************************** */
+/*}}}*/
+/*{{{*/
+/* Style of the bar under the navigation buttons */
+.guidelinesNavMenu {
+	display:block;
+	text-align:center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+hr.topSep, hr.botSep {
+	margin-bottom: -0.5em;
+	width: 100%;
+	height: 2px;
+	border: 0;
+	background: -webkit-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -o-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%);
+	background: -ms-linear-gradient(left,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+	background: linear-gradient(to right,  rgba(198,0,3,0) 0%,rgba(198,0,3,0.9) 50%,rgba(198,0,3,0) 100%); 
+}
+hr.topSep {
+	margin-top: -1em;
+}
+/*}}}*/
+/*{{{*/
+/* Style of the title displayed in the design guidelines */
+.stepMainTitle {
+	color: rgb(191,35,35);
+	text-align: center;
+	font-family: Impact;
+	font-size: 300%;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing:2px;
+	display:block;
+	margin-top: 0.5em;
+}
+/*}}}*/</pre>
+</div>
+<div title="StyleSheetDropDownMenuPlugin" creator="Designer" modifier="Designer" created="201403041549" changecount="1">
+<pre>/*{{{*/
+/***** LAYOUT STYLES -  DO NOT EDIT! *****/
+ul.suckerfish, ul.suckerfish ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	line-height:1.4em;
+}
+
+ul.suckerfish  li {
+	display: inline-block; 
+	display: block;
+	float: left; 
+}
+
+ul.suckerfish li ul {
+	position: absolute;
+	left: -999em;
+}
+
+ul.suckerfish li:hover ul, ul.suckerfish li.sfhover ul {
+	left: auto;
+}
+
+ul.suckerfish ul li {
+	float: none;
+	border-right: 0;
+	border-left:0;
+}
+
+ul.suckerfish a, ul.suckerfish a:hover {
+	display: block;
+}
+
+ul.suckerfish li a.tiddlyLink, ul.suckerfish li a, #mainMenu ul.suckerfish li a {font-weight:bold;}
+/**** END LAYOUT STYLES *****/
+
+
+/**** COLORS AND APPEARANCE - DEFAULT *****/
+ul.suckerfish li a {
+	padding: 0.5em 1.5em;
+	font-weight:bold;
+	border-bottom: 0;
+	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	box-shadow:inset 0px 1px 0px 0px #f29c93;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+	background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
+	background-color:#fe1a00;
+	color:#ffffff;
+}
+
+ul.suckerfish li:hover a, ul.suckerfish li.sfhover a{
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
+	background-color:#ce0100;
+}
+
+ul.suckerfish li:hover ul a, ul.suckerfish li.sfhover ul a{
+	color: #d83526;
+	background: #ffeeee;
+}
+
+ul.suckerfish ul li a:hover {
+	background: #ffdddd;
+}
+
+ul.suckerfish li a{
+	width:9.5em;
+}
+
+ul.suckerfish ul li a, ul.suckerfish ul li a:hover{
+	display:inline-block;
+	width:9.5em;
+}
+
+ul.suckerfish li {
+	border:1px solid #d83526;
+}
+
+ul.suckerfish li ul li a {
+	border-style: solid;
+	border-color: #d83526;
+	border-top-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+}
+/***** END COLORS AND APPEARANCE - DEFAULT *****/
+
+
+/***** LAYOUT AND APPEARANCE: VERTICAL *****/
+ul.suckerfish.vertical li{
+	width:10em;
+	border-left: 0px solid #00558f;
+}
+
+ul.suckerfish.vertical ul li, ul.suckerfish.vertical li a, ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a {
+	border-left: 0.8em solid #00558f;
+}
+
+ul.suckerfish.vertical li a, ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a,  ul.suckerfish.vertical li.sfhover a:hover{
+	width:8em;
+}
+
+ul.suckerfish.vertical {
+	width:10em; text-align:left;
+	float:left;
+}
+
+ul.suckerfish.vertical li a {
+	padding: 0.5em 1em 0.5em 1em;
+	border-top:1px solid  #fff;
+}
+
+ul.suckerfish.vertical, ul.suckerfish.vertical ul {
+	line-height:1.4em;
+}
+
+ul.suckerfish.vertical li:hover ul, ul.suckerfish.vertical li.sfhover ul { 
+	margin: -2.4em 0 0 10.9em;
+}
+
+ul.suckerfish.vertical li:hover ul li a, ul.suckerfish.vertical li.sfhover ul li a {
+	border: 0px solid #FFF;
+}
+
+ul.suckerfish.vertical li:hover a, ul.suckerfish.vertical li.sfhover a{
+	padding-right:1.1em;
+}
+
+ul.suckerfish.vertical li:hover ul li, ul.suckerfish.vertical li.sfhover ul li {
+	border-bottom:1px solid  #fff;
+}
+
+/***** END LAYOUT AND APPEARANCE: VERTICAL *****/
 /*}}}*/</pre>
 </div>
 <div title="TagsTreeStyleSheet" creator="Designer" modifier="Designer" created="201311150935" tags="excludeLists" changecount="1">

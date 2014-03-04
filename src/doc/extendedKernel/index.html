@@ -2627,12 +2627,77 @@ In the extended kernel of SIMILAR, an agent is an empty shell onto which are plu
 {{clearright{}}}
 Each of these models is embodied as a different class, to favor the separation of concerns and facilitate code revision. This feature grants the agent with the ability of reflection and intercession: they become able to dynamically change parts of their behavior.</pre>
 </div>
-<div title="SMD - End criterion" creator="Designer" modifier="Designer" created="201403041420" modified="201403041421" changecount="4">
+<div title="SMD - End criterion" creator="Designer" modifier="Designer" created="201403041420" modified="201403041533" changecount="11">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the simulation end criterion}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Final steps]]  |  [[next step &gt;&gt;|SMD - Initial state]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
-
+&lt;&lt;tiddler [[SMD - End criterion - Intro]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Structure of an ending criterion in SIMILAR&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - End criterion - Structure]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Specifications and implementation instructions&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - End criterion - Specifications]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Creation of an ending criterion&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - End criterion - Creation]]&gt;&gt;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Initial state]]}}}</pre>
+</div>
+<div title="SMD - End criterion - Creation" creator="Designer" modifier="Designer" created="201403041533" modified="201403041541" changecount="5">
+<pre>The created class has to comply with the following constraints:
+*It has to be located in the ''initializations'' package of the tree hierarchy;
+*Its name should be explicit.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Simulation end criterion example&lt;/span&gt;]
+{{exsection{
+For instance, an end criterion stopping the simulation if there is no more agents in the &quot;Savannah&quot; level can be implemented as the following class. This class is also available as a [[stand alone file|file/simulationModel/finalStep/EndCriterionNoAgents.java]].
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/finalStep/EndCriterionNoAgents.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="SMD - End criterion - Intro" creator="Designer" modifier="Designer" created="201403041517" modified="201403041520" changecount="5">
+<pre>The specifications made up until now tell how the simulation runs and when it starts, but defines no criterion identifying when it has to end.
+
+{{focusemphasisblock{
+This step of the simulation methodology focuses on the specification of the ending criterion of the simulation.
+}}}</pre>
+</div>
+<div title="SMD - End criterion - Specifications" creator="Designer" modifier="Designer" created="201403041523" modified="201403041532" changecount="4">
+<pre>In the extended kernel of SIMILAR, an ending criterion is defined as a stand alone class implementing the {{className{IEndCriterionModel}}} interface. Each class implementing this interface has to define the following method:
+{{{
+public boolean isFinalTimeOrAfter(
+	SimulationTimeStamp currentTime, 
+	ISimulationEngine engine 
+);
+}}}
+This method uses the following arguments to determine if the simulation has to end at the current half-consistent state:
+*{{argumentName{currentTime}}} modeling the time stamp of the current half-consistent state of the simulation;
+*{{argumentName{engine}}} modeling the simulation engine where the simulation takes place. This value grants access to:
+**the current half-dynamic state of the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The current half-dynamic state of the simulation is retrieved using the following method of the {{className{IEngine}}} interface:
+{{{
+public IPublicDynamicStateMap getSimulationDynamicStates( );
+}}}
+}}} ===
+
+**the model of the environment; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The model of the environment is retrieved using the following method of the {{className{IEngine}}} interface:
+{{{
+public IEnvironment4Engine getEnvironment( );
+}}}
+}}} ===
+
+**the agents lying in a level. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The model of the agents lying in a specific level are retrieved using the following method of the {{className{IEngine}}} interface:
+{{{
+public Set&lt;IAgent4Engine&gt; getAgents( LevelIdentifier );
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - End criterion - Structure" creator="Designer" modifier="Designer" created="201403041522" modified="201403041527" changecount="5">
+<pre>The ending criterion of a simulation can take very different shapes. The most simple one defines a final time stamp to reach. Yet other simulation might need more complex critera, like attaining a still simulation (nothing happens in the simulation any more), attaining a situation where no more agents are present in the simulation, //etc.//
+
+To take into consideration all these possible cases, an ending criterion is defined as an application taking as parameters the following values to determine if the simulation has to end at the current half-consistent state or not:
+*The ''time stamp'' of the current half consistent state;
+*The ''current half-dynamic state'' of the simulation.</pre>
 </div>
 <div title="SMD - Final steps" creator="Designer" modifier="Designer" created="201403041206" modified="201403041421" changecount="4">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Final specifications of the simulation}}}

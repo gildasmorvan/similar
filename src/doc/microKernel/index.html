@@ -5370,9 +5370,9 @@ Creating the simulation execution class&lt;/h1&gt;&lt;/html&gt;
 &lt;&lt;tiddler [[SMD - Running the simulation - Creation]]&gt;&gt;
 {{nextButton{[[Run simulations with the command line|Simulation execution]]}}}</pre>
 </div>
-<div title="SMD - Running the simulation - Creation" creator="Designer" modifier="Designer" created="201402211320" modified="201402211410" changecount="6">
+<div title="SMD - Running the simulation - Creation" creator="Designer" modifier="Designer" created="201402211320" modified="201403041425" changecount="7">
 <pre>The generated class has to:
-*Be located in the ''model'' package of the tree hierarchy;
+*Be located in the ''initializations'' package of the tree hierarchy;
 *Provide a javadoc ''documentation'' to that class. This documentation has to describe precisely the purpose of the simulation and how to read its results. This point is of utmost importance when different main classes are defined for a simulation.
 +++?[&lt;span class=&quot;exbigbtn&quot;&gt;Simulation main class example&lt;/span&gt;]
 {{exsection{
@@ -5998,14 +5998,14 @@ java -cp &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar:
 &lt;&lt;tiddler [[Simulation execution - Ant]]&gt;&gt;
 }}} ===</pre>
 </div>
-<div title="Simulation execution - Intro" creator="Designer" modifier="Designer" created="201402240930" modified="201402240931" changecount="2">
+<div title="Simulation execution - Intro" creator="Designer" modifier="Designer" created="201402240930" modified="201403041433" changecount="3">
 <pre>{{focusemphasisblock{
 This part of the documentation is dedicated to the execution of an existing simulation designed with SIMILAR.
 }}}
 To run simulations with SIMILAR, the various elements have to be previously defined. These elements can either be designed by the user, or come from existing classes of the [[common libraries|./commonLibs/index.html]] of SIMILAR:
 *A ''simulation model'', describing the initial state and the mechanics of the simulation; {{morelink{[[How to create|Simulation models]]}}}
 *''Observation probes'', describing how to retrieve the results of the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|./commonLibs/index.html#Probes]]}}}
-*A ''simulation engine'' defining the java algorithms used in the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|./commonLibs/index.html#Probes]]}}}
+*A ''simulation engine'' defining the java algorithms used in the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|./commonLibs/index.html#SimulationEngines]]}}}
 Assuming that all these items are whether defined in the source directory of the simulation or within the libraries, then running a simulation consists in:
 #Compiling the sources of the simulation, using a //''javac''// like command;
 #Running the main class of the simulation, using the //''java''// command.</pre>

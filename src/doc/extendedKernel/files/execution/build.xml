@@ -1,0 +1,43 @@
+<project name="SIMILAR simulation" basedir=".">
+	<!-- set global properties for this build -->
+	<property name="src" 			location="src/main/java"/>
+	<property name="build" 		location="target/bin"/>
+	<property name="similarDir" 		location="/home/binaries/similar/"/>
+
+	<property name="main-class"  	value="fr.lgi2a.similar.custom.mysimulation.SimulationMain"/>
+
+	<!-- define the class path -->
+	<path id="project.class.path">
+		<fileset dir="${similarDir}/similarLib">
+			<include name="similar-distribution-*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="all" description="compiles and runs the simulation" 
+			depends="clean, compile, run" />
+
+	<target name="clean" description="clean up generated binaries" >
+		<!-- Delete the ${dist} directory content -->
+		<delete includeemptydirs="true">
+			<fileset dir="${build}" includes="**/*"/>
+		</delete>
+	</target>
+	
+	<target name="compile" description="compile the source " >
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+			<classpath>
+				<path refid="project.class.path"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="run">
+		<java fork="true" classname="${main-class}">
+			<classpath>
+				<path refid="project.class.path"/>
+				<path path="${build}"/>
+			</classpath>
+		</java>
+	</target>
+</project>

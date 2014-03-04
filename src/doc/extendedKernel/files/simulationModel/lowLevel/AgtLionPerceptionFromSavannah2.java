@@ -27,7 +27,7 @@ public class AgtLionPerceptionFromSavannah2 extends AbstractAgtPerceptionModel {
     * Builds an instance of the perception model.
     */
    public AgtLionPerceptionFromSavannah2( ) {
-      super( WildlifeAgentCategoriesList.LION );
+      super( WildlifeLevelList.SAVANNAH );
    }
 
    /**

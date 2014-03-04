@@ -608,7 +608,7 @@ config.options.chkHideTabsBarWhenSingleTab=true;
 <div title="DefaultTiddlers" creator="Designer" modifier="Designer" created="201311281641" modified="201401211546" tags="system excludeLists" changecount="4">
 <pre>[[Home]]</pre>
 </div>
-<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201402281518" modified="201402281519" changecount="3">
+<div title="Design - Simulation model - menu" creator="Designer" modifier="Designer" created="201402281518" modified="201403041423" changecount="4">
 <pre>*[[Start|Simulation models]]
 *[[Preparation|SMD - Preparation]]
 **[[Packages tree|SMD - Package tree]]
@@ -631,6 +631,7 @@ config.options.chkHideTabsBarWhenSingleTab=true;
 **[[Natural|SMD - Natural]]
 **[[Reaction|SMD - Reaction]]
 *[[Final steps|SMD - Final steps]]
+**[[End criterion|SMD - End criterion]]
 **[[Initial state|SMD - Initial state]]
 **[[Execution|SMD - Running the simulation]]
 &lt;&lt;dropMenu&gt;&gt;</pre>
@@ -2626,6 +2627,24 @@ In the extended kernel of SIMILAR, an agent is an empty shell onto which are plu
 {{clearright{}}}
 Each of these models is embodied as a different class, to favor the separation of concerns and facilitate code revision. This feature grants the agent with the ability of reflection and intercession: they become able to dynamically change parts of their behavior.</pre>
 </div>
+<div title="SMD - End criterion" creator="Designer" modifier="Designer" created="201403041420" modified="201403041421" changecount="4">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the simulation end criterion}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Final steps]]  |  [[next step &gt;&gt;|SMD - Initial state]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Initial state]]}}}</pre>
+</div>
+<div title="SMD - Final steps" creator="Designer" modifier="Designer" created="201403041206" modified="201403041421" changecount="4">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Final specifications of the simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction - To regular influences]]  |  [[next step &gt;&gt;|SMD - End criterion]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+At this stage of the simulation model design process, the general behavior of the simulation has been described. The ''final steps'' of the simualtion model design process consists in:
+*Specifying the [[end criterion|SMD - End criterion]] of the simulation;
+*Specifying the [[initialization profile(s)|SMD - Initial state]] of a simulation model;
+*Writing the [[main class|SMD - Running the simulation]] performing the simulation;
+
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - End criterion]]}}}</pre>
+</div>
 <div title="SMD - Global state - Introduction" creator="Designer" modifier="Designer" created="201403031429" changecount="1">
 <pre>The behavior of an agent is defined by three different steps (see the image):
 *The ''perception phase'', where the agent decodes the data from the public local dynamic state of the perceptible levels, identifies the relevant data and stores them into a ''perceived data set'';
@@ -2901,6 +2920,469 @@ For instance:
 {{clearright{}}}
 ~~//''__1:__ This notion is similar to the notion of agent category''//~~
 @@clear:right;display:block;margin:0;padding:0;@@</pre>
+</div>
+<div title="SMD - Initial state" creator="Designer" modifier="Designer" created="201403041206" modified="201403041422" changecount="2">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creating the initial state of a simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - End criterion]]  |  [[next step &gt;&gt;|SMD - Running the simulation]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Initial state - Intro]]&gt;&gt;
+!Structure of an initialization profile of the simulation
+&lt;&lt;tiddler [[SMD - Initial state - Structure]]&gt;&gt;
+!Specifications and implementation instructions
+&lt;&lt;tiddler [[SMD - Initial state - Specifications]]&gt;&gt;
+!Creating an initialization profile for a simulation
+&lt;&lt;tiddler [[SMD - Initial state - Creation]]&gt;&gt;
+
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Running the simulation]]}}}</pre>
+</div>
+<div title="SMD - Initial state - Creation" creator="Designer" modifier="Designer" created="201403041354" modified="201403041412" changecount="13">
+<pre>The constructor of the simulation model initialization profile has to comply with the following requirements:
+*It has to call the super constructor to set the parameters class and the end criterion of the simulation.
+The generated class has to:
+*Be located in the ''initializations'' package of the tree hierarchy;
+*Generate at least one level;
+*Be named explicitly after the initialization profile it represents (if more than one profile are defined).
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Simulation model initialization profile full example&lt;/span&gt;]
+{{exsection{
+We consider a wildlife simulation with this [[list of levels|files/simulationModel/highLevel/WildlifeLevelList.java]] and this [[list of agents|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]. In this example, we wish to define a wildlife simulation with lion and gazelle agents only. Therefore, this initialization profile:
+*creates only a &quot;Savannah&quot; level;
+*places only an initial number of agents of both classes in the simulation, at random locations;
+*stops when a final time is reached.
+!Code
+We assume that the &quot;Savannah&quot; level is defined by the following elements:
+*Its identifier is equal to the {{fieldName{SAVANNAH}}} field of the {{className{WildlifeLevelsList}}} class;
+*Its time model is an instance of the {{className{LvlSavannahTimeModel}}} class. This class is assumed to define a constructor with no parameters;
+*Its reaction model is an instance of the {{className{LvlSavannahReaction}}} class. This class is assumed to define a constructor with the following parameters:
+**a threshold distance for the eat behavior of predators (see the example of [[this step|SMD - Reaction - To regular influences]] of the methodology);
+*Its local states are:
+**{{className{EnvPLSInSavannah}}} modeling the public local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have the following arguments:
+***{{argumentName{initialHumidity}}} modeling the initial humidity of the environment;
+***{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+***{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+**{{className{EnvHLSInSavannah}}} modeling a private local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have no arguments;
+*Its natural action model is implemented as the {{className{EnvNaturalInSavannah}}} for the natural action of the environment in the &quot;Savannah&quot; level. This class is assumed to have a constructor with no arguments;
+We also assume that:
+*Agents from the ''gazelle'' category can be created using the {{className{AgtGazelleFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*Agents from the ''lion'' category can be created using the {{className{AgtLionFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*A [[random number generator|SMD - Tools preparation - Random]] class {{className{RandomValueFactory}}} defines in its strategy a method named {{methodName{randomLocationIn(doube,double)}}} getting a random location within the bounds which width and a height are provided as arguments;
+*The ending criterion of the simulation is implemented as the {{className{WildlifeEndCriterion}}} defining a constructor taking as an argument the final time stamp of the simulation;
+We finally assume that the {{className{WildlifeParametersClass}}} simulation parameters class defines the following public fields:
+*{{fieldName{initialTime}}} modeling the initial time of the simulation;
+*{{fieldName{finalTime}}} modeling the final time of the simulation;
+*{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
+*{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
+*{{fieldName{initialHumidity}}} modeling the initial humidity level in the &quot;Savannah&quot; level;
+*{{fieldName{eatBehaviorThresholdDistance}}} modeling the maximal distance that can separate a predator from its prey for a &quot;eat&quot; behavior;
+*{{fieldName{initialNumOfGazelles}}} modeling the initial number of gazelle agents used in the simulation;
+*{{fieldName{initialNumOfLions}}} modeling the initial number of lion agents used in the simulation.
+
+Based on these information, the corresponding ''simulation model initialization profile'' is implemented with the following code. The sources of this class are also available as a [[stand alone|files/simulationModel/finalStep/WildlifeSimulationModel.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/finalStep/WildlifeSimulationModel.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Intro" creator="Designer" modifier="Designer" created="201403041207" changecount="1">
+<pre>Just like for the initialization of agents, different factors have an impact on the initial state of a simulation:
+*The simulation parameters;
+*The way the parameters are used to generate the initial state of the simulation;
+Consequently, different initialization profiles can be define for the same simulation model, depending on the goals of the simulation.
+
+{{focusemphasisblock{
+This step of the simulation focuses on the specifications of the various initialization profiles of a simulation model.
+}}}</pre>
+</div>
+<div title="SMD - Initial state - Specifications" creator="Designer" modifier="Designer" created="201403041212" modified="201403041228" changecount="10">
+<pre>In SIMILAR, the initialization profile of a simulation are modeled as instances of the {{className{[[AbstractExtendedSimulationModel|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html]]}}} abstract class. Extending this abstract class implies to implement:
+*A ''constructor'' calling the super constructor; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The constructor of the {{className{[[AbstractExtendedSimulationModel|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html]]}}} specifies the parameters class being used in that simulation and the criterion telling when the simulation has to end. The constructor has the following signature:
+{{{
+public AbstractExtendedSimulationModel(
+	ISimulationParameters simulationParameters,
+	IEndCriterionModel endCriterionModel
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{simulationParameters}}} models the simulation parameters class used for that simulation;
+*{{argumentName{endCriterionModel}}} models the criterion telling when the simulation ends.
+}}} ===
+
+*The ''level generation'' profile of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Level generation]]&gt;&gt;
+*The ''environment generation'' profile of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Environment generation]]&gt;&gt;
+*The ''agent generation'' profile of the simulation; &lt;&lt;tiddler [[SMD - Initial state - Specifications - Agents generation]]&gt;&gt;</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Agents generation" creator="Designer" modifier="Designer" created="201403041343" modified="201403041352" changecount="10">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''generation profile of the agents'' is a method creating and initializing the instances of the {{className{ExtendedAgent}}} class modeling the agents initially lying in the simulation. This method is named {{methodName{[[generateAgents(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateAgents(fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters, java.util.Map)]]}}} and has the following signature:
+{{{
+protected AgentInitializationData generateAgents(
+	ISimulationParameters simulationParameters,
+	Map&lt;LevelIdentifier, ILevel&gt; levels
+);
+}}}
+This method defines the following argument:
+*{{argumentName{simulationParameters}}} corresponding to the simulation parameters class of the simulation. This object especially defines the initial time of the simulation;
+*{{argumentName{levels}}} modeling all the levels of the simulation that were created by the ''generation profile of the levels''. These levels are accessed by their ''level identifier'' defined as the key of this map;
+This method returns an instance of the {{className{[[AgentsInitializationData|../api/fr/lgi2a/similar/microkernel/ISimulationModel.AgentsInitializationData.html]]}}} class containing the initial agents of the simulation.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The value returned this method has to be created using the following constructor:
+{{{
+public AgentInitializationData( );
+}}}
+This constructor defines no arguments. The agents initially lying in the simulation have to be added to the agent list returned by its {{methodName{[[getAgents( )|../api/fr/lgi2a/similar/microkernel/ISimulationModel.AgentInitializationData.html#getAgents()]]}}} method.
+
+The creation of an initialized agent instance is made using the agent factories that were specified in a [[previous step|SMD - Agent creation]] of the methodology.
+
+{{bigemphasisblock{Note that for a cleaner definition of the simulation, the actual value of the parameters used to create the agents have to come from the parameters of the simulation.}}} }}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+We consider a wildlife simulation with this [[list of levels|files/simulationModel/highLevel/WildlifeLevelList.java]] and this [[list of agents|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]. In this example, we wish to define a wildlife simulation with ''lion'' and ''gazelle'' agents only. This initialization profile places an initial number of agents of both classes in the simulation, at random locations.
+!Code
+We assume that:
+*Agents from the ''gazelle'' category can be created using the {{className{AgtGazelleFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*Agents from the ''lion'' category can be created using the {{className{AgtLionFactory}}} agent factory class. This class defines a static agent generation method named {{methodName{generate(...)}}} having the initial location of the agent as an argument. This location is modeled as an instance of the {{className{Point2D}}} class;
+*A [[random number generator|SMD - Tools preparation - Random]] class {{className{RandomValueFactory}}} defines in its strategy a method named {{methodName{randomLocationIn(doube,double)}}} getting a random location within the specified bounds having a width and a height provided as arguments;
+*The parameters of the simulation are declared as a field named {{fieldName{parameters}}}, containing the following public fields:
+**{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
+**{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
+**{{fieldName{initialNumOfGazelles}}} modeling the initial number of gazelle agents used in the simulation;
+**{{fieldName{initialNumOfLions}}} modeling the initial number of lion agents used in the simulation;
+Then the generation of the initial agents of the simulation is made with the following code:
+{{{
+protected AgentInitializationData generateAgents(
+	ISimulationParameters simulationParameters,
+	Map&lt;LevelIdentifier, ILevel&gt; levels
+) {
+	WildlifeParametersClass castedParameters = (WildlifeParametersClass) simulationParameters;
+	AgentInitializationData result = new AgentInitializationData( );
+	// Create the initial gazelle agents.
+	for( int gazelleId = 0; gazelleId &lt; castedParameters.initialNumOfGazelles; gazelleId++ ){
+		IAgent4Engine gazelle = AgtGazelleFactory.generate(
+			RandomValueFactory.getStrategy().randomLocationIn(
+				castedParameters.envWidth, 
+				castedParameters.envHeight
+			)
+		);
+		result.getAgents().add( gazelle );
+	}
+	// Create the initial lion agents.
+	for( int lionId = 0; lionId &lt; castedParameters.initialNumOfLions; lionId++ ){
+		IAgent4Engine lion = AgtLionFactory.generate(
+			RandomValueFactory.getStrategy().randomLocationIn(
+				castedParameters.envWidth, 
+				castedParameters.envHeight
+			)
+		);
+		result.getAgents().add( lion );
+	}
+	return result;
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Environment generation" creator="Designer" modifier="Designer" created="201403041313" modified="201403041341" changecount="23">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''generation profile of the environment'' is a method creating and initializing the instance of the {{className{ExtendedEnvironment}}} class modeling the environment of the simulation. This method is named {{methodName{[[generateEnvironment(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateEnvironment(fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters, java.util.Map)]]}}} and has the following signature:
+{{{
+protected EnvironmentInitializationData generateEnvironment(
+	ISimulationParameters simulationParameters,
+	Map&lt;LevelIdentifier, ILevel&gt; levels
+);
+}}}
+This method defines the following argument:
+*{{argumentName{simulationParameters}}} corresponding to the simulation parameters class of the simulation. This object especially defines the initial time of the simulation;
+*{{argumentName{levels}}} modeling all the levels of the simulation that were created by the ''generation profile of the levels''. These levels are accessed by their ''level identifier'' defined as the key of this map;
+This method returns an instance of the {{className{[[EnvironmentInitializationData|../api/fr/lgi2a/similar/microkernel/ISimulationModel.EnvironmentInitializationData.html]]}}} class containing the initialized environment of the simulation.
+}}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The value returned this method has to be created using the following constructor:
+{{{
+public EnvironmentInitializationData(
+	IEnvironment4Engine environment
+);
+}}}
+This constructor takes as an argument the initialized environment of the simulation.
+
+The generation of the initialized environment consists in:
+*Creating an instance of the {{className{[[ExtendedEnvironment|../api/fr/lgi2a/similar/extendedkernel/environment/ExtendedEnvironment.html]]}}} class; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The {{className{[[ExtendedEnvironment|../api/fr/lgi2a/similar/extendedkernel/environment/ExtendedEnvironment.html]]}}} class defines a constructor having the following signature:
+{{{
+public ExtendedEnvironment();
+}}}
+}}} ===
+
+*Setting the initial public and private local states of that environment for each level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The initial public and private local states of the environment is set for a level of the simulation using the following method of the {{className{[[ExtendedEnvironment|../api/fr/lgi2a/similar/extendedkernel/environment/ExtendedEnvironment.html]]}}} class:
+{{{
+public void includeNewLevel( 
+	LevelIdentifier level, 
+	ILocalStateOfEnvironment publicLocalState,
+	ILocalStateOfEnvironment privateLocalState 
+)
+}}}
+This method defines the following arguments:
+*{{argumentName{level}}} modeling the level for which the public and private local state of the environment are set;
+*{{argumentName{publicLocalState}}} modeling the initial public local state of the environment for the specified level;
+*{{argumentName{privateLocalState }}} modeling the initial private local state of the environment for the specified level.
+}}} ===
+
+*Specifying the natural action model of the environment for each level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The natural action model of the environment is set for a level using the following method of the {{className{[[ExtendedEnvironment|../api/fr/lgi2a/similar/extendedkernel/environment/ExtendedEnvironment.html]]}}} class:
+{{{
+public void specifyBehaviorForLevel(
+	LevelIdentifier levelId,
+	IEnvNaturalModel naturalMdl
+);
+}}}
+This method defines the following arguments:
+*{{argumentName{level}}} modeling the level for which the natural action model of the environment is set;
+*{{argumentName{naturalMdl}}} modeling the new natural action model used by the environment for the specified level.
+}}} ===
+
+{{bigemphasisblock{
+Note that for a cleaner definition of the simulation, the actual values used to initialize the public and private local states have to come from the parameters of the simulation.
+}}}
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, in the context of a wildlife simulation with this [[list of levels|files/simulationModel/highLevel/WildlifeLevelList.java]], if we assume that the environment defines the following local states:
+*{{className{EnvPLSInSavannah}}} modeling the public local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have the following arguments:
+**{{argumentName{initialHumidity}}} modeling the initial humidity of the environment;
+**{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+**{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+*{{className{EnvHLSInSavannah}}} modeling a private local state of the environment in the &quot;savannah&quot; level. Its constructor is assumed to have no arguments;
+*{{className{EnvPLSInSky}}} modeling the public local state of the environment in the &quot;sky&quot; level. Its constructor is assumed to have the following arguments:
+**{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+**{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+*{{className{EnvHLSInSky}}} modeling a private local state of the environment in the &quot;sky&quot; level. Its constructor is assumed to have no arguments;
+*{{className{EnvPLSInUnderground}}} modeling the public local state of the environment in the &quot;underground&quot; level. Its constructor is assumed to have the following arguments:
+**{{argumentName{gridWidth}}} modeling the width of the topology of the environment;
+**{{argumentName{gridHeight}}} modeling the height of the topology of the environment;
+*{{className{EnvHLSInUnderground}}} modeling a private local state of the environment in the &quot;underground&quot; level. Its constructor is assumed to have no arguments;
+We assume that the natural action model of the environment is implemented as the following classes implementing the {{className{ILevelNaturalModel}}} interface and defining a constructor with no arguments:
+*{{className{EnvNaturalInSavannah}}} for the natural action of the environment in the &quot;Savannah&quot; level;
+*{{className{EnvNaturalInSky}}} for the natural action of the environment in the &quot;Sky&quot; level;
+*{{className{EnvNaturalInUnderground}}} for the natural action of the environment in the &quot;Underground&quot; level;
+We also assume that the simulation parameters class {{className{WildlifeParametersClass}}} defines the following public fields:
+*{{fieldName{envWidth}}} modeling the width of the environment in all the levels;
+*{{fieldName{envHeight}}} modeling the height of the environment in all the levels;
+*{{fieldName{initialHumidity}}} modeling the initial humidity level in the &quot;Savannah&quot; level.
+Then the generation of the environment is made with the following code:
+{{{
+protected EnvironmentInitializationData generateEnvironment(
+		ISimulationParameters simulationParameters,
+		Map&lt;LevelIdentifier, ILevel&gt; levels
+) {
+	WildlifeParametersClass castedParameters = (WildlifeParametersClass) simulationParameters;
+	ExtendedEnvironment environment = new ExtendedEnvironment( );
+	/*
+	 * First initialize the environment by setting its public and private
+	 * local states in the various levels of the simulation.
+	 */
+	// Specify the &quot;Savannah&quot; level.
+	ILocalStateOfEnvironment envPls = new EnvPLSInSavannah(
+		castedParameters.initialHumidity,
+		castedParameters.envWidth,
+		castedParameters.envHeight
+	);
+	environment.includeNewLevel(
+		WildlifeLevelList.SAVANNAH,
+		envPls ,
+		new EnvHLSInSavannah( )
+	);
+	// Specify the &quot;Sky&quot; level.
+	envPls = new EnvPLSInSky(
+		castedParameters.envWidth,
+		castedParameters.envHeight
+	);
+	environment.includeNewLevel(
+		WildlifeLevelList.SKY,
+		envPls ,
+		new EnvHLSInSky( )
+	);
+	// Specify the &quot;Underground&quot; level.
+	envPls = new EnvPLSInUnderground(
+		castedParameters.envWidth,
+		castedParameters.envHeight
+	);
+	environment.includeNewLevel(
+		WildlifeLevelList.UNDERGROUND,
+		envPls ,
+		new EnvHLSInUnderground( )
+	);
+	/*
+	 * Then specify the natural action of the environment for 
+	 * each of these levels.
+	 */
+	environment.specifyBehaviorForLevel(
+		WildlifeLevelList.SAVANNAH, 
+		new EnvNaturalInSavannah( )
+	);
+	environment.specifyBehaviorForLevel(
+		WildlifeLevelList.SKY, 
+		new EnvNaturalInSky( )
+	);
+	environment.specifyBehaviorForLevel(
+		WildlifeLevelList.UNDERGROUND, 
+		new EnvNaturalInUnderground( )
+	);
+	return new EnvironmentInitializationData( environment );
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Specifications - Level generation" creator="Designer" modifier="Designer" created="201403041227" modified="201403041311" changecount="17">
+<pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The ''generation profile of the levels'' is a method creating the instances of the {{className{ExtendedLevel}}} class modeling the various levels of the simulation. This method is named {{methodName{[[generateLevels(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateLevels(fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters)]]}}} and has the following signature:
+{{{
+protected List&lt;ILevel&gt; generateLevels(
+	ISimulationParameters simulationParameters
+);
+}}}
+This method defines the following argument:
+*{{argumentName{simulationParameters}}} corresponding to the simulation parameters class of the simulation. This object especially defines the initial time of the simulation;
+This method ''returns the list of levels'' of the simulation.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+This list returned by this method has to contain the levels that will be used in the simulation defined by this profile. Such levels are generated and initialized using the following process for each level:
+*Create the ''time model'' used by the level (//i.e.// the time model that was created for that level during [[this step|SMD - Time model]] of the methodology);
+*Create the ''reaction model'' used by the level (//i.e.// the model that was created for that level during [[this step|SMD - Reaction]] of the methodology);
+*Create an instance of the {{className{ExtendedLevel}}} class that will model the level; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The constructor of the {{className{ExtendedLevel}}} class has the following signature:
+{{{
+public ExtendedLevel(
+	SimulationTimeStamp initialTime,
+	LevelIdentifier identifier,
+	ITimeModel timeModel,
+	ILevelReactionModel reactionModel
+);
+}}}
+This constructor requires the following arguments:
+*{{argumentName{initialTime}}} modeling the initial time of the simulation. Its value is obtained by calling the {{methodName{[[getInitialTime()|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/ISimulationParameters.html#getInitialTime()]]}}} method of the {{className{[[ISimulationParameters|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/ISimulationParameters.html]]}}} interface;
+*{{argumentName{identifier}}} modeling the identifier of that level;
+*{{argumentName{timeModel}}} modeling the time model of the level;
+*{{argumentName{reactionModel}}} modeling the reaction model of the level.
+}}} ===
+
+*Specify the perception and influence relation graphs of the level (//i.e.// with the graph defined during [[this step|SMD - Relation graphs]] of the methodology);
+*Add the level to the returned list of levels.
+The initialization of the public local states of the environment and the creation and addition of agents is made in other methods.
+
+{{bigemphasisblock{
+Note that for a cleaner definition of the simulation, the actual value of the parameters used to initialize the reaction processes of the levels have to come from the parameters of the simulation.
+}}}
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, in the context of a wildlife simulation defining the following level classes:
+*A &quot;Savannah&quot; level, such that:
+**Its identifier is equal to the {{fieldName{SAVANNAH}}} field of the {{className{WildlifeLevelsList}}} class;
+**Its time model is an instance of the {{className{LvlSavannahTimeModel}}} class. This class is assumed to define a constructor with no parameters;
+**Its reaction model is an instance of the {{className{LvlSavannahReaction}}} class. This class is assumed to define a constructor with the following parameters:
+***a threshold distance for the eat behavior of predators (see the example of [[this step|SMD - Reaction - To regular influences]] of the methodology);
+*A &quot;Sky&quot; level, such that:
+**Its identifier is equal to the {{fieldName{SKY}}} field of the {{className{WildlifeLevelsList}}} class;
+**Its time model is an instance of the {{className{LvlSkyTimeModel}}} class. This class is assumed to define a constructor with no parameters;
+**Its reaction model is an instance of the {{className{LvlSkyReaction}}} class. This class is assumed to define a constructor with no parameters;
+*A &quot;Underground&quot; level, such that:
+**Its identifier is equal to the {{fieldName{UNDERGROUND}}} field of the {{className{WildlifeLevelsList}}} class;
+**Its time model is an instance of the {{className{LvlUndergroundTimeModel}}} class. This class is assumed to define a constructor with no parameters;
+**Its reaction model is an instance of the {{className{LvlUndergroundReaction}}} class. This class is assumed to define a constructor with no parameters.
+In this example, we also assume that the perception and influence relation graph is defined in a static method named {{methodName{buildGraphOfLevel(ExtendedLevel)}}} of the class {{className{PerceptionAndInfluenceRelationGraphs}}}, and that the simulation parameters class {{className{WildlifeParametersClass}}} defines a parameter {{argumentName{eatBehaviorThresholdDistance}}}.
+
+Then, the generation profile of the levels of the simulation can be written:
+{{{
+protected List&lt;ILevel&gt; generateLevels(
+		ISimulationParameters simulationParameters
+) {
+	WildlifeParametersClass castedParameters = 
+			(WildlifeParametersClass) simulationParameters;
+	SimulationTimeStamp initialTime = simulationParameters.getInitialTime( );
+	List&lt;ILevel&gt; levels = new LinkedList&lt;ILevel&gt;( );
+	/* 
+	 * Create the &quot;Savannah&quot; level.
+	 */
+	ITimeModel timeModel = new LvlSavannahTimeModel( );
+	ILevelReactionModel reactionModel = new LvlSavannahReaction( 
+		castedParameters.eatBehaviorThresholdDistance
+	);
+	ExtendedLevel savannah = new ExtendedLevel(
+		initialTime, 
+		WildlifeLevelList.SAVANNAH, 
+		timeModel, 
+		reactionModel
+	);
+	PerceptionAndInfluenceRelationGraphs.buildGraphOfLevel( savannah );
+	levels.add( savannah );
+	/* 
+	 * Create the &quot;Sky&quot; level.
+	 */
+	timeModel = new LvlSkyTimeModel( );
+	reactionModel = new LvlSkyReaction( );
+	ExtendedLevel sky = new ExtendedLevel(
+		initialTime, 
+		WildlifeLevelList.SKY, 
+		timeModel, 
+		reactionModel
+	);
+	PerceptionAndInfluenceRelationGraphs.buildGraphOfLevel( sky );
+	levels.add( sky );
+	/* 
+	 * Create the &quot;Underground&quot; level.
+	 */
+	timeModel = new LvlUndergroundTimeModel( );
+	reactionModel = new LvlUndergroundReaction( );
+	ExtendedLevel underground = new ExtendedLevel(
+		initialTime, 
+		WildlifeLevelList.UNDERGROUND, 
+		timeModel, 
+		reactionModel
+	);
+	PerceptionAndInfluenceRelationGraphs.buildGraphOfLevel( underground );
+	levels.add( underground );
+	return levels;
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Initial state - Structure" creator="Designer" modifier="Designer" created="201403041208" changecount="1">
+<pre>[&gt;img(55%,)[images/simulationModel/finalStep/simulationModelOutline1.png]]
+The initialization profile defined for a simulation model is characterized by:
+*Some ''parameters'' coming from the [[parameters class|SMD - Tools preparation - Parameters]] of the simulation; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance the parameters can define the initial number of a specific type of agents in the simulation.
+}}} ===
+
+*The ''initial and final times'' of the simulation;
+*The ''levels'' that are lying in the simulation^^//''1''//^^;
+*The ''initial specification of the environment'' of the simulation;
+*The ''agents initially lying'' in the simulation.
+{{clearright{}}}
+~~//''__1:__ Note that the same simulation model can be used to run simulations having different complexities, owning to the initialization profiles. Indeed, an initialization profile has not to necessarily use all the levels that were defined in a simulation.''//~~ +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In the context of a simulation modeling the endogenous and exogenous dynamics of a cell, two levels can be defined: the ''endogenous'' level and the ''exogenous'' level of the simulation. With such a model, different types of simulations can be performed:
+*A simulation studying the interaction between the ''exogenous'' and ''endogenous'' middles of the simulation;
+*A simulation studying the behavior of the ''endogenous'' middle alone;
+*A simulation studying the behavior of the ''exogenous'' middle alone;
+Depending on the type of the simulation, a different subset of levels will be used in the simulation.
+}}} ===
+
+/%
+*When the ''initial and final times'' of the simulation;
+*The ''levels'' that are lying in the simulation^^//''1''//^^:
+**The specification of the reaction being used in each level (if more than one was specified for a level);
+**The parameters being used in such reactions;
+*The ''initial specification of the environment'' of the simulation:
+**Its initial public and private local states for each level of the simulation;
+**The specification of its natural action for each level (if more than one was specified for a level);
+*The ''agents initially lying'' in the simulation:
+**The number and types of agents lying in the simulation;
+**The initialization profile used for each of these agents;
+%/</pre>
 </div>
 <div title="SMD - Levels identification" creator="Designer" modifier="Designer" created="201402281547" changecount="1">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Identification of the levels}}}
@@ -3769,6 +4251,338 @@ The coherence of the data structure contained in the public local state of the e
 *The removal of an agent from the level implies its removal from the data mapping of the environment;
 }}}</pre>
 </div>
+<div title="SMD - Reaction" creator="Designer" modifier="Designer" created="201403031825" modified="201403040935" changecount="7">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Specification of the reaction of the levels}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Natural]]  |  [[next step &gt;&gt;|SMD - Reaction - To system influences]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - Intro]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Structure of the reaction model of a level&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - Structure]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Specifications and implementation instructions&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - Specifications]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Creating the skeleton of the reaction&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - Creation]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction - To system influences]]}}}</pre>
+</div>
+<div title="SMD - Reaction - Creation" creator="Designer" modifier="Designer" created="201403040935" modified="201403041002" changecount="8">
+<pre>A reaction model class has to be written for each level. Each class must comply with the following constraints:
+*It has to be located in the ''levels.ABC'' package, where:
+**''ABC'' is the identifier of the level;
+*It has to be named after the identifier of the level.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Reaction model skeleton example&lt;/span&gt;]
+{{exsection{
+[&gt;img[images/simulationModel/lowLevel/reactionTree.png]]
+This example lies in the context of a wildlife simulation containing the following levels:
+*Savannah
+*Sky
+*Underground
+At the current step of the methodology, three reaction model skeleton classes have to be created (one per level). This example illustrates the creation of the skeleton for the &quot;Sky&quot; level.
+{{clearright{}}}
+This example is also available in a [[stand alone file|./files/simulationModel/lowLevel/LvlSavannahReactionSkeleton.java]].
+!Code
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/lowLevel/LvlSavannahReactionSkeleton.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="SMD - Reaction - Intro" creator="Designer" modifier="Designer" created="201403040848" changecount="1">
+<pre>The side effects on the simulation of the influences created by the behavior of the agents and of the environment are managed through the ''reaction phase'' of the levels (see the image). 
+
+[img(98%,)[images/simulationModel/lowLevel/levelReactionModel.png]]
+{{focusemphasisblock{
+This step of the methodology consist in defining the operational code of the reaction of each level of the simulation.
+}}}</pre>
+</div>
+<div title="SMD - Reaction - Specifications" creator="Designer" modifier="Designer" created="201403040928" modified="201403040934" changecount="2">
+<pre>In the extended kernel of SIMILAR, the reaction process of a level is modeled by an instance of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface. This interface defines two methods:
+*the user-defined reaction to a set of system influences; {{doclink{[[Method API|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+*the user-defined reaction to a set of regular influences, possibly producing system influences. {{doclink{[[Method API|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+The specification instructions for these methods is described later in the methodology. The current step focuses on the creation of the ''skeleton of such a model''.</pre>
+</div>
+<div title="SMD - Reaction - Structure" creator="Designer" modifier="Designer" created="201403040908" modified="201403040911" changecount="2">
+<pre>The ''reaction of a level'' determines how the influences are taken into account in the evolution of the simulation. It defines:
+*how the ''public or private local state'' of the agents and of the environment ''change'' according to the changes depicted by these influences; +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+In the wildlife simulation example described in the previous steps of the methodology, a lion agent ages. Since aging does not come from the behavior of the lion, this phenomenon is modeled as an influence coming from the natural action of the environment.
+The ''Grow old'' influence sent by the natural action of the environment implies the update of the ''age'' field of the public local state of the ''Lion'' agent in the ''Savannah'' level during the reaction of the ''Savannah'' level.
+[img(98%,)[images/simulationModel/lowLevel/reactionExample1.png]]
+}}} ===
+
+*if an influence models an actions that has not finished yet. In such a case, the influence ''persists'' in the new consistent dynamic state of the level after the reaction; +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, in a road trafic simulation, a vehicle can decide to ''overtake'' another vehicle. The overtaking maneuver is not instantaneous. Therefore, the ''overtake'' influence can persist in the dynamic state of the simulation, so that each reaction moves little by little the vehicle towards its target lane.
+}}} ===
+
+*how influences requesting the access to the same resource (''colliding influences'') are managed.  +++?*[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+If the reaction to two individual influences implies writing and reading the same item of a public or private local state, then a ''collision'' occurs between the influences. Depending on the case, the collision can have a great impact on simulation results. Therefore, the reaction has to pay specific attention to them.
+!Colliding influences causing a conflict
+In the best cases, the colliding influences are mutually exclusive. The reaction has then to determine the influence that has to be taken into account, and the influences that have to be ignored.
+
+This is for instance the case of a predator/prey simulation, where two predators try to eat a prey at the same time (see the image).
+[img(98%,)[images/simulationModel/lowLevel/reactionExample2.png]]
+!Colliding influences causing an ambiguity
+In the worst case, colliding influences are not mutually exclusive. Though they have an effect the one on the other, nor error is caught when such cases appear.
+
+For instance, in a bubble chamber simulation where a magnetic field is applied:
+*the natural action of the environment influences the acceleration of particles with its magnetic field;
+*the particles decide to move forward in the chamber^^''//1//''^^.
+To preserve the consistency of the results, the mangetic field has to be applied either before or after the management of the move of all the particles.
+~~''//__1:__ The very same problem happens if the particle agents are not agentified: the natural action of the environment produces different influences that still have to be managed in the reaction.//''~~
+[img(98%,)[images/simulationModel/lowLevel/reactionExample3.png]]
+}}} ===
+
+In SIMILAR, the reaction model of a level can be seen as an ''application'' taking into parameters both the ''most recent consistent state'' of the level and the ''influences that were recently sent'' to the level, and returning the ''updated value of the consistent state'' of the level.
+
+[&lt;img(65%,)[images/simulationModel/lowLevel/levelReactionAlgorithm.png][images/simulationModel/lowLevel/levelReactionAlgorithm.png]] To include the generic algorithms managing the reaction to the system influences, the reaction process of the levels is performed in five steps:
+#The ''engine'' reacts to the ''system influences'' aimed at the levels computing a reaction, to add/remove agents to them;
+#The ''simulation model'' can react to the ''system influences'' of the previous step, to update the topology of the environment when an agent is added/removed;
+#The ''simulation model'' reacts to the ''regular influences'' aimed at the levels computing a reaction. If agents were to be added/removed during this reaction, then create system influences;
+#The ''engine'' reacts to the ''system influences'' produced in the previous step;
+#The ''simulation model'' can react to the ''system influences'' of the previous step.
+{{clearleft{}}}
+{{bigemphasisblock{
+Consequently, the model of a reaction defined by a user has to specify two parts of the reaction:
+*A user-defined reaction to a set of system influences;
+*A user-defined reaction to a set of regular influences, possibly producing system influences.
+}}}</pre>
+</div>
+<div title="SMD - Reaction - To regular influences" creator="Designer" modifier="Designer" created="201403041047" modified="201403041149" changecount="3">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Defining the reaction to regular influences}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction - To system influences]]  |  [[next step &gt;&gt;|SMD - Final steps]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To regular influences - Intro]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Specifications and implementation instructions&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To regular influences - Specifications]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Writing the reaction to regular influences of a level class&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To regular influences - Creation]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Final steps]]}}}</pre>
+</div>
+<div title="SMD - Reaction - To regular influences - Creation" creator="Designer" modifier="Designer" created="201403041149" modified="201403041205" changecount="4">
+<pre>The implementation of this method consists in:
+*Iterating over the system influences provided as an argument;
+**Checking the category of the influence; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+All the regular influence classes of a simulation have define a {{{public static final}}} field named {{fieldName{CATEGORY}}} corresponding to the category of the regular influence. Therefore, checking the category of the influence consists in comparing the category of the influence to the {{fieldName{CATEGORY}}} field of a regular influence class.
+}}} ===
+
+**Cast the influence in the appropriate type;
+**Checking if the influence might collide with other influences:
+***Storing the influence in a variable to delay its management;
+**Else
+***Processing its side effects immediately;
+***Include the influences that were created as a side effect into the {{argumentName{remainingInfluences}}} argument;
+*Grouping the influences by possible collisions;
+*Iterating over the groups of collisions:
+**Handling the reaction to each collision either by ordering the management of the colliding influences or by ignoring some of them;
+During the redaction of the reaction process, the information required by the reaction can become clearer. Therefore, this step will likely lead to the revision of:
+*The data from the [[public local state|SMD - Public local states]] of the environment or of the agents;
+*The [[regular influences|SMD - Influences skeleton]] produced by the decisions: it can lead either to the addition of new metadata to existing regular influences, or the creation of new regular influences;
+*The [[influence relation graph|SMD - Relation graphs]]: new levels can be added to the levels that can be influenced by the level from which the reaction is made;
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Reaction to regular influences full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[images/simulationModel/lowLevel/reactionTree.png]]
+This example illustrates the reaction to regular influences in the context of a wildlife simulation. In this simulation, the ''Savannah'' level defines a grid topology where ''Lion'' and ''Gazelle'' agents can ''move'' towards a designated location by 1 distance unit. In addition, a ''Lion'' agent can ''eat'' a ''Gazelle'', which removes the ''Gazelle'' from the simulation. Finally, the environment triggers the ''aging'' of each ''Lion'' and ''Gazelle''.
+
+We assume that the ''public local state'' of the environment in the ''Savannah'' level defines the following methods:
+*{{methodName{addAgent(ILocalStateOfAgent, double, double)}}} adding an agent at the specified coordinates of the grid;
+*{{methodName{removeAgent(ILocalStateOfAgent, double, double)}}} removing an agent located at the specified coordinates of the grid;
+*{{methodName{getAgentsLocatedAt(int,int)}}} getting the set of agents located in a 1x1 square of the grid which lower left coordinates are specified as an argument of this method.
+This public local state can for instance be implemented as the {{className{[[PLSEnvInSavannahLevel|files/simulationModel/highLevel/PLSEnvInSavannahLevel.java]]}}} class.
+
+We also assume that the public local state of the lions and the gazelle agents define both the following methods, embodied into the {{className{IAgtPLSInSavannah}}} interface extending the {{className{ILocalStateOfAgent4Engine}}} interface:
+*{{methodName{getCoordinates()}}} getting their coordinates as an instance of the {{className{Point2D}}} class;
+*{{methodName{setCoordinates(double,double)}}} setting these coordinates;
+*{{methodName{getAge()}}} getting their age expressed as a {{{long}}} value. It relies on a unit proportional to time stamp identifiers;
+*{{methodName{setAge(long)}}} setting their age in milliseconds as a {{{long}}} value;
+{{clearright{}}}
+Finally, we assume that the following influences are defined:
+*A {{className{[[RISavannahGrowOlder|files/simulationModel/lowLevel/RISavannahGrowOlder.java]]}}} influence defining the following methods:
+**{{methodName{getAgent( )}}} returning the set of agents that have to grow older;
+*A {{className{[[RISavannahEat|files/simulationModel/lowLevel/RISavannahEat.java]]}}} influence defining the following methods:
+**{{methodName{getPredator()}}} returning the predator wishing to eat a prey;
+**{{methodName{getPrey()}}} returning the predator wishing to eat a prey;
+*A {{className{[[RISavannahMove|files/simulationModel/lowLevel/RISavannahMove.java]]}}} influence defining the following methods:
+**{{methodName{getAgent()}}} returning the agent wishing to move;
+**{{methodName{getDesiredX()}}} returning the x coordinate of its desired destination;
+**{{methodName{getDesiredY()}}} returning the y coordinate of its desired destination.
+In this example, the reaction relies on the following principles:
+*The {{className{RISavannahGrowOlder}}} influence causes no collision: we assume that an agent being alive at the beginning of the transitory period has to age;
+*The {{className{RISavannahMove}}} influence causes no collision: we assume that a gazelle can move, even if it is targeted by a eat behavior;
+*The {{className{RISavannahEat}}} influence causes two types of collision: 
+**It collides {{className{RISavannahMove}}} influences: if a gazelle moves, it can get out of reach of the predator. In such a case, it is not eaten;
+**It collides {{className{RISavannahEat}}} influences: if the same gazelle is eaten by two predators, only one predator succeeds in eating the prey (the other one does nothing). The succeeding predator is chosen at random;
+!Code
+If we assume that the agent categories list is defined in the {{className{[[WildlifeAgentCategoriesList|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]}}} class, then the code of the user-reaction to the regular influences in the ''Savannah'' level can be the following one. Note that the sources of this class are also available in a [[stand alone|files/simulationModel/lowLevel/LvlSavannahReaction2.java]] file:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/LvlSavannahReaction2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;{{bigemphasisblock{
+Note that the reaction of a level is not necessarily this complex. The complexity here comes from the ''eat'' influence creating collisions between influences.
+
+Note that ''eat'' influences targeting the same gazelle are not necessarily mutually exclusive. Indeed, we can imagine a reaction where two lions eating the same gazelle will share the nutritive properties of the prey rather than having a predator preventing the other from getting any food.
+}}}
+}}} ===</pre>
+</div>
+<div title="SMD - Reaction - To regular influences - Intro" creator="Designer" modifier="Designer" created="201403041048" modified="201403041132" changecount="2">
+<pre>[&gt;img(37%,)[images/simulationModel/lowLevel/reactionFocusOnRegular.png]]
+The model of the reaction of a level in a simulation model is decomposed in two parts:
+*A user-defined reaction to a set of ''system influences'';
+*A user-defined reaction to a set of ''regular influences''.
+The role of the user-defined reaction to the regular influences mainly consists in updating the public and private local state of the agents according to the modifications implied by the metadata of the influences.
+
+@@display:block;width:60%;{{focusemphasisblock{
+This step of the methodology consist in defining the operational code of the reaction of each level to a set of regular influences.
+}}}@@
+{{clearright{}}}</pre>
+</div>
+<div title="SMD - Reaction - To regular influences - Specifications" creator="Designer" modifier="Designer" created="201403041135" modified="201403041148" changecount="7">
+<pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline5.png]]
+In the extended kernel of SIMILAR, the reaction to the regular influences of a level is modeled by the {{methodName{[[makeRegularReaction(...)|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}} method of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface:
+{{{
+public void makeRegularReaction(
+	SimulationTimeStamp transitoryTimeMin,
+	SimulationTimeStamp transitoryTimeMax,
+	ConsistentPublicLocalDynamicState consistentState,
+	Set&lt;IInfluence&gt; regularInfluences,
+	InfluencesMap remainingInfluences
+);
+}}}
+It defines the following arguments:
+*{{argumentName{transitoryTimeMin}}} modeling the lower bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{transitoryTimeMax}}} modeling the upper bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{consistentState}}} modeling the consistent state of the level being progressively updated by the reaction to go from its value at the time {{argumentName{transitoryTimeMin}}} to its value at the time {{argumentName{transitoryTimeMax}}};
+*{{argumentName{regularInfluences}}} models the regular influences for which a reaction has to be defined;
+*{{argumentName{remainingInfluences}}} models both the set of regular influences persisting in the dynamic state of the level after the reaction, and the system influences that were produced as a side effect of this reaction to regular influences. The side effects of such system influences is applied as soon as possible (either now for the levels computing a reaction, or during the next reaction of the other levels); +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+&lt;&lt;tiddler [[InfluencesMap - Documentation]]&gt;&gt;
+}}} ===
+
+{{clearright{}}}
+&lt;&lt;tiddler [[System influences - Specifications]]&gt;&gt;</pre>
+</div>
+<div title="SMD - Reaction - To system influences" creator="Designer" modifier="Designer" created="201403040911" modified="201403040914" changecount="2">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Defining the reaction to system influences}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Reaction]]  |  [[next step &gt;&gt;|SMD - Reaction - To regular influences]]}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Intro]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Specifications and implementation instructions&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Specifications]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Writing the reaction to system influences of a level class&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Creation]]&gt;&gt;
+{{nextButton{[[Go to the next step &gt;&gt;|SMD - Reaction - To regular influences]]}}}</pre>
+</div>
+<div title="SMD - Reaction - To system influences - Creation" creator="Designer" modifier="Designer" created="201403041036" modified="201403041038" changecount="4">
+<pre>The implementation of this method consists in:
+*Iterating over the system influences provided as an argument;
+*Checking the category of the influence; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+All the system influence classes of SIMILAR define a {{{public static final}}} field named {{fieldName{CATEGORY}}} corresponding to the category of the system influence. Therefore, checking the category of the influence consists in comparing the category of the influence to the {{fieldName{CATEGORY}}} field of a system influence class.
+
+The system influence of SIMILAR are currently:
+*{{className{[[SystemInfluenceAddAgent|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceAddAgent.html]]}}}
+*{{className{[[SystemInfluenceAddAgentToLevel|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceAddAgentToLevel.html]]}}}
+*{{className{[[SystemInfluenceRemoveAgent|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceRemoveAgent.html]]}}}
+*{{className{[[SystemInfluenceRemoveAgentFromLevel|../api/fr/lgi2a/similar/microkernel/influences/system/SystemInfluenceRemoveAgentFromLevel.html]]}}}
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, retrieving the list of the newly added agents to the levels is made with the following instructions:
+{{{
+void makeSystemReaction(
+	SimulationTimeStamp transitoryTimeMin,
+	SimulationTimeStamp transitoryTimeMax,
+	ConsistentPublicLocalDynamicState consistentState,
+	Collection&lt;IInfluence&gt; systemInfluencesToManage,
+	boolean happensBeforeRegularReaction,
+	InfluencesMap newInfluencesToProcess
+){
+	Set&lt;ILocalStateOfAgent&gt; newlyAddedAgents = new LinkedHashSet&lt;ILocalStateOfAgent&gt;();
+	for( IInfluence influence : systemInfluencesToManage ){
+		if( influence.getCategory( ).equals( SystemInfluenceAddAgentToLevel.CATEGORY ) ){
+			// The influence models the addition of an agent to this level.
+			SystemInfluenceAddAgentToLevel castedInfluence = 
+					(SystemInfluenceAddAgentToLevel) influence;
+			newlyAddedAgents.add( castedInfluence.getPublicLocalState( ) );
+		}
+	}
+	// Now &quot;newlyAddedAgents &quot; contains the list of the newly added agents.
+}
+}}}
+}}} ===
+
+*Cast the influence in the appropriate type;
+*Get the metadata contained in the influence to build a reaction; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, if the environment defines a grid topology, then the addition and removal system influences have to be managed to identify the added/removed agent and its location in the grid and to update the content of the grid.
+}}} ===
+
+*Possibly creating influences and adding them to the {{argumentName{newInfluencesToProcess}}} map; +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, if the addition of an agent from a specific category implies the addition of another agent in the simulation: //e.g.// when a person being haunted by a ghost enters the level, an influence adding the ghost agent to the level has to be created and managed.
+}}} ===
+
+During the redaction of the reaction process, the information required by the reaction can become clearer. Therefore, this step will likely lead to the revision of:
+*The data from the [[public local state|SMD - Public local states]] of the environment or of the agents;
+*The [[regular influences|SMD - Influences skeleton]] produced by the decisions: it can lead either to the addition of new metadata to existing regular influences, or the creation of new regular influences;
+*The [[influence relation graph|SMD - Relation graphs]]: new levels can be added to the levels that can be influenced by the level from which the reaction is made;
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Reaction to system influences full example&lt;/span&gt;]
+{{exsection{
+&lt;&lt;tiddler [[SMD - Reaction - To system influences - Creation - Example]]&gt;&gt;
+}}} ===</pre>
+</div>
+<div title="SMD - Reaction - To system influences - Creation - Example" creator="Designer" modifier="Designer" created="201403041038" modified="201403041043" changecount="7">
+<pre>This example is a continuation of the wildlife simulation described in a [[previous step|SMD - Public local states]] of the methodology. In this simulation, the ''Savannah'' level defines a grid topology where ''Lion'' and ''Gazelle'' agents can move. Therefore, the user-defined reaction to system influences has to make sure that the grid is being updated upon the addition or removal of such agents.
+
+Therefore, we assume that the ''public local state'' of the environment in the ''Savannah'' level defines the following methods:
+*{{methodName{addAgent(ILocalStateOfAgent, double, double)}}} adding an agent at the specified coordinates of the grid;
+*{{methodName{removeAgent(ILocalStateOfAgent, double, double)}}} removing an agent located at the specified coordinates of the grid;
+*{{methodName{getAgentsLocatedAt(int,int)}}} getting the set of agents located in a 1x1 square of the grid which lower left coordinates are specified as an argument of this method.
+This public local state can for instance be implemented as the {{className{[[PLSEnvInSavannahLevel|files/simulationModel/highLevel/PLSEnvInSavannahLevel.java]]}}} class.
+
+We also assume that the following public local states are defined:
+*Lion agents define the {{className{AgtLionPLSInSavannah}}} public local state in the ''Savannah'' level;
+*Gazelle agents define the {{className{AgtGazellePLSInSavannah}}} public local state in the ''Savannah'' level;
+*Both of these states define a method {{methodName{getCoordinates()}}} getting their coordinates as an instance of the {{className{Point2D}}} class.
+!Code
+If we assume that the agent categories list is defined in the {{className{[[WildlifeAgentCategoriesList|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]]}}} class, then the code of the user-defined reaction to system influences of the ''Savannah'' level can be the following one. Note that the sources of this class are also available in a [[stand alone|files/simulationModel/lowLevel/LvlSavannahReaction.java]] file:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/simulationModel/lowLevel/LvlSavannahReaction.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;{{bigemphasisblock{
+To simplify our example, we kept the public local state of gazelle and lions independent. Ideally, they should have extended a common interface {{className{AgtPLSInSavannah}}} extending the interface {{className{ILocalStateOfAgent}}} and defining the signature of the method accessing their coordinates.
+}}}</pre>
+</div>
+<div title="SMD - Reaction - To system influences - Intro" creator="Designer" modifier="Designer" created="201403040912" changecount="1">
+<pre>[&gt;img(37%,)[images/simulationModel/lowLevel/reactionFocusOnSystem.png]]
+The model of the reaction of a level in a simulation model is decomposed in two parts:
+*A user-defined reaction to a set of ''system influences'';
+*A user-defined reaction to a set of ''regular influences''.
+The role of the user-defined reaction consists mainly in updating the topology of the environment when agents are added/removed.
+
+@@display:block;width:60%;{{focusemphasisblock{
+This step of the methodology consist in defining the operational code of the reaction of each level to a set of system influences.
+}}}@@
+{{clearright{}}}</pre>
+</div>
+<div title="SMD - Reaction - To system influences - Specifications" creator="Designer" modifier="Designer" created="201403040926" modified="201403041034" changecount="21">
+<pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline4.png]]
+In the extended kernel of SIMILAR, the reaction to the system influences of a level is modeled by the {{methodName{[[makeSystemReaction(...)|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}} method of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface:
+{{{
+public void makeSystemReaction(
+	SimulationTimeStamp transitoryTimeMin,
+	SimulationTimeStamp transitoryTimeMax,
+	ConsistentPublicLocalDynamicState consistentState,
+	Collection&lt;IInfluence&gt; systemInfluencesToManage,
+	boolean happensBeforeRegularReaction,
+	InfluencesMap newInfluencesToProcess
+);
+}}}
+It defines the following arguments:
+*{{argumentName{transitoryTimeMin}}} modeling the lower bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{transitoryTimeMax}}} modeling the upper bound of the transitory period of the level for which this reaction is performed;
+*{{argumentName{consistentState}}} modeling the consistent state of the level being progressively updated by the reaction to go from its value at the time {{argumentName{transitoryTimeMin}}} to its value at the time {{argumentName{transitoryTimeMax}}}. Note that this state already includes the side effects of the system influences listed in the {{argumentName{systemInfluencesToManage}}} argument;
+*{{argumentName{systemInfluencesToManage}}} models the system influences that were managed by the engine and that might require specific management by the user;
+*{{argumentName{happensBeforeRegularReaction}}} determines to which call this method corresponds to: {{{true}}} if it corresponds to the first one (upper one on the image) and {{{false}}} if it corresponds to the second one (lower one on the image);
+*{{argumentName{newInfluencesToProcess}}} models the set where the user has to put the influences produced as a side effect of this reaction. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection {
+&lt;&lt;tiddler [[InfluencesMap - Documentation]]&gt;&gt;
+}}} ===
+
+{{clearright{}}}
+&lt;&lt;tiddler [[System influences - Specifications]]&gt;&gt;</pre>
+</div>
 <div title="SMD - Relation graphs" creator="Designer" modifier="Designer" created="201402281551" modified="201403030831" changecount="32">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the relation graphs}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents identification]]  |  [[next step &gt;&gt;|SMD - Time model]]}}}
@@ -3822,6 +4636,147 @@ Such a graph is implemented as the following class. This example is also availab
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='./files/simulationModel/highLevel/PerceptionAndInfluenceRelationGraphs.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}}===
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Time model]]}}}</pre>
+</div>
+<div title="SMD - Running the simulation" creator="Designer" modifier="Designer" created="201403041424" modified="201403041426" changecount="2">
+<pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Execution class of a simulation}}}
+{{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Initial state]]  |  next step &gt;&gt;}}}
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Running the simulation - Intro]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Structure of the simulation execution procedure&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Running the simulation - Structure]]&gt;&gt;&lt;html&gt;&lt;h1&gt;
+Creating the simulation execution class&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[SMD - Running the simulation - Creation]]&gt;&gt;
+{{nextButton{[[Run simulations with the command line|Simulation execution]]}}}</pre>
+</div>
+<div title="SMD - Running the simulation - Creation" creator="Designer" modifier="Designer" created="201403041428" changecount="1">
+<pre>The generated class has to:
+*Be located in the ''model'' package of the tree hierarchy;
+*Provide a javadoc ''documentation'' to that class. This documentation has to describe precisely the purpose of the simulation and how to read its results. This point is of utmost importance when different main classes are defined for a simulation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Simulation main class example&lt;/span&gt;]
+{{exsection{
+In this example, we describe the simulation execution procedure of a bubble chamber simulation where:
+*The simulation is run with the default engine of SIMILAR ({{className{[[EngineMonothreadedDefaultdisambiguation|../api/fr/lgi2a/similar/microkernel/libs/engines/EngineMonothreadedDefaultdisambiguation.html]]}}} from common libs)
+*The following observation probes are used:
+**A generic probe printing caught exceptions on the standard error stream ({{className{[[ProbeExceptionPrinter|../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExceptionPrinter.html]]}}} from common libs)
+**A generic probe printing the execution trace of the simulation ({{className{[[ProbeExecutionTracker|../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExecutionTracker.html]]}}} from common libs)
+**A probe printing the location of each particle agent over time ({{className{ProbePrintingParticleLocationOverTime}}} class);
+*The following agent factories are used:
+**The {{className{AgtBubbleFactory}}} agent factory, generating ''bubble'' agents;
+**The {{className{AgtCannonFactory}}} agent factory, generating ''particle cannon'' agents;
+**The {{className{AgtParticleFactory}}} agent factory, generating ''particle'' agents;
+*The {{className{JavaRandomBasedValuesGenerator}}} class is used a random number generation strategy. This strategy takes a number modeling its seed as a constructor argument;
+*The simulation parameters are defined as a {{className{BubbleChamberParameters}}} class containing:
+**A {{fieldName{initialTime}}} field defining the initial time of the simulation;
+**A {{fieldName{finalTime}}} field defining the final time of the simulation;
+**A {{fieldName{cannonPower}}} field defining the power of a cannon and therefore the initial speed of the particles it fires;
+**A {{fieldName{randomSeed}}} field defining the seed of the random generator being used;
+*The simulation model initialization procedure is implemented as the {{className{BubbleChamberSimulation}}}, using a simulation parameters as a constructor argument;
+In this example, we define a custom value only for the {{fieldName{initialTime}}}, the {{fieldName{finalTime}}} and {{fieldName{randomSeed}}} parameters. The {{fieldName{cannonPower}}} parameter will use its default value.
+!Code
+The corresponding main class of the simulation is implemented with the following code. The sources of this class are also available as a [[stand alone|files/simulationModel/finalStep/BubbleChamberMain.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/simulationModel/finalStep/BubbleChamberMain.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="SMD - Running the simulation - Intro" creator="Designer" modifier="Designer" created="201403041426" changecount="1">
+<pre>The final step in the design of a simulation model consists in declaring that model in the context of a ''simulation execution procedure''. This procedure gathers to various parts of a SIMILAR simulation and puts them together as a runnable program. 
+
+{{focusemphasisblock{
+This step of the simulation focuses on the creation of the class containing the execution procedure of the simulation.
+}}}</pre>
+</div>
+<div title="SMD - Running the simulation - Structure" creator="Designer" modifier="Designer" created="201403041426" modified="201403041427" changecount="2">
+<pre>The main steps of this procedure are:
+#Create an instance of the simulation parameters class, and set the value of its content;
+#Initialize the [[random number generator|SMD - Tools preparation - Random]], using a seed declared in the simulation parameters; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;] 
+{{implsection{
+This part is achied in two steps:
+#Create the random numbers generation strategy, and initialize its seed with the simulation parameters;
+#Set the generation strategy being used in the random number generation factory, //i.e.// call:
+{{{
+RandomValueFactory.setStrategy( theStrategyImUsing );
+}}}
+}}} ===
+
+#Bind the simulation parameters with the [[agent factories|SMD - Agent creation]] being used in the simulation; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;] 
+{{implsection{
+This step consists in setting the value of the static {{fieldName{simulationParameter}}} field of each factory.
+}}} ===
+
+#Create an instance of the [[simulation model initialization profile|SMD - Initial state]] that will be used to run the simulation;
+#Create an instance of the ''simulation engine'' that will run the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The simulation engine used in a simulation can be:
+*A ''generic'' engine located in the common libs of the micro-kernel of SIMILAR; {{morelink{[[More|../microKernel/commonLibs/index.html#SimulationEngines]]}}}
+*A ''custom'' engine written by the used using the engine design methodology {{morelink{[[More|Simulation engines]]}}}
+}}} ===
+
+#Create the instance of each ''observation probe'' used in the simulation; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The observation probes used in a simulation can be:
+*''Generic'' and located in the common libs of the micro-kernel of SIMILAR; {{morelink{[[More|../microKernel/commonLibs/index.html#Probes]]}}}
+*''Simulation dependent'' and designed using the probes design methodology. {{morelink{[[More|Observation probes]]}}}
+}}} ===
+
+#Bind the probes to the simulation engine; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;] 
+{{docsection{
+The binding of probes with a simulation engine is achieved using the {{methodName{[[addProbe(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#addProbe(java.lang.String, fr.lgi2a.similar.microkernel.IProbe)]]}}} method of the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} class. This method has the following signature:
+{{{
+public void addProbe(
+	String identifier, 
+	IProbe probe 
+);
+}}}
+This method declares the following arguments:
+*{{argumentName{identifier}}} modeling a readable identifier of the probe. This parameter is usefull if two instances of the same probe class but with different parameters are used in the same engine. +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+A simulation tracking the execution trace of the simulation on both the standard output and in a file will use two different instances of the {{className{ProbeExecutionTracker}}} probe from the common libs:
+*One instance using the {{{System.out}}} print stream;
+*One instance using a print stream to a file.
+}}} ===
+
+*{{argumentName{probe}}} modeling the probe being binded with the engine. After the call to this method, whenever the engine reaches a point where probes have to be notified, this probe will receive the notification;
+}}} ===  +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;] 
+{{exsection{
+A simulation tracking the execution trace of the simulation on both the standard output and in a file will use two different instances of the {{className{ProbeExecutionTracker}}} probe from the common libs:
+*One instance using the {{{System.out}}} print stream;
+*One instance using a print stream to a file.
+The creation and binding of these probes to the engine is made with the following code:
+{{{
+ISimulationEngine engine = ...;
+ProbeExecutionTracker sysOutTracker = new ProbeExecutionTracker(
+	System.out
+);
+engine.addProbe(
+	&quot;Standard output simulation trace tracker&quot;,
+	sysOutTracker 
+);
+ProbeExecutionTracker fileTracker = new ProbeExecutionTracker(
+	new PrintStream( new File( &quot;simulationLog.txt&quot; ) )
+);
+engine.addProbe(
+	&quot;File simulation trace tracker&quot;,
+	fileTracker
+);
+}}}
+}}} ===
+
+#Run a simulation with the engine using the simulation model initialization profile. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;] 
+{{docsection{
+The execution of a simulation is achieved using the {{methodName{[[runNewSimulation(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#runNewSimulation(fr.lgi2a.similar.microkernel.ISimulationModel)]]}}} method from the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} interface. This method has the following signature:
+{{{
+public void runNewSimulation( 
+	ISimulationModel simulationModel 
+);
+}}}
+This method defines the following argument:
+*{{argumentName{simulationModel }}} modeling the simulation model initialization profile being used to initialize the dynamic state of the simulation.
+}}} ===
+
+{{bigemphasisblock{
+Note that the execution of a simulation will almost never directly throw an exception, even if an error is met. The exceptions are often intercepted by the simulation engine and forwarded to the probes. Therefore, the observation or errors requires the use of probes.
+
+The {{className{[[ProbeExceptionPrinter|../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExceptionPrinter.html]]}}} probe from the common libs was defined for this purpose.
+}}}</pre>
 </div>
 <div title="SMD - Time model" creator="Designer" modifier="Designer" created="201402281617" modified="201403030923" changecount="12">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the time model}}}
@@ -4239,13 +5194,133 @@ TiddlyWiki.prototype.search = function(searchRegExp, sortField, excludeTag, matc
 These guidelines are described in the documentation of the &lt;html&gt;&lt;a href=&quot;../microKernel/index.html#[[Simulation engines]]&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;micro-kernel&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt;.
 }}}</pre>
 </div>
-<div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201402281515" changecount="3">
+<div title="Simulation execution" creator="Designer" modifier="Designer" created="201311290923" modified="201403041431" changecount="4">
 <pre>{{stepMainTitle{Runnnig a simulation with SIMILAR}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Simulation execution - Intro]]&gt;&gt;&lt;html&gt;
+&lt;h1&gt;Requirements&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Simulation execution - Requirements]]&gt;&gt;&lt;html&gt;
+&lt;h1&gt;Compiling and running simulations&lt;/h1&gt;&lt;/html&gt;
+&lt;&lt;tiddler [[Simulation execution - Compile and run]]&gt;&gt;</pre>
+</div>
+<div title="Simulation execution - Ant" creator="Designer" modifier="Designer" created="201403041436" changecount="1">
+<pre>One of the best approaches to perform simulation is to use building tools like ''Maven'' or ''Ant''. Since maven has a steep learning curve, we only describe here how to use ant.
+
 {{bigemphasisblock{
-These guidelines are described in the documentation of the &lt;html&gt;&lt;a href=&quot;../microKernel/index.html#[[Simulation execution]]&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;micro-kernel&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt;.
+We assume that apache ant is already installed on the machine, and that the path to the ant binary is added to the PATH environment variable.
+}}}
+[&gt;img[images/execution/executionTreeExample_ant.png]]
+The main task in ant consist in defining the ''build script'' that will run the simulation. Such a script usually takes the form of a &quot;{{{build.xml}}}&quot; file located at the root of the directory where the simulation is defined.
+
+Assuming that the SIMILAR binaries are located in a &quot;{{{/home/binaries/similar/}}}&quot; directory, then the image provides an illustration of what the tree hierarchy should look like, and where the ''build.xml'' file should be.
+{{clearright{}}}
+The build can be written as the following file. Note that this file is also available as a [[stand alone file|files/execution/build.xml]].
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='files/execution/build.txt' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+!Compilation and execution commands
+Using this script, the simulation is performed by running one of the following commands.
+
+__Compiling the simulation:__
+{{{
+ant compile
+}}}
+__Running the simulation without compiling:__
+{{{
+ant run
+}}}
+__Compiling and then running the simulation:__
+{{{
+ant all
+}}}
+The latter command will produce the following output in the command shell:
+{{{
+/home/me/projects/mysimulation&gt;ant all
+Buildfile: /home/me/projects/mysimulation/build.xml
+
+clean:
+
+compile:
+    [javac] Compiling 2 source files to /home/me/projects/mysimulation/bin
+
+run:
+     [java] Running the simulation...
+     [java] Simulation done !
+
+all:
+
+BUILD SUCCESSFUL
+Total time: 1 second
+
+/home/me/projects/mysimulation&gt;
+}}}
+{{clearright{}}}</pre>
+</div>
+<div title="Simulation execution - Command line" creator="Designer" modifier="Designer" created="201403041435" changecount="1">
+<pre>Using the command line, the simulation is compiled using a ''javac'' like command and is performed using the ''java'' command.
+
+{{bigemphasisblock{
+We assume that a JavaSE JDK or SDK is already installed on the machine, and than the path to the java binaries is added to the PATH environment variable.
+}}}&lt;html&gt;
+&lt;h1&gt;Compilation&lt;/h1&gt;&lt;/html&gt;
+The compilation of the simulation is made using the following command line:
+{{{
+/home/me/projects/mysimulation&gt;
+javac -d target/bin -classpath &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar&quot; ALLJAVACLASSES
+}}}
+In this command, ALLJAVACLASSES is a space separated list of all the java classes that have to be compiled. In some environments, like Linux Bash, it is possible to use wildcards to simplify the command:
+{{{
+/home/me/projects/mysimulation&gt;
+shopt -s globstar
+/home/me/projects/mysimulation&gt;
+javac -d target/bin -classpath &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar&quot; /home/me/projects/mysimulation/src/main/java/**/*.java
+}}}
+!Execution
+The execusion of the simulation is made using the following command line:
+{{{
+/home/me/projects/mysimulation&gt;
+java -cp &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar:target/bin&quot; fr.lgi2a.similar.custom.mysimulation.SimulationMain
 }}}</pre>
+</div>
+<div title="Simulation execution - Compile and run" creator="Designer" modifier="Designer" created="201403041435" changecount="1">
+<pre>Various approaches can be used to compile and run java classes. In this section, we do not intend to list them all. Instead, we present two kinds of approaches:
+*A ''pure command line approach'', where the user has to specify everything; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;More&lt;/span&gt;]
+{{implsection{
+&lt;&lt;tiddler [[Simulation execution - Command line]]&gt;&gt;
+}}} ===
+
+*A ''script based approach'', where the user has to specify only the path to directories of the project and the name of the main class of the simulation; +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;More&lt;/span&gt;]
+{{implsection{
+&lt;&lt;tiddler [[Simulation execution - Ant]]&gt;&gt;
+}}} ===</pre>
+</div>
+<div title="Simulation execution - Intro" creator="Designer" modifier="Designer" created="201403041431" modified="201403041433" changecount="2">
+<pre>{{focusemphasisblock{
+This part of the documentation is dedicated to the execution of an existing simulation designed with SIMILAR.
+}}}
+To run simulations with SIMILAR, the various elements have to be previously defined. These elements can either be designed by the user, or come from existing classes of the [[common libraries|./commonLibs/index.html]] of SIMILAR:
+*A ''simulation model'', describing the initial state and the mechanics of the simulation; {{morelink{[[How to create|Simulation models]]}}}
+*''Observation probes'', describing how to retrieve the results of the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|../microKernel/commonLibs/index.html#Probes]]}}}
+*A ''simulation engine'' defining the java algorithms used in the simulation; {{morelink{[[How to create|Observation probes]]}}} {{morelink{[[Use libraries|../microKernel/commonLibs/index.html#SimulationEngines]]}}}
+Assuming that all these items are whether defined in the source directory of the simulation or within the libraries, then running a simulation consists in:
+#Compiling the sources of the simulation, using a //''javac''// like command;
+#Running the main class of the simulation, using the //''java''// command.</pre>
+</div>
+<div title="Simulation execution - Requirements" creator="Designer" modifier="Designer" created="201403041434" changecount="1">
+<pre>[&gt;img[images/execution/similarBinariesTree.png]]
+@@display:block;width:60%;{{bigemphasisblock{
+The instructions described in this part of the documentation assumes that the user did not change the directory tree of the SIMILAR binaries nor the files it contains (see image).
+}}}@@
+
+For both compilation and execution operations, the {{{javac}}} and {{{java}}} command lines have to include the binaries of SIMILAR within their classpath. To facilitate the work of designers, only the jar file whose name starts with {{{similar-distribution-}}} (on the image {{{similar-distribution-0.2.1.jar}}}) has to be mentionned in the classpath. This jar links automatically all the binaries of SIMILAR.
+[&lt;img[images/execution/executionTreeExample.png]]
+
+In this section, we illustrate how to compile and to run a simulation on an example assuming that the simulation has the following properties. These properties are summed up in the image displayed to the left:
+*The binaries of SIMILAR are located in a &quot;{{{/home/binaries/similar/}}}&quot; directory;
+*The simulation is declared in the &quot;{{{/home/me/projects/mysimulation/}}}&quot; directory;
+*The sources of the simulation are located in the {{{src/main/java/}}} directory of the simulation directory;
+*The main class of the simulation is the {{className{SimulationMain}}} class from the {{packageName{fr.lgi2a.similar.custom.mysimulation}}} package.
+Note that the binaries of similar or the directory where the simulation is declared can be placed in any other directory. In such cases, pay attention to replace the corresponding directory name in the examples provided below.
+{{clear{}}}</pre>
 </div>
 <div title="Simulation models" creator="Designer" modifier="Designer" created="201311290923" modified="201402281517" changecount="5">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt;{{stepMainTitle{Simulation model design}}}

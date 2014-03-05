@@ -2328,26 +2328,25 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201402100957" changecount="48">
+<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201403050924" changecount="53">
 <pre>This part of the documentation was generated with Maven.
 !Project Dependencies
 The following is a list of dependencies for this project. These dependencies are required to compile and use the application.
 
-+++?[&lt;span class=&quot;implbigbtn&quot;&gt;Compile scope&lt;/span&gt;]
-{{implsection{
++++?[&lt;span class=&quot;morebigbtn&quot;&gt;Compile scope&lt;/span&gt;]
+{{moresection{
 The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:
 |!GroupId |!ArtifactId |!Version |!Type |!License |
 |fr.lgi2a |similar-microKernel |0.2.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 |fr.lgi2a |similar-microKernel-commonLibs |0.2.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-microKernel-examples |0.2.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 |fr.lgi2a |similar-extendedKernel |0.2.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 |fr.lgi2a |similar-extendedKernel-extendedLibs |0.2.1 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}}
 ===
 
 
-+++?[&lt;span class=&quot;implbigbtn&quot;&gt;Test scope&lt;/span&gt;]
-{{implsection{
++++?[&lt;span class=&quot;morebigbtn&quot;&gt;Test scope&lt;/span&gt;]
+{{moresection{
 The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:
 |!GroupId |!ArtifactId |!Version |!Type |!License |
 |junit |[[junit|http://junit.org/]] |4.11 |jar |[[Common Public License Version 1.0|http://opensource.org/licenses/cpl1.0.txt]] |
@@ -2358,8 +2357,8 @@ The following is a list of test dependencies for this project. These dependencie
 !Project Transitive Dependencies
 The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.
 
-+++?[&lt;span class=&quot;implbigbtn&quot;&gt;Test scope&lt;/span&gt;]
-{{implsection{
++++?[&lt;span class=&quot;morebigbtn&quot;&gt;Test scope&lt;/span&gt;]
+{{moresection{
 The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:
 |!GroupId |!ArtifactId |!Version |!Type |!License |
 |org.hamcrest |hamcrest-core |1.3 |jar |[[New BSD License|http://opensource.org/licenses/bsd-license.php]] |
@@ -2384,13 +2383,6 @@ The following is a list of test dependencies for this project. These dependencie
 {{moresection{
 |&gt;|!SIMILAR - Common libs|
 |''Description:'' |The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features. |
-|''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-}}} ===
-
-**fr.lgi2a:similar-microKernel-examples:jar:0.2.1 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
-{{moresection{
-|&gt;|!SIMILAR - Micro-kernel examples|
-|''Description:'' |The examples illustrating the use of the micro kernel and the common libraries to design simulations. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
@@ -2434,7 +2426,7 @@ The following is a list of test dependencies for this project. These dependencie
 
 ''Common Public License Version 1.0:'' JUnit
 
-''CeCILL-B Free Software License Agreement:'' SIMILAR - Binary distribution, SIMILAR - Micro kernel, SIMILAR - Common libs, SIMILAR - Micro-kernel examples, SIMILAR - Extended kernel, SIMILAR - Extended libs</pre>
+''CeCILL-B Free Software License Agreement:'' SIMILAR - Binary distribution, SIMILAR - Micro kernel, SIMILAR - Common libs, SIMILAR - Extended kernel, SIMILAR - Extended libs</pre>
 </div>
 <div title="Project licence" creator="Designer" modifier="Designer" created="201311151108" modified="201311151113" changecount="11">
 <pre>This software is governed by the CeCILL-B license under French law and abiding by the rules of distribution of free software.  You can  use, modify and/ or redistribute the software under the terms of the CeCILL-B license as circulated by CEA, CNRS and INRIA at the following URL http://www.cecill.info. 
@@ -3465,7 +3457,7 @@ In SIMILAR, these issues are dealt by two means:
 
 {{center{[img(95%,)[images/workInProgress.png]]}}}</pre>
 </div>
-<div title="Structure - Simulation model - Time model - Time stamps model" creator="Designer" modifier="Designer" created="201311271459" modified="201402171000" changecount="66">
+<div title="Structure - Simulation model - Time model - Time stamps model" creator="Designer" modifier="Designer" created="201311271459" modified="201403050922" changecount="67">
 <pre>In multi-level simulations, levels are not necessarily moving through time synchronously: there might be a phase shift between their evolution, they can move at different paces, etc.
 
 [img(98%,)[images/multiLevelTimeModel.png]]
@@ -3508,12 +3500,12 @@ In SIMILAR, the time stamps are characterized by:
 A time stamp is an instance of the {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class.
 !!Construction
 A time stamp can be built using three different approaches:
-#Constructing the instance using a {{{long}}} value; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(long)]]}}}
-#Constructing the instance as a copy of another time stamp; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}}
-#Constructing the instance relatively to the {{fieldName{identifier}}} of another time stamp; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp, int)]]}}}
+#Constructing the instance using a {{{long}}} value; {{doclink{[[Method API|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(long)]]}}}
+#Constructing the instance as a copy of another time stamp; {{doclink{[[Method API|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}}
+#Constructing the instance relatively to the {{fieldName{identifier}}} of another time stamp; {{doclink{[[Method API|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#SimulationTimeStamp(fr.lgi2a.similar.microkernel.SimulationTimeStamp, int)]]}}}
 !!Usage
 A time stamp is used in three different contexts:
-*When the identifier of the time stamp has be known; {{doclink{[[Documentation|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#getIdentifier()]]}}}
+*When the identifier of the time stamp has be known; {{doclink{[[Method API|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html#getIdentifier()]]}}}
 *When two time stamps have to be compared; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsubsection{
 The {{className{[[SimulationTimeStamp|api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class implements the {{className{Comparable}}} interface. Its comparison method returns the difference between the identifier of the time stamps.

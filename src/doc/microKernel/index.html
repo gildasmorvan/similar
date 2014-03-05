@@ -1076,11 +1076,11 @@ This documentation provides ''design guidelines'' to implement SIMILAR simulatio
 
 {{linkbigbtn{[[Documentation content|Documentation content]]}}}</pre>
 </div>
-<div title="IDynamicStateMap - Documentation" creator="Designer" modifier="Designer" created="201402051540" modified="201402181215" changecount="8">
+<div title="IDynamicStateMap - Documentation" creator="Designer" modifier="Designer" created="201402051540" modified="201403050937" changecount="9">
 <pre>In SIMILAR, this data structure is an instance of the {{className{[[IPublicDynamicStateMap|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html]]}}} class. This interface is a lightweight version of the {{className{Map}}} interface of java and works similarly to it. It defines the following methods:
-*{{methodName{keySet()}}} lists the identifier of the perceptible levels contained in the map; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#keySet()]]}}}
-*{{methodName{get(LevelIdentifier)}}} gets the local dynamic state of a level having a specific identifier;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#get(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
-*{{methodName{put(IPublicLocalDynamicState)}}} sets the local dynamic state of a specific level in this map. {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#put(fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState)]]}}}</pre>
+*{{methodName{keySet()}}} lists the identifier of the perceptible levels contained in the map; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#keySet()]]}}}
+*{{methodName{get(LevelIdentifier)}}} gets the local dynamic state of a level having a specific identifier;  {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#get(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{put(IPublicLocalDynamicState)}}} sets the local dynamic state of a specific level in this map. {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#put(fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState)]]}}}</pre>
 </div>
 <div title="ImageSizePlugin" creator="Administrator" modifier="Administrator" created="201311150900" tags="systemConfig excludeLists plugin" changecount="1">
 <pre>/***
@@ -1258,10 +1258,10 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 }
 //}}}</pre>
 </div>
-<div title="InfluencesMap - Documentation" creator="Designer" modifier="Designer" created="201402051533" modified="201402181424" changecount="7">
+<div title="InfluencesMap - Documentation" creator="Designer" modifier="Designer" created="201402051533" modified="201403050938" changecount="8">
 <pre>The {{className{InfluencesMap}}} class defines a data structure that was created mainly for engine design purposes. From the point of view of the decision process, only the following addition methods are put to use:
-*{{methodName{add( IInfluence )}}} adding one influence to the data structure; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html#add(fr.lgi2a.similar.microkernel.influences.IInfluence)]]}}}
-*{{methodName{addAll( Collection&lt;IInfluence&gt; )}}} adding a collection of influences to the data structure. {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html#addAll(java.util.Collection)]]}}}</pre>
+*{{methodName{add( IInfluence )}}} adding one influence to the data structure; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html#add(fr.lgi2a.similar.microkernel.influences.IInfluence)]]}}}
+*{{methodName{addAll( Collection&lt;IInfluence&gt; )}}} adding a collection of influences to the data structure. {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html#addAll(java.util.Collection)]]}}}</pre>
 </div>
 <div title="InlineJavascriptPlugin" creator="Designer" modifier="Designer" created="201401211625" tags="plugin systemConfig excludeLists" changecount="1">
 <pre>/***
@@ -2130,7 +2130,7 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 2005.11.03 1.0.0 initial public release
 &lt;&lt;&lt;</pre>
 </div>
-<div title="Observation probes" creator="Designer" modifier="Designer" created="201311290923" modified="201402241235" changecount="15">
+<div title="Observation probes" creator="Designer" modifier="Designer" created="201311290923" modified="201403050925" changecount="16">
 <pre>{{stepMainTitle{Observing simulation results with SIMILAR}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -2165,7 +2165,7 @@ This part of the documentation is dedicated to the design and the implementation
 In SIMILAR, a probe is a ''read-only'' component that can ''observe the dynamic state'' of the simulation during ''consistent or half-consistent'' states to extract data from it. These data are then displayed using various means for the users.
 Usually, probes are defined to show or export the simulation results.</pre>
 </div>
-<div title="Observation probes - Specifications" creator="Designer" modifier="Designer" created="201402241029" modified="201402241321" changecount="44">
+<div title="Observation probes - Specifications" creator="Designer" modifier="Designer" created="201402241029" modified="201403050928" changecount="47">
 <pre>An observation probe is a class extending the {{className{[[IProbe|../api/fr/lgi2a/similar/microkernel/IProbe.html]]}}} interface, and defining the following methods it defines:
 *{{methodName{prepareObservation( )}}}, called by the engine before even initializing the simulation;  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
@@ -2239,10 +2239,10 @@ public void reactToError(
 	String errorMessage,
 	Throwable cause
 );
+}}}
 This method defines the following arguments:
 *{{argumentName{errorMessage}}} modeling the error message associated with the error;
 *{{argumentName{cause}}} modeling the error that caused the simulation to stop.
-}}}
 }}} ===
 
 *{{methodName{endObservation( )}}}, called by the engine at the very end of the simulation.  +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
@@ -2254,11 +2254,11 @@ public void endObservation( );
 }}} ===
 
 The observation of the simulation is based on specific accessors defined in the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} class. They are defined by the following methods:
-*{{methodName{[[getLevels()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getLevels()]]}}}, getting the identifier of the levels defined for the simulation;
-*{{methodName{[[getSimulationDynamicStates()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getSimulationDynamicStates()]]}}}, getting the dynamic state of each level of the simulation;
-*{{methodName{[[getEnvironment()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getEnvironment()]]}}}, getting the environment of the simulation;
-*{{methodName{[[getAgents()|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getAgents()]]}}}, getting the agents currently lying in the simulation;
-*{{methodName{[[getAgents(LevelIdentifier)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getAgents(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}, getting the agents currently lying in a specific level of the simulation.</pre>
+*{{methodName{getLevels()}}}, getting the identifier of the levels defined for the simulation; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getLevels()]]}}}
+*{{methodName{getSimulationDynamicStates()}}}, getting the dynamic state of each level of the simulation; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getSimulationDynamicStates()]]}}}
+*{{methodName{getEnvironment()}}}, getting the environment of the simulation; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getEnvironment()]]}}}
+*{{methodName{getAgents()}}}, getting the agents currently lying in the simulation; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getAgents()]]}}}
+*{{methodName{getAgents(LevelIdentifier)}}}, getting the agents currently lying in a specific level of the simulation. {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#getAgents(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}</pre>
 </div>
 <div title="Observation probes - Structure" creator="Designer" modifier="Designer" created="201402241029" modified="201402241043" changecount="11">
 <pre>In SIMILAR, an ''observation probe'' is a software component that can observe and extract data from the dynamic state of the simulation:
@@ -2352,7 +2352,7 @@ Such a lion agent generation factory is implemented with the following code. The
 *The addition of initialization profiles to an agent implies the modification of its class (//i.e.// addition of new constructors). Therefore, the more initialization profiles are defined, the more unreadable the class of the agent becomes.
 Instead, we defend that agents have to be created using ''factories'', where each factory embodies ''one'' initialization profile.</pre>
 </div>
-<div title="SMD - Agent creation - Specifications" creator="Designer" modifier="Designer" created="201402050742" modified="201402181511" changecount="54">
+<div title="SMD - Agent creation - Specifications" creator="Designer" modifier="Designer" created="201402050742" modified="201403050939" changecount="55">
 <pre>The agent factory usually takes the form of a class using the ''//factory// design pattern'', storing the instance of the ''parameter'' class as a ''static value''. Agents are created using ''static factory methods'' having the ''context dependent'' parameters ''as arguments''.
 
 [img(100%,)[images/simulationModel/lowLevel/agentFactoryStructure.png]]
@@ -2378,7 +2378,7 @@ theAgent.initializeGlobalState(
 *Define the public and private local states of the agent in its initial levels; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The initial levels of an agent are specified using the following method:
-*{{methodName{includeNewLevel(...)}}} specifying both a private and a public local state for a level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
+*{{methodName{includeNewLevel(...)}}} specifying both a private and a public local state for a level; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
 }}} === +++?*[&lt;span class=&quot;exsmallbtn &quot;&gt;Example&lt;/span&gt;]
 {{exsection{
 The initialization of the public local state of an agent in a ''Savannah'' level is made with the following instructions:
@@ -2613,11 +2613,11 @@ In this skeleton, the following elements have to be defined:
 Note that the [[common libs|commonLibs/index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt; of the micro-kernel defines the {{className{[[AbstractAgent|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html]]}}} class providing a default implementation of these features.
 }}}</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Category buttons" creator="Designer" modifier="Designer" created="201402051029" modified="201402171304" changecount="3">
+<div title="SMD - Agents skeleton - Implementation - Category buttons" creator="Designer" modifier="Designer" created="201402051029" modified="201403050932" changecount="4">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the category of the agent is defined by the following methods:
-*The {{methodName{getCategory()}}} method; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getCategory()]]}}}
+*The {{methodName{getCategory()}}} method; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getCategory()]]}}}
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of these methods usually consists in:
@@ -2626,11 +2626,11 @@ The implementation of these methods usually consists in:
 *Granting access to that field in the appropriate methods (//i.e.// {{methodName{getCategory( )}}}).
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Global state buttons" creator="Designer" modifier="Designer" created="201402051032" modified="201402171329" changecount="7">
+<div title="SMD - Agents skeleton - Implementation - Global state buttons" creator="Designer" modifier="Designer" created="201402051032" modified="201403050932" changecount="8">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the global state of the agent is defined by the following method:
-*The {{methodName{getGlobalState( )}}} method; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getGlobalState()]]}}}
+*The {{methodName{getGlobalState( )}}} method; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getGlobalState()]]}}}
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 In SIMILAR, the global state of an agent is a sub class of the {{className{[[IGlobalState|../api/fr/lgi2a/similar/microkernel/agents/IGlobalState.html]]}}} class. This class and its usage are [[described later|SMD - Global state - Plan]].
@@ -2667,11 +2667,11 @@ public class CityBusAgent implements IAgent4Engine {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Levels buttons" creator="Designer" modifier="Designer" created="201402051030" modified="201402171319" changecount="8">
+<div title="SMD - Agents skeleton - Implementation - Levels buttons" creator="Designer" modifier="Designer" created="201402051030" modified="201403050932" changecount="9">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the levels where the agent lies is defined by the following methods: 
-*The {{methodName{getLevels( )}}} method; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getLevels()]]}}}
+*The {{methodName{getLevels( )}}} method; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getLevels()]]}}}
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 Since this notion is tightly bound with the existence of a local state for that level. Therefore, to simplify our task, we consider that this method benefits from an appropriate data structure for the public local state of the agent (see the last item of this enumeration). Assuming that the public local states are stored using a {{className{Map&lt;LevelIdentifier,ILocalStateOfAgent&gt;}}} data structure, the implementation of this method consists in retrieving the keys of that structure.
@@ -2707,12 +2707,12 @@ public class CityBusAgent implements IAgent4Engine {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Perception buttons" creator="Designer" modifier="Designer" created="201402051031" modified="201402171322" changecount="10">
+<div title="SMD - Agents skeleton - Implementation - Perception buttons" creator="Designer" modifier="Designer" created="201402051031" modified="201403050932" changecount="11">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The access to the perceived data of the agent is defined by the following methods:
-*{{methodName{getPerceivedData( )}}} gets the lastly perceived data from ''all the levels'' where the agent lies; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#getPerceivedData()]]}}}
-*{{methodName{setPerceivedData(...)}}} sets the lastly perceived data from ''a level''; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#setPerceivedData(fr.lgi2a.similar.microkernel.agents.IPerceivedData)]]}}}
+*{{methodName{getPerceivedData( )}}} gets the lastly perceived data from ''all the levels'' where the agent lies; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#getPerceivedData()]]}}}
+*{{methodName{setPerceivedData(...)}}} sets the lastly perceived data from ''a level''; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#setPerceivedData(fr.lgi2a.similar.microkernel.agents.IPerceivedData)]]}}}
 }}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 In SIMILAR, the perceived data of an agent from a level are modeled as instances of the {{className{IPerceivedData}}} class. Because of the signature of the perceived data-related methods, designers do not have much freedom in the implementation of this part of the IAgent interface. It has to revolve around a filed having the type {{className{Map&lt;LevelIdentifier, IPerceivedData&gt;}}}.
@@ -2773,15 +2773,15 @@ public class CityBusAgent implements IAgent4Engine {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Private local states buttons" creator="Designer" modifier="Designer" created="201402171345" modified="201402171348" changecount="3">
+<div title="SMD - Agents skeleton - Implementation - Private local states buttons" creator="Designer" modifier="Designer" created="201402171345" modified="201403050933" changecount="4">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The notion of level where an agent lies is tightly bound with the notion of private local state. Indeed, if an agent has a private local state in a specific level, then the agent is necessarily lying in that level. Therefore, adding a private local state to an agent is synonym of adding that agent to a level.
 !Specification of the access methods
 The access to the private local states of the agent is defined by the following methods:
-*{{methodName{getPrivateLocalState(LevelIdentifier)}}} gets the private local state of an agent for a specific level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getPrivateLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
-*{{methodName{includeNewLevel(...)}}} adds an agent to a level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
-*{{methodName{excludeFromLevel(...)}}} removes the agent from a level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#excludeFromLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{getPrivateLocalState(LevelIdentifier)}}} gets the private local state of an agent for a specific level; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getPrivateLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{includeNewLevel(...)}}} adds an agent to a level; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
+*{{methodName{excludeFromLevel(...)}}} removes the agent from a level; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#excludeFromLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
 }}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 In SIMILAR, the ''private local states'' of an agent from a level are modeled as instances of the {{className{ILocalStateOfAgent4Engine}}} class. This class and its usage are [[described later|SMD - Perception]].
@@ -2858,16 +2858,16 @@ public class CityBusAgent implements IAgent4Engine {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Agents skeleton - Implementation - Public local states buttons" creator="Designer" modifier="Designer" created="201402051033" modified="201402171348" changecount="16">
+<div title="SMD - Agents skeleton - Implementation - Public local states buttons" creator="Designer" modifier="Designer" created="201402051033" modified="201403050933" changecount="17">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The notion of level where an agent lies is tightly bound with the notion of public local state. Indeed, if an agent has a public local state in a specific level, then the agent is necessarily lying in that level. Therefore, adding a public local state to an agent is synonym of adding that agent to a level.
 !Specification of the access methods
 The access to the public local states of the agent is defined by the following methods:
-*{{methodName{getPublicLocalState(LevelIdentifier)}}} gets the public local state of an agent for a specific level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getPublicLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
-*{{methodName{getPublicLocalStates( )}}} gets the public local state of an agent all the levels; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#getPublicLocalStates()]]}}}
-*{{methodName{includeNewLevel(...)}}} adds an agent to a level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
-*{{methodName{excludeFromLevel(...)}}} removes the agent from a level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#excludeFromLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{getPublicLocalState(LevelIdentifier)}}} gets the public local state of an agent for a specific level; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent.html#getPublicLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{getPublicLocalStates( )}}} gets the public local state of an agent all the levels; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#getPublicLocalStates()]]}}}
+*{{methodName{includeNewLevel(...)}}} adds an agent to a level; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
+*{{methodName{excludeFromLevel(...)}}} removes the agent from a level; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#excludeFromLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
 }}} ===  +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 In SIMILAR, the ''public local states'' of an agent from a level are modeled as instances of the {{className{ILocalStateOfAgent4Engine}}} class. This class and its usage are [[described later|SMD - Perception]].
@@ -3038,7 +3038,7 @@ This step of the methology focuses on the implementation of the //decision phase
 }}}
 [img(100%,)[images/simulationModel/lowLevel/agentBehaviorModel_decision.png]]</pre>
 </div>
-<div title="SMD - Decision - Specifications" creator="Designer" modifier="Designer" created="201402031705" modified="201402181327" changecount="42">
+<div title="SMD - Decision - Specifications" creator="Designer" modifier="Designer" created="201402031705" modified="201403050938" changecount="45">
 <pre>[&gt;img(45%,)[images\simulationModel\lowLevel\agentDesignOutline6.png]]
 In the micro-kernel of SIMILAR, the decision process is modeled by the following method of the {{className{[[IAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}} interface:
 {{{
@@ -3137,7 +3137,7 @@ To facilitate the extension of the model of the agents, we also advise designers
 
 Knowing all these information, and that a public local state of an environment is an instance of the {{className{[[ILocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface, the environment should declare a field having the type {{className{Map&lt;LevelIdentifier,ILocalStateOfEnvironment&gt;}}}.</pre>
 </div>
-<div title="SMD - Environment skeleton - Specifications" creator="Designer" modifier="Designer" created="201402171217" modified="201402171244" changecount="22">
+<div title="SMD - Environment skeleton - Specifications" creator="Designer" modifier="Designer" created="201402171217" modified="201403050931" changecount="25">
 <pre>[&gt;img(50%,)[images/simulationModel/highLevel/environmentDesignOutline2.png]]
 In SIMILAR, the environment is modeled as an instance of the {{className{[[IEnvironment4Engine|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment4Engine.html]]}}} interface. This interface defines methods providing access to the core elements of an environment (public and private local states) and to the core behavior of the environment (natural action process).
 
@@ -3151,8 +3151,8 @@ In this skeleton, the following elements have to be defined:
 The public local state of the environment models the data that can be perceived about the environment in a specific level. It access is therefore crucial to the construction of a simulation.
 
 In SIMILAR, the access to a ''public local state'' of the environment is made using the following methods:
-*The {{methodName{getPublicLocalState( LevelIdentifier )}}} method granting access to a public local state; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html#getPublicLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
-*The {{methodName{getPublicLocalStates( )}}} method granting access to all the public local states; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment4Engine.html#getPublicLocalStates()]]}}}
+*The {{methodName{getPublicLocalState( LevelIdentifier )}}} method granting access to a public local state; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html#getPublicLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*The {{methodName{getPublicLocalStates( )}}} method granting access to all the public local states; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment4Engine.html#getPublicLocalStates()]]}}}
 }}}
 === +++?*[&lt;span class=&quot;implsmallbtn &quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
@@ -3219,7 +3219,7 @@ public class EnvironmentModel implements IEnvironment4Engine {
 The private local state of the environment models the data that cannot be perceived about the environment in a specific level, but that participate in the computation of its natural action. It access is therefore crucial to the construction of a simulation.
 
 In SIMILAR, the access to a ''private local state'' of the environment is made using the following method:
-*The {{methodName{getPrivateLocalState( LevelIdentifier )}}} method granting access to a private local state; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html#getPrivateLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*The {{methodName{getPrivateLocalState( LevelIdentifier )}}} method granting access to a private local state; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html#getPrivateLocalState(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
 }}}
 === +++?*[&lt;span class=&quot;implsmallbtn &quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
@@ -4697,11 +4697,11 @@ The following code illustrates the implementation of the perceived data set usin
 
 }}} ===</pre>
 </div>
-<div title="SMD - Perception - Perceived data - Specifications" creator="Designer" modifier="Designer" created="201401301023" modified="201402181020" changecount="45">
+<div title="SMD - Perception - Perceived data - Specifications" creator="Designer" modifier="Designer" created="201401301023" modified="201403050936" changecount="47">
 <pre>In SIMILAR, a perceived data set is modeled as an instance of the {{className{[[IPerceivedData|../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html]]}}} interface. This interface defines accessors to the level from which the perception was made as well as to the transitory period during which the data were perceived. The perceived data themselves are context dependent, and therefore are not explicitly part of this interface. They have to be ''defined as fields'' and have to be ''accessed through read only methods'' in the subclasses of the {{className{IPerceivedData}}} interface.
 
 Each class implementing the {{className{IPerceivedData}}} interface have to define the following methods:
-*{{methodName{getLevel()}}} gets the ''level'' from which the data were perceived; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html#getLevel()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getLevel()}}} gets the ''level'' from which the data were perceived; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html#getLevel()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in:
 *Adding a field to the class having the type {{className{IPerceivedData}}};
@@ -4709,7 +4709,7 @@ The implementation of this method usually consists in:
 *Granting access to that field in the appropriate method (//i.e.// {{methodName{getLevel()}}}).
 }}} ===
 
-*{{methodName{getTransitoryPeriodMin()}}} gets the time stamp modeling the ''lower bound'' of the ''transitory period'' when the data were perceived; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html#getTransitoryPeriodMin()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getTransitoryPeriodMin()}}} gets the time stamp modeling the ''lower bound'' of the ''transitory period'' when the data were perceived; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html#getTransitoryPeriodMin()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in:
 *Adding a field to the class having the type {{className{[[SimulationTimeStamp|../api/fr/lgi2a/similar/microkernel/agents/SimulationTimeStamp.html]]}}};
@@ -4717,7 +4717,7 @@ The implementation of this method usually consists in:
 *Granting access to that field in the appropriate method (//i.e.// {{methodName{getTransitoryPeriodMin()}}}).
 }}} ===
 
-*{{methodName{getTransitoryPeriodMax()}}} gets the time stamp modeling the ''upper bound'' of the ''transitory period'' when the data were perceived; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html#getTransitoryPeriodMax()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getTransitoryPeriodMax()}}} gets the time stamp modeling the ''upper bound'' of the ''transitory period'' when the data were perceived; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/IPerceivedData.html#getTransitoryPeriodMax()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in:
 *Adding a field to the class having the type {{className{[[SimulationTimeStamp|../api/fr/lgi2a/similar/microkernel/agents/SimulationTimeStamp.html]]}}};
@@ -4758,7 +4758,7 @@ The specification of the perception process of an agent relies on the implementa
 *The model determining how the perceived data model is filled with data, using the current state of the agent and of the perceptible levels;
 {{nextButton{[[Go to the next step &gt;&gt;|SMD - Perception - Perceived data]]}}}</pre>
 </div>
-<div title="SMD - Perception - Specifications" creator="Designer" modifier="Designer" created="201401301419" modified="201402181210" changecount="38">
+<div title="SMD - Perception - Specifications" creator="Designer" modifier="Designer" created="201401301419" modified="201403050937" changecount="39">
 <pre>[&gt;img(40%,)[images/simulationModel/lowLevel/agentDesignOutline4.png]]
 In the micro-kernel of SIMILAR, the perception model of an agent from a specific level is modeled as the following method of the {{className{[[IAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}} interface:
 {{{
@@ -4959,12 +4959,12 @@ The sources of this class are also available in a [[stand alone file|./files/sim
 ~~//''__3:__ &quot;PLS&quot; stands for &quot;Public Local State&quot;. The name is purposely shortened to keep readable class names.''//~~
 }}} ===</pre>
 </div>
-<div title="SMD - Public local states - Implementation" creator="Designer" modifier="Designer" created="201401240803" modified="201402171612" changecount="109">
+<div title="SMD - Public local states - Implementation" creator="Designer" modifier="Designer" created="201401240803" modified="201403050935" changecount="110">
 <pre>[&gt;img(47%,)[images/simulationModel/highLevel/environmentDesignOutline3.png]]
 In SIMILAR, a public local state of the environment is modeled as an instance of the {{className{[[ILocalStateOfEnvironment|../api/fr/lgi2a/similar/microkernel/environment/ILocalStateOfEnvironment.html]]}}} interface. This interface defines only an access method to the identifier of the level where the state is located. The perceptible data contained in the state are not explicitly specified in the interface, since they can take very different shapes. It is up to the user to define and grant access to them in the implementation of the interface.
 
 Each class implementing the {{className{IPublicLocalState}}} interface have to define the following method:
-*{{methodName{getLevel()}}} gets the ''identifier of the level'' where the state is located; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/ILocalState.html#getLevel()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getLevel()}}} gets the ''identifier of the level'' where the state is located; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/ILocalState.html#getLevel()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in either:
 *Adding a field to the class having the type {{className{LevelIdentifier}}};
@@ -4986,14 +4986,14 @@ Likely to the public state of the environment, the perceptible data contained in
 {{clear{}}}
 Each class implementing the {{className{[[ILocalStateOfAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html]]}}} interface have to define the following methods:
 *{{methodName{getLevel()}}} gets the ''identifier of the level'' where the state is located (see above);
-*{{methodName{getCategory( )}}} gets the ''category of the owner'' of this state; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent.html#getCategoryOfAgent()]]}}}  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getCategory( )}}} gets the ''category of the owner'' of this state; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent.html#getCategoryOfAgent()]]}}}  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in:
 *Getting the agent owning of the state (i.e. {{methodName{getOwner( )}}});
 *Returning the category of that agent (i.e. {{methodName{getCategory( )}}}).
 }}} ===
 
-*{{methodName{getOwner()}}} gets the agent ''owning'' the state; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html#getOwner()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getOwner()}}} gets the agent ''owning'' the state; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent4Engine.html#getOwner()]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in:
 *Adding a field to the class having the type {{className{[[IAgent4Engine|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html]]}}};
@@ -5001,7 +5001,7 @@ The implementation of this method usually consists in:
 *Granting access to that field in the appropriate methods (i.e. {{methodName{getOwner( )}}}).
 }}} ===
 
-*{{methodName{isOwnedBy(...)}}} determines if an agent is the owner of the state or not; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent.html#isOwnedBy(fr.lgi2a.similar.microkernel.agents.IAgent)]]}}}  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{isOwnedBy(...)}}} determines if an agent is the owner of the state or not; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/agents/ILocalStateOfAgent.html#isOwnedBy(fr.lgi2a.similar.microkernel.agents.IAgent)]]}}}  +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 The implementation of this method usually consists in:
 *Comparing the argument of the method and the value returned by the {{methodName{getOwner()}}} method.
@@ -5205,10 +5205,10 @@ This step of the methodology consist in defining the operational code of the rea
 }}}@@
 {{clearright{}}}</pre>
 </div>
-<div title="SMD - Reaction - To regular influences - Specifications" creator="Designer" modifier="Designer" created="201402191600" modified="201402201044" changecount="11">
+<div title="SMD - Reaction - To regular influences - Specifications" creator="Designer" modifier="Designer" created="201402191600" modified="201403050941" changecount="12">
 <pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline5.png]]
 In the micro-kernel of SIMILAR, the reaction process of a level is modeled by the following methods of the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface:
-*{{methodName{makeRegularReaction(...)}}} models the user reaction to the regular influences; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+*{{methodName{makeRegularReaction(...)}}} models the user reaction to the regular influences; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
 This method has for signature:
 {{{
 void makeRegularReaction(
@@ -5330,10 +5330,10 @@ This step of the methodology consist in defining the operational code of the rea
 }}}@@
 {{clearright{}}}</pre>
 </div>
-<div title="SMD - Reaction - To system influences - Specifications" creator="Designer" modifier="Designer" created="201402191558" modified="201402200837" changecount="16">
+<div title="SMD - Reaction - To system influences - Specifications" creator="Designer" modifier="Designer" created="201402191558" modified="201403050941" changecount="17">
 <pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline4.png]]
 In the micro-kernel of SIMILAR, the reaction process of a level is modeled by the following methods of the {{className{[[ILevel|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html]]}}} interface:
-*{{methodName{makeSystemReaction(...)}}} models the user reaction to the system influences;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+*{{methodName{makeSystemReaction(...)}}} models the user reaction to the system influences;  {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/levels/ILevel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
 This method has for signature:
 {{{
 void makeSystemReaction(
@@ -5500,7 +5500,7 @@ Note that the execution of a simulation will almost never directly throw an exce
 The {{className{[[ProbeExceptionPrinter|../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeExceptionPrinter.html]]}}} probe from the common libs was defined for this purpose.
 }}}</pre>
 </div>
-<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201402191539" changecount="66">
+<div title="SMD - Time model" creator="Designer" modifier="Designer" created="201401231322" modified="201403050934" changecount="67">
 <pre>&lt;&lt;tiddler [[Design - Simulation model - menu]]&gt;&gt; {{stepMainTitle{Creation of the time model}}}
 {{guidelinesNavMenu{[[&lt;&lt; previous step|SMD - Agents skeleton]]  |  [[next step &gt;&gt;|SMD - Public local states]]}}}
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -5511,7 +5511,7 @@ This step focuses on the specification of the time model of each level, inside t
 }}}
 Managing explicitly the time in a simulation is not necessarily an easy task. Indeed, a simulation often relies on the notion of &quot;time step&quot; whereas simulated phenomena rely on notions like hours/minutes/seconds, seasons, years, etc. Therefore, before going for the kill, we remind the users about the ''time model'' related terminology used in SIMILAR.
 
-{{linkbigbtn center{&lt;html&gt;&lt;a href=&quot;../README.html#[[Structure - Simulation model - Time model - Time stamps model]]&quot;&gt;Read more about the time model&lt;/a&gt;&lt;/html&gt;}}}
+{{linkbigbtn center{&lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../README.html#[[Structure - Simulation model - Time model - Time stamps model]]&quot;&gt;Read more about the time model&lt;/a&gt;&lt;/html&gt;}}}
 !Structure of a time model in SIMILAR
 &lt;&lt;tiddler [[SMD - Time model - Structure]]&gt;&gt;
 !Specifications and implementation instructions
@@ -5559,12 +5559,12 @@ public class ExampleTimeConvertor {
 }}}
 }}} ===</pre>
 </div>
-<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201402191602" changecount="77">
+<div title="SMD - Time model - Implementation" creator="Designer" modifier="Designer" created="201401231402" modified="201403050934" changecount="78">
 <pre>In SIMILAR, the notion of time model is reified with the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface and the {{className{[[SimulationTimeStamp|../api/fr/lgi2a/similar/microkernel/SimulationTimeStamp.html]]}}} class. The main role of the modeler is to provide an implementation to the methods defined in the {{className{ITimeModel}}} interface.
 [img(47%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(47%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
 {{clear{}}}
 In SIMILAR, ''time models'' are instances of the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface. They are characterized by the following methods:
-*{{methodName{getNextTime(...)}}} computes the ''successor'' of a time stamp;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getNextTime(...)}}} computes the ''successor'' of a time stamp;  {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 For simulation consistency reasons, the {{methodName{getNextTime(...)}}} method has to be deterministic: calling twice this method with the same parameter has to produce the same output.
 

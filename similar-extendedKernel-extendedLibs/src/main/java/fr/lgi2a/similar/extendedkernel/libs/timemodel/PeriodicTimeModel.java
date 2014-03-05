@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.libs.time;
+package fr.lgi2a.similar.extendedkernel.libs.timemodel;
 
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.levels.ITimeModel;

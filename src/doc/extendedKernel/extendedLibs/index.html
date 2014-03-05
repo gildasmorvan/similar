@@ -885,6 +885,104 @@ store.addNotification(&quot;StyleSheetDropDownMenuPlugin&quot;,refreshStyles);
 //!END-PLUGIN-CODE
 // %/</pre>
 </div>
+<div title="EL - Abstract - Decision" creator="Designer" modifier="Designer" created="201403050708" modified="201403050722" changecount="12">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Decision model}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractAgtDecisionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtDecisionModel.html]]}}} to the {{className{[[IAgtDecisionModel|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtDecisionModel.html]]}}} interface modeling the decision model of an agent from a specific level. This abstract class provides the behavior to the generic and domain-independent methods. Only the following method has still to be specified by the users:
+*{{methodName{decide(...)}}} defining how the agent decides to produce influences from a specific level. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtDecisionModel.html#decide(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.agents.IGlobalState, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.IPerceivedData, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+!Implementation instructions
+A class extending {{className{[[AbstractAgtDecisionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtDecisionModel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+public AbstractAgtDecisionModel(
+	LevelIdentifier levelIdentifier
+);
+}}}
+The constructor defines the following argument:
+*{{argumentName{levelIdentifier}}} modeling the identifier of the level from which the decision is made in this class.
++++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Decision process full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/lowLevel/decisionTree.png]]
+This example is a continuation of the example started in the documentation of the &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Perception - Perceived data]]&quot;&gt;&lt;strong&gt;perceived data model&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt;.
+In this example, a ''lion'' agent decides to ''eat'' the closest ''gazelle'' agent. If the agent is close enough, it directly eats the gazelle. Otherwise, it ''moves towards'' the gazelle. Note that if two gazelles are at the same distance, then the agent chooses one of them randomly.
+
+The notion of &quot;close engouh&quot; implies the definition of a threshold distance, under which the action is possible. This threshold belongs purely to the decision process of the agent, and therefore has to be included in its &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Global state model]]&quot;&gt;&lt;strong&gt;global state&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt; or in its &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Private local states]]&quot;&gt;&lt;strong&gt;private local state&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt;. In this example, it is added to the private local state of the &quot;Lion&quot; agent in the &quot;Savannah&quot; level.
+!Code
+We assume that the following influences are defined:
+*The ''eat'' influence is implemented as the {{{RISavannahEat}}} class, defining a constructor having the following signature:
+{{{
+public RISavannahEat( 
+	AgtLionPLSInSavannahLevel predator, 
+	AgtGazellePLSInSavannahLevel prey,
+	SimulationTimeStamp timeLowerBound,
+	SimulationTimeStamp timeUpperBound
+)
+}}}
+*The ''move towards'' influence is implemented as the {{{RISavannahMove}}} class, defining a constructor having the following signature:
+{{{
+public RISavannahMove( 
+	AgtLionPLSInSavannahLevel predator,
+	double desiredX,
+	double desiredY,
+	SimulationTimeStamp timeLowerBound,
+	SimulationTimeStamp timeUpperBound
+)
+}}}
+We also assume that the &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Tools preparation - Random]]&quot;&gt;&lt;strong&gt;random number generation class&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt; provides the following tool method getting a random element within a list:
+{{{
+public &lt;T&gt; T randomElement( List&lt;T&gt; list );
+}}}
+Finally, we assume that the private local state of the agent is implemented as a {{className{AgtLionHLSInSavannahLevel}}} class defining the {{methodName{getEatDistanceThreshold()}}} method, modeling the maximal distance between a lion and a prey to consider them as &quot;close&quot;.
+!Code
+Based on these information, the corresponding ''decision model'' is implemented with the following code. The sources of this class are also available as a [[stand alone|../files/simulationModel/lowLevel/AgtLionDecisionFromSavannah2.java]] file.
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='../files/simulationModel/lowLevel/AgtLionDecisionFromSavannah2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
+<div title="EL - Abstract - Natural" creator="Designer" modifier="Designer" created="201403050724" modified="201403050730" changecount="9">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Natural action model}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractEnvNaturalModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractEnvNaturalModel.html]]}}} to the {{className{[[IEnvNaturalModel|../../api/fr/lgi2a/similar/extendedkernel/environment/IEnvNaturalModel.html]]}}} interface modeling the natural action model of the environment from a specific level. This abstract class provides the behavior to the generic and domain-independent methods. Only the following method has still to be specified by the users:
+*{{methodName{natural(...)}}} defining how the environment decides which influences result for its natural action. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/environment/IEnvNaturalModel.html#natural(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map, fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment, fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+!Implementation instructions
+A class extending {{className{[[AbstractEnvNaturalModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractEnvNaturalModel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
+
+In addition, the constructor of the new class should call the ''super-constructor'' having the following signature:
+{{{
+public AbstractEnvNaturalModel( 
+	LevelIdentifier levelIdentifier
+);
+}}}
+The constructor defines the following argument:
+*{{argumentName{levelIdentifier}}} The identifier of the level from which the natural action is made in this class.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Natural action process full example&lt;/span&gt;]
+{{exsection{
+[&gt;img[../images/simulationModel/lowLevel/naturalTree.png]]
+This example illustrates the use of the natural action of the environment in the context of a ''bubble chamber'' simulation.
+&lt;&lt;&lt;
+//A bubble chamber is a vessel filled with a superheated transparent liquid (most often liquid hydrogen) used to detect electrically charged particles moving through it.
+[...]
+As particles enter the chamber, a piston suddenly decreases its pressure, and the liquid enters into a superheated, metastable phase. Charged particles create an ionisation track, around which the liquid vaporises, forming microscopic bubbles.//
+@@display:block;text-align:right;__Source:__ http://en.wikipedia.org/wiki/Bubble_chamber@@
+&lt;&lt;&lt;
+In this simulation, agents from the ''particle canon'' category fire ''particles'' in the ''bubble chamber'' level. The behavior of the ''particle'' agents only consists in moving. The environment (//i.e.// the superheated transparent liquid) generates the ''bubbles'' along the path of the ''particles'' with its natural action.
+
+In this example, we focus on the definition of the natural action of the environment from the ''bubble chamber'' level. It creates a bubble at the same location than the ''particle'' agents.
+{{clearright{}}}
+!Code
+This example assumes that:
+*The levels identifier list of the simulation is implemented as the {{className{[[BubbleChamberLevelList|../files/simulationModel/lowLevel/BubbleChamberLevelList.java]]}}} class;
+*The agent categories list of the simulation is implemented as the {{className{[[BubbleChamberAgentCategoriesList|../files/simulationModel/lowLevel/BubbleChamberAgentCategoriesList.java]]}}} class;
+*The public local state of the particle agents is implemented as the {{className{AgtParticlePLSInChamber}}} class, containing:
+**a {{methodName{getLocation()}}} method returning a {{className{Point2D}}} object modeling the location of the particle.
+*The factory creating new agents from the ''bubble'' category  is implemented as the {{className{AgtBubbleFactory}}} class and defines the following static method:
+**{{methodName{generate(double,double)}}} returning an instance of the {{className{IAgent4Engine}}} interface. Its parameters are the x and y coordinate of the bubble.
+Based on these information, the corresponding ''natural action model'' is implemented with the following code. The sources of this class are also available as a [[stand alone|../files/simulationModel/lowLevel/EnvNaturalInChamber2.java]] file:
+&lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='../files/simulationModel/lowLevel/EnvNaturalInChamber2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
+}}} ===</pre>
+</div>
 <div title="EL - Abstract - Parameters" creator="Designer" modifier="Designer" created="201403041603" modified="201403041621" changecount="19">
 <pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Simulation parameters}}}
 
@@ -911,12 +1009,12 @@ Based on these information, the corresponding ''simulation parameters'' class is
 &lt;html&gt;&lt;pre&gt;&lt;object width='100%' height='350px' type='text/plain' data='../files/simulationModel/preparation/MyParametersClass2.java' border='0' &gt;&lt;/pre&gt;&lt;/object&gt;&lt;/html&gt;
 }}} ===</pre>
 </div>
-<div title="EL - Abstract - Perception" creator="Designer" modifier="Designer" created="201403041616" modified="201403041620" changecount="3">
+<div title="EL - Abstract - Perception" creator="Designer" modifier="Designer" created="201403041616" modified="201403050723" changecount="9">
 <pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Abstract class - Perception model}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtPerceptionModel.html]]}}} to the {{className{[[IAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtPerceptionModel.html]]}}} interface modeling the perception model of an agent from a specific level. This abstract class provides the behavior to the generic and domain-independent methods. Only the following method has still to be specified by the users:
-*{{methodName{perceive(...)}}} defining how the agent perceives information from the simulation for a specific level.
+*{{methodName{perceive(...)}}} defining how the agent perceives information from the simulation for a specific level. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtPerceptionModel.html#perceive(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap)]]}}}
 !Implementation instructions
 A class extending {{className{[[AbstractAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtPerceptionModel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
 
@@ -927,14 +1025,14 @@ public AbstractAgtPerceptionModel(
 );
 }}}
 The constructor defines the following argument:
-*{{argumentName{levelIdentifier}}} The identifier of the level from which the perception is made in this class.
+*{{argumentName{levelIdentifier}}} modeling the identifier of the level from which the perception is made in this class.
 +++?*[&lt;span class=&quot;exbigbtn &quot;&gt;Perception process full example&lt;/span&gt;]
 {{exsection{
 [&gt;img[../images/simulationModel/lowLevel/perceptionTree.png]]
-This example is a continuation of the example started in the documentation of the &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Perception - Perceived data]]&quot;&gt;perceived data model&lt;/a&gt;&lt;/html&gt;.
+This example is a continuation of the example started in the documentation of the &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Perception - Perceived data]]&quot;&gt;&lt;strong&gt;perceived data model&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt;.
 We illustrate the implementation of the perception process of a ''lion'' agent, assuming that:
-*The ''Sky'' and ''Savannah'' levels use a 2D grid topology (see &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Public local states]]&quot;&gt;this page&lt;/a&gt;&lt;/html&gt;);
-*The ''Lion'' agent defines a 2D coordinate in the ''Savannah'' level (see &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Public local states]]&quot;&gt;this page&lt;/a&gt;&lt;/html&gt;);
+*The ''Sky'' and ''Savannah'' levels use a 2D grid topology (see &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Public local states]]&quot;&gt;&lt;strong&gt;this page&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt;);
+*The ''Lion'' agent defines a 2D coordinate in the ''Savannah'' level (see &lt;html&gt;&lt;a target=&quot;_blank&quot; href=&quot;../index.html#[[SMD - Public local states]]&quot;&gt;&lt;strong&gt;this page&lt;/strong&gt;&lt;/a&gt;&lt;/html&gt;);
 *The ''Gazelle'' agents define a public local state in the ''Savannah'' level named {{className{AgtGazellePLSInSavannahLevel}}}, where their age can be read using the {{methodName{getAge()}}} method;
 The perception process of a ''Lion'' consists in listing the young gazelles (younger than 3 years) agents in a 300 meters square centered on the location of the lion. This implies that the private local state of the &quot;Lion&quot; agent in the &quot;Savannah&quot; level contains two information:
 *The ''perception radius'' where the gazelles can be seen (here 300 meters)
@@ -956,7 +1054,224 @@ The extended libraries of SIMILAR define ''abstract classes'' providing a defaul
 *A [[decision model|EL - Abstract - Decision]] of an agent from a level;
 *A [[natural action model|EL - Abstract - Natural]] of the environment from a level.</pre>
 </div>
-<div title="Extended libs - Navigation menu" creator="Designer" modifier="Designer" created="201403041547" modified="201403041558" changecount="8">
+<div title="EL - End critera" creator="Designer" modifier="Designer" created="201403050805" modified="201403050839" changecount="2">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Simulation end critera}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of SIMILAR define the following ''simulation end critera'':
+*{{className{[[TimeBasedEndCriterion|EL - End critera - Time based]]}}}, telling that the simulation ends if its current half-consistent time is greater or equal to a specific final time stamp;</pre>
+</div>
+<div title="EL - End critera - Time based" creator="Designer" modifier="Designer" created="201403050808" modified="201403050909" changecount="9">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{End critera - Time based}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended-kernel of SIMILAR provide a default implementation to the ''simulation end criterion model'' class where:
+*The simulation ends if it reaches an half consistent time greater or equal to a specific final time.
+This class is called {{className{[[TimeBasedEndCriterion|../../api/fr/lgi2a/similar/extendedkernel/libs/endcriterion/TimeBasedEndCriterion.html]]}}} and defines the following constructor:
+{{{
+public TimeBasedEndCriterion( 
+	SimulationTimeStamp finalTimeStamp
+);
+}}}
+This constructor defines the following argument:
+*{{argumentName{finalTimeStamp}}} modeling the final time of the simulation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+In the context of a simulation that has to end at the time stamp having the identifier {{{15}}}, the corresponding end criterion is created with the following code:
+{{{
+IEndCriterionModel endModel = new TimeBasedEndCriterion(
+	new SimulationTimeStamp( 15 )
+);
+}}}
+}}} ===
+
+!Important notice
+If the specified final time does not represent a time stamp of the time model of the simulation (see the image 1 below), then the simulation will end when it reaches the smallest time stamp of its time model greater than the final time (see the image 2 below).
+
+[img(100%,)[images/endCritera/timeBased1.png]]
+{{caption{Image 1: Situation where the final time of the end criterion is not a time stamp of the time model of the simulation.}}}
+[img(100%,)[images/endCritera/timeBased2.png]]
+{{caption{Image 2: Actual time model of the simulation when a time based end criterion is used.}}}</pre>
+</div>
+<div title="EL - Generic - Empty decision" creator="Designer" modifier="Designer" created="201403050746" modified="201403050756" changecount="4">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Empty decision}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide a default implementation to the ''decision model'' of an agent, in the case where no influences are produced by the decision process of the agent. This class is called {{className{[[EmptyAgtDecisionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/generic/EmptyAgtDecisionModel.html]]}}} and defines the following constructor:
+{{{
+public EmptyAgtDecisionModel(
+	LevelIdentifier levelIdentifier
+);
+}}}
+This constructor defines the following arguments:
+*{{className{levelIdentifier}}} modeling the identifier of the level from which the decision is made.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+If we consider a wildlife simulation where the identifier of a &quot;Savannah&quot; level is declared in the field {{fieldName{SAVANNAH}}} of the class {{className{WildlifeLevelsList}}}, then the creation of an empty decision model of an agent from the &quot;Savannah&quot; level is made with the following code:
+{{{
+IAgtDecisonModel savannahDecisionMdl = new EmptyAgtDecisionModel(
+	WildlifeLevelsList.SAVANNAH
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="EL - Generic - Empty natural" creator="Designer" modifier="Designer" created="201403050750" modified="201403050756" changecount="5">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Empty natural}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide a default implementation to the ''natural action model'' of the environment, in the case where no influences are produced by the decision process of the environment from a level. This class is called {{className{[[EmptyEnvNaturalModel|../../api/fr/lgi2a/similar/extendedkernel/libs/generic/EmptyEnvNaturalModel.html]]}}} and defines the following constructor:
+{{{
+public EmptyEnvNaturalModel(
+	LevelIdentifier levelIdentifier
+);
+}}}
+This constructor defines the following arguments:
+*{{className{levelIdentifier}}} modeling the identifier of the level from which the natural action is made.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+If we consider a wildlife simulation where the identifier of a &quot;Savannah&quot; level is declared in the field {{fieldName{SAVANNAH}}} of the class {{className{WildlifeLevelsList}}}, then the creation of an empty natural action model of the environment from the &quot;Savannah&quot; level is made with the following code:
+{{{
+IEnvNaturalModel savannahNaturalMdl = new EmptyEnvNaturalModel(
+	WildlifeLevelsList.SAVANNAH
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="EL - Generic - Empty perception" creator="Designer" modifier="Designer" created="201403050738" modified="201403050756" changecount="8">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Empty perception}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide a default implementation to the ''perception model'' of an agent, in the case where no perceived data are required by the decision process of the agent. The perception process of that perception model class therefore returns empty perceived data. This class is called {{className{[[EmptyAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/generic/EmptyAgtPerceptionModel.html]]}}} and defines the following constructor:
+{{{
+public EmptyAgtPerceptionModel(
+	LevelIdentifier levelIdentifier
+);
+}}}
+This constructor defines the following arguments:
+*{{className{levelIdentifier}}} modeling the identifier of the level from which the perception is made.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+If we consider a wildlife simulation where the identifier of a &quot;Savannah&quot; level is declared in the field {{fieldName{SAVANNAH}}} of the class {{className{WildlifeLevelsList}}}, then the creation of an empty perception model of an agent from the &quot;Savannah&quot; level is made with the following code:
+{{{
+IAgtPerceptionModel savannahPerceptionMdl = new EmptyAgtPerceptionModel(
+	WildlifeLevelsList.SAVANNAH
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="EL - Generic - Empty reaction" creator="Designer" modifier="Designer" created="201403050754" modified="201403050837" changecount="6">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Empty reaction}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide a default implementation to the ''reaction model'' of a level, in the case where the user-defined reaction to the system and regular influences does nothing. This class is called {{className{[[EmptyAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/generic/EmptyLevelReactionModel.html]]}}} and defines the following constructor:
+{{{
+public EmptyLevelReactionModel( );
+}}}
+
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+The creation of an empty reaction model for any level is made with the following code:
+{{{
+ILevelReactionModel reactionMdl = new EmptyLevelReactionModel( );
+}}}
+}}} ===
+
+!Important notice
+This reaction model makes sure that no influences persists in the new consistent state of the level.</pre>
+</div>
+<div title="EL - Generic - Identity revision" creator="Designer" modifier="Designer" created="201403050755" modified="201403050806" changecount="6">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Still global state}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide a default implementation to the ''global state revision model'' of an agent, in the case where no modifications are performed in the global state of the agent. The global state revision process of that model class therefore returns the plain global state. This class is called {{className{[[IdentityAgtGlobalStateRevisionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/generic/IdentityAgtGlobalStateRevisionModel.html]]}}} and defines the following constructor:
+{{{
+public IdentityAgtGlobalStateRevisionModel( );
+}}}
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+The creation of an //&quot;empty&quot;// global state revision model of an agent is made with the following code:
+{{{
+IAgtGlobalStateRevisionModel revisionMdl = new IdentityAgtGlobalStateRevisionModel( );
+}}}
+}}} ===</pre>
+</div>
+<div title="EL - Generic - Simple parameters" creator="Designer" modifier="Designer" created="201403050803" changecount="1">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic class - Simple parameters}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended kernel of SIMILAR provide a default implementation to the ''parameters class'' of asimulation, in the case where no additionnal parameters are declared. The parameters class therefore contains only the initial time stamp of the simulation. This class is called {{className{[[SimpleSimulationParameters|../../api/fr/lgi2a/similar/extendedkernel/libs/generic/SimpleSimulationParameters.html]]}}} and defines the following constructor:
+{{{
+public SimpleSimulationParameters(
+	SimulationTimeStamp initialTime
+);
+}}}
+This constructor defines the following arguments:
+*{{className{initialTime}}} modeling the initial time of the simulation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+If we consider a simulation where the initial time has the identifier {{{15}}}, then the creation of a simple parameters class of a simulation is made with the following code:
+{{{
+ISimulationParameters parameters = new SimpleSimulationParameters(
+	new SimulationTimeStamp( 15 )
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="EL - Generic implementations" creator="Designer" modifier="Designer" created="201403050731" modified="201403050806" changecount="8">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Generic classes}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of SIMILAR define the ''generic and reusable'' implementations of the following elements of the extended-kernel:
+*An agent [[perception model|EL - Generic - Empty perception]] //&quot;doing nothing&quot;// (//i.e.// returning empty perceived data);
+*An agent [[decision model|EL - Generic - Empty decision]] //&quot;doing nothing&quot;// (//i.e.// generating no influences);
+*An environment [[natural action model|EL - Generic - Empty natural]] //&quot;doing nothing&quot;// (//i.e.// generating no influences);
+*A level [[reaction model|EL - Generic - Empty reaction]] //&quot;doing nothing&quot;// (//i.e.// performing no user reaction to the influences);
+*An agent [[global state revision model|EL - Generic - Identity revision]] //&quot;doing nothing&quot;// (//i.e.// performing no modifications in the global state of the agent);
+*An //&quot;empty&quot;// [[simulation parameters class|EL - Generic - Simple parameters]] (//i.e.// containing only the bare minimal parameters).</pre>
+</div>
+<div title="EL - Time models" creator="Designer" modifier="Designer" created="201403050839" modified="201403050840" changecount="2">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Time models}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of SIMILAR define the following ''time models'':
+*{{className{[[PeriodicTimeModel|EL - Time models - Periodic]]}}}, where the identifiers of the time stamps are periodic;</pre>
+</div>
+<div title="EL - Time models - Periodic" creator="Designer" modifier="Designer" created="201403050841" modified="201403050907" changecount="6">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Time models - Periodic}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended-kernel of SIMILAR provide a default implementation to the ''time model'' class where:
+*The identifier of the time stamps are periodic;
+*A phase shift is applied between the initial time stamp and the first value returned by the time model.
+[img(100%,)[images/timeModels/periodic.png]]
+{{caption{Illustration of a periodic time model.}}}
+
+This class is called {{className{[[PeriodicTimeModel|../../api/fr/lgi2a/similar/extendedkernel/libs/timemodel/PeriodicTimeModel.html]]}}} and defines the following constructor:
+{{{
+public PeriodicTimeModel( 
+	long period,
+	long phaseShift,
+	SimulationTimeStamp initialTime
+);
+}}}
+This constructor defines the following argument:
+*{{argumentName{period}}} modeling the period of the time model (see the image above);
+*{{argumentName{phaseShift}}} modeling the phase shift of the time model (see the image above);
+*{{argumentName{initialTime}}} modeling the initial time of the simulation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+In the context of a simulation using a {{{2}}} period and {{{0}}} as a phase shift, if we assume that the initial time of the simulation is declared in a variable {{argumentName{initialTimeOfSimulation}}}, then such a time model is created using the following code:
+{{{
+SimulationTimeStamp initialTimeOfSimulation = ... ;
+ITimeModel timeModel = new PeriodicTimeModel(
+	2,
+	0,
+	initialTimeOfSimulation
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="Extended libs - Navigation menu" creator="Designer" modifier="Designer" created="201403041547" modified="201403050838" changecount="9">
 <pre>*[[|Home]]
 *[[Abstract implementations|EL - Abstract implementations]]
 **[[Simulation parameters|EL - Abstract - Parameters]]
@@ -1064,16 +1379,16 @@ Tabulation content 2.
 <div title="HaemoSideBar" creator="Designer" modifier="Designer" created="201311150920" modified="201311150925" tags="HaemoglobinTheme excludeLists" changecount="5">
 <pre></pre>
 </div>
-<div title="Home" creator="Designer" modifier="Designer" created="201311290939" modified="201403041601" changecount="30">
+<div title="Home" creator="Designer" modifier="Designer" created="201311290939" modified="201403050908" changecount="32">
 <pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Extended kernel - Extended libraries}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 [&gt;img(45%,)[images/structure_extendedlibs.png]]
 The ''extended libraries'' of the extended kernel, containing generic implementations of simulation algorithms and results exporting features. These libraries ''facilitate the design of simulations with the extended kernel'', owing to:
-*Concrete [[end criteria|EL - End criteria]];
+*Concrete [[end criteria|EL - End critera]];
 *Concrete [[time models|EL - Time models]] for the levels;
 *[[Abstract implementations|EL - Abstract implementations]] of the interfaces of the extended kernel;
-*[[Generic implementations||EL - Generic implementations]] of behaviors and parameters.
+*[[Generic implementations|EL - Generic implementations]] of behaviors and parameters.
 
 {{linkbigbtn center{[[Documentation content]]}}}</pre>
 </div>
@@ -1564,7 +1879,7 @@ loading a script from a source url:
 2005.11.08 1.0.0 initial release
 &lt;&lt;&lt;</pre>
 </div>
-<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201403041558" tags="excludeLists system" changecount="36">
+<div title="MainMenu" creator="Designer" modifier="Designer" created="201311150936" modified="201403050838" tags="excludeLists system" changecount="37">
 <pre>{{toparent{[[back to parent|../index.html]]&lt;script&gt;place.lastChild.target=&quot;_self&quot;;&lt;/script&gt;}}}
 ''General''
 ----
@@ -1573,7 +1888,7 @@ loading a script from a source url:
 ----
 *[[Abstract classes|EL - Abstract implementations]]
 *[[Generic classes|EL - Generic implementations]]
-*[[End criteria|EL - End criteria]]
+*[[End criteria|EL - End critera]]
 *[[Time models|EL - Time models]]</pre>
 </div>
 <div title="MathJaxPlugin" creator="Administrator" modifier="Designer" created="201311150900" modified="201311151031" tags="systemConfig plugin excludeLists" changecount="2">

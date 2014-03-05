@@ -57,6 +57,10 @@ import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 
 /**
  * Models a reaction model doing nothing.
+ * <p>
+ * 	Note that this reaction model makes sure that no influences persists in the
+ * 	new consistent state of the level.
+ * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public final class EmptyLevelReactionModel implements ILevelReactionModel {

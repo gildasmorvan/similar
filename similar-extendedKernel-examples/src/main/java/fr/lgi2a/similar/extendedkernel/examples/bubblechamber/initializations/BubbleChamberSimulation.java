@@ -64,7 +64,7 @@ import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.exter
 import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.RandomValueFactory;
 import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
 import fr.lgi2a.similar.extendedkernel.libs.endcriterion.TimeBasedEndCriterion;
-import fr.lgi2a.similar.extendedkernel.libs.time.PeriodicTimeModel;
+import fr.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
 import fr.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
 import fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;

@@ -46,9 +46,9 @@
  */
 
 /**
- * Defines a simulation based on pop culture, to illustrates the concepts 
- * and possible practices in SIMILAR.
+ * Defines the various initializations of the simulation model used in 
+ * this simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.extendedkernel.examples.popculture;
+package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.initializations;

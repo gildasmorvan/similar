@@ -1054,12 +1054,118 @@ The extended libraries of SIMILAR define ''abstract classes'' providing a defaul
 *A [[decision model|EL - Abstract - Decision]] of an agent from a level;
 *A [[natural action model|EL - Abstract - Natural]] of the environment from a level.</pre>
 </div>
-<div title="EL - End critera" creator="Designer" modifier="Designer" created="201403050805" modified="201403050839" changecount="2">
+<div title="EL - End critera" creator="Designer" modifier="Designer" created="201403050805" modified="201404240741" changecount="4">
 <pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Simulation end critera}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The extended libraries of SIMILAR define the following ''simulation end critera'':
-*{{className{[[TimeBasedEndCriterion|EL - End critera - Time based]]}}}, telling that the simulation ends if its current half-consistent time is greater or equal to a specific final time stamp;</pre>
+*{{className{[[TimeBasedEndCriterion|EL - End critera - Time based]]}}}, telling that the simulation ends if its current half-consistent time is greater or equal to a specific final time stamp;
+*{{className{[[EndCriterionConjunction|EL - End critera - Conjunction]]}}}, modeling an ending criterion as the conjunction of other ending criteria models;
+*{{className{[[EndCriterionDisjunction|EL - End critera - Disjunction]]}}}, modeling an ending criterion as the disjunction of other ending criteria models;
+*{{className{[[EndCriterionNegation|EL - End critera - Negation]]}}}, modeling an ending criterion as the negation of another ending criterion model.
+</pre>
+</div>
+<div title="EL - End critera - Conjunction" creator="Designer" modifier="Designer" created="201404240733" modified="201404240741" changecount="5">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{End critera - Conjunction}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended-kernel of SIMILAR provide a default implementation to the simulation end criterion model class where:
+*The criterion is the composition of a set of other criteria;
+*The simulation ends when it reaches an half consistent state meeting all the criterion of the composition.
+
+This class is called {{className{[[EndCriterionConjunction|../../api/fr/lgi2a/similar/extendedkernel/libs/endcriterion/EndCriterionConjunction.html]]}}} and defines the following constructor:
+{{{
+public EndCriterionConjunction(
+	IEndCriterionModel... criterionModels
+);
+}}}
+This constructor defines the following argument:
+*{{argumentName{criterionModels}}} modeling the various ending criteria used in the conjunction.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+In the context of a simulation that has to be stopped if three different end criteria {{{endCriterion1}}}, {{{endCriterion2}}} and {{{endCriterion3}}} are met, the corresponding end criterion conjunction is created with the following code:
+{{{
+IEndCriterionModel endCriterion1 = ...;
+IEndCriterionModel endCriterion2 = ...;
+IEndCriterionModel endCriterion3 = ...;
+
+IEndCriterionModel endModel = new EndCriterionConjunction(
+	endCriterion1,
+	endCriterion2,
+	endCriterion3
+);
+}}}
+}}} ===
+
+!Notice
+The conjunction is made using a lazy operator. Therefore, the declaration order of the criteria has an influence on the performances of the simulation.
+
+If no criteria are defined as a parameter of the conjunction, the criterion always returns {{{true}}}.</pre>
+</div>
+<div title="EL - End critera - Disjunction" creator="Designer" modifier="Designer" created="201404240743" modified="201404240746" changecount="2">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{End critera - Disjunction}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended-kernel of SIMILAR provide a default implementation to the simulation end criterion model class where:
+*The criterion is the composition of a set of other criteria;
+*The simulation ends when it reaches an half consistent state meeting at least one criterion of the composition.
+
+This class is called {{className{[[EndCriterionDisjunction|../../api/fr/lgi2a/similar/extendedkernel/libs/endcriterion/EndCriterionDisjunction.html]]}}} and defines the following constructor:
+{{{
+public EndCriterionDisjunction(
+	IEndCriterionModel... criterionModels
+);
+}}}
+This constructor defines the following argument:
+*{{argumentName{criterionModels}}} modeling the various ending criteria used in the disjunction.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+In the context of a simulation that has to be stopped if at least one out of three different end criteria {{{endCriterion1}}}, {{{endCriterion2}}} and {{{endCriterion3}}} are met, the corresponding end criterion disjunction is created with the following code:
+{{{
+IEndCriterionModel endCriterion1 = ...;
+IEndCriterionModel endCriterion2 = ...;
+IEndCriterionModel endCriterion3 = ...;
+
+IEndCriterionModel endModel = new EndCriterionDisjunction(
+	endCriterion1,
+	endCriterion2,
+	endCriterion3
+);
+}}}
+}}} ===
+
+!Notice
+The disjunction is made using a lazy operator. Therefore, the declaration order of the criteria has an influence on the performances of the simulation.
+
+If no criteria are defined as a parameter of the disjunction, the criterion always returns {{{false}}}.</pre>
+</div>
+<div title="EL - End critera - Negation" creator="Designer" modifier="Designer" created="201404240746" changecount="1">
+<pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{End critera - Negation}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The extended libraries of the extended-kernel of SIMILAR provide a default implementation to the simulation end criterion model class where:
+*The criterion decorates another criterion;
+*The simulation ends when it reaches an half consistent state meeting the negation of the decorated criterion.
+
+This class is called {{className{[[EndCriterionNegation|../../api/fr/lgi2a/similar/extendedkernel/libs/endcriterion/EndCriterionNegation.html]]}}} and defines the following constructor:
+{{{
+public EndCriterionNegation(
+	IEndCriterionModel criterionModel
+);
+}}}
+This constructor defines the following argument:
+*{{argumentName{criterionModel}}} modeling the decorated criterion of the negation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+In the context of a simulation that has to be stopped if the negation of a criterion {{{endCriterion1}}} is met, the corresponding end criterion is created with the following code:
+{{{
+IEndCriterionModel endCriterion1 = ...;
+
+IEndCriterionModel endModel = new EndCriterionNegation(
+	endCriterion1
+);
+}}}
+}}} ===</pre>
 </div>
 <div title="EL - End critera - Time based" creator="Designer" modifier="Designer" created="201403050808" modified="201403050909" changecount="9">
 <pre>&lt;&lt;tiddler [[Extended libs - Navigation menu]]&gt;&gt;{{stepMainTitle{End critera - Time based}}}
@@ -1271,7 +1377,7 @@ ITimeModel timeModel = new PeriodicTimeModel(
 }}}
 }}} ===</pre>
 </div>
-<div title="Extended libs - Navigation menu" creator="Designer" modifier="Designer" created="201403041547" modified="201403050838" changecount="9">
+<div title="Extended libs - Navigation menu" creator="Designer" modifier="Designer" created="201403041547" modified="201404240747" changecount="10">
 <pre>*[[|Home]]
 *[[Abstract implementations|EL - Abstract implementations]]
 **[[Simulation parameters|EL - Abstract - Parameters]]
@@ -1287,6 +1393,9 @@ ITimeModel timeModel = new PeriodicTimeModel(
 **[[Simple parameters|EL - Generic - Simple parameters]]
 *[[Simulation end critera|EL - End critera]]
 **[[Time based|EL - End critera - Time based]]
+**[[Conjunction|EL - End critera - Conjunction]]
+**[[Disjunction|EL - End critera - Disjunction]]
+**[[Negation|EL - End critera - Negation]]
 *[[Simulation time models|EL - Time models]]
 **[[Periodic|EL - Time models - Periodic]]
 &lt;&lt;dropMenu&gt;&gt;</pre>

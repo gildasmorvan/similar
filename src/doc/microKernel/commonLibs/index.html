@@ -1051,15 +1051,17 @@ The common libraries of SIMILAR define the generic and reusable implementations 
 *[[Agents|CL - Generic - Passive agent]] doing nothing;
 *[[Environments|CL - Generic - Passive environment]] doing nothing.</pre>
 </div>
-<div title="CL - Probes" creator="Designer" modifier="Designer" created="201402281431" modified="201402281435" changecount="7">
+<div title="CL - Probes" creator="Designer" modifier="Designer" created="201402281431" modified="201404240904" changecount="9">
 <pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Observation probes}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The common libraries of SIMILAR define the following observation probes:
 *{{className{[[ProbeExceptionPrinter|CL - Probes - ExceptionPrinter]]}}} printing on a stream the exceptions that were caught during the simulation;
-*{{className{[[ProbeExecutionTracker|CL - Probes - ExecutionTracker]]}}} tracking on a stream the execution flow of the simulation (consistent times reached).</pre>
+*{{className{[[ProbeExecutionTracker|CL - Probes - ExecutionTracker]]}}} tracking on a stream the execution flow of the simulation (consistent times reached);
+*{{className{[[AbstractProbeImageSwingJPanel|CL - Probes - JPanel image]]}}} displaying the content of the simulation into an image printed in a swing JPanel;
+*{{className{[[ProbeImageSwingJFrame|CL - Probes - JFrame image]]}}} displaying the content of the simulation into an image printed in a swing JFrame.</pre>
 </div>
-<div title="CL - Probes - ExceptionPrinter" creator="Designer" modifier="Designer" created="201402281435" modified="201403050959" changecount="10">
+<div title="CL - Probes - ExceptionPrinter" creator="Designer" modifier="Designer" created="201402281435" modified="201404240948" changecount="11">
 <pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - Exception tracker}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -1139,7 +1141,221 @@ IProbe executionTrackingProbe = new ProbeExecutionTracker(
 }}}
 }}} ===</pre>
 </div>
-<div title="Common libs - Navigation menu" creator="Designer" modifier="Designer" created="201402241333" modified="201402281329" changecount="29">
+<div title="CL - Probes - JFrame image" creator="Designer" modifier="Designer" created="201404240947" modified="201404240951" changecount="2">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - JPanel image}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the observation probe class where:
+*The simulation is printed into a {{className{JFrame}}} swing component.
+!Implementation
+
+Such a probe is implemented as the {{className{[[ProbeImageSwingJFrame|../../api/fr/lgi2a/similar/microkernel/libs/probes/ProbeImageSwingJFrame.html]]}}} and defines the following constructor:
+{{{
+public ProbeImageSwingJFrame(
+	String frameTitle,
+	AbstractProbeImageSwingJPanel simulationPainter,
+	ClosingManagementStrategy closureStrategy,
+	Dimension preferredDimensions
+);
+}}}
+This constructor defines the following arguments:
+*{{argumentName{frameTitle}}} modeling the title of the swing frame displayed on screen;
+*{{argumentName{simulationPainter}}} modeling the object converting the dynamic state of the simulation into a {{className{JPanel}}} instance (see the [[JPanel image|CL - Probes - JPanel image]] probe);
+*{{argumentName{closureStrategy}}} modeling the reaction of the application when the user closes the frame. The reactions can be:
+**{{className{NEVER_HIDE}}} if closing the window does nothing;
+**{{className{HIDE_AND_WAIT_FOR_SIMULATION_END}}} if closing the window will not stop the simulation;
+**{{className{ABORT_SIMULATION}}} if closing the windows causes the abortion of the simulation;
+*{{argumentName{preferredDimensions}}} modeling the dimensions of the frame on screen. If {{{null}}}, the size of the frame will fit the size of the image displaying the simulation.
++++?[&lt;span class=&quot;exbigbtn&quot;&gt;Usage example&lt;/span&gt;]
+{{exsection{
+For instance, in the context of a simulation being printed by:
+*a {{className{LambdaGameOfLifeSwingView}}} object extending the {{className{AbstractProbeImageSwingJPanel}}} abstract class;
+*A frame entitled {{{&quot;Game of life evolution&quot;}}};
+*A frame aborting the simulation if closed;
+*A frame which dimensions fit the dimensions of the printed image;
+Then, the creation of such a probe is done with the following code:
+{{{
+String frameTitle = &quot;Game of life evolution&quot;;
+AbstractProbeImageSwingJPanel imageDisplayer = new LambdaGameOfLifeSwingView( );
+ClosingManagementStrategy strategy = ClosingManagementStrategy.ABORT_SIMULATION;
+Dimension frameDimensions = null;
+IProbe probe = new ProbeImageSwingJFrame( 
+	frameTitle,
+	imageDisplayer,
+	strategy,
+	frameDimensions
+);
+}}}
+}}} ===</pre>
+</div>
+<div title="CL - Probes - JPanel image" creator="Designer" modifier="Designer" created="201404240907" modified="201404240942" changecount="21">
+<pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - JPanel image}}}
+
+&lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
+The common libraries of the micro-kernel of SIMILAR provide a default implementation to the observation probe class where:
+*The simulation is printed into a JPanel swing component.
+This features supports the creation of complex GUIs where the simulation can be displayed with various means.
+
+{{bigemphasisblock{
+Note that this probe cannot be used as a stand alone feature. It has to:
+*Be registered to the simulation engine;
+*Include its panel (obtained with the {{className{[[getSwingView()|../../api/fr/lgi2a/similar/microkernel/libs/probes/AbstractProbeImageSwingJPanel.html#getSwingView( )]]}}} method) into another swing component. To facilitate this task, a generic JFrame class was defined (see the description of the [[JFrame image|CL - Probes - JFrame image]] probe)
+}}}
+!Implementation
+Such a probe is implemented as a class extending the {{className{[[AbstractProbeImageSwingJPanel|../../api/fr/lgi2a/similar/microkernel/libs/probes/AbstractProbeImageSwingJPanel.html]]}}} abstract class.
+!!Constructor
+This class defines two constructors:
+*A constructor defining the background color used in the painting; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Signature&lt;/span&gt;]
+{{docsection{
+This constructor has the following signature:
+{{{
+protected AbstractProbeImageSwingJPanel( 
+	Color backgroundColor
+);
+}}}
+It defines the following arguments:
+*{{argumentName{backgroundColor}}} modeling the background color used in the paintings. {{{null}}} means that the background is transparent.
+}}} ===
+
+*A constructor using a transparent background color. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Signature&lt;/span&gt;]
+{{docsection{
+This constructor has the following signature:
+{{{
+protected AbstractProbeImageSwingJPanel( );
+}}}
+}}} ===
+
+!!Abstract methods
+Two abstract methods have to be implemented, in order to determine how to convert the dynamic state of the simulation into an image representing the simulation:
+*A method defining the dimensions of the image; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The method defining the dimensions of the image representing the simulation has the following signature:
+{{{
+protected Dimension computeSimulationImageDimensions(
+	IPublicDynamicStateMap dynamicState, 
+	SimulationTimeStamp initialTime
+);
+}}}
+It defines the following arguments:
+*{{argumentName{dynamicState}}} modeling the consistent dynamic state of the simulation after its initialization;
+*{{argumentName{initialTime}}} modeling the initial time stamp of the simulation.
+This method has to return an object modeling the dimensions of the image that will be displayed on screen.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+The implementation of this method depends on:
+*The nature of the data being displayed: the content of the environment of a level, the public local state of an agent, //etc.//
+*The actual content of the public local state of the agents and/or of the environment.
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For instance, in the context of a game of life simulation where:
+*The levels of the simulation are defined in a {{className{LambdaLifeLevelList}}} class defining a {{{MICRO}}} level;
+*The public local state of the environment in the {{{MICRO}}} level is implemented as the {{className{EnvPLSInMicroLevel}}} class defining the following methods:
+**A {{methodName{getWidth( )}}} getting the width of the game of life grid;
+**A {{methodName{getHeight( )}}} getting the height of the game of life grid.
+*Each cell of the grid is displayed as a 5 x 5 pixel.
+Then, the dimensions of the corresponding image are {{{( getWidth( ) x 5 ; getHeight( ) x 5 }}}. The corresponding method implementation is:
+{{{
+protected Dimension computeSimulationImageDimensions(
+	IPublicDynamicStateMap dynamicState, 
+	SimulationTimeStamp initialTime
+) {
+	int cellSizeInPixels = 5;
+	// Get the public local state of the environment in the &quot;Micro&quot; level.
+	ILocalStateOfEnvironment rawEnPls = 
+		dynamicState.get( LambdaLifeLevelList.MICRO ).getPublicLocalStateOfEnvironment();
+	EnvPLSInMicroLevel envPls = (EnvPLSInMicroLevel) rawEnPls;
+	// Create the dimensions of the images.
+	return new Dimension(
+		envPls.getWidth() * cellSizeInPixels,
+		envPls.getHeight() * cellSizeInPixels
+	);
+}
+}}}
+}}} ===
+
+*A method printing the simulation into the image. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
+{{docsection{
+The method defining the printing the simulation into an image has the following signature:
+{{{
+protected void updateGraphics(
+		IPublicDynamicStateMap dynamicState,
+		SimulationTimeStamp currentTime, 
+		Graphics2D graphics, 
+		int imgWidth,
+		int imgHeight
+);
+}}}
+It defines the following arguments:
+*{{argumentName{dynamicState}}} modeling the current half consistent dynamic state of the simulation;
+*{{argumentName{currentTime}}} modeling the half-consistent time when the simulation is printed;
+*{{argumentName{graphics}}} modeling the graphical context where the simulation is printed;
+*{{argumentName{imgWidth}}} modeling the width in pixels of the image where the simulation is printed;
+*{{argumentName{imgHeight}}} modeling the height in pixels of the image where the simulation is printed.
+}}} === +++?[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+{{implsection{
+Implementing this method consists in using the {{argumentName{graphics}}} object to print data on screen.
+
+This object defines especially the following features:
+*Methods setting the color or the painter used to draw shapes on screen ({{methodName{setColor(Color)}}}) and {{methodName{setPaint(Paint)}}}));
+*Methods drawing or filling shapes in the image (methods whose name starts either with {{methodName{draw...}}} or {{methodName{fill...}}}).
+
+{{bigemphasisblock{
+Note that before painting in the image, its contents have to be reseted using the {{methodName{clearRect(0,0,imgWidth,imgHeight)}}} method call.
+}}}
+}}} === +++?[&lt;span class=&quot;exsmallbtn&quot;&gt;Example&lt;/span&gt;]
+{{exsection{
+For example, in the context of a game of life simulation where:
+*The levels of the simulation are defined in a {{className{LambdaLifeLevelList}}} class defining a {{{MICRO}}} level;
+*The environment of the game of life is modeled as a grid of cell agents;
+*The public local state of the environment in the {{{MICRO}}} level is implemented as the {{className{EnvPLSInMicroLevel}}} class defining the following methods:
+**A {{methodName{getWidth( )}}} getting the width of the game of life grid;
+**A {{methodName{getHeight( )}}} getting the height of the game of life grid;
+**A {{methodName{getCellAt(int,int)}}} getting the public local state of the {{className{cell}}} agent located at that position.
+*The public local state of a cell agent is implemented as the {{className{AgtCellPLSInMicroLevel}}} defining the following method:
+**A {{methodName{isAlive()}}} method returning {{{true}}} if the cell is alive.
+*Each cell of the grid is displayed as a 5 x 5 pixel.
+If the environment is printed as a white rectangle where dead cells are not printed and where alive cells are printed as blue circles, then the corresponding method has the following code:
+{{{
+protected void updateGraphics(
+	IPublicDynamicStateMap dynamicState,
+	SimulationTimeStamp currentTime, 
+	Graphics2D graphics, 
+	int imgWidth,
+	int imgHeight
+) {
+	int cellSizeInPixels = 5;
+	// Clear the content of the image.
+	graphics.setBackground( Color.WHITE );
+	graphics.clearRect(
+		0, 
+		0, 
+		imgWidth, 
+		imgHeight
+	);
+	// Get the public local state of the environment in the &quot;Micro&quot; level.
+	ILocalStateOfEnvironment rawEnPls = 
+		dynamicState.get( LambdaLifeLevelList.MICRO ).getPublicLocalStateOfEnvironment();
+	EnvPLSInMicroLevel envPls = (EnvPLSInMicroLevel) rawEnPls;
+	// Create the content of the graphics.
+	for( int x = 0; x &lt; envPls.getWidth(); x++ ){
+		for( int y = 0; y &lt; envPls.getHeight(); y++ ){
+			AgtCellPLSInMicroLevel cellPls = envPls.getCellAt( x, y );
+			if( cellPls.isAlive ){
+				graphics.setColor( Color.BLUE);
+				graphics.fillOval( 
+					x * cellSizeInPixels, 
+					y * cellSizeInPixels, 
+					cellSizeInPixels, 
+					cellSizeInPixels 
+				);
+			}
+		}
+	}
+}
+}}}
+}}} ===</pre>
+</div>
+<div title="Common libs - Navigation menu" creator="Designer" modifier="Designer" created="201402241333" modified="201404240905" changecount="30">
 <pre>*[[|Home]]
 *[[Abstract implementations|CL - Abstract implementations]]
 **[[Simulation engine|CL - Abstract - Simulation engine]]
@@ -1159,6 +1375,8 @@ IProbe executionTrackingProbe = new ProbeExecutionTracker(
 *[[Observation probes|CL - Probes]]
 **[[Print exceptions|CL - Probes - ExceptionPrinter]]
 **[[Execution steps|CL - Probes - ExecutionTracker]]
+**[[JPanel image|CL - Probes - JPanel image]]
+**[[JFrame image|CL - Probes - JFrame image]]
 &lt;&lt;dropMenu&gt;&gt;</pre>
 </div>
 <div title="ConfigTweaks" creator="Administrator" modifier="Designer" created="201311150903" modified="201401211600" tags="excludeLists systemConfig" changecount="4">

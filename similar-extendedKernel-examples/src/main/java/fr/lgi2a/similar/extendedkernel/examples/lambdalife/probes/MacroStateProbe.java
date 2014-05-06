@@ -50,12 +50,14 @@ import java.io.PrintStream;
 
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.LambdaLifeAgentList;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
+import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
 import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
+import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
 
 /**
  * A probe printing in a stream the number of alive cells over time.
@@ -63,7 +65,7 @@ import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class LivingCellsProbe implements IProbe {
+public class MacroStateProbe implements IProbe {
 	/**
 	 * The stream where the data are written.
 	 */
@@ -74,7 +76,7 @@ public class LivingCellsProbe implements IProbe {
 	 * @param target The stream where the data are written.
 	 * @throws IllegalArgumentException If the <code>target</code> is <code>null</code>.
 	 */
-	public LivingCellsProbe( PrintStream target ) {
+	public MacroStateProbe( PrintStream target ) {
 		if( target == null ){
 			throw new IllegalArgumentException( 
 				"The argument cannot be null." 
@@ -99,7 +101,7 @@ public class LivingCellsProbe implements IProbe {
 		SimulationTimeStamp initialTimestamp,
 		ISimulationEngine simulationEngine
 	) {
-		this.displayLivingCells( initialTimestamp,  simulationEngine );
+		this.displayDensityEnergy( initialTimestamp,  simulationEngine );
 
 	}
 
@@ -111,7 +113,7 @@ public class LivingCellsProbe implements IProbe {
 		SimulationTimeStamp timestamp,
 		ISimulationEngine simulationEngine
 	) {
-		this.displayLivingCells( timestamp,  simulationEngine );
+		this.displayDensityEnergy( timestamp,  simulationEngine );
 
 	}
 
@@ -123,7 +125,7 @@ public class LivingCellsProbe implements IProbe {
 		SimulationTimeStamp finalTimestamp,
 		ISimulationEngine simulationEngine
 	) {
-		this.displayLivingCells( finalTimestamp,  simulationEngine );
+		this.displayDensityEnergy( finalTimestamp,  simulationEngine );
 
 	}
 
@@ -156,25 +158,51 @@ public class LivingCellsProbe implements IProbe {
 	/**
 	 * {@inheritDoc}
 	 */
-	private void displayLivingCells(
+	private void displayDensityEnergy(
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
 	){
-		int livingCells = 0;
+		
+		// Get the public local state of the environment in the "Micro" level.
+
 		IPublicLocalDynamicState microState = simulationEngine.getSimulationDynamicStates().get( 
 				LambdaLifeLevelList.MICRO
 		);
+		ILocalStateOfEnvironment rawEnPls = microState.getPublicLocalStateOfEnvironment();
+		EnvPLSInMicroLevel envPls = (EnvPLSInMicroLevel) rawEnPls;
+		int livingCells = 0, changingStateCells = 0;
 		for( ILocalStateOfAgent agtState : microState.getPublicLocalStateOfAgents() ){
 			if( agtState.getCategoryOfAgent().isA( LambdaLifeAgentList.CELL) ){
 				AgtCellPLSInMicroLevel castedAgtState = (AgtCellPLSInMicroLevel) agtState;
+				// Compute the number of neighbors
+				int neighbors = 0;
+				for( int dx = -1; dx <= 1; dx++ ){
+					for( int dy = -1; dy <= 1; dy++ ){
+						if( dx != 0 || dy != 0 ){
+							AgtCellPLSInMicroLevel neighbor = envPls.getCellAt( castedAgtState.getX() + dx, castedAgtState.getY() + dy );
+							if( neighbor != null && neighbor.isAlive() ){
+								neighbors++;
+							}
+						}
+					}
+				}
 				if(castedAgtState.isAlive() ) {
 					livingCells++;
+					if( neighbors != 2 && neighbors != 3 ){
+						changingStateCells++;
+					}
+				}
+				else {
+					if( neighbors == 3 ) {
+						changingStateCells++;
+					}
 				}
 			}
 		}
 		this.target.println( 
 			timestamp.getIdentifier() + 
-			"\t" + livingCells
+			"\tdensity: "+ ( (double) livingCells)/(envPls.getHeight()*envPls.getWidth())+
+			"\tenergy: "+ ((double) changingStateCells)/(envPls.getHeight()*envPls.getWidth())		
 		);
 	}
 }

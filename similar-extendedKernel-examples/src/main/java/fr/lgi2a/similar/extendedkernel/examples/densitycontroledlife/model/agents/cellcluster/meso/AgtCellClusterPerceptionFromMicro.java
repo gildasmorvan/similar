@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or � or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -8,15 +8,15 @@
  * http://www.lgi2a.univ-artois.fr/
  * 
  * Email: gildas.morvan@univ-artois.fr
+ * 		  hassane.abouaissa@univ-artois.fr
  * 
  * Contributors:
- * 	Gildas MORVAN (creator of the IRM4MLS formalism)
+ * 	Hassane ABOUAISSA (designer)
+ * 	Gildas MORVAN (designer, creator of the IRM4MLS formalism)
  * 	Yoann KUBERA (designer, architect and developer of SIMILAR)
  * 
- * This software is a computer program whose purpose is to support the
- * implementation of multi-agent-based simulations using the formerly named
- * IRM4MLS meta-model. This software defines an API to implement such 
- * simulations, and also provides usage examples.
+ * This software is a computer program whose purpose is run road traffic
+ * simulations using a dynamic hybrid approach.
  * 
  * This software is governed by the CeCILL-B license under French law and
  * abiding by the rules of distribution of free software.  You can  use, 
@@ -44,11 +44,39 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
+package fr.lgi2a.similar.extendedkernel.examples.densitycontroledlife.model.agents.cellcluster.meso;
+
+import java.util.Map;
+
+import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractAgtPerceptionModel;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 
 /**
- * Defines a simulation based on pop culture, to illustrates the concepts 
- * and possible practices in SIMILAR.
+ * Models how the "CellCluster" agent perceives information about the simulation from the "Micro" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-package fr.lgi2a.similar.microkernel.examples.popculture;
+public class AgtCellClusterPerceptionFromMicro extends
+		AbstractAgtPerceptionModel {
+
+	public AgtCellClusterPerceptionFromMicro(LevelIdentifier levelIdentifier) {
+		super(levelIdentifier);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public IPerceivedData perceive(SimulationTimeStamp timeLowerBound,
+			SimulationTimeStamp timeUpperBound,
+			Map<LevelIdentifier, ILocalStateOfAgent> publicLocalStates,
+			ILocalStateOfAgent privateLocalState,
+			IPublicDynamicStateMap dynamicStates) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

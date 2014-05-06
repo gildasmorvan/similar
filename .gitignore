@@ -11,3 +11,7 @@ target/
 # API within sources         #
 ##############################
 src/doc/api
+
+# Mac Os related files       #
+##############################
+

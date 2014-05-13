@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -8,15 +8,15 @@
  * http://www.lgi2a.univ-artois.fr/
  * 
  * Email: gildas.morvan@univ-artois.fr
- * 		  hassane.abouaissa@univ-artois.fr
  * 
  * Contributors:
- * 	Hassane ABOUAISSA (designer)
- * 	Gildas MORVAN (designer, creator of the IRM4MLS formalism)
+ * 	Gildas MORVAN (creator of the IRM4MLS formalism)
  * 	Yoann KUBERA (designer, architect and developer of SIMILAR)
  * 
- * This software is a computer program whose purpose is run road traffic
- * simulations using a dynamic hybrid approach.
+ * This software is a computer program whose purpose is to support the
+ * implementation of multi-agent-based simulations using the formerly named
+ * IRM4MLS meta-model. This software defines an API to implement such 
+ * simulations, and also provides usage examples.
  * 
  * This software is governed by the CeCILL-B license under French law and
  * abiding by the rules of distribution of free software.  You can  use, 
@@ -44,44 +44,39 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.densitycontroledlife.model.agents.cellcluster.meso;
+package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso;
 
-import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractAgtDecisionModel;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractPerceivedData;
 
 /**
-* The decision model of the "CellCluster" agents from the "Meso" level.
-* 
-* @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
-* @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
-*/
-public class AgtCellClusterDecisionFromMeso extends AbstractAgtDecisionModel {
+ * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+ *
+ */
+public class AgtCellClusterPDFMeso extends AbstractPerceivedData {
 
+	/**
+	 * The perceived density of the cluster
+	 */
+	private double density;
 	
 	/**
-	 * Builds an initialized instance of this decision model.
+	 * Builds an initialized instance of these perceived data.
+	 * @param transitoryPeriodMin The lower bound of the transitory period for which these data were perceived.
+	 * @param transitoryPeriodMax The upper bound of the transitory period for which these data were perceived.
 	 */
-	public AgtCellClusterDecisionFromMeso(LevelIdentifier levelIdentifier) {
-		super(levelIdentifier);
-		// TODO Auto-generated constructor stub
+	protected AgtCellClusterPDFMeso(
+			SimulationTimeStamp transitoryPeriodMin,
+			SimulationTimeStamp transitoryPeriodMax,
+			double density) {
+		super(DensityControlledLifeLevelList.MESO, transitoryPeriodMin, transitoryPeriodMax);
+		this.density = density;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void decide(SimulationTimeStamp timeLowerBound,
-			SimulationTimeStamp timeUpperBound, IGlobalState globalState,
-			ILocalStateOfAgent publicLocalState,
-			ILocalStateOfAgent privateLocalState, IPerceivedData perceivedData,
-			InfluencesMap producedInfluences) {
-		// TODO Auto-generated method stub
-
+	public double getDensity() {
+		return density;
 	}
 
 }

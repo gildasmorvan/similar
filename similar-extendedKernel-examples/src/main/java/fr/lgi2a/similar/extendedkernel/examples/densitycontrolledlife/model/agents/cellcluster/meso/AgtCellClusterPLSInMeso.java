@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,39 +44,88 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.densitycontroledlife.model.agents.cellcluster.meso;
+package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso;
 
-import java.util.Map;
-
-import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractAgtPerceptionModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
 
 /**
- * Models how the "CellCluster" agent perceives information about the simulation from the "Micro" level.
+ * The private local state of the "Cell Cluster" agent in the "Meso" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class AgtCellClusterPerceptionFromMicro extends
-		AbstractAgtPerceptionModel {
+public class AgtCellClusterPLSInMeso extends AbstractLocalStateOfAgent {
 
-	public AgtCellClusterPerceptionFromMicro(LevelIdentifier levelIdentifier) {
-		super(levelIdentifier);
-		// TODO Auto-generated constructor stub
+	
+	/**
+	 * The first x coordinate of the cell cluster in the grid.
+	 */
+	private int x;
+	
+	/**
+	 * The first y coordinate of the cell cluster in the grid.
+	 */
+	private int y;
+	
+	/**
+	 * The length of x coordinate of the cell cluster in the grid.
+	 */
+	private int xLength;
+	
+	/**
+	 * The length of y coordinate of the cell cluster in the grid.
+	 */
+	private int yLength;
+	
+	/**
+	 * Builds an initialized instance of this private local state.
+	 * @param owner The agent owning this private local state.
+	 * @param x The first x coordinate of the cell cluster in the grid.
+	 * @param y The first y coordinate of the cell cluster in the grid.
+	 * @param xLength length of x coordinate of the cell cluster in the grid.
+	 * @param yLength The length of y coordinate of the cell cluster in the grid.
+	 */
+	protected AgtCellClusterPLSInMeso(LevelIdentifier level, IAgent4Engine owner,
+			int x, int y, int xLength, int yLength) {
+		super(level, owner);
+		this.x = x;
+		this.y = y;
+		this.xLength = xLength;
+		this.yLength = yLength;
 	}
 
-	@Override
-	public IPerceivedData perceive(SimulationTimeStamp timeLowerBound,
-			SimulationTimeStamp timeUpperBound,
-			Map<LevelIdentifier, ILocalStateOfAgent> publicLocalStates,
-			ILocalStateOfAgent privateLocalState,
-			IPublicDynamicStateMap dynamicStates) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Gets the first x coordinate of the cell in the grid.
+	 * @return The x coordinate of the cell in the grid.
+	 */
+	public int getX() {
+		return x;
+	}
+
+	/**
+	 * Gets the first y coordinate of the cell in the grid.
+	 * @return The y coordinate of the cell in the grid.
+	 */
+	public int getY() {
+		return y;
+	}
+
+	/**
+	 * Gets the length of x coordinate of the cell cluster in the grid.
+	 * @return The length of x coordinate of the cell cluster in the grid.
+	 */
+	public int getxLength() {
+		return xLength;
+	}
+
+	/**
+	 * Gets the length of y coordinate of the cell cluster in the grid.
+	 * @return The length of y coordinate of the cell cluster in the grid.
+	 */
+	public int getyLength() {
+		return yLength;
 	}
 
 }

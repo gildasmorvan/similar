@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,29 +44,31 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.densitycontroledlife.model.levels;
+package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels;
 
-import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
+import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
- * A tool class used to build the perception and influence relation graphs for a level.
+ * The identifier of the levels of the lambda game of life simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
- * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan"
+ *         target="_blank">Gildas Morvan</a>
  */
-public class PerceptionAndInfluenceRelationGraphs {
-	 /**
-	    * Builds the influence and perception relation graph for the specified level.
-	    * @param level The level for which the perception and influence relation graph is built.
-	    */
-	   public static void buildGraphOfLevel(
-	      ExtendedLevel level
-	   ){
-		   if(
-			 level.getIdentifier().equals( DensityControledLifeLevelList.MESO )
-			){
-			   level.addInfluenceableLevel( DensityControledLifeLevelList.MICRO );
-			   level.addPerceptibleLevel(DensityControledLifeLevelList.MICRO);
-		   }
-	   }
+public class DensityControlledLifeLevelList extends LambdaLifeLevelList {
+	/**
+	 * This constructor is unused since this class only defines static values.
+	 * It is declared as protected to prevent the instantiation of this class
+	 * while supporting inheritance.
+	 */
+	protected DensityControlledLifeLevelList() {
+	}
+
+	/**
+	 * The identifier of the "meso" level.
+	 */
+	public static final LevelIdentifier MESO = new LevelIdentifier("meso");
+	
+	
 }

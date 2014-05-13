@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,31 +44,44 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.densitycontroledlife.model.levels;
+package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso;
 
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractAgtDecisionModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 
 /**
- * The identifier of the levels of the lambda game of life simulation.
- * 
- * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
- * @author <a href="http://www.lgi2a.univ-artois.net/~morvan"
- *         target="_blank">Gildas Morvan</a>
- */
-public class DensityControledLifeLevelList extends LambdaLifeLevelList {
+* The decision model of the "CellCluster" agents from the "Meso" level.
+* 
+* @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+* @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+*/
+public class AgtCellClusterDecisionFromMeso extends AbstractAgtDecisionModel {
+
+	
 	/**
-	 * This constructor is unused since this class only defines static values.
-	 * It is declared as protected to prevent the instantiation of this class
-	 * while supporting inheritance.
+	 * Builds an initialized instance of this decision model.
 	 */
-	protected DensityControledLifeLevelList() {
+	public AgtCellClusterDecisionFromMeso(LevelIdentifier levelIdentifier) {
+		super(levelIdentifier);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * The identifier of the "meso" level.
+	 * {@inheritDoc}
 	 */
-	public static final LevelIdentifier MESO = new LevelIdentifier("meso");
-	
-	
+	@Override
+	public void decide(SimulationTimeStamp timeLowerBound,
+			SimulationTimeStamp timeUpperBound, IGlobalState globalState,
+			ILocalStateOfAgent publicLocalState,
+			ILocalStateOfAgent privateLocalState, IPerceivedData perceivedData,
+			InfluencesMap producedInfluences) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

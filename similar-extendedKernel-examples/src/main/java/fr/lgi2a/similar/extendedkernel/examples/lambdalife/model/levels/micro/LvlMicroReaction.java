@@ -68,7 +68,7 @@ public class LvlMicroReaction implements ILevelReactionModel {
 	/**
 	 * A parameter used to compute p using lambda.
 	 */
-	private static final double A = 0.2734375;
+	protected static final double A = 0.2734375;
 	/**
 	 * A parameter used to compute p using lambda.
 	 */
@@ -76,7 +76,7 @@ public class LvlMicroReaction implements ILevelReactionModel {
 	/**
 	 * The p parameter of the lambda game of life.
 	 */
-	private double p;
+	protected double p;
 	
 	/**
 	 * Builds the reaction of the "Micro" level, based on a lambda parameter.
@@ -85,7 +85,12 @@ public class LvlMicroReaction implements ILevelReactionModel {
 	public LvlMicroReaction( 
 		double lambda
 	) {
-		this.p = (lambda - A)/B;
+		if(lambda > LvlMicroReaction.A) {
+			this.p = (lambda - A)/B;
+		}
+		else{
+			this.p = 0;
+		}
 	}
 
 	/**

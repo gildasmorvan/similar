@@ -46,7 +46,7 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
 import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
 import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
 
@@ -58,6 +58,16 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
  */
 public class AgtCellClusterPLSInMeso extends AbstractLocalStateOfAgent {
 
+	
+	/**
+	 * The kP parameter value of the agent
+	 */
+	private double kP;
+	
+	/**
+	 * The expected density of the cell cluster
+	 */
+	private final double expectedDensity;
 	
 	/**
 	 * The first x coordinate of the cell cluster in the grid.
@@ -87,11 +97,13 @@ public class AgtCellClusterPLSInMeso extends AbstractLocalStateOfAgent {
 	 * @param xLength length of x coordinate of the cell cluster in the grid.
 	 * @param yLength The length of y coordinate of the cell cluster in the grid.
 	 */
-	protected AgtCellClusterPLSInMeso(LevelIdentifier level, IAgent4Engine owner,
-			int x, int y, int xLength, int yLength) {
-		super(level, owner);
+	public AgtCellClusterPLSInMeso(IAgent4Engine owner,
+			double kP, double expectedDensity, int x, int y, int xLength, int yLength) {
+		super(DensityControlledLifeLevelList.MESO, owner);
 		this.x = x;
 		this.y = y;
+		this.kP = kP;
+		this.expectedDensity = expectedDensity;
 		this.xLength = xLength;
 		this.yLength = yLength;
 	}
@@ -126,6 +138,27 @@ public class AgtCellClusterPLSInMeso extends AbstractLocalStateOfAgent {
 	 */
 	public int getyLength() {
 		return yLength;
+	}
+
+	/**
+	 * @return the kP
+	 */
+	public double getkP() {
+		return kP;
+	}
+
+	/**
+	 * @param kP the kP to set
+	 */
+	public void setkP(double kP) {
+		this.kP = kP;
+	}
+
+	/**
+	 * @return the expectedDensity
+	 */
+	public double getExpectedDensity() {
+		return expectedDensity;
 	}
 
 }

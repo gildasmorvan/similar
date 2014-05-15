@@ -45,7 +45,7 @@ _|_| | |_ | (_)(_||_|(_  |_ | (_)| |
 
 This project is the root Maven project of the SIMILAR API suite.
 
-The SIMIAR suite is a java API whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. 
+The SIMILAR suite is a java API whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. 
 This software defines an API to implement such simulations and provides usage examples.
 
 The structure of the project as well as the user and developer documentation are defined in the documentation of the project.
@@ -94,7 +94,7 @@ Java Virtual Machine and compilation tools, with the version numbers:
 command line operators, the 'JAVA_HOME' environment variable has to be set to the appropriate value (the root directory of the installed SDK), and the binaries directory
 of the java installation has to be included into the system 'PATH' environment variable.
 
-In windows, it means to add to the end of the 'PATH' environment variable the text following text, without the quote marks: ";%PATH%\bin"
+In Windows, it means to add to the end of the 'PATH' environment variable the text following text, without the quote marks: ";%JAVA_HOME%\bin"
 	
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	(I-b) Install Maven									(sum-mave)
@@ -108,7 +108,7 @@ are listed in the following website: "http://maven.apache.org/download.cgi#Insta
 		(I-b-1) Installation instructions				(sum-mavi)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	This readme file includes the installation instructions that were used to install it onto a windows machine:
+	This readme file includes the installation instructions that were used to install it onto a Windows machine:
 	- Download Maven at the "http://maven.apache.org/download.cgi" page
 	- Unpack the downloaded archive in a directory of the file system. 
 		This directory will be called $MAVEN_HOME from now on.

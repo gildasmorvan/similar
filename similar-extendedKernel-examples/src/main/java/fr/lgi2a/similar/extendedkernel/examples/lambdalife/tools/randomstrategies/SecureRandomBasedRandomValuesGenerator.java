@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -65,13 +65,24 @@ public class SecureRandomBasedRandomValuesGenerator implements IRandomValuesGene
 	
 	
 	/**
-	 * Builds a random values generation strategy relying on the java Random class.
+	 * Builds a random values generation strategy relying on the java SecureRandom class.
 	 * @param seed The seed used to initialize the java random values generator.
 	 */
 	public SecureRandomBasedRandomValuesGenerator (
 		byte[] seed
 	) {
 		this.javaRandomHelper = new SecureRandom(seed);
+	}
+	
+	/**
+	 * Builds a random values generation strategy relying on the java SecureRandom class.
+	 * @param seed The seed used to initialize the java random values generator.
+	 */
+	public SecureRandomBasedRandomValuesGenerator (
+		long seed
+	) {
+		this.javaRandomHelper = new SecureRandom();
+		this.javaRandomHelper.setSeed(seed);
 	}
 	
 	/**

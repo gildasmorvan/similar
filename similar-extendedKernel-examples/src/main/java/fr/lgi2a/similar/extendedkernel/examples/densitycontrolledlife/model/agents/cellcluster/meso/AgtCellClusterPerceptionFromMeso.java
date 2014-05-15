@@ -46,9 +46,12 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
+import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractAgtPerceptionModel;
 import fr.lgi2a.similar.microkernel.LevelIdentifier;
@@ -59,7 +62,7 @@ import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
 
 /**
- * Models how the "CellCluster" agent perceives information about the simulation from the "Micro" level.
+ * Models how the "Cell Cluster" agent perceives information about the simulation from the "Micro" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
@@ -67,6 +70,9 @@ import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
 public class AgtCellClusterPerceptionFromMeso extends
 		AbstractAgtPerceptionModel {
 
+	/**
+	 * Builds an instance of the perception model.
+	 */
 	public AgtCellClusterPerceptionFromMeso() {
 		super(DensityControlledLifeLevelList.MESO);
 	}
@@ -82,22 +88,26 @@ public class AgtCellClusterPerceptionFromMeso extends
 		AgtCellClusterPLSInMeso cellClusterPlsInMeso = (AgtCellClusterPLSInMeso) publicLocalStates.get(DensityControlledLifeLevelList.MESO);
 		ILocalStateOfEnvironment envState = dynamicStates.get( DensityControlledLifeLevelList.MICRO ).getPublicLocalStateOfEnvironment( );
 		EnvPLSInMicroLevel castedEnvState = (EnvPLSInMicroLevel) envState;
+		Set<AgtCellPLSInMicroLevel> targets = new LinkedHashSet<AgtCellPLSInMicroLevel>();
 		
 		double clusterDensity = 0;
 		
 		for(int x=0; x<cellClusterPlsInMeso.getxLength(); x++) {
-			for(int y=0; x<cellClusterPlsInMeso.getyLength(); x++) {
+			for(int y=0; y<cellClusterPlsInMeso.getyLength(); y++) {
+				targets.add(castedEnvState.getCellAt(x + cellClusterPlsInMeso.getX(), y + cellClusterPlsInMeso.getY()));
 				if(castedEnvState.getCellAt(x + cellClusterPlsInMeso.getX(), y + cellClusterPlsInMeso.getY()).isAlive()){
-					clusterDensity++;
+					clusterDensity+=1;
 				}
 				
 			}
 		}
+
 		clusterDensity/=cellClusterPlsInMeso.getxLength()*cellClusterPlsInMeso.getyLength();
 		return new AgtCellClusterPDFMeso(
 				transitoryPeriodMin, 
 				transitoryPeriodMax, 
-				clusterDensity
+				clusterDensity,
+				targets
 			);
 	}
 

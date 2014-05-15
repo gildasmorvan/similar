@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -62,6 +62,7 @@ import fr.lgi2a.similar.microkernel.libs.probes.AbstractProbeImageSwingJPanel;
 
 /**
  * This probe displays the game of life grid as a Swing {@link JPanel}.
+ * The cell color corresponds to the time of the last state change.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
@@ -157,7 +158,8 @@ public class LambdaGameOfLifeHistorySwingView extends AbstractProbeImageSwingJPa
 	
 	/**
 	 * Gets the color of a cell depending on the state of 
-	 * the cell and the state of the environment.
+	 * the cell and the last time it changed
+	 * and the state of the environment.
 	 * @param cellPls The state of the cell.
 	 * @param envPls The state of the environment.
 	 * @return The color that should be used to print the cell.

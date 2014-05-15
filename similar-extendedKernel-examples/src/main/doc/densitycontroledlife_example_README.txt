@@ -32,7 +32,8 @@ MODEL OF THE SIMULATION:
 The simulation contains two levels:
 	- The "micro" level which comes from the "lambda life model"
 	- The "meso" level where:
-		- 
+		- "cell clusters" agents reside and computes the p value associated to the cluster.
+		- The environment manages the topology of the cell cluster grid.
 
 The main class of this simulation is the "DensityControledLifeMain" class from the 
 "fr.lgi2a.similar.extendedkernel.examples.densitycontroledlife" package. 

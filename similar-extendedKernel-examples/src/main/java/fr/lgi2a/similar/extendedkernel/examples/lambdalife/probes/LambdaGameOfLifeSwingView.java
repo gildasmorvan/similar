@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -148,13 +148,33 @@ public class LambdaGameOfLifeSwingView extends AbstractProbeImageSwingJPanel {
 	 * @return The color that should be used to print the cell.
 	 */
 	private Color getColorFor( 
-		AgtCellPLSInMicroLevel cellPls,
-		EnvPLSInMicroLevel envPls
-	) {
-		if( cellPls.isAlive() ){
-			return Color.BLUE;
-		} else {
-			return null;
+			AgtCellPLSInMicroLevel cellPls,
+			EnvPLSInMicroLevel envPls
+		) {
+			// Compute the number of neighbors
+			int neighbors = 0;
+			for( int dx = -1; dx <= 1; dx++ ){
+				for( int dy = -1; dy <= 1; dy++ ){
+					if( dx != 0 || dy != 0 ){
+						AgtCellPLSInMicroLevel neighbor = envPls.getCellAt( cellPls.getX() + dx, cellPls.getY() + dy );
+						if( neighbor != null && neighbor.isAlive() ){
+							neighbors++;
+						}
+					}
+				}
+			}
+			if( cellPls.isAlive() ){
+				if( neighbors == 2 || neighbors == 3 ){
+					return Color.BLUE;
+				} else {
+					return Color.RED;
+				}
+			} else {
+				if( neighbors == 3 ) {
+					return Color.GREEN;
+				} else {
+					return null;
+				}
+			}
 		}
-	}
 }

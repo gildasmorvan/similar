@@ -46,7 +46,6 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.influences.tomicro;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
@@ -81,9 +80,9 @@ public class ControlCommand extends RegularInfluence {
 
 	public ControlCommand(SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound, double command, Set<AgtCellPLSInMicroLevel> targets) {
-		super(CATEGORY, DensityControlledLifeLevelList.MESO, timeLowerBound, timeUpperBound);
+		super(CATEGORY, DensityControlledLifeLevelList.MICRO, timeLowerBound, timeUpperBound);
 		this.command = command;	
-		this.targets = new LinkedHashSet<AgtCellPLSInMicroLevel>();
+		this.targets = targets;
 	}
 
 }

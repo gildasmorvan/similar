@@ -38,7 +38,7 @@ S:::::::::::::::SS      I::::::::I     M::::::M               M::::::M     I::::
 
 
 
-The SIMIAR suite is a java API whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. 
+The SIMILAR suite is a java API whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. 
 This software defines an API to implement such simulations and provides usage examples.
 
 For more usage information about SIMILAR, see the "docs/README.html" file into a web browser.

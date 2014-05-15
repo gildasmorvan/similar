@@ -46,8 +46,9 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso;
 
+import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.influences.tomicro.ControlCommand;
+import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
 import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractAgtDecisionModel;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.agents.IGlobalState;
 import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
@@ -62,13 +63,11 @@ import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 */
 public class AgtCellClusterDecisionFromMeso extends AbstractAgtDecisionModel {
 
-	
-	/**
+	/** 
 	 * Builds an initialized instance of this decision model.
 	 */
-	public AgtCellClusterDecisionFromMeso(LevelIdentifier levelIdentifier) {
-		super(levelIdentifier);
-		// TODO Auto-generated constructor stub
+	public AgtCellClusterDecisionFromMeso() {
+		super(DensityControlledLifeLevelList.MESO);
 	}
 
 	/**
@@ -80,8 +79,17 @@ public class AgtCellClusterDecisionFromMeso extends AbstractAgtDecisionModel {
 			ILocalStateOfAgent publicLocalState,
 			ILocalStateOfAgent privateLocalState, IPerceivedData perceivedData,
 			InfluencesMap producedInfluences) {
-		// TODO Auto-generated method stub
-
+		// First cast the perceived data into the appropriate type
+		AgtCellClusterPDFMeso castedPData = (AgtCellClusterPDFMeso) perceivedData;
+		AgtCellClusterPLSInMeso castedPublicLocalState = 
+                (AgtCellClusterPLSInMeso) publicLocalState;
+		
+		producedInfluences.add( new ControlCommand(
+				timeLowerBound,
+				timeUpperBound,
+				castedPublicLocalState.getkP()*(castedPublicLocalState.getExpectedDensity()- castedPData.getDensity()),  
+				castedPData.getTargets()
+			) ) ;
 	}
 
 }

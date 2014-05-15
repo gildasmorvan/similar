@@ -49,5 +49,6 @@
  * Defines the model of the "Micro" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.chamber;
+package fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.micro;

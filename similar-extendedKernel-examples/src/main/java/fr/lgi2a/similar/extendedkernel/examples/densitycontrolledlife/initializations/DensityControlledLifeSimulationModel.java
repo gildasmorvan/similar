@@ -48,21 +48,30 @@ package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.initializ
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import fr.lgi2a.similar.extendedkernel.environment.ExtendedEnvironment;
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.DensityControlledLifeParameters;
+import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.AgtCellClusterFactory;
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.PerceptionAndInfluenceRelationGraphs;
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.micro.LvlMicroReaction;
+import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.micro.LvlMicroDensityControlledReaction;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.initializations.LambdaLifeSimulationModel;
+import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
 import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
 import fr.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
+import fr.lgi2a.similar.extendedkernel.libs.generic.EmptyEnvNaturalModel;
 import fr.lgi2a.similar.extendedkernel.libs.generic.EmptyLevelReactionModel;
 import fr.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
 import fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
+import fr.lgi2a.similar.microkernel.LevelIdentifier;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
 import fr.lgi2a.similar.microkernel.levels.ILevel;
 import fr.lgi2a.similar.microkernel.levels.ITimeModel;
+import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfEnvironment;
 
 /**
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
@@ -87,15 +96,14 @@ public class DensityControlledLifeSimulationModel extends
 	protected List<ILevel> generateLevels(
 			ISimulationParameters simulationParameters
 	) {
-		DensityControlledLifeParameters castedParameters = 
-				(DensityControlledLifeParameters) simulationParameters;
+
 		SimulationTimeStamp initialTime = simulationParameters.getInitialTime( );
 		List<ILevel> levels = new LinkedList<ILevel>( );
 		/* 
 		 * Create the "Micro" level.
 		 */
 		ITimeModel microTimeModel = new PeriodicTimeModel(1, 0, initialTime);
-		ILevelReactionModel reactionModel = new LvlMicroReaction();
+		ILevelReactionModel reactionModel = new LvlMicroDensityControlledReaction();
 		ExtendedLevel micro = new ExtendedLevel(
 				initialTime, 
 				LambdaLifeLevelList.MICRO, 
@@ -121,6 +129,90 @@ public class DensityControlledLifeSimulationModel extends
 		
 
 		return levels;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected EnvironmentInitializationData generateEnvironment(
+			ISimulationParameters simulationParameters,
+			Map<LevelIdentifier, ILevel> levels
+	) {
+		DensityControlledLifeParameters castedParameters = 
+				(DensityControlledLifeParameters) simulationParameters;
+		
+		// Create the environment
+		ExtendedEnvironment environment = new ExtendedEnvironment();
+		
+		// Define its public and private local states in the "Micro" level.
+		ILocalStateOfEnvironment plsInMicro = new EnvPLSInMicroLevel( 
+			castedParameters.gridWidth, 
+			castedParameters.gridHeight, 
+			castedParameters.xTorus, 
+			castedParameters.yTorus 
+		);
+		ILocalStateOfEnvironment hlsInMicro = new EmptyLocalStateOfEnvironment(
+				DensityControlledLifeLevelList.MICRO
+		);
+		environment.includeNewLevel(
+				DensityControlledLifeLevelList.MICRO,
+				plsInMicro,
+				hlsInMicro
+		);
+		// Specify the behavior of the environment in the "Micro" level.
+		environment.specifyBehaviorForLevel(
+				DensityControlledLifeLevelList.MICRO,
+				new EmptyEnvNaturalModel( DensityControlledLifeLevelList.MICRO )
+		);
+		
+		// Define its public and private local states in the "Meso" level.
+		ILocalStateOfEnvironment plsInMeso = new EmptyLocalStateOfEnvironment(
+				DensityControlledLifeLevelList.MESO
+		);
+		
+		ILocalStateOfEnvironment hlsInMeso = new EmptyLocalStateOfEnvironment(
+				DensityControlledLifeLevelList.MESO
+		);
+		
+		environment.includeNewLevel(
+				DensityControlledLifeLevelList.MESO,
+				plsInMeso,
+				hlsInMeso
+		);
+		
+		// Specify the behavior of the environment in the "Meso" level.
+		environment.specifyBehaviorForLevel(
+			DensityControlledLifeLevelList.MESO,
+			new EmptyEnvNaturalModel( DensityControlledLifeLevelList.MESO )
+		);
+		
+		return new EnvironmentInitializationData( environment );
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	//TODO
+	protected AgentInitializationData generateAgents(
+			ISimulationParameters simulationParameters,
+			Map<LevelIdentifier, ILevel> levels
+	) {
+		DensityControlledLifeParameters castedParameters = 
+				(DensityControlledLifeParameters) simulationParameters;
+		AgentInitializationData result = super.generateAgents(simulationParameters, levels);
+		for( int x = 0; x < castedParameters.gridWidth; x += castedParameters.xlength ) {
+			for( int y = 0; y < castedParameters.gridHeight; y+=castedParameters.ylength ) {
+				// Create the cellCluster located at (x, y)
+				IAgent4Engine cellCluster = AgtCellClusterFactory.generate( x, y);
+				result.getAgents().add( cellCluster );
+				// Register the agent in the grid of the environment.
+				//envPls.setCellAt( (AgtCellPLSInMicroLevel) cell.getPublicLocalState( LambdaLifeLevelList.MICRO ) );
+			}
+		}
+		
+		return result;
 	}
 
 }

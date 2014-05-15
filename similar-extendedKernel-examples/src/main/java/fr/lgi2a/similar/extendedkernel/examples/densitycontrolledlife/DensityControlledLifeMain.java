@@ -77,9 +77,9 @@ public class DensityControlledLifeMain {
 		DensityControlledLifeParameters parameters = new DensityControlledLifeParameters( );
 		parameters.gridWidth = 50;
 		parameters.gridHeight = 50;
-		parameters.stillLifeThreshold = 5;
-		parameters.expectedDensity = 0.005;
-		parameters.kP = 0.2*parameters.expectedDensity;
+		parameters.stillLifeThreshold = 50;
+		parameters.expectedDensity = 0.08;
+		parameters.kP = 10*parameters.expectedDensity;
 		parameters.finalTime = new SimulationTimeStamp(10000);
 		// Initialize the random numbers generator.
 		

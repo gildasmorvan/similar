@@ -130,5 +130,43 @@
 				<include>bubblechamber_example_README.txt</include>
 			</includes>
 		</fileSet>
+		
+		<!-- Add the "Lambda Life" simulation example -->
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/extendedKernel/lambdalife/src</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>**/extendedkernel/examples/lambdalife/**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/doc/</directory>
+			<outputDirectory>/examples/extendedKernel/lambdalife</outputDirectory>
+			<includes>
+				<include>lambdalife_example_README.txt</include>
+			</includes>
+		</fileSet>
+		
+		<!-- Add the "Lambda Energy Life" simulation example -->
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/extendedKernel/lambdaenergylife/src</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>**/extendedkernel/examples/lambdaenergylife/**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/doc/</directory>
+			<outputDirectory>/examples/extendedKernel/lambdaenergylife</outputDirectory>
+			<includes>
+				<include>lambdaenergylife_example_README.txt</include>
+			</includes>
+		</fileSet>
     </fileSets>
 </assembly>

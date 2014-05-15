@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -90,7 +90,7 @@ public class MacroStateProbe implements IProbe {
 	 */
 	@Override
 	public void prepareObservation() {
-		
+		this.target.println("#Time\tDensity\tEnergy");		
 	}
 
 	/**
@@ -201,8 +201,8 @@ public class MacroStateProbe implements IProbe {
 		}
 		this.target.println( 
 			timestamp.getIdentifier() + 
-			"\tdensity: "+ ( (double) livingCells)/(envPls.getHeight()*envPls.getWidth())+
-			"\tenergy: "+ ((double) changingStateCells)/(envPls.getHeight()*envPls.getWidth())		
+			"\t"+ ( (double) livingCells)/(envPls.getHeight()*envPls.getWidth())+
+			"\t"+ ((double) changingStateCells)/(envPls.getHeight()*envPls.getWidth())		
 		);
 	}
 }

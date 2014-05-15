@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -92,11 +92,13 @@ public class AgtCellDecisionFromMicro extends AbstractAgtDecisionModel {
 		boolean nextState = ( castedPData.getNbOfLivingCells() == 3 ) ||
 							( state && castedPData.getNbOfLivingCells() == 2 );
 		// Finally create and send an influence.
-		producedInfluences.add( new NextStateInfluence(
-			timeLowerBound,
-			timeUpperBound, 
-			nextState, 
-			castedPublicLocalState
-		) ) ;
+		if(state != nextState) {
+			producedInfluences.add( new NextStateInfluence(
+					timeLowerBound,
+					timeUpperBound, 
+					nextState, 
+					castedPublicLocalState
+			) ) ;
+		}
 	}
 }

@@ -4,7 +4,7 @@ libraries and the extended libraries.
 MODEL OF THE SIMULATION:
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-***** WHAT IS A BUBBLE CHAMBER ?
+***** WHAT IS A BUBBLE CHAMBER?
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 **		A bubble chamber is a vessel filled with a superheated transparent liquid (most often liquid hydrogen) used 
 **		to detect electrically charged particles moving through it.

@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -73,7 +73,7 @@ public class LambdaGameOfLifeLastStateExporter implements IProbe {
 	/**
 	 * The conversion ratio between cells and pixels.
 	 */
-	private static final int cellSizeInPixels = 10;
+	private static final int cellSizeInPixels = 100;
 	
 	/**
 	 * The name of the file where the state of the simulation is exported.
@@ -156,26 +156,30 @@ public class LambdaGameOfLifeLastStateExporter implements IProbe {
 		AgtCellPLSInMicroLevel cellPls,
 		EnvPLSInMicroLevel envPls
 	) {
-		if( cellPls.isAlive() ){
-			// Compute the number of neighbors
-			int neighbors = 0;
-			for( int dx = -1; dx <= 1; dx++ ){
-				for( int dy = -1; dy <= 1; dy++ ){
-					if( dx != 0 || dy != 0 ){
-						AgtCellPLSInMicroLevel neighbor = envPls.getCellAt( cellPls.getX() + dx, cellPls.getY() + dy );
-						if( neighbor != null && neighbor.isAlive() ){
-							neighbors++;
-						}
+		// Compute the number of neighbors
+		int neighbors = 0;
+		for( int dx = -1; dx <= 1; dx++ ){
+			for( int dy = -1; dy <= 1; dy++ ){
+				if( dx != 0 || dy != 0 ){
+					AgtCellPLSInMicroLevel neighbor = envPls.getCellAt( cellPls.getX() + dx, cellPls.getY() + dy );
+					if( neighbor != null && neighbor.isAlive() ){
+						neighbors++;
 					}
 				}
 			}
+		}
+		if( cellPls.isAlive() ){
 			if( neighbors == 2 || neighbors == 3 ){
 				return Color.BLUE;
 			} else {
 				return Color.RED;
 			}
 		} else {
-			return null;
+			if( neighbors == 3 ) {
+				return Color.GREEN;
+			} else {
+				return null;
+			}
 		}
 	}
 

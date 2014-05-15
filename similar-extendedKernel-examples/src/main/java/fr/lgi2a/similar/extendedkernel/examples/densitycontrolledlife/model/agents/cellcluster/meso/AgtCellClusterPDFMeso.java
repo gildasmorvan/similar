@@ -46,7 +46,11 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
+import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractPerceivedData;
 
@@ -63,6 +67,13 @@ public class AgtCellClusterPDFMeso extends AbstractPerceivedData {
 	private double density;
 	
 	/**
+	 * The target cells
+	 */
+	private Set<AgtCellPLSInMicroLevel> targets  = new LinkedHashSet<AgtCellPLSInMicroLevel>();
+	
+	/**
+	
+	/**
 	 * Builds an initialized instance of these perceived data.
 	 * @param transitoryPeriodMin The lower bound of the transitory period for which these data were perceived.
 	 * @param transitoryPeriodMax The upper bound of the transitory period for which these data were perceived.
@@ -70,13 +81,24 @@ public class AgtCellClusterPDFMeso extends AbstractPerceivedData {
 	protected AgtCellClusterPDFMeso(
 			SimulationTimeStamp transitoryPeriodMin,
 			SimulationTimeStamp transitoryPeriodMax,
-			double density) {
+			double density, Set<AgtCellPLSInMicroLevel> targets) {
 		super(DensityControlledLifeLevelList.MESO, transitoryPeriodMin, transitoryPeriodMax);
 		this.density = density;
+		this.targets = targets;
 	}
 
+	/**
+	 * @return the density
+	 */
 	public double getDensity() {
 		return density;
+	}
+
+	/**
+	 * @return the targets
+	 */
+	public Set<AgtCellPLSInMicroLevel> getTargets() {
+		return targets;
 	}
 
 }

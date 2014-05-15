@@ -99,23 +99,30 @@ public class LvlMicroDensityControlledReaction extends LvlMicroReaction {
 			}
 		}
 		
+		regularInfluencesOftransitoryStateDynamics.removeAll(nonSpecificInfluencesOftransitoryStateDynamics);
+		regularInfluencesOftransitoryStateDynamics.removeAll(collidingInfluencesOftransitoryStateDynamics);
+
 		//Reaction for specific influences
-		for( IInfluence controlCommandInfluence : regularInfluencesOftransitoryStateDynamics ){
-			if( controlCommandInfluence.getCategory().equals( ControlCommand.CATEGORY) ){
-				ControlCommand castedControlCommandInfluence = (ControlCommand) controlCommandInfluence;	
-				for(IInfluence collision : collidingInfluencesOftransitoryStateDynamics) {
-					NextStateInfluence castedNextStateInfluence = (NextStateInfluence) collision;	
-					if(castedControlCommandInfluence.targets.contains(castedNextStateInfluence)){
+		for(IInfluence collision : collidingInfluencesOftransitoryStateDynamics) {
+
+			NextStateInfluence castedNextStateInfluence = (NextStateInfluence) collision;
+			for( IInfluence controlCommandInfluence : regularInfluencesOftransitoryStateDynamics ){
+				
+				if( controlCommandInfluence.getCategory().equals( ControlCommand.CATEGORY) ){
+					ControlCommand castedControlCommandInfluence = (ControlCommand) controlCommandInfluence;
+					
+					if(castedControlCommandInfluence.targets.contains(castedNextStateInfluence.getTarget())){
 						double randomDouble = RandomValueFactory.getStrategy().randomDouble();
 						castedNextStateInfluence.getTarget().setAlive(randomDouble < castedControlCommandInfluence.command);
-				
+
 					}
 				}
 			}
 		}
 		
 		//Reaction for regular influences
-		super.makeRegularReaction(transitoryTimeMin, transitoryTimeMax, consistentState, nonSpecificInfluencesOftransitoryStateDynamics, remainingInfluences);		
+		super.makeRegularReaction(transitoryTimeMin, transitoryTimeMax, consistentState, nonSpecificInfluencesOftransitoryStateDynamics, remainingInfluences);
+		
 	}
 
 	@Override

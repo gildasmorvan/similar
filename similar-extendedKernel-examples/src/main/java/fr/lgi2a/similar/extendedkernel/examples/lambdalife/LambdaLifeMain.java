@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -53,11 +53,12 @@ import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParam
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.AgtCellFactory;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeLastStateExporter;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeSwingView;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LivingCellsProbe;
+import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.MacroStateProbe;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.randomstrategies.JavaRandomBasedRandomValuesGenerator;
+import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.randomstrategies.SecureRandomBasedRandomValuesGenerator;
 import fr.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
 import fr.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
 import fr.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;
@@ -79,12 +80,15 @@ public class LambdaLifeMain {
 	) {
 		// Create the parameters used in this simulation.
 		LambdaLifeParameters parameters = new LambdaLifeParameters( );
-		parameters.gridWidth = 90;
-		parameters.gridHeight = 90;
-		parameters.stillLifeThreshold = 4;
+		parameters.gridWidth = 50;
+		parameters.gridHeight = 50;
+		parameters.stillLifeThreshold = 10;
+		parameters.finalTime = new SimulationTimeStamp(10000);
 		// Initialize the random numbers generator.
+		
 		RandomValueFactory.setStrategy(
-			new JavaRandomBasedRandomValuesGenerator( parameters.seed )
+		//	new JavaRandomBasedRandomValuesGenerator( parameters.seed )
+				new SecureRandomBasedRandomValuesGenerator( parameters.seed)
 		);
 		// Register the parameters to the agent factories.
 		AgtCellFactory.setParameters( parameters );
@@ -102,8 +106,9 @@ public class LambdaLifeMain {
 		);
 		engine.addProbe(
 				"Nb of living cells",
-				new LivingCellsProbe( System.out )
+				new MacroStateProbe( System.out )
 		);
+		
 		engine.addProbe(
 				"Evolution displayer", 
 				new ProbeImageSwingJFrame( 

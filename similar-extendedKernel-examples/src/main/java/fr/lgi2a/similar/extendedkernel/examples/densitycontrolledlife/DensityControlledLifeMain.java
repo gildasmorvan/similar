@@ -52,7 +52,6 @@ import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.initializa
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.DensityControlledLifeParameters;
 import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.AgtCellClusterFactory;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.AgtCellFactory;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeLastStateExporter;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeSwingView;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.MacroStateProbe;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
@@ -72,17 +71,26 @@ import fr.lgi2a.similar.microkernel.libs.probes.ProbeImageSwingJFrame;
  */
 public class DensityControlledLifeMain {
 
+	/**
+	 * The main java method being run.
+	 * @param args The command line arguments.
+	 */
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// Create the parameters used in this simulation.
 		DensityControlledLifeParameters parameters = new DensityControlledLifeParameters( );
-		parameters.gridWidth = 50;
-		parameters.gridHeight = 50;
-		parameters.stillLifeThreshold = 50;
+		parameters.gridWidth = 60;
+		parameters.gridHeight = 60;
+		parameters.stillLifeThreshold = 60;
 		parameters.expectedDensity = 0.08;
 		parameters.kP = 10*parameters.expectedDensity;
+		parameters.xlength = 30;
+		parameters.ylength = 30;
 		parameters.finalTime = new SimulationTimeStamp(10000);
-		// Initialize the random numbers generator.
 		
+		// Initialize the random numbers generator
 		RandomValueFactory.setStrategy(
 		//	new JavaRandomBasedRandomValuesGenerator( parameters.seed )
 				new SecureRandomBasedRandomValuesGenerator( parameters.seed)
@@ -103,7 +111,7 @@ public class DensityControlledLifeMain {
 				new ProbeExecutionTracker( System.err, false )
 		);
 		engine.addProbe(
-				"Nb of living cells",
+				"Macro State",
 				new MacroStateProbe( System.out )
 		);
 		
@@ -116,10 +124,7 @@ public class DensityControlledLifeMain {
 					null																// The frame is resized automatically
 				)
 		);
-		engine.addProbe(
-			"Exportation as image", 
-			new LambdaGameOfLifeLastStateExporter( "SimulationFinalState.png" )
-		);
+		
 		// Create the simulation model being used.
 		AbstractExtendedSimulationModel simulationModel = new DensityControlledLifeSimulationModel(
 				parameters

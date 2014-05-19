@@ -77,7 +77,16 @@ public class ControlCommand extends RegularInfluence {
 	 */
 	public final Set<AgtCellPLSInMicroLevel> targets;
 
-
+	/**
+	 * Builds an instance of this influence created during the transitory 
+	 * period <code>] timeLowerBound, timeUpperBound [</code>.
+	 * @param timeLowerBound The lower bound of the transitory period 
+	 * during which this influence was created.
+	 * @param timeUpperBound The upper bound of the transitory period 
+	 * during which this influence was created.
+	 * @param command the command applied to the targets
+	 * @param targets the targeted public local states of the influence
+	 */
 	public ControlCommand(SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound, double command, Set<AgtCellPLSInMicroLevel> targets) {
 		super(CATEGORY, DensityControlledLifeLevelList.MICRO, timeLowerBound, timeUpperBound);

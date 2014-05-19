@@ -59,6 +59,8 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
 import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
 
 /**
+ * This factory creates a default agent from the "Cell Cluster" category.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  *
@@ -99,7 +101,7 @@ public class AgtCellClusterFactory {
      * Generates a cell located at a specific place of the grid. 
      * @param x The x axis coordinate of the agent.
      * @param y The y axis coordinate of the agent.
-     * @return A newly created and initialized "cell" agent.
+     * @return A newly created and initialized "cell cluster" agent.
      */
     public static ExtendedAgent generate( int x, int y) {
     	// First create the agent instance.

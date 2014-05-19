@@ -194,7 +194,6 @@ public class DensityControlledLifeSimulationModel extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	//TODO
 	protected AgentInitializationData generateAgents(
 			ISimulationParameters simulationParameters,
 			Map<LevelIdentifier, ILevel> levels
@@ -207,8 +206,6 @@ public class DensityControlledLifeSimulationModel extends
 				// Create the cellCluster located at (x, y)
 				IAgent4Engine cellCluster = AgtCellClusterFactory.generate( x, y);
 				result.getAgents().add( cellCluster );
-				// Register the agent in the grid of the environment.
-				//envPls.setCellAt( (AgtCellPLSInMicroLevel) cell.getPublicLocalState( LambdaLifeLevelList.MICRO ) );
 			}
 		}
 		

@@ -7,7 +7,7 @@ package.
 MODEL OF THE SIMULATION:
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
-***** WHAT IS THE DENSITY CONTROLED LIFE MODEL ?
+***** WHAT IS THE DENSITY CONTROLLED LIFE MODEL ?
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
 **		One cruel and ironic aspect of the GoL  is that, starting from a random initial configuration (soup),
 **		a cell has generally little chance to remain alive in the long run.
@@ -35,5 +35,5 @@ The simulation contains two levels:
 		- "cell clusters" agents reside and computes the p value associated to the cluster.
 		- The environment manages the topology of the cell cluster grid.
 
-The main class of this simulation is the "DensityControledLifeMain" class from the 
-"fr.lgi2a.similar.extendedkernel.examples.densitycontroledlife" package. 
+The main class of this simulation is the "DensityControlledLifeMain" class from the 
+"fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife" package. 

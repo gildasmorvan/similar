@@ -168,5 +168,25 @@
 				<include>lambdaenergylife_example_README.txt</include>
 			</includes>
 		</fileSet>
+		
+				<!-- Add the "Density Controlled Life" simulation example -->
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/java</directory>
+			<outputDirectory>/examples/extendedKernel/densitycontrolledlife/src</outputDirectory>
+			<excludes>
+				<exclude>package-info.java</exclude>
+			</excludes>
+			<includes>
+				<include>**/extendedkernel/examples/densitycontrolledlife/**</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>../similar-extendedKernel-examples/src/main/doc/</directory>
+			<outputDirectory>/examples/extendedKernel/densitycontrolledlife</outputDirectory>
+			<includes>
+				<include>densitycontrolledlife_example_README.txt</include>
+			</includes>
+		</fileSet>
+		
     </fileSets>
 </assembly>

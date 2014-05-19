@@ -79,6 +79,8 @@ public class NextStateInfluence extends RegularInfluence {
 	 * during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period 
 	 * during which this influence was created.
+	 * @param nextState the next state of the cell
+	 * @param target the target public local state of the influence
 	 */
 	public NextStateInfluence(
 			SimulationTimeStamp timeLowerBound,

@@ -77,6 +77,7 @@ public class AgtCellClusterPDFMeso extends AbstractPerceivedData {
 	 * Builds an initialized instance of these perceived data.
 	 * @param transitoryPeriodMin The lower bound of the transitory period for which these data were perceived.
 	 * @param transitoryPeriodMax The upper bound of the transitory period for which these data were perceived.
+	 * @param targets the cells of the cell cluster
 	 */
 	protected AgtCellClusterPDFMeso(
 			SimulationTimeStamp transitoryPeriodMin,

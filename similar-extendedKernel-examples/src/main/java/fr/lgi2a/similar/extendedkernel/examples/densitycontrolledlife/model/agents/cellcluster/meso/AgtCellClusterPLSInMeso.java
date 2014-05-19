@@ -92,6 +92,8 @@ public class AgtCellClusterPLSInMeso extends AbstractLocalStateOfAgent {
 	/**
 	 * Builds an initialized instance of this private local state.
 	 * @param owner The agent owning this private local state.
+	 * @param kP the parameter of the control algorithm.
+	 * @param expectedDensity the expected density of the cell cluster.
 	 * @param x The first x coordinate of the cell cluster in the grid.
 	 * @param y The first y coordinate of the cell cluster in the grid.
 	 * @param xLength length of x coordinate of the cell cluster in the grid.

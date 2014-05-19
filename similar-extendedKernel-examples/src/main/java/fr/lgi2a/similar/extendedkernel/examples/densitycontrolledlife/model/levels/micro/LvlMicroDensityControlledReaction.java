@@ -68,11 +68,17 @@ import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
  */
 public class LvlMicroDensityControlledReaction extends LvlMicroReaction {
 	
+
+	/**
+	 * Builds the reaction of the "Meso" level.
+	 */
 	public LvlMicroDensityControlledReaction() {
 		super(LvlMicroReaction.A);
 	}
 
-	//TODO
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public void makeRegularReaction(SimulationTimeStamp transitoryTimeMin,
 			SimulationTimeStamp transitoryTimeMax,
@@ -125,6 +131,9 @@ public class LvlMicroDensityControlledReaction extends LvlMicroReaction {
 		
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public void makeSystemReaction(SimulationTimeStamp transitoryTimeMin,
 			SimulationTimeStamp transitoryTimeMax,

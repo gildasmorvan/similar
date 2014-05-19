@@ -77,6 +77,9 @@ public class AgtCellClusterPerceptionFromMeso extends
 		super(DensityControlledLifeLevelList.MESO);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IPerceivedData perceive(SimulationTimeStamp transitoryPeriodMin,
 			SimulationTimeStamp transitoryPeriodMax,

@@ -48,6 +48,12 @@ package fr.lgi2a.similar.extendedkernel.examples.lambdaenergylife.model;
 
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
 
+/**
+ * The simulation parameters used in the Lambda Energy game of life simulation.
+ * 
+ * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan/" target="_blank">Gildas Morvan</a>
+ */
 public class LambdaEnergyLifeParameters extends LambdaLifeParameters {
 
 	/**
@@ -56,6 +62,9 @@ public class LambdaEnergyLifeParameters extends LambdaLifeParameters {
 	 */
 	public double energyThreshold;
 	
+	/**
+	 * Builds a parameters set containing default values.
+	 */
 	public LambdaEnergyLifeParameters() {
 		super();
 		this.energyThreshold = 0.2;	

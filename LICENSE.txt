@@ -1,4 +1,4 @@
-Copyright or © or Copr. LGI2A
+Copyright or Â© or Copr. LGI2A
 
 LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
 Faculte des Sciences Appliquees
@@ -9,7 +9,7 @@ http://www.lgi2a.univ-artois.fr/
 Email: gildas.morvan@univ-artois.fr
 
 Contributors:
-	Gildas MORVAN (creator of the IRM4MLS formalism)
+	Gildas MORVAN (creator of the IRM4MLS formalism, developer)
 	Yoann KUBERA (designer, architect and developer of SIMILAR)
 
 This software is a computer program whose purpose is to support the

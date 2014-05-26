@@ -46,6 +46,9 @@
  */
 package fr.lgi2a.similar.microkernel;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 
 /**
  * The object identifying the category of an agent involved in a simulation.
@@ -69,6 +72,7 @@ public class CategoriesOfRoadTrafficSimulation {
 </pre>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public final class AgentCategory {
 	/**
@@ -77,15 +81,28 @@ public final class AgentCategory {
 	private final String identifier;
 	
 	/**
+	 * The identifiers of the direct parents of this category.
+	 */
+	private final Set<AgentCategory> directParentCatergories;
+	
+	/**
 	 * Builds an instance of this class using a specific value for the agent category.
 	 * @param identifier The identifier of the agent category. This value should be unique.
+	 * @param parents The identifiers of the direct parents of this category.For instance,
+	 * when creating a turmite agent category, you can specify that a turmite is a turtle and
+	 * therefore also belongs to the turtle agent category, by adding this category in this
+	 * constructor argument.
 	 * @throws IllegalArgumentException If <code>identifier</code> is <code>null</code>.
 	 */
-	public AgentCategory( String identifier ) {
-		if( identifier == null ){
-			throw new IllegalArgumentException( "The first argument cannot be null." );
+	public AgentCategory( String identifier, AgentCategory... parents ) {
+		if( identifier == null || parents == null ) {
+			throw new IllegalArgumentException( "The arguments cannot be null." );
 		}
 		this.identifier = identifier;
+		this.directParentCatergories = new LinkedHashSet<AgentCategory>( );
+		for( AgentCategory category : parents ){
+			this.directParentCatergories.add( category);
+		}
 	}
 	
 	/**
@@ -108,7 +125,17 @@ public final class AgentCategory {
 	 * category provided in parameter.
 	 */
 	public boolean isA( AgentCategory category ) {
-		return this.equals( category );
+		if (this.equals( category )) {
+			return true;
+		}
+		else{
+			for(AgentCategory directParentCatergory : this.directParentCatergories) {
+				if(directParentCatergory.isA(category)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	/**

@@ -7,7 +7,7 @@ A binary distribution of SIMILAR can be downloaded at [this address](www.lgi2a.u
 
 ## Usage
 
-For more information about SIMILAR and how to use it, see [its documentation](www.lgi2a.univ-artois.fr/~morvan/similar/docs/README.html) and the files [README_USER.txt](https://forge.univ-artois.fr/yoann.kubera/similar/blob/master/README_USER.txt) and [README_DEVELOPPER.txt](https://forge.univ-artois.fr/yoann.kubera/similar/blob/master/README_DEVELOPPER.txt).
+For more information about SIMILAR and how to use it, see [its documentation](http://www.lgi2a.univ-artois.fr/~morvan/similar/docs/README.html) and the files [README_USER.txt](https://forge.univ-artois.fr/yoann.kubera/similar/blob/master/README_USER.txt) and [README_DEVELOPPER.txt](https://forge.univ-artois.fr/yoann.kubera/similar/blob/master/README_DEVELOPPER.txt).
 
 ## License
 

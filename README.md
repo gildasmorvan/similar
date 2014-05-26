@@ -16,4 +16,5 @@ SIMILAR is distributed under the [CeCILL-B license](http://cecill.info). See the
 ## Contributors
 
 Yoann KUBERA - [mail](mailto:yoann.kubera@gmail.com) - [homepage](http://yoannkubera.net/) - designer, architect, developer.
+
 Gildas MORVAN - [mail](mailto:gildas.morvan@univ-artois.fr) - [homepage](http://www.lgi2a.univ-artois.fr/~morvan/) - creator of the IRM4MLS meta-model, developer.

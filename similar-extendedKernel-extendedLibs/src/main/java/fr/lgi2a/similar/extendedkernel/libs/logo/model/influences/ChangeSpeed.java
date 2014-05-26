@@ -83,7 +83,7 @@ public class ChangeSpeed extends RegularInfluence {
 	 * during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period 
 	 * during which this influence was created.
-	 * @param ds The direction change.
+	 * @param ds The speed change.
 	 * @param target The turtle's public local state that is going to change.
 	 */
 	public ChangeSpeed(SimulationTimeStamp timeLowerBound,

@@ -1,4 +1,4 @@
-# similar
+![#SIMILAR](src/doc/images/similarLogo.png)
 
 The [SIMILAR](http://www.lgi2a.univ-artois.fr/~morvan/similar.html) suite is a Java API under the [CeCILL-B license](http://cecill.info) whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. 
 This software defines an API to implement such simulations and provides usage examples.

@@ -11,7 +11,9 @@ For more information about SIMILAR and how to use it, see [its documentation](ht
 
 ## License
 
-SIMILAR is distributed under the [CeCILL-B license](http://cecill.info). See the file  [LICENSE.txt](https://forge.univ-artois.fr/yoann.kubera/similar/blob/master/LICENSE.txt) for more information. 
+SIMILAR is distributed under the [CeCILL-B license](http://cecill.info). In a few words, "if the initial program is under CeCILL-B, you can distribute your program under any license that you want (without the need to distribute the source code) provided you properly mention the use that you did of the initial program" (from the [CeCILL-B FAQ](http://www.cecill.info/faq.en.html#differences) ).
+
+See the file  [LICENSE.txt](https://forge.univ-artois.fr/yoann.kubera/similar/blob/master/LICENSE.txt) for more information. 
 
 ## Contributors
 

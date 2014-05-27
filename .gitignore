@@ -7,7 +7,6 @@
 # Maven generation directory #
 ##############################
 target/
-bin/
 
 # API within sources         #
 ##############################
@@ -15,4 +14,4 @@ src/doc/api
 
 # Mac Os related files       #
 ##############################
-
+.DS_Store

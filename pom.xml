@@ -60,11 +60,12 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 		<developer>
 			<name>Gildas MORVAN</name>
 			<email>gildas.morvan@univ-artois.fr</email>
-			<url>http://www.lgi2a.univ-artois.fr/~morvan/Gildas_Morvan/Contact.html</url>
+			<url>http://www.lgi2a.univ-artois.fr/~morvan/</url>
 			<organization>Laboratoire de Genie Informatique et d'Automatique de l'Artois</organization>
 			<organizationUrl>http://www.lgi2a.univ-artois.fr/</organizationUrl>
 			<roles>
 				<role>creator of the IRM4MLS meta-model</role>
+				<role>developer</role>
 			</roles>
 		</developer>
 	</developers>

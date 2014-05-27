@@ -100,10 +100,7 @@ public class EnvPLSInMicroLevel extends AbstractLocalStateOfEnvironment {
 		this.height = height;
 		this.xAxisTorus = xAxisTorus;
 		this.yAxisTorus = yAxisTorus;
-		this.grid = new AgtCellPLSInMicroLevel[ this.width ][];
-		for( int x = 0; x < this.width; x++ ){
-			this.grid[ x ] = new AgtCellPLSInMicroLevel[ this.height ];
-		}
+		this.grid = new AgtCellPLSInMicroLevel[ this.width ][this.height];
 	}
 	
 	/**

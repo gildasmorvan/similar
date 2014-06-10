@@ -60,7 +60,7 @@ public class AbstractLocalStateOfEnvironment extends AbstractLocalState implemen
 	 * Builds an initialized instance of this class.
 	 * @param level The level for which this local state was defined.
 	 */
-	protected AbstractLocalStateOfEnvironment(
+	public AbstractLocalStateOfEnvironment(
 			LevelIdentifier level
 	){
 		super( level );

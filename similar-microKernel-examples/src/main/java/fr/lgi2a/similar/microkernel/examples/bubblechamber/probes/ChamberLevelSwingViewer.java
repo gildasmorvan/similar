@@ -157,11 +157,12 @@ public class ChamberLevelSwingViewer extends AbstractProbeImageSwingJPanel {
 		for(ILocalStateOfAgent agentPLS : externalLevel.getPublicLocalStateOfAgents()) {
 			if(agentPLS.getCategoryOfAgent().equals(BubbleChamberAgentCategoriesList.CANNON)) {
 				AgtCannonPLSInExternal cannonPLS = (AgtCannonPLSInExternal) agentPLS;
+				
 				Polygon canonPolygon = new Polygon( );
-				canonPolygon.addPoint( MULTIPLICATION_FACTOR * (int) cannonPLS.getEntryPointInChamber( ).getX(), MULTIPLICATION_FACTOR * ( (int) cannonPLS.getEntryPointInChamber( ).getY() - 1 ) );
-				canonPolygon.addPoint( MULTIPLICATION_FACTOR * (int) cannonPLS.getEntryPointInChamber( ).getX(), MULTIPLICATION_FACTOR * ( (int) cannonPLS.getEntryPointInChamber( ).getY()  + 1 ) );
-				canonPolygon.addPoint( MULTIPLICATION_FACTOR * (int) cannonPLS.getEntryPointInChamber( ).getX(), MULTIPLICATION_FACTOR * ( (int) cannonPLS.getEntryPointInChamber( ).getY()  + 1 ) );
-				canonPolygon.addPoint( MULTIPLICATION_FACTOR * (int) cannonPLS.getEntryPointInChamber( ).getX(), MULTIPLICATION_FACTOR * ( (int) cannonPLS.getEntryPointInChamber( ).getY() - 1 ) );
+				canonPolygon.addPoint( (int) Math.floor(cannonPLS.getEntryPointInChamber( ).getX()), (int) Math.floor(MULTIPLICATION_FACTOR * (cannonPLS.getEntryPointInChamber( ).getY() - 1 )) );
+				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX()), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY()  + 1 ) ) );
+				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX() + 20), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY()  + 1 ) ) );
+				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX() + 20), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY() - 1 ) ) );
 				graphics.setColor( Color.RED );
 				graphics.fillPolygon( canonPolygon );
 			}

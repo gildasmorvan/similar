@@ -46,6 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.external;
 
+import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.Set;
 
@@ -55,6 +56,7 @@ import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.ArithmeticParam
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RICoolDown;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIFireParticle;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIMoveCannon;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
 import fr.lgi2a.similar.microkernel.influences.IInfluence;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
@@ -139,7 +141,15 @@ public class ExternalLevel extends AbstractLevel {
 					(RIFireParticle) influence, 
 					remainingInfluences
 				);
-			} else {
+			} else  if( influence.getCategory().equals( RIMoveCannon.CATEGORY ) ){
+				this.reactionTo( 
+						transitoryTimeMin,
+						transitoryTimeMax,
+						(RIMoveCannon) influence, 
+						remainingInfluences
+					);
+				}
+			else {
 				throw new UnsupportedOperationException( 
 					"The influence '" + influence.getCategory() + "' is currently not supported in this reaction." 
 				);
@@ -153,8 +163,28 @@ public class ExternalLevel extends AbstractLevel {
 				coolDownInfluence 
 			);
 		}
+		
 	}
 	
+	/**
+	 * Reacts to a {@link RIMoveCannon} influence.
+	 * @param transitoryTimeMin The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param transitoryTimeMax The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param influence The influence to manage.
+	 */
+	private void reactionTo(SimulationTimeStamp transitoryTimeMin,
+			SimulationTimeStamp transitoryTimeMax, RIMoveCannon influence,
+			InfluencesMap remainingInfluences) {
+		//TODO 
+		//TEST
+		influence.cannon.setDirection(
+			new Point2D.Double(
+					influence.cannon.getDirection().getX(),
+					influence.cannon.getDirection().getY() - 0.001
+				)
+			);
+	}
+
 	/**
 	 * Reacts to a {@link RICoolDown} influence.
 	 * @param transitoryTimeMin The lower bound of the transitory period of the level for which this reaction is performed.

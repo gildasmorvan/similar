@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -61,6 +61,7 @@ import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.e
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticle;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticleFactory;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIFireParticle;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIMoveCannon;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractAgent;
@@ -69,6 +70,7 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
 /**
  * Models a "Cannon" agent of the simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class AgtCannon extends AbstractAgent {
 	/**
@@ -163,6 +165,13 @@ public class AgtCannon extends AbstractAgent {
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences
 	) {
+		//Move the cannon
+		RIMoveCannon moveInfluence = new RIMoveCannon(
+				timeLowerBound,
+				timeUpperBound,
+				publicLocalState
+			);
+		producedInfluences.add(moveInfluence);
 		// Get the current temperature of the cannon.
 		double temperature = publicLocalState.getTemperature();
 		// Get the overheat temperature of the cannon.

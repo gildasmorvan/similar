@@ -130,6 +130,14 @@ public class AgtCannonPLSInExternal extends AbstractLocalStateOfAgent {
 	}
 	
 	/**
+	 * Sets the direction where the cannon points to.
+	 * @param power The new direction where the cannon points to.
+	 */
+	public void setDirection( Point2D direction ){
+		this.direction = direction;
+	}
+	
+	/**
 	 * The power of the particle cannon.
 	 */
 	private double power;

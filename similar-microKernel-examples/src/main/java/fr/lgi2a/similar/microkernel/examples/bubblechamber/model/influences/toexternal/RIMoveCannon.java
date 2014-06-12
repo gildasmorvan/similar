@@ -44,82 +44,51 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.chamber;
+package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal;
 
-import java.awt.geom.Point2D;
+import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
+import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
 
 /**
- * The public local state of the "Bubble" agent in the "Chamber" level.
+ * This influence is sent by the environment in the "External" level to naturally cool down 
+ * overheated cannons.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class AgtBubblePLSInChamber extends AbstractLocalStateOfAgent {
+public class RIMoveCannon extends RegularInfluence {
 	/**
-	 * Builds an initialized instance of this public local state.
-	 * @param owner The agent owning this public local state.
-	 * @param initialX The initial x coordinate of the bubble.
-	 * @param initialY The initial y coordinate of the bubble.
-	 * @param initialDiameter The initial diameter of the bubble.
-	 * @throws IllegalArgumentException If the diameter is lower or equal to 0.
+	 * The category of this influence.
 	 */
-	public AgtBubblePLSInChamber(
-			IAgent4Engine owner,
-			double initialX,
-			double initialY,
-			double initialDiameter
-	) {
+	public static final String CATEGORY = "move cannon";
+
+	/**
+	 * The cannons being moved.
+	 */
+	public final AgtCannonPLSInExternal cannon;
+	
+	/**
+	 * Builds a partly initialized instance of this influence.
+	 * The {@link Set#add(Object)} method has still to be called on the 
+	 * {@link RIMoveCannon#ambientTemperature} field for each cannon to cool down.
+	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
+	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
+	 * @param ambientTemperature The external ambient temperature.
+	 */
+	public RIMoveCannon(
+			SimulationTimeStamp timeLowerBound,
+			SimulationTimeStamp timeUpperBound,
+			AgtCannonPLSInExternal cannon
+	){
 		super(
-			BubbleChamberLevelList.CHAMBER,
-			owner
+				CATEGORY,
+				BubbleChamberLevelList.EXTERNAL,
+				timeLowerBound, 
+				timeUpperBound
 		);
-		this.location = new Point2D.Double( initialX, initialY );
-		if( initialDiameter <= 0 ){
-			throw new IllegalArgumentException( "The diameter of the bubble cannot be null." );
-		} else {
-			this.diameter = initialDiameter;
-		}
-	}
-	
-	//
-	//
-	// Declaration of the content of the public local state
-	//
-	//
-	
-	/**
-	 * The location of the center of the bubble in the chamber.
-	 */
-	private Point2D location;
-
-	/**
-	 * Gets the location of the center of the bubble in the chamber.
-	 * @return The location of the center of the bubble in the chamber.
-	 */
-	public Point2D getLocation( ){
-		return this.location;
-	}
-
-	/**
-	 * The diameter of the bubble.
-	 */
-	private double diameter;
-
-	/**
-	 * Gets the diameter of the bubble.
-	 * @return The diameter of the bubble.
-	 */
-	public double getDiameter( ){
-		return this.diameter;
-	}
-
-	/**
-	 * Sets the diameter of the bubble.
-	 * @param diameter The new diameter of the bubble.
-	 */
-	public void setDiameter( double diameter ){
-		this.diameter = diameter;
+		this.cannon = cannon;
 	}
 }

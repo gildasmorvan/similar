@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -53,17 +53,20 @@ import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.BubbleChamberPa
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubbleFactory;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.AgtCannonFactory;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticleFactory;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.probes.ChamberLevelSwingViewer;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.probes.ProbePrintingParticleLocationOverTime;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.RandomValueFactory;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
 import fr.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
 import fr.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
 import fr.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;
+import fr.lgi2a.similar.microkernel.libs.probes.ProbeImageSwingJFrame;
 
 
 /**
  * The main class of the "Bubble chamber" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class BubbleChamberMain {
 	/**
@@ -97,6 +100,15 @@ public class BubbleChamberMain {
 		engine.addProbe(
 				"Particle location",
 				new ProbePrintingParticleLocationOverTime( System.out )
+		);
+		engine.addProbe(
+				"Chamber level Swing viewer",
+				new ProbeImageSwingJFrame( 
+					"Chamber level", 													// The name of the frame
+					new ChamberLevelSwingViewer(), 										
+					ProbeImageSwingJFrame.ClosingManagementStrategy.ABORT_SIMULATION, 	// The simulation will abort if the frame is closed
+					null																// The frame is resized automatically
+				)
 		);
 
 		// Create the simulation model being used.

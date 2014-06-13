@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -77,7 +77,7 @@ public class RICoolDown extends RegularInfluence {
 	/**
 	 * Builds a partly initialized instance of this influence.
 	 * The {@link Set#add(Object)} method has still to be called on the 
-	 * {@link RICoolDown#ambientTemperature} field for each cannon to cool down.
+	 * {@link RICoolDown#ambientTemperature} field for each cannonPublicState to cool down.
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
 	 * @param ambientTemperature The external ambient temperature.

@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -64,17 +64,17 @@ public class RIFireParticle extends RegularInfluence {
 	public static final String CATEGORY = "Fire particle";
 	
 	/**
-	 * The particle being fired in the bubble chamber by the cannon.
+	 * The particle being fired in the bubble chamber by the cannonPublicState.
 	 */
 	public final AgtParticle particle;
 	/**
-	 * The cannon that fired the particle.
+	 * The cannonPublicState that fired the particle.
 	 */
 	public final AgtCannonPLSInExternal cannon;
 	
 	/**
 	 * Builds an initialized instance of this influence.
-	 * @throws IllegalArgumentException If either <code>cannon</code> or 
+	 * @throws IllegalArgumentException If either <code>cannonPublicState</code> or 
 	 * <code>particle</code> are <code>null</code>.
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.

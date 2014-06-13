@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -52,6 +52,7 @@ import java.awt.geom.Rectangle2D;
  * The parameters used in the "Bubble chamber" simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class BubbleChamberParameters {
 	/**
@@ -81,6 +82,16 @@ public class BubbleChamberParameters {
 	public double[] cannonPowerRange;
 	
 	/**
+	 * maximal angle of the cannonPublicState (in rad).
+	 */
+	public double cannonMaxAngle;
+	
+	/**
+	 * Angular speed of the cannonPublicState (in rad/step).
+	 */
+	public double cannonAngularSpeed;
+	
+	/**
 	 * Creates a new set of parameters for the "Bubble chamber" 
 	 * simulation having default values.
 	 */
@@ -94,6 +105,8 @@ public class BubbleChamberParameters {
 				200,
 				200
 		);
+		this.cannonMaxAngle = Math.PI/3;
+		this.cannonAngularSpeed = Math.PI/24;
 		this.initialAmbientTemperature = 20;
 		this.cannonPowerRange = new double[]{
 			0.5,

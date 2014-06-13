@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -55,6 +55,7 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
 /**
  * The factory creating instances of agents the "Cannon" category.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class AgtCannonFactory {
     /**
@@ -89,12 +90,12 @@ public class AgtCannonFactory {
 	
 	/**
 	 * Generates a new agent of the "Cannon" category.
-	 * @param cannonEndX The x axis coordinate of the point where the cannon points to.
-	 * @param cannonEndY The y axis coordinate of the point where the cannon points to.
-	 * @param initialDirectionX The direction of the cannon along the x axis.
-	 * @param initialDirectionY The direction of the cannon along the y axis.
-	 * @param initialPower The initial power of the cannon.
-	 * @param ambientTemperature The ambient temperature when the cannon was created.
+	 * @param cannonEndX The x axis coordinate of the point where the cannonPublicState points to.
+	 * @param cannonEndY The y axis coordinate of the point where the cannonPublicState points to.
+	 * @param initialDirectionX The direction of the cannonPublicState along the x axis.
+	 * @param initialDirectionY The direction of the cannonPublicState along the y axis.
+	 * @param initialPower The initial power of the cannonPublicState.
+	 * @param ambientTemperature The ambient temperature when the cannonPublicState was created.
 	 * @return The newly created instance.
 	 */
 	public static AgtCannon generate(
@@ -122,7 +123,9 @@ public class AgtCannonFactory {
 				),
 				new AgtCannonHLSInExternal(
 						cannon, 
-					getParameters().cannonOverheatTemperature
+					getParameters().cannonOverheatTemperature,
+					getParameters().cannonMaxAngle,
+					getParameters().cannonAngularSpeed
 				)
 		);
 		return cannon;

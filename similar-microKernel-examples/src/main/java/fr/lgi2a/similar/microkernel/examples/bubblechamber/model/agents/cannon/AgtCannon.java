@@ -165,20 +165,25 @@ public class AgtCannon extends AbstractAgent {
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences
 	) {
-		//Move the cannon
+		double dt = timeUpperBound.compareTo(timeLowerBound);
+		double da = privateLocalState.getAngularSpeed()*dt;
+		
+		//Move the cannonPublicState
 		RIMoveCannon moveInfluence = new RIMoveCannon(
 				timeLowerBound,
 				timeUpperBound,
-				publicLocalState
+				publicLocalState,
+				privateLocalState,
+				da
 			);
 		producedInfluences.add(moveInfluence);
-		// Get the current temperature of the cannon.
+		// Get the current temperature of the cannonPublicState.
 		double temperature = publicLocalState.getTemperature();
-		// Get the overheat temperature of the cannon.
+		// Get the overheat temperature of the cannonPublicState.
 		double overheatTemperature = privateLocalState.getOverheatTemperature();
 		// Check if it is not overheating.
 		if( temperature - overheatTemperature < - ArithmeticParameters.DOUBLE_PRECISION ){
-			// If the cannon is not overheating, then fire a new particle.
+			// If the cannonPublicState is not overheating, then fire a new particle.
 			// First create the particle.
 			AgtParticle particleAgt = AgtParticleFactory.generate(
 					publicLocalState.getEntryPointInChamber().getX(), 

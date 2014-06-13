@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -56,17 +56,18 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
  * The public local state of the "Cannon" agent in the "External" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class AgtCannonPLSInExternal extends AbstractLocalStateOfAgent {
 	/**
 	 * Builds an initialized instance of this public local state.
 	 * @param owner The agent owning this public local state.
-	 * @param cannonEndX The x coordinate in the chamber where the end of the cannon points to.
-	 * @param cannonEndY The y coordinate in the chamber where the end of the cannon points to.
-	 * @param initialDirectionX The x-axis element of the initial direction where the cannon points to.
-	 * @param initialDirectionY The y-axis element of the initial  direction where the cannon points to.
-	 * @param initialPower The initial power of the particle cannon.
-	 * @param initialTemperature The initial temperature of the particle cannon.
+	 * @param cannonEndX The x coordinate in the chamber where the end of the cannonPublicState points to.
+	 * @param cannonEndY The y coordinate in the chamber where the end of the cannonPublicState points to.
+	 * @param initialDirectionX The x-axis element of the initial direction where the cannonPublicState points to.
+	 * @param initialDirectionY The y-axis element of the initial  direction where the cannonPublicState points to.
+	 * @param initialPower The initial power of the particle cannonPublicState.
+	 * @param initialTemperature The initial temperature of the particle cannonPublicState.
 	 * @throws IllegalArgumentException If the direction is a null vector.
 	 */
 	public AgtCannonPLSInExternal(
@@ -104,76 +105,76 @@ public class AgtCannonPLSInExternal extends AbstractLocalStateOfAgent {
 	//
 
 	/**
-	 * The coordinates in the chamber where the end of the cannon points to.
+	 * The coordinates in the chamber where the end of the cannonPublicState points to.
 	 */
 	private Point2D entryPointInChamber;
 
 	/**
-	 * Gets the coordinates in the chamber where the end of the cannon points to.
-	 * @return The coordinates in the chamber where the end of the cannon points to.
+	 * Gets the coordinates in the chamber where the end of the cannonPublicState points to.
+	 * @return The coordinates in the chamber where the end of the cannonPublicState points to.
 	 */
 	public Point2D getEntryPointInChamber( ){
 		return this.entryPointInChamber;
 	}
 	
 	/**
-	 * The direction where the cannon points to.
+	 * The direction where the cannonPublicState points to.
 	 */
 	private Point2D direction;
 	
 	/**
-	 * Gets the direction where the cannon points to.
-	 * @return The direction where the cannon points to.
+	 * Gets the direction where the cannonPublicState points to.
+	 * @return The direction where the cannonPublicState points to.
 	 */
 	public Point2D getDirection( ) {
 		return this.direction;
 	}
 	
 	/**
-	 * Sets the direction where the cannon points to.
-	 * @param power The new direction where the cannon points to.
+	 * Sets the direction where the cannonPublicState points to.
+	 * @param power The new direction where the cannonPublicState points to.
 	 */
 	public void setDirection( Point2D direction ){
 		this.direction = direction;
 	}
 	
 	/**
-	 * The power of the particle cannon.
+	 * The power of the particle cannonPublicState.
 	 */
 	private double power;
 	
 	/**
-	 * Gets the power of the particle cannon.
-	 * @return The power of the particle cannon.
+	 * Gets the power of the particle cannonPublicState.
+	 * @return The power of the particle cannonPublicState.
 	 */
 	public double getPower( ){
 		return this.power;
 	}
 	
 	/**
-	 * Sets the power of the particle cannon.
-	 * @param power The new power of the particle cannon.
+	 * Sets the power of the particle cannonPublicState.
+	 * @param power The new power of the particle cannonPublicState.
 	 */
 	public void setPower( double power ){
 		this.power = power;
 	}
 	
 	/**
-	 * The current temperature of the particle cannon.
+	 * The current temperature of the particle cannonPublicState.
 	 */
 	private double temperature;
 	
 	/**
-	 * Gets the power of the particle cannon.
-	 * @return The power of the particle cannon.
+	 * Gets the power of the particle cannonPublicState.
+	 * @return The power of the particle cannonPublicState.
 	 */
 	public double getTemperature( ){
 		return this.temperature;
 	}
 	
 	/**
-	 * Sets the power of the particle cannon.
-	 * @param power The new power of the particle cannon.
+	 * Sets the power of the particle cannonPublicState.
+	 * @param power The new power of the particle cannonPublicState.
 	 */
 	public void setTemperature( double temperature ){
 		this.temperature = temperature;

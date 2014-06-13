@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -64,13 +64,16 @@ import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.environment.ext
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.tochamber.RIUpdateParticlesSpatialStateInChamber;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RICoolDown;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.RandomValueFactory;
 import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
 import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
+import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractEnvironment;
 
 /**
  * The environment used in the "Bubble chamber" simulation.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class BubbleChamberEnvironment extends AbstractEnvironment {
 	/**
@@ -144,6 +147,24 @@ public class BubbleChamberEnvironment extends AbstractEnvironment {
 		IPublicLocalDynamicState dynamicState = dynamicStates.get( 
 			BubbleChamberLevelList.CHAMBER 
 		);
+		
+		// Search for bubbles to remove from the chamber.
+		for( ILocalStateOfAgent state : dynamicState.getPublicLocalStateOfAgents() ){
+			// Check if the agent is a bubble.
+			if( state.getCategoryOfAgent().isA( BubbleChamberAgentCategoriesList.BUBBLE ) ){
+				if(RandomValueFactory.getStrategy().randomDouble(0, 1) < 0.01) {
+					SystemInfluenceRemoveAgent removeAgent = new SystemInfluenceRemoveAgent(
+							BubbleChamberLevelList.CHAMBER, 
+							timeUpperBound,
+							timeLowerBound,
+							state
+						);
+					producedInfluences.add(removeAgent);
+					
+				}
+			}
+		}
+		
 		// Search for particles among the agents lying in that state.
 		for( ILocalStateOfAgent state : dynamicState.getPublicLocalStateOfAgents() ){
 			// Check if the agent is a particle.

@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -54,24 +54,33 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
  * The private local state of the "Cannon" agent in the "External" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class AgtCannonHLSInExternal extends AbstractLocalStateOfAgent {
 	/**
 	 * Builds an initialized instance of this private local state.
 	 * @param owner The agent owning this private local state.
-	 * @param initialOverheatTemperature The temperature starting which the cannon 
+	 * @param initialOverheatTemperature The temperature starting which the cannonPublicState 
 	 * is considered as overheated.
+	 * @param maxAngle The maximal angle of the cannonPublicState (in rad).
+	 * @param angularSpeed The angular speed (in rad/step) of the cannonPublicState.
 	 * @throws IllegalArgumentException If the direction is a null vector.
 	 */
 	public AgtCannonHLSInExternal(
 			IAgent4Engine owner,
-			double initialOverheatTemperature
+			double initialOverheatTemperature,
+			double maxAngle,
+			double angularSpeed
+			
 	) {
 		super(
 			BubbleChamberLevelList.EXTERNAL,
 			owner
 		);
 		this.overheatTemperature = initialOverheatTemperature;
+		this.maxAngle = maxAngle;
+		this.angularSpeed = angularSpeed;
+		this.clockWiseRotation = false;
 	}
 	
 	//
@@ -81,15 +90,63 @@ public class AgtCannonHLSInExternal extends AbstractLocalStateOfAgent {
 	//
 
 	/**
-	 * The overheat temperature of the cannon.
+	 * The overheat temperature of the cannonPublicState.
 	 */
 	private double overheatTemperature;
+	
+	/**
+	 * The maximal angle of the cannonPublicState (in rad).
+	 */
+	private double maxAngle;
+	
+	/**
+	 * The angular speed (in rad/step) of the cannonPublicState.
+	 */
+	private double angularSpeed;
+	
+	/**
+	 * <code>true</code> if the cannonPublicState rotates clockwise.
+	 */
+	private boolean clockWiseRotation;
+
 
 	/**
-	 * Gets the overheat temperature of the cannon.
-	 * @return The overheat temperature of the cannon.
+	 * Gets the overheat temperature of the cannonPublicState.
+	 * @return The overheat temperature of the cannonPublicState.
 	 */
 	public double getOverheatTemperature( ){
 		return this.overheatTemperature;
+	}
+
+
+	/**
+	 * @return the maximal angle of the cannonPublicState (in rad).
+	 */
+	public double getMaxAngle() {
+		return maxAngle;
+	}
+
+
+	/**
+	 * @return the angular speed (in rad/step) of the cannonPublicState.
+	 */
+	public double getAngularSpeed() {
+		return angularSpeed;
+	}
+
+
+	/**
+	 * @return <code>true</code> if the cannonPublicState rotates clockwise.
+	 */
+	public boolean isClockWiseRotation() {
+		return clockWiseRotation;
+	}
+
+
+	/**
+	 * @param clockWiseRotation <code>true</code> if the cannonPublicState rotates clockwise.
+	 */
+	public void setClockWiseRotation(boolean clockWiseRotation) {
+		this.clockWiseRotation = clockWiseRotation;
 	}
 }

@@ -49,6 +49,7 @@ package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toe
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonHLSInExternal;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
 import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
@@ -63,25 +64,38 @@ public class RIMoveCannon extends RegularInfluence {
 	/**
 	 * The category of this influence.
 	 */
-	public static final String CATEGORY = "move cannon";
+	public static final String CATEGORY = "move cannonPublicState";
 
 	/**
-	 * The cannons being moved.
+	 * The public local state of the cannonPublicState being moved.
 	 */
-	public final AgtCannonPLSInExternal cannon;
+	public final AgtCannonPLSInExternal cannonPublicState;
+	
+	/**
+	 * The rotation speed of the cannonPublicState.
+	 */
+	public final double rotationAngle;
+
+	/**
+	 * The private local state of the cannonPublicState being moved.
+	 */
+	public final  AgtCannonHLSInExternal cannonPrivateState;
 	
 	/**
 	 * Builds a partly initialized instance of this influence.
 	 * The {@link Set#add(Object)} method has still to be called on the 
-	 * {@link RIMoveCannon#ambientTemperature} field for each cannon to cool down.
+	 * {@link RIMoveCannon#ambientTemperature} field for each cannonPublicState to cool down.
 	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
 	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
 	 * @param ambientTemperature The external ambient temperature.
+	 * @param rotationAngle The rotation speed of the cannonPublicState.
 	 */
 	public RIMoveCannon(
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound,
-			AgtCannonPLSInExternal cannon
+			AgtCannonPLSInExternal cannon,
+			AgtCannonHLSInExternal cannonPrivateState,
+			double rotationAngle
 	){
 		super(
 				CATEGORY,
@@ -89,6 +103,8 @@ public class RIMoveCannon extends RegularInfluence {
 				timeLowerBound, 
 				timeUpperBound
 		);
-		this.cannon = cannon;
+		this.cannonPublicState = cannon;
+		this.cannonPrivateState = cannonPrivateState;
+		this.rotationAngle = rotationAngle;
 	}
 }

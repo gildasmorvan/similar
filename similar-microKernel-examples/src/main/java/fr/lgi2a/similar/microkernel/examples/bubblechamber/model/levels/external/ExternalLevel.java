@@ -1,5 +1,5 @@
 /**
- * Copyright or � or Copr. LGI2A
+ * Copyright or © or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -64,10 +64,11 @@ import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
 import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLevel;
 
 /**
- * The "External" level, where the "particles cannon" exists and fires particles 
+ * The "External" level, where the "particles cannonPublicState" exists and fires particles 
  * inside the "bubble chamber" level.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class ExternalLevel extends AbstractLevel {
 	/**
@@ -175,14 +176,27 @@ public class ExternalLevel extends AbstractLevel {
 	private void reactionTo(SimulationTimeStamp transitoryTimeMin,
 			SimulationTimeStamp transitoryTimeMax, RIMoveCannon influence,
 			InfluencesMap remainingInfluences) {
-		//TODO 
-		//TEST
-		influence.cannon.setDirection(
+		
+		double angle = Math.asin(influence.cannonPublicState.getDirection().getY());
+		
+		if(Math.abs(angle) + influence.rotationAngle >= influence.cannonPrivateState.getMaxAngle()) {
+			influence.cannonPrivateState.setClockWiseRotation(!influence.cannonPrivateState.isClockWiseRotation());
+		}
+		
+		if(influence.cannonPrivateState.isClockWiseRotation()) {
+			angle += influence.rotationAngle;
+		}
+		else {
+			angle -= influence.rotationAngle;
+		}
+		
+		influence.cannonPublicState.setDirection(
 			new Point2D.Double(
-					influence.cannon.getDirection().getX(),
-					influence.cannon.getDirection().getY() - 0.001
+					Math.cos(angle),
+					Math.sin(angle)
 				)
 			);
+		
 	}
 
 	/**
@@ -198,11 +212,11 @@ public class ExternalLevel extends AbstractLevel {
 	) {
 		double ambientTemperature = influence.ambientTemperature;
 		for( AgtCannonPLSInExternal cannon : influence.cannon ) {
-			// Adjust the temperature of the cannon to the ambient external temperature.
+			// Adjust the temperature of the cannonPublicState to the ambient external temperature.
 			double cannonTemp = cannon.getTemperature( );
 			double difference = ambientTemperature - cannonTemp;
 //			double adjustment = Math.pow( Math.abs( difference ) / 10, 1.5 );
-//			cannon.setTemperature( cannonTemp + Math.signum( difference ) * adjustment );
+//			cannonPublicState.setTemperature( cannonTemp + Math.signum( difference ) * adjustment );
 			double adjustment = Math.signum( difference ) * 1.0;
 			if( Math.abs( difference )  > ArithmeticParameters.DOUBLE_PRECISION ){
 				if( Math.abs( difference ) < 1.0 ){
@@ -235,7 +249,7 @@ public class ExternalLevel extends AbstractLevel {
 				influence.particle
 			) 
 		);
-		// Then heat up the cannon depending on the expended power
+		// Then heat up the cannonPublicState depending on the expended power
 		AgtCannonPLSInExternal state = influence.cannon;
 		state.setTemperature(
 			state.getTemperature() + state.getPower() * this.powerToTemperatureConversionRatio

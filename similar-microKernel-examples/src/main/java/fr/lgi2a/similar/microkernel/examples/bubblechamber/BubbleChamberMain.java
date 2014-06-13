@@ -114,7 +114,7 @@ public class BubbleChamberMain {
 		// Create the simulation model being used.
 		BubbleChamberSimulation simulationModel = new BubbleChamberSimulation(
 				new SimulationTimeStamp( 0 ), 
-				new SimulationTimeStamp( 300 ), 
+				new SimulationTimeStamp( 3000 ), 
 				parameters
 		);
 		// Run the simulation.

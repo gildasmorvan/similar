@@ -106,7 +106,7 @@ public class BubbleChamberParameters {
 				200
 		);
 		this.cannonMaxAngle = Math.PI/3;
-		this.cannonAngularSpeed = Math.PI/24;
+		this.cannonAngularSpeed = Math.PI/17;
 		this.initialAmbientTemperature = 20;
 		this.cannonPowerRange = new double[]{
 			0.5,

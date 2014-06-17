@@ -152,7 +152,7 @@ public class BubbleChamberEnvironment extends AbstractEnvironment {
 		for( ILocalStateOfAgent state : dynamicState.getPublicLocalStateOfAgents() ){
 			// Check if the agent is a bubble.
 			if( state.getCategoryOfAgent().isA( BubbleChamberAgentCategoriesList.BUBBLE ) ){
-				if(RandomValueFactory.getStrategy().randomDouble(0, 1) < 0.01) {
+				if(RandomValueFactory.getStrategy().randomDouble(0, 1) < 0.001) {
 					SystemInfluenceRemoveAgent removeAgent = new SystemInfluenceRemoveAgent(
 							BubbleChamberLevelList.CHAMBER, 
 							timeUpperBound,

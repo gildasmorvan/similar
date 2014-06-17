@@ -76,12 +76,12 @@ public class ChamberLevelSwingViewer extends AbstractProbeImageSwingJPanel {
 	/**
 	 * The size in pixels of a simulation distance unit.
 	 */
-	private static final int MULTIPLICATION_FACTOR = 5;
+	private static final int MULTIPLICATION_FACTOR = 3;
 	
 	/**
 	 * The size in pixels of a simulation distance unit.
 	 */
-	private static final int CANNON_LENGTH = 10;
+	private static final int CANNON_LENGTH = 5;
 	
 	/**
 	 * {@inheritDoc}
@@ -158,7 +158,7 @@ public class ChamberLevelSwingViewer extends AbstractProbeImageSwingJPanel {
 			}
 		}
 		
-		// Finally, we print the canons.
+		// Finally, we print the cannon.
 		for(ILocalStateOfAgent agentPLS : externalLevel.getPublicLocalStateOfAgents()) {
 			if(agentPLS.getCategoryOfAgent().equals(BubbleChamberAgentCategoriesList.CANNON)) {
 				AgtCannonPLSInExternal cannonPLS = (AgtCannonPLSInExternal) agentPLS;
@@ -166,8 +166,8 @@ public class ChamberLevelSwingViewer extends AbstractProbeImageSwingJPanel {
 				Polygon canonPolygon = new Polygon( );
 				canonPolygon.addPoint( (int) Math.floor(cannonPLS.getEntryPointInChamber( ).getX()), (int) Math.floor(MULTIPLICATION_FACTOR * (cannonPLS.getEntryPointInChamber( ).getY() - 1 )) );
 				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX()), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY()  + 1 ) ) );
-				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX() + CANNON_LENGTH), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY()  + 1 ) ) );
-				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX() + CANNON_LENGTH), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY() - 1 ) ) );
+				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX() + CANNON_LENGTH ), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY()  + 1 ) ) );
+				canonPolygon.addPoint( (int) Math.floor( MULTIPLICATION_FACTOR * cannonPLS.getEntryPointInChamber( ).getX() + CANNON_LENGTH ), (int) Math.floor(MULTIPLICATION_FACTOR * ( cannonPLS.getEntryPointInChamber( ).getY() - 1 ) ) );
 				graphics.setColor( Color.RED );
 				graphics.fillPolygon( canonPolygon );
 			}

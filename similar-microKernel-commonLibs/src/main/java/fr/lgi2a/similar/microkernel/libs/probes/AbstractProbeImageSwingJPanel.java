@@ -70,6 +70,7 @@ import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
  * in a Swing {@link JPanel} object.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	/**
@@ -343,11 +344,11 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		/**
 		 * The identifier of the component displayed when the simulation is yet to be initialized.
 		 */
-		private final String SIMULATION_NOT_INITIALIZED_JCOMPONENT = "notInitializedLabel";
+		private static final String SIMULATION_NOT_INITIALIZED_JCOMPONENT = "notInitializedLabel";
 		/**
 		 * The identifier of the component displayed when the simulation is initialized.
 		 */
-		private final String SIMULATION_JCOMPONENT = "levelPainter";
+		private static final String SIMULATION_JCOMPONENT = "levelPainter";
 		
 		/**
 		 * The layout used either to display the content of the simulation or to display
@@ -372,8 +373,8 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 			this.simulationPainter = new SimulationPainter( background );
 			this.cardLayout = new CardLayout( );
 			this.setLayout( this.cardLayout );
-			this.add( this.notInitializedLabel, this.SIMULATION_NOT_INITIALIZED_JCOMPONENT );
-			this.add( this.simulationPainter, this.SIMULATION_JCOMPONENT );
+			this.add( this.notInitializedLabel, MainJPanel.SIMULATION_NOT_INITIALIZED_JCOMPONENT );
+			this.add( this.simulationPainter, MainJPanel.SIMULATION_JCOMPONENT );
 			
 			this.showInitializationLabel( );
 		}
@@ -382,14 +383,14 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		 * Displays the initialization label in the panel.
 		 */
 		public final void showInitializationLabel(){
-			this.cardLayout.show( this, this.SIMULATION_NOT_INITIALIZED_JCOMPONENT );
+			this.cardLayout.show( this, MainJPanel.SIMULATION_NOT_INITIALIZED_JCOMPONENT );
 		}
 
 		/**
 		 * Displays the simulation panel in the panel.
 		 */
 		public final void showSimulationPanel( ) {
-			this.cardLayout.show( this, this.SIMULATION_JCOMPONENT );
+			this.cardLayout.show( this, MainJPanel.SIMULATION_JCOMPONENT );
 		}
 		
 		/**

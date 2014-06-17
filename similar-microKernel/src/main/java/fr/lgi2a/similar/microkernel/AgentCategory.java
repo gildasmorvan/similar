@@ -127,8 +127,7 @@ public final class AgentCategory {
 	public boolean isA( AgentCategory category ) {
 		if (this.equals( category )) {
 			return true;
-		}
-		else{
+		} else{
 			for(AgentCategory directParentCatergory : this.directParentCatergories) {
 				if(directParentCatergory.isA(category)) {
 					return true;
@@ -148,13 +147,11 @@ public final class AgentCategory {
 	public boolean equals( Object o ) {
 		if( o == null ){
 			return false;
+		} else if( ! ( o instanceof AgentCategory )  ){
+			return false;
 		} else {
-			if( ! ( o instanceof AgentCategory )  ){
-				return false;
-			} else {
-				AgentCategory otherIdentifier = (AgentCategory) o;
-				return this.identifier.equals( otherIdentifier.identifier );
-			}
+			AgentCategory otherIdentifier = (AgentCategory) o;
+			return this.identifier.equals( otherIdentifier.identifier );
 		}
 	}
 	

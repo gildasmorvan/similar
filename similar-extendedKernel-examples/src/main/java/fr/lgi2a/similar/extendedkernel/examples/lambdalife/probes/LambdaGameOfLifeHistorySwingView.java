@@ -95,8 +95,7 @@ public class LambdaGameOfLifeHistorySwingView extends AbstractProbeImageSwingJPa
 			for(int y = 0; y < height; y++) {
 				this.lastChange[x][y]=initialTime.getIdentifier();
 			}
-		}
-			
+		}		
 	}
 
 	/**

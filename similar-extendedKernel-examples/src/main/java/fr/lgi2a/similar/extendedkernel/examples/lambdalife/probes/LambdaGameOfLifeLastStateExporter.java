@@ -94,7 +94,9 @@ public class LambdaGameOfLifeLastStateExporter implements IProbe {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void endObservation() { }
+	public void endObservation() {
+		//Does nothing in this case.
+	}
 
 	/**
 	 * {@inheritDoc}

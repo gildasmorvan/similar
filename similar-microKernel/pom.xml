@@ -6,7 +6,7 @@
   <parent>
     <groupId>fr.lgi2a</groupId>
     <artifactId>similar</artifactId>
-    <version>0.2.3-SNAPSHOT</version>
+    <version>0.2.3</version>
   </parent>
   
 <!-- The description of the module -->
@@ -14,5 +14,5 @@
   <artifactId>similar-microKernel</artifactId>
   <description>A micro kernel containing the minimal specification of SIMILAR, supporting the design of efficient simulations.</description>
   <name>SIMILAR - Micro kernel</name>
-  <inceptionYear>2013</inceptionYear>
+  <inceptionYear>2014</inceptionYear>
 </project>

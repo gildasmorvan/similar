@@ -6,7 +6,7 @@
   <parent>
     <groupId>fr.lgi2a</groupId>
     <artifactId>similar</artifactId>
-    <version>0.2.3-SNAPSHOT</version>
+    <version>0.2.3</version>
   </parent>
   
 <!-- The description of the module -->
@@ -14,7 +14,7 @@
   <artifactId>similar-distribution</artifactId>
   <description>Builds the binary release of the SIMILAR API suite.</description>
   <name>SIMILAR - Binary distribution</name>
-  <inceptionYear>2013</inceptionYear>
+  <inceptionYear>2014</inceptionYear>
   
 <!-- The dependencies of this module. Since this module builds the whole application, 
 		its dependencies have to include all the other sub-modules.  -->
@@ -81,6 +81,6 @@
 		</plugins>
 	</build>
 	<properties>
-		<fr.lgi2a.similar.version>0.2.3-SNAPSHOT</fr.lgi2a.similar.version>
+		<fr.lgi2a.similar.version>0.2.3</fr.lgi2a.similar.version>
 	</properties>
 </project>

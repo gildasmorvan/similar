@@ -51,9 +51,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
+import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
@@ -86,6 +90,12 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	 * The panel where the probe is displayed.
 	 */
 	private MainJPanel mainPanel;
+	/**
+	 * Flag telling if the display of the simulation has to be optimized or not.
+	 * If <code>true</code>, then some half-consistent states will be ignored to prevent going over
+	 * 32 milliseconds between two images updates. Indeed, paradoxically, doing so reduces the overall performances of the display.
+	 */
+	private boolean displayOptimization;
 	
 	/**
 	 * Builds a swing displayer using a transparent background in the drawing area.
@@ -104,10 +114,29 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	protected AbstractProbeImageSwingJPanel( 
 		Color backgroundColor
 	)  {
+		this(
+			backgroundColor,
+			false
+		);
+	}
+
+	/**
+	 * Builds a swing displayer using a custom background in the drawing area.
+	 * @param backgroundColor A background color used when the drawing area is not filled. 
+	 * <code>null</code> means that the background remains transparent.
+	 * @param displayOptimization Flag telling if the display of the simulation has to be optimized or not.
+	 * If <code>true</code>, then some half-consistent states will be ignored to prevent going over
+	 * 32 milliseconds between two images updates. Indeed, paradoxically, doing so reduces the overall performances of the display.
+	 */
+	protected AbstractProbeImageSwingJPanel( 
+		Color backgroundColor,
+		boolean displayOptimization
+	)  {
 		super();
 		this.mainPanel = new MainJPanel( backgroundColor );
 		this.doubleBuffer = new BufferedImage[2];
 		this.currentBufferIndex = 0;
+		this.displayOptimization = displayOptimization;
 	}
 	
 
@@ -155,11 +184,14 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 			simulationEngine.getSimulationDynamicStates(), 
 			initialTimestamp 
 		);
+		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    GraphicsDevice device = env.getDefaultScreenDevice();
+	    GraphicsConfiguration config = device.getDefaultConfiguration();
 		for(int index = 0; index < this.doubleBuffer.length; index++){
-			this.doubleBuffer[index] = new BufferedImage( 
+			this.doubleBuffer[index] = config.createCompatibleImage(
 				imageDimensions.width, 
 				imageDimensions.height, 
-				BufferedImage.TYPE_INT_ARGB
+				Transparency.OPAQUE
 			);
 		}
 		/*
@@ -226,6 +258,15 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	);
 	
 	/**
+	 * This field stores the last time an update of the image on screen was made.
+	 */
+	private long lastUpdate;
+	/**
+	 * The delay, in milliseconds, between two updates of the on-screen image.
+	 */
+	private static final int UPDATE_INTERDELAY = 32;
+	
+	/**
 	 * Refreshes the not displayed image of the double buffer with the simulation data 
 	 * defined as arguments of this method, and then performs a double buffer swap to display
 	 * its content on screen.
@@ -236,6 +277,17 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		SimulationTimeStamp currentTime,
 		IPublicDynamicStateMap dynamicState
 	){
+		/*
+		 * First check if we are not trying to update the image on screen more than necessary (for instance to generate 
+		 * more than 32 images per seconds).
+		 */
+		long currentSystemTime = System.currentTimeMillis( );
+		if( this.displayOptimization && currentSystemTime - this.lastUpdate < UPDATE_INTERDELAY ) {
+			return;
+		} else {
+			this.lastUpdate = currentSystemTime;
+		}
+		/* The on screen image has to be updated : perform the update operations. */
 		/*
 		 * Update the double buffer index being used.
 		 * After this instruction, the 'currentBufferIndex' field contains the index
@@ -369,6 +421,7 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		 * @param background The background color used in the panel.
 		 */
 		public MainJPanel ( Color background ){
+			this.setDoubleBuffered( true );
 			this.notInitializedLabel = new JLabel( "The simulation is not yet initialized." );
 			this.simulationPainter = new SimulationPainter( background );
 			this.cardLayout = new CardLayout( );
@@ -400,6 +453,8 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		public final void updateSimulationPanel( BufferedImage printerImage ){
 			this.simulationPainter.printerImage = printerImage;
 			this.simulationPainter.repaint( );
+			// This operation is necessary to avoid blinks/flashing of the image.
+			Toolkit.getDefaultToolkit().sync();
 		}
 	}
 
@@ -408,7 +463,7 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	 * 
 	 * @author <a href="http://www.lgi2a.univ-artois.fr/" target="_blank">LGI2A</a> -- <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
 	 */
-	private class SimulationPainter extends JComponent {
+	private class SimulationPainter extends JPanel {
 		/**
 		 * Serialization ID of this class.
 		 */
@@ -459,7 +514,7 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 				graphics2d.drawImage( this.printerImage, getInsets( ).left, getInsets( ).top, null );
 			}
 		}
-
+		
 		/**
 		 * {@inheritDoc}
 		 * @see javax.swing.JComponent#getPreferredSize()

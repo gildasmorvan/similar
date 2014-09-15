@@ -1,5 +1,3 @@
 This file lists the changes between this version and the previous version of SIMILAR:
 
-	* Changed the general structure of the SIMILAR API to take into considerations the 
-advances made in the theory of SIMILAR.
-	* Now including abstract classes facilitating the design of new simulation engines
+	* Improved the performances of the swing image probe (AbstractProbeImageSwingJPanel class)

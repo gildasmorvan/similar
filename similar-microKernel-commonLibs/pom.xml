@@ -6,7 +6,7 @@
   <parent>
     <groupId>fr.lgi2a</groupId>
     <artifactId>similar</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.4-SNAPSHOT</version>
   </parent>
   
 <!-- The description of the module -->
@@ -19,7 +19,7 @@
   	<dependency>
   		<groupId>fr.lgi2a</groupId>
   		<artifactId>similar-microKernel</artifactId>
-  		<version>0.2.3</version>
+  		<version>0.2.4-SNAPSHOT</version>
   	</dependency>
   </dependencies>
   <description>The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features.</description>

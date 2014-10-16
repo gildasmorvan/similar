@@ -53,7 +53,6 @@ import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParam
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.AgtCellFactory;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeLastStateExporter;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeSwingView;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes.MacroStateProbe;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.randomstrategies.SecureRandomBasedRandomValuesGenerator;
 import fr.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
@@ -82,7 +81,9 @@ public class LambdaLifeMain {
 		LambdaLifeParameters parameters = new LambdaLifeParameters( );
 		parameters.gridWidth = 50;
 		parameters.gridHeight = 50;
-		parameters.stillLifeThreshold = 10;
+		parameters.stillLifeThreshold = 20;
+		parameters.xTorus = false;
+		parameters.yTorus = false;
 		parameters.finalTime = new SimulationTimeStamp(10000);
 		// Initialize the random numbers generator.
 		
@@ -104,10 +105,10 @@ public class LambdaLifeMain {
 				"Trace printer", 
 				new ProbeExecutionTracker( System.err, false )
 		);
-		engine.addProbe(
-				"Nb of living cells",
-				new MacroStateProbe( System.out )
-		);
+//		engine.addProbe(
+//				"Nb of living cells",
+//				new MacroStateProbe( System.out )
+//		);
 		
 		engine.addProbe(
 				"Evolution displayer", 

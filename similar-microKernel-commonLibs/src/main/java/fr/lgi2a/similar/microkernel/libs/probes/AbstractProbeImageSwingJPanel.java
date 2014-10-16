@@ -116,7 +116,7 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	)  {
 		this(
 			backgroundColor,
-			false
+			true
 		);
 	}
 

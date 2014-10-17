@@ -58,11 +58,11 @@ public abstract class RealTimeMatcherProbe implements IProbe {
 	/**
 	 * The number of milliseconds in a second.
 	 */
-	private static final int MILLISECONDS_IN_SECONDS = (int) Math.pow( 10, 3 );
+	protected static final int MILLISECONDS_IN_SECONDS = (int) Math.pow( 10, 3 );
 	/**
 	 * The number of nanoseconds in a second.
 	 */
-	private static final int NANOSECONDS_IN_SECONDS = (int) Math.pow( 10, 9 );
+	protected static final int NANOSECONDS_IN_SECONDS = (int) Math.pow( 10, 9 );
 	
 	/**
 	 * The acceleration factor of the simulation. 1 means that the time of the simulation has to match real time. A higher value means that 

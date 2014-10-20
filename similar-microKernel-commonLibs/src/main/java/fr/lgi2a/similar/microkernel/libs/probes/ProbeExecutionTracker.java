@@ -54,8 +54,9 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * This probe tracks the execution of the simulation and prints notification messages
- * in an stream printer.
+ * in a stream printer.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class ProbeExecutionTracker implements IProbe {
 	/**

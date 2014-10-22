@@ -6,7 +6,7 @@
   <parent>
     <groupId>fr.lgi2a</groupId>
     <artifactId>similar</artifactId>
-    <version>0.2.4</version>
+    <version>0.2.5-SNAPSHOT</version>
   </parent>
   
 <!-- The description of the module -->
@@ -80,7 +80,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<properties>
-		<fr.lgi2a.similar.version>0.2.4</fr.lgi2a.similar.version>
-	</properties>
 </project>

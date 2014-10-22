@@ -6,7 +6,7 @@
   <parent>
     <groupId>fr.lgi2a</groupId>
     <artifactId>similar</artifactId>
-    <version>0.2.4</version>
+    <version>0.2.5-SNAPSHOT</version>
   </parent>
   
 <!-- The description of the module -->
@@ -19,12 +19,12 @@
   	<dependency>
   		<groupId>fr.lgi2a</groupId>
   		<artifactId>similar-microKernel</artifactId>
-  		<version>0.2.4</version>
+	  	<version>${fr.lgi2a.similar.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>fr.lgi2a</groupId>
   		<artifactId>similar-microKernel-commonLibs</artifactId>
-  		<version>0.2.4</version>
+	  	<version>${fr.lgi2a.similar.version}</version>
   	</dependency>
   </dependencies>
 </project>

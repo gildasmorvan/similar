@@ -1,3 +1,0 @@
-This file lists the changes between this version and the previous version of SIMILAR:
-
-	* Improved the performances of the swing image probe (AbstractProbeImageSwingJPanel class)

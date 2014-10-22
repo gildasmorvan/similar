@@ -1051,7 +1051,7 @@ The common libraries of SIMILAR define the generic and reusable implementations 
 *[[Agents|CL - Generic - Passive agent]] doing nothing;
 *[[Environments|CL - Generic - Passive environment]] doing nothing.</pre>
 </div>
-<div title="CL - Probes" creator="Designer" modifier="Designer" created="201402281431" modified="201404240904" changecount="9">
+<div title="CL - Probes" creator="Designer" modifier="Designer" created="201402281431" modified="201410220835" changecount="13">
 <pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Observation probes}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -1059,7 +1059,8 @@ The common libraries of SIMILAR define the following observation probes:
 *{{className{[[ProbeExceptionPrinter|CL - Probes - ExceptionPrinter]]}}} printing on a stream the exceptions that were caught during the simulation;
 *{{className{[[ProbeExecutionTracker|CL - Probes - ExecutionTracker]]}}} tracking on a stream the execution flow of the simulation (consistent times reached);
 *{{className{[[AbstractProbeImageSwingJPanel|CL - Probes - JPanel image]]}}} displaying the content of the simulation into an image printed in a swing JPanel;
-*{{className{[[ProbeImageSwingJFrame|CL - Probes - JFrame image]]}}} displaying the content of the simulation into an image printed in a swing JFrame.</pre>
+*{{className{[[ProbeImageSwingJFrame|CL - Probes - JFrame image]]}}} displaying the content of the simulation into an image printed in a swing JFrame.
+*{{className{[[RealTimeMatcherProbe|CL - Probes - Real time matcher]]}}} slowing down the execution of the simulation.</pre>
 </div>
 <div title="CL - Probes - ExceptionPrinter" creator="Designer" modifier="Designer" created="201402281435" modified="201404240948" changecount="11">
 <pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - Exception tracker}}}
@@ -1098,7 +1099,7 @@ IProbe probe = new ProbeExecutionTracker( );
 }}}
 }}} ===</pre>
 </div>
-<div title="CL - Probes - ExecutionTracker" creator="Designer" modifier="Designer" created="201402281447" modified="201403051004" changecount="7">
+<div title="CL - Probes - ExecutionTracker" creator="Designer" modifier="Designer" created="201402281447" modified="201410220839" changecount="8">
 <pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - Execution flow tracker}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -1188,7 +1189,7 @@ IProbe probe = new ProbeImageSwingJFrame(
 }}}
 }}} ===</pre>
 </div>
-<div title="CL - Probes - JPanel image" creator="Designer" modifier="Designer" created="201404240907" modified="201404240942" changecount="21">
+<div title="CL - Probes - JPanel image" creator="Designer" modifier="Designer" created="201404240907" modified="201410220854" changecount="25">
 <pre>&lt;&lt;tiddler [[Common libs - Navigation menu]]&gt;&gt;{{stepMainTitle{Probe - JPanel image}}}
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
@@ -1355,7 +1356,7 @@ protected void updateGraphics(
 }}}
 }}} ===</pre>
 </div>
-<div title="Common libs - Navigation menu" creator="Designer" modifier="Designer" created="201402241333" modified="201404240905" changecount="30">
+<div title="Common libs - Navigation menu" creator="Designer" modifier="Designer" created="201402241333" modified="201410220836" changecount="33">
 <pre>*[[|Home]]
 *[[Abstract implementations|CL - Abstract implementations]]
 **[[Simulation engine|CL - Abstract - Simulation engine]]
@@ -1377,6 +1378,7 @@ protected void updateGraphics(
 **[[Execution steps|CL - Probes - ExecutionTracker]]
 **[[JPanel image|CL - Probes - JPanel image]]
 **[[JFrame image|CL - Probes - JFrame image]]
+**[[Realtime matcher|CL - Probes - Real time matcher]]
 &lt;&lt;dropMenu&gt;&gt;</pre>
 </div>
 <div title="ConfigTweaks" creator="Administrator" modifier="Designer" created="201311150903" modified="201401211600" tags="excludeLists systemConfig" changecount="4">

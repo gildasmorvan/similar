@@ -323,21 +323,19 @@ The licensing text to put as a comment at the beginning of the files can be foun
 To change the version number of the SIMILAR API suite, the following modifications have to be made:
 	- Change the version in the 'pom.xml' file of the root of the project:
 		- Change the value of the "version" tag located in the root of the pom.
+		- Change the value of the "fr.lgi2a.similar.version" tag located in the "properties" tag of the root of the pom.
 	- Change the version number of the parent of each 'pom.xml' of the sub-modules, i.e. change version in:
 			  <parent>
 			    <groupId>fr.lgi2a</groupId>
 			    <artifactId>similar</artifactId>
 			    <version>0.0.0</version>
 			  </parent>
-	- Change the version number of the dependencies in each 'pom.xml' of the sub-modules, i.e. change version in 'dependency' tags like:
-		  	<dependency>
-		  		<groupId>fr.lgi2a</groupId>
-		  		<artifactId>similar-microKernel</artifactId>
-		  		<version>0.0.0</version>
-		  	</dependency>
 	- Change the version number in the documentation in the file "src/doc/README.txt":
-		- In the tiddler found in the "Project dependencies" item of the left menu
-		- In the "SiteSubtitle" tiddler (it can be found by performing a search using the top right bar)
+		- Go to the top right of the page and select "backstage"
+		- In the top menu, select "plugins" and then "SimilarVersionPlugin"
+		- Click on "Close" at the top right of the page
+		- Select the "Edit" menu displayed right to the "SimilarVersionPlugin" title
+		- Find the line starting with "wikify" and change the version number there
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	(IV-c) Adding simulation examples					(sum-exam)

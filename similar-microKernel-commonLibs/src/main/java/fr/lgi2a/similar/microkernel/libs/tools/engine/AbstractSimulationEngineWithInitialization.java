@@ -125,34 +125,34 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public LinkedHashSet<IAgent4Engine> getAgents() {
+	public Set<IAgent4Engine> getAgents() {
 		Set<IAgent4Engine> agentsSet = new LinkedHashSet<IAgent4Engine>();
 		for( LevelIdentifier level : this.getLevels() ){
 			agentsSet.addAll( this.getAgents( level ) );
 		}
-		return (LinkedHashSet<IAgent4Engine>) agentsSet;
+		return agentsSet;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public LinkedHashSet<LevelIdentifier> getLevels() {
-		return (LinkedHashSet<LevelIdentifier>) this.levels.keySet( );
+	public Set<LevelIdentifier> getLevels() {
+		return this.levels.keySet( );
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public LinkedHashSet<IAgent4Engine> getAgents(
+	public Set<IAgent4Engine> getAgents(
 			LevelIdentifier level
 	) {
 		Set<IAgent4Engine> agentsSet = this.agents.get( level );
 		if( agentsSet == null ){
 			throw new NoSuchElementException( "The simulation does not contain the level '" + level + "'." );
 		}
-		return (LinkedHashSet<IAgent4Engine>) agentsSet;
+		return agentsSet;
 	}
 
 	/**

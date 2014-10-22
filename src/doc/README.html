@@ -46,7 +46,7 @@ DAMAGE.
 <!--}}}-->
 
 <!--PRE-HEAD-END-->
-<title> Similar API suite - Documentation (v 0.2.4) </title>
+<title> Similar API suite - Documentation(v 0.2.5) </title>
 <style id="styleArea" type="text/css">
 #saveTest {display:none;}
 #messageArea {display:none;}
@@ -850,7 +850,7 @@ Tiddler.prototype.changed = function()
 };
 //}}}</pre>
 </div>
-<div title="Documentation content" creator="Designer" modifier="Designer" created="201311261511" modified="201401220934" changecount="9">
+<div title="Documentation content" creator="Designer" modifier="Designer" created="201311261511" modified="201410220819" changecount="10">
 <pre>The SIMIAR API suite is a java API whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. Its present documentation contains the following features:
 
 !!Beginner's guide
@@ -1154,13 +1154,13 @@ Tabulation content 2.
 <div title="HaemoSideBar" creator="Designer" modifier="Designer" created="201311150920" modified="201311150925" tags="HaemoglobinTheme excludeLists" changecount="5">
 <pre></pre>
 </div>
-<div title="Home" creator="Designer" modifier="Designer" created="201311261001" modified="201311290938" changecount="52">
+<div title="Home" creator="Designer" modifier="Designer" created="201311261001" modified="201410220819" changecount="54">
 <pre>The simulation of complex system often requires knowledge coming from different sources to obtain relevant results. These sources can either be persons from different application fields, or different viewpoints on the same phenomenon.
 		
 Yet, regular multi-agent based simulation meta models lack the structure to manage the aggregation of such systems: their representation of the agents, the environment and the temporal dynamics of the system is designed to support a single viewpoint.
 		
 The +++^34em^*@[&lt;strong&gt;SIMILAR&lt;/strong&gt;]''SIMILAR'' stands for: //''SI''mulations with ''M''ult''I''-''L''evel ''A''gents and ''R''eactions//.
-=== approach is designed to deal with this issue. This approach relies on a a multi-level, influence-reaction and agent-based knowledge representation, more fitting to multiple viewpoints. The approach includes a generic and modular formal model, a methodology and a simulation API preserving the structure of the formal model. Owing to these properties, the design of the above-mentioned simulations is supported during the whole simulation process, is more robust to model revisions and relies on a structure fit to represent the intrinsic complexity of the simulated phenomena.
+=== approach is designed to deal with this issue. This approach relies on a a multi-level, influence-reaction and agent-based knowledge representation, more fitting to multiple viewpoints. The approach includes a generic and modular formal model, a methodology and a simulation API preserving the structure of the formal model. Owing to these properties, the design of the above-mentioned simulations is supported during the whole simulation process, is more robust to model revisions and relies on a structure fit to represent the intrinsic complexity of the simulated phenomena. 
 
 {{linkbigbtn center{[[Documentation content]]}}}</pre>
 </div>
@@ -2328,7 +2328,7 @@ tweaked &quot;eat newlines&quot; logic for line-mode {{{+++}}} and {{{===}}} syn
 &lt;div id='contentFooter' refresh='content' tiddler='contentFooter'&gt;&lt;/div&gt;
 &lt;!--}}}--&gt;</pre>
 </div>
-<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201409151513" changecount="54">
+<div title="Project dependencies" creator="Designer" modifier="Designer" created="201311151152" modified="201410220825" changecount="55">
 <pre>This part of the documentation was generated with Maven.
 !Project Dependencies
 The following is a list of dependencies for this project. These dependencies are required to compile and use the application.
@@ -2337,10 +2337,10 @@ The following is a list of dependencies for this project. These dependencies are
 {{moresection{
 The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:
 |!GroupId |!ArtifactId |!Version |!Type |!License |
-|fr.lgi2a |similar-microKernel |0.2.4 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-microKernel-commonLibs |0.2.4 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-extendedKernel |0.2.4 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
-|fr.lgi2a |similar-extendedKernel-extendedLibs |0.2.4 |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-microKernel |&lt;&lt;similarversion&gt;&gt; |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-microKernel-commonLibs |&lt;&lt;similarversion&gt;&gt; |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-extendedKernel |&lt;&lt;similarversion&gt;&gt; |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
+|fr.lgi2a |similar-extendedKernel-extendedLibs |&lt;&lt;similarversion&gt;&gt; |jar |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}}
 ===
 
@@ -2365,35 +2365,35 @@ The following is a list of test dependencies for this project. These dependencie
 }}} ===
 
 !Project Dependency Tree
-*fr.lgi2a:similar-distribution:jar:0.2.4 +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+*fr.lgi2a:similar-distribution:jar:&lt;&lt;similarversion&gt;&gt; +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Binary distribution|
 |''Description:'' |Builds the binary release of the SIMILAR API suite. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
-**fr.lgi2a:similar-microKernel:jar:0.2.4 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+**fr.lgi2a:similar-microKernel:jar:&lt;&lt;similarversion&gt;&gt; (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Micro kernel|
 |''Description:'' |A micro kernel containing the minimal specification of SIMILAR, supporting the design of efficient simulations. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
-**fr.lgi2a:similar-microKernel-commonLibs:jar:0.2.4 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+**fr.lgi2a:similar-microKernel-commonLibs:jar:&lt;&lt;similarversion&gt;&gt; (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Common libs|
 |''Description:'' |The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
-**fr.lgi2a:similar-extendedKernel:jar:0.2.4 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+**fr.lgi2a:similar-extendedKernel:jar:&lt;&lt;similarversion&gt;&gt; (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Extended kernel|
 |''Description:'' |An extended kernel containing the modular and highly customizable specifications of SIMILAR, supporting the design of maintainable et evolutive simulations. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |
 }}} ===
 
-**fr.lgi2a:similar-extendedKernel-extendedLibs:jar:0.2.4 (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
+**fr.lgi2a:similar-extendedKernel-extendedLibs:jar:&lt;&lt;similarversion&gt;&gt; (compile) +++?[&lt;span class=&quot;moresmallbtn&quot;&gt;More...&lt;/span&gt;]
 {{moresection{
 |&gt;|!SIMILAR - Extended libs|
 |''Description:'' |The extended libraries of the extended kernel, containing generic implementations of simulation algorithms and results exporting features. |
@@ -2442,6 +2442,29 @@ The fact that you are presently reading this means that you have had knowledge o
 &lt;&lt;&lt;
 &lt;html&gt;&lt;object width='100%' height=&quot;500&quot; type='text/plain' data='files/licence.txt' border='0' &gt;&lt;/object&gt;&lt;/html&gt;
 &lt;&lt;&lt;</pre>
+</div>
+<div title="SimilarVersionPlugin" creator="Designer" modifier="Designer" created="201410220822" modified="201410220822" tags="systemConfig excludeLists plugin" changecount="2">
+<pre>/***
+|''Name:''|SimilarVersionPlugin|
+|''Description:''|Provides a macro printing the version of SIMILAR in a tiddler |
+|''Author''|Yoann Kubera|
+|''CodeRepository:''|n/a |
+|''Version:''|0.1|
+|''Comments:''| |
+|''License''|None |
+
+***/
+//{{{
+config.macros.similarversion = {};
+
+/*
+ * Displays the version of SIMILAR in a tiddler, using the &lt;&lt;similarversion&gt;&gt; command.
+ */
+config.macros.similarversion.handler = function (place,macroName,params,wikifier,paramString,tiddler){ 
+	wikify( '0.2.5', place );
+}
+
+//}}}</pre>
 </div>
 <div title="SimpleSearchPlugin" creator="Designer" modifier="Designer" created="201311151015" tags="systemConfig plugin excludeLists" changecount="1">
 <pre>/***
@@ -2830,8 +2853,8 @@ enables 'one tiddler at a time' display for all users //other than// &quot;~Some
 2005.08.15 1.0.0 Initial Release
 &lt;&lt;&lt;</pre>
 </div>
-<div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201409151512" tags="system excludeLists" changecount="10">
-<pre>Documentation &lt;html&gt;&lt;sub&gt;(v 0.2.4)&lt;/sub&gt;&lt;/html&gt;</pre>
+<div title="SiteSubtitle" creator="Designer" modifier="Designer" created="201311150942" modified="201410220824" tags="system excludeLists" changecount="15">
+<pre>Documentation~~(v &lt;&lt;similarversion&gt;&gt;)~~</pre>
 </div>
 <div title="SiteTitle" creator="Designer" modifier="Designer" created="201311150941" modified="201311151625" tags="system excludeLists" changecount="15">
 <pre>[img(50%,)[SIMILAR API suite|images/similarLogo.png]] [&gt;img[images/structure_thumb.png]]</pre>

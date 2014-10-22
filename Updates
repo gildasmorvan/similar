@@ -2,8 +2,4 @@
 -------------------------------------   RECENT CHANGES (SINCE LAST COMMIT)	-----------------------
 ---------------------------------------------------------------------------------------------------
 
-		- Fixed a class cast issue in the AbstractSimulationEngineWithInitialization class
-		- Added the updates and release notes files (ReleaseNotes and Updates)
-		- Updated the pom.xml files to make version change easier
-		- Updated the documentation to make version change easier
-		- Updated the documentation with help for RealTimeMatcherProbe
+		-

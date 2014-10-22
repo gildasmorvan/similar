@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.lgi2a</groupId>
 	<artifactId>similar</artifactId>
-	<version>0.2.5-SNAPSHOT</version>
+	<version>0.2.5</version>
 	
 	<name>SIMILAR API suite</name>
 	<description>The SIMILAR suite is a java API whose purpose is to support the
@@ -26,7 +26,7 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 		 </sonar.jacoco.itReportPath>
 		
 <!-- Version information. -->
-		<fr.lgi2a.similar.version>0.2.5-SNAPSHOT</fr.lgi2a.similar.version> <!-- Declared here to facilitate the declaration of dependencies in sub-modules -->
+		<fr.lgi2a.similar.version>0.2.5</fr.lgi2a.similar.version> <!-- Declared here to facilitate the declaration of dependencies in sub-modules -->
 		
 		<maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
 		<maven-site-plugin.version>3.3</maven-site-plugin.version>

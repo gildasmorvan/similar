@@ -119,13 +119,29 @@ public class ChamberLvlReactionModel implements ILevelReactionModel {
 	){
 		for( AgtParticlePLSInChamber particle : particlesUpdateList ) {
 			particle.setLocation(
-				particle.getLocation().getX() + particle.getVelocity().getX() + particle.getAcceleration().getX() / 2, 
-				particle.getLocation().getY() + particle.getVelocity().getY() + particle.getAcceleration().getY() / 2
+				particle.getLocation().getX()
+				+ particle.getVelocity().getX()
+				+ particle.getAcceleration().getX() / 2
+				, particle.getLocation().getY()
+				+ particle.getVelocity().getY()
+				+ particle.getAcceleration().getY() / 2
 			);
 			particle.setVelocity(
 				particle.getVelocity().getX() + particle.getAcceleration().getX(), 
 				particle.getVelocity().getY() + particle.getAcceleration().getY()
 			);
+			
+			//Update the acceleration of the particle according to the magnetic field
+			if(chamberEnvState.getMagneticFieldEmissionPoint() != null) {
+				particle.setAcceleration(
+					particle.getAcceleration().getX() + chamberEnvState.getMagneticFieldValue()/(1 + Math.pow(
+						Math.abs(chamberEnvState.getMagneticFieldEmissionPoint().getX() - particle.getLocation().getX()), 2)
+					),
+					particle.getAcceleration().getY() + chamberEnvState.getMagneticFieldValue()/(1 + Math.pow(
+						Math.abs(chamberEnvState.getMagneticFieldEmissionPoint().getY() - particle.getLocation().getY()), 2)
+					)
+				);
+			}
 			// Check if the particle goes out of the bounds of the chamber.
 			// If true, the agent is removed from the simulation.
 			if( ! chamberEnvState.getBounds().contains( particle.getLocation() ) ) {

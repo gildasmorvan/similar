@@ -46,6 +46,7 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model;
 
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractSimulationParameters;
@@ -82,6 +83,17 @@ public class BubbleChamberParameters extends AbstractSimulationParameters {
 	 * This array contains two elements (the lower and higher bound of the range).
 	 */
 	public double[] cannonPowerRange;
+	
+	/**
+	 * The point from where a magnetic field is emitted.
+	 */
+	public Point2D magneticFieldEmissionPoint;
+	
+	/**
+	 * The value of the magnetic field.
+	 */
+	public double magneticFieldValue;
+	
 	/**
 	 * The final time of the simulation.
 	 */
@@ -107,6 +119,14 @@ public class BubbleChamberParameters extends AbstractSimulationParameters {
 			0.5,
 			10
 		};
+		
+		this.magneticFieldEmissionPoint = new Point2D.Double(
+				100, 200
+			);
+		
+		this.magneticFieldValue = 1000;
+		
 		this.finalTime = new SimulationTimeStamp( 300 );
+		
 	}
 }

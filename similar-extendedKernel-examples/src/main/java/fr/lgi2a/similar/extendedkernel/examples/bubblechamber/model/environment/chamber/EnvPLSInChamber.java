@@ -46,6 +46,7 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber;
 
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
@@ -61,11 +62,16 @@ public class EnvPLSInChamber extends AbstractLocalStateOfEnvironment {
 	 * Builds an initialized instance of this public local state.
 	 * @param owner The agent owning this public local state.
 	 * @param bounds The bounds of the chamber.
+	 * @param magneticFieldEmissionPoint The point from where a magnetic field is emitted.
+	 * @param magneticFieldValue The value of the magnetic field.
 	 * @throws IllegalArgumentException If the <code>bounds</code> are null
 	 * or if its dimensions are lower or equal to 0.
 	 */
 	public EnvPLSInChamber(
-			Rectangle2D bounds
+			Rectangle2D bounds,
+			Point2D magneticFieldEmissionPoint,
+			double magneticFieldValue
+			
 	) {
 		super(
 			BubbleChamberLevelList.CHAMBER
@@ -82,6 +88,10 @@ public class EnvPLSInChamber extends AbstractLocalStateOfEnvironment {
 					bounds.getHeight()
 			);
 		}
+		
+		this.magneticFieldEmissionPoint = magneticFieldEmissionPoint;
+
+		this.magneticFieldValue = magneticFieldValue;
 	}
 	
 	//
@@ -96,9 +106,33 @@ public class EnvPLSInChamber extends AbstractLocalStateOfEnvironment {
 	private Rectangle2D bounds;
 
 	/**
+	 * The point from where a magnetic field is emitted.
+	 */
+	private Point2D magneticFieldEmissionPoint;
+	
+	/**
+	 * The value of the magnetic field.
+	 */
+	private double magneticFieldValue;
+	
+	/**
 	 * The bounds of the chamber.
 	 */
 	public Rectangle2D getBounds( ) {
 		return this.bounds;
+	}
+
+	/**
+	 * The point from where a magnetic field is emitted.
+	 */
+	public Point2D getMagneticFieldEmissionPoint() {
+		return magneticFieldEmissionPoint;
+	}
+
+	/**
+	 * The value of the magnetic field.
+	 */
+	public double getMagneticFieldValue() {
+		return magneticFieldValue;
 	}
 }

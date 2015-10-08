@@ -166,7 +166,11 @@ public class BubbleChamberSimulation extends AbstractExtendedSimulationModel {
 		// Set the initial local state of the environment for each level.
 		environment.includeNewLevel(
 				BubbleChamberLevelList.CHAMBER, 
-				new EnvPLSInChamber( this.parameters.chamberBounds ),
+				new EnvPLSInChamber( 
+						this.parameters.chamberBounds,
+						this.parameters.magneticFieldEmissionPoint,
+						this.parameters.magneticFieldValue
+				),
 				new EmptyLocalStateOfEnvironment( BubbleChamberLevelList.CHAMBER )
 		);
 		environment.includeNewLevel(

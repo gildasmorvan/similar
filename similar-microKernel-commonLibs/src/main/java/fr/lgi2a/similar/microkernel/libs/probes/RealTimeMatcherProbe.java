@@ -143,7 +143,6 @@ public abstract class RealTimeMatcherProbe implements IProbe {
 				long waitingTime = (long) ( difference * MILLISECONDS_IN_SECONDS / NANOSECONDS_IN_SECONDS );
 				Thread.sleep( waitingTime );
 			} catch ( InterruptedException cause ) {
-				throw new RuntimeException( cause );
 			}
 		}
 		// Update the values read during the next observation.

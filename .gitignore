@@ -3,9 +3,6 @@
 .classpath
 .project
 .settings/
-bin/
-.externalToolBuilders/
-similarcodetemplates.xml
 
 # Maven generation directory #
 ##############################

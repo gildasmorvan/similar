@@ -81,6 +81,7 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	 * The double buffer displaying the images in the swing panel.
 	 */
 	private BufferedImage[] doubleBuffer;
+
 	/**
 	 * The index of the double buffer pointing to the image currently being used by the display 
 	 * panel to display the content of the simulation.
@@ -139,7 +140,10 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		this.displayOptimization = displayOptimization;
 	}
 	
-
+	protected BufferedImage[] getDoubleBuffer() {
+		return doubleBuffer;
+	}
+	
 	/**
 	 * Gets the swing panel where the simulation is displayed.
 	 * @return The swing panel where the simulation is displayed.

@@ -121,10 +121,10 @@ public class BubbleChamberParameters extends AbstractSimulationParameters {
 		};
 		
 		this.magneticFieldEmissionPoint = new Point2D.Double(
-				100, 200
+				200, 200
 			);
 		
-		this.magneticFieldValue = 1000;
+		this.magneticFieldValue = -100;
 		
 		this.finalTime = new SimulationTimeStamp( 300 );
 		

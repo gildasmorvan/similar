@@ -45,7 +45,7 @@
     	<moduleSet>
     		<useAllReactorProjects>true</useAllReactorProjects>
     		<binaries>
-    			<outputDirectory>/similarLib</outputDirectory>
+    			<outputDirectory>/lib</outputDirectory>
 				<unpack>false</unpack>
 				<includeDependencies>true</includeDependencies>
 				<dependencySets>

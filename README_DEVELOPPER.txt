@@ -83,8 +83,7 @@ _|_         _|_| |_>  |_(_| |  | (_| |_ | (_)| |    | | |_>  |_ | |_|(_  |_ | (_
 
 Since the SIMILAR API suite is a Java-based technology, a valid J2SE SDK has to be installed on the computer. SIMILAR was designed with the oracle implementation of the 
 Java Virtual Machine and compilation tools, with the version numbers:
-	- Java(TM) SE Runtime Environment (build 1.7.0_13-b20)
-	- Java HotSpot(TM) 64-Bit Server VM (build 23.7-b01, mixed mode)
+	- Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	(I-a) Prerequisites								(sum-requ)
@@ -150,12 +149,12 @@ checks that dependencies can be downloaded from the internet.
 First test: 
 Type the "mvn --version" command in a command line prompt. It should print information looking like the following text:
 
-			Apache Maven 3.1.0 (893ca28a1da9d5f51ac03827af98bb730128f9f2; 2013-06-2
-			Maven home: C:\apache-maven-3.1.0
-			Java version: 1.7.0_13, vendor: Oracle Corporation
-			Java home: C:\Program Files\Java\jdk1.7.0_13\jre
-			Default locale: fr_FR, platform encoding: Cp1252
-			OS name: "windows 7", version: "6.1", arch: "amd64", family: "windows"
+			Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41:47+01:00)
+			Maven home: /opt/local/share/java/maven3
+			Java version: 1.8.0_25, vendor: Oracle Corporation
+			Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre
+			Default locale: fr_FR, platform encoding: UTF-8
+			OS name: "mac os x", version: "10.11.4", arch: "x86_64", family: "mac"
 			
 Second test:
 Create a temporary directory on the file system, and open a command line prompt inside it. Then type the following command:

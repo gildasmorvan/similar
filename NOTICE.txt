@@ -4,6 +4,6 @@
 #																											  #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-	- The binary distribution of the SIMILAR API suite is built with Maven v3.1.0.
+	- The binary distribution of the SIMILAR API suite is built with Maven v3.3.9.
 	
 	- The SVG images lying in the documentation were written with the Inkscape v0.48 software.

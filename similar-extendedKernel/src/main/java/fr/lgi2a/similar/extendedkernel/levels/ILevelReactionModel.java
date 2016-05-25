@@ -97,7 +97,7 @@ public interface ILevelReactionModel {
 	 * 	</li>
 	 * </ul>
 	 * @param transitoryTimeMin The lower bound of the transitory period of the level for which this reaction is performed.
-	 * @param transitoryTimeMax The lower bound of the transitory period of the level for which this reaction is performed.
+	 * @param transitoryTimeMax The upper bound of the transitory period of the level for which this reaction is performed.
 	 * @param consistentState The consistent state being updated by this user reaction.
 	 * @param regularInfluencesOftransitoryStateDynamics The <b>regular</b> influences that have to be managed by this reaction to go from the 
 	 * previous consistent state to the next consistent state of the level.

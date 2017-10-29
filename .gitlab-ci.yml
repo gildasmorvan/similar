@@ -1,7 +1,0 @@
-build:
-  script: "mvn clean package install -B"
-  tags:
-     - maven
-  artifacts:
-    paths:
-      - similar-distribution/target/similar-distribution-*-bin.zip

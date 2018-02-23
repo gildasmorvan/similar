@@ -4,9 +4,14 @@
 [![Documentation](https://img.shields.io/badge/documentation-web-brightgreen.svg)](http://www.lgi2a.univ-artois.fr/~morvan/similar/docs/README.html)
 [![Download](https://img.shields.io/badge/download-latest%20binary%20distribution%20(v0.2.6)-blue.svg)](http://www.lgi2a.univ-artois.fr/~morvan/download/similar-distribution-0.2.6-bin.zip)
 
-[![Language](http://img.shields.io/badge/language-java-brightgreen.svg)](https://www.java.com/)
+[![Language](http://img.shields.io/badge/language-java-lightgray.svg)](https://www.java.com/)
 
-The [SIMILAR](http://www.lgi2a.univ-artois.fr/~morvan/similar.html) suite is a Java API under the [CeCILL-B license](http://cecill.info) whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. 
+The [SIMILAR](http://www.lgi2a.univ-artois.fr/~morvan/similar.html) suite is a Java API under the [CeCILL-B license](http://cecill.info) whose purpose is to support the implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. It is fully described in these two papers:
+
+* [G. Morvan and Y. Kubera. On time and consistency in multi-level agent-based simulations. arXiv:1703.02399, 2017](https://arxiv.org/abs/1703.02399)
+
+* [G. Morvan, A. Veremme, and D. Dupont. IRM4MLS: the influence reaction model for multi-level simulation. Multi-Agent-Based Simulation XI, LNAI 6532, pages 16–27. Springer, 2011](http://arxiv.org/abs/1310.7951)
+
 This software defines an API to implement such simulations and provides usage examples.
 
 A binary distribution of SIMILAR can be downloaded at [this address](http://www.lgi2a.univ-artois.fr/~morvan/similar.html).

@@ -4,3 +4,9 @@ cache:
   - .autoconf
   - $HOME/.m2
 script: mvn clean install
+deploy:
+  provider: releases
+  api_key:
+    secure: 2b60f218fc85a197c94b4223099d77172186602f
+  file: "/home/travis/build/gildasmorvan/similar/similar-distribution/target/similar-distribution-0.2.6-bin.zip"
+  skip_cleanup: true

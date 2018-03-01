@@ -4,10 +4,14 @@ cache:
   - .autoconf
   - $HOME/.m2
 script: mvn clean install
+before_deploy:
+  - export RELEASE_ZIP_FILE=$(ls /home/travis/build/gildasmorvan/similar/similar-distribution/target/similar-distribution-*-bin.zip)
+  - echo "deploying $RELEASE_ZIP_FILE to GitHub releases"
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
-  file: "/home/travis/build/gildasmorvan/similar/similar-distribution/target/similar-distribution-0.2.6-bin.zip"
+  file_glob: true
+  file: "${RELEASE_ZIP_FILE}"
   skip_cleanup: true
   on:
     tags: true

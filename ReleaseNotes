@@ -1,5 +1,29 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
+#	SIMILAR v1.0
+#	( SImulations with MultI-Level Agents and Reactions )
+#
+#	-----------------------------------------------------------------------------------------------
+#
+#	Release notes
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+---------------------------------------------------------------------------------------------------
+-------------------------------------   DETAILS		-----------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+1. Major changes:
+		- 
+2. Minor changes:
+		- 
+
+3. Bug fixes:
+		- 
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+#
 #	SIMILAR v0.2.6
 #	( SImulations with MultI-Level Agents and Reactions )
 #
@@ -16,7 +40,9 @@
 ---------------------------------------------------------------------------------------------------
 
 1. Major changes:
-		- An agent can belong to multiple categories
+		- An agent can belong to multiple categories.
+		- Similar has a new home: https://github.com/gildasmorvan/similar
+		- Change in AbstractSimulationEngineWithInitialization: Custom reactions can be made when the public local state of the agent appears in a level. For instance, update the list of agents contained in a patch of the  environment.
 
 2. Minor changes:
 		- 

@@ -78,6 +78,26 @@ public abstract class AbstractExtendedSimulationModel extends AbstractSimulation
 	private IEndCriterionModel endCriterionModel;
 	
 	/**
+	 * Builds an instance of an abstract extended simulation model, having a specific time stamp as initial time and a specific
+	 * ending criterion.
+	 * @param simulationParameters The execution parameters of the simulation.
+	 * @param endCriterionModel The end criterion model used in this simulation model.
+	 * @throws IllegalArgumentException If an argument is <code>null</code>.
+	 */
+	public AbstractExtendedSimulationModel(
+			ISimulationParameters simulationParameters,
+			IEndCriterionModel endCriterionModel
+			
+	) {
+		super( checkParametersValidity(
+			simulationParameters, 
+			endCriterionModel
+		) );
+		this.simulationParameters = simulationParameters;
+		this.endCriterionModel = endCriterionModel;
+	}
+	
+	/**
 	 * Checks the validity of the parameters provided to the constructor.
 	 * @param simulationParameters The execution parameters of the simulation.
 	 * @param endCriterionModel The end criterion model used in this simulation model.
@@ -99,26 +119,6 @@ public abstract class AbstractExtendedSimulationModel extends AbstractSimulation
 		} else {
 			return simulationParameters.getInitialTime();
 		}
-	}
-	
-	/**
-	 * Builds an instance of an abstract extended simulation model, having a specific time stamp as initial time and a specific
-	 * ending criterion.
-	 * @param simulationParameters The execution parameters of the simulation.
-	 * @param endCriterionModel The end criterion model used in this simulation model.
-	 * @throws IllegalArgumentException If an argument is <code>null</code>.
-	 */
-	public AbstractExtendedSimulationModel(
-			ISimulationParameters simulationParameters,
-			IEndCriterionModel endCriterionModel
-			
-	) {
-		super( checkParametersValidity(
-			simulationParameters, 
-			endCriterionModel
-		) );
-		this.simulationParameters = simulationParameters;
-		this.endCriterionModel = endCriterionModel;
 	}
 	
 	/**

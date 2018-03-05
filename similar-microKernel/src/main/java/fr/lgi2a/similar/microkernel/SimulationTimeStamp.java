@@ -164,10 +164,8 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 			throw new IllegalArgumentException( "The first parameter of this method cannot be null." );
 		} else {
 			long difference = this.identifier - otherTimeStamp.identifier;
-			if( difference > Integer.MAX_VALUE ){
-				return Integer.MAX_VALUE;
-			} else if( difference < Integer.MIN_VALUE ){
-				return Integer.MIN_VALUE;
+			if( difference > Integer.MAX_VALUE || difference < Integer.MIN_VALUE) {
+				throw new InvalidIntegerValueException();
 			} else {
 				return (int) difference;
 			}

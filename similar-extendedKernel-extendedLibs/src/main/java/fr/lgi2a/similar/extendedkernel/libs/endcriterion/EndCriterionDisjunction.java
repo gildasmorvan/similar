@@ -71,7 +71,7 @@ public class EndCriterionDisjunction implements IEndCriterionModel {
 	public EndCriterionDisjunction(
 		IEndCriterionModel... criterionModels
 	) {
-		this.criteria = new LinkedList<IEndCriterionModel>( );
+		this.criteria = new LinkedList<>( );
 		for( IEndCriterionModel criterion : criterionModels ){
 			if( criterion != null ){
 				this.criteria.add( criterion );

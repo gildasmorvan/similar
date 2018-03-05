@@ -144,10 +144,10 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
 		}
 		this.level = level;
-		this.stateDynamicsSystemInfluences = new LinkedHashSet<IInfluence>();
-		this.stateDynamicsRegularInfluences = new LinkedHashSet<IInfluence>();
-		this.stateDynamics = new ViewOnSetUnion<IInfluence>( this.stateDynamicsSystemInfluences, this.stateDynamicsRegularInfluences );
-		this.publicLocalStateOfAgents = new LinkedHashSet<ILocalStateOfAgent>();
+		this.stateDynamicsSystemInfluences = new LinkedHashSet<>();
+		this.stateDynamicsRegularInfluences = new LinkedHashSet<>();
+		this.stateDynamics = new ViewOnSetUnion<>( this.stateDynamicsSystemInfluences, this.stateDynamicsRegularInfluences );
+		this.publicLocalStateOfAgents = new LinkedHashSet<>();
 		
 	}
 	

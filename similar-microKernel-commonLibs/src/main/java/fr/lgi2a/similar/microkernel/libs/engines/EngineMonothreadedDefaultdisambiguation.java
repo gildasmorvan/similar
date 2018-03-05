@@ -72,6 +72,7 @@ public class EngineMonothreadedDefaultdisambiguation extends AbstractMonothreade
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	protected SimulationTimeStamp performSimulation(
 			ISimulationModel simulationModel,
 			DynamicStateMap currentSimulationDynamicState,

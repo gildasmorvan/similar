@@ -174,8 +174,8 @@ public class ExtendedAgent extends AbstractAgent {
 		AgentCategory category
 	) {
 		super(category);
-		this.perceptionModels = new HashMap<LevelIdentifier, IAgtPerceptionModel>( );
-		this.decisionModels = new HashMap<LevelIdentifier, IAgtDecisionModel>( );
+		this.perceptionModels = new HashMap<>( );
+		this.decisionModels = new HashMap<>( );
 	}
 
 	//
@@ -277,7 +277,7 @@ public class ExtendedAgent extends AbstractAgent {
 		IAgtPerceptionModel perceptionMdl,
 		IAgtDecisionModel decisionMdl
 	){
-		if( levelId == null || perceptionMdl == null | decisionMdl == null ){
+		if( levelId == null || perceptionMdl == null || decisionMdl == null ){
 			throw new IllegalArgumentException(
 				"The arguments cannot be null."
 			);

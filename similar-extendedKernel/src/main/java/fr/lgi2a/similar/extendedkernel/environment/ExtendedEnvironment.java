@@ -121,7 +121,7 @@ public class ExtendedEnvironment extends AbstractEnvironment {
 	 * </ul>
 	 */
 	public ExtendedEnvironment( ) {
-		this.naturalActionModels = new HashMap<LevelIdentifier, IEnvNaturalModel>( );
+		this.naturalActionModels = new HashMap<>( );
 	}
 
 	//

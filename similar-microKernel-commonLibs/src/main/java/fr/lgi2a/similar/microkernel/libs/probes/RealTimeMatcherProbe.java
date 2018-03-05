@@ -46,7 +46,9 @@
  */
 package fr.lgi2a.similar.microkernel.libs.probes;
 
-import fr.lgi2a.similar.microkernel.*;
+import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * This probe slows down the simulation so that its execution speed matches real time (in the simulation), or a specific factor 
@@ -143,6 +145,7 @@ public abstract class RealTimeMatcherProbe implements IProbe {
 				long waitingTime = (long) ( difference * MILLISECONDS_IN_SECONDS / NANOSECONDS_IN_SECONDS );
 				Thread.sleep( waitingTime );
 			} catch ( InterruptedException cause ) {
+				//Does nothing
 			}
 		}
 		// Update the values read during the next observation.

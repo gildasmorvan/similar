@@ -62,5 +62,7 @@ public final class EmptyGlobalState implements IGlobalState {
 	/**
 	 * Builds an empty global state for an agent.
 	 */
-	public EmptyGlobalState( ) { }
+	public EmptyGlobalState( ) {
+		//Does nothing
+	}
 }

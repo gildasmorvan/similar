@@ -304,7 +304,7 @@ public class ProbeImageSwingJFrame extends JFrame implements IProbe {
 	 * 
 	 * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
 	 */
-	public static enum ClosingManagementStrategy {
+	public enum ClosingManagementStrategy {
 		/**
 		 * The frame does not hide, even when the user clicks on the cross.
 		 */

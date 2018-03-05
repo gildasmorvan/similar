@@ -174,6 +174,7 @@ public class ViewOnSetUnion<E> extends AbstractSet<E> {
 		/**
 		 * This operation is not supported.
 		 */
+		@Override
 		public void remove() {
 			if( this.currentIterator == null ){
 				throw new IllegalStateException( "The iterator is not pointing to a valid item." );

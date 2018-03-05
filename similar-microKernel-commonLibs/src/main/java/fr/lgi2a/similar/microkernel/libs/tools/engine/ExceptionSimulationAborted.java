@@ -62,7 +62,7 @@ public class ExceptionSimulationAborted extends RuntimeException {
 	/**
 	 * The last time the simulation was half-consistent before the abortion of the simulation.
 	 */
-	private SimulationTimeStamp lastConsistentTimeBeforeAbortion;
+	private final SimulationTimeStamp lastConsistentTimeBeforeAbortion;
 	
 	/**
 	 * Builds an initialized instance of this exception, where the time stamp of the abortion

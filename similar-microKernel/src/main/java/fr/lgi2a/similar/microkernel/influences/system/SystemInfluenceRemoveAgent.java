@@ -112,6 +112,7 @@ public final class SystemInfluenceRemoveAgent extends SystemInfluence {
 	 * Uses the category, the target level and the removed agent of the influence to build a printable version of this object.
 	 * @return The concatenation of the category, the target level and the removed agent of the influence.
 	 */
+	@Override
 	public String toString(){
 		return super.toString() + ", removing " + this.agent.toString();
 	}

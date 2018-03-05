@@ -201,9 +201,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		SimulationTimeStamp result = null;
 		for( ILevel level : levels ){
 			SimulationTimeStamp levelTime = level.getLastTransitoryState().getTransitoryPeriodMax();
-			if( result == null ){
-				result = levelTime;
-			} else if( levelTime.compareTo( result ) < 0 ) {
+			if( result == null || levelTime.compareTo( result ) < 0){
 				result = levelTime;
 			}
 		}
@@ -229,7 +227,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		SimulationTimeStamp halfConsistentTime,
 		LinkedHashMap<LevelIdentifier, ILevel> levels
 	){
-		Collection<ILevel> result = new LinkedHashSet<ILevel>();
+		Collection<ILevel> result = new LinkedHashSet<>();
 		for( ILevel level : levels.values() ){
 			if( level.getLastTransitoryState().getTransitoryPeriodMin().equals( halfConsistentTime ) ){
 				result.add( level );
@@ -250,7 +248,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		SimulationTimeStamp halfConsistentTime,
 		LinkedHashMap<LevelIdentifier, ILevel> levels
 	){
-		Collection<ILevel> result = new LinkedHashSet<ILevel>();
+		Collection<ILevel> result = new LinkedHashSet<>();
 		for( ILevel level : levels.values() ){
 			if( level.getLastTransitoryState().getTransitoryPeriodMax().equals( halfConsistentTime ) ){
 				result.add( level );
@@ -340,7 +338,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		//
 		// Initialize the set returned by this method.
 		//
-		Set<IAgent4Engine> result = new LinkedHashSet<IAgent4Engine>( );
+		Set<IAgent4Engine> result = new LinkedHashSet<>( );
 		//
 		// Iterate over the levels to trigger the perception of the agents.
 		//

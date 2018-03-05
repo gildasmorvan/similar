@@ -184,7 +184,7 @@ public interface ISimulationModel {
 		 * In this object, the influences map and the agents list are initially empty.
 		 */
 		public AgentInitializationData( ){
-			this.agents = new LinkedHashSet<IAgent4Engine>( );
+			this.agents = new LinkedHashSet<>( );
 			this.influences = new InfluencesMap( );
 		}
 		

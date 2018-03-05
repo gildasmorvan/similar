@@ -504,6 +504,7 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		 * {@inheritDoc}
 		 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 		 */
+		@Override
 		public void paintComponent(Graphics g) {
 			super.paintComponent( g );
 			g.setColor( this.getBackground( ) );
@@ -523,6 +524,7 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		 * {@inheritDoc}
 		 * @see javax.swing.JComponent#getPreferredSize()
 		 */
+		@Override
 		public Dimension getPreferredSize(){
 			Dimension preferredSize;
 			if( this.printerImage != null ){

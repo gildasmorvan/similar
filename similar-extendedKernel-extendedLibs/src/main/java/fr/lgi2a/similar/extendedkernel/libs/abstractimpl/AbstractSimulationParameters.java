@@ -54,7 +54,7 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractSimulationParameters implements ISimulationParameters {
+public abstract class AbstractSimulationParameters implements ISimulationParameters {
 	/**
 	 * The initial time of the simulation.
 	 */

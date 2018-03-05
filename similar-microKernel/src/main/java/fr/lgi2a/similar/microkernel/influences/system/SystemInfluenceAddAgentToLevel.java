@@ -153,6 +153,7 @@ public class SystemInfluenceAddAgentToLevel extends SystemInfluence {
 	 * to build a printable version of this object.
 	 * @return The concatenation of the category, the target level and the added owner of the public local state of the influence.
 	 */
+	@Override
 	public String toString(){
 		return super.toString() + ", with owner " + this.publicLocalState.getOwner();
 	}

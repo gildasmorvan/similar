@@ -126,9 +126,9 @@ public abstract class AbstractAgent implements IAgent, IAgent4Engine {
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "category" ) );
 		}
 		this.category = category;
-		this.publicLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfAgent>();
-		this.privateLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfAgent>();
-		this.lastPerceivedData = new LinkedHashMap<LevelIdentifier, IPerceivedData>();
+		this.publicLocalStates = new LinkedHashMap<>();
+		this.privateLocalStates = new LinkedHashMap<>();
+		this.lastPerceivedData = new LinkedHashMap<>();
 	}
 	
 	/**

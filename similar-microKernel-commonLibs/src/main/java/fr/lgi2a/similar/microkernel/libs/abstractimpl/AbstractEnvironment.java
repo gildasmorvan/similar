@@ -79,8 +79,8 @@ public abstract class AbstractEnvironment implements IEnvironment, IEnvironment4
 	 * {@link AbstractEnvironment#includeNewLevel(LevelIdentifier, ILocalStateOfEnvironment, ILocalStateOfEnvironment)} method.
 	 */
 	public AbstractEnvironment( ) {
-		this.publicLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfEnvironment>();
-		this.privateLocalStates = new LinkedHashMap<LevelIdentifier, ILocalStateOfEnvironment>();
+		this.publicLocalStates = new LinkedHashMap<>();
+		this.privateLocalStates = new LinkedHashMap<>();
 	}
 
 	/**

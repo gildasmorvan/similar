@@ -71,7 +71,7 @@ public final class InfluencesMap {
 	 * Builds an empty influences map.
 	 */
 	public InfluencesMap( ){
-		this.influencesMap = new LinkedHashMap<LevelIdentifier, List<IInfluence>>();
+		this.influencesMap = new LinkedHashMap<>();
 	}
 	
 	/**
@@ -145,7 +145,7 @@ public final class InfluencesMap {
 	public List<IInfluence> getInfluencesForLevel( LevelIdentifier targetLevel ) {
 		List<IInfluence> result = this.influencesMap.get( targetLevel );
 		if( result == null ){
-			result = new LinkedList<IInfluence>( );
+			result = new LinkedList<>( );
 			this.influencesMap.put( targetLevel, result );
 		}
 		return result;
@@ -162,7 +162,7 @@ public final class InfluencesMap {
 		}
 		List<IInfluence> influenceList = this.influencesMap.get( influence.getTargetLevel() );
 		if( influenceList == null ){
-			influenceList = new LinkedList<IInfluence>();
+			influenceList = new LinkedList<>();
 			this.influencesMap.put( influence.getTargetLevel(), influenceList );
 		}
 		influenceList.add( influence );
@@ -183,7 +183,7 @@ public final class InfluencesMap {
 		}
 		for( LevelIdentifier key : toAdd.getDefinedKeys() ){
 			if( ! toAdd.isEmpty( key ) ){
-				List<IInfluence> influences = new LinkedList<IInfluence>();
+				List<IInfluence> influences = new LinkedList<>();
 				this.influencesMap.put( key, influences );
 				influences.addAll( toAdd.getInfluencesForLevel( key ) );
 			}

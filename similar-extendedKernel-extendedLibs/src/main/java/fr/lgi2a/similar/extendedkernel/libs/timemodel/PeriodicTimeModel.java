@@ -79,10 +79,10 @@ public final class PeriodicTimeModel implements ITimeModel {
 			long phaseShift,
 			SimulationTimeStamp initialTime
 	) {
-		this.checkConstructorArgumentsValidity(
-				period, 
-				phaseShift,
-				initialTime
+		checkConstructorArgumentsValidity(
+			period, 
+			phaseShift,
+			initialTime
 		);
 		this.period = period;
 		this.phaseShift = phaseShift;
@@ -96,7 +96,7 @@ public final class PeriodicTimeModel implements ITimeModel {
 	 * @param initialTime The initial time stamp of the simulation. This value cannot be <code>null</code>.
 	 * @throws IllegalArgumentException If an argument is invalid.
 	 */
-	private void checkConstructorArgumentsValidity(
+	private static void checkConstructorArgumentsValidity(
 			long period,
 			long phaseShift,
 			SimulationTimeStamp initialTime

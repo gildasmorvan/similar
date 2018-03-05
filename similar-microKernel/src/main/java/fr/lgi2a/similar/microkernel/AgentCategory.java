@@ -99,7 +99,7 @@ public final class AgentCategory {
 			throw new IllegalArgumentException( "The arguments cannot be null." );
 		}
 		this.identifier = identifier;
-		this.directParentCatergories = new LinkedHashSet<AgentCategory>( );
+		this.directParentCatergories = new LinkedHashSet<>( );
 		for( AgentCategory category : parents ){
 			this.directParentCatergories.add( category);
 		}

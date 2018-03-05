@@ -105,10 +105,10 @@ public abstract class AbstractLevel implements ILevel {
 		}
 		this.identifier = identifier;
 		// Create the out neighborhood of the perception relation graph for this level.
-		this.perceptibleLevels = new LinkedHashSet<LevelIdentifier>( );
+		this.perceptibleLevels = new LinkedHashSet<>( );
 		this.perceptibleLevels.add( identifier );
 		// Create the out neighborhood of the influence relation graph for this level.
-		this.influenceableLevels = new LinkedHashSet<LevelIdentifier>( );
+		this.influenceableLevels = new LinkedHashSet<>( );
 		this.influenceableLevels.add( identifier );
 		// Create a partially initialized instance of the dynamic state of the level.
 		this.initializeStates(

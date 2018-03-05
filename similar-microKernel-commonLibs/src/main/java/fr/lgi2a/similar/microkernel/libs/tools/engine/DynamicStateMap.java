@@ -70,7 +70,7 @@ public class DynamicStateMap implements IPublicDynamicStateMap {
 	 * Builds an initially empty map.
 	 */
 	public DynamicStateMap( ) {
-		this.dynamicStates = new LinkedHashMap<LevelIdentifier, IPublicLocalDynamicState>();
+		this.dynamicStates = new LinkedHashMap<>();
 	}
 
 	/**

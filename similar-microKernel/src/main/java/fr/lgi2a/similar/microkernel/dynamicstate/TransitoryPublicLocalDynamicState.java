@@ -141,12 +141,12 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 		}
 		this.lastConsistentDynamicState = lastConsistentDynamicState;
 		this.timeUpperBound = timeUpperBound;
-		this.stateTransitoryDynamicsSystemInfluences = new LinkedHashSet<IInfluence>();
+		this.stateTransitoryDynamicsSystemInfluences = new LinkedHashSet<>();
 		this.allInfluencesOfStateTransitoryDynamicsSystemInfluences = new ViewOnSetUnion<>( 
 				this.lastConsistentDynamicState.getSystemInfluencesOfStateDynamics(), 
 				this.stateTransitoryDynamicsSystemInfluences
 		);
-		this.stateTransitoryDynamicsRegularInfluences = new LinkedHashSet<IInfluence>();
+		this.stateTransitoryDynamicsRegularInfluences = new LinkedHashSet<>();
 		this.allInfluencesOfStateTransitoryDynamicsRegularInfluences = new ViewOnSetUnion<>( 
 				this.lastConsistentDynamicState.getRegularInfluencesOfStateDynamics(), 
 				this.stateTransitoryDynamicsRegularInfluences 

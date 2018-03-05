@@ -118,8 +118,8 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * Builds an instance of this simulation engine.
 	 */
 	public AbstractSimulationEngineWithInitialization( ) {
-		this.levels = new LinkedHashMap<LevelIdentifier, ILevel>( );
-		this.agents = new LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>>();
+		this.levels = new LinkedHashMap<>( );
+		this.agents = new LinkedHashMap<>();
 		this.resetData( );
 	}
 
@@ -128,7 +128,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 */
 	@Override
 	public Set<IAgent4Engine> getAgents() {
-		Set<IAgent4Engine> agentsSet = new LinkedHashSet<IAgent4Engine>();
+		Set<IAgent4Engine> agentsSet = new LinkedHashSet<>();
 		for( LevelIdentifier level : this.getLevels() ){
 			agentsSet.addAll( this.getAgents( level ) );
 		}
@@ -482,8 +482,6 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 				 * environment. In the case of the initialization, agents are not added with a reaction:
 				 * they are manually added by this method. Therefore, the customized user reaction to the
 				 * addition of the agent in the level has to be triggered manually. */
-				// TODO Ideally, the "createAgents" method should simply call a reaction to perform a clean
-				// TODO addition of the agents.
 				// Identify the level where the custom reaction takes place.
 				ILevel level = this.levels.get( levelId );
 				// Identify the time range of the reaction. Since we are initializing the simulation, they
@@ -492,7 +490,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 				SimulationTimeStamp initialTime = level.getLastConsistentState().getTime();
 				// Generate the list of influences that will be managed by the reaction. In this case, there
 				// will be only one influence: a 
-				List<IInfluence> influences = new LinkedList<IInfluence>( );
+				List<IInfluence> influences = new LinkedList<>( );
 				influences.add( new SystemInfluenceAddAgentToLevel(
 						initialTime, initialTime, 
 						agent.getPublicLocalState( levelId ), 

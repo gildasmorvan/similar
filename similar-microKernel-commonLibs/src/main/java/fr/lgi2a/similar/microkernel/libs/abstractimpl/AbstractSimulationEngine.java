@@ -76,7 +76,7 @@ public abstract class AbstractSimulationEngine implements ISimulationEngine {
 	 * Builds an instance of this abstract simulation engine, containing no probes.
 	 */
 	protected AbstractSimulationEngine(  ) {
-		this.probes = new LinkedHashMap<String,IProbe>();
+		this.probes = new LinkedHashMap<>();
 	}
 
 	/**

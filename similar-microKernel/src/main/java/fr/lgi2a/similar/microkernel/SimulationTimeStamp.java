@@ -65,7 +65,7 @@ import java.io.Serializable;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp>, Serializable, Cloneable {
+public final class SimulationTimeStamp implements Serializable, Cloneable {
 	/**
 	 * The serialization ID of this class.
 	 */
@@ -153,22 +153,13 @@ public final class SimulationTimeStamp implements Comparable<SimulationTimeStamp
 	 * 	<li>a positive value if the identifier of this time stamp is greater than the identifier of the time stamp 
 	 * 	of the parameter</li>
 	 * </ul>
-	 * If the difference goes out of the bounds of the {@link Integer} type, the value is either set to {@link Integer#MAX_VALUE}
-	 * or to {@link Integer#MIN_VALUE}.
 	 * @throws IllegalArgumentException If the parameter is <code>null</code>.
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	@Override
-	public int compareTo( SimulationTimeStamp otherTimeStamp ) {
+	public long compareToTimeStamp( SimulationTimeStamp otherTimeStamp ) {
 		if( otherTimeStamp == null ) {
 			throw new IllegalArgumentException( "The first parameter of this method cannot be null." );
 		} else {
-			long difference = this.identifier - otherTimeStamp.identifier;
-			if( difference > Integer.MAX_VALUE || difference < Integer.MIN_VALUE) {
-				throw new InvalidIntegerValueException();
-			} else {
-				return (int) difference;
-			}
+			return this.identifier - otherTimeStamp.identifier;
 		}
 	}
 

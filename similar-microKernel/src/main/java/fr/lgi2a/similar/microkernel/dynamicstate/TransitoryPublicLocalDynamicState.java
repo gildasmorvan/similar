@@ -219,7 +219,7 @@ public class TransitoryPublicLocalDynamicState implements IModifiablePublicLocal
 	public void setTransitoryPeriodMax( SimulationTimeStamp time ) {
 		if( time == null ){
 			throw new IllegalArgumentException( "The 'time' argument cannot be null." );
-		} else if( time.compareTo( this.getTransitoryPeriodMin() ) <= 0 ){
+		} else if( time.compareToTimeStamp( this.getTransitoryPeriodMin() ) <= 0 ){
 			throw new IllegalArgumentException( "The time following the value '" + this.getTransitoryPeriodMin() + 
 					"' in the time model of the level '" + this.getLevel() + "' has to be strictly greater than '" +
 							this.getTransitoryPeriodMin() + ".' (was '" + time + "')." );

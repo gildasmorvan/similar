@@ -165,7 +165,7 @@ public class AgtCannon extends AbstractAgent {
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences
 	) {
-		double dt = timeUpperBound.compareTo(timeLowerBound);
+		double dt = timeUpperBound.compareToTimeStamp(timeLowerBound);
 		double da = privateLocalState.getAngularSpeed()*dt;
 		
 		//Move the cannonPublicState

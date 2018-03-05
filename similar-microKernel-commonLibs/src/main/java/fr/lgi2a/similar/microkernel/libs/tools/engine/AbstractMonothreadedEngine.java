@@ -201,7 +201,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		SimulationTimeStamp result = null;
 		for( ILevel level : levels ){
 			SimulationTimeStamp levelTime = level.getLastTransitoryState().getTransitoryPeriodMax();
-			if( result == null || levelTime.compareTo( result ) < 0){
+			if( result == null || levelTime.compareToTimeStamp( result ) < 0){
 				result = levelTime;
 			}
 		}

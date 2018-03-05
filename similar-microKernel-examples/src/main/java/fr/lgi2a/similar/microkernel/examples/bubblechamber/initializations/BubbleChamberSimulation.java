@@ -110,7 +110,7 @@ public class BubbleChamberSimulation extends AbstractSimulationModel {
 			SimulationTimeStamp currentTime,
 			ISimulationEngine engine
 	) {
-		return currentTime.compareTo( this.finalTime ) >= 0;
+		return currentTime.compareToTimeStamp( this.finalTime ) >= 0;
 	}
 
 	/**

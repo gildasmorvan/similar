@@ -50,6 +50,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -79,6 +80,7 @@ import fr.lgi2a.similar.microkernel.libs.disambiguation.DisambiguationOperatorRe
  * process of the simulation, using a single threaded approach: the initialization of the levels is made in sequence.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
 public abstract class AbstractSimulationEngineWithInitialization extends AbstractSimulationEngine {
 	/**
@@ -129,7 +131,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	@Override
 	public Set<IAgent4Engine> getAgents() {
 		Set<IAgent4Engine> agentsSet = new LinkedHashSet<>();
-		for( LevelIdentifier level : this.getLevels() ){
+		for( LevelIdentifier level : this.getLevelIdentifiers() ){
 			agentsSet.addAll( this.getAgents( level ) );
 		}
 		return agentsSet;
@@ -139,8 +141,17 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Set<LevelIdentifier> getLevels() {
+	public Set<LevelIdentifier> getLevelIdentifiers() {
 		return this.levels.keySet( );
+	}
+	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Map<LevelIdentifier, ILevel> getLevels() {
+		return this.levels;
 	}
 
 	/**

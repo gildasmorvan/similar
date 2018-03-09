@@ -46,6 +46,7 @@
  */
 package fr.lgi2a.similar.microkernel;
 
+import java.util.Map;
 import java.util.Set;
 
 import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
@@ -53,10 +54,14 @@ import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicSta
 import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 import fr.lgi2a.similar.microkernel.dynamicstate.TransitoryPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
+import fr.lgi2a.similar.microkernel.levels.ILevel;
 
 /**
  * Models a simulation engine, <i>i.e.</i> the object moving the simulation through time.
+ * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+ * 
  */
 public interface ISimulationEngine {
 	/**
@@ -125,6 +130,16 @@ public interface ISimulationEngine {
 	Set<IAgent4Engine> getAgents( );
 	
 	/**
+	 * Gets the set of level identifiers contained in the simulation.
+	 * <p>
+     * 	This method has to ensure that two consecutive iterations over this set always return its items in
+     * 	the same order.
+	 * </p>
+	 * @return The list of levels contained in the simulation.
+	 */
+	Set<LevelIdentifier> getLevelIdentifiers( );
+	
+	/**
 	 * Gets the list of levels contained in the simulation.
 	 * <p>
      * 	This method has to ensure that two consecutive iterations over this set always return its items in
@@ -132,7 +147,7 @@ public interface ISimulationEngine {
 	 * </p>
 	 * @return The list of levels contained in the simulation.
 	 */
-	Set<LevelIdentifier> getLevels( );
+	Map<LevelIdentifier, ILevel> getLevels( );
 	
 	/**
 	 * Gets the set of all the agents lying in a specific level of the simulation.

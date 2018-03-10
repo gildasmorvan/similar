@@ -69,6 +69,10 @@ public class EngineMonothreadedDefaultdisambiguation extends AbstractMonothreade
 	 */
 	private DynamicStateMap dynamicStateContainingOnlyConsistentStates;
 	
+	public EngineMonothreadedDefaultdisambiguation() {
+		//Does nothing
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

@@ -59,7 +59,7 @@ import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent4Engine;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractLocalStateOfAgent extends AbstractLocalState implements ILocalStateOfAgent, ILocalStateOfAgent4Engine {
+public abstract class AbstractLocalStateOfAgent extends AbstractLocalState implements ILocalStateOfAgent4Engine {
 	/**
 	 * The agent owning this local state.
 	 */

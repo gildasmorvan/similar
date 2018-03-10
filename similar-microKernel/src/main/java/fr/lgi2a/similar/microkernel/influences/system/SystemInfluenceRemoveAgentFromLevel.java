@@ -78,24 +78,7 @@ public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 	 */
 	private ILocalStateOfAgent4Engine agent;
 	
-	/**
-	 * Checks the validity of the parameters of the constructor.
-	 * @param publicLocalState The second parameter of the constructor.
-	 * @return The value of <code>publicLocalState</code>. This returned value is a trick allowing the integration of this tests 
-	 * in the parameters of the super constructor call.
-	 */
-	private static ILocalStateOfAgent4Engine checkParameterValidity( 
-			ILocalStateOfAgent publicLocalState
-	) {
-		if( publicLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
-		} else if( ! ( publicLocalState instanceof ILocalStateOfAgent4Engine ) ) {
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot has to be an instance of the" +
-					ILocalStateOfAgent4Engine.class.getSimpleName() + " interface (found " + publicLocalState.getClass() + ")" );
-		} else {
-			return (ILocalStateOfAgent4Engine) publicLocalState;
-		}
-	}
+	
 	
 	/**
 	 * Builds a 'Remove agent from a level' system influence, removing an agent from the 
@@ -142,6 +125,25 @@ public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 	}
 	
 	/**
+	 * Checks the validity of the parameters of the constructor.
+	 * @param publicLocalState The second parameter of the constructor.
+	 * @return The value of <code>publicLocalState</code>. This returned value is a trick allowing the integration of this tests 
+	 * in the parameters of the super constructor call.
+	 */
+	private static ILocalStateOfAgent4Engine checkParameterValidity( 
+			ILocalStateOfAgent publicLocalState
+	) {
+		if( publicLocalState == null ){
+			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
+		} else if( ! ( publicLocalState instanceof ILocalStateOfAgent4Engine ) ) {
+			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot has to be an instance of the" +
+					ILocalStateOfAgent4Engine.class.getSimpleName() + " interface (found " + publicLocalState.getClass() + ")" );
+		} else {
+			return (ILocalStateOfAgent4Engine) publicLocalState;
+		}
+	}
+	
+	/**
 	 * Gets the public local state of the agent being removed from the level.
 	 * @return The public local state of the agent being removed from the level.
 	 */
@@ -154,6 +156,7 @@ public class SystemInfluenceRemoveAgentFromLevel extends SystemInfluence {
 	 * to build a printable version of this object.
 	 * @return The concatenation of the category, the target level and the added owner of the public local state of the influence.
 	 */
+	@Override
 	public String toString(){
 		return super.toString() + ", with owner " + this.agent;
 	}

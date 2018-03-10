@@ -55,7 +55,7 @@ import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractLocalStateOfEnvironment extends AbstractLocalState implements ILocalStateOfEnvironment {
+public abstract class AbstractLocalStateOfEnvironment extends AbstractLocalState implements ILocalStateOfEnvironment {
 	/**
 	 * Builds an initialized instance of this class.
 	 * @param level The level for which this local state was defined.

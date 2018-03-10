@@ -55,7 +55,7 @@ import fr.lgi2a.similar.microkernel.LevelIdentifier;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractLocalState implements ILocalState {
+public abstract class AbstractLocalState implements ILocalState {
 	/**
 	 * The level for which this local state was defined.
 	 */

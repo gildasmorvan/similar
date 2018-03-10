@@ -69,15 +69,7 @@ import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractAgent implements IAgent, IAgent4Engine {
-	/**
-	 * Builds the text of an exception stating that an argument cannot be <code>null</code>.
-	 * @param argName The name of the argument.
-	 * @return The text of an exception stating that an argument cannot be <code>null</code>.
-	 */
-	private static String buildNullArgumentExceptionText( String argName ) {
-		return "The '" + argName + "' argument cannot be null.";
-	}
+public abstract class AbstractAgent implements IAgent4Engine {
 	
 	/**
 	 * The category of the agent.
@@ -269,5 +261,14 @@ public abstract class AbstractAgent implements IAgent, IAgent4Engine {
 			throw new IllegalArgumentException( buildNullArgumentExceptionText( "levelIden" ) );
 		} 
 		this.lastPerceivedData.put( perceivedData.getLevel(), perceivedData );
+	}
+	
+	/**
+	 * Builds the text of an exception stating that an argument cannot be <code>null</code>.
+	 * @param argName The name of the argument.
+	 * @return The text of an exception stating that an argument cannot be <code>null</code>.
+	 */
+	private static String buildNullArgumentExceptionText( String argName ) {
+		return "The '" + argName + "' argument cannot be null.";
 	}
 }

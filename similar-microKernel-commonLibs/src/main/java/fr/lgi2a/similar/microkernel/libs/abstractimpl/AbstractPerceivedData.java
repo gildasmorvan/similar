@@ -55,7 +55,7 @@ import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
  * default behavior to the methods of the interface.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class AbstractPerceivedData implements IPerceivedData {
+public abstract class AbstractPerceivedData implements IPerceivedData {
 	/**
 	 * The identifier of the level by which the data were perceived.
 	 */

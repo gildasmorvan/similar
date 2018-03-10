@@ -63,7 +63,7 @@ import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
  * </p>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractEnvironment implements IEnvironment, IEnvironment4Engine {
+public abstract class AbstractEnvironment implements IEnvironment4Engine {
 	/**
 	 * The public local states of the environment in the various levels of the simulation.
 	 */

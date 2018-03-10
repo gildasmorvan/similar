@@ -99,6 +99,15 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 	private boolean displayOptimization;
 	
 	/**
+	 * This field stores the last time an update of the image on screen was made.
+	 */
+	private long lastUpdate;
+	/**
+	 * The delay, in milliseconds, between two updates of the on-screen image.
+	 */
+	private static final int UPDATE_INTERDELAY = 32;
+	
+	/**
 	 * Builds a swing displayer using a transparent background in the drawing area.
 	 */
 	protected AbstractProbeImageSwingJPanel( ) {
@@ -260,15 +269,6 @@ public abstract class AbstractProbeImageSwingJPanel implements IProbe {
 		IPublicDynamicStateMap dynamicState, 
 		SimulationTimeStamp initialTime
 	);
-	
-	/**
-	 * This field stores the last time an update of the image on screen was made.
-	 */
-	private long lastUpdate;
-	/**
-	 * The delay, in milliseconds, between two updates of the on-screen image.
-	 */
-	private static final int UPDATE_INTERDELAY = 32;
 	
 	/**
 	 * Refreshes the not displayed image of the double buffer with the simulation data 

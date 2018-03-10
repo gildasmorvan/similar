@@ -109,20 +109,20 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	private boolean abortFlag;
 	
 	/**
-	 * Tells if the simulation has to be aborted or not.
-	 * @return <code>true</code> if the user requested the abortion of the simulation.
-	 */
-	public boolean isAbortionRequested( ) {
-		return this.abortFlag;
-	}
-	
-	/**
 	 * Builds an instance of this simulation engine.
 	 */
 	public AbstractSimulationEngineWithInitialization( ) {
 		this.levels = new LinkedHashMap<>( );
 		this.agents = new LinkedHashMap<>();
 		this.resetData( );
+	}
+	
+	/**
+	 * Tells if the simulation has to be aborted or not.
+	 * @return <code>true</code> if the user requested the abortion of the simulation.
+	 */
+	public boolean isAbortionRequested( ) {
+		return this.abortFlag;
 	}
 
 	/**
@@ -249,7 +249,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * Checks the validity of the argument of the {@link AbstractSimulationEngineWithInitialization#runNewSimulation(ISimulationModel)} method.
 	 * @param simulationModel The argument which validity is checked.
 	 */
-	private void checkArgumentValidity( 
+	private static void checkArgumentValidity( 
 			ISimulationModel simulationModel 
 	) {
 		if( simulationModel == null ) {
@@ -384,7 +384,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	 * Checks the validity of the list of levels created by the {@link ISimulationModel#generateLevels(SimulationTimeStamp)} method.
 	 * @param createdLevels The levels list that was created.
 	 */
-	private void checkLevelsListValidity( List<ILevel> createdLevels ){
+	private static void checkLevelsListValidity( List<ILevel> createdLevels ){
 		if( createdLevels == null ){
 			throw new IllegalStateException( "The simulation model has to provide a valid list of levels. The list was null." );
 		} else if( createdLevels.isEmpty( ) ){

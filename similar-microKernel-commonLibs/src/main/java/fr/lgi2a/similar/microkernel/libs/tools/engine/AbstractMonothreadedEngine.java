@@ -195,7 +195,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param levels The levels of the simulation.
 	 * @return The next time new transitory periods will start.
 	 */
-	private SimulationTimeStamp getNextTime(
+	private static SimulationTimeStamp getNextTime(
 		Collection<ILevel> levels
 	) {
 		SimulationTimeStamp result = null;
@@ -223,7 +223,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param levels A map containing the levels of the simulation.
 	 * @return The levels that are currently starting a new transitory period.
 	 */
-	private Collection<ILevel> identifyLevelsStartingNewTransitoryPeriod(
+	private static Collection<ILevel> identifyLevelsStartingNewTransitoryPeriod(
 		SimulationTimeStamp halfConsistentTime,
 		LinkedHashMap<LevelIdentifier, ILevel> levels
 	){
@@ -244,7 +244,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @return The levels ending their transitory period at the half-consistent time 
 	 * <code>halfConsistentTime</code>.
 	 */
-	private Collection<ILevel> identifyLevelsEndingTransitoryPeriod(
+	private static Collection<ILevel> identifyLevelsEndingTransitoryPeriod(
 		SimulationTimeStamp halfConsistentTime,
 		LinkedHashMap<LevelIdentifier, ILevel> levels
 	){
@@ -330,7 +330,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @return The set of agents that perceived during this phase. 
 	 * It contains the agent that will have to revise their global state.
 	 */
-	private Set<IAgent4Engine> perceptionPhase( 
+	private static Set<IAgent4Engine> perceptionPhase( 
 			DynamicStateMap disambiguatedSimulationDynamicState,
 			Collection<ILevel> levelsStartingNewTransitoryPeriod,
 			LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
@@ -385,7 +385,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * the simulation.
 	 * @param agents The agents having to revise their global state.
 	 */
-	private void globalStateRevisionPhase(
+	private static void globalStateRevisionPhase(
 		SimulationTimeStamp t,
 		SimulationTimeStamp tPlusDt,
 		Collection<IAgent4Engine> agents
@@ -409,7 +409,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param producedInfluences The data structure where to put the influences that were produced by the 
 	 * environment.
 	 */
-	private void naturalPhase( 
+	private static void naturalPhase( 
 		Collection<ILevel> levelsStartingNewTransitoryPeriod,
 		DynamicStateMap disambiguatedSimulationDynamicState,
 		IEnvironment4Engine environment,
@@ -442,7 +442,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param producedInfluences The data structure where to put the influences that were produced by the 
 	 * environment.
 	 */
-	private void decisionPhase( 
+	private static void decisionPhase( 
 		Collection<ILevel> levelsStartingNewTransitoryPeriod,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 		InfluencesMap producedInfluences
@@ -713,7 +713,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param producedInfluences The data structure where to add the influences that were 
 	 * produced in reaction to this influence. 
 	 */
-	private void manageSystemInfluence(
+	private static void manageSystemInfluence(
 		SimulationTimeStamp transitoryTimeMin,
 		SimulationTimeStamp transitoryTimeMax,
 		SystemInfluenceAddAgent systemInfluence,
@@ -743,7 +743,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param producedInfluences The data structure where to add the influences that were 
 	 * produced in reaction to this influence. 
 	 */
-	private void manageSystemInfluence(
+	private static void manageSystemInfluence(
 		SimulationTimeStamp transitoryTimeMin,
 		SimulationTimeStamp transitoryTimeMax,
 		SystemInfluenceRemoveAgent systemInfluence,
@@ -768,7 +768,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param agents The agents of the simulation.
 	 * @return The influences that were produced in reaction to this influence. 
 	 */
-	private void manageSystemInfluence(
+	private static void manageSystemInfluence(
 		SystemInfluenceAddAgentToLevel systemInfluence,
 		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
@@ -808,7 +808,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param agents The agents of the simulation.
 	 * @return The influences that were produced in reaction to this influence. 
 	 */
-	private void manageSystemInfluence(
+	private static void manageSystemInfluence(
 		SystemInfluenceRemoveAgentFromLevel systemInfluence,
 		LinkedHashMap<LevelIdentifier, ILevel> levels,
 		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents
@@ -848,7 +848,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * to the system influences.
 	 * @param beforeRegularReaction <code>true</code> if this method is called before the user-defined reaction to regular influences.
 	 */
-	private void userReactionToSystemInfluences( 
+	private static void userReactionToSystemInfluences( 
 			Collection<ILevel> levelsEndingTransitoryPeriod,
 			LinkedHashMap<LevelIdentifier, ILevel> levels,
 			InfluencesMap influencesManagedDuringSystemReaction,
@@ -890,7 +890,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	 * @param levelsEndingTransitoryPeriod The levels for which a reaction is performed.
 	 * @param levels The levels of the simulation.
 	 */
-	private void userReactionToRegularInfluences( 
+	private static void userReactionToRegularInfluences( 
 			Collection<ILevel> levelsEndingTransitoryPeriod,
 			LinkedHashMap<LevelIdentifier, ILevel> levels
 	) {

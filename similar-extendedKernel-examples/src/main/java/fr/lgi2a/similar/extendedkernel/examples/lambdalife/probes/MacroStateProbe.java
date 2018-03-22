@@ -52,12 +52,12 @@ import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.LambdaLi
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
-import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * A probe printing in a stream the number of alive cells over time.
@@ -65,7 +65,7 @@ import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class MacroStateProbe implements IProbe {
+public class MacroStateProbe extends AbstractProbe {
 	/**
 	 * The stream where the data are written.
 	 */
@@ -128,24 +128,6 @@ public class MacroStateProbe implements IProbe {
 		this.displayDensityEnergy( finalTimestamp,  simulationEngine );
 
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToError(
-		String errorMessage, 
-		Throwable cause
-	) { }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToAbortion(
-		SimulationTimeStamp timestamp,
-		ISimulationEngine simulationEngine
-	) { }
 
 	/**
 	 * {@inheritDoc}

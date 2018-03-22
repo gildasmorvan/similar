@@ -48,7 +48,6 @@ package fr.lgi2a.similar.microkernel.examples.bubblechamber.probes;
 
 import java.io.PrintStream;
 
-import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
@@ -56,13 +55,14 @@ import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
 import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * A simulation probe displaying on a print stream the 
  * location of the particles over time.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ProbePrintingParticleLocationOverTime implements IProbe {
+public class ProbePrintingParticleLocationOverTime  extends AbstractProbe {
 	/**
 	 * The stream where the data are written.
 	 */
@@ -78,12 +78,6 @@ public class ProbePrintingParticleLocationOverTime implements IProbe {
 	){
 		this.target = target;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void prepareObservation() { }
 
 	/**
 	 * {@inheritDoc}
@@ -136,34 +130,7 @@ public class ProbePrintingParticleLocationOverTime implements IProbe {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void observeAtFinalTime(
-			SimulationTimeStamp finalTimestamp,
-			ISimulationEngine simulationEngine
-	) {	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void endObservation() {
 		this.target.flush();
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToError(
-			String errorMessage, 
-			Throwable cause
-	) { }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToAbortion(
-			SimulationTimeStamp timestamp,
-			ISimulationEngine simulationEngine
-	) { }
 }

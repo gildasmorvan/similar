@@ -46,7 +46,9 @@
  */
 package fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -57,9 +59,11 @@ import javax.imageio.ImageIO;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
 import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
-import fr.lgi2a.similar.microkernel.*;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * This probe exports as an image the last state that was reached by the simulation.
@@ -69,7 +73,7 @@ import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class LambdaGameOfLifeLastStateExporter implements IProbe {
+public class LambdaGameOfLifeLastStateExporter extends AbstractProbe {
 	/**
 	 * The conversion ratio between cells and pixels.
 	 */
@@ -88,14 +92,6 @@ public class LambdaGameOfLifeLastStateExporter implements IProbe {
 		String fileName
 	) {
 		this.outputName = fileName;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void endObservation() {
-		//Does nothing in this case.
 	}
 
 	/**
@@ -184,34 +180,4 @@ public class LambdaGameOfLifeLastStateExporter implements IProbe {
 			}
 		}
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void observeAtInitialTimes( SimulationTimeStamp arg0, ISimulationEngine arg1 ) { }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void observeAtPartialConsistentTime(SimulationTimeStamp arg0,ISimulationEngine arg1) { }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void prepareObservation() { }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToAbortion(SimulationTimeStamp arg0, ISimulationEngine arg1) { }
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToError(String arg0, Throwable arg1) { }
 }

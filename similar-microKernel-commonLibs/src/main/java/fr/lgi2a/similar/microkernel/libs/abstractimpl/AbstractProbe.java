@@ -44,19 +44,58 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.libs.probes;
+package fr.lgi2a.similar.microkernel.libs.abstractimpl;
 
-import java.io.PrintStream;
-
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
+import fr.lgi2a.similar.microkernel.IProbe;
+import fr.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
- * A probe of the 'common libs' printing on the standard output 
- * the trace of an exception that was thrown during the execution of the simulation.
+ * An abstract probe of the 'common libs' that does nothing.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ProbeExceptionPrinter extends AbstractProbe {
+public abstract class AbstractProbe implements IProbe {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void prepareObservation() {
+		// Does nothing.
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void observeAtInitialTimes(
+			SimulationTimeStamp initialTimestamp,
+			ISimulationEngine simulationEngine
+	) {
+		// Does nothing.
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void observeAtPartialConsistentTime(
+			SimulationTimeStamp timestamp,
+			ISimulationEngine simulationEngine
+	) {
+		// Does nothing.
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void observeAtFinalTime(
+			SimulationTimeStamp finalTimestamp,
+			ISimulationEngine simulationEngine
+	) {
+		// Does nothing.
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -66,8 +105,25 @@ public class ProbeExceptionPrinter extends AbstractProbe {
 			String errorMessage, 
 			Throwable cause
 	) {
-		PrintStream streamPrinter = System.err;
-		streamPrinter.println( "An error was met during the execution of the simulation: " + errorMessage );
-		cause.printStackTrace( streamPrinter );
+		// Does nothing.
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reactToAbortion(
+			SimulationTimeStamp timestamp,
+			ISimulationEngine simulationEngine
+	) {
+		// Does nothing.
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void endObservation() {
+		// Does nothing.
 	}
 }

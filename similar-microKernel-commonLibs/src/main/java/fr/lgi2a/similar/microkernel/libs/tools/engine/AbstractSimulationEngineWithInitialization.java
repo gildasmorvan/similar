@@ -208,7 +208,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	@Override
 	public void runNewSimulation( ISimulationModel simulationModel ) {
 		// First check that the simulation model is not null.
-		this.checkArgumentValidity( simulationModel );
+		checkArgumentValidity( simulationModel );
 		// Prepare the observation made by the probes
 		for( IProbe probe : this.getProbes() ){
 			probe.prepareObservation();
@@ -355,7 +355,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	) {
 		List<ILevel> createdLevels = simulationModel.generateLevels( initialTime );
 		// Check that the list is valid (not null, not empty).
-		this.checkLevelsListValidity( createdLevels );
+		checkLevelsListValidity( createdLevels );
 		// Add the levels to the engine while checking that each level is unique
 		for( ILevel generatedLevel : createdLevels ){
 			if( generatedLevel == null ){

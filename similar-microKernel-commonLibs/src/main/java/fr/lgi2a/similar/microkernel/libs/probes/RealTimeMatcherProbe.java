@@ -46,9 +46,9 @@
  */
 package fr.lgi2a.similar.microkernel.libs.probes;
 
-import fr.lgi2a.similar.microkernel.IProbe;
 import fr.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * This probe slows down the simulation so that its execution speed matches real time (in the simulation), or a specific factor 
@@ -56,7 +56,7 @@ import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-public abstract class RealTimeMatcherProbe implements IProbe {
+public abstract class RealTimeMatcherProbe  extends AbstractProbe {
 	/**
 	 * The number of milliseconds in a second.
 	 */
@@ -102,14 +102,6 @@ public abstract class RealTimeMatcherProbe implements IProbe {
 	 */
 	public RealTimeMatcherProbe() {
 		this(1);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void prepareObservation() {
-		// Does nothing in this probe.
 	}
 	
 	/**
@@ -168,45 +160,5 @@ public abstract class RealTimeMatcherProbe implements IProbe {
 		SimulationTimeStamp time2
 	);
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void observeAtFinalTime(
-		SimulationTimeStamp finalTime,
-		ISimulationEngine engine
-	) {
-		// Does nothing in this probe.
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToAbortion(
-		SimulationTimeStamp abortionTime, 
-		ISimulationEngine engine
-	) {
-		// Does nothing in this probe.
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reactToError(
-		String errorMessage,
-		Throwable cause
-	) {
-		// Does nothing in this probe.
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void endObservation() {
-		// Does nothing in this probe.
-	}
 }
 

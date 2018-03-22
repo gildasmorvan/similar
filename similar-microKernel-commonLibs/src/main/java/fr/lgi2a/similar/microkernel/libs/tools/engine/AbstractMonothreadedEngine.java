@@ -131,8 +131,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			 *			state of the simulation at the half-consistent time following the reaction.
 			 *		* The value of lastPartlyConsistentStateTimestamp changes. 
 			 */
-			SimulationTimeStamp nextPartlyConsistentStateTimestamp = this.getNextTime( levels.values() );
-			Collection<ILevel> levelsEndingTransitoryPeriod = this.identifyLevelsEndingTransitoryPeriod(
+			SimulationTimeStamp nextPartlyConsistentStateTimestamp = getNextTime( levels.values() );
+			Collection<ILevel> levelsEndingTransitoryPeriod = identifyLevelsEndingTransitoryPeriod(
 				nextPartlyConsistentStateTimestamp, 
 				levels
 			);
@@ -154,7 +154,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			DynamicStateMap disambiguatedSimulationDynamicState = this.buildDynamicStateDisambiguation(
 					currentSimulationDynamicState
 			);
-			Collection<ILevel> levelsStartingNewTransitoryPeriod = this.identifyLevelsStartingNewTransitoryPeriod(
+			Collection<ILevel> levelsStartingNewTransitoryPeriod = identifyLevelsStartingNewTransitoryPeriod(
 				lastPartlyConsistentStateTimestamp, 
 				levels
 			);
@@ -182,11 +182,8 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			SimulationTimeStamp lastPartlyConsistentStateTimestamp,
 			ISimulationModel simulationModel 
 	) {
-		return ! this.isAbortionRequested() && 
-				! simulationModel.isFinalTimeOrAfter( 
-						lastPartlyConsistentStateTimestamp, 
-						this 
-				);
+		return ! this.isAbortionRequested()
+			&& ! simulationModel.isFinalTimeOrAfter(lastPartlyConsistentStateTimestamp, this);
 	}
 	
 	/**
@@ -284,31 +281,31 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 				simulationModel 
 		) ) {
 			// Tell the agents to perceive
-			Set<IAgent4Engine> agentHavingToReviseGlobalState = this.perceptionPhase( 
+			Set<IAgent4Engine> agentHavingToReviseGlobalState = perceptionPhase( 
 				disambiguatedSimulationDynamicState,
 				levelsStartingNewTransitoryPeriod,
 				agents
 			);
 			// Then revise their global state.
-			SimulationTimeStamp tPlusDt = this.getNextTime( levels.values() );
-			this.globalStateRevisionPhase( 
+			SimulationTimeStamp tPlusDt = getNextTime( levels.values() );
+			globalStateRevisionPhase( 
 				lastPartlyConsistentStateTimestamp,
 				tPlusDt,
 				agentHavingToReviseGlobalState 
 			);
 			InfluencesMap producedInfluencesDuringnewTransitoryPhases = new InfluencesMap();
 			// Then trigger the natural action of the environment.
-			this.naturalPhase( 
-					levelsStartingNewTransitoryPeriod,
-					disambiguatedSimulationDynamicState,
-					environment,
-					producedInfluencesDuringnewTransitoryPhases
+			naturalPhase( 
+				levelsStartingNewTransitoryPeriod,
+				disambiguatedSimulationDynamicState,
+				environment,
+				producedInfluencesDuringnewTransitoryPhases
 			);
 			// Trigger the decision of the agents
-			this.decisionPhase( 
-					levelsStartingNewTransitoryPeriod,
-					agents,
-					producedInfluencesDuringnewTransitoryPhases
+			decisionPhase( 
+				levelsStartingNewTransitoryPeriod,
+				agents,
+				producedInfluencesDuringnewTransitoryPhases
 			);
 			// Then include the produced influences into the state dynamics of the
 			// transitory dynamic states.
@@ -516,16 +513,16 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 				agents
 		);
 		// Perform the user-defined reaction to these influences.
-		this.userReactionToSystemInfluences(
-				levelsEndingTransitoryPeriod,
-				levels,
-				managedInfluences, 
-				true
+		userReactionToSystemInfluences(
+			levelsEndingTransitoryPeriod,
+			levels,
+			managedInfluences, 
+			true
 		);
 		//
 		// Then perform the user-defined reaction to the regular influences of the levels where a reaction is computed.
 		//
-		this.userReactionToRegularInfluences( 
+		userReactionToRegularInfluences( 
 			levelsEndingTransitoryPeriod,
 			levels
 		);
@@ -534,16 +531,16 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		// the regular influences.
 		//
 		managedInfluences = this.systemReactionToSystemInfluences( 
-				levelsEndingTransitoryPeriod,
-				levels,
-				agents
+			levelsEndingTransitoryPeriod,
+			levels,
+			agents
 		);
 		// Perform the user-defined reaction to these influences.
-		this.userReactionToSystemInfluences(
-				levelsEndingTransitoryPeriod,
-				levels,
-				managedInfluences, 
-				false
+		userReactionToSystemInfluences(
+			levelsEndingTransitoryPeriod,
+			levels,
+			managedInfluences, 
+			false
 		);
 		//
 		// Update the time and next time of the consistent and transitory states that computed a reaction.
@@ -668,27 +665,27 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 	){
 		// Dispatches the management to the appropriate methods.
 		if( systemInfluence.getCategory().equals( SystemInfluenceAddAgent.CATEGORY ) ){
-			this.manageSystemInfluence(
+			manageSystemInfluence(
 				transitoryTimeMin,
 				transitoryTimeMax,
 				(SystemInfluenceAddAgent) systemInfluence,
 				producedInfluences
 			);
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemoveAgent.CATEGORY ) ){
-			this.manageSystemInfluence( 
+			manageSystemInfluence( 
 				transitoryTimeMin,
 				transitoryTimeMax,
 				(SystemInfluenceRemoveAgent) systemInfluence,
 				producedInfluences
 			);
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceAddAgentToLevel.CATEGORY ) ){
-			this.manageSystemInfluence( 
+			manageSystemInfluence( 
 				(SystemInfluenceAddAgentToLevel) systemInfluence,
 				levels,
 				agents
 			);
 		} else if( systemInfluence.getCategory().equals( SystemInfluenceRemoveAgentFromLevel.CATEGORY ) ){
-			this.manageSystemInfluence( 
+			manageSystemInfluence( 
 				(SystemInfluenceRemoveAgentFromLevel) systemInfluence,
 				levels,
 				agents

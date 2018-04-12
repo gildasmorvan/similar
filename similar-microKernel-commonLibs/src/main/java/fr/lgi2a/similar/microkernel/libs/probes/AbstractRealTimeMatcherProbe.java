@@ -56,7 +56,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  */
-public abstract class RealTimeMatcherProbe  extends AbstractProbe {
+public abstract class AbstractRealTimeMatcherProbe  extends AbstractProbe {
 	/**
 	 * The number of milliseconds in a second.
 	 */
@@ -88,7 +88,7 @@ public abstract class RealTimeMatcherProbe  extends AbstractProbe {
 	 * A higher value means that the simulation has to go faster than real time. A lower value means that the simulation has to go slower 
 	 * than real time. This value has to be strictly positive.
 	 */
-	public RealTimeMatcherProbe(
+	public AbstractRealTimeMatcherProbe(
 		double accelerationFactor
 	) {
 		if( accelerationFactor <= 0 ) {
@@ -100,7 +100,7 @@ public abstract class RealTimeMatcherProbe  extends AbstractProbe {
 	/**
 	 * Builds a probe slowing down the simulation so that its execution speed matches real time.
 	 */
-	public RealTimeMatcherProbe() {
+	public AbstractRealTimeMatcherProbe() {
 		this(1);
 	}
 	

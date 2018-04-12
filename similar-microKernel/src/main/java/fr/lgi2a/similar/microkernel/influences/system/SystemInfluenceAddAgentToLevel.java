@@ -80,6 +80,31 @@ public class SystemInfluenceAddAgentToLevel extends SystemInfluence {
 	private ILocalStateOfAgent4Engine privateLocalState;
 	
 	/**
+	 * Builds an 'Add agent to a level' system influence, adding an agent to the 
+	 * dynamic state of a specific level during the next reaction of that level.
+	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
+	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
+	 * @param publicLocalState The public local state to add to the agent (and to the dynamic state of the level).
+	 * @param privateLocalState The private local state to add to the agent (and to the dynamic state of the level).
+	 * @throws IllegalArgumentException If the public local state is <code>null</code>.
+	 */
+	public SystemInfluenceAddAgentToLevel( 
+			SimulationTimeStamp timeLowerBound,
+			SimulationTimeStamp timeUpperBound, 
+			ILocalStateOfAgent publicLocalState , 
+			ILocalStateOfAgent privateLocalState 
+	) {
+		super( 
+			CATEGORY, 
+			checkParameterValidity( publicLocalState, privateLocalState ).getLevel(),
+			timeLowerBound,
+			timeUpperBound
+		);
+		this.publicLocalState = (ILocalStateOfAgent4Engine) publicLocalState;
+		this.privateLocalState = (ILocalStateOfAgent4Engine) privateLocalState;
+	}
+	
+	/**
 	 * Checks the validity of the parameters of the constructor.
 	 * @param publicLocalState The first parameter of the constructor.
 	 * @param privateLocalState The second parameter of the constructor.
@@ -104,32 +129,6 @@ public class SystemInfluenceAddAgentToLevel extends SystemInfluence {
 			return (ILocalStateOfAgent4Engine) publicLocalState;
 		}
 	}
-	
-	/**
-	 * Builds an 'Add agent to a level' system influence, adding an agent to the 
-	 * dynamic state of a specific level during the next reaction of that level.
-	 * @param timeLowerBound The lower bound of the transitory period during which this influence was created.
-	 * @param timeUpperBound The upper bound of the transitory period during which this influence was created.
-	 * @param publicLocalState The public local state to add to the agent (and to the dynamic state of the level).
-	 * @param privateLocalState The private local state to add to the agent (and to the dynamic state of the level).
-	 * @throws IllegalArgumentException If the public local state is <code>null</code>.
-	 */
-	public SystemInfluenceAddAgentToLevel( 
-			SimulationTimeStamp timeLowerBound,
-			SimulationTimeStamp timeUpperBound, 
-			ILocalStateOfAgent publicLocalState , 
-			ILocalStateOfAgent privateLocalState 
-	) {
-		super( 
-			CATEGORY, 
-			checkParameterValidity( publicLocalState, privateLocalState ).getLevel(),
-			timeLowerBound,
-			timeUpperBound
-		);
-		this.publicLocalState = (ILocalStateOfAgent4Engine) publicLocalState;
-		this.privateLocalState = (ILocalStateOfAgent4Engine) privateLocalState;
-	}
-
 	
 	/**
 	 * Gets the public local state to add to the agent (and to the dynamic state of the level).

@@ -1,7 +1,7 @@
 ![#SIMILAR](src/doc/images/similarLogo.png)
 
 [![Documentation](https://img.shields.io/badge/documentation-web-brightgreen.svg)](http://www.lgi2a.univ-artois.fr/~morvan/similar/docs/README.html)
-[![Download](https://img.shields.io/badge/download-latest%20binary%20distribution%20(v0.2.6)-blue.svg)](http://www.lgi2a.univ-artois.fr/~morvan/download/similar-distribution-0.2.6-bin.zip)
+[![Download](https://img.shields.io/badge/download-latest%20binary%20distribution%20(v0.2.6)-blue.svg)](https://github.com/gildasmorvan/similar/releases/download/v0.2.6-distribution/similar-distribution-0.2.6-bin.zip)
 [![Build Status](https://travis-ci.org/gildasmorvan/similar.svg?branch=master)](https://travis-ci.org/gildasmorvan/similar)
 [![Quality Gate](https://sonarcloud.io/api/badges/gate?key=fr.lgi2a:similar)](https://sonarcloud.io/dashboard?id=fr.lgi2a%3Asimilar)
 [![SonarCloud Bugs](https://sonarcloud.io/api/badges/measure?key=fr.lgi2a%3Asimilar&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=fr.lgi2a%3Asimilar)

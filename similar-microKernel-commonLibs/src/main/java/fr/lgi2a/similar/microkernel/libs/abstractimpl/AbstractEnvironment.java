@@ -136,7 +136,7 @@ public abstract class AbstractEnvironment implements IEnvironment4Engine {
 			throw new IllegalArgumentException( "The arguments cannot be null." );
 		} else if( ! level.equals( publicLocalState.getLevel())  || ! level.equals( privateLocalState.getLevel() ) ) {
 			throw new IllegalArgumentException( "The 'getLevel()' method of the 'publicLocalState' and" +
-					" 'publicLocalState' arguments have to be equal to the 'level' argument." );
+					" 'privateLocalState' arguments have to be equal to the 'level' argument." );
 		} else if( this.publicLocalStates.containsKey( level ) ){
 			throw new IllegalArgumentException( "The level '" + level + "' is already defined for this environment." );
 		}

@@ -54,7 +54,7 @@ import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfEnviro
  * The public local state of the environment in the "micro" level of the Lambda game of life simulation.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
- * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class EnvPLSInMicroLevel extends AbstractLocalStateOfEnvironment {
 	/**

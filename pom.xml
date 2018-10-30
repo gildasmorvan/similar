@@ -157,7 +157,6 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 					<additionalparam>-Xdoclint:none</additionalparam>
                		<use>false</use>
 					<docfilessubdirs>true</docfilessubdirs>
-					<stylesheetfile>stylesheet.css</stylesheetfile>
                 	<links>
                    		<link>http://java.sun.com/javase/8/docs/api/</link>
                 	</links>

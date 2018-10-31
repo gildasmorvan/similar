@@ -1,7 +1,7 @@
-package fr.lgi2a.wildlifesimulation.model;
+package fr.univ_artois.lgi2a.wildlifesimulation.model;
 
-import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractSimulationParameters;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractSimulationParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * The simulation parameters of the 'wildlife' simulation.

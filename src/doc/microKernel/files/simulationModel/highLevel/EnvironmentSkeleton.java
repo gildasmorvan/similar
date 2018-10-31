@@ -1,15 +1,15 @@
-package fr.lgi2a.mysimulation.model.environment;
+package fr.univ_artois.lgi2a.mysimulation.model.environment;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
-import fr.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
-import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.univ_artois.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
 
 /**
  * The model of the environment in the simulation.

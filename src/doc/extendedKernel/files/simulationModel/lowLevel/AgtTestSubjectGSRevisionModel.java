@@ -1,15 +1,15 @@
-package fr.lgi2a.underpressure.model.agents.testsubject;
+package fr.univ_artois.lgi2a.underpressure.model.agents.testsubject;
 
 import java.util.Map;
 
-import fr.lgi2a.similar.extendedkernel.agents.IAgtGlobalStateRevisionModel;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.underpressure.model.agents.testsubject.physical.AgtTestSubjectPDFPhysical;
-import fr.lgi2a.underpressure.model.agents.testsubject.social.AgtTestSubjectPDFSocial;
-import fr.lgi2a.underpressure.model.levels.SimulationLevels;
+import fr.univ_artois.lgi2a.similar.extendedkernel.agents.IAgtGlobalStateRevisionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.univ_artois.lgi2a.underpressure.model.agents.testsubject.physical.AgtTestSubjectPDFPhysical;
+import fr.univ_artois.lgi2a.underpressure.model.agents.testsubject.social.AgtTestSubjectPDFSocial;
+import fr.univ_artois.lgi2a.underpressure.model.levels.SimulationLevels;
 
 /**
  * The global state revision model of a 'Test subject' agent.

@@ -44,11 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro;
 
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
 
 /**
  * The public local state of the "Cell" agent in the "Micro" level.

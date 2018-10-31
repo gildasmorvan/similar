@@ -74,7 +74,7 @@ The simulation contains one level:
 		- the reaction function applies state changes according to p.
 		
 The simulation contains four specific probes located in the
-"fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes" package
+"fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.probes" package
 	- MacroStateProbe prints the density and energy of the system at each simulation step to
 	  the specified target (e.g., a file or System.out).
 	- LambdaGameOfLifeLastStateExporter exports the grid state of the last simulation step as
@@ -90,4 +90,4 @@ The simulation contains four specific probes located in the
 
 
 The main class of this simulation is the "LambdaLifeMain" class from the 
-"fr.lgi2a.similar.extendedkernel.examples.lambdalife" package. 
+"fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife" package. 

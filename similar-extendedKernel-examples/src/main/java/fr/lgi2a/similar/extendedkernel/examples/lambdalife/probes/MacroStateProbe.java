@@ -44,20 +44,20 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdalife.probes;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.probes;
 
 import java.io.PrintStream;
 
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.LambdaLifeAgentList;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.LambdaLifeAgentList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * A probe printing in a stream the number of alive cells over time.

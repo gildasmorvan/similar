@@ -1,11 +1,11 @@
-package fr.lgi2a.wildlifesimulation.model.environment.savannah;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfEnvironment;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
  * The public local state of the environment in the "Savannah" level of the 

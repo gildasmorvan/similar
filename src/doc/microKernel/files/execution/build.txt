@@ -4,7 +4,7 @@
    <property name="build"       location="target/bin"/>
    <property name="similarDir" 	location="/home/binaries/similar/"/>
 
-   <property name="main-class"	value="fr.lgi2a.similar.custom.mysimulation.SimulationMain"/>
+   <property name="main-class"	value="fr.univ_artois.lgi2a.similar.custom.mysimulation.SimulationMain"/>
 
    <!-- define the class path -->
    <path id="project.class.path">

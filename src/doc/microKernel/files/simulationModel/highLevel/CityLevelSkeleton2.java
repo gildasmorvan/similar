@@ -1,14 +1,14 @@
-package fr.lgi2a.mysimulation.model.levels.city;
+package fr.univ_artois.lgi2a.mysimulation.model.levels.city;
 
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.mysimulation.model.levels.MyAwesomeLevelList;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.influences.IInfluence;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLevel;
+import fr.univ_artois.lgi2a.mysimulation.model.levels.MyAwesomeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLevel;
 
 /**
  * The model of the "City" level.

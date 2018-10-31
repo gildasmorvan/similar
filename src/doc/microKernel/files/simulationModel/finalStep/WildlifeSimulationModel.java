@@ -1,26 +1,26 @@
-package fr.lgi2a.wildlifesimulation.initializations;
+package fr.univ_artois.lgi2a.wildlifesimulation.initializations;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractSimulationModel;
-import fr.lgi2a.wildlifesimulation.model.WildlifeSimulationParam;
-import fr.lgi2a.wildlifesimulation.model.agents.gazelle.AgtGazelleFactory;
-import fr.lgi2a.wildlifesimulation.model.agents.lion.AgtLionFactory;
-import fr.lgi2a.wildlifesimulation.model.environment.WildlifeEnvironment;
-import fr.lgi2a.wildlifesimulation.model.environment.savannah.EnvHLSInSavannah;
-import fr.lgi2a.wildlifesimulation.model.environment.savannah.EnvPLSInSavannah;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
-import fr.lgi2a.wildlifesimulation.model.levels.savannah.SavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.levels.sky.SkyLevel;
-import fr.lgi2a.wildlifesimulation.model.levels.underground.UndergroundLevel;
-import fr.lgi2a.wildlifesimulation.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ILevel;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractSimulationModel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.WildlifeSimulationParam;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.gazelle.AgtGazelleFactory;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.AgtLionFactory;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.WildlifeEnvironment;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah.EnvHLSInSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah.EnvPLSInSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.savannah.SavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.sky.SkyLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.underground.UndergroundLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.tools.RandomValueFactory;
 
 /**
  * Models an initialization profile of a Wildlife simulation containing only 

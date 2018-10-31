@@ -44,11 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external;
 
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
 
 /**
  * The private local state of the "Cannon" agent in the "External" level.

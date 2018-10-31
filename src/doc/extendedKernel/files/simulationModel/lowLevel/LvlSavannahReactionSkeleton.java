@@ -1,13 +1,13 @@
-package fr.lgi2a.wildlifesimulation.model.levels.savannah;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.levels.savannah;
 
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.influences.IInfluence;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
 
 /**
  * Models the user-side of the reaction of the "Savannah" level to the influence it 

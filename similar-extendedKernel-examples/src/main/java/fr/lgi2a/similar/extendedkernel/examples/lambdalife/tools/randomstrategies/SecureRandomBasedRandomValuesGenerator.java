@@ -44,11 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.randomstrategies;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.tools.randomstrategies;
 
 import java.security.SecureRandom;
 
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.IRandomValuesGenerator;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.tools.IRandomValuesGenerator;
 
 /**
  * A {@link SecureRandom} based implementation of the random numbers generation strategy.

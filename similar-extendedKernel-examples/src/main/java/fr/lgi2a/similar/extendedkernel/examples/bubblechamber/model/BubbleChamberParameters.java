@@ -44,13 +44,13 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractSimulationParameters;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractSimulationParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * The parameters used in the "Bubble chamber" simulation.

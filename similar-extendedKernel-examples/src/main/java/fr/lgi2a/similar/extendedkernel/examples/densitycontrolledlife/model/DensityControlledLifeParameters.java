@@ -44,9 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model;
 
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
 
 /**
  * The simulation parameters used in the Density Controlled game of life simulation.

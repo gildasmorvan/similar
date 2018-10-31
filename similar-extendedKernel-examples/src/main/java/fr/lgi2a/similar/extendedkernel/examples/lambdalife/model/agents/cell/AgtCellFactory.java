@@ -44,20 +44,20 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell;
 
-import fr.lgi2a.similar.extendedkernel.agents.ExtendedAgent;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.LambdaLifeAgentList;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellDecisionFromMicro;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPerceptionFromMicro;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
-import fr.lgi2a.similar.extendedkernel.libs.generic.IdentityAgtGlobalStateRevisionModel;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent4Engine;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.agents.ExtendedAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.LambdaLifeAgentList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellDecisionFromMicro;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPerceptionFromMicro;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.generic.IdentityAgtGlobalStateRevisionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
 
 /**
  * This factory creates a default agent from the "Cell" category.

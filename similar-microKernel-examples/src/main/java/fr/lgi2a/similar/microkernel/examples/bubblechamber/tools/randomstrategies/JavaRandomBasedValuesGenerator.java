@@ -44,11 +44,11 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.randomstrategies;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.tools.randomstrategies;
 
 import java.util.Random;
 
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.IRandomValuesGenerator;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.tools.IRandomValuesGenerator;
 
 /**
  * A random value generation strategy based on the java.util.Random java class.

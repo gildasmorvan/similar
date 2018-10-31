@@ -1,6 +1,6 @@
-package fr.lgi2a.wildlifesimulation.model.agents;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.agents;
 
-import fr.lgi2a.similar.microkernel.AgentCategory;
+import fr.univ_artois.lgi2a.similar.microkernel.AgentCategory;
 
 /**
  * The list of levels of a wildlife simulation.

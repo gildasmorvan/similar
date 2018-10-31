@@ -44,7 +44,7 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.tools;
 
 /**
  * Defines the random value generation methods that can be used in this simulation.

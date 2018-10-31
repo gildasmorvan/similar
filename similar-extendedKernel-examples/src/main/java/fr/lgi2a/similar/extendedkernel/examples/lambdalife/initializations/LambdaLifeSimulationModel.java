@@ -44,35 +44,35 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdalife.initializations;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.initializations;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.extendedkernel.environment.ExtendedEnvironment;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.AgtCellFactory;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.PerceptionAndInfluenceRelationGraphs;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.micro.LvlMicroReaction;
-import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
-import fr.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
-import fr.lgi2a.similar.extendedkernel.libs.endcriterion.EndCriterionDisjunction;
-import fr.lgi2a.similar.extendedkernel.libs.endcriterion.TimeBasedEndCriterion;
-import fr.lgi2a.similar.extendedkernel.libs.generic.EmptyEnvNaturalModel;
-import fr.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
-import fr.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
-import fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.levels.ITimeModel;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.extendedkernel.environment.ExtendedEnvironment;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.AgtCellFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.PerceptionAndInfluenceRelationGraphs;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.micro.LvlMicroReaction;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.endcriterion.EndCriterionDisjunction;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.endcriterion.TimeBasedEndCriterion;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.generic.EmptyEnvNaturalModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ILevel;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ITimeModel;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfEnvironment;
 
 /**
  * Models the default configuration of the simulation for a lambda game of life.

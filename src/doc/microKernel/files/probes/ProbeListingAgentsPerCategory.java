@@ -1,4 +1,4 @@
-package fr.lgi2a.similar.customprobes;
+package fr.univ_artois.lgi2a.similar.customprobes;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -8,12 +8,12 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import fr.lgi2a.similar.microkernel.AgentCategory;
-import fr.lgi2a.similar.microkernel.IProbe;
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.AgentCategory;
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
+import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
 
 /**
  * This probe creates a file describing the evolution of the population of

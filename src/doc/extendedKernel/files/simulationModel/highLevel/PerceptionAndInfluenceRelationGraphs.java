@@ -1,6 +1,6 @@
-package fr.lgi2a.mysimulation.model.levels;
+package fr.univ_artois.lgi2a.mysimulation.model.levels;
 
-import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
 
 /**
  * This class models the perception and the influence relation graphs of the simulation.

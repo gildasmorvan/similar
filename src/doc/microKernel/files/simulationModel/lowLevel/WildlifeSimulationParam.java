@@ -1,4 +1,4 @@
-package fr.lgi2a.wildlifesimulation.model;
+package fr.univ_artois.lgi2a.wildlifesimulation.model;
 
 /**
  * The simulation parameters of the 'wildlife' simulation.

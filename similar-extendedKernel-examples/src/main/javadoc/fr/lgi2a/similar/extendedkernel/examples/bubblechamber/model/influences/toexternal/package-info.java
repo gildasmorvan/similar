@@ -51,4 +51,4 @@
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.influences.toexternal;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.influences.toexternal;

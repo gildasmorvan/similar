@@ -44,22 +44,22 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.chamber;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.chamber;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvPLSInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.influences.tochamber.RIUpdateParticlesSpatialStateInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.influences.IInfluence;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvPLSInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.influences.tochamber.RIUpdateParticlesSpatialStateInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
 
 /**
  * The reaction model of the "Chamber" level of the simulation.

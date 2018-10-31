@@ -1,6 +1,6 @@
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.levels;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * The list of levels of a "bubble chamber" simulation.

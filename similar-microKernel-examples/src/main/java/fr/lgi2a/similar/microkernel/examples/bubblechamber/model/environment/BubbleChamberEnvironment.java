@@ -44,31 +44,31 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.environment;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.environment;
 
 import java.awt.geom.Point2D;
 import java.util.Map;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubble;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubbleFactory;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.environment.external.EnvPLSInExternal;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.tochamber.RIUpdateParticlesSpatialStateInChamber;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RICoolDown;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.tools.RandomValueFactory;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractEnvironment;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubble;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubbleFactory;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.environment.external.EnvPLSInExternal;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.tochamber.RIUpdateParticlesSpatialStateInChamber;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RICoolDown;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractEnvironment;
 
 /**
  * The environment used in the "Bubble chamber" simulation.

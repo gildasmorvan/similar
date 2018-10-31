@@ -44,20 +44,20 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.micro;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.micro;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.influences.tomicro.ControlCommand;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.influences.tomicro.NextStateInfluence;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.micro.LvlMicroReaction;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.influences.IInfluence;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.influences.tomicro.ControlCommand;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.influences.tomicro.NextStateInfluence;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.micro.LvlMicroReaction;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
 
 /**
  * Models the user-side of the reaction of the "Micro" level to the influence it 

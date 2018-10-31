@@ -1,13 +1,13 @@
-package fr.lgi2a.wildlifesimulation.model.agents.lion;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion;
 
 import java.awt.geom.Point2D;
 
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
-import fr.lgi2a.wildlifesimulation.model.WildlifeSimulationParam;
-import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionHLSInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPLSInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
-import fr.lgi2a.wildlifesimulation.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.WildlifeSimulationParam;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionHLSInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPLSInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.wildlifesimulation.tools.RandomValueFactory;
 
 /**
  * This factory creates a default agent from the "Lion" category.

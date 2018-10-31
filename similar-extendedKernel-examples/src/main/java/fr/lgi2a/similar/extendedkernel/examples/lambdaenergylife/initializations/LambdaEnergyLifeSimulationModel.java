@@ -44,23 +44,23 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdaenergylife.initializations;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdaenergylife.initializations;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import fr.lgi2a.similar.extendedkernel.examples.lambdaenergylife.model.LambdaEnergyLifeParameters;
-import fr.lgi2a.similar.extendedkernel.examples.lambdaenergylife.model.levels.micro.LvlMicroLambdaEnergyLifeReaction;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.initializations.LambdaLifeSimulationModel;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.PerceptionAndInfluenceRelationGraphs;
-import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
-import fr.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
-import fr.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
-import fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.levels.ITimeModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdaenergylife.model.LambdaEnergyLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdaenergylife.model.levels.micro.LvlMicroLambdaEnergyLifeReaction;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.initializations.LambdaLifeSimulationModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.PerceptionAndInfluenceRelationGraphs;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ILevel;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ITimeModel;
 
 /**
  * Models the default configuration of the simulation for a lambda energyTreshold game of life.

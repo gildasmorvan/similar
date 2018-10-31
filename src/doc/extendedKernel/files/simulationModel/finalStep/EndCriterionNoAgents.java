@@ -1,9 +1,9 @@
-package fr.lgi2a.wildlifesimulation.initializations;
+package fr.univ_artois.lgi2a.wildlifesimulation.initializations;
 
-import fr.lgi2a.similar.extendedkernel.simulationmodel.IEndCriterionModel;
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.IEndCriterionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
  * A simulation end criterion stopping the simulation as long as the

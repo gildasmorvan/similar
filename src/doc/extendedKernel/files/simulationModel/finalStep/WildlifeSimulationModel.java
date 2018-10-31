@@ -1,31 +1,31 @@
-package fr.lgi2a.wildlifesimulation.initializations;
+package fr.univ_artois.lgi2a.wildlifesimulation.initializations;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.extendedkernel.environment.ExtendedEnvironment;
-import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
-import fr.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
-import fr.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
-import fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.levels.ITimeModel;
-import fr.lgi2a.wildlifesimulation.model.WildlifeParametersClass;
-import fr.lgi2a.wildlifesimulation.model.agents.gazelle.AgtGazelleFactory;
-import fr.lgi2a.wildlifesimulation.model.agents.lion.AgtLionFactory;
-import fr.lgi2a.wildlifesimulation.model.environment.savannah.EnvHLSInSavannah;
-import fr.lgi2a.wildlifesimulation.model.environment.savannah.EnvNaturalInSavannah;
-import fr.lgi2a.wildlifesimulation.model.environment.savannah.EnvPLSInSavannah;
-import fr.lgi2a.wildlifesimulation.model.levels.PerceptionAndInfluenceRelationGraphs;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
-import fr.lgi2a.wildlifesimulation.model.levels.savannah.LvlSavannahReaction;
-import fr.lgi2a.wildlifesimulation.model.levels.savannah.LvlSavannahTimeModel;
-import fr.lgi2a.wildlifesimulation.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.environment.ExtendedEnvironment;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ILevel;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ITimeModel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.WildlifeParametersClass;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.gazelle.AgtGazelleFactory;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.AgtLionFactory;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah.EnvHLSInSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah.EnvNaturalInSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah.EnvPLSInSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.PerceptionAndInfluenceRelationGraphs;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.savannah.LvlSavannahReaction;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.savannah.LvlSavannahTimeModel;
+import fr.univ_artois.lgi2a.wildlifesimulation.tools.RandomValueFactory;
 
 /**
  * Models an initialization profile of a Wildlife simulation containing only 

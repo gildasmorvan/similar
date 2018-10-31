@@ -605,7 +605,7 @@ The common libraries of the micro-kernel of SIMILAR provide a default implementa
 *{{methodName{reviseGlobalState(...)}}} performing the global state revision process of the agent;
 *{{methodName{decide(...)}}} performing the decision process of the agent.
 Note that this class also provides a method initializing the value of the ''global state'' of the agent:
-*{{methodName{initializeGlobalState(IGlobalState)}}} setting the initial value of the global state of the agent; {{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html#initializeGlobalState(fr.lgi2a.similar.microkernel.agents.IGlobalState)]]}}}
+*{{methodName{initializeGlobalState(IGlobalState)}}} setting the initial value of the global state of the agent; {{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html#initializeGlobalState(fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState)]]}}}
 !Implementation instructions
 A class extending {{className{[[AbstractAgent|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractAgent.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
 
@@ -634,7 +634,7 @@ The following code illustrates the implementation of the &quot;City bus&quot; ag
 The common libraries of the micro-kernel of SIMILAR provide a default implementation named {{className{[[AbstractEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html]]}}} to the {{className{[[IEnvironment|../../api/fr/lgi2a/similar/microkernel/environment/IEnvironment.html]]}}} interface modeling the environment of a simulation. This abstract class provides the behavior to the generic and domain-independent methods of this class. Only the following methods have still to be specified by the users:
 *{{methodName{natural(...)}}} specifying the natural action of the environment from each level.
 Note that this class also determines a method initializing the public and local state of the environment:
-*{{methodName{includeNewLevel(LevelIdentifier,ILocalStateOfEnvironment,ILocalStateOfEnvironment)}}} determines the public and private local state (in this order) of the environment for a specific level;{{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment, fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)]]}}}
+*{{methodName{includeNewLevel(LevelIdentifier,ILocalStateOfEnvironment,ILocalStateOfEnvironment)}}} determines the public and private local state (in this order) of the environment for a specific level;{{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html#includeNewLevel(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier, fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment, fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment)]]}}}
 !Implementation instructions
 A class extending {{className{[[AbstractEnvironment|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractEnvironment.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
 
@@ -661,8 +661,8 @@ The common libraries of the micro-kernel of SIMILAR provide a default implementa
 *{{methodName{makeSystemReaction(...)}}} performing a user-defined reaction to a set of system influences;
 *{{methodName{makeRegularReaction(...)}}}  performing a user-defined reaction to a set of regular influences.
 Note that this class also changes the way the influence and perception relation graph are handled. By default, the level belongs to its out neighborhood in the perception and influence relation graphs. The addition of levels to these neighborhoods is made by calling the following method during the creation of the level or in its constructor:
-*{{methodName{addPerceptibleLevel(LevelIdentifier)}}} to add a perceptible level from this level; {{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addPerceptibleLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
-*{{methodName{addInfluenceableLevel(LevelIdentifier)}}} to add an influenceable level from this level.{{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addInfluenceableLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{addPerceptibleLevel(LevelIdentifier)}}} to add a perceptible level from this level; {{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addPerceptibleLevel(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{addInfluenceableLevel(LevelIdentifier)}}} to add an influenceable level from this level.{{doclink{[[Method API|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addInfluenceableLevel(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
 !Implementation instructions
 A class extending {{className{[[AbstractLevel|../../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
 
@@ -721,7 +721,7 @@ In this example, we illustrate the creation of the ''public local state'' of the
 *The ambient humidity level
 It also defines a &quot;grid&quot; topology, where the public local state of the agents of that level are put.
 
-The created state is named {{className{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
+The created state is named {{className{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
 {{clear{}}}
 !Code
 If the model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|../files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|../files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the environment can be implemented as the {{className{PLSEnvInSavannahLevel2}}} class. The sources of this class are also available in a [[stand alone file|../files/simulationModel/highLevel/PLSEnvInSavannahLevel2.java]]:
@@ -747,7 +747,7 @@ This constructor defines the following arguments:
 In this example, we illustrate the creation of the ''public local state'' of an agent from the category &quot;Lion&quot; in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
 *The coordinates of the lion in the environment;
 *The age of the lion.
-The created state is named {{{AgtLionPLSInSavannahLevel}}}^^//''3''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{{fr.lgi2a.wildlifesimulation.model.agents.lion.savannah}}} package.
+The created state is named {{{AgtLionPLSInSavannahLevel}}}^^//''3''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{{fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah}}} package.
 {{clear{}}}
 !Code
 If this model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|../files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|../files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the &quot;Lion&quot; agent in the &quot;Savannah&quot; level can be implemented as the {{className{AgtLionPLSInSavannahLevel2}}} class. The sources of this class are also available in a [[stand alone file|../files/simulationModel/highLevel/AgtLionPLSInSavannahLevel2.java]]:
@@ -1074,15 +1074,15 @@ This section illustrates the type of trace being printed by the exception tracke
 {{{
 An error was met during the execution of the simulation: The simulation stopped because of an error.
 java.lang.NullPointerException: This exception was triggered intentionally.
-	at fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubble.decide(AgtBubble.java:81)
-	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.decisionPhase(AbstractMonothreadedEngine.java:458)
-	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.behaviorPhaseOfAgentsAndEnvironment(AbstractMonothreadedEngine.java:310)
-	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.performSimulation(AbstractMonothreadedEngine.java:161)
-	at fr.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation.performSimulation(EngineMonothreadedDefaultdisambiguation.java:94)
-	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.performSimulation(AbstractSimulationEngineWithInitialization.java:527)
-	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.runNewSimulationWithoutCheckingErrors(AbstractSimulationEngineWithInitialization.java:262)
-	at fr.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.runNewSimulation(AbstractSimulationEngineWithInitialization.java:208)
-	at fr.lgi2a.similar.microkernel.examples.bubblechamber.BubbleChamberMain.main(BubbleChamberMain.java:109)
+	at fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble.AgtBubble.decide(AgtBubble.java:81)
+	at fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.decisionPhase(AbstractMonothreadedEngine.java:458)
+	at fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.behaviorPhaseOfAgentsAndEnvironment(AbstractMonothreadedEngine.java:310)
+	at fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine.performSimulation(AbstractMonothreadedEngine.java:161)
+	at fr.univ_artois.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation.performSimulation(EngineMonothreadedDefaultdisambiguation.java:94)
+	at fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.performSimulation(AbstractSimulationEngineWithInitialization.java:527)
+	at fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.runNewSimulationWithoutCheckingErrors(AbstractSimulationEngineWithInitialization.java:262)
+	at fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractSimulationEngineWithInitialization.runNewSimulation(AbstractSimulationEngineWithInitialization.java:208)
+	at fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.BubbleChamberMain.main(BubbleChamberMain.java:109)
 }}}
 }}} ===
 
@@ -1951,38 +1951,38 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 !!Apache Maven
 {{{
 &lt;dependency&gt;
-  &lt;groupId&gt;fr.lgi2a&lt;/groupId&gt;
+  &lt;groupId&gt;fr.univ_artois.lgi2a&lt;/groupId&gt;
   &lt;artifactId&gt;similar-microKernel&lt;/artifactId&gt;
   &lt;version&gt;0.0.1&lt;/version&gt;
 &lt;/dependency&gt;
 }}}
 !!Apache Buildr
 {{{
-'fr.lgi2a:similar-microKernel:jar:0.0.1'
+'fr.univ_artois.lgi2a:similar-microKernel:jar:0.0.1'
 }}}
 !!Apache Ant
 {{{
-&lt;dependency org=&quot;fr.lgi2a&quot; name=&quot;similar-microKernel&quot; rev=&quot;0.0.1&quot;&gt;
+&lt;dependency org=&quot;fr.univ_artois.lgi2a&quot; name=&quot;similar-microKernel&quot; rev=&quot;0.0.1&quot;&gt;
   &lt;artifact name=&quot;similar-microKernel&quot; type=&quot;jar&quot; /&gt;
 &lt;/dependency&gt;
 }}}
 !!Groovy Grape
 {{{
 @Grapes(
-@Grab(group='fr.lgi2a', module='similar-microKernel', version='0.0.1')
+@Grab(group='fr.univ_artois.lgi2a', module='similar-microKernel', version='0.0.1')
 )
 }}}
 !!Grails
 {{{
-compile 'fr.lgi2a:similar-microKernel:0.0.1'
+compile 'fr.univ_artois.lgi2a:similar-microKernel:0.0.1'
 }}}
 !!Leiningen
 {{{
-[fr.lgi2a/similar-microKernel &quot;0.0.1&quot;]
+[fr.univ_artois.lgi2a/similar-microKernel &quot;0.0.1&quot;]
 }}}
 !!SBT
 {{{
-libraryDependencies += &quot;fr.lgi2a&quot; %% &quot;similar-microKernel&quot; % &quot;0.0.1&quot;
+libraryDependencies += &quot;fr.univ_artois.lgi2a&quot; %% &quot;similar-microKernel&quot; % &quot;0.0.1&quot;
 }}}</pre>
 </div>
 <div title="InlineJavascriptPlugin" creator="Designer" modifier="Designer" created="201401211625" tags="plugin systemConfig excludeLists" changecount="1">
@@ -2888,7 +2888,7 @@ The following is a list of test dependencies for this project. These dependencie
 |org.hamcrest |hamcrest-core |1.3 |jar |[[New BSD License|http://opensource.org/licenses/bsd-license.php]] |
 !Project Dependency Graph
 !!Dependency Tree
-*fr.lgi2a:similar-microKernel:jar:0.0.1+++
+*fr.univ_artois.lgi2a:similar-microKernel:jar:0.0.1+++
 |&gt;|!SIMILAR - Micro kernel|
 |''Description:'' |A micro kernel containing the minimal specification of SIMILAR, supporting the design of efficient simulations. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |

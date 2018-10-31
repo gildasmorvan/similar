@@ -310,7 +310,7 @@ _|_  v         |__(_| |  |_ | | |(_|    |_| |(/_   __)_|_| |_|_|__| || \   | || 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	Since we have to include the licensing information in each generated java class, an eclipse code template is defined for that purpose in the "codetemplatex.xml" 
-file of the parent project of the SIMILAR API suite (artifactId "similar", groupId "fr.lgi2a"). If you are not using eclipse, then add a text has to be added manually 
+file of the parent project of the SIMILAR API suite (artifactId "similar", groupId "fr.univ_artois.lgi2a"). If you are not using eclipse, then add a text has to be added manually 
 at the beginning of each java file you are writing inside the SIMILAR API suite.
 
 The licensing text to put as a comment at the beginning of the files can be found in the 'LICENSE.txt' file.
@@ -322,10 +322,10 @@ The licensing text to put as a comment at the beginning of the files can be foun
 To change the version number of the SIMILAR API suite, the following modifications have to be made:
 	- Change the version in the 'pom.xml' file of the root of the project:
 		- Change the value of the "version" tag located in the root of the pom.
-		- Change the value of the "fr.lgi2a.similar.version" tag located in the "properties" tag of the root of the pom.
+		- Change the value of the "fr.univ_artois.lgi2a.similar.version" tag located in the "properties" tag of the root of the pom.
 	- Change the version number of the parent of each 'pom.xml' of the sub-modules, i.e. change version in:
 			  <parent>
-			    <groupId>fr.lgi2a</groupId>
+			    <groupId>fr.univ_artois.lgi2a</groupId>
 			    <artifactId>similar</artifactId>
 			    <version>0.0.0</version>
 			  </parent>

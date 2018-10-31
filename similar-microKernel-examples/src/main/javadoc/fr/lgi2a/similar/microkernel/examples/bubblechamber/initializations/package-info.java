@@ -51,4 +51,4 @@
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.initializations;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.initializations;

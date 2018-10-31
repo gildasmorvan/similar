@@ -44,10 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.bubble;
 
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
-import fr.lgi2a.similar.microkernel.libs.generic.PassiveAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.PassiveAgent;
 
 /**
  * Models a "Bubble" agent of the simulation.

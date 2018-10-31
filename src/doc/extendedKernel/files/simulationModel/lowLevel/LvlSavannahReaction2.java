@@ -1,4 +1,4 @@
-package fr.lgi2a.wildlifesimulation.model.levels.savannah;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.levels.savannah;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -7,20 +7,20 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.influences.IInfluence;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
-import fr.lgi2a.wildlifesimulation.model.agents.gazelle.savannah.AgtGazellePLSInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.agents.generic.savannah.IAgtPLSInSavannah;
-import fr.lgi2a.wildlifesimulation.model.environment.savannah.PLSEnvInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahEat;
-import fr.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahGrowOlder;
-import fr.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahMove;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
-import fr.lgi2a.wildlifesimulation.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ILevelReactionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.gazelle.savannah.AgtGazellePLSInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.generic.savannah.IAgtPLSInSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah.PLSEnvInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahEat;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahGrowOlder;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.influences.tosavannah.RISavannahMove;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.wildlifesimulation.tools.RandomValueFactory;
 
 /**
  * Models the user-side of the reaction of the "Savannah" level to the influence it 

@@ -1,4 +1,4 @@
-package fr.lgi2a.mysimulation.model;
+package fr.univ_artois.lgi2a.mysimulation.model;
 
 /**
  * Models the parameters used in this simulation.

@@ -44,10 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdalife.model;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model;
 
-import fr.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractSimulationParameters;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.abstractimpl.AbstractSimulationParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 
 /**
  * The simulation parameters used in the Lambda game of life simulation.

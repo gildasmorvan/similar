@@ -1,7 +1,7 @@
 This example illustrates how a modified version of the lambda life simulation can be implemented using the
 extended-kernel, the common libraries and the extended libraries.
 
-It extends the "Lambda Life" model implemented in the fr.lgi2a.similar.extendedkernel.examples.lambdalife
+It extends the "Lambda Life" model implemented in the fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife
 package.
 
 ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** *****
@@ -21,4 +21,4 @@ The simulation contains one level:
 		- the reaction function applies state changes according to p and the energy of the grid.
 
 The main class of this simulation is the "LambdaEnergyLifeMain" class from the 
-"fr.lgi2a.similar.extendedkernel.examples.lambdaenergylife" package.
+"fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdaenergylife" package.

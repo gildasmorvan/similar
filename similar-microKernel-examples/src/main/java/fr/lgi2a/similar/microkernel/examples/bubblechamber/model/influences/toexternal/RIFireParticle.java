@@ -44,13 +44,13 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal;
 
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticle;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticle;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.RegularInfluence;
 
 /**
  * This influence is sent by a "Cannon" in the "External" level whenever it fires a new

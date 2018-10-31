@@ -1,4 +1,4 @@
-package fr.lgi2a.mysimulation.tools;
+package fr.univ_artois.lgi2a.mysimulation.tools;
 
 /**
  * The random values factory used in the simulation.

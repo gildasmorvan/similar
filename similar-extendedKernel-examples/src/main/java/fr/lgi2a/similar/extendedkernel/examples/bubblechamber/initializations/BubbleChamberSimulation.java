@@ -44,33 +44,33 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.initializations;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.initializations;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import fr.lgi2a.similar.extendedkernel.environment.ExtendedEnvironment;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.BubbleChamberParameters;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.cannon.AgtCannonFactory;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvNaturalInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvPLSInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.external.EnvNaturalInExternal;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.external.EnvPLSInExternal;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.PerceptionAndInfluenceRelationGraphs;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.chamber.ChamberLvlReactionModel;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.external.ExternalLvlReactionModel;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.RandomValueFactory;
-import fr.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
-import fr.lgi2a.similar.extendedkernel.libs.endcriterion.TimeBasedEndCriterion;
-import fr.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
-import fr.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
-import fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.levels.ILevel;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfEnvironment;
+import fr.univ_artois.lgi2a.similar.extendedkernel.environment.ExtendedEnvironment;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.BubbleChamberParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.cannon.AgtCannonFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvNaturalInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvPLSInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.external.EnvNaturalInExternal;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.external.EnvPLSInExternal;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.PerceptionAndInfluenceRelationGraphs;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.chamber.ChamberLvlReactionModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.external.ExternalLvlReactionModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.levels.ExtendedLevel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.endcriterion.TimeBasedEndCriterion;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.timemodel.PeriodicTimeModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ILevel;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfEnvironment;
 
 /**
  * The simulation model of the "Bubble chamber" simulation.

@@ -1,9 +1,9 @@
-package fr.lgi2a.wildlifesimulation.model.influences.tosavannah;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.influences.tosavannah;
 
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
-import fr.lgi2a.wildlifesimulation.model.agents.generic.savannah.IAgtPLSInSavannah;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.RegularInfluence;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.generic.savannah.IAgtPLSInSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
  * An influence sent by an agent from the "Savannah" level to move towards a direction.

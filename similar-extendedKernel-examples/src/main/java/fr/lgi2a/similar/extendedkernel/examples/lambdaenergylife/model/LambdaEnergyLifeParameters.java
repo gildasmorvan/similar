@@ -44,9 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.lambdaenergylife.model;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdaenergylife.model;
 
-import fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
 
 /**
  * The simulation parameters used in the Lambda Energy game of life simulation.
@@ -58,7 +58,7 @@ public class LambdaEnergyLifeParameters extends LambdaLifeParameters {
 
 	/**
 	 * Defines the energyThreshold at which the lambda value
-	 * starts to lower to {@link fr.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.micro.LvlMicroReaction.LAMBDA_LIFE}
+	 * starts to lower to {@link fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.micro.LvlMicroReaction.LAMBDA_LIFE}
 	 */
 	public double energyThreshold;
 	

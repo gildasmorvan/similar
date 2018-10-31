@@ -890,7 +890,7 @@ store.addNotification(&quot;StyleSheetDropDownMenuPlugin&quot;,refreshStyles);
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractAgtDecisionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtDecisionModel.html]]}}} to the {{className{[[IAgtDecisionModel|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtDecisionModel.html]]}}} interface modeling the decision model of an agent from a specific level. This abstract class provides the behavior to the generic and domain-independent methods. Only the following method has still to be specified by the users:
-*{{methodName{decide(...)}}} defining how the agent decides to produce influences from a specific level. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtDecisionModel.html#decide(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.agents.IGlobalState, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.IPerceivedData, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+*{{methodName{decide(...)}}} defining how the agent decides to produce influences from a specific level. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtDecisionModel.html#decide(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState, fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData, fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
 !Implementation instructions
 A class extending {{className{[[AbstractAgtDecisionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtDecisionModel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
 
@@ -945,7 +945,7 @@ Based on these information, the corresponding ''decision model'' is implemented 
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractEnvNaturalModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractEnvNaturalModel.html]]}}} to the {{className{[[IEnvNaturalModel|../../api/fr/lgi2a/similar/extendedkernel/environment/IEnvNaturalModel.html]]}}} interface modeling the natural action model of the environment from a specific level. This abstract class provides the behavior to the generic and domain-independent methods. Only the following method has still to be specified by the users:
-*{{methodName{natural(...)}}} defining how the environment decides which influences result for its natural action. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/environment/IEnvNaturalModel.html#natural(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map, fr.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment, fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+*{{methodName{natural(...)}}} defining how the environment decides which influences result for its natural action. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/environment/IEnvNaturalModel.html#natural(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map, fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment, fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap, fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
 !Implementation instructions
 A class extending {{className{[[AbstractEnvNaturalModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractEnvNaturalModel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
 
@@ -1014,7 +1014,7 @@ Based on these information, the corresponding ''simulation parameters'' class is
 
 &lt;html&gt;&lt;hr class=&quot;topSep&quot;/&gt;&lt;/html&gt;
 The extended libraries of the extended kernel of SIMILAR provide the default implementation {{className{[[AbstractAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtPerceptionModel.html]]}}} to the {{className{[[IAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtPerceptionModel.html]]}}} interface modeling the perception model of an agent from a specific level. This abstract class provides the behavior to the generic and domain-independent methods. Only the following method has still to be specified by the users:
-*{{methodName{perceive(...)}}} defining how the agent perceives information from the simulation for a specific level. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtPerceptionModel.html#perceive(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap)]]}}}
+*{{methodName{perceive(...)}}} defining how the agent perceives information from the simulation for a specific level. {{doclink{[[Method API|../../api/fr/lgi2a/similar/extendedkernel/agents/IAgtPerceptionModel.html#perceive(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, java.util.Map, fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap)]]}}}
 !Implementation instructions
 A class extending {{className{[[AbstractAgtPerceptionModel|../../api/fr/lgi2a/similar/extendedkernel/libs/abstractimpl/AbstractAgtPerceptionModel.html]]}}} has also to be abstract, or to provide the operational code of the abovementionned methods.
 
@@ -1682,38 +1682,38 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 !!Apache Maven
 {{{
 &lt;dependency&gt;
-  &lt;groupId&gt;fr.lgi2a&lt;/groupId&gt;
+  &lt;groupId&gt;fr.univ_artois.lgi2a&lt;/groupId&gt;
   &lt;artifactId&gt;similar-microKernel&lt;/artifactId&gt;
   &lt;version&gt;0.0.1&lt;/version&gt;
 &lt;/dependency&gt;
 }}}
 !!Apache Buildr
 {{{
-'fr.lgi2a:similar-microKernel:jar:0.0.1'
+'fr.univ_artois.lgi2a:similar-microKernel:jar:0.0.1'
 }}}
 !!Apache Ant
 {{{
-&lt;dependency org=&quot;fr.lgi2a&quot; name=&quot;similar-microKernel&quot; rev=&quot;0.0.1&quot;&gt;
+&lt;dependency org=&quot;fr.univ_artois.lgi2a&quot; name=&quot;similar-microKernel&quot; rev=&quot;0.0.1&quot;&gt;
   &lt;artifact name=&quot;similar-microKernel&quot; type=&quot;jar&quot; /&gt;
 &lt;/dependency&gt;
 }}}
 !!Groovy Grape
 {{{
 @Grapes(
-@Grab(group='fr.lgi2a', module='similar-microKernel', version='0.0.1')
+@Grab(group='fr.univ_artois.lgi2a', module='similar-microKernel', version='0.0.1')
 )
 }}}
 !!Grails
 {{{
-compile 'fr.lgi2a:similar-microKernel:0.0.1'
+compile 'fr.univ_artois.lgi2a:similar-microKernel:0.0.1'
 }}}
 !!Leiningen
 {{{
-[fr.lgi2a/similar-microKernel &quot;0.0.1&quot;]
+[fr.univ_artois.lgi2a/similar-microKernel &quot;0.0.1&quot;]
 }}}
 !!SBT
 {{{
-libraryDependencies += &quot;fr.lgi2a&quot; %% &quot;similar-microKernel&quot; % &quot;0.0.1&quot;
+libraryDependencies += &quot;fr.univ_artois.lgi2a&quot; %% &quot;similar-microKernel&quot; % &quot;0.0.1&quot;
 }}}</pre>
 </div>
 <div title="InlineJavascriptPlugin" creator="Designer" modifier="Designer" created="201401211626" tags="plugin systemConfig excludeLists" changecount="1">
@@ -2616,7 +2616,7 @@ The following is a list of test dependencies for this project. These dependencie
 |org.hamcrest |hamcrest-core |1.3 |jar |[[New BSD License|http://opensource.org/licenses/bsd-license.php]] |
 !Project Dependency Graph
 !!Dependency Tree
-*fr.lgi2a:similar-microKernel:jar:0.0.1+++
+*fr.univ_artois.lgi2a:similar-microKernel:jar:0.0.1+++
 |&gt;|!SIMILAR - Micro kernel|
 |''Description:'' |A micro kernel containing the minimal specification of SIMILAR, supporting the design of efficient simulations. |
 |''Project License:'' |[[CeCILL-B Free Software License Agreement|http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt]] |

@@ -1,5 +1,5 @@
 /**
- * Copyright or © or Copr. LGI2A
+ * Copyright or ï¿½ or Copr. LGI2A
  * 
  * LGI2A - Laboratoire de Genie Informatique et d'Automatique de l'Artois - EA 3926 
  * Faculte des Sciences Appliquees
@@ -44,10 +44,10 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle;
 
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
-import fr.lgi2a.similar.microkernel.libs.generic.PassiveAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.PassiveAgent;
 
 /**
  * Models a "Particle" agent of the simulation.

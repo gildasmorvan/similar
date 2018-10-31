@@ -1,16 +1,16 @@
-package fr.lgi2a.mysimulation.model.agents.citybus;
+package fr.univ_artois.lgi2a.mysimulation.model.agents.citybus;
 
 import java.util.Map;
 
-import fr.lgi2a.mysimulation.model.agents.MyAgentCategoriesList;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractAgent;
+import fr.univ_artois.lgi2a.mysimulation.model.agents.MyAgentCategoriesList;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractAgent;
 
 /**
  * The "City bus" agent.

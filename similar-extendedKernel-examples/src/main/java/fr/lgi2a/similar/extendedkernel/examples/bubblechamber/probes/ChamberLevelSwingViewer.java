@@ -44,25 +44,25 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.probes;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.probes;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.bubble.chamber.AgtBubblePLSInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvPLSInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.influences.IInfluence;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
-import fr.lgi2a.similar.microkernel.libs.probes.AbstractProbeImageSwingJPanel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.bubble.chamber.AgtBubblePLSInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.environment.chamber.EnvPLSInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.system.SystemInfluenceRemoveAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.AbstractProbeImageSwingJPanel;
 
 /**
  * The probe displaying the content of the "liquid" level of the bubble chamber simulation using a 2 dimensional image.

@@ -44,19 +44,19 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster;
 
-import fr.lgi2a.similar.extendedkernel.agents.ExtendedAgent;
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.DensityControlledLifeParameters;
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.DensityControlledLifeAgentList;
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso.AgtCellClusterDecisionFromMeso;
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso.AgtCellClusterPLSInMeso;
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso.AgtCellClusterPerceptionFromMeso;
-import fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
-import fr.lgi2a.similar.extendedkernel.libs.generic.IdentityAgtGlobalStateRevisionModel;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent4Engine;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.agents.ExtendedAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.DensityControlledLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.DensityControlledLifeAgentList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso.AgtCellClusterDecisionFromMeso;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso.AgtCellClusterPLSInMeso;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.meso.AgtCellClusterPerceptionFromMeso;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.levels.DensityControlledLifeLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.generic.IdentityAgtGlobalStateRevisionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
 
 /**
  * This factory creates a default agent from the "Cell Cluster" category.

@@ -1,6 +1,6 @@
-package fr.lgi2a.mysimulation.model.agents;
+package fr.univ_artois.lgi2a.mysimulation.model.agents;
 
-import fr.lgi2a.similar.microkernel.AgentCategory;
+import fr.univ_artois.lgi2a.similar.microkernel.AgentCategory;
 
 /**
  * The list of agent categories of my awesome simulation.

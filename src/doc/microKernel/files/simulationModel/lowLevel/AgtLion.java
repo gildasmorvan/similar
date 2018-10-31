@@ -1,25 +1,25 @@
-package fr.lgi2a.wildlifesimulation.model.agents.lion;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion;
 
 import java.awt.geom.Point2D;
 import java.util.Map;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractAgent;
-import fr.lgi2a.wildlifesimulation.model.agents.WildlifeAgentCategoriesList;
-import fr.lgi2a.wildlifesimulation.model.agents.gazelle.savannah.AgtGazellePLSInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionHLSInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPDFSavannah;
-import fr.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPLSInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.environment.savannah.PLSEnvInSavannahLevel;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractAgent;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.WildlifeAgentCategoriesList;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.gazelle.savannah.AgtGazellePLSInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionHLSInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPDFSavannah;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah.AgtLionPLSInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah.PLSEnvInSavannahLevel;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
  * Models an agent from the 'Lion' category.

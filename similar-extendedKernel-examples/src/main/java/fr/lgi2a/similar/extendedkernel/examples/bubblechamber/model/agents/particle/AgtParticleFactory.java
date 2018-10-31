@@ -44,19 +44,19 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle;
 
-import fr.lgi2a.similar.extendedkernel.agents.ExtendedAgent;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.BubbleChamberParameters;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.extendedkernel.libs.generic.EmptyAgtDecisionModel;
-import fr.lgi2a.similar.extendedkernel.libs.generic.EmptyAgtPerceptionModel;
-import fr.lgi2a.similar.extendedkernel.libs.generic.IdentityAgtGlobalStateRevisionModel;
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.agents.ExtendedAgent;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.BubbleChamberParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.generic.EmptyAgtDecisionModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.generic.EmptyAgtPerceptionModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.generic.IdentityAgtGlobalStateRevisionModel;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
 
 /**
  * The factory creating instances of agents the "Bubble" category.

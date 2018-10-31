@@ -44,9 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents;
 
-import fr.lgi2a.similar.microkernel.AgentCategory;
+import fr.univ_artois.lgi2a.similar.microkernel.AgentCategory;
 
 /**
  * The list of levels of a "Bubble chamber" simulation.

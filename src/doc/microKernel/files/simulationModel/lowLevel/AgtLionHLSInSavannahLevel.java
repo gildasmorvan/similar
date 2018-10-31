@@ -1,8 +1,8 @@
-package fr.lgi2a.wildlifesimulation.model.agents.lion.savannah;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah;
 
-import fr.lgi2a.similar.microkernel.agents.IAgent4Engine;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLocalStateOfAgent;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
  * The private local state of an agent from the "Lion" category in the 

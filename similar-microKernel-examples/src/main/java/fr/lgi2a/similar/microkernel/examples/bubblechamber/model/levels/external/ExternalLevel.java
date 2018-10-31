@@ -44,24 +44,24 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.external;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.external;
 
 import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.ArithmeticParameters;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RICoolDown;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIFireParticle;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIMoveCannon;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.microkernel.influences.IInfluence;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLevel;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.ArithmeticParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RICoolDown;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIFireParticle;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIMoveCannon;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.system.SystemInfluenceAddAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractLevel;
 
 /**
  * The "External" level, where the "particles cannonPublicState" exists and fires particles 

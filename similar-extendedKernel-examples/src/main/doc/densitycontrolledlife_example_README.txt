@@ -1,7 +1,7 @@
 This example illustrates how a modified version of the game of life simulation can be implemented using the
 extended-kernel, the common libraries and the extended libraries.
 
-It extends the "Lambda Life" model implemented in the fr.lgi2a.similar.extendedkernel.examples.lambdalife
+It extends the "Lambda Life" model implemented in the fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife
 package.
 
 MODEL OF THE SIMULATION:
@@ -36,4 +36,4 @@ The simulation contains two levels:
 		- The environment manages the topology of the cell cluster grid.
 
 The main class of this simulation is the "DensityControlledLifeMain" class from the 
-"fr.lgi2a.similar.extendedkernel.examples.densitycontrolledlife" package. 
+"fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife" package. 

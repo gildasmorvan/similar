@@ -1,6 +1,6 @@
-package fr.lgi2a.mysimulation.model.levels;
+package fr.univ_artois.lgi2a.mysimulation.model.levels;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
 
 /**
  * The list of levels of my awesome simulation.

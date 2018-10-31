@@ -1,6 +1,6 @@
-package fr.lgi2a.underpressure.model.agents.testsubject;
+package fr.univ_artois.lgi2a.underpressure.model.agents.testsubject;
 
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState;
 
 /**
  * The global state of a 'Test subject' agent.

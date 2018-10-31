@@ -4,7 +4,7 @@
 <!-- The description of the project -->
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.lgi2a</groupId>
+	<groupId>fr.univ_artois.lgi2a</groupId>
 	<artifactId>similar</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	
@@ -27,7 +27,7 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 		 </sonar.jacoco.itReportPath>
 		
 <!-- Version information. -->
-		<fr.lgi2a.similar.version>1.0-SNAPSHOT</fr.lgi2a.similar.version> <!-- Declared here to facilitate the declaration of dependencies in sub-modules -->
+		<fr.univ_artois.lgi2a.similar.version>1.0-SNAPSHOT</fr.univ_artois.lgi2a.similar.version> <!-- Declared here to facilitate the declaration of dependencies in sub-modules -->
 		
 		<maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
 		<maven-site-plugin.version>3.3</maven-site-plugin.version>
@@ -163,22 +163,22 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 					<groups>
 						<group>
 							<title>Micro-kernel</title>
-							<packages>fr.lgi2a.similar.microkernel:fr.lgi2a.similar.microkernel.dynamicstate*:fr.lgi2a.similar.microkernel.influences*:fr.lgi2a.similar.microkernel.agents*:fr.lgi2a.similar.microkernel.environment*:fr.lgi2a.similar.microkernel.levels*</packages>
+							<packages>fr.univ_artois.lgi2a.similar.microkernel:fr.univ_artois.lgi2a.similar.microkernel.dynamicstate*:fr.univ_artois.lgi2a.similar.microkernel.influences*:fr.univ_artois.lgi2a.similar.microkernel.agents*:fr.univ_artois.lgi2a.similar.microkernel.environment*:fr.univ_artois.lgi2a.similar.microkernel.levels*</packages>
 						</group>
 						<group>
 							<title>Common libs</title>
-							<packages>fr.lgi2a.similar.microkernel.libs:fr.lgi2a.similar.microkernel.libs.*</packages>
+							<packages>fr.univ_artois.lgi2a.similar.microkernel.libs:fr.univ_artois.lgi2a.similar.microkernel.libs.*</packages>
 						</group>
 						<group>
 							<title>Extended-kernel</title>
-							<packages>fr.lgi2a.similar.extendedkernel:fr.lgi2a.similar.extendedkernel.agents*:fr.lgi2a.similar.extendedkernel.levels*:fr.lgi2a.similar.extendedkernel.environment*:fr.lgi2a.similar.extendedkernel.simulationmodel*</packages>
+							<packages>fr.univ_artois.lgi2a.similar.extendedkernel:fr.univ_artois.lgi2a.similar.extendedkernel.agents*:fr.univ_artois.lgi2a.similar.extendedkernel.levels*:fr.univ_artois.lgi2a.similar.extendedkernel.environment*:fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel*</packages>
 						</group>
 						<group>
 							<title>Extended libs</title>
-							<packages>fr.lgi2a.similar.extendedkernel.libs*</packages>
+							<packages>fr.univ_artois.lgi2a.similar.extendedkernel.libs*</packages>
 						</group>
 					</groups>
-					<excludePackageNames>fr.lgi2a.similar.extendedkernel.examples*;fr.lgi2a.similar.microkernel.examples*</excludePackageNames>
+					<excludePackageNames>fr.univ_artois.lgi2a.similar.extendedkernel.examples*;fr.univ_artois.lgi2a.similar.microkernel.examples*</excludePackageNames>
 				</configuration>
 		      </plugin>
 		</plugins>

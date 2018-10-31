@@ -30,4 +30,4 @@ The simulation contains two levels:
 			cannons according to the ambient temperature.
 		
 The main class of this simulation is the "BubbleChamberMain" class from the 
-"fr.lgi2a.similar.extendedkernel.examples.bubblechamber" package.
+"fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber" package.

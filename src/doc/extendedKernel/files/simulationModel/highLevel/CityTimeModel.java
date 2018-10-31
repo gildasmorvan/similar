@@ -1,7 +1,7 @@
-package fr.lgi2a.mysimulation.model.levels.city;
+package fr.univ_artois.lgi2a.mysimulation.model.levels.city;
 
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.levels.ITimeModel;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.levels.ITimeModel;
 
 /**
  * Implementation of the time evolution model of the 

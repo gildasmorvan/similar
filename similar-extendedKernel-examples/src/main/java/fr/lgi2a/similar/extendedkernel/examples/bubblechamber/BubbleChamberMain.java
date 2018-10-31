@@ -44,23 +44,23 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber;
 
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.initializations.BubbleChamberSimulation;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.BubbleChamberParameters;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.bubble.AgtBubbleFactory;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.cannon.AgtCannonFactory;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle.AgtParticleFactory;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.probes.ChamberLevelSwingViewer;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.probes.ProbePrintingParticleLocationOverTime;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.RandomValueFactory;
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
-import fr.lgi2a.similar.microkernel.ISimulationEngine;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
-import fr.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
-import fr.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;
-import fr.lgi2a.similar.microkernel.libs.probes.ProbeImageSwingJFrame;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.initializations.BubbleChamberSimulation;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.BubbleChamberParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.bubble.AgtBubbleFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.cannon.AgtCannonFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle.AgtParticleFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.probes.ChamberLevelSwingViewer;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.probes.ProbePrintingParticleLocationOverTime;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.RandomValueFactory;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
+import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeImageSwingJFrame;
 
 
 /**

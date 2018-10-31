@@ -1,15 +1,15 @@
-package fr.lgi2a.wildlifesimulation.model.agents.lion.savannah;
+package fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah;
 
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.univ_artois.lgi2a.wildlifesimulation.model.levels.WildlifeLevelList;
 
 /**
  * Models the data being perceived by a "lion" agent from the "Savannah" level.

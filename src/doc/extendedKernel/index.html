@@ -1059,8 +1059,8 @@ This documentation provides ''design guidelines'' to implement SIMILAR simulatio
 <div title="IDynamicStateMap - Documentation" creator="Designer" modifier="Designer" created="201403031323" modified="201403031323" changecount="2">
 <pre>In SIMILAR, this data structure is an instance of the {{className{[[IPublicDynamicStateMap|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html]]}}} class. This interface is a lightweight version of the {{className{Map}}} interface of java and works similarly to it. It defines the following methods:
 *{{methodName{keySet()}}} lists the identifier of the perceptible levels contained in the map; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#keySet()]]}}}
-*{{methodName{get(LevelIdentifier)}}} gets the local dynamic state of a level having a specific identifier;  {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#get(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
-*{{methodName{put(IPublicLocalDynamicState)}}} sets the local dynamic state of a specific level in this map. {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#put(fr.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState)]]}}}</pre>
+*{{methodName{get(LevelIdentifier)}}} gets the local dynamic state of a level having a specific identifier;  {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#get(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{put(IPublicLocalDynamicState)}}} sets the local dynamic state of a specific level in this map. {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/dynamicstate/IPublicDynamicStateMap.html#put(fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState)]]}}}</pre>
 </div>
 <div title="ImageSizePlugin" creator="Administrator" modifier="Administrator" created="201311150900" tags="systemConfig excludeLists plugin" changecount="1">
 <pre>/***
@@ -1240,7 +1240,7 @@ config.formatterHelpers.addStretchHandlers=function(e,stretchW,stretchH) {
 </div>
 <div title="InfluencesMap - Documentation" creator="Designer" modifier="Designer" created="201403031525" modified="201403031526" changecount="2">
 <pre>The {{className{InfluencesMap}}} class defines a data structure that was created mainly for engine design purposes. From the point of view of the decision process, only the following addition methods are put to use:
-*{{methodName{add( IInfluence )}}} adding one influence to the data structure; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html#add(fr.lgi2a.similar.microkernel.influences.IInfluence)]]}}}
+*{{methodName{add( IInfluence )}}} adding one influence to the data structure; {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html#add(fr.univ_artois.lgi2a.similar.microkernel.influences.IInfluence)]]}}}
 *{{methodName{addAll( Collection&lt;IInfluence&gt; )}}} adding a collection of influences to the data structure. {{doclink{[[Method API|../api/fr/lgi2a/similar/microkernel/influences/InfluencesMap.html#addAll(java.util.Collection)]]}}}</pre>
 </div>
 <div title="InlineJavascriptPlugin" creator="Designer" modifier="Designer" created="201401211626" tags="plugin systemConfig excludeLists" changecount="1">
@@ -2253,7 +2253,7 @@ theAgent.initializeGlobalState(
 **Define the public and private local states of the agent in its ''initial levels''; +++?*[&lt;span class=&quot;docsmallbtn &quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The initial levels of an agent are specified using the following method:
-*{{methodName{includeNewLevel(...)}}} specifying both a private and a public local state for a level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
+*{{methodName{includeNewLevel(...)}}} specifying both a private and a public local state for a level; {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier, fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}}
 }}} === +++?*[&lt;span class=&quot;exsmallbtn &quot;&gt;Example&lt;/span&gt;]
 {{exsection{
 The initialization of the public local state of an agent in a ''Savannah'' level is made with the following instructions:
@@ -3078,7 +3078,7 @@ This constructor defines the following arguments:
 <div title="SMD - Initial state - Specifications - Agents generation" creator="Designer" modifier="Designer" created="201403041343" modified="201403041352" changecount="10">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The ''generation profile of the agents'' is a method creating and initializing the instances of the {{className{ExtendedAgent}}} class modeling the agents initially lying in the simulation. This method is named {{methodName{[[generateAgents(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateAgents(fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters, java.util.Map)]]}}} and has the following signature:
+The ''generation profile of the agents'' is a method creating and initializing the instances of the {{className{ExtendedAgent}}} class modeling the agents initially lying in the simulation. This method is named {{methodName{[[generateAgents(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateAgents(fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters, java.util.Map)]]}}} and has the following signature:
 {{{
 protected AgentInitializationData generateAgents(
 	ISimulationParameters simulationParameters,
@@ -3148,7 +3148,7 @@ protected AgentInitializationData generateAgents(
 <div title="SMD - Initial state - Specifications - Environment generation" creator="Designer" modifier="Designer" created="201403041313" modified="201403041341" changecount="23">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The ''generation profile of the environment'' is a method creating and initializing the instance of the {{className{ExtendedEnvironment}}} class modeling the environment of the simulation. This method is named {{methodName{[[generateEnvironment(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateEnvironment(fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters, java.util.Map)]]}}} and has the following signature:
+The ''generation profile of the environment'' is a method creating and initializing the instance of the {{className{ExtendedEnvironment}}} class modeling the environment of the simulation. This method is named {{methodName{[[generateEnvironment(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateEnvironment(fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters, java.util.Map)]]}}} and has the following signature:
 {{{
 protected EnvironmentInitializationData generateEnvironment(
 	ISimulationParameters simulationParameters,
@@ -3302,7 +3302,7 @@ protected EnvironmentInitializationData generateEnvironment(
 <div title="SMD - Initial state - Specifications - Level generation" creator="Designer" modifier="Designer" created="201403041227" modified="201403041311" changecount="17">
 <pre>+++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
-The ''generation profile of the levels'' is a method creating the instances of the {{className{ExtendedLevel}}} class modeling the various levels of the simulation. This method is named {{methodName{[[generateLevels(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateLevels(fr.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters)]]}}} and has the following signature:
+The ''generation profile of the levels'' is a method creating the instances of the {{className{ExtendedLevel}}} class modeling the various levels of the simulation. This method is named {{methodName{[[generateLevels(...)|../api/fr/lgi2a/similar/extendedkernel/simulationmodel/AbstractExtendedSimulationModel.html#generateLevels(fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters)]]}}} and has the following signature:
 {{{
 protected List&lt;ILevel&gt; generateLevels(
 	ISimulationParameters simulationParameters
@@ -3740,7 +3740,7 @@ According to the naming conventions of java, all these name have to be written i
 {{exsection {
 A __bubble chamber simulation__ wrote by the __french__ team of the __LGI2A laboratory__ should have a name like:
 &lt;&lt;&lt;
-//fr.lgi2a.bubblechamber//
+//fr.univ_artois.lgi2a.bubblechamber//
 &lt;&lt;&lt;
 }}}===
 !Folders hierarchy
@@ -4200,7 +4200,7 @@ In this example, we illustrate the creation of the ''public local state'' of the
 *The ambient humidity level
 It also defines a &quot;grid&quot; topology, where the public local state of the agents of that level are put.
 
-The created state is named {{className{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
+The created state is named {{className{PLSEnvInSavannahLevel}}}^^//''2''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.univ_artois.lgi2a.wildlifesimulation.model.environment.savannah}}} package.
 {{clear{}}}
 !Code
 If the model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the environment can be implemented as the following class. The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/PLSEnvInSavannahLevel.java]]:
@@ -4214,7 +4214,7 @@ If the model defines a &quot;wildlife&quot; simulation, having specific [[levels
 In this example, we illustrate the creation of the ''public local state'' of an agent from the category &quot;Lion&quot; in a level identified by &quot;Savannah&quot;. This state defines the following perceptible data:
 *The coordinates of the lion in the environment;
 *The age of the lion.
-The created state is named {{className{AgtLionPLSInSavannahLevel}}}^^//''3''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.lgi2a.wildlifesimulation.model.agents.lion.savannah}}} package.
+The created state is named {{className{AgtLionPLSInSavannahLevel}}}^^//''3''//^^. This class is defined in the context of a &quot;wildlife&quot; simulation. Therefore, it lies in the {{packageName{fr.univ_artois.lgi2a.wildlifesimulation.model.agents.lion.savannah}}} package.
 {{clear{}}}
 !Code
 If this model defines a &quot;wildlife&quot; simulation, having specific [[levels identifier list|files/simulationModel/highLevel/WildlifeLevelList.java]] and [[agent categories list|files/simulationModel/highLevel/WildlifeAgentCategoriesList.java]], then the public local state of the &quot;Lion&quot; agent in the &quot;Savannah&quot; level can be implemented as the following class. The sources of this class are also available in a [[stand alone file|./files/simulationModel/highLevel/AgtLionPLSInSavannahLevel.java]]:
@@ -4358,8 +4358,8 @@ This step of the methodology consist in defining the operational code of the rea
 </div>
 <div title="SMD - Reaction - Specifications" creator="Designer" modifier="Designer" created="201403040928" modified="201403040934" changecount="2">
 <pre>In the extended kernel of SIMILAR, the reaction process of a level is modeled by an instance of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface. This interface defines two methods:
-*the user-defined reaction to a set of system influences; {{doclink{[[Method API|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
-*the user-defined reaction to a set of regular influences, possibly producing system influences. {{doclink{[[Method API|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+*the user-defined reaction to a set of system influences; {{doclink{[[Method API|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeSystemReaction(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
+*the user-defined reaction to a set of regular influences, possibly producing system influences. {{doclink{[[Method API|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeRegularReaction(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}}
 The specification instructions for these methods is described later in the methodology. The current step focuses on the creation of the ''skeleton of such a model''.</pre>
 </div>
 <div title="SMD - Reaction - Structure" creator="Designer" modifier="Designer" created="201403040908" modified="201403040911" changecount="2">
@@ -4498,7 +4498,7 @@ This step of the methodology consist in defining the operational code of the rea
 </div>
 <div title="SMD - Reaction - To regular influences - Specifications" creator="Designer" modifier="Designer" created="201403041135" modified="201403041148" changecount="7">
 <pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline5.png]]
-In the extended kernel of SIMILAR, the reaction to the regular influences of a level is modeled by the {{methodName{[[makeRegularReaction(...)|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeRegularReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}} method of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface:
+In the extended kernel of SIMILAR, the reaction to the regular influences of a level is modeled by the {{methodName{[[makeRegularReaction(...)|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeRegularReaction(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Set, fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}} method of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface:
 {{{
 public void makeRegularReaction(
 	SimulationTimeStamp transitoryTimeMin,
@@ -4623,7 +4623,7 @@ This step of the methodology consist in defining the operational code of the rea
 </div>
 <div title="SMD - Reaction - To system influences - Specifications" creator="Designer" modifier="Designer" created="201403040926" modified="201403041034" changecount="21">
 <pre>[&gt;img(45%,)[images/simulationModel/lowLevel/levelDesignOutline4.png]]
-In the extended kernel of SIMILAR, the reaction to the system influences of a level is modeled by the {{methodName{[[makeSystemReaction(...)|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeSystemReaction(fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.SimulationTimeStamp, fr.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}} method of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface:
+In the extended kernel of SIMILAR, the reaction to the system influences of a level is modeled by the {{methodName{[[makeSystemReaction(...)|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html#makeSystemReaction(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp, fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState, java.util.Collection, boolean, fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap)]]}}} method of the {{className{[[ILevelReactionModel|../api/fr/lgi2a/similar/extendedkernel/levels/ILevelReactionModel.html]]}}} interface:
 {{{
 public void makeSystemReaction(
 	SimulationTimeStamp transitoryTimeMin,
@@ -4668,8 +4668,8 @@ This method defines the following arguments:
 *{{argumentName{level}}} models the level which perception and the influence relation graph are set. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;]
 {{docsection{
 The {{className{[[ExtendedLevel|../api/fr/lgi2a/similar/extendedkernel/levels/ExtendedLevel.html]]}}} class models a level in the extended kernel of SIMILAR. It provides all the built-it features necessary to create a level. This class defines especially two methods to update the perception and influence relation graphs:
-*{{methodName{addPerceptibleLevel(LevelIdentifier)}}} adds a new level to the out neighborhood in the perception relation graph of this level; {{doclink{[[method API|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addPerceptibleLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
-*{{methodName{addInfluenceableLevel(LevelIdentifier)}}} adds a new level to the out neighborhood in the influence relation graph of this level; {{doclink{[[method API|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addInfluenceableLevel(fr.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{addPerceptibleLevel(LevelIdentifier)}}} adds a new level to the out neighborhood in the perception relation graph of this level; {{doclink{[[method API|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addPerceptibleLevel(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
+*{{methodName{addInfluenceableLevel(LevelIdentifier)}}} adds a new level to the out neighborhood in the influence relation graph of this level; {{doclink{[[method API|../api/fr/lgi2a/similar/microkernel/libs/abstractimpl/AbstractLevel.html#addInfluenceableLevel(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier)]]}}}
 }}}===
 
 By default, the out neighborhood of a level always contains the identifier of the level itself. Therefore, the following instructions do nothing if a level {{argumentName{level}}} has the {{argumentName{MyAwesomeLevelList.CITY}}} identifier:
@@ -4784,7 +4784,7 @@ The observation probes used in a simulation can be:
 
 #Bind the probes to the simulation engine; +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;] 
 {{docsection{
-The binding of probes with a simulation engine is achieved using the {{methodName{[[addProbe(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#addProbe(java.lang.String, fr.lgi2a.similar.microkernel.IProbe)]]}}} method of the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} class. This method has the following signature:
+The binding of probes with a simulation engine is achieved using the {{methodName{[[addProbe(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#addProbe(java.lang.String, fr.univ_artois.lgi2a.similar.microkernel.IProbe)]]}}} method of the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} class. This method has the following signature:
 {{{
 public void addProbe(
 	String identifier, 
@@ -4827,7 +4827,7 @@ engine.addProbe(
 
 #Run a simulation with the engine using the simulation model initialization profile. +++?[&lt;span class=&quot;docsmallbtn&quot;&gt;Documentation&lt;/span&gt;] 
 {{docsection{
-The execution of a simulation is achieved using the {{methodName{[[runNewSimulation(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#runNewSimulation(fr.lgi2a.similar.microkernel.ISimulationModel)]]}}} method from the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} interface. This method has the following signature:
+The execution of a simulation is achieved using the {{methodName{[[runNewSimulation(...)|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html#runNewSimulation(fr.univ_artois.lgi2a.similar.microkernel.ISimulationModel)]]}}} method from the {{className{[[ISimulationEngine|../api/fr/lgi2a/similar/microkernel/ISimulationEngine.html]]}}} interface. This method has the following signature:
 {{{
 public void runNewSimulation( 
 	ISimulationModel simulationModel 
@@ -4934,7 +4934,7 @@ The implementation of such a time model is made in the {{className{CityTimeModel
 [img(47%,)[images/simulationModel/highLevel/timeStampOutline.png]] [&gt;img(47%,)[images/simulationModel/highLevel/timeModelDesignOutline.png]]
 {{clear{}}}
 In SIMILAR, ''time models'' are instances of the {{className{[[ITimeModel|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html]]}}} interface. They are characterized by the following methods:
-*{{methodName{getNextTime(...)}}} computes the ''successor'' of a time stamp;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html#getNextTime(fr.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
+*{{methodName{getNextTime(...)}}} computes the ''successor'' of a time stamp;  {{doclink{[[Documentation|../api/fr/lgi2a/similar/microkernel/levels/ITimeModel.html#getNextTime(fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp)]]}}} +++?*[&lt;span class=&quot;implsmallbtn&quot;&gt;Implementation&lt;/span&gt;]
 {{implsection{
 For simulation consistency reasons, the {{methodName{getNextTime(...)}}} method has to be deterministic: calling twice this method with the same parameter has to produce the same output.
 
@@ -5343,7 +5343,7 @@ javac -d target/bin -classpath &quot;/home/binaries/similar/similarLib/similar-d
 The execusion of the simulation is made using the following command line:
 {{{
 /home/me/projects/mysimulation&gt;
-java -cp &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar:target/bin&quot; fr.lgi2a.similar.custom.mysimulation.SimulationMain
+java -cp &quot;/home/binaries/similar/similarLib/similar-distribution-0.2.1.jar:target/bin&quot; fr.univ_artois.lgi2a.similar.custom.mysimulation.SimulationMain
 }}}</pre>
 </div>
 <div title="Simulation execution - Compile and run" creator="Designer" modifier="Designer" created="201403041435" changecount="1">
@@ -5383,7 +5383,7 @@ In this section, we illustrate how to compile and to run a simulation on an exam
 *The binaries of SIMILAR are located in a &quot;{{{/home/binaries/similar/}}}&quot; directory;
 *The simulation is declared in the &quot;{{{/home/me/projects/mysimulation/}}}&quot; directory;
 *The sources of the simulation are located in the {{{src/main/java/}}} directory of the simulation directory;
-*The main class of the simulation is the {{className{SimulationMain}}} class from the {{packageName{fr.lgi2a.similar.custom.mysimulation}}} package.
+*The main class of the simulation is the {{className{SimulationMain}}} class from the {{packageName{fr.univ_artois.lgi2a.similar.custom.mysimulation}}} package.
 Note that the binaries of similar or the directory where the simulation is declared can be placed in any other directory. In such cases, pay attention to replace the corresponding directory name in the examples provided below.
 {{clear{}}}</pre>
 </div>
@@ -6764,7 +6764,7 @@ This constructor defines the following arguments:
 *{{argumentName{targetLevel}}} models the level which reaction will add the new agent to the simulation;
 *{{argumentName{timeLowerBound}}} models the lower bound of the transitory period during which this influence was created;
 *{{argumentName{timeUpperBound}}} models the upper bound of the transitory period during which this influence was created;
-*{{argumentName{agent}}} models the agent to add to the simulation. The agent has to be fully initialized before being added using this influence. This initialization has to include calls to the {{methodName{[[includeNewLevel(...)|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.lgi2a.similar.microkernel.LevelIdentifier, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}} method of the {{className{IAgent4Engine}}} interface.
+*{{argumentName{agent}}} models the agent to add to the simulation. The agent has to be fully initialized before being added using this influence. This initialization has to include calls to the {{methodName{[[includeNewLevel(...)|../api/fr/lgi2a/similar/microkernel/agents/IAgent4Engine.html#includeNewLevel(fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier, fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent, fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent)]]}}} method of the {{className{IAgent4Engine}}} interface.
 !Important notes
 *The {{argumentName{targetLevel}}} of the influence defines when the public local states of the agent will begin to appear in the dynamic state of their respective levels: during the reaction of their respective levels occurring at the same time or after the reaction of {{argumentName{targetLevel}}};
 *The reaction of this influence consists in creating a //&quot;public local state addition&quot;// influence for each public local state of the agent. These influences are processed either immediately if the level of the public local state is currently computing a reaction or during the next reaction of that level;

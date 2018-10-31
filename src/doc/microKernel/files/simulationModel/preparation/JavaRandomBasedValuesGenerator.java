@@ -1,4 +1,4 @@
-package fr.lgi2a.mysimulation.tools;
+package fr.univ_artois.lgi2a.mysimulation.tools;
 
 import java.util.Random;
 

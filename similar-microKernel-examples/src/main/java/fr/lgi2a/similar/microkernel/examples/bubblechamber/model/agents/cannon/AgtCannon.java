@@ -44,28 +44,28 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon;
+package fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon;
 
 import java.util.Map;
 
-import fr.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.lgi2a.similar.microkernel.agents.IGlobalState;
-import fr.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
-import fr.lgi2a.similar.microkernel.agents.IPerceivedData;
-import fr.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.ArithmeticParameters;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonHLSInExternal;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticle;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticleFactory;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIFireParticle;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIMoveCannon;
-import fr.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
-import fr.lgi2a.similar.microkernel.influences.InfluencesMap;
-import fr.lgi2a.similar.microkernel.libs.abstractimpl.AbstractAgent;
-import fr.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
+import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.ArithmeticParameters;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonHLSInExternal;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.cannon.external.AgtCannonPLSInExternal;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticle;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.agents.particle.AgtParticleFactory;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIFireParticle;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.influences.toexternal.RIMoveCannon;
+import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.influences.InfluencesMap;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractAgent;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
 
 /**
  * Models a "Cannon" agent of the simulation.

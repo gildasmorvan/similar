@@ -44,9 +44,9 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.lgi2a.similar.extendedkernel.examples.bubblechamber.tools;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.tools;
 
-import fr.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
 
 /**
  * The random values factory used in the simulation.

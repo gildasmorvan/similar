@@ -68,7 +68,7 @@ import fr.lgi2a.similar.microkernel.libs.probes.AbstractProbeImageSwingJPanel;
  * The probe displaying the content of the "liquid" level of the bubble chamber simulation using a 2 dimensional image.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
- * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  *
  */
 public class ChamberLevelSwingViewer extends AbstractProbeImageSwingJPanel {

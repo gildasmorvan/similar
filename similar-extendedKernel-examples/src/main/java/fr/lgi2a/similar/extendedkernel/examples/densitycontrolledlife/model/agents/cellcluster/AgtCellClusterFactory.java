@@ -62,7 +62,7 @@ import fr.lgi2a.similar.microkernel.libs.generic.EmptyLocalStateOfAgent;
  * This factory creates a default agent from the "Cell Cluster" category.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
- * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  *
  */
 public class AgtCellClusterFactory {

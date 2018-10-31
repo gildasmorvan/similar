@@ -58,7 +58,7 @@ import fr.lgi2a.similar.microkernel.influences.RegularInfluence;
  * This influence is sent by the environment in the "External" level to naturally cool down 
  * overheated cannons.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
- * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
 public class RIMoveCannon extends RegularInfluence {
 	/**

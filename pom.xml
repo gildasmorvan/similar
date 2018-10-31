@@ -11,6 +11,7 @@
 	<name>SIMILAR API suite</name>
 	<description>The SIMILAR suite is a java API whose purpose is to support the
 implementation of multi-agent-based simulations using the formerly named IRM4MLS meta-model. This software defines an API to implement such simulations and provides usage examples.</description>
+	<url>https://www.lgi2a.univ-artois.fr/~morvan/similar.html</url>
 	<inceptionYear>2013</inceptionYear>
 	
 	<packaging>pom</packaging>
@@ -79,10 +80,17 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 			<url>http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt</url>
 		</license>
 	</licenses>
+
+<!-- scm of the project -->	
+	<scm>
+    	<url>https://github.com/gildasmorvan/similar</url>
+    	<connection>scm:git:git://github.com/gildasmorvan/similar.git</connection>
+    	<developerConnection>scm:git:git@github.com:gildasmorvan/similar.git</developerConnection>
+	</scm>
 	
 	<build>
 	
-<!-- Tell that the project is compiled using java 1.7 -->
+<!-- Tell that the project is compiled using java 1.8 -->
 
 		<plugins>
 			<plugin>
@@ -149,9 +157,8 @@ implementation of multi-agent-based simulations using the formerly named IRM4MLS
 					<additionalparam>-Xdoclint:none</additionalparam>
                		<use>false</use>
 					<docfilessubdirs>true</docfilessubdirs>
-					<stylesheetfile>javadoc.css</stylesheetfile>
                 	<links>
-                   		<link>http://java.sun.com/javase/7/docs/api/</link>
+                   		<link>http://java.sun.com/javase/8/docs/api/</link>
                 	</links>
 					<groups>
 						<group>

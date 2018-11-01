@@ -137,7 +137,7 @@ public abstract class AbstractRealTimeMatcherProbe  extends AbstractProbe {
 				long waitingTime = (long) ( difference * MILLISECONDS_IN_SECONDS / NANOSECONDS_IN_SECONDS );
 				Thread.sleep( waitingTime );
 			} catch ( InterruptedException cause ) {
-				//Does nothing
+				Thread.currentThread().interrupt();
 			}
 		}
 		// Update the values read during the next observation.

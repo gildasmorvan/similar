@@ -4,7 +4,7 @@
 <!-- Specification of the parent module -->
   
   <parent>
-    <groupId>fr.univ_artois.lgi2a</groupId>
+    <groupId>fr.univ-artois.lgi2a</groupId>
     <artifactId>similar</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
@@ -17,9 +17,9 @@
   
   <dependencies>
   	<dependency>
-  		<groupId>fr.univ_artois.lgi2a</groupId>
+  		<groupId>fr.univ-artois.lgi2a</groupId>
   		<artifactId>similar-microKernel</artifactId>
-	  	<version>${fr.univ_artois.lgi2a.similar.version}</version>
+	  	<version>${fr.univ-artois.lgi2a.similar.version}</version>
   	</dependency>
   </dependencies>
   <description>The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features.</description>

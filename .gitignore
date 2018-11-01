@@ -14,3 +14,4 @@ src/doc/api
 ##############################
 .classpath
 .settings
+.project

@@ -60,7 +60,7 @@ public final class PRNG {
 	 * The random values generation strategy currently used in the simulation.
 	 * The default strategy is based on a XoRoRNG instance.
 	 */
-	private static RandomValuesGenerator instance = new RandomValuesGenerator(RandomValuesGenerator.XORO);
+	private static RandomGeneratorWrapper instance = new RandomGeneratorWrapper(RandomGeneratorWrapper.XORO);
 	
 	/**
 	 * Private Constructor to prevent class instantiation.
@@ -72,7 +72,7 @@ public final class PRNG {
 	 * Sets the random value generation strategy used in the simulation.
 	 * @param strategy The random value generation strategy used in the simulation.
 	 */
-	public static void set( RandomValuesGenerator  strategy ) {
+	public static void set( RandomGeneratorWrapper  strategy ) {
 		if( strategy != null ) {
 			instance = strategy ;
 		}
@@ -81,7 +81,7 @@ public final class PRNG {
 	/**
 	 * @return the random value generation strategy used in the simulation.
 	 */
-	public static RandomValuesGenerator get( ) {
+	public static RandomGeneratorWrapper get( ) {
 		return instance;
 	}
 }

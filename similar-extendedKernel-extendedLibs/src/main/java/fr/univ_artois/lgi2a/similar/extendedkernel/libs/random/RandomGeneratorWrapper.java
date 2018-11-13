@@ -62,7 +62,13 @@ import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.PermutedRNG;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.XoRoRNG;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.XorRNG;
 
-public class RandomValuesGenerator {
+/**
+ * A convenient wrapper for RandomGenerator objects.
+ * 
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
+ *
+ */
+public class RandomGeneratorWrapper {
 	
     public static final String XORO = "xoroshiro128+";
     
@@ -86,7 +92,7 @@ public class RandomValuesGenerator {
 	 * Build a new instance of this class with a given rng.
 	 * @param random the rng to be used
 	 */
-	public RandomValuesGenerator(RandomGenerator random) {
+	public RandomGeneratorWrapper(RandomGenerator random) {
 		this.random = random;
 	}
 	
@@ -95,7 +101,7 @@ public class RandomValuesGenerator {
 	 * @param random the rng to be used
 	 * @param sync <code>true</code> if the generator is synchronized
 	 */
-	public RandomValuesGenerator(RandomGenerator random, boolean sync) {
+	public RandomGeneratorWrapper(RandomGenerator random, boolean sync) {
 		if(sync) {
 			this.random = new SynchronizedRandomGenerator(random);
 		} else {
@@ -108,7 +114,7 @@ public class RandomValuesGenerator {
 	 * @param random the Random instance to be used as generator
 	 * @param sync <code>true</code> if the generator is synchronized
 	 */
-	public RandomValuesGenerator(Random random, boolean sync) {
+	public RandomGeneratorWrapper(Random random, boolean sync) {
 		if(sync) {
 			this.random = new SynchronizedRandomGenerator(
 				RandomGeneratorFactory.createRandomGenerator(random)
@@ -122,7 +128,7 @@ public class RandomValuesGenerator {
 	 * Build a new instance of this class with a given Random instance.
 	 * @param random the Random instance to be used as generator
 	 */
-	public RandomValuesGenerator(Random random) {
+	public RandomGeneratorWrapper(Random random) {
 		this.random = RandomGeneratorFactory.createRandomGenerator(random);
 	}
 	
@@ -130,7 +136,7 @@ public class RandomValuesGenerator {
 	 * Build a new instance of this class with a given rng name.
 	 * @param random thename of the rng.
 	 */
-	public RandomValuesGenerator(String random) {
+	public RandomGeneratorWrapper(String random) {
 		this.random = getRandomGenerator(random, false);
 	}
 	
@@ -139,7 +145,7 @@ public class RandomValuesGenerator {
 	 * @param random thename of the rng.
 	 * @param sync <code>true</code> if the generator is synchronized
 	 */
-	public RandomValuesGenerator(String random, boolean sync) {
+	public RandomGeneratorWrapper(String random, boolean sync) {
 		this.random = getRandomGenerator(random, sync);
 	}
 	
@@ -148,7 +154,7 @@ public class RandomValuesGenerator {
 	 * @param random the name of the rng
 	 * @param seed the seed of the rng
 	 */
-	public RandomValuesGenerator(String random, long seed) {
+	public RandomGeneratorWrapper(String random, long seed) {
 		this.random = getRandomGenerator(random, false);
 		this.random.setSeed(seed);
 	}
@@ -159,7 +165,7 @@ public class RandomValuesGenerator {
 	 * @param seed the seed of the rng
 	 * @param sync <code>true</code> if the generator is synchronized
 	 */
-	public RandomValuesGenerator(String random, long seed, boolean sync) {
+	public RandomGeneratorWrapper(String random, long seed, boolean sync) {
 		this.random = getRandomGenerator(random, sync);
 		this.random.setSeed(seed);
 	}

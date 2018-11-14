@@ -252,19 +252,39 @@ public class RandomGeneratorWrapper {
 	}
 
 	/**
-	 * Gets a random integer.
+	 * Gets a random integer from 0 to bound - 1.
+	 * @param bound the (excluded) upper bound.
 	 * @return A random integer.
 	 */
 	public int randomInt(int bound) {
 		return random.nextInt(bound);
 	}
+	
+	/**
+	 * Gets -1 or +1.
+	 * @return -1 or +1.
+	 */
+	public int randomSign() {
+		return random.nextBoolean() ? 1 : -1;
+	}
 
 	/**
-	 * Gets a Gaussian ("normally") distributed double value with mean 0.0 and standard deviation 1.0
-	 * @return A Gaussian ("normally") distributed double value with mean 0.0 and standard deviation 1.0
+	 * Gets a Gaussian ("normally") distributed double value with mean 0.0 and standard deviation 1.0.
+	 * @return A Gaussian ("normally") distributed double value with mean 0.0 and standard deviation 1.0.
 	 */
 	public double randomGaussian() {
 		return random.nextGaussian();
+	}
+	
+	/**
+	 * Gets a Gaussian ("normally") distributed double value
+	 * with a given mean and standard deviation.
+	 * @param mean the mean.
+	 * @param sd the standard deviation.
+	 * @return A Gaussian ("normally") distributed double value with a given mean and standard deviation.
+	 */
+	public double randomGaussian(double mean, double sd) {
+		return random.nextGaussian()*sd+mean;
 	}
 	
 	/**

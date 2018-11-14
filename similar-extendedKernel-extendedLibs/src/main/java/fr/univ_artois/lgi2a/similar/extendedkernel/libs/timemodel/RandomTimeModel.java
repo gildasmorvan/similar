@@ -108,7 +108,7 @@ public final class RandomTimeModel implements ITimeModel {
 		// If the simulation engine works appropriately, this method will be called either
 		// if currentTime is the initial time, or if the identifier of the currentTime has the form
 		return new SimulationTimeStamp(
-			currentTime.getIdentifier() + (long) (this.minPeriod + 1+ PRNG.get().randomInt(this.maxPeriod - this.minPeriod))
+			currentTime.getIdentifier() + (long) (this.minPeriod + 1+ PRNG.randomInt(this.maxPeriod - this.minPeriod))
 		);
 	}
 }

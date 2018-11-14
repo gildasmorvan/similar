@@ -15,3 +15,5 @@ src/doc/api
 .classpath
 .settings
 .project
+.pydevproject
+*/bin

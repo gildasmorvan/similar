@@ -25,7 +25,8 @@ public class XorRNG extends Random {
 
 	private static final long serialVersionUID = 1263134736171610359L;
 
-    private long state0, state1;
+    private long state0;
+    private long state1;
 
     /**
      * Creates a new generator seeded using four calls to Math.random().
@@ -127,7 +128,8 @@ public class XorRNG extends Random {
 	 */
     @Override
     public void nextBytes(final byte[] bytes) {
-        int i = bytes.length, n = 0;
+        int i = bytes.length;
+        int n = 0;
         while (i != 0) {
             n = Math.min(i, 8);
             for (long bits = nextLong(); n-- != 0; bits >>>= 8) {

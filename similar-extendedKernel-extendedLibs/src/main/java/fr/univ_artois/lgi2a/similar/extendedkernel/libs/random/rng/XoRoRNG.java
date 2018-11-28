@@ -145,7 +145,8 @@ public final class XoRoRNG extends Random {
 	 */
     @Override
     public void nextBytes(final byte[] bytes) {
-        int i = bytes.length, n = 0;
+        int i = bytes.length;
+        int n = 0;
         while (i != 0) {
             n = Math.min(i, 8);
             for (long bits = nextLong(); n-- != 0; bits >>>= 8) {
@@ -162,8 +163,8 @@ public final class XoRoRNG extends Random {
     @Override
     public void setSeed(final long seed) {
 
-        long state = seed + 0x9E37_79B9_7F4A_7C15L,
-        		 z = state;
+        long state = seed + 0x9E37_79B9_7F4A_7C15L;
+        long z = state;
         z = (z ^ (z >>> 30)) * 0xBF58_476D_1CE4_E5B9L;
         z = (z ^ (z >>> 27)) * 0x94D0_49BB_1331_11EBL;
         state0 = z ^ (z >>> 31);

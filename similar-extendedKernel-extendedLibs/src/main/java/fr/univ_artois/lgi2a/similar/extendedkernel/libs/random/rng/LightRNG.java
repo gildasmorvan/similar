@@ -50,7 +50,7 @@ public final class LightRNG extends Random {
      */
     public LightRNG() {
         this(
-        		(long) ((Math.random() - 0.5) * 0x10_0000_0000_0000L)
+        	(long) ((Math.random() - 0.5) * 0x10_0000_0000_0000L)
           ^ (long) (((Math.random() - 0.5) * 2.0) * 0x8000_0000_0000_0000L)
         );
     }
@@ -203,7 +203,8 @@ public final class LightRNG extends Random {
 	 */
 	@Override
     public void nextBytes( final byte[] bytes ) {
-        int i = bytes.length, n;
+        int i = bytes.length;
+        int n;
         while( i != 0 ) {
             n = Math.min( i, 8 );
             for ( long bits = nextLong(); n-- != 0; bits >>>= 8 ) {
@@ -220,13 +221,7 @@ public final class LightRNG extends Random {
     public void setSeed( final long seed ) {
         state = seed;
     }
-    /**
-     * Sets the seed (also the current state) of this generator.
-     * @param seed the seed to use for this LightRNG, as if it was constructed with this seed.
-     */
-    public void setState( final long seed ) {
-        state = seed;
-    }
+
     /**
      * Gets the current state of this generator.
      * @return the current seed of this LightRNG, changed once per call to nextLong()

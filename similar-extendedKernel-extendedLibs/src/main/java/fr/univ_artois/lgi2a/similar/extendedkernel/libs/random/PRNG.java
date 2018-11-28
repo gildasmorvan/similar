@@ -184,7 +184,7 @@ public final class PRNG {
             		swap(list, i-1, get().getRandom().nextInt(i));
             }
         } else {
-            Object arr[] = list.toArray();
+            Object[] arr = list.toArray();
 
             // Shuffle array
             for (int i=size; i>1; i--) {

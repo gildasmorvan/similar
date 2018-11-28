@@ -109,9 +109,6 @@ public final class PermutedRNG extends Random {
      */
     @Override
     public long nextLong() {
-        // increment  = 1442695040888963407L;
-        // multiplier = 6364136223846793005L;
-
         long p = (state = state * 0x5851_F42D_4C95_7F2DL + 0x1405_7B7E_F767_814FL);
         p = (p ^ p >>> (5 + (p >>> 59))) * 0xAEF1_7502_108E_F2D9L;
         return (p ^ p >>> 43);
@@ -230,7 +227,8 @@ public final class PermutedRNG extends Random {
      */
     @Override
     public void nextBytes( final byte[] bytes ) {
-        int i = bytes.length, n = 0;
+        int i = bytes.length;
+        int n = 0;
         while( i != 0 ) {
             n = Math.min(i, 8 );
             for ( long bits = nextLong(); n-- != 0; bits >>>= 8 ) {
@@ -248,13 +246,7 @@ public final class PermutedRNG extends Random {
     public void setSeed( final long seed ) {
         state = seed;
     }
-    /**
-     * Sets the seed (also the current state) of this generator.
-     * @param seed the seed to use for this PermutedRNG, as if it was constructed with this seed.
-     */
-	public void setState( final long seed ) {
-        state = seed;
-    }
+
     /**
      * Gets the current state of this generator.
      * @return the current seed of this PermutedRNG, changed once per call to nextLong()
@@ -280,7 +272,10 @@ public final class PermutedRNG extends Random {
         //
         // Even though advance is a signed long, it is treated as unsigned, effectively, for the purposes
         // of how many iterations it goes through (at most 63 for forwards, 64 for "backwards").
-        long acc_mult = 1, acc_plus = 0, cur_mult = 0x5851_F42D_4C95_7F2DL, cur_plus = 0x1405_7B7E_F767_814FL;
+        long acc_mult = 1;
+        long acc_plus = 0;
+        long cur_mult = 0x5851_F42D_4C95_7F2DL;
+        long cur_plus = 0x1405_7B7E_F767_814FL;
 
         while (advance > 0L) {
             if ((advance & 1L) != 0L) {

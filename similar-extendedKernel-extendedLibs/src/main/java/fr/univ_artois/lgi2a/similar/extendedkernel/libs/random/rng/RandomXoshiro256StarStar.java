@@ -53,8 +53,6 @@ public class RandomXoshiro256StarStar extends Random {
 
 	@Override
 	public void setSeed(long seed) {
-		if (s == null) return;
-		// update haveNextNextGaussian flag in super
 		super.setSeed(seed);
 		long sms = splitmix64_1(seed);
 		s[0] = splitmix64_2(sms);

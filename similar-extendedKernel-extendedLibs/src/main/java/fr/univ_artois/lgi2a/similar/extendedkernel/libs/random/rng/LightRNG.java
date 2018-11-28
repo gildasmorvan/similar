@@ -43,7 +43,7 @@ public final class LightRNG extends Random {
 
 	private static final long serialVersionUID = -374415589203474497L;
 
-    public long state; /* The state can be seeded with any value. */
+    private long state; /* The state can be seeded with any value. */
 
     /** 
      * Creates a new generator seeded using Math.random. 

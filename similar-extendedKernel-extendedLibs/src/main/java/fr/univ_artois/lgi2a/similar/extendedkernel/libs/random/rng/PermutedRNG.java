@@ -58,7 +58,7 @@ public final class PermutedRNG extends Random {
     /**
      * The state can be seeded with any value.
      */
-    public long state;
+    private long state;
 
 	private static final long serialVersionUID = 3748443966125527657L;
 

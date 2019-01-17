@@ -171,6 +171,10 @@ public final class PRNG {
 		return get().getRandom().nextGaussian()*sd+mean;
 	}
 	
+	public static void setSeed(long seed) {
+		get().getRandom().setSeed(seed);
+	}
+	
 	/**
 	 *  Shuffles the given collection.
 	 *  

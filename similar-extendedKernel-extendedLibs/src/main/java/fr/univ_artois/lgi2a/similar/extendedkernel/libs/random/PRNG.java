@@ -93,6 +93,13 @@ public final class PRNG {
 	}
 	
 	/**
+	 * @return the random value generation strategy implementation name used in the simulation.
+	 */
+	public static String getImplementationName( ) {
+		return get().getRandom().getClass().getSimpleName();
+	}
+	
+	/**
 	 * Gets a random number between 0 (included) and 1 (excluded).
 	 * @return A random number between 0 (included) and 1 (excluded).
 	 */

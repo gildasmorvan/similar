@@ -27,6 +27,8 @@ public class RandomXoshiro256StarStar extends Random {
 
 	private static final long serialVersionUID = -6294584098036826543L;
 
+	private static final long[] s = new long[4];
+
 	public RandomXoshiro256StarStar() {
 		this((new SecureRandom()).nextLong());
 	}
@@ -139,9 +141,6 @@ public class RandomXoshiro256StarStar extends Random {
 	private static long rotl(long x, int k) {
 		return (x << k) | (x >>> (64 - k));
 	}
-
-
-	private final long[] s = new long[4];
 
 	@Override
 	public long nextLong() {

@@ -50,15 +50,16 @@ import static spark.Spark.*;
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 import org.eclipse.jetty.util.log.Log;
 
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.IHtmlControls;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.IHtmlInitializationData;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.IHtmlRequests;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.SimilarWebConfig;
 
 /**
  * The Spark HTTP server used as a connection point between the HTML view on the simulation
@@ -68,78 +69,70 @@ import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.SimilarWebConfig;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="mailto:Antoine-Lecoutre@outlook.com">Antoine Lecoutre</a>
  */
-public class SparkHttpServer implements IHtmlControls {
+public class SimilarHttpServer implements IHtmlControls {
 	/**
 	 * The controller to which the requests coming from the view are forwarded.
 	 */
-	private IHtmlRequests controller;
-	/**
-	 * The object providing initialization data to this server.
-	 */
-	private IHtmlInitializationData initializationData;
+	protected IHtmlRequests controller;
+
 	/**
 	 * The tool generating the HTML code of the view.
 	 */
-	private SimilarHtmlGenerator htmlCodeGenerator;
+	protected SimilarHtmlGenerator htmlCodeGenerator;
 	
 	/**
 	 * Creates a new Spark Http Server managing the HTML view on the simulation.
 	 * @param controller The controller to which the view will be bound.
 	 * @param initializationData The object providing initialization data to this server.
 	 */
-	public SparkHttpServer(
+	public SimilarHttpServer(
 		IHtmlRequests controller,
 		IHtmlInitializationData initializationData
 	) {
 		this.controller = controller;
-		this.initializationData = initializationData;
-		this.initServer( );
+		// Initialize the tool generating the view
+		this.htmlCodeGenerator = new SimilarHtmlGenerator(
+			initializationData.getConfig().getCustomHtmlBody(),
+			initializationData
+		);
 	}
 	
 	/**
 	 * Initializes the web server
 	 */
-	private final void initServer( ) {
-		// Get the configuration class that will be used.
-		SimilarWebConfig config = this.initializationData.getConfig();
-		
-		// Initialize the tool generating the view
-		this.htmlCodeGenerator = new SimilarHtmlGenerator(
-			config.getCustomHtmlBody(),
-			this.initializationData
-		);
+	public void initServer( ) {
 		
 		//Listens to 8080
 		port(8080);
 
 		get("/", (request, response) -> {
 			response.type("text/html");
-			return SparkHttpServer.this.htmlCodeGenerator.renderHtmlHeader()
-					+ SparkHttpServer.this.htmlCodeGenerator.renderHtmlBody()
-					+ SparkHttpServer.this.htmlCodeGenerator.renderHtmlFooter();
+			return SimilarHttpServer.this.htmlCodeGenerator.renderHtmlHeader()
+					+ SimilarHttpServer.this.htmlCodeGenerator.renderHtmlBody()
+					+ SimilarHttpServer.this.htmlCodeGenerator.renderHtmlFooter();
 		});
 		get("/state", (request, response) -> {
-			return SparkHttpServer.this.controller.handleSimulationStateRequest( );
+			return SimilarHttpServer.this.controller.handleSimulationStateRequest( );
 		});
 		get("/start", (request, response) -> {
-			SparkHttpServer.this.controller.handleNewSimulationRequest();
+			SimilarHttpServer.this.controller.handleNewSimulationRequest();
     			return "";
     		});
 		get("/stop", (request, response) -> {
-			SparkHttpServer.this.controller.handleSimulationAbortionRequest();
+			SimilarHttpServer.this.controller.handleSimulationAbortionRequest();
     			return "";
 		});
 		get("/pause", (request, response) -> {
-			SparkHttpServer.this.controller.handleSimulationPauseRequest();
+			SimilarHttpServer.this.controller.handleSimulationPauseRequest();
     			return "";
 		});
 		get("/shutdown", (request, response) -> {
-			SparkHttpServer.this.controller.handleShutDownRequest();
+			SimilarHttpServer.this.controller.handleShutDownRequest();
     			return "";
 		});
 		get("/setParameter", (request, response) -> {
 			for( String param : request.queryParams()) {
-				SparkHttpServer.this.controller.setParameter(param, request.queryParams(param));
+				SimilarHttpServer.this.controller.setParameter(param, request.queryParams(param));
 			}
 			return "";
 		});
@@ -147,14 +140,14 @@ public class SparkHttpServer implements IHtmlControls {
 			StringBuilder output =  new StringBuilder();
 			for( String param : request.queryParams()) {
 				output.append(param+": ");
-				output.append(SparkHttpServer.this.controller.getParameter(param)+"\n");
+				output.append(SimilarHttpServer.this.controller.getParameter(param)+"\n");
 			}
 			response.type("text/plain");
 		    return output.toString();
 		});
-		for(String resource : SimilarHtmlGenerator.deployedResources) {
-			get("/"+resource, (request, response) -> {
-				String[] splitResource = resource.split("[.]");
+		for(Map.Entry<String, InputStream> resource : SimilarHtmlGenerator.deployedResources.entrySet()) {
+			get("/"+resource.getKey(), (request, response) -> {
+				String[] splitResource = resource.getKey().split("[.]");
 				switch(splitResource[splitResource.length-1]) {
 					case "js":
 						response.type("application/javascript"); 
@@ -169,7 +162,7 @@ public class SparkHttpServer implements IHtmlControls {
 						response.type("text/plain");
 				}
 				return SimilarHtmlGenerator.getViewResource(
-					SparkHttpServer.class.getResourceAsStream(resource)
+					resource.getValue()
 				);
 			});
 		}

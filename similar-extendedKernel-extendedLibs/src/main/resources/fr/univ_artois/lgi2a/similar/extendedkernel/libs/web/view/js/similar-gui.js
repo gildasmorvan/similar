@@ -47,19 +47,13 @@
 
 
 /**
- * The javascript library of the Similar2Logo GUI
+ * The javascript library of the Similar GUI
  * 
  * @author <a href="http://www.lgi2a.univ-artois.net/~morvan" target="_blank">Gildas Morvan</a>
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="mailto:Antoine-Lecoutre@outlook.com>Antoine Lecoutre</a>
  *
  */
-
-
-/**
- * Establishes the WebSocket connection and set up event handlers 
- */
-var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/webSocket");
 
 /**
  * Starts the simulation.
@@ -111,79 +105,3 @@ function updateBooleanParameter(parameter) {
     var output = 'setParameter?' + parameter + '=' + $('#' + parameter).prop('checked');
     $.get(output);
 }
-
-/**
- * Displays the grid canvas in full screen.
- */
-function fullScreen() {
-    document.getElementById('grid_canvas').webkitRequestFullScreen();
-    document.getElementById('grid_canvas').height = screen.availHeight;
-    document.getElementById('grid_canvas').width = screen.availHeight;
-}
-
-/**
- * Displays the simulation data in a canvas identified as <code>grid_canvas</code>
- * 
- * @param data the simulation data.
- */
-function drawCanvas(data) {
-    var json = JSON.parse(data),
-        canvas = document.getElementById('grid_canvas'),
-        context = canvas.getContext('2d'),
-        value,
-        radius,
-        centerX,
-        centerY,
-        i;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    if (json.hasOwnProperty('pheromones')) {
-        for (i = 0; i < json.pheromones.length; i++) {
-            centerX = json.pheromones[i].x * canvas.width;
-            centerY = json.pheromones[i].y * canvas.height;
-            radius = 5;
-
-            if (json.pheromones[i].v < 255) {
-                value = Math.floor(255 - (json.pheromones[i].v));
-            } else {
-                value = 0;
-            }
-            context.fillStyle = "rgb(" + 255 + "," + value + "," + value + ")";
-
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            context.fill();
-        }
-    }
-    if (json.hasOwnProperty('marks')) {
-        for (i = 0; i < json.marks.length; i++) {
-            centerX = json.marks[i].x * canvas.width;
-            centerY = json.marks[i].y * canvas.height;
-            radius = 1;
-            context.fillStyle = 'red';
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            context.fill();
-        }
-    }
-    if (json.hasOwnProperty('agents')) {
-        for (i = 0; i < json.agents.length; i++) {
-            centerX = json.agents[i].x * canvas.width;
-            centerY = json.agents[i].y * canvas.height;
-            radius = 1;
-            context.fillStyle = 'blue';
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            context.fill();
-        }
-    }
-
-}
-
-$(function () {
-    $('[data-toggle=\popover\]').popover();
-    if (document.getElementById('grid_canvas') !== null) {
-        webSocket.onmessage = function (event) {
-            drawCanvas(event.data);
-        }
-    }
-});

@@ -50,6 +50,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.jetty.util.log.Log;
 
@@ -71,24 +73,27 @@ public class SimilarHtmlGenerator {
 	/**
 	 * The name of the files where the js and css libraries are located.
 	 */
-	protected static final String[] deployedResources = {
-		"js/bootstrap.min.js",
-		"css/bootstrap.min.css",
-		"js/dygraph.min.js",
-		"css/dygraph.css",
-		"js/jquery-3.3.1.min.js",
-		"js/similar2logo-gui.js",
-		"css/similar2logo-gui.css"
-	};	
+	@SuppressWarnings("serial")
+	protected static Map<String, InputStream> deployedResources = new HashMap<String, InputStream>() {
+		{
+			put("js/bootstrap.min.js", SimilarHtmlGenerator.class.getResourceAsStream("js/bootstrap.min.js"));
+			put("css/bootstrap.min.css", SimilarHtmlGenerator.class.getResourceAsStream("css/bootstrap.min.css"));
+			put("js/dygraph.min.js", SimilarHtmlGenerator.class.getResourceAsStream("js/dygraph.min.js"));
+			put("css/dygraph.css", SimilarHtmlGenerator.class.getResourceAsStream("css/dygraph.css"));
+			put("js/jquery-3.3.1.min.js", SimilarHtmlGenerator.class.getResourceAsStream("js/jquery-3.3.1.min.js"));
+			put("js/similar-gui.js", SimilarHtmlGenerator.class.getResourceAsStream("js/similar-gui.js"));
+			put("css/similar-gui.css", SimilarHtmlGenerator.class.getResourceAsStream("css/similar-gui.css"));
+		}
+	};
 
 	/**
 	 * The object providing initialization data to this view.
 	 */
-	private IHtmlInitializationData initializationData;
+	protected IHtmlInitializationData initializationData;
 	/**
 	 * The body of the web GUI.
 	 */
-	private String htmlBody;
+	protected String htmlBody;
 	
 	/**
 	 * Builds a HTML code generator where the body of the web GUI is manually defined.
@@ -138,16 +143,6 @@ public class SimilarHtmlGenerator {
 			
 		}
 		return writer.toString();
-	}
-	
-	/**
-	 * Gets the HTML code of the canvas containing the grid view over the simulation.
-	 * @return the canvas containing the grid view.
-	 */
-	public static String getGridView() {
-		return SimilarHtmlGenerator.getViewResource(
-			SimilarHtmlGenerator.class.getResourceAsStream("gridview.html")
-		);
 	}
 	
 	/**

@@ -49,7 +49,7 @@ package fr.univ_artois.lgi2a.similar.extendedkernel.libs.web;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes.Slf4jExceptionPrinter;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes.Slf4jExecutionTracker;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.control.SimilarWebController;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.view.SparkHttpServer;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.view.SimilarHttpServer;
 import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
 import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.ISimulationParameters;
 import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
@@ -79,7 +79,7 @@ public class SimilarWebRunner implements IHtmlInitializationData {
 	/**
 	 * The object managing the HTML view.
 	 */
-	protected SparkHttpServer view;
+	protected SimilarHttpServer view;
 	/**
 	 * The controller managing the interaction between the engine and the view.
 	 */
@@ -133,7 +133,8 @@ public class SimilarWebRunner implements IHtmlInitializationData {
 		// Create the controller managing the interaction between the engine and the view.
 		this.controller = new SimilarWebController( this.engine, model );
 		// Create the SPARK HTTP server that will generate the HTML pages
-		this.view = new SparkHttpServer( this.controller, this );
+		this.view = new SimilarHttpServer( this.controller, this );
+		this.view.initServer();
 		// Bind the view and the controller
 		this.controller.setViewControls( this.view );
 	}

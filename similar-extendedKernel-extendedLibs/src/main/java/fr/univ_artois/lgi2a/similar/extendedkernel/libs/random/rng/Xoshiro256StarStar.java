@@ -23,23 +23,23 @@ import java.util.Random;
  * @author David Blackman and Sebastiano Vigna &lt;vigna@acm.org> (original C code)
  * @author Una Thompson &lt;una@unascribed.com> (Java port)
  */
-public class RandomXoshiro256StarStar extends Random {
+public class Xoshiro256StarStar extends Random {
 
 	private static final long serialVersionUID = -6294584098036826543L;
 
 	private static final long[] s = new long[4];
 
-	public RandomXoshiro256StarStar() {
+	public Xoshiro256StarStar() {
 		this((new SecureRandom()).nextLong());
 	}
 
-	public RandomXoshiro256StarStar(long seed) {
+	public Xoshiro256StarStar(long seed) {
 		super(seed);
 		// super will call setSeed, but at that point, s will not be initialized
 		setSeed(seed);
 	}
 
-	public RandomXoshiro256StarStar(long s1, long s2, long s3, long s4) {
+	public Xoshiro256StarStar(long s1, long s2, long s3, long s4) {
 		setState(s1, s2, s3, s4);
 	}
 

@@ -22,9 +22,9 @@ import java.util.Random;
  * 32-bit random int output as 9.8x faster. Specifically, generating 1 billion longs
  * took about 1.28 nanoseconds per long (1.277 seconds for the whole group) with
  * LightRNG, while java.util.Random (which is meant to produce int, to be fair) took
- * about 22.8 nanoseconds per long (22.797 seconds for the whole group). XorRNG
+ * about 22.8 nanoseconds per long (22.797 seconds for the whole group). Xorshift128Plus
  * appears to be occasionally faster on int output than LightRNG, but it isn't clear
- * why or what causes that (JIT or GC internals, possibly). XorRNG is slightly
+ * why or what causes that (JIT or GC internals, possibly). Xorshift128Plus is slightly
  * slower at generating 64-bit random data, including long and double, but not by
  * a significant degree (a multiplier between 0.9 and 1.2 times). The only deciding
  * factor then is state size, where LightRNG is as small as possible for any JVM
@@ -48,8 +48,8 @@ public final class LightRNG extends Random {
     /** 
      * Creates a new generator seeded using Math.random. 
      */
-    public LightRNG() {
-        this(
+    public LightRNG() {   
+    	this(
         	(long) ((Math.random() - 0.5) * 0x10_0000_0000_0000L)
           ^ (long) (((Math.random() - 0.5) * 2.0) * 0x8000_0000_0000_0000L)
         );

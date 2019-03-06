@@ -16,7 +16,7 @@ import java.util.Random;
  * @author Sebastiano Vigna
  * @author Tommy Ettinger
  */
-public class XorRNG extends Random {
+public class Xorshift128Plus extends Random {
 
 	private static final long DOUBLE_MASK = (1L << 53) - 1;
     private static final double NORM_53 = 1. / (1L << 53);
@@ -31,7 +31,7 @@ public class XorRNG extends Random {
     /**
      * Creates a new generator seeded using four calls to Math.random().
      */
-    public XorRNG() {
+    public Xorshift128Plus() {
         this(
         		(long) ((Math.random() - 0.5) * 0x10_0000_0000_0000L)
         		^ (long) (((Math.random() - 0.5) * 2.0) * 0x8000_0000_0000_0000L),
@@ -45,7 +45,7 @@ public class XorRNG extends Random {
      * a unary hash across the two parts of state this has.
      * @param seed a long that won't be used exactly, but will affect both components of state
      */
-    public XorRNG(final long seed) {
+    public Xorshift128Plus(final long seed) {
         setSeed(seed);
     }
 
@@ -56,7 +56,7 @@ public class XorRNG extends Random {
      * @param stateA the number to use as the first part of the state; this will be 1 instead if both seeds are 0
      * @param stateB the number to use as the second part of the state
      */
-    public XorRNG(final long stateA, final long stateB) {
+    public Xorshift128Plus(final long stateA, final long stateB) {
         setSeed(stateA, stateB);
     }
 
@@ -206,8 +206,8 @@ public class XorRNG extends Random {
      *
      * @return a copy of this RandomnessSource
      */
-    public XorRNG copy() {
-        XorRNG next = new XorRNG(state0);
+    public Xorshift128Plus copy() {
+        Xorshift128Plus next = new Xorshift128Plus(state0);
         next.state0 = state0;
         next.state1 = state1;
         return next;

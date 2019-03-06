@@ -23,7 +23,7 @@ import java.util.Random;
  * @author David Blackman
  * @author Tommy Ettinger (if there's a flaw, use SquidLib's issues and don't bother Vigna or Blackman, it's probably a mistake in SquidLib's implementation)
  */
-public final class XoRoRNG extends Random {
+public final class Xoroshiro128Plus extends Random {
 	
 	private static final long DOUBLE_MASK = (1L << 53) - 1;
     private static final double NORM_53 = 1. / (1L << 53);
@@ -38,14 +38,14 @@ public final class XoRoRNG extends Random {
     /**
      * Creates a new generator seeded using secure random.
      */
-    public XoRoRNG() {
+    public Xoroshiro128Plus() {
         this((new SecureRandom()).nextLong());
     }
 
     /**
      * Creates a new generator with the given seed.
      */
-    public XoRoRNG(final long seed) {
+    public Xoroshiro128Plus(final long seed) {
         setSeed(seed);
     }
 
@@ -187,7 +187,7 @@ public final class XoRoRNG extends Random {
         		return false;
         }
 
-        XoRoRNG xoRoRNG = (XoRoRNG) o;
+        Xoroshiro128Plus xoRoRNG = (Xoroshiro128Plus) o;
 
         if (state0 != xoRoRNG.state0) {
         		return false;

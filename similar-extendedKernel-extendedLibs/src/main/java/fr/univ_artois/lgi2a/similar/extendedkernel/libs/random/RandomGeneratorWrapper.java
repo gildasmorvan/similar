@@ -55,10 +55,10 @@ import org.apache.commons.math3.random.SynchronizedRandomGenerator;
 import org.apache.commons.math3.random.Well1024a;
 
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.LightRNG;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.PermutedRNG;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.RandomXoshiro256StarStar;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.XoRoRNG;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.XorRNG;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.PCG;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xoshiro256StarStar;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xoroshiro128Plus;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xorshift128Plus;
 
 /**
  * A convenient wrapper for RandomGenerator objects.
@@ -68,9 +68,9 @@ import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.XorRNG;
  */
 public class RandomGeneratorWrapper {
 	
-    public static final String XORO = "xoroshiro128+";
+    public static final String XOROSHIRO_128 = "xoroshiro128+";
     
-    public static final String XOR = "xorshift128+";
+    public static final String XORSHIFT_128 = "xorshift128+";
     
     public static final String XOROSHIRO_256 = "xoshiro256**";
     
@@ -176,14 +176,14 @@ public class RandomGeneratorWrapper {
 	private static RandomGenerator getRandomGenerator(String randomLib, boolean sync) {
 		RandomGenerator random;
 		switch(randomLib) {
-		case XORO:
-			random = RandomGeneratorFactory.createRandomGenerator(new XoRoRNG());
+		case XOROSHIRO_128:
+			random = RandomGeneratorFactory.createRandomGenerator(new Xoroshiro128Plus());
 			break;
-		case XOR:
-			random = RandomGeneratorFactory.createRandomGenerator(new XorRNG());
+		case XORSHIFT_128:
+			random = RandomGeneratorFactory.createRandomGenerator(new Xorshift128Plus());
 			break;
 		case XOROSHIRO_256:
-			random = RandomGeneratorFactory.createRandomGenerator(new RandomXoshiro256StarStar());
+			random = RandomGeneratorFactory.createRandomGenerator(new Xoshiro256StarStar());
 			break;
 		case LIGHT:
 			random = RandomGeneratorFactory.createRandomGenerator(new LightRNG());
@@ -198,10 +198,10 @@ public class RandomGeneratorWrapper {
 			random = new Well1024a();
 			break;
 		case PCG:
-			random = RandomGeneratorFactory.createRandomGenerator(new PermutedRNG());
+			random = RandomGeneratorFactory.createRandomGenerator(new PCG());
 			break;
 		default:
-			random = RandomGeneratorFactory.createRandomGenerator(new XoRoRNG());
+			random = RandomGeneratorFactory.createRandomGenerator(new Xoroshiro128Plus());
 		}
 		if(sync) {
 			return new SynchronizedRandomGenerator(random);

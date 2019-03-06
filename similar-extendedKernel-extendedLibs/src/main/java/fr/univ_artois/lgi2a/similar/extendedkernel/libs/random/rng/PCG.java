@@ -40,13 +40,13 @@ import java.util.Random;
  * Even though benchmarks on similar programs in C would lead you to
  * believe this should be somewhat faster than LightRNG, benchmarking
  * with JMH seems to show LightRNG being roughly 16% faster than
- * PermutedRNG, and both drastically faster than java.util.Random .
+ * PCG, and both drastically faster than java.util.Random .
  * This generator was implemented incorrectly for a large part of its history,
  * but it seems correct now, though it may be a little slower.
  * @author Melissa E. O'Neill (Go HMC!)
  * @author Tommy Ettinger
  */
-public final class PermutedRNG extends Random {
+public final class PCG extends Random {
 	/** 2 raised to the 53, - 1. */
     private static final long DOUBLE_MASK = ( 1L << 53 ) - 1;
     /** 2 raised to the -53. */
@@ -65,7 +65,7 @@ public final class PermutedRNG extends Random {
     /**
      * Creates a new generator seeded using SecureRandom.
      */
-    public PermutedRNG() {
+    public PCG() {
         this((long) (((new SecureRandom()).nextLong() - 0.5) * 0x10_0000_0000_0000L)
                 ^ (long) ((((new SecureRandom()).nextLong() - 0.5) * 2.0) * 0x8000_0000_0000_0000L));
     }
@@ -74,7 +74,7 @@ public final class PermutedRNG extends Random {
      * Constructs a new PermutedRNG with the given seed as its state, exactly.
      * @param seed a long that will be used as-is for the state of a new PermutedRNG
      */
-    public PermutedRNG(final long seed) {
+    public PCG(final long seed) {
         state = seed;
     }
 

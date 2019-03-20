@@ -54,7 +54,7 @@ public class Xoshiro256StarStar extends Random {
 	}
 
 	@Override
-	public void setSeed(long seed) {
+	synchronized public void setSeed(long seed) {
 		super.setSeed(seed);
 		long sms = splitmix64_1(seed);
 		s[0] = splitmix64_2(sms);

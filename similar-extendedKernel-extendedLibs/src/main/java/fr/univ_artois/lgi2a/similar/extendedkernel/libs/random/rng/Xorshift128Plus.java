@@ -155,7 +155,7 @@ public class Xorshift128Plus extends Random {
      * @param seed the number to use as the seed
      */
     @Override
-    public final void setSeed(final long seed) {
+    synchronized public final void setSeed(final long seed) {
         state0 = avalanche(seed == 0 ? -1 : seed);
         state1 = avalanche(state0);
         state0 = avalanche(state1);

@@ -50,7 +50,6 @@ import static spark.Spark.*;
 
 import java.awt.Desktop;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -145,7 +144,7 @@ public class SimilarHttpServer implements IHtmlControls {
 			response.type("text/plain");
 		    return output.toString();
 		});
-		for(Map.Entry<String, InputStream> resource : SimilarHtmlGenerator.deployedResources.entrySet()) {
+		for(Map.Entry<String, String> resource : SimilarHtmlGenerator.deployedResources.entrySet()) {
 			get("/"+resource.getKey(), (request, response) -> {
 				String[] splitResource = resource.getKey().split("[.]");
 				switch(splitResource[splitResource.length-1]) {
@@ -161,9 +160,7 @@ public class SimilarHttpServer implements IHtmlControls {
 					default: 
 						response.type("text/plain");
 				}
-				return SimilarHtmlGenerator.getViewResource(
-					resource.getValue()
-				);
+				return resource.getValue();
 			});
 		}
 	}

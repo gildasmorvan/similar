@@ -67,7 +67,7 @@ public final class RandomTimeModel implements ITimeModel {
 	/**
 	 * Builds a periodic time model having a specific period and phase shift.
 	 * @param minPeriod The min period of the time model. This value has to be strictly positive.
-	 * @param maxPeriod The max period of the time model. This value has to be strictly > to minPeriod.
+	 * @param maxPeriod The max period of the time model. This value has to be strictly inferior to minPeriod.
 	 * @throws IllegalArgumentException If an argument is invalid.
 	 */
 	public RandomTimeModel( 

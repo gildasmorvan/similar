@@ -20,8 +20,8 @@ import java.util.Random;
  * instance which is not shared.
  *
  * @see <a href="http://xoshiro.di.unimi.it/">http://xoshiro.di.unimi.it/</a>
- * @author David Blackman and Sebastiano Vigna &lt;vigna@acm.org> (original C code)
- * @author Una Thompson &lt;una@unascribed.com> (Java port)
+ * @author David Blackman and Sebastiano Vigna &lt;vigna@acm.org (original C code)
+ * @author Una Thompson &lt;una@unascribed.com (Java port)
  */
 public class Xoshiro256StarStar extends Random {
 

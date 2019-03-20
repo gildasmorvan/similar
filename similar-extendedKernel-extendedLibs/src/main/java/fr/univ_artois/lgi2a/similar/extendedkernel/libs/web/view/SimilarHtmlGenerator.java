@@ -73,17 +73,15 @@ public class SimilarHtmlGenerator {
 	/**
 	 * The name of the files where the js and css libraries are located.
 	 */
-	@SuppressWarnings("serial")
-	protected static Map<String, String> deployedResources = new HashMap<String, String>() {
-		{
-			
-			put("js/bootstrap.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/bootstrap.min.js")));
-			put("css/bootstrap.min.css", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("css/bootstrap.min.css")));
-			put("js/jquery-3.3.1.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/jquery-3.3.1.min.js")));
-			put("js/similar-gui.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/similar-gui.js")));
-			put("css/similar-gui.css", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("css/similar-gui.css")));
+	protected static Map<String, String> deployedResources = new HashMap<String, String>();
+	
+	static {
+		deployedResources.put("js/bootstrap.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/bootstrap.min.js")));
+		deployedResources.put("css/bootstrap.min.css", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("css/bootstrap.min.css")));
+		deployedResources.put("js/jquery-3.3.1.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/jquery-3.3.1.min.js")));
+		deployedResources.put("js/similar-gui.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/similar-gui.js")));
+		deployedResources.put("css/similar-gui.css", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("css/similar-gui.css")));
 		}
-	};
 
 	/**
 	 * The object providing initialization data to this view.

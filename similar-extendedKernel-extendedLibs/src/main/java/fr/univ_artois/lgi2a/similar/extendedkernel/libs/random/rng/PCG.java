@@ -243,7 +243,7 @@ public final class PCG extends Random {
      * @param seed the seed to use for this PermutedRNG, as if it was constructed with this seed.
      */
     @Override
-    synchronized public void setSeed( final long seed ) {
+    public synchronized void setSeed( final long seed ) {
         state = seed;
     }
 

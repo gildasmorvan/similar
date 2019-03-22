@@ -56,7 +56,6 @@ import org.apache.commons.math3.random.Well1024a;
 
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.LightRNG;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.PCG;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xoshiro256StarStar;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xoroshiro128Plus;
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xorshift128Plus;
 
@@ -71,8 +70,6 @@ public class RandomGeneratorWrapper {
     public static final String XOROSHIRO_128 = "xoroshiro128+";
     
     public static final String XORSHIFT_128 = "xorshift128+";
-    
-    public static final String XOROSHIRO_256 = "xoshiro256**";
     
     public static final String LIGHT = "SplitMix64";
     
@@ -181,9 +178,6 @@ public class RandomGeneratorWrapper {
 			break;
 		case XORSHIFT_128:
 			random = RandomGeneratorFactory.createRandomGenerator(new Xorshift128Plus());
-			break;
-		case XOROSHIRO_256:
-			random = RandomGeneratorFactory.createRandomGenerator(new Xoshiro256StarStar());
 			break;
 		case LIGHT:
 			random = RandomGeneratorFactory.createRandomGenerator(new LightRNG());

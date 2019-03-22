@@ -218,7 +218,7 @@ public final class LightRNG extends Random {
 	 * {@inheritDoc}
 	 */
 	@Override
-	synchronized public void setSeed( final long seed ) {
+	public synchronized void setSeed( final long seed ) {
         state = seed;
     }
 

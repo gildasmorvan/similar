@@ -161,7 +161,7 @@ public final class Xoroshiro128Plus extends Random {
      * @param seed the number to use as the seed
      */
     @Override
-    synchronized public void setSeed(final long seed) {
+    public synchronized void setSeed(final long seed) {
 
         long state = seed + 0x9E37_79B9_7F4A_7C15L;
         long z = state;

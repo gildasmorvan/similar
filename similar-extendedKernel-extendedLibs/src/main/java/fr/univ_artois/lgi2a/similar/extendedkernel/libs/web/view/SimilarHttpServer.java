@@ -110,24 +110,22 @@ public class SimilarHttpServer implements IHtmlControls {
 					+ SimilarHttpServer.this.htmlCodeGenerator.renderHtmlBody()
 					+ SimilarHttpServer.this.htmlCodeGenerator.renderHtmlFooter();
 		});
-		get("/state", (request, response) -> {
-			return SimilarHttpServer.this.controller.handleSimulationStateRequest( );
-		});
+		get("/state", (request, response) -> SimilarHttpServer.this.controller.handleSimulationStateRequest( ));
 		get("/start", (request, response) -> {
 			SimilarHttpServer.this.controller.handleNewSimulationRequest();
-    			return "";
-    		});
+    		return "";
+    	});
 		get("/stop", (request, response) -> {
 			SimilarHttpServer.this.controller.handleSimulationAbortionRequest();
-    			return "";
+    		return "";
 		});
 		get("/pause", (request, response) -> {
 			SimilarHttpServer.this.controller.handleSimulationPauseRequest();
-    			return "";
+    		return "";
 		});
 		get("/shutdown", (request, response) -> {
 			SimilarHttpServer.this.controller.handleShutDownRequest();
-    			return "";
+    		return "";
 		});
 		get("/setParameter", (request, response) -> {
 			for( String param : request.queryParams()) {

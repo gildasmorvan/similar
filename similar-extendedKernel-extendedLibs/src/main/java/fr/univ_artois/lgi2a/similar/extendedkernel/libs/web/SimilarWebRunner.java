@@ -101,7 +101,7 @@ public class SimilarWebRunner implements IHtmlInitializationData {
 	 * @param model The model of the simulation.
 	 * @throws IllegalStateException If the runner has already been initialized.
 	 */
-	public void initializeRunner(AbstractExtendedSimulationModel model) throws IllegalStateException {
+	public void initializeRunner(AbstractExtendedSimulationModel model) {
 		
 		if( model == null ){
 			throw new IllegalArgumentException( "The model cannot be Null" );
@@ -178,10 +178,7 @@ public class SimilarWebRunner implements IHtmlInitializationData {
 	 * @param probe The probe to register.
 	 * @throws IllegalStateException If the runner is not initialized yet.
 	 */
-	public void addProbe(
-		String name,
-		IProbe probe
-	) throws IllegalStateException {
+	public void addProbe(String name, IProbe probe) {
 		if( ! this.config.isAlreadyInitialized() ) {
 			throw new IllegalStateException( "The runner has to be initialized before adding other probes." );
 		}

@@ -143,7 +143,7 @@ public class SimilarWebConfig {
 	 * @return The updated configuration.
 	 * @throws IOException If the input stream cannot be read.
 	 */
-	public final SimilarWebConfig setCustomHtmlBody( InputStream resource ) throws IOException {
+	public final SimilarWebConfig setCustomHtmlBody( InputStream resource ) {
 		if( ! this.initializationDone ){
 			this.customHtmlBody = SimilarHtmlGenerator.getViewResource( resource );
 		} else {

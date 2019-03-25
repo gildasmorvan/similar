@@ -58,8 +58,6 @@ import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.probes.Pr
 import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.tools.RandomValueFactory;
 import fr.univ_artois.lgi2a.similar.microkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeImageSwingJFrame;
 
 
@@ -89,14 +87,6 @@ public class BubbleChamberMain {
 		// Create the simulation engine that will run simulations
 		ISimulationEngine engine = new EngineMonothreadedDefaultdisambiguation( );
 		// Create the probes that will listen to the execution of the simulation.
-		engine.addProbe( 
-				"Error printer", 
-				new ProbeExceptionPrinter( )
-		);
-		engine.addProbe(
-				"Trace printer", 
-				new ProbeExecutionTracker( System.err, false )
-		);
 		engine.addProbe(
 				"Particle location",
 				new ProbePrintingParticleLocationOverTime( System.out )

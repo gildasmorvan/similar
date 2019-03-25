@@ -8,15 +8,15 @@
  * http://www.lgi2a.univ-artois.fr/
  * 
  * Email: gildas.morvan@univ-artois.fr
- * 		  hassane.abouaissa@univ-artois.fr
  * 
  * Contributors:
- * 	Hassane ABOUAISSA (designer)
- * 	Gildas MORVAN (designer, creator of the IRM4MLS formalism)
+ * 	Gildas MORVAN (creator of the IRM4MLS formalism)
  * 	Yoann KUBERA (designer, architect and developer of SIMILAR)
  * 
- * This software is a computer program whose purpose is run road traffic
- * simulations using a dynamic hybrid approach.
+ * This software is a computer program whose purpose is to support the
+ * implementation of multi-agent-based simulations using the formerly named
+ * IRM4MLS meta-model. This software defines an API to implement such 
+ * simulations, and also provides usage examples.
  * 
  * This software is governed by the CeCILL-B license under French law and
  * abiding by the rules of distribution of free software.  You can  use, 
@@ -44,71 +44,76 @@
  * The fact that you are presently reading this means that you have had
  * knowledge of the CeCILL-B license and that you accept its terms.
  */
-package fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife;
+package fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife;
 
 import java.awt.Color;
 
-import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.initializations.LambdaLifeSimulationModel;
-import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.LambdaLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes.Slf4jExceptionPrinter;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes.Slf4jExecutionTracker;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.initializations.DensityControlledLifeSimulationModel;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.DensityControlledLifeParameters;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.densitycontrolledlife.model.agents.cellcluster.AgtCellClusterFactory;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.AgtCellFactory;
-import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeLastStateExporter;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.probes.LambdaGameOfLifeSwingView;
+import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.probes.MacroStateProbe;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.tools.RandomValueFactory;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.tools.randomstrategies.SecureRandomBasedRandomValuesGenerator;
 import fr.univ_artois.lgi2a.similar.extendedkernel.simulationmodel.AbstractExtendedSimulationModel;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeImageSwingJFrame;
 
 /**
- * The class defining which simulation is being run.
- * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
+ *
  */
-public class LambdaLifeMain {
+public class DensityControlledLifeMain {
+
 	/**
 	 * The main java method being run.
 	 * @param args The command line arguments.
 	 */
-	public static void main(
-			String[] args
-	) {
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
 		// Create the parameters used in this simulation.
-		LambdaLifeParameters parameters = new LambdaLifeParameters( );
-		parameters.gridWidth = 50;
-		parameters.gridHeight = 50;
-		parameters.stillLifeThreshold = 20;
-		parameters.xTorus = false;
-		parameters.yTorus = false;
+		DensityControlledLifeParameters parameters = new DensityControlledLifeParameters( );
+		parameters.gridWidth = 60;
+		parameters.gridHeight = 60;
+		parameters.stillLifeThreshold = 60;
+		parameters.expectedDensity = 0.08;
+		parameters.kP = 10*parameters.expectedDensity;
+		parameters.xlength = 30;
+		parameters.ylength = 30;
 		parameters.finalTime = new SimulationTimeStamp(10000);
-		// Initialize the random numbers generator.
 		
+		// Initialize the random numbers generator
 		RandomValueFactory.setStrategy(
 		//	new JavaRandomBasedRandomValuesGenerator( parameters.seed )
 				new SecureRandomBasedRandomValuesGenerator( parameters.seed)
 		);
 		// Register the parameters to the agent factories.
 		AgtCellFactory.setParameters( parameters );
-	
+		AgtCellClusterFactory.setParameters( parameters );
+		
 		// Create the simulation engine that will run simulations
 		ISimulationEngine engine = new EngineMonothreadedDefaultdisambiguation( );
 		// Create the probes that will listen to the execution of the simulation.
 		engine.addProbe( 
-				"Error printer", 
-				new ProbeExceptionPrinter( )
+			"Error printer", 
+			new Slf4jExceptionPrinter( )
 		);
 		engine.addProbe(
-				"Trace printer", 
-				new ProbeExecutionTracker( System.err, false )
+			"Trace printer", 
+			new Slf4jExecutionTracker( false )
 		);
-//		engine.addProbe(
-//				"Nb of living cells",
-//				new MacroStateProbe( System.out )
-//		);
+		engine.addProbe(
+				"Macro State",
+				new MacroStateProbe( System.out )
+		);
 		
 		engine.addProbe(
 				"Evolution displayer", 
@@ -119,15 +124,14 @@ public class LambdaLifeMain {
 					null																// The frame is resized automatically
 				)
 		);
-		engine.addProbe(
-			"Exportation as image", 
-			new LambdaGameOfLifeLastStateExporter( "SimulationFinalState.png" )
-		);
+		
 		// Create the simulation model being used.
-		AbstractExtendedSimulationModel simulationModel = new LambdaLifeSimulationModel(
+		AbstractExtendedSimulationModel simulationModel = new DensityControlledLifeSimulationModel(
 				parameters
 		);
 		// Run the simulation.
 		engine.runNewSimulation( simulationModel );
+
 	}
+
 }

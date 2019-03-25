@@ -55,11 +55,11 @@ import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.probes
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.probes.ProbePrintingParticleLocationOverTime;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.RandomValueFactory;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.tools.randomstrategies.JavaRandomBasedValuesGenerator;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes.Slf4jExceptionPrinter;
+import fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes.Slf4jExecutionTracker;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.engines.EngineMonothreadedDefaultdisambiguation;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExceptionPrinter;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeExecutionTracker;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.ProbeImageSwingJFrame;
 
 
@@ -91,12 +91,12 @@ public class BubbleChamberMain {
 		ISimulationEngine engine = new EngineMonothreadedDefaultdisambiguation( );
 		// Create the probes that will listen to the execution of the simulation.
 		engine.addProbe( 
-				"Error printer", 
-				new ProbeExceptionPrinter( )
+			"Error printer", 
+			new Slf4jExceptionPrinter( )
 		);
 		engine.addProbe(
-				"Trace printer", 
-				new ProbeExecutionTracker( System.err, false )
+			"Trace printer", 
+			new Slf4jExecutionTracker( false )
 		);
 		engine.addProbe(
 				"Particle location",

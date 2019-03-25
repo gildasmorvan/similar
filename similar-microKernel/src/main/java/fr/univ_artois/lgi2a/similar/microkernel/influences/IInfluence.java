@@ -74,7 +74,7 @@ public interface IInfluence {
 	/**
 	 * Gets the category of the influence, <i>i.e.</i> a name identifying the type of the influence.
 	 * <p>
-	 * 	<b>Examples:</p>
+	 * 	<b>Examples:</b>
 	 * </p>
 	 * <ul>
 	 * 	<li>Accelerate</li>

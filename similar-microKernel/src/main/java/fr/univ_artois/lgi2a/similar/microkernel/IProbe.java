@@ -97,6 +97,7 @@ public interface IProbe {
 	
 	/**
 	 * Reacts to an error thrown by the simulation engine.
+	 * @param errorMessage The error message.
 	 * @param cause The cause of the error.
 	 */
 	void reactToError(

@@ -54,7 +54,7 @@ package fr.univ_artois.lgi2a.similar.microkernel;
  * 	An instance of this interface models one of the following elements:
  * </p>
  * <ul>
- * 	<li><emph>The public local state of an agent:</emph> &phi;<sup>+</sup><sub>a</sub>(t, l) &isin; &Phi;<sup>+</sup><sub>a</sub></li>
+ * 	<li>zThe public local state of an agent:</emph> &phi;<sup>+</sup><sub>a</sub>(t, l) &isin; &Phi;<sup>+</sup><sub>a</sub></li>
  * 	<li><emph>The private local state of an agent:</emph> &phi;<sup>-</sup><sub>a</sub>(t, l) &isin; &Phi;<sup>-</sup><sub>a</sub></li>
  * 	<li><emph>The public local state of the environment:</emph> &phi;<sup>+</sup><sub>&omega;</sub>(t, l) &isin; &Phi;<sup>+</sup><sub>&omega;</sub></li>
  * 	<li><emph>The private local state of the environment:</emph> &phi;<sup>-</sup><sub>&omega;</sub>(t, l) &isin; &Phi;<sup>-</sup><sub>&omega;</sub></li>

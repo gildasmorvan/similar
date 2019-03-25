@@ -151,14 +151,12 @@ public class ExtendedLevel extends AbstractLevel {
 		);
 		if( timeModel == null ){
 			throw new IllegalArgumentException( 
-				"The 'timeModel' of the level '" + identifier + "" +
-				"' cannot be null." 
+				errorWhenNull("timeModel") 
 			);
 		}
 		if( reactionModel == null ){
 			throw new IllegalArgumentException( 
-				"The 'reactionModel' of the level '" + identifier + "" +
-				"' cannot be null." 
+				errorWhenNull("reactionModel")
 			);
 		}
 		this.timeModel = timeModel;
@@ -205,7 +203,7 @@ public class ExtendedLevel extends AbstractLevel {
 	){
 		if( newReactionModel == null ){
 			throw new IllegalArgumentException( 
-				"The reaction model of the level '" + this.getIdentifier() + "' cannot be null." 
+				errorWhenNull("reaction model") 
 			);
 		}
 		this.reactionModel = newReactionModel;
@@ -269,5 +267,9 @@ public class ExtendedLevel extends AbstractLevel {
 		SimulationTimeStamp currentTime 
 	) {
 		return this.getTimeModel().getNextTime( currentTime );
+	}
+	
+	private String errorWhenNull(String resource) {
+		return "The "+resource+" of the level '" + this.getIdentifier() + "' cannot be null." ;
 	}
 }

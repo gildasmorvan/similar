@@ -65,13 +65,13 @@ public final class InfluencesMap {
 	/**
 	 * The data structure storing the influences.
 	 */
-	private Map<LevelIdentifier, List<IInfluence>> influencesMap;
+	private Map<LevelIdentifier, List<IInfluence>> influences;
 	
 	/**
 	 * Builds an empty influences map.
 	 */
 	public InfluencesMap( ){
-		this.influencesMap = new LinkedHashMap<>();
+		this.influences = new LinkedHashMap<>();
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public final class InfluencesMap {
 	 * @return The unordered set containing the keys that are defined in this influences map.
 	 */
 	public Set<LevelIdentifier> getDefinedKeys(){
-		return this.influencesMap.keySet();
+		return this.influences.keySet();
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public final class InfluencesMap {
 	 * @return <code>true</code> if this map contains no influences targeted at the <code>targetLevel</code> level.
 	 */
 	public boolean isEmpty( LevelIdentifier targetLevel ) {
-		List<IInfluence> result = this.influencesMap.get( targetLevel );
+		List<IInfluence> result = this.influences.get( targetLevel );
 		return result == null || result.isEmpty();
 	}
 	
@@ -143,10 +143,10 @@ public final class InfluencesMap {
 	 * @return The influences contained in this map that are targeted at a specific level.
 	 */
 	public List<IInfluence> getInfluencesForLevel( LevelIdentifier targetLevel ) {
-		List<IInfluence> result = this.influencesMap.get( targetLevel );
+		List<IInfluence> result = this.influences.get( targetLevel );
 		if( result == null ){
 			result = new LinkedList<>( );
-			this.influencesMap.put( targetLevel, result );
+			this.influences.put( targetLevel, result );
 		}
 		return result;
 	}
@@ -160,10 +160,10 @@ public final class InfluencesMap {
 		if( influence == null ){
 			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
 		}
-		List<IInfluence> influenceList = this.influencesMap.get( influence.getTargetLevel() );
+		List<IInfluence> influenceList = this.influences.get( influence.getTargetLevel() );
 		if( influenceList == null ){
 			influenceList = new LinkedList<>();
-			this.influencesMap.put( influence.getTargetLevel(), influenceList );
+			this.influences.put( influence.getTargetLevel(), influenceList );
 		}
 		influenceList.add( influence );
 	}
@@ -184,7 +184,7 @@ public final class InfluencesMap {
 		for( LevelIdentifier key : toAdd.getDefinedKeys() ){
 			if( ! toAdd.isEmpty( key ) ){
 				List<IInfluence> influences = new LinkedList<>();
-				this.influencesMap.put( key, influences );
+				this.influences.put( key, influences );
 				influences.addAll( toAdd.getInfluencesForLevel( key ) );
 			}
 		}
@@ -212,6 +212,6 @@ public final class InfluencesMap {
 	 * Removes all of the mappings from this map. The map will be empty after this call returns
 	 */
 	public void clear( ) {
-		this.influencesMap.clear( );
+		this.influences.clear( );
 	}
 }

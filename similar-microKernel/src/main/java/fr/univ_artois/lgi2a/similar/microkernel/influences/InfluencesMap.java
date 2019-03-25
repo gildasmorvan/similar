@@ -183,9 +183,9 @@ public final class InfluencesMap {
 		}
 		for( LevelIdentifier key : toAdd.getDefinedKeys() ){
 			if( ! toAdd.isEmpty( key ) ){
-				List<IInfluence> influences = new LinkedList<>();
-				this.influences.put( key, influences );
-				influences.addAll( toAdd.getInfluencesForLevel( key ) );
+				List<IInfluence> influenceList = new LinkedList<>();
+				this.influences.put( key, influenceList );
+				influenceList.addAll( toAdd.getInfluencesForLevel( key ) );
 			}
 		}
 	}

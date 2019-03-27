@@ -46,6 +46,7 @@
  */
 package fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.view;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -73,7 +74,7 @@ public class SimilarHtmlGenerator {
 	/**
 	 * The name of the files where the js and css libraries are located.
 	 */
-	protected static Map<String, String> deployedResources = new HashMap<>();
+	public static Map<String, String> deployedResources = new HashMap<>();
 	
 	static {
 		deployedResources.put("js/bootstrap.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/bootstrap.min.js")));
@@ -140,6 +141,22 @@ public class SimilarHtmlGenerator {
 			
 		}
 		return writer.toString();
+	}
+	
+	public static byte[] toByteArray(InputStream in) throws IOException {
+
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+
+		byte[] buffer = new byte[1024];
+		int len;
+
+		// read bytes from the input stream and store them in buffer
+		while ((len = in.read(buffer)) != -1) {
+			// write bytes from the buffer into output stream
+			os.write(buffer, 0, len);
+		}
+
+		return os.toByteArray();
 	}
 	
 	/**

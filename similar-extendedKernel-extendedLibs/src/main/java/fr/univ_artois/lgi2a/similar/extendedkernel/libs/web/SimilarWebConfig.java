@@ -49,7 +49,7 @@ package fr.univ_artois.lgi2a.similar.extendedkernel.libs.web;
 import java.io.IOException;
 import java.io.InputStream;
 
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.view.SimilarHtmlGenerator;
+import spark.utils.IOUtils;
 
 /**
  * The configuration options of Similar simulations using the HTML web interface.
@@ -145,7 +145,11 @@ public class SimilarWebConfig {
 	 */
 	public final SimilarWebConfig setCustomHtmlBody( InputStream resource ) {
 		if( ! this.initializationDone ){
-			this.customHtmlBody = SimilarHtmlGenerator.getViewResource( resource );
+			try {
+				this.customHtmlBody = IOUtils.toString( resource );
+			} catch (IOException e) {
+				throw new ResourceNotFoundException(e);
+			}
 		} else {
 			throw new IllegalStateException( ERROR_MESSAGE );
 		}

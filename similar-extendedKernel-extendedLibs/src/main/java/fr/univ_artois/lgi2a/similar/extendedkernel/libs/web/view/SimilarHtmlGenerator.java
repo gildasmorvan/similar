@@ -46,10 +46,8 @@
  */
 package fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.view;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -74,15 +72,15 @@ public class SimilarHtmlGenerator {
 	/**
 	 * The name of the files where the js and css libraries are located.
 	 */
-	public static final Map<String, String> deployedResources = new HashMap<>();
+	protected static final Map<String, String> deployedResources = new HashMap<>();
 	
 	static {
-		deployedResources.put("js/bootstrap.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/bootstrap.min.js")));
-		deployedResources.put("css/bootstrap.min.css", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("css/bootstrap.min.css")));
-		deployedResources.put("js/jquery-3.3.1.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/jquery-3.3.1.min.js")));
-		deployedResources.put("js/similar-gui.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/similar-gui.js")));
-		deployedResources.put("css/similar-gui.css", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("css/similar-gui.css")));
-		}
+		addResource("js/bootstrap.min.js", SimilarHtmlGenerator.class);
+		addResource("css/bootstrap.min.css", SimilarHtmlGenerator.class);
+		addResource("js/jquery-3.3.1.min.js", SimilarHtmlGenerator.class);
+		addResource("js/similar-gui.js", SimilarHtmlGenerator.class);
+		addResource("css/similar-gui.css", SimilarHtmlGenerator.class);
+	}
 
 	/**
 	 * The object providing initialization data to this view.
@@ -120,55 +118,34 @@ public class SimilarHtmlGenerator {
 	 * Builds a HTML code generator where the body of the web GUI is obtained through an input stream.
 	 * @param htmlBody The body of the web GUI.
 	 * @param initializationData The object providing initialization data to this view.
+	 * @throws IOException 
 	 */
 	public SimilarHtmlGenerator(
 		InputStream htmlBody,
 		IHtmlInitializationData initializationData
-	) {
-		this( SimilarHtmlGenerator.getViewResource(htmlBody), initializationData );
+	) throws IOException {
+		this( IOUtils.toString(htmlBody), initializationData );
 	}
 	
-	/**
-	 * Gets the URL of a static resource of the HTML view.
-	 * @return the URL of a resource of the HTML view.
-	 */
-	public static String getViewResource(InputStream inputStream) {
-		StringWriter writer = new StringWriter();
+	public static final void addResource(String path, Class<?> c) {
 		try {
-			IOUtils.copy(inputStream, writer);
+			deployedResources.put(path, IOUtils.toString(c.getResourceAsStream(path)));
 		} catch (IOException e) {
 			throw new ResourceNotFoundException(e);
-			
 		}
-		return writer.toString();
-	}
-	
-	public static byte[] toByteArray(InputStream in) throws IOException {
-
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-
-		byte[] buffer = new byte[1024];
-		int len;
-
-		// read bytes from the input stream and store them in buffer
-		while ((len = in.read(buffer)) != -1) {
-			// write bytes from the buffer into output stream
-			os.write(buffer, 0, len);
-		}
-
-		return os.toByteArray();
 	}
 	
 	/**
 	 * Generates the HTML code of the header of the GUI.
 	 * @return the header of the web GUI.
+	 * @throws IOException 
 	 */
-	public String renderHtmlHeader( ) {
+	public String renderHtmlHeader( ) throws IOException {
 		
 		StringBuilder output =  new StringBuilder();
 		
-		output	.append(SimilarHtmlGenerator.getViewResource(
-			SimilarHtmlGenerator.class.getResourceAsStream("guiheader.html")
+		output	.append(IOUtils.toString(
+				SimilarHtmlGenerator.class.getResourceAsStream("guiheader.html")
 			)
 		)
 				.append("<h2 id='simulation-title'>"+ this.initializationData.getConfig().getSimulationName()+"</h2>")
@@ -277,10 +254,11 @@ public class SimilarHtmlGenerator {
 	/**
 	 * Generates the HTML code of the footer of the GUI.
 	 * @return the footer of the web GUI.
+	 * @throws IOException 
 	 */
-	public String renderHtmlFooter() {
-		return SimilarHtmlGenerator.getViewResource(
-				SimilarHtmlGenerator.class.getResourceAsStream("guifooter.html")
+	public String renderHtmlFooter() throws IOException {
+		return IOUtils.toString(
+			SimilarHtmlGenerator.class.getResourceAsStream("guifooter.html")
 		);
 	}
 }

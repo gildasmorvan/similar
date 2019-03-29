@@ -74,7 +74,7 @@ public class SimilarHtmlGenerator {
 	/**
 	 * The name of the files where the js and css libraries are located.
 	 */
-	public static Map<String, String> deployedResources = new HashMap<>();
+	public static final Map<String, String> deployedResources = new HashMap<>();
 	
 	static {
 		deployedResources.put("js/bootstrap.min.js", getViewResource(SimilarHtmlGenerator.class.getResourceAsStream("js/bootstrap.min.js")));

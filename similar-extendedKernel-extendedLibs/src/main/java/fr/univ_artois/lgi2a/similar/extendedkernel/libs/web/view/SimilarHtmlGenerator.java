@@ -70,16 +70,21 @@ import spark.utils.IOUtils;
 public class SimilarHtmlGenerator {
 	
 	/**
-	 * The name of the files where the js and css libraries are located.
+	 * The path and content of the binary resources.
 	 */
-	protected static final Map<String, String> deployedResources = new HashMap<>();
+	protected static final Map<String, byte[]> binaryResources = new HashMap<>();
+	
+	/**
+	 * The path and content of the text resources.
+	 */
+	protected static final Map<String, String> textResources = new HashMap<>();
 	
 	static {
-		addResource("js/bootstrap.min.js", SimilarHtmlGenerator.class);
-		addResource("css/bootstrap.min.css", SimilarHtmlGenerator.class);
-		addResource("js/jquery-3.3.1.min.js", SimilarHtmlGenerator.class);
-		addResource("js/similar-gui.js", SimilarHtmlGenerator.class);
-		addResource("css/similar-gui.css", SimilarHtmlGenerator.class);
+		addTextResource("js/bootstrap.min.js", SimilarHtmlGenerator.class);
+		addTextResource("css/bootstrap.min.css", SimilarHtmlGenerator.class);
+		addTextResource("js/jquery-3.3.1.min.js", SimilarHtmlGenerator.class);
+		addTextResource("js/similar-gui.js", SimilarHtmlGenerator.class);
+		addTextResource("css/similar-gui.css", SimilarHtmlGenerator.class);
 	}
 
 	/**
@@ -127,9 +132,17 @@ public class SimilarHtmlGenerator {
 		this( IOUtils.toString(htmlBody), initializationData );
 	}
 	
-	public static final void addResource(String path, Class<?> c) {
+	public static final void addTextResource(String path, Class<?> c) {
 		try {
-			deployedResources.put(path, IOUtils.toString(c.getResourceAsStream(path)));
+			textResources.put(path, IOUtils.toString(c.getResourceAsStream(path)));
+		} catch (IOException e) {
+			throw new ResourceNotFoundException(e);
+		}
+	}
+	
+	public static final void addBinaryResource(String path, Class<?> c) {
+		try {
+			binaryResources.put(path, IOUtils.toByteArray(c.getResourceAsStream(path)));
 		} catch (IOException e) {
 			throw new ResourceNotFoundException(e);
 		}

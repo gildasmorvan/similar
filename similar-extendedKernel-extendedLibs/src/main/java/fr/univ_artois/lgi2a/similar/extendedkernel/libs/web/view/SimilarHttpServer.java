@@ -54,6 +54,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tika.Tika;
 import org.eclipse.jetty.util.log.Log;
 
 import fr.univ_artois.lgi2a.similar.extendedkernel.libs.web.IHtmlControls;
@@ -142,23 +145,21 @@ public class SimilarHttpServer implements IHtmlControls {
 			response.type("text/plain");
 		    return output.toString();
 		});
-		for(Map.Entry<String, String> resource : SimilarHtmlGenerator.deployedResources.entrySet()) {
+		Tika tika = new Tika();
+		for(Map.Entry<String, String> resource : SimilarHtmlGenerator.textResources.entrySet()) {
 			get("/"+resource.getKey(), (request, response) -> {
-				String[] splitResource = resource.getKey().split("[.]");
-				switch(splitResource[splitResource.length-1]) {
-					case "js":
-						response.type("application/javascript"); 
-						break;
-					case "css":
-						response.type("text/css"); 
-						break;
-					case "html":
-						response.type("text/html");
-						break;
-					default: 
-						response.type("text/plain");
-				}
+				response.type(tika.detect(resource.getKey())); 
 				return resource.getValue();
+			});
+		}
+		for(Map.Entry<String, byte[]> resource : SimilarHtmlGenerator.binaryResources.entrySet()) {
+			get("/"+resource.getKey(), (request, response) -> {
+				HttpServletResponse raw = response.raw();
+				response.type(tika.detect(resource.getKey())); 
+				raw.getOutputStream().write(resource.getValue());
+	            raw.getOutputStream().flush();
+	            raw.getOutputStream().close();
+				return raw;
 			});
 		}
 	}

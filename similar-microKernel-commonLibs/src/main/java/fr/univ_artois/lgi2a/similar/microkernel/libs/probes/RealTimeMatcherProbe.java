@@ -47,7 +47,6 @@
 package fr.univ_artois.lgi2a.similar.microkernel.libs.probes;
 
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.probes.AbstractRealTimeMatcherProbe;
 
 /**
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>

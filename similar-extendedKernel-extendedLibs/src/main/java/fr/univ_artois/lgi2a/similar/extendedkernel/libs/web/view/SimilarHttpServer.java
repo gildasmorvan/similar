@@ -109,9 +109,7 @@ public class SimilarHttpServer implements IHtmlControls {
 
 		get("/", (request, response) -> {
 			response.type("text/html");
-			return SimilarHttpServer.this.htmlCodeGenerator.renderHtmlHeader()
-					+ SimilarHttpServer.this.htmlCodeGenerator.renderHtmlBody()
-					+ SimilarHttpServer.this.htmlCodeGenerator.renderHtmlFooter();
+			return this.htmlCodeGenerator.renderView().render();
 		});
 		get("/state", (request, response) -> SimilarHttpServer.this.controller.handleSimulationStateRequest( ));
 		get("/start", (request, response) -> {

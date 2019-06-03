@@ -51,7 +51,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.levels.ITimeModel;
 
 /**
- * A time model using a period and a phase shift to determine the next time stamp.
+ * A random time model using a min and max period properties to determine the next time stamp.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
 public final class RandomTimeModel implements ITimeModel {
@@ -65,7 +65,7 @@ public final class RandomTimeModel implements ITimeModel {
 	private int maxPeriod;
 
 	/**
-	 * Builds a periodic time model having a specific period and phase shift.
+	 * Builds a random time model.
 	 * @param minPeriod The min period of the time model. This value has to be strictly positive.
 	 * @param maxPeriod The max period of the time model. This value has to be strictly inferior to minPeriod.
 	 * @throws IllegalArgumentException If an argument is invalid.

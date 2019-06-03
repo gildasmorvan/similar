@@ -46,9 +46,9 @@
  */
 package fr.univ_artois.lgi2a.similar.microkernel.libs.probes;
 
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * This probe slows down the simulation so that its execution speed matches real time (in the simulation), or a specific factor 
@@ -56,7 +56,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
-public abstract class AbstractRealTimeMatcherProbe  extends AbstractProbe {
+public abstract class AbstractRealTimeMatcherProbe  implements IProbe {
 	/**
 	 * The number of milliseconds in a second.
 	 */

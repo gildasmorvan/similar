@@ -48,9 +48,9 @@ package fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes;
 
 import org.eclipse.jetty.util.log.Log;
 
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * A probe allowing to step the simulation.
@@ -60,7 +60,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
  *         target="_blank">Gildas Morvan</a>
  * 
  */
-public class StepSimulationProbe  extends AbstractProbe {
+public class StepSimulationProbe  implements IProbe {
 
 	/**
 	 * <code>true</code> if a simulation step must be performed.

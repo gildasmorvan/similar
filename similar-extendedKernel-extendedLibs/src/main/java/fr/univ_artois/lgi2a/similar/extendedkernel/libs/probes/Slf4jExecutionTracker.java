@@ -48,9 +48,9 @@ package fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes;
 
 import org.eclipse.jetty.util.log.Log;
 
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * This probe tracks the execution of the simulation and prints notification messages
@@ -58,7 +58,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class Slf4jExecutionTracker  extends AbstractProbe {
+public class Slf4jExecutionTracker  implements IProbe {
 
 	/**
 	 * Determines if the verbose mode has to include the simulation steps.

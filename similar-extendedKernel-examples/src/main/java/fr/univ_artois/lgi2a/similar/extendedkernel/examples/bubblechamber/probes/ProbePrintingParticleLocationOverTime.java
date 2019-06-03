@@ -51,18 +51,18 @@ import java.io.PrintStream;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.BubbleChamberAgentCategoriesList;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.agents.particle.chamber.AgtParticlePLSInChamber;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.bubblechamber.model.levels.BubbleChamberLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * A simulation probe displaying on a print stream the 
  * location of the particles over time.
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class ProbePrintingParticleLocationOverTime  extends AbstractProbe {
+public class ProbePrintingParticleLocationOverTime  implements IProbe {
 	/**
 	 * The stream where the data are written.
 	 */

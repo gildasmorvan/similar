@@ -49,78 +49,95 @@ package fr.univ_artois.lgi2a.similar.microkernel;
 
 /**
  * Models an observation probe extracting data from the simulation when at least one level
- * becomes consistent.
+ * becomes consistent. All methods do nothing by default.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
 public interface IProbe {
+	
+	
 	/**
 	 * Prepares the observation of a simulation.
 	 * <p>
 	 * 	This method is defined to open the streams or the other resources used during the observation of one simulation.
 	 * </p>
 	 */
-	void prepareObservation( );
-	
+	public default void prepareObservation() {
+		// Does nothing.
+	}
+
 	/**
 	 * Observes the state of the simulation when the initial time stamp is reached.
 	 * @param initialTimestamp The initial time stamp of the simulation.
 	 * @param simulationEngine The simulation engine embedding the currently running simulation and the current 
 	 * dynamic state of the various levels of the simulation.
 	 */
-	void observeAtInitialTimes(
+	public default void observeAtInitialTimes(
 			SimulationTimeStamp initialTimestamp,
 			ISimulationEngine simulationEngine
-	);
-	
+	) {
+		// Does nothing.
+	}
+
 	/**
 	 * Observes the state of the simulation when at least one level is in a consistent state.
 	 * @param timestamp The time stamp for which at least one level of the simulation is a consistent state.
 	 * @param simulationEngine The simulation engine embedding the currently running simulation and the current 
 	 * dynamic state of the various levels of the simulation.
 	 */
-	void observeAtPartialConsistentTime(
+	public default void observeAtPartialConsistentTime(
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
-	);
-	
+	) {
+		// Does nothing.
+	}
+
 	/**
 	 * Observes the state of the simulation when the final time stamp of the simulation is reached.
 	 * @param finalTimestamp The final time stamp of the simulation.
 	 * @param simulationEngine The simulation engine embedding the currently running simulation and the current 
 	 * dynamic state of the various levels of the simulation.
 	 */
-	void observeAtFinalTime(
+	public default void observeAtFinalTime(
 			SimulationTimeStamp finalTimestamp,
 			ISimulationEngine simulationEngine
-	);
-	
+	) {
+		// Does nothing.
+	}
+
 	/**
 	 * Reacts to an error thrown by the simulation engine.
 	 * @param errorMessage The error message.
 	 * @param cause The cause of the error.
 	 */
-	void reactToError(
-			String errorMessage,
+	public default void reactToError(
+			String errorMessage, 
 			Throwable cause
-	);
-	
+	) {
+		// Does nothing.
+	}
+
 	/**
 	 * Reacts to the abortion of a currently running simulation.
 	 * @param timestamp The time stamp reached right after the moment when the abortion was requested.
 	 * @param simulationEngine The simulation engine embedding the aborted simulation and the  
 	 * dynamic state of the various levels of the simulation after abortion.
 	 */
-	void reactToAbortion( 
+	public default void reactToAbortion(
 			SimulationTimeStamp timestamp,
 			ISimulationEngine simulationEngine
-	);
-	
+	) {
+		// Does nothing.
+	}
+
 	/**
 	 * Ends the observation of a simulation.
 	 * <p>
 	 * 	This method is defined to close the streams or the other resources used during the observation of one simulation.
 	 * </p>
 	 */
-	void endObservation( );
+	public default void endObservation() {
+		// Does nothing.
+	}
 }

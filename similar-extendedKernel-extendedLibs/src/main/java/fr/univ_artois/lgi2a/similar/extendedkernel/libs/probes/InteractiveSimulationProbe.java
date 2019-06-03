@@ -46,9 +46,9 @@
  */
 package fr.univ_artois.lgi2a.similar.extendedkernel.libs.probes;
 
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * A probe allowing to pause and resume the simulation.
@@ -58,7 +58,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
  *         target="_blank">Gildas Morvan</a>
  * 
  */
-public class InteractiveSimulationProbe  extends AbstractProbe {
+public class InteractiveSimulationProbe  implements IProbe {
 
 	/**
 	 * <code>true</code> if the simulation is currently paused.

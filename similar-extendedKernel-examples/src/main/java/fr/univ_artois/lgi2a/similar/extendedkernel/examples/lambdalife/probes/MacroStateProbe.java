@@ -52,12 +52,12 @@ import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.age
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicLocalDynamicState;
 import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * A probe printing in a stream the number of alive cells over time.
@@ -65,7 +65,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class MacroStateProbe extends AbstractProbe {
+public class MacroStateProbe implements IProbe {
 	/**
 	 * The stream where the data are written.
 	 */

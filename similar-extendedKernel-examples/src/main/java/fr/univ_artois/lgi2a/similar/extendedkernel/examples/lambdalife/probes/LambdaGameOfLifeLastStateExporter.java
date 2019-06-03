@@ -59,11 +59,11 @@ import javax.imageio.ImageIO;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.agents.cell.micro.AgtCellPLSInMicroLevel;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.environment.micro.EnvPLSInMicroLevel;
 import fr.univ_artois.lgi2a.similar.extendedkernel.examples.lambdalife.model.levels.LambdaLifeLevelList;
+import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.IPublicDynamicStateMap;
 import fr.univ_artois.lgi2a.similar.microkernel.environment.ILocalStateOfEnvironment;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
 
 /**
  * This probe exports as an image the last state that was reached by the simulation.
@@ -73,7 +73,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.abstractimpl.AbstractProbe;
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
-public class LambdaGameOfLifeLastStateExporter extends AbstractProbe {
+public class LambdaGameOfLifeLastStateExporter implements IProbe {
 	/**
 	 * The conversion ratio between cells and pixels.
 	 */

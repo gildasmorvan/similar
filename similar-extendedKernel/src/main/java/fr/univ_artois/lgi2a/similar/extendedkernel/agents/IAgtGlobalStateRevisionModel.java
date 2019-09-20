@@ -61,7 +61,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
 public interface IAgtGlobalStateRevisionModel {
 	/**
 	 * Revises the content of the global state of the agent, using the previous value of its global state and
-	 * the data that were lastly perceived by the agent.
+	 * the data that were lastly perceived by the agent. Does nothing by default.
 	 * <p>
 	 * 	This method corresponds to the application memoryRev<sub>a, ]t,t+dt[</sub> of this agent.
 	 * </p>
@@ -76,10 +76,12 @@ public interface IAgtGlobalStateRevisionModel {
 	 * @param perceivedData The map containing the data that were lastly perceived from the various levels of the simulation.
 	 * @param globalState The previous value of the global state of the agent being updated by this method call.
 	 */
-	void reviseGlobalState(
+	public default void reviseGlobalState(
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound,
 			Map<LevelIdentifier, IPerceivedData> perceivedData, 
 			IGlobalState globalState 
-	);
+	) {
+		// Does nothing.
+	}
 }

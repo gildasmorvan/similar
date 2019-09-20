@@ -84,7 +84,7 @@ public interface IAgtDecisionModel {
 	 * @param perceivedData The data that were perceived about the level identified by <code>levelId</code> and its perceptible levels.
 	 * @param producedInfluences The map where the influences resulting from the decisions are stored.
 	 */
-	void decide(
+	public default void decide(
 			SimulationTimeStamp timeLowerBound,
 			SimulationTimeStamp timeUpperBound,
 			IGlobalState globalState,
@@ -92,5 +92,7 @@ public interface IAgtDecisionModel {
 			ILocalStateOfAgent privateLocalState,
 			IPerceivedData perceivedData,
 			InfluencesMap producedInfluences
-	);
+	) {
+		// Does nothing
+	}
 }

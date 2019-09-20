@@ -46,13 +46,7 @@
  */
 package fr.univ_artois.lgi2a.similar.extendedkernel.libs.generic;
 
-import java.util.Map;
-
 import fr.univ_artois.lgi2a.similar.extendedkernel.agents.IAgtGlobalStateRevisionModel;
-import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
-import fr.univ_artois.lgi2a.similar.microkernel.agents.IGlobalState;
-import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
 
 /**
  * Models a global state revision model performing no changes in the global state of the agent.
@@ -60,16 +54,4 @@ import fr.univ_artois.lgi2a.similar.microkernel.agents.IPerceivedData;
  */
 public final class IdentityAgtGlobalStateRevisionModel implements IAgtGlobalStateRevisionModel {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void reviseGlobalState(
-		SimulationTimeStamp timeLowerBound,
-		SimulationTimeStamp timeUpperBound,
-		Map<LevelIdentifier, IPerceivedData> perceivedData,
-		IGlobalState globalState
-	) {
-		// Does nothing.
-	}
 }

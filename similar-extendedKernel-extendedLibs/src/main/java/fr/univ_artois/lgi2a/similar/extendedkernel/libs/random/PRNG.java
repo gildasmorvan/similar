@@ -67,7 +67,7 @@ public final class PRNG {
 	 * The random values generation strategy currently used in the simulation.
 	 * The default strategy is based on a Xoroshiro128Plus instance.
 	 */
-	private static RandomGeneratorWrapper instance = new RandomGeneratorWrapper(RandomGeneratorWrapper.XOROSHIRO_128);
+	private static RandomGeneratorWrapper instance = new RandomGeneratorWrapper(RandomGeneratorWrapper.XOROSHIRO_128_STAR_STAR);
 	
 	/**
 	 * Private Constructor to prevent class instantiation.

@@ -54,10 +54,9 @@ import org.apache.commons.math3.random.RandomGeneratorFactory;
 import org.apache.commons.math3.random.SynchronizedRandomGenerator;
 import org.apache.commons.math3.random.Well1024a;
 
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.LightRNG;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.PCG;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xoroshiro128Plus;
-import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xorshift128Plus;
+import it.unimi.dsi.util.SplitMix64RandomGenerator;
+import it.unimi.dsi.util.XoRoShiRo128StarStarRandomGenerator;
+import it.unimi.dsi.util.XoShiRo256StarStarRandomGenerator;
 
 /**
  * A convenient wrapper for RandomGenerator objects.
@@ -67,17 +66,15 @@ import fr.univ_artois.lgi2a.similar.extendedkernel.libs.random.rng.Xorshift128Pl
  */
 public class RandomGeneratorWrapper {
 	
-    public static final String XOROSHIRO_128 = "xoroshiro128+";
+    public static final String XOROSHIRO_128_STAR_STAR = "XoRoShiRo128**";
     
-    public static final String XORSHIFT_128 = "xorshift128+";
+    public static final String XOSHIRO_256_STAR_STAR = "XoShiRo256**";
     
-    public static final String LIGHT = "SplitMix64";
+    public static final String SPLIT_MIX_64 = "SplitMix64";
     
     public static final String MT_64 = "MT19937-64";
     
     public static final String WELL_1024 = "Well1024a";
-    
-    public static final String PCG = "PCG";
     
     public static final String JDK = "jdk";
     
@@ -173,14 +170,14 @@ public class RandomGeneratorWrapper {
 	private static RandomGenerator getRandomGenerator(String randomLib, boolean sync) {
 		RandomGenerator random;
 		switch(randomLib) {
-		case XOROSHIRO_128:
-			random = RandomGeneratorFactory.createRandomGenerator(new Xoroshiro128Plus());
+		case XOROSHIRO_128_STAR_STAR:
+			random = new XoRoShiRo128StarStarRandomGenerator();
 			break;
-		case XORSHIFT_128:
-			random = RandomGeneratorFactory.createRandomGenerator(new Xorshift128Plus());
+		case XOSHIRO_256_STAR_STAR:
+			random = new XoShiRo256StarStarRandomGenerator();
 			break;
-		case LIGHT:
-			random = RandomGeneratorFactory.createRandomGenerator(new LightRNG());
+		case SPLIT_MIX_64:
+			random = new SplitMix64RandomGenerator();
 			break;	
 		case MT_64:
 			random = new MersenneTwister();
@@ -191,11 +188,8 @@ public class RandomGeneratorWrapper {
 		case WELL_1024:
 			random = new Well1024a();
 			break;
-		case PCG:
-			random = RandomGeneratorFactory.createRandomGenerator(new PCG());
-			break;
 		default:
-			random = RandomGeneratorFactory.createRandomGenerator(new Xoroshiro128Plus());
+			random = new XoRoShiRo128StarStarRandomGenerator();
 		}
 		if(sync) {
 			return new SynchronizedRandomGenerator(random);

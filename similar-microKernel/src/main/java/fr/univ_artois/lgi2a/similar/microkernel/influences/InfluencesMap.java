@@ -47,6 +47,7 @@
 package fr.univ_artois.lgi2a.similar.microkernel.influences;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -72,6 +73,16 @@ public final class InfluencesMap {
 	 */
 	public InfluencesMap( ){
 		this.influences = new LinkedHashMap<>();
+	}
+	
+	/**
+	 * Builds an empty influences map.
+	 */
+	public InfluencesMap(boolean parallelSimulation ){
+		this();
+		if(parallelSimulation) {
+			this.influences = Collections.synchronizedMap(this.influences);
+		}
 	}
 	
 	/**

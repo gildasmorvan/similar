@@ -47,6 +47,7 @@
 package fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +87,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngineWithInitialization {	
+public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngineWithInitialization {	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -335,7 +336,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 		//
 		// Initialize the set returned by this method.
 		//
-		Set<IAgent4Engine> result = new LinkedHashSet<>( );
+		Set<IAgent4Engine> result = Collections.synchronizedSet(new LinkedHashSet<>( ));
 		//
 		// Iterate over the levels to trigger the perception of the agents.
 		//
@@ -348,7 +349,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			);
 			SimulationTimeStamp transitoryPeriodMin = level.getLastTransitoryState().getTransitoryPeriodMin();
 			SimulationTimeStamp transitoryPeriodMax = level.getLastTransitoryState().getTransitoryPeriodMax();
-			for( IAgent4Engine agent : agents.get( levelId ) ){
+			agents.get( levelId ).parallelStream().forEach(agent -> {
 				// Perform the perception for this agent
 				IPerceivedData perceivedData = agent.perceive(
 						levelId, 
@@ -368,7 +369,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 				);
 				// Include the agent into the ones that have to revise their global state.
 				result.add( agent );
-			}
+			});
 		}
 		return result;
 	}
@@ -449,7 +450,7 @@ public abstract class AbstractMonothreadedEngine extends AbstractSimulationEngin
 			SimulationTimeStamp transitoryPeriodMin = level.getLastTransitoryState().getTransitoryPeriodMin();
 			SimulationTimeStamp transitoryPeriodMax = level.getLastTransitoryState().getTransitoryPeriodMax();
 			// Perform the decision of each agent lying in that level.
-			for( IAgent4Engine agent : agents.get( levelId ) ){
+			for (IAgent4Engine agent : agents.get( levelId )) {
 				agent.decide(
 					levelId, 
 					transitoryPeriodMin, 

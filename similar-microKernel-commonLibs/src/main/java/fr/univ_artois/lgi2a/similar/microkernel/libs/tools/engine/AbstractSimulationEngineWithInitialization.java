@@ -56,10 +56,10 @@ import java.util.Set;
 
 import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationModel;
-import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
-import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationModel.AgentInitializationData;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationModel.EnvironmentInitializationData;
+import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
+import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
 import fr.univ_artois.lgi2a.similar.microkernel.agents.ILocalStateOfAgent;
 import fr.univ_artois.lgi2a.similar.microkernel.dynamicstate.ConsistentPublicLocalDynamicState;
@@ -94,7 +94,7 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	/**
 	 * A map associating a level to its identifier.
 	 */
-	private LinkedHashMap<LevelIdentifier, ILevel> levels;
+	private Map<LevelIdentifier, ILevel> levels;
 	/**
 	 * A map associating the agents lying in each level of the simulation to the identifier of the level.
 	 */
@@ -654,8 +654,8 @@ public abstract class AbstractSimulationEngineWithInitialization extends Abstrac
 	protected abstract SimulationTimeStamp performSimulation(
 		ISimulationModel simulationModel,
 		DynamicStateMap currentSimulationDynamicState,
-		LinkedHashMap<LevelIdentifier, ILevel> levels,
-		LinkedHashMap<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
+		Map<LevelIdentifier, ILevel> levels,
+		Map<LevelIdentifier, LinkedHashSet<IAgent4Engine>> agents,
 		IEnvironment4Engine environment
 	);
 	

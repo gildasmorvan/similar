@@ -46,8 +46,8 @@
  */
 package fr.univ_artois.lgi2a.similar.microkernel.libs.engines;
 
-import java.util.Map;
 import java.util.LinkedHashSet;
+import java.util.Map;
 
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationModel;
 import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
@@ -55,7 +55,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.SimulationTimeStamp;
 import fr.univ_artois.lgi2a.similar.microkernel.agents.IAgent4Engine;
 import fr.univ_artois.lgi2a.similar.microkernel.environment.IEnvironment4Engine;
 import fr.univ_artois.lgi2a.similar.microkernel.levels.ILevel;
-import fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractMonothreadedEngine;
+import fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractMultithreadedEngine;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
 
 /**
@@ -63,13 +63,13 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMa
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
  */
-public class EngineMonothreadedDefaultdisambiguation extends AbstractMonothreadedEngine {
+public class EngineMultithreadedDefaultdisambiguation extends AbstractMultithreadedEngine {
 	/**
 	 * A dynamic state containing only the most recent consistent state of the levels.
 	 */
 	private DynamicStateMap dynamicStateContainingOnlyConsistentStates;
 	
-	public EngineMonothreadedDefaultdisambiguation() {
+	public EngineMultithreadedDefaultdisambiguation() {
 		//Does nothing
 	}
 	

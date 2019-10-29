@@ -86,6 +86,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
  * </ul>
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
  */
 public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngineWithInitialization {	
 	/**
@@ -294,7 +295,7 @@ public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngi
 				tPlusDt,
 				agentHavingToReviseGlobalState 
 			);
-			InfluencesMap producedInfluencesDuringnewTransitoryPhases = new InfluencesMap();
+			InfluencesMap producedInfluencesDuringnewTransitoryPhases = new InfluencesMap(true);
 			// Then trigger the natural action of the environment.
 			naturalPhase( 
 				levelsStartingNewTransitoryPeriod,
@@ -450,7 +451,7 @@ public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngi
 			SimulationTimeStamp transitoryPeriodMin = level.getLastTransitoryState().getTransitoryPeriodMin();
 			SimulationTimeStamp transitoryPeriodMax = level.getLastTransitoryState().getTransitoryPeriodMax();
 			// Perform the decision of each agent lying in that level.
-			for (IAgent4Engine agent : agents.get( levelId )) {
+			agents.get( levelId ).parallelStream().forEach( agent -> {
 				agent.decide(
 					levelId, 
 					transitoryPeriodMin, 
@@ -461,7 +462,7 @@ public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngi
 					agent.getPerceivedData().get( levelId ), 
 					producedInfluences
 				);
-			}
+			});
 		}
 	}
 

@@ -47,12 +47,13 @@
 package fr.univ_artois.lgi2a.similar.microkernel.influences;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.univ_artois.lgi2a.similar.microkernel.LevelIdentifier;
 
@@ -68,6 +69,8 @@ public final class InfluencesMap {
 	 */
 	private Map<LevelIdentifier, List<IInfluence>> influences;
 	
+	private boolean parallelSimulation = false;
+	
 	/**
 	 * Builds an empty influences map.
 	 */
@@ -79,9 +82,11 @@ public final class InfluencesMap {
 	 * Builds an empty influences map.
 	 */
 	public InfluencesMap(boolean parallelSimulation ){
-		this();
+		this.parallelSimulation = parallelSimulation;
 		if(parallelSimulation) {
-			this.influences = Collections.synchronizedMap(this.influences);
+			this.influences = new ConcurrentHashMap<>();
+		} else {
+			this.influences = new LinkedHashMap<>();
 		}
 	}
 	
@@ -156,7 +161,11 @@ public final class InfluencesMap {
 	public List<IInfluence> getInfluencesForLevel( LevelIdentifier targetLevel ) {
 		List<IInfluence> result = this.influences.get( targetLevel );
 		if( result == null ){
-			result = new LinkedList<>( );
+			if(parallelSimulation) {
+				result = new CopyOnWriteArrayList<>();
+			} else {
+				result = new LinkedList<>( );
+			}
 			this.influences.put( targetLevel, result );
 		}
 		return result;
@@ -173,7 +182,11 @@ public final class InfluencesMap {
 		}
 		List<IInfluence> influenceList = this.influences.get( influence.getTargetLevel() );
 		if( influenceList == null ){
-			influenceList = new LinkedList<>();
+			if(parallelSimulation) {
+				influenceList = new CopyOnWriteArrayList<>();
+			} else {
+				influenceList = new LinkedList<>( );
+			}
 			this.influences.put( influence.getTargetLevel(), influenceList );
 		}
 		influenceList.add( influence );
@@ -194,7 +207,12 @@ public final class InfluencesMap {
 		}
 		for( LevelIdentifier key : toAdd.getDefinedKeys() ){
 			if( ! toAdd.isEmpty( key ) ){
-				List<IInfluence> influenceList = new LinkedList<>();
+				List<IInfluence> influenceList;
+				if(parallelSimulation) {
+					influenceList = new CopyOnWriteArrayList<>();
+				} else {
+					influenceList = new LinkedList<>( );
+				}
 				this.influences.put( key, influenceList );
 				influenceList.addAll( toAdd.getInfluencesForLevel( key ) );
 			}

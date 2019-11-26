@@ -451,8 +451,7 @@ public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngi
 			SimulationTimeStamp transitoryPeriodMin = level.getLastTransitoryState().getTransitoryPeriodMin();
 			SimulationTimeStamp transitoryPeriodMax = level.getLastTransitoryState().getTransitoryPeriodMax();
 			// Perform the decision of each agent lying in that level.
-			agents.get( levelId ).parallelStream().forEach( agent -> {
-				agent.decide(
+			agents.get( levelId ).parallelStream().forEach( agent -> agent.decide(
 					levelId, 
 					transitoryPeriodMin, 
 					transitoryPeriodMax, 
@@ -461,8 +460,8 @@ public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngi
 					agent.getPrivateLocalState( levelId ),
 					agent.getPerceivedData().get( levelId ), 
 					producedInfluences
-				);
-			});
+				)
+			);
 		}
 	}
 

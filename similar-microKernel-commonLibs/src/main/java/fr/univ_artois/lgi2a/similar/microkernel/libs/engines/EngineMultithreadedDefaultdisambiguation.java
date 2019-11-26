@@ -59,9 +59,11 @@ import fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.AbstractMultit
 import fr.univ_artois.lgi2a.similar.microkernel.libs.tools.engine.DynamicStateMap;
 
 /**
- * Models a simulation engine using monothreaded algorithms and the default disambiguation mechanism.
+ * Models a simulation engine using multithreaded algorithms and the default disambiguation mechanism.
  * 
  * @author <a href="http://www.yoannkubera.net" target="_blank">Yoann Kubera</a>
+ * @author <a href="http://www.lgi2a.univ-artois.fr/~morvan" target="_blank">Gildas Morvan</a>
+ * 
  */
 public class EngineMultithreadedDefaultdisambiguation extends AbstractMultithreadedEngine {
 	/**

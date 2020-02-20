@@ -107,7 +107,7 @@ public class SimilarWebController implements IProbe, IHtmlRequests {
 	/**
 	 * The current state of the simulation engine of the controller.
 	 */
-	private volatile EngineState engineState;
+	private EngineState engineState;
 	/**
 	 * <code>true</code> whenever a user requests to pause (or to resume) a running simulation,
 	 * and the request has not been processed yet. 
@@ -163,7 +163,9 @@ public class SimilarWebController implements IProbe, IHtmlRequests {
 	 */
 	@Override
 	public byte[] handleSimulationStateRequest() {
-		return this.engineState.toString().getBytes(StandardCharsets.UTF_8);
+		synchronized ( this.engineState ) {
+			return this.engineState.toString().getBytes(StandardCharsets.UTF_8);
+		}
 	}
 
 	/**

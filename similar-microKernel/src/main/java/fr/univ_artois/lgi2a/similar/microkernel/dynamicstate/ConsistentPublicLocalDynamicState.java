@@ -141,7 +141,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	) {
 		this.setTime( time );
 		if( level == null ){
-			throw new IllegalArgumentException( "The 'level' argument cannot be null." );
+			throw new IllegalArgumentException( errorMessage("level") );
 		}
 		this.level = level;
 		this.stateDynamicsSystemInfluences = new LinkedHashSet<>();
@@ -179,7 +179,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	 */
 	public void setTime( SimulationTimeStamp time ) {
 		if( time == null ){
-			throw new IllegalArgumentException( "The 'time' argument cannot be null." );
+			throw new IllegalArgumentException( errorMessage("time") );
 		}
 		this.time = time;
 	}
@@ -231,7 +231,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 			ILocalStateOfEnvironment publicLocalState
 	) {
 		if( publicLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
+			throw new IllegalArgumentException( errorMessage("publicLocalState") );
 		}
 		this.publicLocalstateOfEnvironment = publicLocalState;
 	}
@@ -244,7 +244,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 			ILocalStateOfAgent publicLocalState
 	) {
 		if( publicLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
+			throw new IllegalArgumentException( errorMessage("publicLocalState") );
 		}
 		this.publicLocalStateOfAgents.add( publicLocalState );
 	}
@@ -257,7 +257,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 			ILocalStateOfAgent publicLocalState
 	) {
 		if( publicLocalState == null ){
-			throw new IllegalArgumentException( "The 'publicLocalState' argument cannot be null." );
+			throw new IllegalArgumentException( errorMessage("publicLocalState") );
 		}
 		this.publicLocalStateOfAgents.remove( publicLocalState );
 	}
@@ -268,7 +268,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	@Override
 	public void addInfluence( IInfluence influence ) {
 		if( influence == null ){
-			throw new IllegalArgumentException( "The 'influence' argument cannot be null." );
+			throw new IllegalArgumentException( errorMessage("influence") );
 		}
 		if( influence.isSystem() ){
 			this.stateDynamicsSystemInfluences.add( influence );
@@ -284,7 +284,7 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	@Override
 	public void setStateDynamicsAsCopyOf( Collection<IInfluence> toCopy ) {
 		if( toCopy == null ){
-			throw new IllegalArgumentException( "The 'toCopy' argument cannot be null." );
+			throw new IllegalArgumentException( errorMessage("toCopy") );
 		}
 		this.stateDynamicsRegularInfluences.clear();
 		this.stateDynamicsSystemInfluences.clear();
@@ -307,5 +307,9 @@ public final class ConsistentPublicLocalDynamicState implements IModifiablePubli
 	@Override
 	public void clearRegularInfluences() {
 		this.stateDynamicsRegularInfluences.clear();
+	}
+	
+	private String errorMessage(String cause) {
+		return "The '"+cause+"' argument cannot be null.";
 	}
 }

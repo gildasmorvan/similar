@@ -53,6 +53,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
 
 import fr.univ_artois.lgi2a.similar.microkernel.IProbe;
 import fr.univ_artois.lgi2a.similar.microkernel.ISimulationEngine;
@@ -170,7 +171,7 @@ public class ProbeImageSwingJFrame extends JFrame implements IProbe {
 		 */
 		this.setVisible( true );
 		this.setLocationRelativeTo( null );
-		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 	}
 
 	/**
@@ -193,7 +194,7 @@ public class ProbeImageSwingJFrame extends JFrame implements IProbe {
 		 */
 		switch( this.closureStrategy ){
 		case ABORT_SIMULATION:
-			this.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+			this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
 			this.addWindowListener( new WindowAdapter() {
 				@Override
 				public void windowClosing( WindowEvent e ) {
@@ -202,11 +203,11 @@ public class ProbeImageSwingJFrame extends JFrame implements IProbe {
 			});
 			break;
 		case NEVER_HIDE:
-			this.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
+			this.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
 			break;
 		case HIDE_AND_WAIT_FOR_SIMULATION_END:
 		default:
-			this.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+			this.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
 			break;
 		}
 		/*

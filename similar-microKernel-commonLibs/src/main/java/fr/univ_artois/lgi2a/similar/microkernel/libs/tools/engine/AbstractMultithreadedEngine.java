@@ -389,14 +389,12 @@ public abstract class AbstractMultithreadedEngine extends AbstractSimulationEngi
 		SimulationTimeStamp tPlusDt,
 		Collection<IAgent4Engine> agents
 	){
-		for( IAgent4Engine agent : agents ){
-			agent.reviseGlobalState(
-				t, 
-				tPlusDt, 
-				agent.getPerceivedData(), 
-				agent.getGlobalState()
-			);
-		}
+		agents.parallelStream().forEach(agent -> agent.reviseGlobalState(
+			t, 
+			tPlusDt, 
+			agent.getPerceivedData(), 
+			agent.getGlobalState()
+		));
 	}
 
 	/**

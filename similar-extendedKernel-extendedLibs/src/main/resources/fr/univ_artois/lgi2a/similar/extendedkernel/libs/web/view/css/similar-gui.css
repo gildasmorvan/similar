@@ -7,6 +7,22 @@ canvas{
 	width: auto;
 }
 
+:-webkit-full-screen {
+  background-color: white;
+}
+
+:-moz-full-screen {
+  background-color: yellow;
+}
+
+:-ms-fullscreen {
+  background-color: yellow;
+}
+
+:fullscreen {
+  background-color: yellow;
+}
+
 #simulation-title{
 	text-align:center;
 }

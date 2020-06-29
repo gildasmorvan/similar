@@ -7,20 +7,8 @@ canvas{
 	width: auto;
 }
 
-:-webkit-full-screen {
-  background-color: white;
-}
-
-:-moz-full-screen {
-  background-color: yellow;
-}
-
-:-ms-fullscreen {
-  background-color: yellow;
-}
-
 :fullscreen {
-  background-color: yellow;
+  background-color: white;
 }
 
 #simulation-title{

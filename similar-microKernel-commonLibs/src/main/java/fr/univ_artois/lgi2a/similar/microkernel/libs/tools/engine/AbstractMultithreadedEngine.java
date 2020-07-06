@@ -74,7 +74,7 @@ import fr.univ_artois.lgi2a.similar.microkernel.levels.ILevel;
 import fr.univ_artois.lgi2a.similar.microkernel.libs.generic.EmptyPerceivedData;
 
 /**
- * A simulation engine using a mono-threaded simulation engine.
+ * A simulation engine using a multi-threaded simulation engine.
  * <p>
  * 	This engine supports the following system influences:
  * </p>

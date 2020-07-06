@@ -21,6 +21,11 @@
   		<artifactId>similar-microKernel</artifactId>
 	  	<version>${fr.univ-artois.lgi2a.similar.version}</version>
   	</dependency>
+  	<dependency>
+	    <groupId>org.apache.spark</groupId>
+	    <artifactId>spark-core_2.12</artifactId>
+	    <version>3.0.0</version>
+	</dependency> 	
   </dependencies>
   <description>The common libraries of the minimal kernel, containing generic implementations of simulation algorithms and results exporting features.</description>
   <name>SIMILAR - Common libs</name>

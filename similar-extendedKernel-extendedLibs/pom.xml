@@ -38,55 +38,55 @@
 	<dependency>
     	<groupId>com.sparkjava</groupId>
     	<artifactId>spark-core</artifactId>
-    	<version>2.9.1</version>
+    	<version>2.9.3</version>
 	</dependency>
     
   	<dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.25</version>
+      <version>1.7.32</version>
   	</dependency>
 
   	<dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
-      <version>1.7.25</version>
+      <version>1.7.32</version>
   	</dependency>
 
   	<dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
-      <version>1.7.25</version>
+      <version>1.7.32</version>
   	</dependency>
 
   	<dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.25</version>
+      <version>1.7.32</version>
   	</dependency>
 
   	<dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-jdk14</artifactId>
-      <version>1.7.25</version>
+      <version>1.7.32</version>
   	</dependency>
 	
 	<dependency>
 	  <groupId>org.apache.tika</groupId>
 	  <artifactId>tika-core</artifactId>
-	  <version>1.22</version>
+	  <version>2.2.1</version>
 	</dependency>
 	
 	<dependency>
     	<groupId>com.j2html</groupId>
     	<artifactId>j2html</artifactId>
-    	<version>1.4.0</version>
+    	<version>1.5.0</version>
 	</dependency>
 	
 	<dependency>
 	  <groupId>it.unimi.dsi</groupId>
 	  <artifactId>dsiutils</artifactId>
-	  <version>2.6.0</version>
+	  <version>2.6.17</version>
 	</dependency>
 	
   </dependencies>

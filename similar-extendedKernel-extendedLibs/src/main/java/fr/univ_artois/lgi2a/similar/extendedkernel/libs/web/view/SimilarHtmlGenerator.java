@@ -84,7 +84,7 @@ public class SimilarHtmlGenerator {
 	protected static final Map<String, String> textResources = new LinkedHashMap<>();
 	
 	static {
-		addTextResource("js/jquery-3.3.1.min.js", SimilarHtmlGenerator.class);
+		addTextResource("js/jquery-3.6.0.min.js", SimilarHtmlGenerator.class);
 		addTextResource("js/bootstrap.min.js", SimilarHtmlGenerator.class);
 		addTextResource("css/bootstrap.min.css", SimilarHtmlGenerator.class);
 		addTextResource("js/similar-gui.js", SimilarHtmlGenerator.class);

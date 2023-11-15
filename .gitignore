@@ -17,3 +17,8 @@ src/doc/api
 .project
 .pydevproject
 */bin
+
+# Intellij IDE related files#
+#############################
+*.iml
+*/*.iml
